@@ -39,14 +39,14 @@ const Projects = () => {
     <div className="min-h-screen bg-primary">
       <Header />
       <section className="pt-32 pb-20 px-6">
-        <div className="max-w-6xl mx-auto">
+        <div className="max-w-4xl mx-auto">
           <h1 className="text-4xl md:text-5xl font-bold text-white text-center mb-4">Our Projects</h1>
           <p className="text-xl text-gray-300 text-center mb-16 max-w-2xl mx-auto">
             Discover our latest smart home transformations
           </p>
 
           {/* Photo Categories Section */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-20">
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mb-20">
             {photoCategories.map((category, index) => (
               <Link 
                 key={index}
@@ -57,15 +57,15 @@ const Projects = () => {
                   <img 
                     src={category.image}
                     alt={category.title}
-                    className="w-full h-full object-cover transform transition-all duration-300 scale-95 group-hover:scale-110"
+                    className="w-full h-full object-cover"
                   />
                 </div>
-                <div className="p-6">
-                  <h3 className="text-xl font-semibold text-white mb-2">{category.title}</h3>
-                  <p className="text-gray-300">{category.description}</p>
-                  <div className="mt-4 flex items-center text-accent">
+                <div className="p-4">
+                  <h3 className="text-sm md:text-base font-semibold text-white mb-1">{category.title}</h3>
+                  <p className="text-xs md:text-sm text-gray-300">{category.description}</p>
+                  <div className="mt-2 flex items-center text-accent text-xs md:text-sm">
                     View Gallery
-                    <ArrowRight className="ml-2 w-4 h-4" />
+                    <ArrowRight className="ml-2 w-3 h-3" />
                   </div>
                 </div>
               </Link>
