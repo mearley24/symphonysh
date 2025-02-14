@@ -50,8 +50,8 @@ const Shades = () => {
             </div>
             <div className="bg-white/5 backdrop-blur-sm rounded-lg p-8">
               <img 
-                src="https://images.unsplash.com/photo-1439337153520-7082a56a81f4?auto=format&fit=crop&q=80"
-                alt="Smart Shades"
+                src="/lovable-uploads/82ceba00-9f66-4905-b5a8-be6979b7f744.png"
+                alt="Smart Shades Control Interface"
                 className="rounded-lg w-full h-64 object-cover mb-6"
               />
             </div>
