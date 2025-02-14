@@ -1,10 +1,12 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import Header from '../../components/Header';
 import { Link } from 'react-router-dom';
-import { ArrowLeft } from 'lucide-react';
+import { ArrowLeft, X } from 'lucide-react';
 
 const MountedTVs = () => {
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
+
   const photos = [
     "https://images.unsplash.com/photo-1483058712412-4245e9b90334",
     "https://images.unsplash.com/photo-1460925895917-afdab827c52f",
@@ -25,18 +27,40 @@ const MountedTVs = () => {
             {photos.map((photo, index) => (
               <div 
                 key={index} 
-                className="aspect-video rounded-lg overflow-hidden group cursor-pointer"
+                className="aspect-video rounded-lg overflow-hidden cursor-pointer"
+                onClick={() => setSelectedImage(photo)}
               >
                 <img 
                   src={photo} 
                   alt={`Mounted TV Installation ${index + 1}`} 
-                  className="w-full h-full object-cover transform transition-all duration-300 scale-95 group-hover:scale-110"
+                  className="w-full h-full object-cover"
                 />
               </div>
             ))}
           </div>
         </div>
       </section>
+
+      {/* Full-size image modal */}
+      {selectedImage && (
+        <div 
+          className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4"
+          onClick={() => setSelectedImage(null)}
+        >
+          <button 
+            className="absolute top-4 right-4 text-white hover:text-gray-300"
+            onClick={() => setSelectedImage(null)}
+          >
+            <X className="w-8 h-8" />
+          </button>
+          <img 
+            src={selectedImage} 
+            alt="Full size view" 
+            className="max-w-full max-h-[90vh] object-contain"
+            onClick={(e) => e.stopPropagation()}
+          />
+        </div>
+      )}
     </div>
   );
 };
