@@ -1,4 +1,3 @@
-
 import { ArrowLeft } from "lucide-react";
 import { Link, useSearchParams } from "react-router-dom";
 import { Calendar } from "@/components/ui/calendar";
@@ -28,6 +27,7 @@ const SERVICES = [
   { id: "climate-control", name: "Climate Control" },
   { id: "security-systems", name: "Security Systems" },
   { id: "maintenance", name: "Troubleshooting & Maintenance" },
+  { id: "matterport-scan", name: "Matterport Scan" },
 ];
 
 const Scheduling = () => {

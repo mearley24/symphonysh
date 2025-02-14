@@ -27,7 +27,7 @@ const Matterport = () => {
             </p>
             <div className="flex justify-center gap-4">
               <Link 
-                to="/scheduling?service=home-integration" 
+                to="/scheduling?service=matterport-scan" 
                 className="inline-flex items-center gap-2 bg-accent hover:bg-accent/90 text-white px-6 py-3 rounded-md transition-colors"
               >
                 Get Started <ArrowRight className="w-5 h-5" />
@@ -72,7 +72,7 @@ const Matterport = () => {
               Transform your space into an immersive digital experience today. Contact us for a consultation.
             </p>
             <Link 
-              to="/scheduling?service=home-integration" 
+              to="/scheduling?service=matterport-scan" 
               className="inline-flex items-center gap-2 bg-accent hover:bg-accent/90 text-white px-6 py-3 rounded-md transition-colors"
             >
               Schedule a Demo <ArrowRight className="w-5 h-5" />
