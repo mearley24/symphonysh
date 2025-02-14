@@ -1,4 +1,3 @@
-
 import { ArrowRight, Home, Shield, Lightbulb, Thermometer, Camera, Speaker, Network, Sun, Wrench, Phone } from "lucide-react";
 import { Link } from "react-router-dom";
 
@@ -18,14 +17,14 @@ const ServiceCard = ({ icon: Icon, title, description, link }: { icon: any; titl
 const Services = () => {
   return (
     <div className="min-h-screen bg-primary">
-      <header className="fixed top-0 left-0 right-0 bg-secondary/80 backdrop-blur-md z-50">
+      <header className="fixed top-0 left-0 right-0 bg-[rgb(0,9,24)]/95 backdrop-blur-sm border-b border-white/10 z-50">
         <div className="max-w-6xl mx-auto px-6 py-4">
           <nav className="flex items-center justify-between">
             <Link to="/" className="flex items-center">
               <img 
                 src="/lovable-uploads/1d7a78ef-4d02-453d-aeea-81e50fb784b6.png" 
                 alt="Symphony Smart Homes Logo" 
-                className="h-32 w-auto"
+                className="h-16 w-auto"
               />
             </Link>
             <div className="flex items-center space-x-8">
@@ -56,65 +55,67 @@ const Services = () => {
         </div>
       </header>
 
-      <section className="pt-32 pb-20 px-6">
-        <div className="max-w-6xl mx-auto">
-          <h1 className="text-4xl md:text-5xl font-bold text-white text-center mb-4">Our Services</h1>
-          <p className="text-xl text-gray-300 text-center mb-16 max-w-2xl mx-auto">
-            Comprehensive home automation solutions powered by Control4
-          </p>
-          
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <ServiceCard
-              icon={Home}
-              title="Home Integration"
-              description="Seamless integration of all your smart home systems."
-              link="/services/home-integration"
-            />
-            <ServiceCard
-              icon={Speaker}
-              title="Audio & Entertainment"
-              description="Multi-room audio systems and home theater solutions."
-              link="/services/audio-entertainment"
-            />
-            <ServiceCard
-              icon={Lightbulb}
-              title="Smart Lighting"
-              description="Automated lighting systems that create the perfect ambiance and save energy."
-              link="/services/smart-lighting"
-            />
-            <ServiceCard
-              icon={Sun}
-              title="Smart Shades"
-              description="Automated window treatments for comfort and energy efficiency."
-              link="/services/shades"
-            />
-            <ServiceCard
-              icon={Network}
-              title="Networking"
-              description="Enterprise-grade networking solutions for reliable smart home performance."
-              link="/services/networking"
-            />
-            <ServiceCard
-              icon={Thermometer}
-              title="Climate Control"
-              description="Intelligent temperature control for optimal comfort and efficiency."
-              link="/services/climate-control"
-            />
-            <ServiceCard
-              icon={Shield}
-              title="Security Systems"
-              description="Advanced security solutions including cameras, smart locks, and monitoring."
-              link="/services/security-systems"
-            />
-            <ServiceCard
-              icon={Wrench}
-              title="Troubleshooting & Maintenance"
-              description="Professional system maintenance and technical support services."
-              link="/services/maintenance"
-            />
+      <main className="pt-28">
+        <section className="py-20 px-6">
+          <div className="max-w-6xl mx-auto">
+            <h1 className="text-4xl md:text-5xl font-bold text-white text-center mb-4">Our Services</h1>
+            <p className="text-xl text-gray-300 text-center mb-16 max-w-2xl mx-auto">
+              Comprehensive home automation solutions powered by Control4
+            </p>
+            
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+              <ServiceCard
+                icon={Home}
+                title="Home Integration"
+                description="Seamless integration of all your smart home systems."
+                link="/services/home-integration"
+              />
+              <ServiceCard
+                icon={Speaker}
+                title="Audio & Entertainment"
+                description="Multi-room audio systems and home theater solutions."
+                link="/services/audio-entertainment"
+              />
+              <ServiceCard
+                icon={Lightbulb}
+                title="Smart Lighting"
+                description="Automated lighting systems that create the perfect ambiance and save energy."
+                link="/services/smart-lighting"
+              />
+              <ServiceCard
+                icon={Sun}
+                title="Smart Shades"
+                description="Automated window treatments for comfort and energy efficiency."
+                link="/services/shades"
+              />
+              <ServiceCard
+                icon={Network}
+                title="Networking"
+                description="Enterprise-grade networking solutions for reliable smart home performance."
+                link="/services/networking"
+              />
+              <ServiceCard
+                icon={Thermometer}
+                title="Climate Control"
+                description="Intelligent temperature control for optimal comfort and efficiency."
+                link="/services/climate-control"
+              />
+              <ServiceCard
+                icon={Shield}
+                title="Security Systems"
+                description="Advanced security solutions including cameras, smart locks, and monitoring."
+                link="/services/security-systems"
+              />
+              <ServiceCard
+                icon={Wrench}
+                title="Troubleshooting & Maintenance"
+                description="Professional system maintenance and technical support services."
+                link="/services/maintenance"
+              />
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      </main>
 
       <footer className="py-12 px-6 text-center text-gray-400 bg-primary">
         <p className="text-sm">
