@@ -1,3 +1,4 @@
+
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -20,6 +21,7 @@ import HomeIntegration from "./pages/services/HomeIntegration";
 import Networking from "./pages/services/Networking";
 import Shades from "./pages/services/Shades";
 import Maintenance from "./pages/services/Maintenance";
+import Matterport from "./pages/Matterport";
 
 const queryClient = new QueryClient();
 
@@ -36,6 +38,7 @@ function App() {
             <Route path="/services" element={<Services />} />
             <Route path="/projects" element={<Projects />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="/matterport" element={<Matterport />} />
             <Route path="/photos/mounted-tvs" element={<MountedTVs />} />
             <Route path="/photos/wiring" element={<Wiring />} />
             <Route path="/photos/home-theater" element={<HomeTheater />} />
