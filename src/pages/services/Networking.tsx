@@ -82,10 +82,10 @@ const Networking = () => {
               Let us design a professional networking solution for your smart home.
             </p>
             <Link 
-              to="/contact"
+              to="/scheduling"
               className="inline-flex items-center bg-accent hover:bg-accent/90 text-white px-6 py-3 rounded-md font-medium transition-colors"
             >
-              Get Started
+              Schedule a Consultation
             </Link>
           </div>
         </div>
