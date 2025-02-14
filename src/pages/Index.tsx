@@ -1,5 +1,4 @@
-
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Phone } from "lucide-react";
 import { Link } from "react-router-dom";
 import {
   NavigationMenu,
@@ -22,52 +21,61 @@ const Index = () => {
                 className="h-32 w-auto"
               />
             </Link>
-            <NavigationMenu>
-              <NavigationMenuList>
-                <NavigationMenuItem>
-                  <Link to="/services" className="inline-flex items-center justify-between text-white px-4 py-2 hover:text-accent transition-colors">
-                    Services
-                  </Link>
-                  <NavigationMenuContent>
-                    <div className="w-[300px] p-4 space-y-3">
-                      <Link to="/services/home-integration" className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground">
-                        <div className="text-sm font-medium leading-none text-white">Home Integration</div>
-                        <p className="line-clamp-2 text-sm leading-snug text-gray-300">
-                          Complete Control4 smart home solutions
-                        </p>
-                      </Link>
-                      <Link to="/services/audio-entertainment" className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground">
-                        <div className="text-sm font-medium leading-none text-white">Audio & Entertainment</div>
-                        <p className="line-clamp-2 text-sm leading-snug text-gray-300">
-                          Premium multi-room audio solutions
-                        </p>
-                      </Link>
-                      <Link to="/services/smart-lighting" className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground">
-                        <div className="text-sm font-medium leading-none text-white">Smart Lighting</div>
-                        <p className="line-clamp-2 text-sm leading-snug text-gray-300">
-                          Automated lighting systems
-                        </p>
-                      </Link>
-                    </div>
-                  </NavigationMenuContent>
-                </NavigationMenuItem>
-                <NavigationMenuItem>
-                  <Link to="/projects" className="text-white px-4 py-2 hover:text-accent transition-colors">
-                    Projects
-                  </Link>
-                </NavigationMenuItem>
-                <NavigationMenuItem>
-                  <Link to="/about" className="text-white px-4 py-2 hover:text-accent transition-colors">
-                    About
-                  </Link>
-                </NavigationMenuItem>
-                <NavigationMenuItem>
-                  <Link to="/contact" className="text-white px-4 py-2 hover:text-accent transition-colors">
-                    Contact
-                  </Link>
-                </NavigationMenuItem>
-              </NavigationMenuList>
-            </NavigationMenu>
+            <div className="flex items-center gap-6">
+              <NavigationMenu>
+                <NavigationMenuList>
+                  <NavigationMenuItem>
+                    <Link to="/services" className="inline-flex items-center justify-between text-white px-4 py-2 hover:text-accent transition-colors">
+                      Services
+                    </Link>
+                    <NavigationMenuContent>
+                      <div className="w-[300px] p-4 space-y-3">
+                        <Link to="/services/home-integration" className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground">
+                          <div className="text-sm font-medium leading-none text-white">Home Integration</div>
+                          <p className="line-clamp-2 text-sm leading-snug text-gray-300">
+                            Complete Control4 smart home solutions
+                          </p>
+                        </Link>
+                        <Link to="/services/audio-entertainment" className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground">
+                          <div className="text-sm font-medium leading-none text-white">Audio & Entertainment</div>
+                          <p className="line-clamp-2 text-sm leading-snug text-gray-300">
+                            Premium multi-room audio solutions
+                          </p>
+                        </Link>
+                        <Link to="/services/smart-lighting" className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground">
+                          <div className="text-sm font-medium leading-none text-white">Smart Lighting</div>
+                          <p className="line-clamp-2 text-sm leading-snug text-gray-300">
+                            Automated lighting systems
+                          </p>
+                        </Link>
+                      </div>
+                    </NavigationMenuContent>
+                  </NavigationMenuItem>
+                  <NavigationMenuItem>
+                    <Link to="/projects" className="text-white px-4 py-2 hover:text-accent transition-colors">
+                      Projects
+                    </Link>
+                  </NavigationMenuItem>
+                  <NavigationMenuItem>
+                    <Link to="/about" className="text-white px-4 py-2 hover:text-accent transition-colors">
+                      About
+                    </Link>
+                  </NavigationMenuItem>
+                  <NavigationMenuItem>
+                    <Link to="/contact" className="text-white px-4 py-2 hover:text-accent transition-colors">
+                      Contact
+                    </Link>
+                  </NavigationMenuItem>
+                </NavigationMenuList>
+              </NavigationMenu>
+              <a 
+                href="tel:+1234567890" 
+                className="inline-flex items-center gap-2 bg-accent hover:bg-accent/90 text-white px-4 py-2 rounded-md transition-colors"
+              >
+                <Phone className="w-4 h-4" />
+                Call Now
+              </a>
+            </div>
           </div>
         </div>
       </nav>

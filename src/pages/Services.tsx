@@ -1,5 +1,5 @@
 
-import { ArrowRight, Home, Shield, Lightbulb, Thermometer, Camera, Speaker, Network, Sun, Wrench } from "lucide-react";
+import { ArrowRight, Home, Shield, Lightbulb, Thermometer, Camera, Speaker, Network, Sun, Wrench, Phone } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const ServiceCard = ({ icon: Icon, title, description, link }: { icon: any; title: string; description: string; link: string }) => (
@@ -37,9 +37,16 @@ const Services = () => {
               <Link to="/about" className="text-gray-300 hover:text-white transition-colors">
                 About
               </Link>
-              <Link to="/contact" className="text-accent hover:text-accent/90 transition-colors">
+              <Link to="/contact" className="text-gray-300 hover:text-white transition-colors">
                 Contact
               </Link>
+              <a 
+                href="tel:+1234567890" 
+                className="inline-flex items-center gap-2 bg-accent hover:bg-accent/90 text-white px-4 py-2 rounded-md transition-colors"
+              >
+                <Phone className="w-4 h-4" />
+                Call Now
+              </a>
             </div>
           </nav>
         </div>
