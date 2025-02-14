@@ -9,6 +9,7 @@ import Services from "./pages/Services";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
 import Projects from "./pages/Projects";
+import Matterport from "./pages/Matterport";
 import NotFound from "./pages/NotFound";
 import SmartLighting from "./pages/services/SmartLighting";
 import SecuritySystems from "./pages/services/SecuritySystems";
@@ -41,6 +42,7 @@ const App = () => (
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/projects" element={<Projects />} />
+          <Route path="/matterport" element={<Matterport />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
