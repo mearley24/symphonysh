@@ -50,8 +50,8 @@ const ClimateControl = () => {
             </div>
             <div className="bg-white/5 backdrop-blur-sm rounded-lg p-8">
               <img 
-                src="https://images.unsplash.com/photo-1513506003901-1e6a229e2d15?auto=format&fit=crop&q=80"
-                alt="Smart Climate Control"
+                src="/lovable-uploads/646c1725-c4e5-4cf9-9670-0d9633402150.png"
+                alt="Smart Climate Control Interface"
                 className="rounded-lg w-full h-64 object-cover mb-6"
               />
             </div>
