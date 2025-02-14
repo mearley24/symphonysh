@@ -53,8 +53,8 @@ const Maintenance = () => {
             </div>
             <div className="bg-white/5 backdrop-blur-sm rounded-lg p-8">
               <img 
-                src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&q=80"
-                alt="System Maintenance"
+                src="/lovable-uploads/df55cc4d-3261-458d-92d3-7acaae21361e.png"
+                alt="Professional System Maintenance"
                 className="rounded-lg w-full h-64 object-cover mb-6"
               />
             </div>
