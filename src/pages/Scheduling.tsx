@@ -19,7 +19,7 @@ const AVAILABLE_TIMES = [
 ];
 
 const SERVICES = [
-  { id: "home-integration", name: "Home Integration" },
+  { id: "home-integration", name: "Home Automation" },
   { id: "audio-entertainment", name: "Audio & Entertainment" },
   { id: "smart-lighting", name: "Smart Lighting" },
   { id: "shades", name: "Smart Shades" },

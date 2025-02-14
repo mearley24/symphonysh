@@ -1,3 +1,4 @@
+
 import { ArrowLeft, Home, Zap, Lock, Settings, Wifi, Globe } from "lucide-react";
 import { Link } from "react-router-dom";
 
@@ -19,7 +20,7 @@ const HomeIntegration = () => {
             Back to Services
           </Link>
 
-          <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">Home Integration</h1>
+          <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">Home Automation</h1>
           <p className="text-xl text-gray-300 mb-12 max-w-2xl">
             Seamless integration of all your smart home systems with Control4
           </p>
@@ -78,7 +79,7 @@ const HomeIntegration = () => {
           <div className="bg-white/5 backdrop-blur-sm p-8 rounded-lg text-center">
             <h2 className="text-2xl font-semibold text-white mb-4">Ready for Complete Home Automation?</h2>
             <p className="text-gray-300 mb-6">
-              Let us create your perfect integrated smart home experience.
+              Let us create your perfect automated smart home experience.
             </p>
             <Link 
               to="/scheduling?service=home-integration"

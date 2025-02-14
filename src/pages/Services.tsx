@@ -1,3 +1,4 @@
+
 import { ArrowRight, Home, Shield, Lightbulb, Thermometer, Camera, Speaker, Network, Sun, Wrench } from "lucide-react";
 import { Link } from "react-router-dom";
 import Header from "../components/Header";
@@ -30,7 +31,7 @@ const Services = () => {
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
               <ServiceCard
                 icon={Home}
-                title="Home Integration"
+                title="Home Automation"
                 description="Seamless integration of all your smart home systems."
                 link="/services/home-integration"
               />
