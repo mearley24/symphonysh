@@ -1,6 +1,6 @@
-
 import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
+import Header from "../components/Header";
 
 const ProjectCard = ({ title, description, image }: { title: string; description: string; image: string }) => (
   <div className="bg-white/5 backdrop-blur-sm rounded-lg overflow-hidden">
@@ -21,6 +21,7 @@ const ProjectCard = ({ title, description, image }: { title: string; description
 const Projects = () => {
   return (
     <div className="min-h-screen bg-primary">
+      <Header />
       <section className="pt-32 pb-20 px-6">
         <div className="max-w-6xl mx-auto">
           <h1 className="text-4xl md:text-5xl font-bold text-white text-center mb-4">Our Projects</h1>

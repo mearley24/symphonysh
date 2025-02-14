@@ -1,9 +1,10 @@
-
 import { Check } from "lucide-react";
+import Header from "../components/Header";
 
 const About = () => {
   return (
     <div className="min-h-screen bg-primary">
+      <Header />
       <section className="pt-32 pb-20 px-6">
         <div className="max-w-4xl mx-auto">
           <h1 className="text-4xl md:text-5xl font-bold text-white text-center mb-4">About Us</h1>

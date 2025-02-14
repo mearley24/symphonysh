@@ -1,5 +1,6 @@
-import { ArrowRight, Home, Shield, Lightbulb, Thermometer, Camera, Speaker, Network, Sun, Wrench, Phone } from "lucide-react";
+import { ArrowRight, Home, Shield, Lightbulb, Thermometer, Camera, Speaker, Network, Sun, Wrench } from "lucide-react";
 import { Link } from "react-router-dom";
+import Header from "../components/Header";
 
 const ServiceCard = ({ icon: Icon, title, description, link }: { icon: any; title: string; description: string; link: string }) => (
   <Link to={link} className="block h-full">
@@ -17,44 +18,7 @@ const ServiceCard = ({ icon: Icon, title, description, link }: { icon: any; titl
 const Services = () => {
   return (
     <div className="min-h-screen bg-primary">
-      <header className="fixed top-0 left-0 right-0 bg-[rgb(0,9,24)]/95 backdrop-blur-sm border-b border-white/10 z-50">
-        <div className="max-w-6xl mx-auto px-6 py-4">
-          <nav className="flex items-center justify-between">
-            <Link to="/" className="flex items-center">
-              <img 
-                src="/lovable-uploads/1d7a78ef-4d02-453d-aeea-81e50fb784b6.png" 
-                alt="Symphony Smart Homes Logo" 
-                className="h-16 w-auto"
-              />
-            </Link>
-            <div className="flex items-center space-x-8">
-              <Link to="/" className="text-gray-300 hover:text-white transition-colors">
-                Home
-              </Link>
-              <Link to="/services" className="text-white font-medium">
-                Services
-              </Link>
-              <Link to="/projects" className="text-gray-300 hover:text-white transition-colors">
-                Projects
-              </Link>
-              <Link to="/about" className="text-gray-300 hover:text-white transition-colors">
-                About
-              </Link>
-              <Link to="/contact" className="text-gray-300 hover:text-white transition-colors">
-                Contact
-              </Link>
-              <a 
-                href="tel:+1234567890" 
-                className="inline-flex items-center gap-2 bg-accent hover:bg-accent/90 text-white px-4 py-2 rounded-md transition-colors"
-              >
-                <Phone className="w-4 h-4" />
-                Call Now
-              </a>
-            </div>
-          </nav>
-        </div>
-      </header>
-
+      <Header />
       <main className="pt-28">
         <section className="py-20 px-6">
           <div className="max-w-6xl mx-auto">
@@ -116,12 +80,6 @@ const Services = () => {
           </div>
         </section>
       </main>
-
-      <footer className="py-12 px-6 text-center text-gray-400 bg-primary">
-        <p className="text-sm">
-          © 2024 Symphony Smart Homes. All rights reserved.
-        </p>
-      </footer>
     </div>
   );
 };

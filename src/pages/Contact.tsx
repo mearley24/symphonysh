@@ -1,5 +1,5 @@
-
 import { Mail, Phone, MapPin } from "lucide-react";
+import Header from "../components/Header";
 
 const ContactInfo = ({ icon: Icon, title, content }: { icon: any; title: string; content: string }) => (
   <div className="flex items-center gap-4 bg-white/5 backdrop-blur-sm p-6 rounded-lg">
@@ -14,6 +14,7 @@ const ContactInfo = ({ icon: Icon, title, content }: { icon: any; title: string;
 const Contact = () => {
   return (
     <div className="min-h-screen bg-primary">
+      <Header />
       <section className="pt-32 pb-20 px-6">
         <div className="max-w-4xl mx-auto">
           <h1 className="text-4xl md:text-5xl font-bold text-white text-center mb-4">Contact Us</h1>
