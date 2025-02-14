@@ -1,5 +1,5 @@
 
-import { ArrowLeft, Shield, Lock, Bell, Eye, Smartphone, Wifi } from "lucide-react";
+import { ArrowLeft, Shield, Lock, Bell, Eye, Smartphone, Wifi, Camera } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const FeatureCard = ({ icon: Icon, title, description }: { icon: any; title: string; description: string }) => (
@@ -22,12 +22,12 @@ const SecuritySystems = () => {
 
           <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">Security Systems</h1>
           <p className="text-xl text-gray-300 mb-12 max-w-2xl">
-            Comprehensive home security solutions integrated with Control4 for complete peace of mind
+            Comprehensive security and surveillance solutions integrated with Control4 for complete peace of mind
           </p>
 
           <div className="grid md:grid-cols-2 gap-12 mb-16">
             <div>
-              <h2 className="text-2xl font-semibold text-white mb-4">Control4 Security Integration</h2>
+              <h2 className="text-2xl font-semibold text-white mb-4">Integrated Security Solution</h2>
               <p className="text-gray-300 mb-6">
                 Our security systems seamlessly integrate with Control4's automation platform, providing 
                 unified control over your entire home security ecosystem. Monitor and manage your security 
@@ -37,6 +37,10 @@ const SecuritySystems = () => {
                 <li className="flex items-center">
                   <Lock className="w-5 h-5 text-accent mr-3" />
                   Smart lock integration and monitoring
+                </li>
+                <li className="flex items-center">
+                  <Camera className="w-5 h-5 text-accent mr-3" />
+                  HD surveillance cameras with night vision
                 </li>
                 <li className="flex items-center">
                   <Bell className="w-5 h-5 text-accent mr-3" />
@@ -65,15 +69,48 @@ const SecuritySystems = () => {
               description="Manage and monitor all entry points with smart locks and access controls integrated with Control4."
             />
             <FeatureCard
-              icon={Wifi}
-              title="Remote Monitoring"
-              description="View security cameras and system status from anywhere using the Control4 mobile app."
+              icon={Camera}
+              title="Video Surveillance"
+              description="HD cameras with night vision, smart motion detection, and cloud storage options."
             />
             <FeatureCard
               icon={Bell}
               title="Intelligent Alerts"
               description="Receive instant notifications for any security events or unusual activity."
             />
+          </div>
+
+          <div className="bg-white/5 backdrop-blur-sm p-8 rounded-lg mb-16">
+            <h2 className="text-2xl font-semibold text-white mb-4">Video Surveillance Features</h2>
+            <div className="grid md:grid-cols-2 gap-8">
+              <div>
+                <ul className="space-y-4 text-gray-300">
+                  <li className="flex items-center">
+                    <Camera className="w-5 h-5 text-accent mr-3" />
+                    HD cameras with wide-angle viewing
+                  </li>
+                  <li className="flex items-center">
+                    <Eye className="w-5 h-5 text-accent mr-3" />
+                    Night vision capabilities
+                  </li>
+                  <li className="flex items-center">
+                    <Smartphone className="w-5 h-5 text-accent mr-3" />
+                    Mobile access and remote viewing
+                  </li>
+                  <li className="flex items-center">
+                    <Wifi className="w-5 h-5 text-accent mr-3" />
+                    Cloud storage and local backup
+                  </li>
+                </ul>
+              </div>
+              <div>
+                <img 
+                  src="https://images.unsplash.com/photo-1557317081-341c04601c13?auto=format&fit=crop&q=80"
+                  alt="Video Surveillance"
+                  className="rounded-lg w-full h-48 object-cover"
+                />
+              </div>
+            </div>
           </div>
 
           <div className="bg-white/5 backdrop-blur-sm p-8 rounded-lg text-center">
