@@ -54,8 +54,8 @@ const SecuritySystems = () => {
             </div>
             <div className="bg-white/5 backdrop-blur-sm rounded-lg p-8">
               <img 
-                src="https://images.unsplash.com/photo-1557317081-341c04601c13?auto=format&fit=crop&q=80"
-                alt="Home Security System"
+                src="/lovable-uploads/1d7a78ef-4d02-453d-aeea-81e50fb784b6.png"
+                alt="Home Security System Dashboard"
                 className="rounded-lg w-full h-64 object-cover mb-6"
               />
             </div>
