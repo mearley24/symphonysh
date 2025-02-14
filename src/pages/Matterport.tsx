@@ -25,25 +25,20 @@ const Matterport = () => {
             <p className="text-lg text-gray-300 max-w-2xl mx-auto mb-6">
               Create stunning 3D virtual tours that allow clients to explore your property from anywhere in the world.
             </p>
-            <Link 
-              to="/contact" 
-              className="inline-flex items-center gap-2 bg-accent hover:bg-accent/90 text-white px-6 py-3 rounded-md transition-colors"
-            >
-              Get Started <ArrowRight className="w-5 h-5" />
-            </Link>
-          </div>
-
-          {/* Demo Section */}
-          <div className="relative rounded-lg overflow-hidden mb-16 aspect-video">
-            <iframe
-              width="100%"
-              height="100%"
-              src="https://my.matterport.com/show/?m=ohEAHYLpcVD"
-              frameBorder="0"
-              allowFullScreen
-              allow="autoplay; fullscreen; web-share; xr-spatial-tracking;"
-              className="w-full h-full"
-            />
+            <div className="flex justify-center gap-4">
+              <Link 
+                to="/contact" 
+                className="inline-flex items-center gap-2 bg-accent hover:bg-accent/90 text-white px-6 py-3 rounded-md transition-colors"
+              >
+                Get Started <ArrowRight className="w-5 h-5" />
+              </Link>
+              <Link 
+                to="/projects" 
+                className="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white px-6 py-3 rounded-md transition-colors"
+              >
+                View Our Projects <ArrowRight className="w-5 h-5" />
+              </Link>
+            </div>
           </div>
 
           {/* Features Grid */}
