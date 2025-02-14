@@ -1,4 +1,3 @@
-
 import { ArrowLeft, Wrench, Check, List, AlertCircle } from "lucide-react";
 import { Link } from "react-router-dom";
 
@@ -53,21 +52,11 @@ const Maintenance = () => {
               </ul>
             </div>
             <div className="bg-white/5 backdrop-blur-sm rounded-lg p-8">
-              <h3 className="text-xl font-semibold text-white mb-4">Maintenance Plans</h3>
-              <ul className="space-y-4">
-                <li className="bg-white/5 p-4 rounded-lg">
-                  <h4 className="text-lg font-medium text-white mb-2">Quarterly Maintenance</h4>
-                  <p className="text-gray-300">Regular system checks and updates every 3 months</p>
-                </li>
-                <li className="bg-white/5 p-4 rounded-lg">
-                  <h4 className="text-lg font-medium text-white mb-2">Annual Service</h4>
-                  <p className="text-gray-300">Comprehensive yearly system inspection and optimization</p>
-                </li>
-                <li className="bg-white/5 p-4 rounded-lg">
-                  <h4 className="text-lg font-medium text-white mb-2">Priority Support</h4>
-                  <p className="text-gray-300">24/7 emergency support with guaranteed response times</p>
-                </li>
-              </ul>
+              <img 
+                src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&q=80"
+                alt="System Maintenance"
+                className="rounded-lg w-full h-64 object-cover mb-6"
+              />
             </div>
           </div>
 

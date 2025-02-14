@@ -50,7 +50,7 @@ const HomeIntegration = () => {
             </div>
             <div className="bg-white/5 backdrop-blur-sm rounded-lg p-8">
               <img 
-                src="https://images.unsplash.com/photo-1558002038-1055907df827?auto=format&fit=crop&q=80"
+                src="https://images.unsplash.com/photo-1721322800607-8c38375eef04?auto=format&fit=crop&q=80"
                 alt="Smart Home Integration"
                 className="rounded-lg w-full h-64 object-cover mb-6"
               />
