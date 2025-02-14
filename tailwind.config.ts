@@ -21,7 +21,7 @@ export default {
     extend: {
       fontFamily: {
         sans: ['Inter', 'sans-serif'],
-        display: ['SF Pro Display', 'Inter', 'sans-serif'],
+        display: ['Inter', 'sans-serif'],
       },
       colors: {
         border: "hsl(var(--border))",
@@ -30,20 +30,20 @@ export default {
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
         primary: {
-          DEFAULT: "#333333",
+          DEFAULT: "#1A1F2C",
           foreground: "#FFFFFF",
         },
         secondary: {
-          DEFAULT: "#F5F5F7",
-          foreground: "#1D1D1F",
+          DEFAULT: "#F1F0FB",
+          foreground: "#1A1F2C",
         },
         accent: {
-          DEFAULT: "#86868B",
+          DEFAULT: "#9b87f5",
           foreground: "#FFFFFF",
         },
         muted: {
           DEFAULT: "#F5F5F7",
-          foreground: "#86868B",
+          foreground: "#403E43",
         },
       },
       keyframes: {

@@ -35,7 +35,7 @@
     --input: 0 0% 89.8%;
     --ring: 0 0% 3.9%;
 
-    --radius: 0.75rem;
+    --radius: 0.5rem;
   }
 }
 
@@ -44,12 +44,12 @@
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground antialiased;
+    @apply bg-primary text-foreground antialiased;
     font-feature-settings: "ss01", "ss02", "cv01", "cv02", "cv03";
   }
   
-  .glass {
-    @apply backdrop-blur-lg bg-white/80 border border-white/20;
+  .glass-dark {
+    @apply backdrop-blur-sm bg-white/5 border border-white/10;
   }
   
   .card-hover {
