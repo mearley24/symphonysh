@@ -1,6 +1,5 @@
-import { ArrowLeft, Lightbulb, Power, Clock, Sun, Smartphone, Palette, LampCeiling, LampWallDown } from "lucide-react";
+import { ArrowLeft, Lightbulb, Sun, Clock, Smartphone } from "lucide-react";
 import { Link } from "react-router-dom";
-import { useState } from "react";
 
 const FeatureCard = ({ icon: Icon, title, description }: { icon: any; title: string; description: string }) => (
   <div className="bg-white/5 backdrop-blur-sm p-6 rounded-lg">
@@ -10,85 +9,7 @@ const FeatureCard = ({ icon: Icon, title, description }: { icon: any; title: str
   </div>
 );
 
-type LightingLoad = {
-  id: number;
-  title: string;
-  icon: any;
-  position: { top: string; left: string };
-  glowSize?: string;
-  glowOpacity?: string;
-};
-
 const SmartLighting = () => {
-  const [activeLoad, setActiveLoad] = useState<number | null>(null);
-
-  const lightingLoads: LightingLoad[] = [
-    {
-      id: 1,
-      title: "Under Cabinet Lighting",
-      icon: LampWallDown,
-      position: { top: "30%", left: "20%" },
-      glowSize: "60px",
-      glowOpacity: "0.15"
-    },
-    {
-      id: 2,
-      title: "Island Pendant Lights",
-      icon: LampCeiling,
-      position: { top: "25%", left: "45%" },
-      glowSize: "80px",
-      glowOpacity: "0.2"
-    },
-    {
-      id: 3,
-      title: "Recessed Lighting",
-      icon: Lightbulb,
-      position: { top: "15%", left: "65%" },
-      glowSize: "60px",
-      glowOpacity: "0.15"
-    },
-    {
-      id: 4,
-      title: "Above Sink Light",
-      icon: LampWallDown,
-      position: { top: "30%", left: "35%" },
-      glowSize: "50px",
-      glowOpacity: "0.15"
-    },
-    {
-      id: 5,
-      title: "Accent Wall Lighting",
-      icon: LampWallDown,
-      position: { top: "40%", left: "15%" },
-      glowSize: "40px",
-      glowOpacity: "0.15"
-    },
-    {
-      id: 6,
-      title: "Island Strip Lighting",
-      icon: LampWallDown,
-      position: { top: "45%", left: "45%" },
-      glowSize: "70px",
-      glowOpacity: "0.1"
-    },
-    {
-      id: 7,
-      title: "LED Floor Lighting",
-      icon: LampWallDown,
-      position: { top: "85%", left: "55%" },
-      glowSize: "60px",
-      glowOpacity: "0.15"
-    },
-    {
-      id: 8,
-      title: "Living Area Lighting",
-      icon: LampCeiling,
-      position: { top: "35%", left: "85%" },
-      glowSize: "50px",
-      glowOpacity: "0.15"
-    },
-  ];
-
   return (
     <div className="min-h-screen bg-primary">
       <section className="pt-32 pb-20 px-6">
@@ -98,102 +19,72 @@ const SmartLighting = () => {
             Back to Services
           </Link>
 
-          <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">Smart Lighting Solutions</h1>
+          <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">Smart Lighting</h1>
           <p className="text-xl text-gray-300 mb-12 max-w-2xl">
-            Transform your home's ambiance with intelligent lighting control powered by Control4
+            Automated lighting systems that create the perfect ambiance and save energy
           </p>
 
           <div className="grid md:grid-cols-2 gap-12 mb-16">
             <div>
-              <h2 className="text-2xl font-semibold text-white mb-4">Control4 Integration</h2>
+              <h2 className="text-2xl font-semibold text-white mb-4">Control4 Lighting Integration</h2>
               <p className="text-gray-300 mb-6">
-                Our smart lighting solutions seamlessly integrate with Control4's powerful automation platform, 
-                giving you complete control over your home's lighting from a single interface. Whether you're 
-                using the Control4 app, touchscreen panels, or voice commands, managing your lighting has never 
-                been easier.
+                Our smart lighting solutions seamlessly integrate with Control4, allowing you to automate 
+                your lights for optimal ambiance, convenience, and energy efficiency. Create scenes, schedules, 
+                and control your lights from any Control4 interface.
               </p>
               <ul className="space-y-3 text-gray-300">
                 <li className="flex items-center">
-                  <Power className="w-5 h-5 text-accent mr-3" />
-                  Central control of all lighting fixtures
+                  <Sun className="w-5 h-5 text-accent mr-3" />
+                  Automated sun tracking
                 </li>
                 <li className="flex items-center">
                   <Clock className="w-5 h-5 text-accent mr-3" />
-                  Automated schedules and scenes
+                  Scheduled operations
                 </li>
                 <li className="flex items-center">
                   <Smartphone className="w-5 h-5 text-accent mr-3" />
-                  Mobile app control from anywhere
+                  Multi-device control
                 </li>
               </ul>
             </div>
-            <div className="bg-[#1A1F2C] backdrop-blur-sm rounded-lg p-8 relative">
+            <div className="bg-white/5 backdrop-blur-sm rounded-lg p-8">
               <img 
-                src="/lovable-uploads/56480a40-adc0-4a59-912b-0309634ebf44.png"
-                alt="Smart Kitchen Lighting Control"
-                className="rounded-lg w-full h-[500px] object-cover mb-6"
+                src="/lovable-uploads/499a491f-6a9a-4f6a-849b-90499909a94a.png"
+                alt="Smart Lighting Control Interface with Automated Features"
+                className="rounded-lg w-full h-64 object-cover mb-6"
               />
-              {lightingLoads.map((load) => (
-                <div
-                  key={load.id}
-                  className="absolute cursor-pointer transform -translate-x-1/2 -translate-y-1/2"
-                  style={{ top: load.position.top, left: load.position.left }}
-                  onMouseEnter={() => setActiveLoad(load.id)}
-                  onMouseLeave={() => setActiveLoad(null)}
-                >
-                  <div className="relative">
-                    <div 
-                      className="absolute rounded-full bg-[#FEC6A1]"
-                      style={{
-                        width: load.glowSize,
-                        height: load.glowSize,
-                        opacity: load.glowOpacity,
-                        filter: 'blur(15px)',
-                        transform: 'translate(-50%, -50%)',
-                        zIndex: 0
-                      }}
-                    />
-                    <load.icon className="w-6 h-6 text-[#FEC6A1] animate-pulse relative z-10" />
-                    {activeLoad === load.id && (
-                      <div className="absolute left-full ml-2 whitespace-nowrap bg-black/80 text-white text-sm px-2 py-1 rounded">
-                        {load.title}
-                      </div>
-                    )}
-                  </div>
-                </div>
-              ))}
             </div>
           </div>
 
           <h2 className="text-2xl font-semibold text-white mb-8 text-center">Key Features</h2>
           <div className="grid md:grid-cols-3 gap-6 mb-16">
             <FeatureCard
+              icon={Lightbulb}
+              title="Smart Control"
+              description="Control your lights from anywhere using the Control4 app."
+            />
+            <FeatureCard
               icon={Sun}
-              title="Daylight Harvesting"
-              description="Automatically adjust lighting based on natural light levels to save energy and maintain optimal brightness."
+              title="Automated Schedules"
+              description="Create custom lighting schedules that adapt to your lifestyle."
             />
             <FeatureCard
               icon={Clock}
-              title="Smart Scheduling"
-              description="Create automated schedules that align with your daily routines and lifestyle patterns."
-            />
-            <FeatureCard
-              icon={Palette}
-              title="Scene Creation"
-              description="Design custom lighting scenes for different occasions, moods, and activities."
+              title="Energy Efficiency"
+              description="Reduce energy consumption with automated lighting control."
             />
           </div>
 
           <div className="bg-white/5 backdrop-blur-sm p-8 rounded-lg text-center">
-            <h2 className="text-2xl font-semibold text-white mb-4">Ready to Transform Your Home?</h2>
+            <h2 className="text-2xl font-semibold text-white mb-4">Ready to Transform Your Lighting?</h2>
             <p className="text-gray-300 mb-6">
               Let us help you design the perfect smart lighting solution for your home.
             </p>
             <Link 
-              to="/contact"
+              to="/scheduling"
               className="inline-flex items-center bg-accent hover:bg-accent/90 text-white px-6 py-3 rounded-md font-medium transition-colors"
             >
-              Get Started
+              Schedule a Consultation
             </Link>
           </div>
         </div>
