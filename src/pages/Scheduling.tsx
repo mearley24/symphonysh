@@ -1,9 +1,76 @@
 
 import { ArrowLeft } from "lucide-react";
 import { Link } from "react-router-dom";
+import { Calendar } from "@/components/ui/calendar";
+import { useState } from "react";
+import { useToast } from "@/components/ui/use-toast";
 import Header from "../components/Header";
+import { format } from "date-fns";
+
+const AVAILABLE_TIMES = [
+  "09:00", "10:00", "11:00", "13:00", "14:00", "15:00", "16:00"
+];
 
 const Scheduling = () => {
+  const [date, setDate] = useState<Date>();
+  const [selectedTime, setSelectedTime] = useState<string>();
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [message, setMessage] = useState("");
+  const { toast } = useToast();
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    if (!date || !selectedTime || !name || !email || !phone) {
+      toast({
+        title: "Missing Information",
+        description: "Please fill in all required fields.",
+        variant: "destructive"
+      });
+      return;
+    }
+
+    try {
+      const { data, error } = await window.supabase
+        .from('appointments')
+        .insert([
+          {
+            date: format(date, 'yyyy-MM-dd'),
+            time: selectedTime,
+            name,
+            email,
+            phone,
+            message,
+            status: 'pending'
+          }
+        ]);
+
+      if (error) throw error;
+
+      toast({
+        title: "Appointment Scheduled!",
+        description: "We'll contact you to confirm your appointment.",
+      });
+
+      // Reset form
+      setDate(undefined);
+      setSelectedTime(undefined);
+      setName("");
+      setEmail("");
+      setPhone("");
+      setMessage("");
+      
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "There was a problem scheduling your appointment. Please try again.",
+        variant: "destructive"
+      });
+    }
+  };
+
   return (
     <div className="min-h-screen bg-primary">
       <Header />
@@ -19,21 +86,128 @@ const Scheduling = () => {
               Back to Services
             </Link>
             <h1 className="text-4xl font-bold text-white mb-4">Schedule a Consultation</h1>
-            <p className="text-lg text-gray-300">
+            <p className="text-lg text-gray-300 mb-8">
               Book a time to discuss your smart home project with our experts.
             </p>
           </div>
 
-          <div className="bg-white/5 backdrop-blur-sm rounded-lg p-4 aspect-[3/4]">
-            {/* Replace the src URL below with your actual Acuity Scheduling embed URL */}
-            <iframe
-              src="YOUR_ACUITY_SCHEDULING_EMBED_URL"
-              width="100%"
-              height="100%"
-              frameBorder="0"
-              className="rounded-md"
-            />
-          </div>
+          <form onSubmit={handleSubmit} className="space-y-8">
+            <div className="grid md:grid-cols-2 gap-8">
+              <div className="space-y-4">
+                <div className="bg-white/5 backdrop-blur-sm rounded-lg p-4">
+                  <Calendar
+                    mode="single"
+                    selected={date}
+                    onSelect={setDate}
+                    className="bg-transparent text-white"
+                    disabled={(date) => {
+                      // Disable past dates and weekends
+                      const now = new Date();
+                      now.setHours(0, 0, 0, 0);
+                      return (
+                        date < now ||
+                        date.getDay() === 0 ||
+                        date.getDay() === 6
+                      );
+                    }}
+                  />
+                </div>
+
+                {date && (
+                  <div className="bg-white/5 backdrop-blur-sm rounded-lg p-4">
+                    <h3 className="text-lg font-medium text-white mb-4">Available Times</h3>
+                    <div className="grid grid-cols-3 gap-2">
+                      {AVAILABLE_TIMES.map((time) => (
+                        <button
+                          key={time}
+                          type="button"
+                          onClick={() => setSelectedTime(time)}
+                          className={`p-2 rounded-md text-sm transition-colors ${
+                            selectedTime === time
+                              ? "bg-accent text-white"
+                              : "bg-white/5 text-gray-300 hover:bg-white/10"
+                          }`}
+                        >
+                          {time}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
+
+              <div className="space-y-4">
+                <div>
+                  <label htmlFor="name" className="block text-sm font-medium text-gray-300 mb-1">
+                    Name *
+                  </label>
+                  <input
+                    type="text"
+                    id="name"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    required
+                    className="w-full bg-white/5 border border-white/10 rounded-md px-4 py-2 text-white placeholder-gray-400"
+                    placeholder="Your full name"
+                  />
+                </div>
+
+                <div>
+                  <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-1">
+                    Email *
+                  </label>
+                  <input
+                    type="email"
+                    id="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    required
+                    className="w-full bg-white/5 border border-white/10 rounded-md px-4 py-2 text-white placeholder-gray-400"
+                    placeholder="your@email.com"
+                  />
+                </div>
+
+                <div>
+                  <label htmlFor="phone" className="block text-sm font-medium text-gray-300 mb-1">
+                    Phone *
+                  </label>
+                  <input
+                    type="tel"
+                    id="phone"
+                    value={phone}
+                    onChange={(e) => setPhone(e.target.value)}
+                    required
+                    className="w-full bg-white/5 border border-white/10 rounded-md px-4 py-2 text-white placeholder-gray-400"
+                    placeholder="(123) 456-7890"
+                  />
+                </div>
+
+                <div>
+                  <label htmlFor="message" className="block text-sm font-medium text-gray-300 mb-1">
+                    Message (Optional)
+                  </label>
+                  <textarea
+                    id="message"
+                    value={message}
+                    onChange={(e) => setMessage(e.target.value)}
+                    rows={4}
+                    className="w-full bg-white/5 border border-white/10 rounded-md px-4 py-2 text-white placeholder-gray-400"
+                    placeholder="Tell us about your project..."
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div className="flex justify-center">
+              <button
+                type="submit"
+                className="bg-accent hover:bg-accent/90 text-white px-8 py-3 rounded-md font-medium transition-colors"
+                disabled={!date || !selectedTime || !name || !email || !phone}
+              >
+                Schedule Consultation
+              </button>
+            </div>
+          </form>
         </div>
       </section>
 
