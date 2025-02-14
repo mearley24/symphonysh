@@ -56,12 +56,12 @@ const Projects = () => {
                   {album.images.map((image, imageIndex) => (
                     <div 
                       key={imageIndex} 
-                      className="aspect-video rounded-lg overflow-hidden hover:opacity-90 transition-opacity"
+                      className="aspect-video rounded-lg overflow-hidden group cursor-pointer"
                     >
                       <img 
                         src={image} 
                         alt={`${album.title} - Image ${imageIndex + 1}`} 
-                        className="w-full h-full object-cover"
+                        className="w-full h-full object-cover transform transition-all duration-300 scale-95 group-hover:scale-110"
                       />
                     </div>
                   ))}
