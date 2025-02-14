@@ -11,7 +11,6 @@ const Header = () => {
     { path: "/services", label: "Services" },
     { path: "/projects", label: "Projects" },
     { path: "/matterport", label: "Matterport" },
-    { path: "/ava", label: "AVA" },
     { path: "/about", label: "About" },
     { path: "/contact", label: "Contact" },
   ];
@@ -40,11 +39,11 @@ const Header = () => {
               )
             ))}
             <a 
-              href="tel:+1234567890" 
+              href="tel:+19705193013" 
               className="inline-flex items-center gap-2 bg-accent hover:bg-accent/90 text-white px-4 py-2 rounded-md transition-colors"
             >
               <Phone className="w-4 h-4" />
-              Call Now
+              (970) 519-3013
             </a>
           </div>
         </nav>
