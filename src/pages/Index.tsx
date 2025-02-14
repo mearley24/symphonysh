@@ -12,7 +12,7 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-primary">
       {/* Navigation */}
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-[#1e1e1e]/95 backdrop-blur-sm border-b border-white/10">
+      <nav className="fixed top-0 left-0 right-0 z-50 bg-[rgb(0,9,24)]/95 backdrop-blur-sm border-b border-white/10">
         <div className="max-w-6xl mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
             <Link to="/" className="flex items-center">
