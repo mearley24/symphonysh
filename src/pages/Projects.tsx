@@ -27,7 +27,7 @@ const Projects = () => {
     { id: "ohEAHYLpcVD", title: "Frost Creek Residence" },
     { id: "vM2D6WVw9Jx", title: "Eagle Ranch Residence" },
     { id: "JryTWXeEypj", title: "Avon Residence" },
-    { id: "K2h9uNmtPLY", title: "Luxury Condo" },
+    { id: "thkE7sSu7S1", title: "Gypsum Residence" },
   ];
 
   return (
