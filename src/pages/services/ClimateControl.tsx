@@ -82,7 +82,7 @@ const ClimateControl = () => {
               Let us help you create the perfect climate control solution for your home.
             </p>
             <Link 
-              to="/scheduling"
+              to="/scheduling?service=climate-control"
               className="inline-flex items-center bg-accent hover:bg-accent/90 text-white px-6 py-3 rounded-md font-medium transition-colors"
             >
               Schedule a Consultation

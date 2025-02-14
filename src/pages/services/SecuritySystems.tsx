@@ -119,7 +119,7 @@ const SecuritySystems = () => {
               Let us design a comprehensive security solution tailored to your needs.
             </p>
             <Link 
-              to="/scheduling"
+              to="/scheduling?service=security-systems"
               className="inline-flex items-center bg-accent hover:bg-accent/90 text-white px-6 py-3 rounded-md font-medium transition-colors"
             >
               Schedule a Consultation

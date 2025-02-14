@@ -81,7 +81,7 @@ const HomeIntegration = () => {
               Let us create your perfect integrated smart home experience.
             </p>
             <Link 
-              to="/scheduling"
+              to="/scheduling?service=home-integration"
               className="inline-flex items-center bg-accent hover:bg-accent/90 text-white px-6 py-3 rounded-md font-medium transition-colors"
             >
               Schedule a Consultation
