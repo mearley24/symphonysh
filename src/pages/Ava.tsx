@@ -5,7 +5,6 @@ import {
   Shield, 
   Video, 
   Mic, 
-  User, 
   Users, 
   Settings,
   Headset
@@ -42,16 +41,16 @@ const Ava = () => {
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
             <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">
-              Secure Video Conferencing for Your Business
+              Welcome to the Future of Smart Technology
             </h1>
-            <p className="text-xl text-gray-300 max-w-2xl mx-auto mb-8">
-              Enterprise-grade security and compliance for virtual meetings and collaboration
+            <p className="text-xl text-gray-300 max-w-3xl mx-auto mb-8">
+              Your premier destination for innovative solutions tailored to modern living and business needs. Experience cutting-edge technology designed to enhance efficiency, productivity, and lifestyle.
             </p>
             <Link 
               to="/contact" 
               className="inline-flex items-center gap-2 bg-accent hover:bg-accent/90 text-white px-6 py-3 rounded-md transition-colors text-lg"
             >
-              Get Started <ArrowRight className="w-5 h-5" />
+              Explore Solutions <ArrowRight className="w-5 h-5" />
             </Link>
           </div>
 
@@ -60,57 +59,60 @@ const Ava = () => {
             <FeatureCard
               icon={Shield}
               title="Enterprise Security"
-              description="End-to-end encryption and security features to protect your communications."
+              description="State-of-the-art security features to protect your business and data."
             />
             <FeatureCard
               icon={Video}
-              title="HD Video Conferencing"
-              description="Crystal clear video meetings with support for large groups."
+              title="Smart Solutions"
+              description="Cutting-edge technology for seamless integration and control."
             />
             <FeatureCard
               icon={Mic}
-              title="Advanced Audio"
-              description="Noise cancellation and crystal clear audio for professional meetings."
+              title="Voice Control"
+              description="Advanced voice recognition for effortless command of your environment."
             />
             <FeatureCard
               icon={Users}
-              title="Team Collaboration"
-              description="Built-in tools for team messaging and file sharing."
+              title="Collaborative Tools"
+              description="Enhanced team productivity with integrated communication systems."
             />
             <FeatureCard
               icon={Settings}
-              title="Easy Integration"
-              description="Seamlessly integrate with your existing business tools and workflows."
+              title="Custom Integration"
+              description="Tailored solutions that adapt to your specific needs and workflows."
             />
             <FeatureCard
               icon={Headset}
-              title="24/7 Support"
-              description="Enterprise-grade support whenever you need assistance."
+              title="Expert Support"
+              description="24/7 dedicated support to ensure your success with AVA solutions."
             />
           </div>
 
-          {/* Resources Section */}
-          <div className="mb-20">
-            <h2 className="text-3xl font-bold text-white text-center mb-12">Resources & Documentation</h2>
+          {/* Why Choose AVA Section */}
+          <div className="text-center mb-20">
+            <h2 className="text-3xl font-bold text-white mb-8">Why Choose AVA</h2>
+            <p className="text-xl text-gray-300 max-w-3xl mx-auto mb-12">
+              At AVA, we specialize in delivering innovative solutions that transform how you live and work. Our commitment to excellence drives us to provide cutting-edge technology that empowers and inspires.
+            </p>
             <div className="grid md:grid-cols-2 gap-8">
               <ResourceCard
-                title="Getting Started Guide"
-                description="Learn how to set up and configure your AVA environment."
+                title="Business Solutions"
+                description="Streamline operations and boost productivity with our enterprise-grade solutions."
                 link="/contact"
               />
               <ResourceCard
-                title="Security Overview"
-                description="Detailed information about our security features and compliance."
+                title="Smart Home Integration"
+                description="Transform your living space with intelligent automation and control."
                 link="/contact"
               />
               <ResourceCard
-                title="API Documentation"
-                description="Technical documentation for developers and integrators."
+                title="Technology Innovation"
+                description="Stay ahead with our constantly evolving suite of smart solutions."
                 link="/contact"
               />
               <ResourceCard
-                title="Best Practices"
-                description="Tips and guidelines for optimal usage of AVA features."
+                title="Customer Success"
+                description="Join thousands of satisfied customers experiencing the AVA difference."
                 link="/contact"
               />
             </div>
@@ -118,15 +120,15 @@ const Ava = () => {
 
           {/* CTA Section */}
           <div className="text-center bg-white/5 backdrop-blur-sm rounded-lg p-12 mb-20">
-            <h2 className="text-3xl font-bold text-white mb-4">Ready to Transform Your Communication?</h2>
+            <h2 className="text-3xl font-bold text-white mb-4">Ready to Experience the Future?</h2>
             <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
-              Join thousands of businesses already using AVA for secure video conferencing
+              Join the growing community of innovators who trust AVA for their technology needs
             </p>
             <Link 
               to="/contact" 
               className="inline-flex items-center gap-2 bg-accent hover:bg-accent/90 text-white px-6 py-3 rounded-md transition-colors"
             >
-              Contact Sales <ArrowRight className="w-5 h-5" />
+              Get Started Today <ArrowRight className="w-5 h-5" />
             </Link>
           </div>
         </div>
