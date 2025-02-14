@@ -1,6 +1,7 @@
 
-import { ArrowLeft, Lightbulb, Power, Clock, Sun, Smartphone, Palette } from "lucide-react";
+import { ArrowLeft, Lightbulb, Power, Clock, Sun, Smartphone, Palette, LampCeiling, LampWallDown } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useState } from "react";
 
 const FeatureCard = ({ icon: Icon, title, description }: { icon: any; title: string; description: string }) => (
   <div className="bg-white/5 backdrop-blur-sm p-6 rounded-lg">
@@ -10,7 +11,37 @@ const FeatureCard = ({ icon: Icon, title, description }: { icon: any; title: str
   </div>
 );
 
+type LightingLoad = {
+  id: number;
+  title: string;
+  icon: any;
+  position: { top: string; left: string };
+};
+
 const SmartLighting = () => {
+  const [activeLoad, setActiveLoad] = useState<number | null>(null);
+
+  const lightingLoads: LightingLoad[] = [
+    {
+      id: 1,
+      title: "Under Cabinet Lighting",
+      icon: LampWallDown,
+      position: { top: "70%", left: "30%" },
+    },
+    {
+      id: 2,
+      title: "Pendant Lights",
+      icon: LampCeiling,
+      position: { top: "30%", left: "50%" },
+    },
+    {
+      id: 3,
+      title: "Recessed Lighting",
+      icon: Lightbulb,
+      position: { top: "20%", left: "70%" },
+    },
+  ];
+
   return (
     <div className="min-h-screen bg-primary">
       <section className="pt-32 pb-20 px-6">
@@ -49,12 +80,30 @@ const SmartLighting = () => {
                 </li>
               </ul>
             </div>
-            <div className="bg-white/5 backdrop-blur-sm rounded-lg p-8">
+            <div className="bg-white/5 backdrop-blur-sm rounded-lg p-8 relative">
               <img 
                 src="https://images.unsplash.com/photo-1600489000022-c2086d79f9d4?auto=format&fit=crop&q=80"
                 alt="Smart Kitchen Lighting Control"
                 className="rounded-lg w-full h-64 object-cover mb-6"
               />
+              {lightingLoads.map((load) => (
+                <div
+                  key={load.id}
+                  className="absolute cursor-pointer transform -translate-x-1/2 -translate-y-1/2"
+                  style={{ top: load.position.top, left: load.position.left }}
+                  onMouseEnter={() => setActiveLoad(load.id)}
+                  onMouseLeave={() => setActiveLoad(null)}
+                >
+                  <div className="relative">
+                    <load.icon className="w-6 h-6 text-accent" />
+                    {activeLoad === load.id && (
+                      <div className="absolute left-full ml-2 whitespace-nowrap bg-black/80 text-white text-sm px-2 py-1 rounded">
+                        {load.title}
+                      </div>
+                    )}
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
 
