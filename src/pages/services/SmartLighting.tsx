@@ -1,3 +1,4 @@
+
 import { ArrowLeft, Lightbulb, Power, Clock, Sun, Smartphone, Palette, LampCeiling, LampWallDown } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useState } from "react";
@@ -15,6 +16,8 @@ type LightingLoad = {
   title: string;
   icon: any;
   position: { top: string; left: string };
+  glowSize?: string;
+  glowOpacity?: string;
 };
 
 const SmartLighting = () => {
@@ -26,48 +29,64 @@ const SmartLighting = () => {
       title: "Under Cabinet Lighting",
       icon: LampWallDown,
       position: { top: "65%", left: "25%" },
+      glowSize: "60px",
+      glowOpacity: "0.3"
     },
     {
       id: 2,
       title: "Island Pendant Lights",
       icon: LampCeiling,
       position: { top: "35%", left: "45%" },
+      glowSize: "100px",
+      glowOpacity: "0.4"
     },
     {
       id: 3,
       title: "Recessed Lighting",
       icon: Lightbulb,
       position: { top: "15%", left: "60%" },
+      glowSize: "80px",
+      glowOpacity: "0.25"
     },
     {
       id: 4,
       title: "Above Sink Light",
       icon: LampWallDown,
       position: { top: "40%", left: "75%" },
+      glowSize: "70px",
+      glowOpacity: "0.35"
     },
     {
       id: 5,
       title: "Accent Cabinet Lighting",
       icon: LampWallDown,
       position: { top: "30%", left: "85%" },
+      glowSize: "50px",
+      glowOpacity: "0.3"
     },
     {
       id: 6,
       title: "Island Strip Lighting",
       icon: LampWallDown,
       position: { top: "55%", left: "45%" },
+      glowSize: "120px",
+      glowOpacity: "0.2"
     },
     {
       id: 7,
       title: "Toe Kick Lighting",
       icon: LampWallDown,
       position: { top: "85%", left: "55%" },
+      glowSize: "90px",
+      glowOpacity: "0.25"
     },
     {
       id: 8,
       title: "Decorative Wall Sconces",
       icon: LampWallDown,
       position: { top: "45%", left: "15%" },
+      glowSize: "70px",
+      glowOpacity: "0.35"
     },
   ];
 
@@ -124,7 +143,18 @@ const SmartLighting = () => {
                   onMouseLeave={() => setActiveLoad(null)}
                 >
                   <div className="relative">
-                    <load.icon className="w-6 h-6 text-[#FEC6A1] animate-pulse" />
+                    <div 
+                      className="absolute rounded-full bg-[#FEC6A1]"
+                      style={{
+                        width: load.glowSize,
+                        height: load.glowSize,
+                        opacity: load.glowOpacity,
+                        filter: 'blur(20px)',
+                        transform: 'translate(-50%, -50%)',
+                        zIndex: 0
+                      }}
+                    />
+                    <load.icon className="w-6 h-6 text-[#FEC6A1] animate-pulse relative z-10" />
                     {activeLoad === load.id && (
                       <div className="absolute left-full ml-2 whitespace-nowrap bg-black/80 text-white text-sm px-2 py-1 rounded">
                         {load.title}
