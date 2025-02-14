@@ -51,7 +51,7 @@ const SmartLighting = () => {
             </div>
             <div className="bg-white/5 backdrop-blur-sm rounded-lg p-8">
               <img 
-                src="https://images.unsplash.com/photo-1581090464777-f3220bbe1b8b?auto=format&fit=crop&q=80"
+                src="https://images.unsplash.com/photo-1565814636199-ae8133055c1c?auto=format&fit=crop&q=80"
                 alt="Smart Lighting Control"
                 className="rounded-lg w-full h-64 object-cover mb-6"
               />
