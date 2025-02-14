@@ -26,17 +26,17 @@ const Contact = () => {
               <ContactInfo
                 icon={Phone}
                 title="Phone"
-                content="+1 (555) 123-4567"
+                content="(970) 519-3013"
               />
               <ContactInfo
                 icon={Mail}
                 title="Email"
-                content="info@symphonysmarthomes.com"
+                content="info@symphonysh.com"
               />
               <ContactInfo
                 icon={MapPin}
                 title="Address"
-                content="123 Smart Street, Innovation City, ST 12345"
+                content="45 Aspen Glen Ct, Edwards CO 81632"
               />
             </div>
 
