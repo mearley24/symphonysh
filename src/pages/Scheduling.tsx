@@ -12,11 +12,11 @@ const Scheduling = () => {
         <div className="max-w-4xl mx-auto">
           <div className="mb-8">
             <Link 
-              to="/" 
+              to="/services" 
               className="inline-flex items-center gap-2 text-gray-400 hover:text-white transition-colors mb-4"
             >
               <ArrowLeft className="w-4 h-4" />
-              Back to Home
+              Back to Services
             </Link>
             <h1 className="text-4xl font-bold text-white mb-4">Schedule a Consultation</h1>
             <p className="text-lg text-gray-300">
