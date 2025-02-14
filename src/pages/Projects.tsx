@@ -4,22 +4,6 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import Header from "../components/Header";
 
-const ProjectCard = ({ title, description, image }: { title: string; description: string; image: string }) => (
-  <div className="bg-white/5 backdrop-blur-sm rounded-lg overflow-hidden">
-    <img src={image} alt={title} className="w-full h-48 object-cover" />
-    <div className="p-6">
-      <h3 className="text-xl font-semibold text-white mb-2">{title}</h3>
-      <p className="text-gray-300 mb-4">{description}</p>
-      <Link 
-        to="/contact"
-        className="inline-flex items-center text-accent hover:text-accent/90"
-      >
-        Learn More <ArrowRight className="w-4 h-4 ml-2" />
-      </Link>
-    </div>
-  </div>
-);
-
 const Projects = () => {
   const [selectedProject, setSelectedProject] = useState("ohEAHYLpcVD");
 
@@ -28,6 +12,26 @@ const Projects = () => {
     { id: "vM2D6WVw9Jx", title: "Eagle Ranch Residence" },
     { id: "JryTWXeEypj", title: "Avon Residence" },
     { id: "thkE7sSu7S1", title: "Gypsum Residence" },
+  ];
+
+  const photoAlbums = [
+    {
+      title: "Home Theater Systems",
+      description: "Custom-designed entertainment spaces that deliver immersive experiences.",
+      images: [
+        "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?auto=format&fit=crop&q=80",
+        "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?auto=format&fit=crop&q=80",
+        "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&q=80",
+      ],
+    },
+    {
+      title: "Smart Lighting Solutions",
+      description: "Automated lighting systems that enhance ambiance and energy efficiency.",
+      images: [
+        "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80",
+        "https://images.unsplash.com/photo-1649972904349-6e44c42644a7?auto=format&fit=crop&q=80",
+      ],
+    },
   ];
 
   return (
@@ -40,22 +44,30 @@ const Projects = () => {
             Discover our latest smart home transformations
           </p>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-20">
-            <ProjectCard
-              title="Modern Mountain Estate"
-              description="Complete smart home automation with lighting, climate, and entertainment systems."
-              image="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&q=80"
-            />
-            <ProjectCard
-              title="Urban Smart Penthouse"
-              description="Integrated security and comfort solutions for luxury city living."
-              image="https://images.unsplash.com/photo-1600607687644-c7171b47104e?auto=format&fit=crop&q=80"
-            />
-            <ProjectCard
-              title="Smart Family Home"
-              description="Family-friendly automation with focus on safety and entertainment."
-              image="https://images.unsplash.com/photo-1600607688969-a5bfcd646154?auto=format&fit=crop&q=80"
-            />
+          {/* Photo Albums Section */}
+          <div className="space-y-16 mb-20">
+            {photoAlbums.map((album, index) => (
+              <div key={index} className="space-y-6">
+                <div className="text-center">
+                  <h3 className="text-2xl font-semibold text-white mb-2">{album.title}</h3>
+                  <p className="text-gray-300">{album.description}</p>
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {album.images.map((image, imageIndex) => (
+                    <div 
+                      key={imageIndex} 
+                      className="aspect-video rounded-lg overflow-hidden hover:opacity-90 transition-opacity"
+                    >
+                      <img 
+                        src={image} 
+                        alt={`${album.title} - Image ${imageIndex + 1}`} 
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ))}
           </div>
 
           {/* Matterport Section */}
