@@ -1,4 +1,3 @@
-
 import { ArrowLeft, Lightbulb, Power, Clock, Sun, Smartphone, Palette, LampCeiling, LampWallDown } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useState } from "react";
@@ -30,63 +29,63 @@ const SmartLighting = () => {
       icon: LampWallDown,
       position: { top: "65%", left: "25%" },
       glowSize: "60px",
-      glowOpacity: "0.3"
+      glowOpacity: "0.15"
     },
     {
       id: 2,
       title: "Island Pendant Lights",
       icon: LampCeiling,
       position: { top: "35%", left: "45%" },
-      glowSize: "100px",
-      glowOpacity: "0.4"
+      glowSize: "80px",
+      glowOpacity: "0.2"
     },
     {
       id: 3,
       title: "Recessed Lighting",
       icon: Lightbulb,
       position: { top: "15%", left: "60%" },
-      glowSize: "80px",
-      glowOpacity: "0.25"
+      glowSize: "60px",
+      glowOpacity: "0.15"
     },
     {
       id: 4,
       title: "Above Sink Light",
       icon: LampWallDown,
       position: { top: "40%", left: "75%" },
-      glowSize: "70px",
-      glowOpacity: "0.35"
+      glowSize: "50px",
+      glowOpacity: "0.15"
     },
     {
       id: 5,
       title: "Accent Cabinet Lighting",
       icon: LampWallDown,
       position: { top: "30%", left: "85%" },
-      glowSize: "50px",
-      glowOpacity: "0.3"
+      glowSize: "40px",
+      glowOpacity: "0.15"
     },
     {
       id: 6,
       title: "Island Strip Lighting",
       icon: LampWallDown,
       position: { top: "55%", left: "45%" },
-      glowSize: "120px",
-      glowOpacity: "0.2"
+      glowSize: "70px",
+      glowOpacity: "0.1"
     },
     {
       id: 7,
       title: "Toe Kick Lighting",
       icon: LampWallDown,
       position: { top: "85%", left: "55%" },
-      glowSize: "90px",
-      glowOpacity: "0.25"
+      glowSize: "60px",
+      glowOpacity: "0.15"
     },
     {
       id: 8,
       title: "Decorative Wall Sconces",
       icon: LampWallDown,
       position: { top: "45%", left: "15%" },
-      glowSize: "70px",
-      glowOpacity: "0.35"
+      glowSize: "50px",
+      glowOpacity: "0.15"
     },
   ];
 
@@ -130,9 +129,9 @@ const SmartLighting = () => {
             </div>
             <div className="bg-[#1A1F2C] backdrop-blur-sm rounded-lg p-8 relative">
               <img 
-                src="https://images.unsplash.com/photo-1600607686527-6fb886090705?auto=format&fit=crop&q=80"
+                src="https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&q=80"
                 alt="Smart Kitchen Lighting Control"
-                className="rounded-lg w-full h-64 object-cover mb-6 brightness-50"
+                className="rounded-lg w-full h-[500px] object-cover mb-6 brightness-40"
               />
               {lightingLoads.map((load) => (
                 <div
@@ -149,7 +148,7 @@ const SmartLighting = () => {
                         width: load.glowSize,
                         height: load.glowSize,
                         opacity: load.glowOpacity,
-                        filter: 'blur(20px)',
+                        filter: 'blur(15px)',
                         transform: 'translate(-50%, -50%)',
                         zIndex: 0
                       }}
