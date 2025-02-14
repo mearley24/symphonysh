@@ -31,7 +31,7 @@ const Index = () => {
                 <NavigationMenuItem>
                   <NavigationMenuTrigger className="bg-transparent text-white">Services</NavigationMenuTrigger>
                   <NavigationMenuContent>
-                    <div className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
+                    <div className="w-[300px] p-4 space-y-3">
                       <Link to="/services/networking" className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground">
                         <div className="text-sm font-medium leading-none text-white">Networking</div>
                         <p className="line-clamp-2 text-sm leading-snug text-gray-300">
