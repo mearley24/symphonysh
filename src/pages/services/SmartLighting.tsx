@@ -1,4 +1,3 @@
-
 import { ArrowLeft, Lightbulb, Power, Clock, Sun, Smartphone, Palette, LampCeiling, LampWallDown } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useState } from "react";
@@ -26,19 +25,31 @@ const SmartLighting = () => {
       id: 1,
       title: "Under Cabinet Lighting",
       icon: LampWallDown,
-      position: { top: "70%", left: "30%" },
+      position: { top: "65%", left: "25%" },
     },
     {
       id: 2,
-      title: "Pendant Lights",
+      title: "Island Pendant Lights",
       icon: LampCeiling,
-      position: { top: "30%", left: "50%" },
+      position: { top: "35%", left: "45%" },
     },
     {
       id: 3,
       title: "Recessed Lighting",
       icon: Lightbulb,
-      position: { top: "20%", left: "70%" },
+      position: { top: "15%", left: "60%" },
+    },
+    {
+      id: 4,
+      title: "Above Sink Light",
+      icon: LampWallDown,
+      position: { top: "40%", left: "75%" },
+    },
+    {
+      id: 5,
+      title: "Accent Cabinet Lighting",
+      icon: LampWallDown,
+      position: { top: "30%", left: "85%" },
     },
   ];
 
@@ -80,11 +91,11 @@ const SmartLighting = () => {
                 </li>
               </ul>
             </div>
-            <div className="bg-white/5 backdrop-blur-sm rounded-lg p-8 relative">
+            <div className="bg-[#1A1F2C] backdrop-blur-sm rounded-lg p-8 relative">
               <img 
-                src="https://images.unsplash.com/photo-1600489000022-c2086d79f9d4?auto=format&fit=crop&q=80"
+                src="https://images.unsplash.com/photo-1565538810643-b5bdb714032a?auto=format&fit=crop&q=80"
                 alt="Smart Kitchen Lighting Control"
-                className="rounded-lg w-full h-64 object-cover mb-6"
+                className="rounded-lg w-full h-64 object-cover mb-6 brightness-75"
               />
               {lightingLoads.map((load) => (
                 <div
@@ -95,7 +106,7 @@ const SmartLighting = () => {
                   onMouseLeave={() => setActiveLoad(null)}
                 >
                   <div className="relative">
-                    <load.icon className="w-6 h-6 text-orange-500" />
+                    <load.icon className="w-6 h-6 text-[#FEC6A1] animate-pulse" />
                     {activeLoad === load.id && (
                       <div className="absolute left-full ml-2 whitespace-nowrap bg-black/80 text-white text-sm px-2 py-1 rounded">
                         {load.title}
