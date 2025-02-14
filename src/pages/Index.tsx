@@ -1,4 +1,3 @@
-
 import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import {
@@ -29,31 +28,27 @@ const Index = () => {
             <NavigationMenu>
               <NavigationMenuList>
                 <NavigationMenuItem>
-                  <NavigationMenuTrigger className="bg-transparent text-white">Services</NavigationMenuTrigger>
+                  <Link to="/services" className="inline-flex items-center justify-between text-white px-4 py-2 hover:text-accent transition-colors">
+                    Services
+                  </Link>
                   <NavigationMenuContent>
                     <div className="w-[300px] p-4 space-y-3">
-                      <Link to="/services/networking" className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground">
-                        <div className="text-sm font-medium leading-none text-white">Networking</div>
+                      <Link to="/services/home-integration" className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground">
+                        <div className="text-sm font-medium leading-none text-white">Home Integration</div>
                         <p className="line-clamp-2 text-sm leading-snug text-gray-300">
-                          Enterprise-grade networking solutions
+                          Complete Control4 smart home solutions
+                        </p>
+                      </Link>
+                      <Link to="/services/audio-entertainment" className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground">
+                        <div className="text-sm font-medium leading-none text-white">Audio & Entertainment</div>
+                        <p className="line-clamp-2 text-sm leading-snug text-gray-300">
+                          Premium multi-room audio solutions
                         </p>
                       </Link>
                       <Link to="/services/smart-lighting" className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground">
                         <div className="text-sm font-medium leading-none text-white">Smart Lighting</div>
                         <p className="line-clamp-2 text-sm leading-snug text-gray-300">
                           Automated lighting systems
-                        </p>
-                      </Link>
-                      <Link to="/services/security-systems" className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground">
-                        <div className="text-sm font-medium leading-none text-white">Security</div>
-                        <p className="line-clamp-2 text-sm leading-snug text-gray-300">
-                          Advanced security solutions
-                        </p>
-                      </Link>
-                      <Link to="/services" className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground">
-                        <div className="text-sm font-medium leading-none text-white">View All Services</div>
-                        <p className="line-clamp-2 text-sm leading-snug text-gray-300">
-                          Explore our complete range of solutions
                         </p>
                       </Link>
                     </div>
