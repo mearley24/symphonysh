@@ -1,4 +1,3 @@
-
 import { ArrowLeft, Home, Zap, Lock, Settings, Wifi, Globe } from "lucide-react";
 import { Link } from "react-router-dom";
 
@@ -50,8 +49,8 @@ const HomeIntegration = () => {
             </div>
             <div className="bg-white/5 backdrop-blur-sm rounded-lg p-8">
               <img 
-                src="https://images.unsplash.com/photo-1512295767273-ac109ac3acfa?auto=format&fit=crop&q=80"
-                alt="Control4 Mobile Interface"
+                src="/lovable-uploads/646c1725-c4e5-4cf9-9670-0d9633402150.png"
+                alt="Smart Home Control Interface with Automated Features"
                 className="rounded-lg w-full h-64 object-cover mb-6"
               />
             </div>
