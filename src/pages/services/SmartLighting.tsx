@@ -51,6 +51,24 @@ const SmartLighting = () => {
       icon: LampWallDown,
       position: { top: "30%", left: "85%" },
     },
+    {
+      id: 6,
+      title: "Island Strip Lighting",
+      icon: LampWallDown,
+      position: { top: "55%", left: "45%" },
+    },
+    {
+      id: 7,
+      title: "Toe Kick Lighting",
+      icon: LampWallDown,
+      position: { top: "85%", left: "55%" },
+    },
+    {
+      id: 8,
+      title: "Decorative Wall Sconces",
+      icon: LampWallDown,
+      position: { top: "45%", left: "15%" },
+    },
   ];
 
   return (
@@ -93,9 +111,9 @@ const SmartLighting = () => {
             </div>
             <div className="bg-[#1A1F2C] backdrop-blur-sm rounded-lg p-8 relative">
               <img 
-                src="https://images.unsplash.com/photo-1565538810643-b5bdb714032a?auto=format&fit=crop&q=80"
+                src="https://images.unsplash.com/photo-1600607686527-6fb886090705?auto=format&fit=crop&q=80"
                 alt="Smart Kitchen Lighting Control"
-                className="rounded-lg w-full h-64 object-cover mb-6 brightness-75"
+                className="rounded-lg w-full h-64 object-cover mb-6 brightness-50"
               />
               {lightingLoads.map((load) => (
                 <div
