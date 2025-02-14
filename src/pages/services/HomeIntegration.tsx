@@ -1,4 +1,3 @@
-
 import { ArrowLeft, Home, Zap, Lock, Settings, Wifi, Globe } from "lucide-react";
 import { Link } from "react-router-dom";
 
@@ -50,7 +49,7 @@ const HomeIntegration = () => {
             </div>
             <div className="bg-white/5 backdrop-blur-sm rounded-lg p-8">
               <img 
-                src="https://images.unsplash.com/photo-1721322800607-8c38375eef04?auto=format&fit=crop&q=80"
+                src="/lovable-uploads/1d7a78ef-4d02-453d-aeea-81e50fb784b6.png"
                 alt="Smart Home Integration"
                 className="rounded-lg w-full h-64 object-cover mb-6"
               />
