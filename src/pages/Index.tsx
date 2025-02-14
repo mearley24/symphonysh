@@ -1,8 +1,10 @@
 
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Home, Shield, Lightbulb, Thermometer, Camera, Speaker } from "lucide-react";
+import { Link } from "react-router-dom";
 
-const Feature = ({ title, description }: { title: string; description: string }) => (
+const FeatureCard = ({ icon: Icon, title, description }: { icon: any; title: string; description: string }) => (
   <div className="bg-white/5 backdrop-blur-sm p-8 rounded-lg hover:bg-white/10 transition-all duration-300">
+    <Icon className="w-8 h-8 text-accent mb-4" />
     <h3 className="text-xl font-semibold mb-3 text-white">{title}</h3>
     <p className="text-gray-300">{description}</p>
   </div>
@@ -12,46 +14,97 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-primary">
       {/* Hero Section */}
-      <section className="min-h-screen flex items-center relative py-20 px-6">
-        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1721322800607-8c38375eef04')] bg-cover bg-center opacity-20"></div>
-        <div className="max-w-4xl mx-auto text-center relative z-10">
-          <h1 className="text-5xl md:text-7xl font-bold text-white animate-fade-up mb-6 leading-tight">
-            Symphony <br />Smart Homes
-          </h1>
-          <p className="text-xl text-gray-300 animate-fade-up [animation-delay:200ms] mb-8 max-w-2xl mx-auto">
-            Transform your living space with intelligent home automation solutions
-          </p>
-          <button className="bg-accent hover:bg-accent/90 text-white px-8 py-4 rounded-md font-medium inline-flex items-center gap-2 transition-colors animate-fade-up [animation-delay:400ms]">
-            Explore Our Solutions
-            <ArrowRight className="w-5 h-5" />
-          </button>
-        </div>
-      </section>
-
-      {/* Features Section */}
-      <section className="py-32 px-6 bg-gradient-to-b from-primary to-primary/95">
+      <section className="pt-32 pb-20 px-6">
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-16 text-white">
-            Smart Living Solutions
-          </h2>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <Feature
-              title="Smart Lighting"
-              description="Intelligent lighting systems that adapt to your lifestyle and enhance your home's ambiance."
-            />
-            <Feature
-              title="Climate Control"
-              description="Advanced temperature and humidity control for optimal comfort in every room."
-            />
-            <Feature
-              title="Home Security"
-              description="Comprehensive security solutions with smart cameras, locks, and 24/7 monitoring."
-            />
+          <div className="text-center mb-16">
+            <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 animate-fade-up">
+              Symphony Smart Homes
+            </h1>
+            <p className="text-xl text-gray-300 animate-fade-up [animation-delay:200ms] mb-8 max-w-2xl mx-auto">
+              Transform your living space with intelligent home automation solutions powered by Control4
+            </p>
+            <Link 
+              to="/services"
+              className="bg-accent hover:bg-accent/90 text-white px-8 py-4 rounded-md font-medium inline-flex items-center gap-2 transition-colors animate-fade-up [animation-delay:400ms]"
+            >
+              Explore Our Solutions
+              <ArrowRight className="w-5 h-5" />
+            </Link>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-12 mb-16">
+            <div>
+              <h2 className="text-2xl font-semibold text-white mb-4">Why Choose Symphony?</h2>
+              <p className="text-gray-300 mb-6">
+                We specialize in creating seamless, intelligent living spaces using Control4's powerful 
+                automation platform. Our expert team designs and implements custom solutions that enhance 
+                your lifestyle and simplify home management.
+              </p>
+              <ul className="space-y-3 text-gray-300">
+                <li className="flex items-center">
+                  <Shield className="w-5 h-5 text-accent mr-3" />
+                  Professional installation and support
+                </li>
+                <li className="flex items-center">
+                  <Home className="w-5 h-5 text-accent mr-3" />
+                  Customized automation solutions
+                </li>
+                <li className="flex items-center">
+                  <Lightbulb className="w-5 h-5 text-accent mr-3" />
+                  Energy-efficient technologies
+                </li>
+              </ul>
+            </div>
+            <div className="bg-white/5 backdrop-blur-sm rounded-lg p-8">
+              <img 
+                src="https://images.unsplash.com/photo-1558002038-1055907df827?auto=format&fit=crop&q=80"
+                alt="Smart Home Integration"
+                className="rounded-lg w-full h-64 object-cover"
+              />
+            </div>
+          </div>
+
+          <h2 className="text-3xl font-semibold text-white text-center mb-8">Our Services</h2>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+            <Link to="/services/smart-lighting">
+              <FeatureCard
+                icon={Lightbulb}
+                title="Smart Lighting"
+                description="Intelligent lighting systems that adapt to your lifestyle and enhance your home's ambiance."
+              />
+            </Link>
+            <Link to="/services/climate-control">
+              <FeatureCard
+                icon={Thermometer}
+                title="Climate Control"
+                description="Advanced temperature and humidity control for optimal comfort in every room."
+              />
+            </Link>
+            <Link to="/services/security-systems">
+              <FeatureCard
+                icon={Shield}
+                title="Security Systems"
+                description="Comprehensive security solutions with smart cameras, locks, and 24/7 monitoring."
+              />
+            </Link>
+          </div>
+
+          <div className="bg-white/5 backdrop-blur-sm p-8 rounded-lg text-center">
+            <h2 className="text-2xl font-semibold text-white mb-4">Ready to Transform Your Home?</h2>
+            <p className="text-gray-300 mb-6">
+              Let us create your perfect smart home experience with Control4
+            </p>
+            <Link 
+              to="/contact"
+              className="inline-flex items-center bg-accent hover:bg-accent/90 text-white px-6 py-3 rounded-md font-medium transition-colors"
+            >
+              Get Started
+              <ArrowRight className="w-4 h-4 ml-2" />
+            </Link>
           </div>
         </div>
       </section>
 
-      {/* Footer */}
       <footer className="py-12 px-6 text-center text-gray-400 bg-primary">
         <p className="text-sm">
           © 2024 Symphony Smart Homes. All rights reserved.
