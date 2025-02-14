@@ -6,7 +6,7 @@ const ContactInfo = ({ icon: Icon, title, content }: { icon: any; title: string;
     <Icon className="w-6 h-6 text-accent" />
     <div>
       <h3 className="text-lg font-semibold text-white">{title}</h3>
-      <p className="text-gray-300">{content}</p>
+      <p className="text-gray-300 whitespace-pre-line">{content}</p>
     </div>
   </div>
 );
@@ -36,7 +36,7 @@ const Contact = () => {
               <ContactInfo
                 icon={MapPin}
                 title="Address"
-                content="45 Aspen Glen Ct, Edwards CO 81632"
+                content={`45 Aspen Glen Ct\nEdwards, CO 81632`}
               />
             </div>
 
