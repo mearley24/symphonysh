@@ -16,12 +16,15 @@ const Index = () => {
       <nav className="fixed top-0 left-0 right-0 z-50 bg-primary/95 backdrop-blur-sm border-b border-white/10">
         <div className="max-w-6xl mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
-            <Link to="/" className="flex items-center">
+            <Link to="/" className="flex items-center gap-4">
               <img 
                 src="/lovable-uploads/1d7a78ef-4d02-453d-aeea-81e50fb784b6.png" 
                 alt="Symphony Smart Homes Logo" 
-                className="h-12 w-auto"
+                className="h-16 w-auto"
               />
+              <span className="text-white font-semibold text-xl hidden md:block">
+                Symphony Smart Homes
+              </span>
             </Link>
             <NavigationMenu>
               <NavigationMenuList>
