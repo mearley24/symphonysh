@@ -1,3 +1,4 @@
+
 import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import {
@@ -18,7 +19,7 @@ const Index = () => {
               <img 
                 src="/lovable-uploads/1d7a78ef-4d02-453d-aeea-81e50fb784b6.png" 
                 alt="Symphony Smart Homes Logo" 
-                className="h-32 w-auto"
+                className="h-32 w-auto brightness-0 invert"
               />
             </Link>
             <NavigationMenu>
