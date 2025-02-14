@@ -14,23 +14,24 @@ const Projects = () => {
     { id: "thkE7sSu7S1", title: "Gypsum Residence" },
   ];
 
-  const photoAlbums = [
+  const photoCategories = [
     {
-      title: "Home Theater Systems",
-      description: "Custom-designed entertainment spaces that deliver immersive experiences.",
-      images: [
-        "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?auto=format&fit=crop&q=80",
-        "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?auto=format&fit=crop&q=80",
-        "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&q=80",
-      ],
+      title: "Mounted TVs",
+      description: "Professional TV mounting and installation services",
+      path: "/photos/mounted-tvs",
+      image: "https://images.unsplash.com/photo-1483058712412-4245e9b90334",
     },
     {
-      title: "Smart Lighting Solutions",
-      description: "Automated lighting systems that enhance ambiance and energy efficiency.",
-      images: [
-        "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80",
-        "https://images.unsplash.com/photo-1649972904349-6e44c42644a7?auto=format&fit=crop&q=80",
-      ],
+      title: "Wiring",
+      description: "Clean and professional wiring solutions",
+      path: "/photos/wiring",
+      image: "https://images.unsplash.com/photo-1518770660439-4636190af475",
+    },
+    {
+      title: "Home Theater",
+      description: "Custom home theater installations",
+      path: "/photos/home-theater",
+      image: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b",
     },
   ];
 
@@ -44,29 +45,30 @@ const Projects = () => {
             Discover our latest smart home transformations
           </p>
 
-          {/* Photo Albums Section */}
-          <div className="space-y-16 mb-20">
-            {photoAlbums.map((album, index) => (
-              <div key={index} className="space-y-6">
-                <div className="text-center">
-                  <h3 className="text-2xl font-semibold text-white mb-2">{album.title}</h3>
-                  <p className="text-gray-300">{album.description}</p>
+          {/* Photo Categories Section */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-20">
+            {photoCategories.map((category, index) => (
+              <Link 
+                key={index}
+                to={category.path}
+                className="group bg-secondary rounded-lg overflow-hidden hover:ring-2 hover:ring-accent transition-all duration-300"
+              >
+                <div className="aspect-video overflow-hidden">
+                  <img 
+                    src={category.image}
+                    alt={category.title}
+                    className="w-full h-full object-cover transform transition-all duration-300 scale-95 group-hover:scale-110"
+                  />
                 </div>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                  {album.images.map((image, imageIndex) => (
-                    <div 
-                      key={imageIndex} 
-                      className="aspect-video rounded-lg overflow-hidden group cursor-pointer"
-                    >
-                      <img 
-                        src={image} 
-                        alt={`${album.title} - Image ${imageIndex + 1}`} 
-                        className="w-full h-full object-cover transform transition-all duration-300 scale-95 group-hover:scale-110"
-                      />
-                    </div>
-                  ))}
+                <div className="p-6">
+                  <h3 className="text-xl font-semibold text-white mb-2">{category.title}</h3>
+                  <p className="text-gray-300">{category.description}</p>
+                  <div className="mt-4 flex items-center text-accent">
+                    View Gallery
+                    <ArrowRight className="ml-2 w-4 h-4" />
+                  </div>
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
 
