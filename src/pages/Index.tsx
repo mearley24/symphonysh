@@ -16,8 +16,12 @@ const Index = () => {
       <nav className="fixed top-0 left-0 right-0 z-50 bg-primary/95 backdrop-blur-sm border-b border-white/10">
         <div className="max-w-6xl mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
-            <Link to="/" className="text-white font-semibold text-xl">
-              Symphony Smart Homes
+            <Link to="/" className="flex items-center">
+              <img 
+                src="/lovable-uploads/1d7a78ef-4d02-453d-aeea-81e50fb784b6.png" 
+                alt="Symphony Smart Homes Logo" 
+                className="h-12 w-auto"
+              />
             </Link>
             <NavigationMenu>
               <NavigationMenuList>
@@ -83,9 +87,6 @@ const Index = () => {
         />
         <div className="max-w-6xl mx-auto px-6 relative z-20">
           <div className="text-center">
-            <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 animate-fade-up">
-              Symphony Smart Homes
-            </h1>
             <p className="text-xl text-gray-200 animate-fade-up [animation-delay:200ms] mb-8 max-w-2xl mx-auto">
               Transform your living space with intelligent home automation solutions powered by Control4
             </p>
