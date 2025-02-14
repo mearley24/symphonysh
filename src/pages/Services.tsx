@@ -21,8 +21,12 @@ const Services = () => {
       <header className="fixed top-0 left-0 right-0 bg-secondary/80 backdrop-blur-md z-50">
         <div className="max-w-6xl mx-auto px-6 py-4">
           <nav className="flex items-center justify-between">
-            <Link to="/" className="text-2xl font-bold text-white">
-              Symphony
+            <Link to="/" className="flex items-center">
+              <img 
+                src="/lovable-uploads/1d7a78ef-4d02-453d-aeea-81e50fb784b6.png" 
+                alt="Symphony Smart Homes Logo" 
+                className="h-32 w-auto"
+              />
             </Link>
             <div className="flex items-center space-x-8">
               <Link to="/" className="text-gray-300 hover:text-white transition-colors">
