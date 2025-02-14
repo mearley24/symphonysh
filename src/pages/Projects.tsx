@@ -1,3 +1,4 @@
+
 import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useState } from "react";
@@ -25,7 +26,7 @@ const Projects = () => {
   const matterportProjects = [
     { id: "ohEAHYLpcVD", title: "Frost Creek Residence" },
     { id: "vM2D6WVw9Jx", title: "Eagle Ranch Residence" },
-    { id: "RAqb1AQnrdr", title: "Smart Family Home" },
+    { id: "JryTWXeEypj", title: "Avon Residence" },
     { id: "K2h9uNmtPLY", title: "Luxury Condo" },
   ];
 
