@@ -1,6 +1,13 @@
 
 import { ArrowRight, Home, Shield, Lightbulb, Thermometer, Camera, Speaker } from "lucide-react";
 import { Link } from "react-router-dom";
+import {
+  NavigationMenu,
+  NavigationMenuContent,
+  NavigationMenuItem,
+  NavigationMenuList,
+  NavigationMenuTrigger,
+} from "@/components/ui/navigation-menu";
 
 const FeatureCard = ({ icon: Icon, title, description }: { icon: any; title: string; description: string }) => (
   <div className="bg-white/5 backdrop-blur-sm p-8 rounded-lg hover:bg-white/10 transition-all duration-300">
@@ -13,6 +20,67 @@ const FeatureCard = ({ icon: Icon, title, description }: { icon: any; title: str
 const Index = () => {
   return (
     <div className="min-h-screen bg-primary">
+      {/* Navigation */}
+      <nav className="fixed top-0 left-0 right-0 z-50 bg-primary/95 backdrop-blur-sm border-b border-white/10">
+        <div className="max-w-6xl mx-auto px-6 py-4">
+          <div className="flex items-center justify-between">
+            <Link to="/" className="text-white font-semibold text-xl">
+              Symphony Smart Homes
+            </Link>
+            <NavigationMenu>
+              <NavigationMenuList>
+                <NavigationMenuItem>
+                  <NavigationMenuTrigger className="bg-transparent text-white">Services</NavigationMenuTrigger>
+                  <NavigationMenuContent>
+                    <div className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
+                      <Link to="/services/networking" className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground">
+                        <div className="text-sm font-medium leading-none text-white">Networking</div>
+                        <p className="line-clamp-2 text-sm leading-snug text-gray-300">
+                          Enterprise-grade networking solutions
+                        </p>
+                      </Link>
+                      <Link to="/services/smart-lighting" className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground">
+                        <div className="text-sm font-medium leading-none text-white">Smart Lighting</div>
+                        <p className="line-clamp-2 text-sm leading-snug text-gray-300">
+                          Automated lighting systems
+                        </p>
+                      </Link>
+                      <Link to="/services/security-systems" className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground">
+                        <div className="text-sm font-medium leading-none text-white">Security</div>
+                        <p className="line-clamp-2 text-sm leading-snug text-gray-300">
+                          Advanced security solutions
+                        </p>
+                      </Link>
+                      <Link to="/services" className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground">
+                        <div className="text-sm font-medium leading-none text-white">View All Services</div>
+                        <p className="line-clamp-2 text-sm leading-snug text-gray-300">
+                          Explore our complete range of solutions
+                        </p>
+                      </Link>
+                    </div>
+                  </NavigationMenuContent>
+                </NavigationMenuItem>
+                <NavigationMenuItem>
+                  <Link to="/projects" className="text-white px-4 py-2 hover:text-accent transition-colors">
+                    Projects
+                  </Link>
+                </NavigationMenuItem>
+                <NavigationMenuItem>
+                  <Link to="/about" className="text-white px-4 py-2 hover:text-accent transition-colors">
+                    About
+                  </Link>
+                </NavigationMenuItem>
+                <NavigationMenuItem>
+                  <Link to="/contact" className="text-white px-4 py-2 hover:text-accent transition-colors">
+                    Contact
+                  </Link>
+                </NavigationMenuItem>
+              </NavigationMenuList>
+            </NavigationMenu>
+          </div>
+        </div>
+      </nav>
+
       {/* Hero Section */}
       <section className="pt-32 pb-20 px-6">
         <div className="max-w-6xl mx-auto">

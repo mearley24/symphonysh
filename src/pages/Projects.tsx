@@ -1,0 +1,60 @@
+
+import { ArrowRight } from "lucide-react";
+import { Link } from "react-router-dom";
+
+const ProjectCard = ({ title, description, image }: { title: string; description: string; image: string }) => (
+  <div className="bg-white/5 backdrop-blur-sm rounded-lg overflow-hidden">
+    <img src={image} alt={title} className="w-full h-48 object-cover" />
+    <div className="p-6">
+      <h3 className="text-xl font-semibold text-white mb-2">{title}</h3>
+      <p className="text-gray-300 mb-4">{description}</p>
+      <Link 
+        to="/contact"
+        className="inline-flex items-center text-accent hover:text-accent/90"
+      >
+        Learn More <ArrowRight className="w-4 h-4 ml-2" />
+      </Link>
+    </div>
+  </div>
+);
+
+const Projects = () => {
+  return (
+    <div className="min-h-screen bg-primary">
+      <section className="pt-32 pb-20 px-6">
+        <div className="max-w-6xl mx-auto">
+          <h1 className="text-4xl md:text-5xl font-bold text-white text-center mb-4">Our Projects</h1>
+          <p className="text-xl text-gray-300 text-center mb-16 max-w-2xl mx-auto">
+            Discover our latest smart home transformations
+          </p>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <ProjectCard
+              title="Modern Mountain Estate"
+              description="Complete smart home automation with lighting, climate, and entertainment systems."
+              image="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&q=80"
+            />
+            <ProjectCard
+              title="Urban Smart Penthouse"
+              description="Integrated security and comfort solutions for luxury city living."
+              image="https://images.unsplash.com/photo-1600607687644-c7171b47104e?auto=format&fit=crop&q=80"
+            />
+            <ProjectCard
+              title="Smart Family Home"
+              description="Family-friendly automation with focus on safety and entertainment."
+              image="https://images.unsplash.com/photo-1600607688969-a5bfcd646154?auto=format&fit=crop&q=80"
+            />
+          </div>
+        </div>
+      </section>
+
+      <footer className="py-12 px-6 text-center text-gray-400 bg-primary">
+        <p className="text-sm">
+          © 2024 Symphony Smart Homes. All rights reserved.
+        </p>
+      </footer>
+    </div>
+  );
+};
+
+export default Projects;
