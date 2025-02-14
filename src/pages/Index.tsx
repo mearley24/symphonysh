@@ -1,4 +1,3 @@
-
 import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import {
@@ -15,15 +14,12 @@ const Index = () => {
       <nav className="fixed top-0 left-0 right-0 z-50 bg-primary/95 backdrop-blur-sm border-b border-white/10">
         <div className="max-w-6xl mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
-            <Link to="/" className="flex items-center gap-4">
+            <Link to="/" className="flex items-center">
               <img 
                 src="/lovable-uploads/1d7a78ef-4d02-453d-aeea-81e50fb784b6.png" 
                 alt="Symphony Smart Homes Logo" 
-                className="h-16 w-auto"
+                className="h-32 w-auto"
               />
-              <span className="text-white font-semibold text-xl hidden md:block">
-                Symphony Smart Homes
-              </span>
             </Link>
             <NavigationMenu>
               <NavigationMenuList>
@@ -127,7 +123,7 @@ const Index = () => {
             <div className="text-center space-y-4 animate-[fade-up_1s_ease-out_400ms]">
               <div className="w-16 h-16 bg-accent rounded-full flex items-center justify-center mx-auto mb-6">
                 <svg className="w-8 h-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2V7a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
                 </svg>
               </div>
               <h3 className="text-xl font-semibold text-white">Enhanced Security</h3>
