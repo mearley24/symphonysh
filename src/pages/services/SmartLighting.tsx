@@ -95,7 +95,7 @@ const SmartLighting = () => {
                   onMouseLeave={() => setActiveLoad(null)}
                 >
                   <div className="relative">
-                    <load.icon className="w-6 h-6 text-accent" />
+                    <load.icon className="w-6 h-6 text-orange-500" />
                     {activeLoad === load.id && (
                       <div className="absolute left-full ml-2 whitespace-nowrap bg-black/80 text-white text-sm px-2 py-1 rounded">
                         {load.title}
