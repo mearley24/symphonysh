@@ -18,6 +18,33 @@ const ServiceCard = ({ icon: Icon, title, description, link }: { icon: any; titl
 const Services = () => {
   return (
     <div className="min-h-screen bg-primary">
+      <header className="fixed top-0 left-0 right-0 bg-secondary/80 backdrop-blur-md z-50">
+        <div className="max-w-6xl mx-auto px-6 py-4">
+          <nav className="flex items-center justify-between">
+            <Link to="/" className="text-2xl font-bold text-white">
+              Symphony
+            </Link>
+            <div className="flex items-center space-x-8">
+              <Link to="/" className="text-gray-300 hover:text-white transition-colors">
+                Home
+              </Link>
+              <Link to="/services" className="text-white font-medium">
+                Services
+              </Link>
+              <Link to="/projects" className="text-gray-300 hover:text-white transition-colors">
+                Projects
+              </Link>
+              <Link to="/about" className="text-gray-300 hover:text-white transition-colors">
+                About
+              </Link>
+              <Link to="/contact" className="text-accent hover:text-accent/90 transition-colors">
+                Contact
+              </Link>
+            </div>
+          </nav>
+        </div>
+      </header>
+
       <section className="pt-32 pb-20 px-6">
         <div className="max-w-6xl mx-auto">
           <h1 className="text-4xl md:text-5xl font-bold text-white text-center mb-4">Our Services</h1>
