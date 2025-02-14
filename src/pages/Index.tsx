@@ -1,5 +1,5 @@
 
-import { ArrowRight, Home, Shield, Lightbulb, Thermometer, Camera, Speaker } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import {
   NavigationMenu,
@@ -8,14 +8,6 @@ import {
   NavigationMenuList,
   NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu";
-
-const FeatureCard = ({ icon: Icon, title, description }: { icon: any; title: string; description: string }) => (
-  <div className="bg-white/5 backdrop-blur-sm p-8 rounded-lg hover:bg-white/10 transition-all duration-300">
-    <Icon className="w-8 h-8 text-accent mb-4" />
-    <h3 className="text-xl font-semibold mb-3 text-white">{title}</h3>
-    <p className="text-gray-300">{description}</p>
-  </div>
-);
 
 const Index = () => {
   return (
@@ -82,13 +74,19 @@ const Index = () => {
       </nav>
 
       {/* Hero Section */}
-      <section className="pt-32 pb-20 px-6">
-        <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-16">
+      <section className="min-h-screen flex items-center justify-center relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-b from-primary/50 to-primary z-10"></div>
+        <img 
+          src="https://images.unsplash.com/photo-1558002038-1055907df827?auto=format&fit=crop&q=80"
+          alt="Smart Home Background"
+          className="absolute inset-0 w-full h-full object-cover"
+        />
+        <div className="max-w-6xl mx-auto px-6 relative z-20">
+          <div className="text-center">
             <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 animate-fade-up">
               Symphony Smart Homes
             </h1>
-            <p className="text-xl text-gray-300 animate-fade-up [animation-delay:200ms] mb-8 max-w-2xl mx-auto">
+            <p className="text-xl text-gray-200 animate-fade-up [animation-delay:200ms] mb-8 max-w-2xl mx-auto">
               Transform your living space with intelligent home automation solutions powered by Control4
             </p>
             <Link 
@@ -99,77 +97,108 @@ const Index = () => {
               <ArrowRight className="w-5 h-5" />
             </Link>
           </div>
+        </div>
+      </section>
 
-          <div className="grid md:grid-cols-2 gap-12 mb-16">
-            <div>
-              <h2 className="text-2xl font-semibold text-white mb-4">Why Choose Symphony?</h2>
-              <p className="text-gray-300 mb-6">
-                We specialize in creating seamless, intelligent living spaces using Control4's powerful 
-                automation platform. Our expert team designs and implements custom solutions that enhance 
-                your lifestyle and simplify home management.
+      {/* Experience Section */}
+      <section className="py-24 relative overflow-hidden">
+        <div className="max-w-6xl mx-auto px-6">
+          <div className="grid md:grid-cols-2 gap-12 items-center">
+            <div className="space-y-6 animate-fade-up">
+              <h2 className="text-3xl md:text-4xl font-bold text-white">Experience the Future of Living</h2>
+              <p className="text-gray-300">
+                Our expert team designs and implements custom Control4 solutions that enhance your lifestyle 
+                and simplify home management. From lighting and climate control to security and entertainment, 
+                we create seamless experiences that transform how you interact with your home.
               </p>
-              <ul className="space-y-3 text-gray-300">
-                <li className="flex items-center">
-                  <Shield className="w-5 h-5 text-accent mr-3" />
-                  Professional installation and support
-                </li>
-                <li className="flex items-center">
-                  <Home className="w-5 h-5 text-accent mr-3" />
-                  Customized automation solutions
-                </li>
-                <li className="flex items-center">
-                  <Lightbulb className="w-5 h-5 text-accent mr-3" />
-                  Energy-efficient technologies
-                </li>
-              </ul>
+              <Link 
+                to="/contact"
+                className="inline-flex items-center text-accent hover:text-accent/90 gap-2"
+              >
+                Get Started <ArrowRight className="w-4 h-4" />
+              </Link>
             </div>
-            <div className="bg-white/5 backdrop-blur-sm rounded-lg p-8">
+            <div className="relative">
+              <div className="aspect-video rounded-lg overflow-hidden animate-fade-up [animation-delay:200ms]">
+                <img 
+                  src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&q=80"
+                  alt="Smart Home Experience"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Latest Projects Section */}
+      <section className="py-24 relative overflow-hidden bg-white/5">
+        <div className="max-w-6xl mx-auto px-6">
+          <h2 className="text-3xl md:text-4xl font-bold text-white text-center mb-12 animate-fade-up">Latest Projects</h2>
+          <div className="grid md:grid-cols-3 gap-8">
+            <div className="relative group overflow-hidden rounded-lg animate-fade-up [animation-delay:200ms]">
               <img 
-                src="https://images.unsplash.com/photo-1558002038-1055907df827?auto=format&fit=crop&q=80"
-                alt="Smart Home Integration"
-                className="rounded-lg w-full h-64 object-cover"
+                src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&q=80"
+                alt="Project 1"
+                className="w-full aspect-video object-cover transform group-hover:scale-105 transition-transform duration-500"
               />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
+                <div>
+                  <h3 className="text-xl font-semibold text-white mb-2">Modern Mountain Estate</h3>
+                  <Link to="/projects" className="text-accent hover:text-accent/90 inline-flex items-center gap-2">
+                    View Project <ArrowRight className="w-4 h-4" />
+                  </Link>
+                </div>
+              </div>
+            </div>
+            <div className="relative group overflow-hidden rounded-lg animate-fade-up [animation-delay:400ms]">
+              <img 
+                src="https://images.unsplash.com/photo-1600607687644-c7171b47104e?auto=format&fit=crop&q=80"
+                alt="Project 2"
+                className="w-full aspect-video object-cover transform group-hover:scale-105 transition-transform duration-500"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
+                <div>
+                  <h3 className="text-xl font-semibold text-white mb-2">Urban Smart Penthouse</h3>
+                  <Link to="/projects" className="text-accent hover:text-accent/90 inline-flex items-center gap-2">
+                    View Project <ArrowRight className="w-4 h-4" />
+                  </Link>
+                </div>
+              </div>
+            </div>
+            <div className="relative group overflow-hidden rounded-lg animate-fade-up [animation-delay:600ms]">
+              <img 
+                src="https://images.unsplash.com/photo-1600607688969-a5bfcd646154?auto=format&fit=crop&q=80"
+                alt="Project 3"
+                className="w-full aspect-video object-cover transform group-hover:scale-105 transition-transform duration-500"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
+                <div>
+                  <h3 className="text-xl font-semibold text-white mb-2">Smart Family Home</h3>
+                  <Link to="/projects" className="text-accent hover:text-accent/90 inline-flex items-center gap-2">
+                    View Project <ArrowRight className="w-4 h-4" />
+                  </Link>
+                </div>
+              </div>
             </div>
           </div>
+        </div>
+      </section>
 
-          <h2 className="text-3xl font-semibold text-white text-center mb-8">Our Services</h2>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
-            <Link to="/services/smart-lighting">
-              <FeatureCard
-                icon={Lightbulb}
-                title="Smart Lighting"
-                description="Intelligent lighting systems that adapt to your lifestyle and enhance your home's ambiance."
-              />
-            </Link>
-            <Link to="/services/climate-control">
-              <FeatureCard
-                icon={Thermometer}
-                title="Climate Control"
-                description="Advanced temperature and humidity control for optimal comfort in every room."
-              />
-            </Link>
-            <Link to="/services/security-systems">
-              <FeatureCard
-                icon={Shield}
-                title="Security Systems"
-                description="Comprehensive security solutions with smart cameras, locks, and 24/7 monitoring."
-              />
-            </Link>
-          </div>
-
-          <div className="bg-white/5 backdrop-blur-sm p-8 rounded-lg text-center">
-            <h2 className="text-2xl font-semibold text-white mb-4">Ready to Transform Your Home?</h2>
-            <p className="text-gray-300 mb-6">
-              Let us create your perfect smart home experience with Control4
-            </p>
-            <Link 
-              to="/contact"
-              className="inline-flex items-center bg-accent hover:bg-accent/90 text-white px-6 py-3 rounded-md font-medium transition-colors"
-            >
-              Get Started
-              <ArrowRight className="w-4 h-4 ml-2" />
-            </Link>
-          </div>
+      {/* CTA Section */}
+      <section className="py-24 relative overflow-hidden">
+        <div className="max-w-6xl mx-auto px-6 text-center">
+          <h2 className="text-3xl md:text-4xl font-bold text-white mb-6 animate-fade-up">Ready to Transform Your Home?</h2>
+          <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto animate-fade-up [animation-delay:200ms]">
+            Let us create your perfect smart home experience with Control4
+          </p>
+          <Link 
+            to="/contact"
+            className="bg-accent hover:bg-accent/90 text-white px-8 py-4 rounded-md font-medium inline-flex items-center gap-2 transition-colors animate-fade-up [animation-delay:400ms]"
+          >
+            Get Started
+            <ArrowRight className="w-5 h-5" />
+          </Link>
         </div>
       </section>
 
