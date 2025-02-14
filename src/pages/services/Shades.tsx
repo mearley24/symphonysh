@@ -1,5 +1,5 @@
 
-import { ArrowLeft, Sun, SunDim, Clock, Remote, Smartphone } from "lucide-react";
+import { ArrowLeft, Sun, SunDim, Clock, Smartphone } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const FeatureCard = ({ icon: Icon, title, description }: { icon: any; title: string; description: string }) => (
@@ -43,7 +43,7 @@ const Shades = () => {
                   Scheduled operations
                 </li>
                 <li className="flex items-center">
-                  <Remote className="w-5 h-5 text-accent mr-3" />
+                  <Smartphone className="w-5 h-5 text-accent mr-3" />
                   Multi-device control
                 </li>
               </ul>
@@ -71,7 +71,7 @@ const Shades = () => {
             />
             <FeatureCard
               icon={Smartphone}
-              title="Remote Control"
+              title="Remote Access"
               description="Control your shades from anywhere using the Control4 app."
             />
           </div>

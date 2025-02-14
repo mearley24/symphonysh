@@ -26,17 +26,26 @@ const Services = () => {
           </p>
           
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {/* Core Infrastructure */}
+            <ServiceCard
+              icon={Network}
+              title="Networking"
+              description="Enterprise-grade networking solutions for reliable smart home performance."
+              link="/services/networking"
+            />
+            <ServiceCard
+              icon={Home}
+              title="Home Integration"
+              description="Seamless integration of all your smart home systems."
+              link="/services/home-integration"
+            />
+
+            {/* Essential Home Systems */}
             <ServiceCard
               icon={Lightbulb}
               title="Smart Lighting"
               description="Automated lighting systems that create the perfect ambiance and save energy."
               link="/services/smart-lighting"
-            />
-            <ServiceCard
-              icon={Shield}
-              title="Security Systems"
-              description="Advanced security solutions with smart locks and surveillance cameras."
-              link="/services/security-systems"
             />
             <ServiceCard
               icon={Thermometer}
@@ -45,10 +54,18 @@ const Services = () => {
               link="/services/climate-control"
             />
             <ServiceCard
-              icon={Speaker}
-              title="Audio & Entertainment"
-              description="Multi-room audio systems and home theater solutions."
-              link="/services/audio-entertainment"
+              icon={Sun}
+              title="Smart Shades"
+              description="Automated window treatments for comfort and energy efficiency."
+              link="/services/shades"
+            />
+
+            {/* Security */}
+            <ServiceCard
+              icon={Shield}
+              title="Security Systems"
+              description="Advanced security solutions with smart locks and surveillance cameras."
+              link="/services/security-systems"
             />
             <ServiceCard
               icon={Camera}
@@ -56,23 +73,13 @@ const Services = () => {
               description="HD cameras with remote monitoring and smart alerts."
               link="/services/video-surveillance"
             />
+
+            {/* Entertainment */}
             <ServiceCard
-              icon={Home}
-              title="Home Integration"
-              description="Seamless integration of all your smart home systems."
-              link="/services/home-integration"
-            />
-            <ServiceCard
-              icon={Network}
-              title="Networking"
-              description="Enterprise-grade networking solutions for reliable smart home performance."
-              link="/services/networking"
-            />
-            <ServiceCard
-              icon={Sun}
-              title="Smart Shades"
-              description="Automated window treatments for comfort and energy efficiency."
-              link="/services/shades"
+              icon={Speaker}
+              title="Audio & Entertainment"
+              description="Multi-room audio systems and home theater solutions."
+              link="/services/audio-entertainment"
             />
           </div>
         </div>
