@@ -15,6 +15,8 @@ import ClimateControl from "./pages/services/ClimateControl";
 import AudioEntertainment from "./pages/services/AudioEntertainment";
 import VideoSurveillance from "./pages/services/VideoSurveillance";
 import HomeIntegration from "./pages/services/HomeIntegration";
+import Networking from "./pages/services/Networking";
+import Shades from "./pages/services/Shades";
 
 const queryClient = new QueryClient();
 
@@ -33,6 +35,8 @@ const App = () => (
           <Route path="/services/audio-entertainment" element={<AudioEntertainment />} />
           <Route path="/services/video-surveillance" element={<VideoSurveillance />} />
           <Route path="/services/home-integration" element={<HomeIntegration />} />
+          <Route path="/services/networking" element={<Networking />} />
+          <Route path="/services/shades" element={<Shades />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="*" element={<NotFound />} />

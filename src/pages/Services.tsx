@@ -1,5 +1,5 @@
 
-import { ArrowRight, Home, Shield, Lightbulb, Thermometer, Camera, Speaker } from "lucide-react";
+import { ArrowRight, Home, Shield, Lightbulb, Thermometer, Camera, Speaker, Network, Sun } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const ServiceCard = ({ icon: Icon, title, description, link }: { icon: any; title: string; description: string; link: string }) => (
@@ -61,6 +61,18 @@ const Services = () => {
               title="Home Integration"
               description="Seamless integration of all your smart home systems."
               link="/services/home-integration"
+            />
+            <ServiceCard
+              icon={Network}
+              title="Networking"
+              description="Enterprise-grade networking solutions for reliable smart home performance."
+              link="/services/networking"
+            />
+            <ServiceCard
+              icon={Sun}
+              title="Smart Shades"
+              description="Automated window treatments for comfort and energy efficiency."
+              link="/services/shades"
             />
           </div>
         </div>
