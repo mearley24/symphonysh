@@ -6,6 +6,7 @@ import { useState } from "react";
 import { useToast } from "@/components/ui/use-toast";
 import Header from "../components/Header";
 import { format } from "date-fns";
+import { supabase } from "../lib/supabase";
 
 const AVAILABLE_TIMES = [
   "09:00", "10:00", "11:00", "13:00", "14:00", "15:00", "16:00"
@@ -33,7 +34,7 @@ const Scheduling = () => {
     }
 
     try {
-      const { data, error } = await window.supabase
+      const { data, error } = await supabase
         .from('appointments')
         .insert([
           {
