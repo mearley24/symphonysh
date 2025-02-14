@@ -27,7 +27,7 @@ const SmartLighting = () => {
       id: 1,
       title: "Under Cabinet Lighting",
       icon: LampWallDown,
-      position: { top: "65%", left: "25%" },
+      position: { top: "30%", left: "20%" },
       glowSize: "60px",
       glowOpacity: "0.15"
     },
@@ -35,7 +35,7 @@ const SmartLighting = () => {
       id: 2,
       title: "Island Pendant Lights",
       icon: LampCeiling,
-      position: { top: "35%", left: "45%" },
+      position: { top: "25%", left: "45%" },
       glowSize: "80px",
       glowOpacity: "0.2"
     },
@@ -43,7 +43,7 @@ const SmartLighting = () => {
       id: 3,
       title: "Recessed Lighting",
       icon: Lightbulb,
-      position: { top: "15%", left: "60%" },
+      position: { top: "15%", left: "65%" },
       glowSize: "60px",
       glowOpacity: "0.15"
     },
@@ -51,15 +51,15 @@ const SmartLighting = () => {
       id: 4,
       title: "Above Sink Light",
       icon: LampWallDown,
-      position: { top: "40%", left: "75%" },
+      position: { top: "30%", left: "35%" },
       glowSize: "50px",
       glowOpacity: "0.15"
     },
     {
       id: 5,
-      title: "Accent Cabinet Lighting",
+      title: "Accent Wall Lighting",
       icon: LampWallDown,
-      position: { top: "30%", left: "85%" },
+      position: { top: "40%", left: "15%" },
       glowSize: "40px",
       glowOpacity: "0.15"
     },
@@ -67,13 +67,13 @@ const SmartLighting = () => {
       id: 6,
       title: "Island Strip Lighting",
       icon: LampWallDown,
-      position: { top: "55%", left: "45%" },
+      position: { top: "45%", left: "45%" },
       glowSize: "70px",
       glowOpacity: "0.1"
     },
     {
       id: 7,
-      title: "Toe Kick Lighting",
+      title: "LED Floor Lighting",
       icon: LampWallDown,
       position: { top: "85%", left: "55%" },
       glowSize: "60px",
@@ -81,9 +81,9 @@ const SmartLighting = () => {
     },
     {
       id: 8,
-      title: "Decorative Wall Sconces",
-      icon: LampWallDown,
-      position: { top: "45%", left: "15%" },
+      title: "Living Area Lighting",
+      icon: LampCeiling,
+      position: { top: "35%", left: "85%" },
       glowSize: "50px",
       glowOpacity: "0.15"
     },
@@ -129,9 +129,9 @@ const SmartLighting = () => {
             </div>
             <div className="bg-[#1A1F2C] backdrop-blur-sm rounded-lg p-8 relative">
               <img 
-                src="https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&q=80"
+                src="/lovable-uploads/56480a40-adc0-4a59-912b-0309634ebf44.png"
                 alt="Smart Kitchen Lighting Control"
-                className="rounded-lg w-full h-[500px] object-cover mb-6 brightness-40"
+                className="rounded-lg w-full h-[500px] object-cover mb-6"
               />
               {lightingLoads.map((load) => (
                 <div
