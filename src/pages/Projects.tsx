@@ -1,4 +1,3 @@
-
 import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useState } from "react";
@@ -24,7 +23,7 @@ const Projects = () => {
   const [selectedProject, setSelectedProject] = useState("ohEAHYLpcVD");
 
   const matterportProjects = [
-    { id: "ohEAHYLpcVD", title: "Modern Mountain Estate" },
+    { id: "ohEAHYLpcVD", title: "Frost Creek Residence" },
     { id: "SxQL8kmata4", title: "Urban Smart Penthouse" },
     { id: "RAqb1AQnrdr", title: "Smart Family Home" },
     { id: "K2h9uNmtPLY", title: "Luxury Condo" },
