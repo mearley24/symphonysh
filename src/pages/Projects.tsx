@@ -1,5 +1,7 @@
+
 import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useState } from "react";
 import Header from "../components/Header";
 
 const ProjectCard = ({ title, description, image }: { title: string; description: string; image: string }) => (
@@ -19,6 +21,13 @@ const ProjectCard = ({ title, description, image }: { title: string; description
 );
 
 const Projects = () => {
+  const [selectedProject, setSelectedProject] = useState("ohEAHYLpcVD");
+
+  const matterportProjects = [
+    { id: "ohEAHYLpcVD", title: "Project 1" },
+    // Add more projects here as needed
+  ];
+
   return (
     <div className="min-h-screen bg-primary">
       <Header />
@@ -29,7 +38,7 @@ const Projects = () => {
             Discover our latest smart home transformations
           </p>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-20">
             <ProjectCard
               title="Modern Mountain Estate"
               description="Complete smart home automation with lighting, climate, and entertainment systems."
@@ -45,6 +54,39 @@ const Projects = () => {
               description="Family-friendly automation with focus on safety and entertainment."
               image="https://images.unsplash.com/photo-1600607688969-a5bfcd646154?auto=format&fit=crop&q=80"
             />
+          </div>
+
+          {/* Matterport Section */}
+          <div className="mt-20">
+            <h2 className="text-3xl font-bold text-white text-center mb-8">Virtual Tours</h2>
+            <div className="space-y-8">
+              <div className="flex justify-center gap-4 mb-8">
+                {matterportProjects.map((project) => (
+                  <button
+                    key={project.id}
+                    onClick={() => setSelectedProject(project.id)}
+                    className={`px-4 py-2 rounded-md transition-colors ${
+                      selectedProject === project.id
+                        ? "bg-accent text-white"
+                        : "bg-white/5 text-gray-300 hover:bg-white/10"
+                    }`}
+                  >
+                    {project.title}
+                  </button>
+                ))}
+              </div>
+              <div className="aspect-video w-full max-w-4xl mx-auto rounded-lg overflow-hidden bg-white/5">
+                <iframe
+                  width="100%"
+                  height="100%"
+                  src={`https://my.matterport.com/show/?m=${selectedProject}`}
+                  frameBorder="0"
+                  allowFullScreen
+                  allow="autoplay; fullscreen; web-share; xr-spatial-tracking;"
+                  className="w-full h-full"
+                />
+              </div>
+            </div>
           </div>
         </div>
       </section>
