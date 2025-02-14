@@ -3,12 +3,12 @@ import { ArrowRight, Home, Shield, Lightbulb, Thermometer, Camera, Speaker, Netw
 import { Link } from "react-router-dom";
 
 const ServiceCard = ({ icon: Icon, title, description, link }: { icon: any; title: string; description: string; link: string }) => (
-  <Link to={link} className="block">
-    <div className="bg-white/5 backdrop-blur-sm p-8 rounded-lg hover:bg-white/10 transition-all duration-300">
+  <Link to={link} className="block h-full">
+    <div className="bg-white/5 backdrop-blur-sm p-8 rounded-lg hover:bg-white/10 transition-all duration-300 h-full flex flex-col">
       <Icon className="w-8 h-8 text-accent mb-4" />
       <h3 className="text-xl font-semibold mb-3 text-white">{title}</h3>
-      <p className="text-gray-300 mb-4">{description}</p>
-      <div className="flex items-center text-accent">
+      <p className="text-gray-300 mb-4 flex-grow">{description}</p>
+      <div className="flex items-center text-accent mt-auto">
         Learn More <ArrowRight className="w-4 h-4 ml-2" />
       </div>
     </div>
