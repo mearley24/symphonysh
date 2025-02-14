@@ -24,7 +24,7 @@ const Projects = () => {
 
   const matterportProjects = [
     { id: "ohEAHYLpcVD", title: "Frost Creek Residence" },
-    { id: "SxQL8kmata4", title: "Urban Smart Penthouse" },
+    { id: "vM2D6WVw9Jx", title: "Eagle Ranch Residence" },
     { id: "RAqb1AQnrdr", title: "Smart Family Home" },
     { id: "K2h9uNmtPLY", title: "Luxury Condo" },
   ];
