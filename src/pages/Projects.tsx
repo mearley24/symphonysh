@@ -24,8 +24,10 @@ const Projects = () => {
   const [selectedProject, setSelectedProject] = useState("ohEAHYLpcVD");
 
   const matterportProjects = [
-    { id: "ohEAHYLpcVD", title: "Project 1" },
-    // Add more projects here as needed
+    { id: "ohEAHYLpcVD", title: "Modern Mountain Estate" },
+    { id: "SxQL8kmata4", title: "Urban Smart Penthouse" },
+    { id: "RAqb1AQnrdr", title: "Smart Family Home" },
+    { id: "K2h9uNmtPLY", title: "Luxury Condo" },
   ];
 
   return (
@@ -60,7 +62,7 @@ const Projects = () => {
           <div className="mt-20">
             <h2 className="text-3xl font-bold text-white text-center mb-8">Virtual Tours</h2>
             <div className="space-y-8">
-              <div className="flex justify-center gap-4 mb-8">
+              <div className="flex flex-wrap justify-center gap-4 mb-8">
                 {matterportProjects.map((project) => (
                   <button
                     key={project.id}
