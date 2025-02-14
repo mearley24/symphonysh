@@ -1,29 +1,58 @@
+
 import { ArrowLeft } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import { Calendar } from "@/components/ui/calendar";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useToast } from "@/components/ui/use-toast";
 import Header from "../components/Header";
 import { format } from "date-fns";
 import { supabase } from "../integrations/supabase/client";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 const AVAILABLE_TIMES = [
   "09:00", "10:00", "11:00", "13:00", "14:00", "15:00", "16:00"
 ];
 
+const SERVICES = [
+  { id: "home-integration", name: "Home Integration" },
+  { id: "audio-entertainment", name: "Audio & Entertainment" },
+  { id: "smart-lighting", name: "Smart Lighting" },
+  { id: "shades", name: "Smart Shades" },
+  { id: "networking", name: "Networking" },
+  { id: "climate-control", name: "Climate Control" },
+  { id: "security-systems", name: "Security Systems" },
+  { id: "maintenance", name: "Troubleshooting & Maintenance" },
+];
+
 const Scheduling = () => {
+  const [searchParams] = useSearchParams();
   const [date, setDate] = useState<Date>();
   const [selectedTime, setSelectedTime] = useState<string>();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [message, setMessage] = useState("");
+  const [service, setService] = useState<string>("");
   const { toast } = useToast();
+
+  // Set initial service from URL parameter if available
+  useEffect(() => {
+    const serviceFromUrl = searchParams.get("service");
+    if (serviceFromUrl) {
+      setService(serviceFromUrl);
+    }
+  }, [searchParams]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    if (!date || !selectedTime || !name || !email || !phone) {
+    if (!date || !selectedTime || !name || !email || !phone || !service) {
       toast({
         title: "Missing Information",
         description: "Please fill in all required fields.",
@@ -43,6 +72,7 @@ const Scheduling = () => {
             email,
             phone,
             message,
+            service,
             status: 'pending'
           }
         ]);
@@ -61,6 +91,7 @@ const Scheduling = () => {
       setEmail("");
       setPhone("");
       setMessage("");
+      setService("");
       
     } catch (error) {
       toast({
@@ -138,6 +169,24 @@ const Scheduling = () => {
 
               <div className="space-y-4">
                 <div>
+                  <label htmlFor="service" className="block text-sm font-medium text-gray-300 mb-1">
+                    Service *
+                  </label>
+                  <Select value={service} onValueChange={setService}>
+                    <SelectTrigger className="w-full bg-white/5 border border-white/10 text-white">
+                      <SelectValue placeholder="Select a service" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {SERVICES.map((service) => (
+                        <SelectItem key={service.id} value={service.id}>
+                          {service.name}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </div>
+
+                <div>
                   <label htmlFor="name" className="block text-sm font-medium text-gray-300 mb-1">
                     Name *
                   </label>
@@ -202,7 +251,7 @@ const Scheduling = () => {
               <button
                 type="submit"
                 className="bg-accent hover:bg-accent/90 text-white px-8 py-3 rounded-md font-medium transition-colors"
-                disabled={!date || !selectedTime || !name || !email || !phone}
+                disabled={!date || !selectedTime || !name || !email || !phone || !service}
               >
                 Schedule Consultation
               </button>
