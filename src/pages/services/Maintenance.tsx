@@ -1,5 +1,5 @@
 
-import { ArrowLeft, Wrench, Check, List, Alert } from "lucide-react";
+import { ArrowLeft, Wrench, Check, List, AlertCircle } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const FeatureCard = ({ icon: Icon, title, description }: { icon: any; title: string; description: string }) => (
@@ -47,7 +47,7 @@ const Maintenance = () => {
                   System updates and upgrades
                 </li>
                 <li className="flex items-center">
-                  <Alert className="w-5 h-5 text-accent mr-3" />
+                  <AlertCircle className="w-5 h-5 text-accent mr-3" />
                   Emergency support
                 </li>
               </ul>
@@ -84,7 +84,7 @@ const Maintenance = () => {
               description="Regular maintenance to ensure optimal performance and prevent system failures."
             />
             <FeatureCard
-              icon={Alert}
+              icon={AlertCircle}
               title="Emergency Support"
               description="Rapid response technical support for urgent system issues and failures."
             />
