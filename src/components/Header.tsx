@@ -121,22 +121,6 @@ const Header = () => {
                     AVA Smart Remote
                   </Link>
                 </DropdownMenuItem>
-                <DropdownMenuItem>
-                  <Link
-                    to="/projects"
-                    className="w-full text-sm text-gray-300 hover:text-white"
-                  >
-                    Our Projects
-                  </Link>
-                </DropdownMenuItem>
-                <DropdownMenuItem>
-                  <Link
-                    to="/matterport"
-                    className="w-full text-sm text-gray-300 hover:text-white"
-                  >
-                    Matterport Tours
-                  </Link>
-                </DropdownMenuItem>
                 <DropdownMenuSeparator className="bg-white/10" />
                 <DropdownMenuItem>
                   <Link
@@ -156,6 +140,15 @@ const Header = () => {
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
+
+            <Link
+              to="/projects"
+              className={`text-gray-300 hover:text-white transition-colors ${
+                currentPath === "/projects" ? "text-white" : ""
+              }`}
+            >
+              Our Projects
+            </Link>
 
             <a 
               href="tel:+19705193013" 
