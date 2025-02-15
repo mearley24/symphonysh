@@ -13,27 +13,6 @@ const Header = () => {
   const location = useLocation();
   const currentPath = location.pathname;
 
-  const menuItems = {
-    services: [
-      { path: "/services/home-integration", label: "Home Automation" },
-      { path: "/services/audio-entertainment", label: "Audio & Entertainment" },
-      { path: "/services/smart-lighting", label: "Smart Lighting" },
-      { path: "/services/shades", label: "Smart Shades" },
-      { path: "/services/networking", label: "Networking" },
-      { path: "/services/climate-control", label: "Climate Control" },
-      { path: "/services/security-systems", label: "Security Systems" },
-      { path: "/services/maintenance", label: "Maintenance" },
-    ],
-    showcase: [
-      { path: "/projects", label: "Our Projects" },
-      { path: "/matterport", label: "Matterport Tours" },
-    ],
-    company: [
-      { path: "/about", label: "About Us" },
-      { path: "/contact", label: "Contact" },
-    ]
-  };
-
   return (
     <header className="fixed top-0 left-0 right-0 bg-[rgb(0,9,24)]/95 backdrop-blur-sm border-b border-white/10 z-50">
       <div className="max-w-6xl mx-auto px-6 py-4">
@@ -57,64 +36,126 @@ const Header = () => {
 
             <DropdownMenu>
               <DropdownMenuTrigger className="flex items-center text-gray-300 hover:text-white transition-colors">
-                Services <ChevronDown className="ml-1 h-4 w-4" />
+                Menu <ChevronDown className="ml-1 h-4 w-4" />
               </DropdownMenuTrigger>
-              <DropdownMenuContent className="bg-[rgb(0,9,24)] border-white/10">
-                {menuItems.services.map((service) => (
-                  <DropdownMenuItem key={service.path}>
-                    <Link
-                      to={service.path}
-                      className="w-full text-sm text-gray-300 hover:text-white"
-                    >
-                      {service.label}
-                    </Link>
-                  </DropdownMenuItem>
-                ))}
+              <DropdownMenuContent className="bg-[rgb(0,9,24)] border-white/10 w-64">
+                <DropdownMenuItem>
+                  <Link
+                    to="/services"
+                    className="w-full text-sm text-gray-300 hover:text-white font-medium"
+                  >
+                    All Services
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuSeparator className="bg-white/10" />
+                <DropdownMenuItem>
+                  <Link
+                    to="/services/home-integration"
+                    className="w-full text-sm text-gray-300 hover:text-white"
+                  >
+                    Home Automation
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem>
+                  <Link
+                    to="/services/audio-entertainment"
+                    className="w-full text-sm text-gray-300 hover:text-white"
+                  >
+                    Audio & Entertainment
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem>
+                  <Link
+                    to="/services/smart-lighting"
+                    className="w-full text-sm text-gray-300 hover:text-white"
+                  >
+                    Smart Lighting
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem>
+                  <Link
+                    to="/services/shades"
+                    className="w-full text-sm text-gray-300 hover:text-white"
+                  >
+                    Smart Shades
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem>
+                  <Link
+                    to="/services/networking"
+                    className="w-full text-sm text-gray-300 hover:text-white"
+                  >
+                    Networking
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem>
+                  <Link
+                    to="/services/climate-control"
+                    className="w-full text-sm text-gray-300 hover:text-white"
+                  >
+                    Climate Control
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem>
+                  <Link
+                    to="/services/security-systems"
+                    className="w-full text-sm text-gray-300 hover:text-white"
+                  >
+                    Security Systems
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem>
+                  <Link
+                    to="/services/maintenance"
+                    className="w-full text-sm text-gray-300 hover:text-white"
+                  >
+                    Maintenance
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuSeparator className="bg-white/10" />
+                <DropdownMenuItem>
+                  <Link
+                    to="/ava"
+                    className="w-full text-sm text-gray-300 hover:text-white"
+                  >
+                    AVA Smart Remote
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem>
+                  <Link
+                    to="/projects"
+                    className="w-full text-sm text-gray-300 hover:text-white"
+                  >
+                    Our Projects
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem>
+                  <Link
+                    to="/matterport"
+                    className="w-full text-sm text-gray-300 hover:text-white"
+                  >
+                    Matterport Tours
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuSeparator className="bg-white/10" />
+                <DropdownMenuItem>
+                  <Link
+                    to="/about"
+                    className="w-full text-sm text-gray-300 hover:text-white"
+                  >
+                    About Us
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem>
+                  <Link
+                    to="/contact"
+                    className="w-full text-sm text-gray-300 hover:text-white"
+                  >
+                    Contact
+                  </Link>
+                </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
-
-            <DropdownMenu>
-              <DropdownMenuTrigger className="flex items-center text-gray-300 hover:text-white transition-colors">
-                Showcase <ChevronDown className="ml-1 h-4 w-4" />
-              </DropdownMenuTrigger>
-              <DropdownMenuContent className="bg-[rgb(0,9,24)] border-white/10">
-                {menuItems.showcase.map((item) => (
-                  <DropdownMenuItem key={item.path}>
-                    <Link
-                      to={item.path}
-                      className="w-full text-sm text-gray-300 hover:text-white"
-                    >
-                      {item.label}
-                    </Link>
-                  </DropdownMenuItem>
-                ))}
-              </DropdownMenuContent>
-            </DropdownMenu>
-
-            <DropdownMenu>
-              <DropdownMenuTrigger className="flex items-center text-gray-300 hover:text-white transition-colors">
-                Company <ChevronDown className="ml-1 h-4 w-4" />
-              </DropdownMenuTrigger>
-              <DropdownMenuContent className="bg-[rgb(0,9,24)] border-white/10">
-                {menuItems.company.map((item) => (
-                  <DropdownMenuItem key={item.path}>
-                    <Link
-                      to={item.path}
-                      className="w-full text-sm text-gray-300 hover:text-white"
-                    >
-                      {item.label}
-                    </Link>
-                  </DropdownMenuItem>
-                ))}
-              </DropdownMenuContent>
-            </DropdownMenu>
-
-            <Link
-              to="/ava"
-              className="text-gray-300 hover:text-white transition-colors"
-            >
-              AVA Smart Remote
-            </Link>
 
             <a 
               href="tel:+19705193013" 
