@@ -25,56 +25,56 @@ const Services = () => {
           <div className="max-w-6xl mx-auto">
             <h1 className="text-4xl md:text-5xl font-bold text-white text-center mb-4">Our Services</h1>
             <p className="text-xl text-gray-300 text-center mb-16 max-w-2xl mx-auto">
-              Experience the future of home control with AVA Smart Remote
+              Comprehensive home automation solutions powered by Control4
             </p>
             
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
               <ServiceCard
                 icon={Home}
                 title="Home Automation"
-                description="Simple, intuitive control of your smart home devices with AVA."
+                description="Seamless integration of all your smart home systems."
                 link="/services/home-integration"
               />
               <ServiceCard
                 icon={Speaker}
                 title="Audio & Entertainment"
-                description="Control your TV, music, and streaming services from a single remote."
+                description="Multi-room audio systems and home theater solutions."
                 link="/services/audio-entertainment"
               />
               <ServiceCard
                 icon={Lightbulb}
                 title="Smart Lighting"
-                description="Effortlessly control your smart lights and create perfect ambiance."
+                description="Automated lighting systems that create the perfect ambiance and save energy."
                 link="/services/smart-lighting"
               />
               <ServiceCard
                 icon={Sun}
                 title="Smart Shades"
-                description="Manage your automated window treatments with ease."
+                description="Automated window treatments for comfort and energy efficiency."
                 link="/services/shades"
               />
               <ServiceCard
                 icon={Network}
                 title="Networking"
-                description="Setup and optimization for reliable smart home connectivity."
+                description="Enterprise-grade networking solutions for reliable smart home performance."
                 link="/services/networking"
               />
               <ServiceCard
                 icon={Thermometer}
                 title="Climate Control"
-                description="Smart thermostat control for comfort and energy savings."
+                description="Intelligent temperature control for optimal comfort and efficiency."
                 link="/services/climate-control"
               />
               <ServiceCard
                 icon={Shield}
                 title="Security Systems"
-                description="Monitor and control your smart security devices."
+                description="Advanced security solutions including cameras, smart locks, and monitoring."
                 link="/services/security-systems"
               />
               <ServiceCard
                 icon={Wrench}
-                title="Troubleshooting & Setup"
-                description="Expert setup and support for your AVA Smart Remote system."
+                title="Troubleshooting & Maintenance"
+                description="Professional system maintenance and technical support services."
                 link="/services/maintenance"
               />
             </div>
