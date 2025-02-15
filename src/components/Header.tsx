@@ -6,30 +6,33 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
+  DropdownMenuSeparator,
 } from "@/components/ui/dropdown-menu";
 
 const Header = () => {
   const location = useLocation();
   const currentPath = location.pathname;
 
-  const control4Services = [
-    { path: "/services/home-integration", label: "Home Automation" },
-    { path: "/services/audio-entertainment", label: "Audio & Entertainment" },
-    { path: "/services/smart-lighting", label: "Smart Lighting" },
-    { path: "/services/shades", label: "Smart Shades" },
-    { path: "/services/networking", label: "Networking" },
-    { path: "/services/climate-control", label: "Climate Control" },
-    { path: "/services/security-systems", label: "Security Systems" },
-    { path: "/services/maintenance", label: "Maintenance" },
-  ];
-
-  const mainNavItems = [
-    { path: "/", label: "Home" },
-    { path: "/projects", label: "Projects" },
-    { path: "/matterport", label: "Matterport" },
-    { path: "/about", label: "About" },
-    { path: "/contact", label: "Contact" },
-  ];
+  const menuItems = {
+    services: [
+      { path: "/services/home-integration", label: "Home Automation" },
+      { path: "/services/audio-entertainment", label: "Audio & Entertainment" },
+      { path: "/services/smart-lighting", label: "Smart Lighting" },
+      { path: "/services/shades", label: "Smart Shades" },
+      { path: "/services/networking", label: "Networking" },
+      { path: "/services/climate-control", label: "Climate Control" },
+      { path: "/services/security-systems", label: "Security Systems" },
+      { path: "/services/maintenance", label: "Maintenance" },
+    ],
+    showcase: [
+      { path: "/projects", label: "Our Projects" },
+      { path: "/matterport", label: "Matterport Tours" },
+    ],
+    company: [
+      { path: "/about", label: "About Us" },
+      { path: "/contact", label: "Contact" },
+    ]
+  };
 
   return (
     <header className="fixed top-0 left-0 right-0 bg-[rgb(0,9,24)]/95 backdrop-blur-sm border-b border-white/10 z-50">
@@ -43,30 +46,63 @@ const Header = () => {
             />
           </Link>
           <div className="flex items-center space-x-6">
-            {mainNavItems.map((item) => (
-              currentPath !== item.path && (
-                <Link
-                  key={item.path}
-                  to={item.path}
-                  className="text-gray-300 hover:text-white transition-colors"
-                >
-                  {item.label}
-                </Link>
-              )
-            ))}
-            
+            <Link
+              to="/"
+              className={`text-gray-300 hover:text-white transition-colors ${
+                currentPath === "/" ? "text-white" : ""
+              }`}
+            >
+              Home
+            </Link>
+
             <DropdownMenu>
               <DropdownMenuTrigger className="flex items-center text-gray-300 hover:text-white transition-colors">
-                Control4 <ChevronDown className="ml-1 h-4 w-4" />
+                Services <ChevronDown className="ml-1 h-4 w-4" />
               </DropdownMenuTrigger>
-              <DropdownMenuContent>
-                {control4Services.map((service) => (
+              <DropdownMenuContent className="bg-[rgb(0,9,24)] border-white/10">
+                {menuItems.services.map((service) => (
                   <DropdownMenuItem key={service.path}>
                     <Link
                       to={service.path}
-                      className="w-full text-sm"
+                      className="w-full text-sm text-gray-300 hover:text-white"
                     >
                       {service.label}
+                    </Link>
+                  </DropdownMenuItem>
+                ))}
+              </DropdownMenuContent>
+            </DropdownMenu>
+
+            <DropdownMenu>
+              <DropdownMenuTrigger className="flex items-center text-gray-300 hover:text-white transition-colors">
+                Showcase <ChevronDown className="ml-1 h-4 w-4" />
+              </DropdownMenuTrigger>
+              <DropdownMenuContent className="bg-[rgb(0,9,24)] border-white/10">
+                {menuItems.showcase.map((item) => (
+                  <DropdownMenuItem key={item.path}>
+                    <Link
+                      to={item.path}
+                      className="w-full text-sm text-gray-300 hover:text-white"
+                    >
+                      {item.label}
+                    </Link>
+                  </DropdownMenuItem>
+                ))}
+              </DropdownMenuContent>
+            </DropdownMenu>
+
+            <DropdownMenu>
+              <DropdownMenuTrigger className="flex items-center text-gray-300 hover:text-white transition-colors">
+                Company <ChevronDown className="ml-1 h-4 w-4" />
+              </DropdownMenuTrigger>
+              <DropdownMenuContent className="bg-[rgb(0,9,24)] border-white/10">
+                {menuItems.company.map((item) => (
+                  <DropdownMenuItem key={item.path}>
+                    <Link
+                      to={item.path}
+                      className="w-full text-sm text-gray-300 hover:text-white"
+                    >
+                      {item.label}
                     </Link>
                   </DropdownMenuItem>
                 ))}
