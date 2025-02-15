@@ -1,16 +1,31 @@
 
 import { Link, useLocation } from "react-router-dom";
-import { Phone } from "lucide-react";
+import { Phone, ChevronDown } from "lucide-react";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 const Header = () => {
   const location = useLocation();
   const currentPath = location.pathname;
 
-  const navItems = [
+  const control4Services = [
+    { path: "/services/home-integration", label: "Home Automation" },
+    { path: "/services/audio-entertainment", label: "Audio & Entertainment" },
+    { path: "/services/smart-lighting", label: "Smart Lighting" },
+    { path: "/services/shades", label: "Smart Shades" },
+    { path: "/services/networking", label: "Networking" },
+    { path: "/services/climate-control", label: "Climate Control" },
+    { path: "/services/security-systems", label: "Security Systems" },
+    { path: "/services/maintenance", label: "Maintenance" },
+  ];
+
+  const mainNavItems = [
     { path: "/", label: "Home" },
-    { path: "/services", label: "Services" },
     { path: "/projects", label: "Projects" },
-    { path: "/ava", label: "AVA Smart Remote" },
     { path: "/matterport", label: "Matterport" },
     { path: "/about", label: "About" },
     { path: "/contact", label: "Contact" },
@@ -28,7 +43,7 @@ const Header = () => {
             />
           </Link>
           <div className="flex items-center space-x-6">
-            {navItems.map((item) => (
+            {mainNavItems.map((item) => (
               currentPath !== item.path && (
                 <Link
                   key={item.path}
@@ -39,6 +54,32 @@ const Header = () => {
                 </Link>
               )
             ))}
+            
+            <DropdownMenu>
+              <DropdownMenuTrigger className="flex items-center text-gray-300 hover:text-white transition-colors">
+                Control4 <ChevronDown className="ml-1 h-4 w-4" />
+              </DropdownMenuTrigger>
+              <DropdownMenuContent>
+                {control4Services.map((service) => (
+                  <DropdownMenuItem key={service.path}>
+                    <Link
+                      to={service.path}
+                      className="w-full text-sm"
+                    >
+                      {service.label}
+                    </Link>
+                  </DropdownMenuItem>
+                ))}
+              </DropdownMenuContent>
+            </DropdownMenu>
+
+            <Link
+              to="/ava"
+              className="text-gray-300 hover:text-white transition-colors"
+            >
+              AVA Smart Remote
+            </Link>
+
             <a 
               href="tel:+19705193013" 
               className="inline-flex items-center gap-2 bg-accent hover:bg-accent/90 text-white px-4 py-2 rounded-md transition-colors"

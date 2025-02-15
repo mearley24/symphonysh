@@ -23,6 +23,7 @@ import Shades from "./pages/services/Shades";
 import Maintenance from "./pages/services/Maintenance";
 import Matterport from "./pages/Matterport";
 import Scheduling from "./pages/Scheduling";
+import Ava from "./pages/Ava";
 
 const queryClient = new QueryClient();
 
@@ -41,6 +42,7 @@ function App() {
             <Route path="/contact" element={<Contact />} />
             <Route path="/matterport" element={<Matterport />} />
             <Route path="/scheduling" element={<Scheduling />} />
+            <Route path="/ava" element={<Ava />} />
             <Route path="/photos/mounted-tvs" element={<MountedTVs />} />
             <Route path="/photos/wiring" element={<Wiring />} />
             <Route path="/photos/home-theater" element={<HomeTheater />} />
