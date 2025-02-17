@@ -51,6 +51,33 @@ export type Database = {
         }
         Relationships: []
       }
+      contact_submissions: {
+        Row: {
+          created_at: string | null
+          email: string
+          email_sent: boolean | null
+          id: string
+          message: string
+          name: string
+        }
+        Insert: {
+          created_at?: string | null
+          email: string
+          email_sent?: boolean | null
+          id?: string
+          message: string
+          name: string
+        }
+        Update: {
+          created_at?: string | null
+          email?: string
+          email_sent?: boolean | null
+          id?: string
+          message?: string
+          name?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
