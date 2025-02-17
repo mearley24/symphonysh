@@ -1,3 +1,4 @@
+
 import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import Header from "../components/Header";
@@ -8,24 +9,24 @@ const Index = () => {
       <Header />
       
       {/* Hero Section */}
-      <section className="h-[60vh] flex items-center justify-center relative overflow-hidden">
+      <section className="min-h-[60vh] flex items-center justify-center relative overflow-hidden pt-24 sm:pt-0">
         <div className="absolute inset-0 bg-gradient-to-b from-primary/50 to-primary z-10"></div>
         <img 
           src="https://images.unsplash.com/photo-1558002038-1055907df827?auto=format&fit=crop&q=80"
           alt="Smart Home Background"
           className="absolute inset-0 w-full h-full object-cover animate-[fade-in_1.5s_ease-out]"
         />
-        <div className="max-w-6xl mx-auto px-6 relative z-20">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 relative z-20">
           <div className="text-center">
-            <h1 className="text-4xl md:text-6xl font-bold text-white mb-6 animate-[fade-up_1s_ease-out]">
+            <h1 className="text-3xl md:text-6xl font-bold text-white mb-4 sm:mb-6 animate-[fade-up_1s_ease-out]">
               Smart Home Solutions
             </h1>
-            <p className="text-xl text-gray-200 animate-[fade-up_1s_ease-out_200ms] mb-8 max-w-2xl mx-auto">
+            <p className="text-lg sm:text-xl text-gray-200 animate-[fade-up_1s_ease-out_200ms] mb-6 sm:mb-8 max-w-2xl mx-auto">
               Transform your living space with intelligent home automation solutions powered by Control4
             </p>
             <Link 
               to="/services"
-              className="bg-accent hover:bg-accent/90 text-white px-8 py-4 rounded-md font-medium inline-flex items-center gap-2 transition-colors animate-[fade-up_1s_ease-out_400ms]"
+              className="bg-accent hover:bg-accent/90 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-md font-medium inline-flex items-center gap-2 transition-colors animate-[fade-up_1s_ease-out_400ms]"
             >
               Explore Our Solutions
               <ArrowRight className="w-5 h-5" />

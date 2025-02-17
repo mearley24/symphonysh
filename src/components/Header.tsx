@@ -1,6 +1,6 @@
 
 import { Link, useLocation } from "react-router-dom";
-import { Phone, ChevronDown } from "lucide-react";
+import { Phone, ChevronDown, Menu as MenuIcon } from "lucide-react";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -15,19 +15,19 @@ const Header = () => {
 
   return (
     <header className="fixed top-0 left-0 right-0 bg-[rgb(0,9,24)]/95 backdrop-blur-sm border-b border-white/10 z-50">
-      <div className="max-w-6xl mx-auto px-6 py-4">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 py-2 sm:py-4">
         <nav className="flex items-center justify-between">
           <Link to="/" className="flex items-center">
             <img 
               src="/lovable-uploads/1d7a78ef-4d02-453d-aeea-81e50fb784b6.png" 
               alt="Symphony Smart Homes Logo" 
-              className="h-16 w-auto"
+              className="h-12 sm:h-16 w-auto"
             />
           </Link>
-          <div className="flex items-center space-x-6">
+          <div className="flex items-center space-x-2 sm:space-x-6">
             <Link
               to="/"
-              className={`text-gray-300 hover:text-white transition-colors ${
+              className={`hidden sm:block text-gray-300 hover:text-white transition-colors ${
                 currentPath === "/" ? "text-white" : ""
               }`}
             >
@@ -36,7 +36,10 @@ const Header = () => {
 
             <DropdownMenu>
               <DropdownMenuTrigger className="flex items-center text-gray-300 hover:text-white transition-colors">
-                Menu <ChevronDown className="ml-1 h-4 w-4" />
+                <MenuIcon className="w-6 h-6 sm:hidden" />
+                <span className="hidden sm:flex items-center">
+                  Menu <ChevronDown className="ml-1 h-4 w-4" />
+                </span>
               </DropdownMenuTrigger>
               <DropdownMenuContent className="bg-[rgb(0,9,24)] border-white/10 w-64">
                 <DropdownMenuItem>
@@ -143,7 +146,7 @@ const Header = () => {
 
             <Link
               to="/projects"
-              className={`text-gray-300 hover:text-white transition-colors ${
+              className={`hidden sm:block text-gray-300 hover:text-white transition-colors ${
                 currentPath === "/projects" ? "text-white" : ""
               }`}
             >
@@ -152,10 +155,10 @@ const Header = () => {
 
             <a 
               href="tel:+19705193013" 
-              className="inline-flex items-center gap-2 bg-accent hover:bg-accent/90 text-white px-4 py-2 rounded-md transition-colors"
+              className="inline-flex items-center gap-2 bg-accent hover:bg-accent/90 text-white px-3 sm:px-4 py-2 rounded-md transition-colors text-sm sm:text-base"
             >
               <Phone className="w-4 h-4" />
-              (970) 519-3013
+              <span className="hidden sm:inline">(970) 519-3013</span>
             </a>
           </div>
         </nav>
