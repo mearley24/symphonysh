@@ -10,7 +10,7 @@ export default defineConfig(({ mode }) => ({
     host: "::",
     port: 8080,
   },
-  base: "/", // This will be replaced with your repo name in production
+  base: process.env.GITHUB_REPOSITORY ? `/${process.env.GITHUB_REPOSITORY.split('/')[1]}/` : '/',
   plugins: [
     react(),
     mode === 'development' &&
@@ -22,4 +22,3 @@ export default defineConfig(({ mode }) => ({
     },
   },
 }));
-
