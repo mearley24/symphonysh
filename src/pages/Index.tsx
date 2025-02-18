@@ -13,9 +13,6 @@ const Index = () => {
         <img src="https://images.unsplash.com/photo-1558002038-1055907df827?auto=format&fit=crop&q=80" alt="Smart Home Background" className="absolute inset-0 w-full h-full object-cover animate-[fade-in_1.5s_ease-out]" />
         <div className="max-w-6xl mx-auto px-4 sm:px-6 relative z-20">
           <div className="text-center">
-            <h1 className="text-3xl md:text-6xl font-bold text-white mb-4 sm:mb-6 animate-[fade-up_1s_ease-out]">
-              Smart Home Solutions
-            </h1>
             <p className="text-lg sm:text-xl text-gray-200 animate-[fade-up_1s_ease-out_200ms] mb-6 sm:mb-8 max-w-2xl mx-auto">
               Transform your living space with intelligent home automation solutions powered by Control4
             </p>
