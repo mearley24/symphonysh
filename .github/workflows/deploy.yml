@@ -16,7 +16,7 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  build:
+  build-and-deploy:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -39,33 +39,21 @@ jobs:
         env:
           CI: false
 
-      - name: Debug - List workspace
+      - name: Debug build output
         run: |
           echo "Current directory content:"
           ls -la
           echo "Dist directory content:"
           ls -la dist || echo "dist directory not found"
 
-      - name: Create artifact directory
-        run: |
-          mkdir -p _site
-          cp -r dist/* _site/ || echo "Failed to copy dist contents"
-          echo "Content of _site directory:"
-          ls -la _site
-
-      - name: Upload Pages artifact
+      - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: _site
+          path: dist
+          retention-days: 1
 
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-
-    steps:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v2
+        with:
+          artifact_name: github-pages
