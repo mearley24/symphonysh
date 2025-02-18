@@ -11,19 +11,16 @@ permissions:
   pages: write
   id-token: write
 
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
 jobs:
-  deploy:
+  build:
     runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
-
-      - name: Setup Pages
-        uses: actions/configure-pages@v3
 
       - name: Setup Node
         uses: actions/setup-node@v3
@@ -45,15 +42,20 @@ jobs:
           ls -la
           ls -la dist || echo "dist directory not found"
 
-      - name: Upload artifact
+      - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
           name: github-pages
-          path: 'dist'
-          retention-days: 1
+          path: dist
 
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v2
-        with:
-          artifact_name: github-pages
