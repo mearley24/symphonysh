@@ -54,10 +54,66 @@ const Scheduling = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     
-    if (!date || !selectedTime || !name || !email || !phone || !service) {
+    console.log("Form Data:", {
+      date,
+      selectedTime,
+      name,
+      email,
+      phone,
+      service,
+      message
+    });
+
+    // Check each field individually and show specific error messages
+    if (!date) {
       toast({
-        title: "Missing Information",
-        description: "Please fill in all required fields.",
+        title: "Missing Date",
+        description: "Please select a date for your appointment.",
+        variant: "destructive"
+      });
+      return;
+    }
+
+    if (!selectedTime) {
+      toast({
+        title: "Missing Time",
+        description: "Please select a time slot for your appointment.",
+        variant: "destructive"
+      });
+      return;
+    }
+
+    if (!name.trim()) {
+      toast({
+        title: "Missing Name",
+        description: "Please enter your name.",
+        variant: "destructive"
+      });
+      return;
+    }
+
+    if (!email.trim()) {
+      toast({
+        title: "Missing Email",
+        description: "Please enter your email address.",
+        variant: "destructive"
+      });
+      return;
+    }
+
+    if (!phone.trim()) {
+      toast({
+        title: "Missing Phone",
+        description: "Please enter your phone number.",
+        variant: "destructive"
+      });
+      return;
+    }
+
+    if (!service) {
+      toast({
+        title: "Missing Service",
+        description: "Please select a service for your consultation.",
         variant: "destructive"
       });
       return;
@@ -72,10 +128,10 @@ const Scheduling = () => {
           {
             date: format(date, 'yyyy-MM-dd'),
             time: selectedTime,
-            name,
-            email,
-            phone,
-            message,
+            name: name.trim(),
+            email: email.trim(),
+            phone: phone.trim(),
+            message: message.trim(),
             service,
             status: 'pending'
           }
