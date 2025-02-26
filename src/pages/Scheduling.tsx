@@ -122,7 +122,8 @@ const Scheduling = () => {
     setIsSubmitting(true);
 
     try {
-      const { error } = await supabase
+      // First, create the appointment in the database
+      const { data: appointmentData, error: appointmentError } = await supabase
         .from('appointments')
         .insert([
           {
@@ -135,9 +136,31 @@ const Scheduling = () => {
             service,
             status: 'pending'
           }
-        ]);
+        ])
+        .select()
+        .single();
 
-      if (error) throw error;
+      if (appointmentError) throw appointmentError;
+
+      // Then, create the calendar event
+      const { error: calendarError } = await supabase.functions.invoke('create-calendar-event', {
+        body: {
+          appointment: {
+            date: format(date, 'yyyy-MM-dd'),
+            time: selectedTime,
+            name: name.trim(),
+            email: email.trim(),
+            phone: phone.trim(),
+            message: message.trim(),
+            service: SERVICES.find(s => s.id === service)?.name || service
+          }
+        }
+      });
+
+      if (calendarError) {
+        console.error('Calendar error:', calendarError);
+        throw new Error('Failed to create calendar event');
+      }
 
       toast({
         title: "Appointment Scheduled!",
