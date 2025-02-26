@@ -1,3 +1,4 @@
+
 import { ArrowLeft } from "lucide-react";
 import { Link, useSearchParams } from "react-router-dom";
 import { Calendar } from "@/components/ui/calendar";
@@ -6,6 +7,7 @@ import { useToast } from "@/components/ui/use-toast";
 import Header from "../components/Header";
 import { format } from "date-fns";
 import { supabase } from "../integrations/supabase/client";
+import { Button } from "@/components/ui/button";
 import {
   Select,
   SelectContent,
@@ -109,13 +111,16 @@ const Scheduling = () => {
       <section className="pt-32 pb-20 px-6">
         <div className="max-w-4xl mx-auto">
           <div className="mb-8">
-            <Link 
-              to="/services" 
-              className="inline-flex items-center gap-2 text-gray-400 hover:text-white transition-colors mb-4"
+            <Button
+              variant="ghost"
+              className="text-gray-400 hover:text-white mb-4"
+              asChild
             >
-              <ArrowLeft className="w-4 h-4" />
-              Back to Services
-            </Link>
+              <Link to="/services" className="inline-flex items-center gap-2">
+                <ArrowLeft className="w-4 h-4" />
+                Back to Services
+              </Link>
+            </Button>
             <h1 className="text-4xl font-bold text-white mb-4">Schedule a Consultation</h1>
             <p className="text-lg text-gray-300 mb-8">
               Book a time to discuss your smart home project with our experts.
@@ -149,18 +154,15 @@ const Scheduling = () => {
                     <h3 className="text-lg font-medium text-white mb-4">Available Times</h3>
                     <div className="grid grid-cols-3 gap-2">
                       {AVAILABLE_TIMES.map((time) => (
-                        <button
+                        <Button
                           key={time}
                           type="button"
+                          variant={selectedTime === time ? "default" : "secondary"}
                           onClick={() => setSelectedTime(time)}
-                          className={`p-2 rounded-md text-sm transition-colors ${
-                            selectedTime === time
-                              ? "bg-accent text-white"
-                              : "bg-white/5 text-gray-300 hover:bg-white/10"
-                          }`}
+                          className="w-full"
                         >
                           {time}
-                        </button>
+                        </Button>
                       ))}
                     </div>
                   </div>
@@ -248,13 +250,13 @@ const Scheduling = () => {
             </div>
 
             <div className="flex justify-center">
-              <button
+              <Button
                 type="submit"
-                className="bg-accent hover:bg-accent/90 text-white px-8 py-3 rounded-md font-medium transition-colors"
                 disabled={!date || !selectedTime || !name || !email || !phone || !service}
+                className="px-8 py-3"
               >
                 Schedule Consultation
-              </button>
+              </Button>
             </div>
           </form>
         </div>
