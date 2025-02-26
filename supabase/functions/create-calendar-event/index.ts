@@ -1,10 +1,8 @@
 
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2.38.0';
+import { format } from 'https://esm.sh/date-fns@2.30.0';
 
-const corsHeaders = {
-  'Access-Control-Allow-Origin': '*',
-  'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
-};
+const SCOPES = ['https://www.googleapis.com/auth/calendar.events'];
 
 interface AppointmentData {
   date: string;
@@ -16,78 +14,46 @@ interface AppointmentData {
   service: string;
 }
 
-// Handle CORS preflight requests
-async function handleCors(req: Request) {
-  if (req.method === 'OPTIONS') {
-    return new Response(null, { headers: corsHeaders });
-  }
-}
+Deno.serve(async (req) => {
+  try {
+    const { appointment } = await req.json() as { appointment: AppointmentData };
+    
+    // Get environment variables
+    const clientEmail = Deno.env.get('GOOGLE_CLIENT_EMAIL');
+    const privateKey = Deno.env.get('GOOGLE_PRIVATE_KEY')?.replace(/\\n/g, '\n');
+    const calendarId = Deno.env.get('GOOGLE_CALENDAR_ID');
+    
+    if (!clientEmail || !privateKey || !calendarId) {
+      throw new Error('Missing required Google Calendar credentials');
+    }
 
-async function getAccessToken(supabase: any) {
-  const { data: tokens, error } = await supabase
-    .from('google_tokens')
-    .select('*')
-    .order('created_at', { ascending: false })
-    .limit(1)
-    .single();
+    // Create JWT for Google Calendar API
+    const iat = Math.floor(Date.now() / 1000);
+    const exp = iat + 3600; // 1 hour expiration
 
-  if (error) throw error;
+    const jwt = await new jose.SignJWT({
+      scope: SCOPES.join(' ')
+    })
+      .setProtectedHeader({ alg: 'RS256', typ: 'JWT' })
+      .setIssuer(clientEmail)
+      .setAudience('https://oauth2.googleapis.com/token')
+      .setExpirationTime(exp)
+      .setIssuedAt(iat)
+      .sign(await jose.importPKCS8(privateKey, 'RS256'));
 
-  if (new Date(tokens.expiry) <= new Date()) {
-    // Refresh the token
-    const clientId = Deno.env.get('GOOGLE_OAUTH_CLIENT_ID');
-    const clientSecret = Deno.env.get('GOOGLE_OAUTH_CLIENT_SECRET');
-
-    const response = await fetch('https://oauth2.googleapis.com/token', {
+    // Get access token
+    const tokenResponse = await fetch('https://oauth2.googleapis.com/token', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
       },
       body: new URLSearchParams({
-        client_id: clientId!,
-        client_secret: clientSecret!,
-        refresh_token: tokens.refresh_token,
-        grant_type: 'refresh_token',
+        grant_type: 'urn:ietf:params:oauth:grant-type:jwt-bearer',
+        assertion: jwt,
       }),
     });
 
-    const newTokens = await response.json();
-
-    await supabase
-      .from('google_tokens')
-      .upsert([
-        {
-          refresh_token: tokens.refresh_token,
-          access_token: newTokens.access_token,
-          expiry: new Date(Date.now() + newTokens.expires_in * 1000).toISOString(),
-        }
-      ]);
-
-    return newTokens.access_token;
-  }
-
-  return tokens.access_token;
-}
-
-Deno.serve(async (req) => {
-  // Handle CORS
-  const corsResponse = await handleCors(req);
-  if (corsResponse) return corsResponse;
-
-  try {
-    const { appointment } = await req.json() as { appointment: AppointmentData };
-    
-    const calendarId = Deno.env.get('GOOGLE_CALENDAR_ID');
-    if (!calendarId) {
-      throw new Error('Missing calendar ID');
-    }
-
-    const supabase = createClient(
-      Deno.env.get('SUPABASE_URL') ?? '',
-      Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') ?? ''
-    );
-
-    const accessToken = await getAccessToken(supabase);
+    const { access_token } = await tokenResponse.json();
 
     // Parse appointment date and time
     const [hours, minutes] = appointment.time.split(':');
@@ -95,7 +61,7 @@ Deno.serve(async (req) => {
     startDate.setHours(parseInt(hours), parseInt(minutes), 0);
     
     const endDate = new Date(startDate);
-    endDate.setHours(startDate.getHours() + 1);
+    endDate.setHours(startDate.getHours() + 1); // 1 hour appointments
 
     // Create calendar event
     const event = {
@@ -126,7 +92,7 @@ Deno.serve(async (req) => {
       {
         method: 'POST',
         headers: {
-          'Authorization': `Bearer ${accessToken}`,
+          'Authorization': `Bearer ${access_token}`,
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(event),
@@ -139,14 +105,14 @@ Deno.serve(async (req) => {
 
     return new Response(
       JSON.stringify({ message: 'Calendar event created successfully' }),
-      { headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+      { headers: { 'Content-Type': 'application/json' } }
     );
 
   } catch (error) {
     console.error('Error creating calendar event:', error);
     return new Response(
       JSON.stringify({ error: 'Failed to create calendar event' }),
-      { status: 500, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+      { status: 500, headers: { 'Content-Type': 'application/json' } }
     );
   }
 });
