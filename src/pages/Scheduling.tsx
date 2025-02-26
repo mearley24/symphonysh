@@ -1,3 +1,4 @@
+
 import { ArrowLeft } from "lucide-react";
 import { Link, useSearchParams } from "react-router-dom";
 import { Calendar } from "@/components/ui/calendar";
@@ -40,6 +41,7 @@ const Scheduling = () => {
   const [phone, setPhone] = useState("");
   const [message, setMessage] = useState("");
   const [service, setService] = useState<string>("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
 
   useEffect(() => {
@@ -49,7 +51,7 @@ const Scheduling = () => {
     }
   }, [searchParams]);
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log("Submit clicked", { date, selectedTime, name, email, phone, service });
     
@@ -61,6 +63,8 @@ const Scheduling = () => {
       });
       return;
     }
+
+    setIsSubmitting(true);
 
     try {
       const { error } = await supabase
@@ -100,6 +104,8 @@ const Scheduling = () => {
         description: "There was a problem scheduling your appointment. Please try again.",
         variant: "destructive"
       });
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -252,10 +258,11 @@ const Scheduling = () => {
                 type="submit"
                 variant="default"
                 size="lg"
-                disabled={!date || !selectedTime || !name || !email || !phone || !service}
-                className="px-8"
+                disabled={!date || !selectedTime || !name || !email || !phone || !service || isSubmitting}
+                onClick={() => console.log("Button clicked")}
+                className="w-fit px-8"
               >
-                Schedule Consultation
+                {isSubmitting ? "Scheduling..." : "Schedule Consultation"}
               </Button>
             </div>
           </form>
