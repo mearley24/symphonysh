@@ -53,7 +53,6 @@ const Scheduling = () => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log("Submit clicked", { date, selectedTime, name, email, phone, service });
     
     if (!date || !selectedTime || !name || !email || !phone || !service) {
       toast({
@@ -89,6 +88,7 @@ const Scheduling = () => {
         description: "We'll contact you to confirm your appointment.",
       });
 
+      // Reset form
       setDate(undefined);
       setSelectedTime(undefined);
       setName("");
@@ -132,7 +132,7 @@ const Scheduling = () => {
             </p>
           </div>
 
-          <form onSubmit={handleSubmit} className="space-y-8">
+          <form onSubmit={handleSubmit} className="space-y-8" noValidate>
             <div className="grid md:grid-cols-2 gap-8">
               <div className="space-y-4">
                 <div className="bg-white/5 backdrop-blur-sm rounded-lg p-4">
@@ -201,7 +201,6 @@ const Scheduling = () => {
                     id="name"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
-                    required
                     className="w-full bg-white/5 border border-white/10 rounded-md px-4 py-2 text-white placeholder-gray-400"
                     placeholder="Your full name"
                   />
@@ -216,7 +215,6 @@ const Scheduling = () => {
                     id="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    required
                     className="w-full bg-white/5 border border-white/10 rounded-md px-4 py-2 text-white placeholder-gray-400"
                     placeholder="your@email.com"
                   />
@@ -231,7 +229,6 @@ const Scheduling = () => {
                     id="phone"
                     value={phone}
                     onChange={(e) => setPhone(e.target.value)}
-                    required
                     className="w-full bg-white/5 border border-white/10 rounded-md px-4 py-2 text-white placeholder-gray-400"
                     placeholder="(123) 456-7890"
                   />
@@ -256,11 +253,9 @@ const Scheduling = () => {
             <div className="flex justify-center">
               <Button
                 type="submit"
-                variant="default"
+                variant="secondary"
                 size="lg"
-                disabled={!date || !selectedTime || !name || !email || !phone || !service || isSubmitting}
-                onClick={() => console.log("Button clicked")}
-                className="w-fit px-8"
+                className="w-fit px-8 bg-white hover:bg-white/90 text-primary"
               >
                 {isSubmitting ? "Scheduling..." : "Schedule Consultation"}
               </Button>
