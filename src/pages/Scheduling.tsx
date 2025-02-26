@@ -1,4 +1,3 @@
-
 import { ArrowLeft } from "lucide-react";
 import { Link, useSearchParams } from "react-router-dom";
 import { Calendar } from "@/components/ui/calendar";
@@ -43,7 +42,6 @@ const Scheduling = () => {
   const [service, setService] = useState<string>("");
   const { toast } = useToast();
 
-  // Set initial service from URL parameter if available
   useEffect(() => {
     const serviceFromUrl = searchParams.get("service");
     if (serviceFromUrl) {
@@ -53,6 +51,7 @@ const Scheduling = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    console.log("Submit clicked", { date, selectedTime, name, email, phone, service });
     
     if (!date || !selectedTime || !name || !email || !phone || !service) {
       toast({
@@ -64,7 +63,7 @@ const Scheduling = () => {
     }
 
     try {
-      const { data, error } = await supabase
+      const { error } = await supabase
         .from('appointments')
         .insert([
           {
@@ -86,7 +85,6 @@ const Scheduling = () => {
         description: "We'll contact you to confirm your appointment.",
       });
 
-      // Reset form
       setDate(undefined);
       setSelectedTime(undefined);
       setName("");
@@ -96,6 +94,7 @@ const Scheduling = () => {
       setService("");
       
     } catch (error) {
+      console.error("Scheduling error:", error);
       toast({
         title: "Error",
         description: "There was a problem scheduling your appointment. Please try again.",
@@ -137,7 +136,6 @@ const Scheduling = () => {
                     onSelect={setDate}
                     className="bg-transparent text-white"
                     disabled={(date) => {
-                      // Disable past dates and weekends
                       const now = new Date();
                       now.setHours(0, 0, 0, 0);
                       return (
@@ -252,8 +250,10 @@ const Scheduling = () => {
             <div className="flex justify-center">
               <Button
                 type="submit"
+                variant="default"
+                size="lg"
                 disabled={!date || !selectedTime || !name || !email || !phone || !service}
-                className="px-8 py-3"
+                className="px-8"
               >
                 Schedule Consultation
               </Button>
