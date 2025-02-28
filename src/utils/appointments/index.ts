@@ -5,7 +5,7 @@ import { saveAppointmentToDatabase } from "./dbUtils";
 import { sendEmailNotification } from "./notificationUtils";
 import { createCalendarEvent } from "./calendarUtils";
 
-export { AppointmentData } from "./types";
+export type { AppointmentData } from "./types";
 
 export async function submitAppointment(appointmentData: AppointmentData) {
   const { date, selectedTime, name, email, phone, service, message } = appointmentData;
