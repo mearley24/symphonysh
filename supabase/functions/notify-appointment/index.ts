@@ -46,6 +46,7 @@ function formatDateTime(date: string, time: string) {
 
 serve(async (req) => {
   console.log("Notification function triggered with method:", req.method);
+  console.log("Request headers:", Object.fromEntries(req.headers.entries()));
   
   // Handle CORS preflight requests
   if (req.method === "OPTIONS") {
@@ -81,12 +82,14 @@ serve(async (req) => {
       }
       
       requestData = JSON.parse(bodyText);
+      console.log("Successfully parsed request body:", JSON.stringify(requestData, null, 2));
     } catch (parseError) {
       console.error("Error parsing request body:", parseError);
       return new Response(
         JSON.stringify({ 
           error: "Invalid JSON in request body", 
-          receivedData: bodyText 
+          receivedData: bodyText,
+          parseError: parseError.message
         }),
         {
           headers: { ...corsHeaders, "Content-Type": "application/json" },
@@ -97,11 +100,32 @@ serve(async (req) => {
     
     const { appointment } = requestData;
     
-    console.log("Appointment data received:", JSON.stringify(appointment));
+    console.log("Appointment data received:", JSON.stringify(appointment, null, 2));
     
     if (!appointment) {
       return new Response(
-        JSON.stringify({ error: "No appointment data provided" }),
+        JSON.stringify({ 
+          error: "No appointment data provided",
+          receivedData: requestData
+        }),
+        {
+          headers: { ...corsHeaders, "Content-Type": "application/json" },
+          status: 400,
+        }
+      );
+    }
+    
+    // Validate required fields
+    const requiredFields = ['date', 'time', 'name', 'email', 'phone', 'service'];
+    const missingFields = requiredFields.filter(field => !appointment[field]);
+    
+    if (missingFields.length > 0) {
+      return new Response(
+        JSON.stringify({ 
+          error: "Missing required fields", 
+          missingFields,
+          receivedData: appointment
+        }),
         {
           headers: { ...corsHeaders, "Content-Type": "application/json" },
           status: 400,
