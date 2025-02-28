@@ -53,7 +53,6 @@ export async function submitAppointment(appointmentData: AppointmentData) {
   try {
     // Call the notify-appointment function to send email notification
     console.log("Sending email notification...");
-    console.log("About to call notify-appointment edge function...");
     
     // Create payload object
     const payload = {
@@ -71,8 +70,49 @@ export async function submitAppointment(appointmentData: AppointmentData) {
     
     console.log("Appointment payload for notification:", JSON.stringify(payload, null, 2));
     
-    // Get Supabase function URL without accessing protected properties
-    console.log("Attempting to invoke notify-appointment function...");
+    // Manual fetch approach for debugging
+    console.log("Attempting direct fetch to notify-appointment function...");
+    
+    try {
+      // First try the direct fetch approach for better error visibility
+      const functionUrl = "https://bxsdjxkbhjtdrrtjtyto.supabase.co/functions/v1/notify-appointment";
+      console.log("Using direct fetch to URL:", functionUrl);
+      
+      const fetchResponse = await fetch(functionUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${supabase.auth.getSession()}`
+        },
+        body: JSON.stringify(payload)
+      });
+      
+      console.log("Direct fetch response status:", fetchResponse.status);
+      const responseText = await fetchResponse.text();
+      console.log("Direct fetch response:", responseText);
+      
+      try {
+        const jsonResponse = JSON.parse(responseText);
+        console.log("Parsed JSON response:", jsonResponse);
+      } catch (jsonError) {
+        console.log("Response is not valid JSON:", responseText);
+      }
+      
+      if (!fetchResponse.ok) {
+        console.error("Direct fetch failed with status:", fetchResponse.status);
+        // Continue to try the supabase.functions.invoke approach
+      } else {
+        console.log("Direct fetch succeeded!");
+        // If direct fetch succeeded, we can skip the invoke method
+        return appointmentData_?.[0];
+      }
+    } catch (fetchError) {
+      console.error("Direct fetch error:", fetchError);
+      console.log("Falling back to supabase.functions.invoke method...");
+    }
+    
+    // Fallback to the supabase.functions.invoke method
+    console.log("Attempting to invoke notify-appointment function via SDK...");
     
     // Call the function with detailed error handling
     let notifyResponse;
