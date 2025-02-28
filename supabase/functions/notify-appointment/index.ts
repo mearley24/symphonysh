@@ -48,7 +48,7 @@ function formatDateTime(date: string, time: string) {
   const [hour, minute] = time.split(":");
   const hourNum = parseInt(hour);
   const period = hourNum >= 12 ? "PM" : "AM";
-  const formattedHour = hourNum > 12 ? hourNum - 12 : hourNum;
+  const formattedHour = hourNum > 12 ? hourNum - 12 : hourNum === 0 ? 12 : hourNum;
   const formattedTime = `${formattedHour}:${minute} ${period}`;
   
   return { formattedDate, formattedTime };
@@ -80,8 +80,16 @@ serve(async (req) => {
   }
 
   try {
+    console.log("Notification function triggered");
+    
     // Get the latest appointment from the database
     const appointment = await getLatestAppointment();
+    console.log("Appointment data:", JSON.stringify(appointment));
+    
+    if (!appointment) {
+      throw new Error("No appointment found");
+    }
+    
     const { formattedDate, formattedTime } = formatDateTime(appointment.date, appointment.time);
     const serviceName = getServiceName(appointment.service);
 
@@ -122,11 +130,13 @@ serve(async (req) => {
       throw new Error("Failed to send email notification");
     }
 
-    return new Response(JSON.stringify({ success: true }), {
+    console.log("Email notification sent successfully:", data);
+
+    return new Response(JSON.stringify({ success: true, data }), {
       headers: { ...corsHeaders, "Content-Type": "application/json" },
       status: 200,
     });
-  } catch (error) {
+  } catch (error: any) {
     console.error("Function error:", error.message);
     return new Response(
       JSON.stringify({ error: error.message }),

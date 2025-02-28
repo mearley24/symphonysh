@@ -22,43 +22,58 @@ serve(async (req) => {
   }
 
   try {
-    // Trigger notify-appointment function
+    console.log("Appointment trigger function started");
+    
+    // Call the notify-appointment function
     const notifyResponse = await fetch(
-      "https://bxsdjxkbhjtdrrtjtyto.supabase.co/functions/v1/notify-appointment",
+      `${supabaseUrl}/functions/v1/notify-appointment`, 
       {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "Authorization": `Bearer ${supabaseKey}`,
-        },
+          "Authorization": `Bearer ${supabaseKey}`
+        }
       }
     );
     
     if (!notifyResponse.ok) {
-      console.error("Error calling notify-appointment:", await notifyResponse.text());
+      const errorText = await notifyResponse.text();
+      console.error("Error calling notify-appointment function:", errorText);
+      throw new Error(`Failed to call notify-appointment: ${errorText}`);
     }
     
-    // Trigger create-calendar-event function
+    const notifyResult = await notifyResponse.json();
+    console.log("Notification sent successfully:", notifyResult);
+    
+    // Call the create-calendar-event function
     const calendarResponse = await fetch(
-      "https://bxsdjxkbhjtdrrtjtyto.supabase.co/functions/v1/create-calendar-event",
+      `${supabaseUrl}/functions/v1/create-calendar-event`, 
       {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "Authorization": `Bearer ${supabaseKey}`,
-        },
+          "Authorization": `Bearer ${supabaseKey}`
+        }
       }
     );
     
     if (!calendarResponse.ok) {
-      console.error("Error calling create-calendar-event:", await calendarResponse.text());
+      const errorText = await calendarResponse.text();
+      console.error("Error calling create-calendar-event function:", errorText);
+      // Don't throw error here to ensure we at least return success for the notification
+    } else {
+      const calendarResult = await calendarResponse.json();
+      console.log("Calendar event created successfully:", calendarResult);
     }
-    
-    return new Response(JSON.stringify({ success: true }), {
-      headers: { ...corsHeaders, "Content-Type": "application/json" },
-      status: 200,
-    });
-  } catch (error) {
+
+    return new Response(
+      JSON.stringify({ success: true, message: "Appointment notifications and calendar events processed" }),
+      {
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+        status: 200,
+      }
+    );
+  } catch (error: any) {
     console.error("Function error:", error.message);
     return new Response(
       JSON.stringify({ error: error.message }),
