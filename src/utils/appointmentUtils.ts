@@ -51,7 +51,7 @@ export async function submitAppointment(appointmentData: AppointmentData) {
     console.log("Sending email notification...");
     
     // Enhanced logging to debug the function call
-    console.log("Function URL:", `${supabase.functions.url}/notify-appointment`);
+    console.log("Calling notify-appointment edge function...");
     console.log("Appointment payload:", {
       id: appointmentData_?.[0]?.id,
       date: formattedDate,
