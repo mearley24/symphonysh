@@ -102,12 +102,39 @@ export type Database = {
         }
         Relationships: []
       }
+      scheduling: {
+        Row: {
+          date: string
+          id: number
+          is_available: boolean | null
+          time_slot: string
+        }
+        Insert: {
+          date: string
+          id?: never
+          is_available?: boolean | null
+          time_slot: string
+        }
+        Update: {
+          date?: string
+          id?: never
+          is_available?: boolean | null
+          time_slot?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      update_time_slot_availability: {
+        Args: {
+          selected_date: string
+          selected_time: string
+        }
+        Returns: undefined
+      }
     }
     Enums: {
       [_ in never]: never

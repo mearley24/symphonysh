@@ -1,1 +1,47 @@
+
 project_id = "bxsdjxkbhjtdrrtjtyto"
+
+[api]
+enabled = true
+port = 54321
+schemas = ["public", "storage", "graphql_public"]
+
+[db]
+port = 54322
+shadow_port = 54320
+major_version = 15
+
+[realtime]
+enabled = true
+
+[studio]
+enabled = true
+port = 54323
+api_url = "http://localhost"
+
+[inbucket]
+enabled = true
+port = 54324
+
+[storage]
+enabled = true
+
+[auth]
+enabled = true
+site_url = "http://127.0.0.1:5173"
+
+[functions]
+[functions.notify-appointment]
+verify_jwt = false
+
+[functions.create-calendar-event]
+verify_jwt = false
+
+[functions.google-auth]
+verify_jwt = false
+
+[functions.google-auth-callback]
+verify_jwt = false
+
+[functions.appointment-trigger]
+verify_jwt = false
