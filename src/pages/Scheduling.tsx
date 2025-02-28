@@ -122,9 +122,10 @@ const Scheduling = () => {
     setIsSubmitting(true);
 
     try {
-      // Use the edge function instead of direct database insert to bypass RLS issues
-      const { error } = await supabase.functions.invoke('create-appointment', {
-        body: {
+      // Skip the edge function and insert directly into the database
+      const { error } = await supabase
+        .from('appointments')
+        .insert([{
           date: format(date, 'yyyy-MM-dd'),
           time: selectedTime,
           name: name.trim(),
@@ -133,10 +134,12 @@ const Scheduling = () => {
           message: message.trim(),
           service,
           status: 'pending'
-        }
-      });
+        }]);
 
-      if (error) throw error;
+      if (error) {
+        console.error("Database error:", error);
+        throw new Error("Database error: " + error.message);
+      }
 
       toast({
         title: "Appointment Scheduled!",
