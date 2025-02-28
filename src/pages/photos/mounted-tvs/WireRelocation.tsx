@@ -3,8 +3,11 @@ import React from 'react';
 import PhotoGallery from '../../../components/PhotoGallery';
 
 const WireRelocation = () => {
+  // The HEIC file seems to be causing issues, let's try using a different image format if available
+  // or use a different image from the same category
   const photos = [
-    "/lovable-uploads/mounted tvs/Wire Relocation/IMG_2841.HEIC", // Using the one that worked in MountedTVs 
+    "/lovable-uploads/wiring/Wire Relocation/IMG_2841.HEIC", // Path might need adjustment
+    "/lovable-uploads/wiring/IMG_0611.JPG", // Alternative JPG format
   ];
 
   return (

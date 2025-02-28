@@ -1,10 +1,12 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Header from '../../components/Header';
 import { ArrowLeft } from 'lucide-react';
 
 const MountedTVs = () => {
+  const [loadErrors, setLoadErrors] = useState<Record<string, boolean>>({});
+
   const categories = [
     { title: "BC Condo Fireplace", path: "/photos/mounted-tvs/bc-condo-fp", image: "/lovable-uploads/mounted tvs/BC Condo FP/IMG_0610.JPG" },
     { title: "Backbox Fireplace", path: "/photos/mounted-tvs/backbox-fp", image: "/lovable-uploads/mounted tvs/Backbox FP/IMG_0024.JPG" },
@@ -16,9 +18,22 @@ const MountedTVs = () => {
     { title: "Misc Installations", path: "/photos/mounted-tvs/misc", image: "/lovable-uploads/mounted tvs/Misc/IMG_0224.JPG" },
     { title: "Singletree Fireplace", path: "/photos/mounted-tvs/singletree-fp", image: "/lovable-uploads/mounted tvs/Singletree FP/IMG_1185.JPG" },
     { title: "West Vail Backbox", path: "/photos/mounted-tvs/west-vail-bb", image: "/lovable-uploads/mounted tvs/West Vail BB/IMG_1717.JPG" },
-    { title: "Wire Relocation", path: "/photos/mounted-tvs/wire-relocation", image: "/lovable-uploads/mounted tvs/Wire Relocation/IMG_2841.HEIC" },
+    { title: "Wire Relocation", path: "/photos/mounted-tvs/wire-relocation", image: "/lovable-uploads/wiring/IMG_0611.JPG" }, // Changed to a JPG in the wiring folder
     { title: "Wood Media", path: "/photos/mounted-tvs/wood-media", image: "/lovable-uploads/mounted tvs/Wood Media/IMG_0510.JPG" },
   ];
+
+  // Fix image path - ensure it doesn't have double slashes and is properly encoded
+  const getFixedImagePath = (path: string) => {
+    // Remove any double slashes that aren't part of protocol
+    const cleanPath = path.replace(/([^:])\/+/g, '$1/');
+    // Encode the path properly for URLs
+    return encodeURI(cleanPath);
+  };
+
+  const handleImageError = (image: string) => {
+    console.error(`Failed to load image: ${image}`);
+    setLoadErrors(prev => ({ ...prev, [image]: true }));
+  };
 
   return (
     <div className="min-h-screen bg-primary">
@@ -38,16 +53,19 @@ const MountedTVs = () => {
                 to={category.path}
                 className="bg-secondary/50 rounded-lg overflow-hidden group hover:bg-secondary/80 transition-all duration-300"
               >
-                <div className="aspect-video overflow-hidden">
+                <div className="aspect-video overflow-hidden bg-secondary/30">
                   <img 
-                    src={encodeURI(category.image)} 
+                    src={getFixedImagePath(category.image)} 
                     alt={category.title} 
                     className="w-full h-full object-cover transform transition-all duration-300 scale-95 group-hover:scale-110"
-                    onError={(e) => {
-                      console.error(`Failed to load image: ${category.image}`);
-                      e.currentTarget.src = "/placeholder.svg";
-                    }}
+                    onError={() => handleImageError(category.image)}
+                    style={{ display: loadErrors[category.image] ? 'none' : 'block' }}
                   />
+                  {loadErrors[category.image] && (
+                    <div className="w-full h-full flex items-center justify-center text-white">
+                      <span>{category.title}</span>
+                    </div>
+                  )}
                 </div>
                 <div className="p-4">
                   <h3 className="text-lg font-semibold text-white">{category.title}</h3>
