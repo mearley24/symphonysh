@@ -24,7 +24,9 @@ const corsHeaders = {
   "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
 };
 
-// Function to format date/time for better readability
+/**
+ * Formats date and time for better readability
+ */
 function formatDateTime(date: string, time: string) {
   const dateObj = new Date(date);
   const formattedDate = dateObj.toLocaleDateString("en-US", {
@@ -44,52 +46,203 @@ function formatDateTime(date: string, time: string) {
   return { formattedDate, formattedTime };
 }
 
-serve(async (req) => {
+/**
+ * Handles OPTIONS requests for CORS
+ */
+function handleOptionsRequest() {
+  console.log("Handling OPTIONS request");
+  return new Response(null, {
+    headers: corsHeaders,
+  });
+}
+
+/**
+ * Handles GET requests (direct browser visits)
+ */
+function handleGetRequest() {
+  console.log("Handling GET request (direct browser visit)");
+  return new Response(JSON.stringify({ 
+    message: "This is the notify-appointment API endpoint. POST requests with appointment data are required." 
+  }), {
+    headers: { ...corsHeaders, "Content-Type": "application/json" },
+    status: 200,
+  });
+}
+
+/**
+ * Parses and validates the request body
+ */
+async function parseRequestBody(req: Request) {
+  console.log("Parsing request body...");
+  
+  try {
+    const bodyText = await req.text();
+    console.log("Raw request body:", bodyText);
+    
+    if (!bodyText || bodyText.trim() === "") {
+      throw new Error("Empty request body");
+    }
+    
+    const requestData = JSON.parse(bodyText);
+    console.log("Successfully parsed request body:", JSON.stringify(requestData, null, 2));
+    
+    return { success: true, data: requestData, error: null };
+  } catch (parseError) {
+    console.error("Error parsing request body:", parseError);
+    return { 
+      success: false, 
+      data: null, 
+      error: {
+        message: "Invalid JSON in request body",
+        details: parseError.message
+      }
+    };
+  }
+}
+
+/**
+ * Validates appointment data
+ */
+function validateAppointmentData(appointment: any) {
+  if (!appointment) {
+    return { 
+      valid: false, 
+      error: "No appointment data provided" 
+    };
+  }
+  
+  // Validate required fields
+  const requiredFields = ['date', 'time', 'name', 'email', 'phone', 'service'];
+  const missingFields = requiredFields.filter(field => !appointment[field]);
+  
+  if (missingFields.length > 0) {
+    return { 
+      valid: false, 
+      error: "Missing required fields", 
+      missingFields 
+    };
+  }
+  
+  return { valid: true, error: null };
+}
+
+/**
+ * Generates HTML email content for business notification
+ */
+function generateBusinessEmailHtml(appointment: any, formattedDate: string, formattedTime: string) {
+  return `
+    <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #eee; border-radius: 10px;">
+      <h1 style="color: #333; text-align: center;">New Appointment Scheduled</h1>
+      <div style="background-color: #f8f9fa; padding: 15px; border-radius: 5px; margin-bottom: 20px;">
+        <h2 style="margin-top: 0; color: #0056b3;">${appointment.name}</h2>
+        <p style="margin: 5px 0;"><strong>Date:</strong> ${formattedDate}</p>
+        <p style="margin: 5px 0;"><strong>Time:</strong> ${formattedTime}</p>
+        <p style="margin: 5px 0;"><strong>Service:</strong> ${appointment.service}</p>
+      </div>
+      <div style="margin-bottom: 20px;">
+        <h3>Contact Information:</h3>
+        <p style="margin: 5px 0;"><strong>Email:</strong> ${appointment.email}</p>
+        <p style="margin: 5px 0;"><strong>Phone:</strong> ${appointment.phone}</p>
+      </div>
+      ${appointment.message ? `
+      <div style="margin-bottom: 20px;">
+        <h3>Message:</h3>
+        <p style="background-color: #f8f9fa; padding: 10px; border-radius: 5px;">${appointment.message}</p>
+      </div>
+      ` : ''}
+      <div style="text-align: center; margin-top: 30px; color: #666; font-size: 12px;">
+        <p>This is an automated notification from Symphony Smart Homes.</p>
+      </div>
+    </div>
+  `;
+}
+
+/**
+ * Generates HTML email content for customer confirmation
+ */
+function generateCustomerEmailHtml(appointment: any, formattedDate: string, formattedTime: string) {
+  return `
+    <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #eee; border-radius: 10px;">
+      <h1 style="color: #333; text-align: center;">Appointment Confirmation</h1>
+      <p style="font-size: 16px; line-height: 1.5;">Dear ${appointment.name},</p>
+      <p style="font-size: 16px; line-height: 1.5;">Thank you for scheduling a consultation with Symphony Smart Homes. We're looking forward to discussing your project.</p>
+      
+      <div style="background-color: #f8f9fa; padding: 15px; border-radius: 5px; margin: 20px 0;">
+        <h2 style="margin-top: 0; color: #0056b3;">Appointment Details</h2>
+        <p style="margin: 5px 0;"><strong>Date:</strong> ${formattedDate}</p>
+        <p style="margin: 5px 0;"><strong>Time:</strong> ${formattedTime}</p>
+        <p style="margin: 5px 0;"><strong>Service:</strong> ${appointment.service}</p>
+      </div>
+      
+      <p style="font-size: 16px; line-height: 1.5;">If you need to reschedule or have any questions, please contact us at info@symphonysh.com or call our office.</p>
+      
+      <p style="font-size: 16px; line-height: 1.5;">Best regards,<br>Symphony Smart Homes Team</p>
+      
+      <div style="text-align: center; margin-top: 30px; color: #666; font-size: 12px;">
+        <p>This is an automated confirmation. Please do not reply to this email.</p>
+      </div>
+    </div>
+  `;
+}
+
+/**
+ * Sends business notification email
+ */
+async function sendBusinessEmail(appointment: any, formattedDate: string, formattedTime: string) {
+  console.log("Sending business email...");
+  try {
+    const businessEmailResult = await resend.emails.send({
+      from: "Symphony Smart Homes <notifications@symphonysh.com>",
+      to: ["info@symphonysh.com"],
+      subject: `New Appointment: ${appointment.name}`,
+      html: generateBusinessEmailHtml(appointment, formattedDate, formattedTime),
+    });
+    
+    console.log("Business email notification sent successfully:", businessEmailResult);
+    return { success: true, data: businessEmailResult, error: null };
+  } catch (error) {
+    console.error("Error sending business email:", error);
+    return { success: false, data: null, error };
+  }
+}
+
+/**
+ * Sends customer confirmation email
+ */
+async function sendCustomerEmail(appointment: any, formattedDate: string, formattedTime: string) {
+  console.log("Sending customer email...");
+  try {
+    const customerEmailResult = await resend.emails.send({
+      from: "Symphony Smart Homes <notifications@symphonysh.com>",
+      to: [appointment.email],
+      subject: "Your Appointment Confirmation - Symphony Smart Homes",
+      html: generateCustomerEmailHtml(appointment, formattedDate, formattedTime),
+    });
+    
+    console.log("Customer email confirmation sent successfully:", customerEmailResult);
+    return { success: true, data: customerEmailResult, error: null };
+  } catch (error) {
+    console.error("Error sending customer email:", error);
+    return { success: false, data: null, error };
+  }
+}
+
+/**
+ * Main request handler
+ */
+async function handleRequest(req: Request) {
   console.log("Notification function triggered with method:", req.method);
   console.log("Request headers:", Object.fromEntries(req.headers.entries()));
   
-  // Handle CORS preflight requests
-  if (req.method === "OPTIONS") {
-    console.log("Handling OPTIONS request");
-    return new Response(null, {
-      headers: corsHeaders,
-    });
-  }
-
-  // Handle direct browser visits or GET requests
-  if (req.method === "GET") {
-    console.log("Handling GET request (direct browser visit)");
-    return new Response(JSON.stringify({ 
-      message: "This is the notify-appointment API endpoint. POST requests with appointment data are required." 
-    }), {
-      headers: { ...corsHeaders, "Content-Type": "application/json" },
-      status: 200,
-    });
-  }
-
   try {
-    console.log("Parsing request body...");
-    // Parse the request body
-    let requestData;
-    let bodyText = "";
+    // Parse request body
+    const { success, data: requestData, error: parseError } = await parseRequestBody(req);
     
-    try {
-      bodyText = await req.text();
-      console.log("Raw request body:", bodyText);
-      
-      if (!bodyText || bodyText.trim() === "") {
-        throw new Error("Empty request body");
-      }
-      
-      requestData = JSON.parse(bodyText);
-      console.log("Successfully parsed request body:", JSON.stringify(requestData, null, 2));
-    } catch (parseError) {
-      console.error("Error parsing request body:", parseError);
+    if (!success) {
       return new Response(
         JSON.stringify({ 
-          error: "Invalid JSON in request body", 
-          receivedData: bodyText,
-          parseError: parseError.message
+          error: parseError.message, 
+          receivedData: parseError.details
         }),
         {
           headers: { ...corsHeaders, "Content-Type": "application/json" },
@@ -100,29 +253,13 @@ serve(async (req) => {
     
     const { appointment } = requestData;
     
-    console.log("Appointment data received:", JSON.stringify(appointment, null, 2));
+    // Validate appointment data
+    const { valid, error: validationError, missingFields } = validateAppointmentData(appointment);
     
-    if (!appointment) {
+    if (!valid) {
       return new Response(
         JSON.stringify({ 
-          error: "No appointment data provided",
-          receivedData: requestData
-        }),
-        {
-          headers: { ...corsHeaders, "Content-Type": "application/json" },
-          status: 400,
-        }
-      );
-    }
-    
-    // Validate required fields
-    const requiredFields = ['date', 'time', 'name', 'email', 'phone', 'service'];
-    const missingFields = requiredFields.filter(field => !appointment[field]);
-    
-    if (missingFields.length > 0) {
-      return new Response(
-        JSON.stringify({ 
-          error: "Missing required fields", 
+          error: validationError, 
           missingFields,
           receivedData: appointment
         }),
@@ -133,115 +270,28 @@ serve(async (req) => {
       );
     }
     
+    // Format date and time
     const { formattedDate, formattedTime } = formatDateTime(appointment.date, appointment.time);
-    
     console.log("Formatted date and time:", formattedDate, formattedTime);
-
-    // Send email notification to the business
-    console.log("Sending business email...");
-    let businessEmailData;
-    let businessEmailError;
-    try {
-      const businessEmailResult = await resend.emails.send({
-        from: "Symphony Smart Homes <notifications@symphonysh.com>", // Use verified domain
-        to: ["info@symphonysh.com"],
-        subject: `New Appointment: ${appointment.name}`,
-        html: `
-          <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #eee; border-radius: 10px;">
-            <h1 style="color: #333; text-align: center;">New Appointment Scheduled</h1>
-            <div style="background-color: #f8f9fa; padding: 15px; border-radius: 5px; margin-bottom: 20px;">
-              <h2 style="margin-top: 0; color: #0056b3;">${appointment.name}</h2>
-              <p style="margin: 5px 0;"><strong>Date:</strong> ${formattedDate}</p>
-              <p style="margin: 5px 0;"><strong>Time:</strong> ${formattedTime}</p>
-              <p style="margin: 5px 0;"><strong>Service:</strong> ${appointment.service}</p>
-            </div>
-            <div style="margin-bottom: 20px;">
-              <h3>Contact Information:</h3>
-              <p style="margin: 5px 0;"><strong>Email:</strong> ${appointment.email}</p>
-              <p style="margin: 5px 0;"><strong>Phone:</strong> ${appointment.phone}</p>
-            </div>
-            ${appointment.message ? `
-            <div style="margin-bottom: 20px;">
-              <h3>Message:</h3>
-              <p style="background-color: #f8f9fa; padding: 10px; border-radius: 5px;">${appointment.message}</p>
-            </div>
-            ` : ''}
-            <div style="text-align: center; margin-top: 30px; color: #666; font-size: 12px;">
-              <p>This is an automated notification from Symphony Smart Homes.</p>
-            </div>
-          </div>
-        `,
-      });
-      businessEmailData = businessEmailResult;
-    } catch (error) {
-      console.error("Error sending business email:", error);
-      businessEmailError = error;
-    }
-
-    if (businessEmailError) {
-      console.error("Error sending business email:", businessEmailError);
-      // We continue to try sending the customer email even if business email fails
-    } else {
-      console.log("Business email notification sent successfully:", businessEmailData);
-    }
-
-    // Send confirmation email to the customer
-    console.log("Sending customer email...");
-    let customerEmailData;
-    let customerEmailError;
-    try {
-      const customerEmailResult = await resend.emails.send({
-        from: "Symphony Smart Homes <notifications@symphonysh.com>", // Use verified domain
-        to: [appointment.email],
-        subject: "Your Appointment Confirmation - Symphony Smart Homes",
-        html: `
-          <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #eee; border-radius: 10px;">
-            <h1 style="color: #333; text-align: center;">Appointment Confirmation</h1>
-            <p style="font-size: 16px; line-height: 1.5;">Dear ${appointment.name},</p>
-            <p style="font-size: 16px; line-height: 1.5;">Thank you for scheduling a consultation with Symphony Smart Homes. We're looking forward to discussing your project.</p>
-            
-            <div style="background-color: #f8f9fa; padding: 15px; border-radius: 5px; margin: 20px 0;">
-              <h2 style="margin-top: 0; color: #0056b3;">Appointment Details</h2>
-              <p style="margin: 5px 0;"><strong>Date:</strong> ${formattedDate}</p>
-              <p style="margin: 5px 0;"><strong>Time:</strong> ${formattedTime}</p>
-              <p style="margin: 5px 0;"><strong>Service:</strong> ${appointment.service}</p>
-            </div>
-            
-            <p style="font-size: 16px; line-height: 1.5;">If you need to reschedule or have any questions, please contact us at info@symphonysh.com or call our office.</p>
-            
-            <p style="font-size: 16px; line-height: 1.5;">Best regards,<br>Symphony Smart Homes Team</p>
-            
-            <div style="text-align: center; margin-top: 30px; color: #666; font-size: 12px;">
-              <p>This is an automated confirmation. Please do not reply to this email.</p>
-            </div>
-          </div>
-        `,
-      });
-      customerEmailData = customerEmailResult;
-    } catch (error) {
-      console.error("Error sending customer email:", error);
-      customerEmailError = error;
-    }
-
-    if (customerEmailError) {
-      console.error("Error sending customer email:", customerEmailError);
-      // We don't throw here to ensure the function completes even if customer email fails
-    } else {
-      console.log("Customer email confirmation sent successfully:", customerEmailData);
-    }
-
+    
+    // Send business email
+    const businessEmailResult = await sendBusinessEmail(appointment, formattedDate, formattedTime);
+    
+    // Send customer email
+    const customerEmailResult = await sendCustomerEmail(appointment, formattedDate, formattedTime);
+    
     // Return response with details of both email operations
     return new Response(JSON.stringify({ 
       success: true, 
       businessEmail: {
-        success: !businessEmailError,
-        data: businessEmailData,
-        error: businessEmailError ? businessEmailError.message : null
+        success: businessEmailResult.success,
+        data: businessEmailResult.data,
+        error: businessEmailResult.error ? businessEmailResult.error.message : null
       },
       customerEmail: {
-        success: !customerEmailError,
-        data: customerEmailData,
-        error: customerEmailError ? customerEmailError.message : null
+        success: customerEmailResult.success,
+        data: customerEmailResult.data,
+        error: customerEmailResult.error ? customerEmailResult.error.message : null
       }
     }), {
       headers: { ...corsHeaders, "Content-Type": "application/json" },
@@ -258,4 +308,22 @@ serve(async (req) => {
       }
     );
   }
+}
+
+/**
+ * Main serve function
+ */
+serve(async (req) => {
+  // Handle CORS preflight requests
+  if (req.method === "OPTIONS") {
+    return handleOptionsRequest();
+  }
+
+  // Handle direct browser visits or GET requests
+  if (req.method === "GET") {
+    return handleGetRequest();
+  }
+  
+  // Handle POST requests
+  return handleRequest(req);
 });
