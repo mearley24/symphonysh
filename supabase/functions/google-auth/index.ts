@@ -34,6 +34,7 @@ function getAuthUrl() {
   
   return oauth2Client.generateAuthUrl({
     access_type: 'offline',
+    response_type: 'code', // Added the missing response_type parameter
     scope: [
       'https://www.googleapis.com/auth/calendar',
       'https://www.googleapis.com/auth/calendar.events',
@@ -52,6 +53,20 @@ serve(async (req) => {
 
   try {
     const authUrl = getAuthUrl();
+    
+    // For direct browser access, redirect instead of returning JSON
+    const url = new URL(req.url);
+    const redirect = url.searchParams.get('redirect');
+    
+    if (redirect === 'true') {
+      return new Response(null, {
+        status: 302,
+        headers: {
+          ...corsHeaders,
+          "Location": authUrl
+        }
+      });
+    }
     
     return new Response(JSON.stringify({ authUrl }), {
       headers: { ...corsHeaders, "Content-Type": "application/json" },
