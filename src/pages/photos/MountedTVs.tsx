@@ -1,16 +1,23 @@
 
-import React, { useState } from 'react';
-import Header from '../../components/Header';
+import React from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowLeft, X } from 'lucide-react';
+import Header from '../../components/Header';
+import { ArrowLeft } from 'lucide-react';
 
 const MountedTVs = () => {
-  const [selectedImage, setSelectedImage] = useState<string | null>(null);
-
-  const photos = [
-    "/lovable-uploads/1d7a78ef-4d02-453d-aeea-81e50fb784b6.png",
-    "/lovable-uploads/66b3d52b-e7b9-476b-b902-f5bd6b8a3e76.png",
-    "/lovable-uploads/82ceba00-9f66-4905-b5a8-be6979b7f744.png"
+  const categories = [
+    { title: "BC Condo Fireplace", path: "/photos/mounted-tvs/bc-condo-fp", image: "/lovable-uploads/mounted tvs/BC Condo FP/IMG_0610.JPG" },
+    { title: "Backbox Fireplace", path: "/photos/mounted-tvs/backbox-fp", image: "/lovable-uploads/mounted tvs/Backbox FP/IMG_0024.JPG" },
+    { title: "Fireplace Frame", path: "/photos/mounted-tvs/fp-frame", image: "/lovable-uploads/mounted tvs/FP Frame/IMG_2189.JPG" },
+    { title: "Frame & Sonos", path: "/photos/mounted-tvs/frame-sonos", image: "/lovable-uploads/mounted tvs/Frame Sonos/IMG_0022.JPG" },
+    { title: "HP Installations", path: "/photos/mounted-tvs/hp", image: "/lovable-uploads/mounted tvs/HP/IMG_0179.JPG" },
+    { title: "Home Installations", path: "/photos/mounted-tvs/home", image: "/lovable-uploads/mounted tvs/Home/IMG_0659.JPG" },
+    { title: "Mantel Mount", path: "/photos/mounted-tvs/mantel-mount", image: "/lovable-uploads/mounted tvs/Mantel Mount/IMG_1090.JPG" },
+    { title: "Misc Installations", path: "/photos/mounted-tvs/misc", image: "/lovable-uploads/mounted tvs/Misc/IMG_0224.JPG" },
+    { title: "Singletree Fireplace", path: "/photos/mounted-tvs/singletree-fp", image: "/lovable-uploads/mounted tvs/Singletree FP/IMG_1185.JPG" },
+    { title: "West Vail Backbox", path: "/photos/mounted-tvs/west-vail-bb", image: "/lovable-uploads/mounted tvs/West Vail BB/IMG_1717.JPG" },
+    { title: "Wire Relocation", path: "/photos/mounted-tvs/wire-relocation", image: "/lovable-uploads/mounted tvs/Wire Relocation/IMG_2841.HEIC" },
+    { title: "Wood Media", path: "/photos/mounted-tvs/wood-media", image: "/lovable-uploads/mounted tvs/Wood Media/IMG_0510.JPG" },
   ];
 
   return (
@@ -23,44 +30,33 @@ const MountedTVs = () => {
             Back to Projects
           </Link>
           <h1 className="text-4xl font-bold text-white mb-8">Mounted TVs</h1>
+          
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {photos.map((photo, index) => (
-              <div 
-                key={index} 
-                className="aspect-video rounded-lg overflow-hidden cursor-pointer"
-                onClick={() => setSelectedImage(photo)}
+            {categories.map((category, index) => (
+              <Link 
+                key={index}
+                to={category.path}
+                className="bg-secondary/50 rounded-lg overflow-hidden group hover:bg-secondary/80 transition-all duration-300"
               >
-                <img 
-                  src={photo} 
-                  alt={`Mounted TV Installation ${index + 1}`} 
-                  className="w-full h-full object-cover"
-                />
-              </div>
+                <div className="aspect-video overflow-hidden">
+                  <img 
+                    src={encodeURI(category.image)} 
+                    alt={category.title} 
+                    className="w-full h-full object-cover transform transition-all duration-300 scale-95 group-hover:scale-110"
+                    onError={(e) => {
+                      console.error(`Failed to load image: ${category.image}`);
+                      e.currentTarget.src = "/placeholder.svg";
+                    }}
+                  />
+                </div>
+                <div className="p-4">
+                  <h3 className="text-lg font-semibold text-white">{category.title}</h3>
+                </div>
+              </Link>
             ))}
           </div>
         </div>
       </section>
-
-      {/* Full-size image modal */}
-      {selectedImage && (
-        <div 
-          className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4"
-          onClick={() => setSelectedImage(null)}
-        >
-          <button 
-            className="absolute top-4 right-4 text-white hover:text-gray-300"
-            onClick={() => setSelectedImage(null)}
-          >
-            <X className="w-8 h-8" />
-          </button>
-          <img 
-            src={selectedImage} 
-            alt="Full size view" 
-            className="max-w-full max-h-[90vh] object-contain"
-            onClick={(e) => e.stopPropagation()}
-          />
-        </div>
-      )}
     </div>
   );
 };

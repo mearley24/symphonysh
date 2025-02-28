@@ -1,68 +1,37 @@
 
-import React, { useState } from 'react';
-import Header from '../../components/Header';
-import { Link } from 'react-router-dom';
-import { ArrowLeft, X } from 'lucide-react';
+import React from 'react';
+import PhotoGallery from '../../components/PhotoGallery';
 
 const Wiring = () => {
-  const [selectedImage, setSelectedImage] = useState<string | null>(null);
-
   const photos = [
-    "/lovable-uploads/56480a40-adc0-4a59-912b-0309634ebf44.png",
-    "/lovable-uploads/860a30b2-c8df-4e9e-b327-3efecb18a16f.png",
-    "/lovable-uploads/df55cc4d-3261-458d-92d3-7acaae21361e.png"
+    "/lovable-uploads/wiring/71674303475__8894E961-8D43-47AC-906F-6F5262138D13.JPG",
+    "/lovable-uploads/wiring/71674305301__BF3FF410-BB0F-4285-B21C-A7F9EDEBA8B3.JPG",
+    "/lovable-uploads/wiring/71934397485__8C49F301-AD94-46A1-86EB-A779999B757F.JPG",
+    "/lovable-uploads/wiring/IMG_0080.JPG",
+    "/lovable-uploads/wiring/IMG_0136.JPG",
+    "/lovable-uploads/wiring/IMG_0137.JPG",
+    "/lovable-uploads/wiring/IMG_0228 2.JPG",
+    "/lovable-uploads/wiring/IMG_0578.JPG",
+    "/lovable-uploads/wiring/IMG_0611.JPG",
+    "/lovable-uploads/wiring/IMG_1138.JPG",
+    "/lovable-uploads/wiring/IMG_1139.JPG",
+    "/lovable-uploads/wiring/IMG_1161.JPG",
+    "/lovable-uploads/wiring/IMG_1311.JPG",
+    "/lovable-uploads/wiring/IMG_1312.JPG",
+    "/lovable-uploads/wiring/IMG_1313.JPG",
+    "/lovable-uploads/wiring/IMG_1320.JPG",
+    "/lovable-uploads/wiring/IMG_1321.JPG",
+    "/lovable-uploads/wiring/IMG_1322.JPG",
+    "/lovable-uploads/wiring/IMG_1323.JPG",
+    "/lovable-uploads/wiring/IMG_1324.JPG",
+    "/lovable-uploads/wiring/IMG_1499.JPG",
+    "/lovable-uploads/wiring/IMG_1551.JPG",
+    "/lovable-uploads/wiring/IMG_1552.JPG",
+    "/lovable-uploads/wiring/IMG_1733.JPG",
+    "/lovable-uploads/wiring/IMG_1755.JPG",
   ];
 
-  return (
-    <div className="min-h-screen bg-primary">
-      <Header />
-      <section className="pt-32 pb-20 px-6">
-        <div className="max-w-6xl mx-auto">
-          <Link to="/projects" className="inline-flex items-center text-gray-300 hover:text-white mb-8">
-            <ArrowLeft className="w-4 h-4 mr-2" />
-            Back to Projects
-          </Link>
-          <h1 className="text-4xl font-bold text-white mb-8">Wiring</h1>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {photos.map((photo, index) => (
-              <div 
-                key={index} 
-                className="aspect-video rounded-lg overflow-hidden group cursor-pointer"
-                onClick={() => setSelectedImage(photo)}
-              >
-                <img 
-                  src={photo} 
-                  alt={`Wiring Installation ${index + 1}`} 
-                  className="w-full h-full object-cover transform transition-all duration-300 scale-95 group-hover:scale-110"
-                />
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Full-size image modal */}
-      {selectedImage && (
-        <div 
-          className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4"
-          onClick={() => setSelectedImage(null)}
-        >
-          <button 
-            className="absolute top-4 right-4 text-white hover:text-gray-300"
-            onClick={() => setSelectedImage(null)}
-          >
-            <X className="w-8 h-8" />
-          </button>
-          <img 
-            src={selectedImage} 
-            alt="Full size view" 
-            className="max-w-full max-h-[90vh] object-contain"
-            onClick={(e) => e.stopPropagation()}
-          />
-        </div>
-      )}
-    </div>
-  );
+  return <PhotoGallery title="Wiring" photos={photos} />;
 };
 
 export default Wiring;
