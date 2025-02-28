@@ -1,7 +1,6 @@
 
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2.38.4';
-import * as smtp from "https://deno.land/x/smtp@v0.7.0/mod.ts";
 
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
@@ -33,50 +32,7 @@ serve(async (req) => {
       throw new Error(`Database error: ${dbError.message}`);
     }
 
-    // Send email using Gmail SMTP
-    const client = new smtp.SmtpClient();
-    await client.connectTLS({
-      hostname: "smtp.gmail.com",
-      port: 465,
-      username: "info@symphonysh.com",
-      password: Deno.env.get('GMAIL_APP_PASSWORD')!,
-    });
-
-    // Send notification to business
-    await client.send({
-      from: "info@symphonysh.com",
-      to: "info@symphonysh.com",
-      subject: "New Contact Form Submission",
-      content: `
-Name: ${name}
-Email: ${email}
-Message: ${message}
-      `,
-    });
-
-    // Send confirmation to customer
-    await client.send({
-      from: "info@symphonysh.com",
-      to: email,
-      subject: "Thank you for contacting Symphony Smart Homes",
-      content: `
-Dear ${name},
-
-Thank you for contacting Symphony Smart Homes. We have received your message and will get back to you shortly.
-
-Best regards,
-Symphony Smart Homes Team
-      `,
-    });
-
-    await client.close();
-
-    // Update the submission to mark email as sent
-    await supabase
-      .from('contact_submissions')
-      .update({ email_sent: true })
-      .eq('id', submission.id);
-
+    // Since we're storing in the database, we'll return success
     return new Response(JSON.stringify({ success: true }), {
       headers: { ...corsHeaders, 'Content-Type': 'application/json' },
     });

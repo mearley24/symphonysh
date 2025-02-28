@@ -27,11 +27,14 @@ const Contact = () => {
     setIsSubmitting(true);
 
     try {
-      const { error: functionError } = await supabase.functions.invoke('send-contact-email', {
-        body: { name, email, message },
-      });
+      // Store message in the database directly instead of using edge function
+      const { error } = await supabase
+        .from('contact_submissions')
+        .insert([
+          { name, email, message }
+        ]);
 
-      if (functionError) throw functionError;
+      if (error) throw error;
 
       toast({
         title: "Message Sent!",
