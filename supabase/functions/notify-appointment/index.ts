@@ -18,22 +18,6 @@ const corsHeaders = {
   "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
 };
 
-// Function to fetch the most recent appointment
-async function getLatestAppointment() {
-  const { data, error } = await supabase
-    .from("appointments")
-    .select("*")
-    .order("created_at", { ascending: false })
-    .limit(1);
-
-  if (error) {
-    console.error("Error fetching appointment:", error);
-    throw new Error("Failed to fetch appointment");
-  }
-
-  return data[0];
-}
-
 // Function to format date/time for better readability
 function formatDateTime(date: string, time: string) {
   const dateObj = new Date(date);
@@ -54,23 +38,6 @@ function formatDateTime(date: string, time: string) {
   return { formattedDate, formattedTime };
 }
 
-// Service name lookup
-function getServiceName(serviceId: string) {
-  const services = {
-    "home-integration": "Home Automation",
-    "audio-entertainment": "Audio & Entertainment",
-    "smart-lighting": "Smart Lighting",
-    "shades": "Smart Shades",
-    "networking": "Networking",
-    "climate-control": "Climate Control",
-    "security-systems": "Security Systems",
-    "maintenance": "Troubleshooting & Maintenance",
-    "matterport-scan": "Matterport Scan",
-  };
-  
-  return services[serviceId as keyof typeof services] || serviceId;
-}
-
 serve(async (req) => {
   // Handle CORS preflight requests
   if (req.method === "OPTIONS") {
@@ -82,16 +49,17 @@ serve(async (req) => {
   try {
     console.log("Notification function triggered");
     
-    // Get the latest appointment from the database
-    const appointment = await getLatestAppointment();
+    // Parse the request body
+    const requestData = await req.json();
+    const { appointment } = requestData;
+    
     console.log("Appointment data:", JSON.stringify(appointment));
     
     if (!appointment) {
-      throw new Error("No appointment found");
+      throw new Error("No appointment data provided");
     }
     
     const { formattedDate, formattedTime } = formatDateTime(appointment.date, appointment.time);
-    const serviceName = getServiceName(appointment.service);
 
     // Send email notification
     const { data, error } = await resend.emails.send({
@@ -105,7 +73,7 @@ serve(async (req) => {
             <h2 style="margin-top: 0; color: #0056b3;">${appointment.name}</h2>
             <p style="margin: 5px 0;"><strong>Date:</strong> ${formattedDate}</p>
             <p style="margin: 5px 0;"><strong>Time:</strong> ${formattedTime}</p>
-            <p style="margin: 5px 0;"><strong>Service:</strong> ${serviceName}</p>
+            <p style="margin: 5px 0;"><strong>Service:</strong> ${appointment.service}</p>
           </div>
           <div style="margin-bottom: 20px;">
             <h3>Contact Information:</h3>
