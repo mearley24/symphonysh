@@ -4,8 +4,7 @@ import PhotoGallery from '../../../components/PhotoGallery';
 
 const WireRelocation = () => {
   const photos = [
-    "/lovable-uploads/mounted tvs/Wire Relocation/IMG_2840.HEIC",
-    "/lovable-uploads/mounted tvs/Wire Relocation/IMG_2841.HEIC",
+    "/lovable-uploads/mounted tvs/Wire Relocation/IMG_2841.HEIC", // Using the one that worked in MountedTVs 
   ];
 
   return (

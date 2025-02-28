@@ -37,9 +37,13 @@ const PhotoGallery: React.FC<PhotoGalleryProps> = ({
                 onClick={() => setSelectedImage(photo)}
               >
                 <img 
-                  src={photo} 
+                  src={encodeURI(photo)} 
                   alt={`${title} ${index + 1}`} 
                   className="w-full h-full object-cover transform transition-all duration-300 scale-95 group-hover:scale-110"
+                  onError={(e) => {
+                    console.error(`Failed to load image: ${photo}`);
+                    e.currentTarget.src = "/placeholder.svg";
+                  }}
                 />
               </div>
             ))}
@@ -60,10 +64,14 @@ const PhotoGallery: React.FC<PhotoGalleryProps> = ({
             <X className="w-8 h-8" />
           </button>
           <img 
-            src={selectedImage} 
+            src={encodeURI(selectedImage)} 
             alt="Full size view" 
             className="max-w-full max-h-[90vh] object-contain"
             onClick={(e) => e.stopPropagation()}
+            onError={(e) => {
+              console.error(`Failed to load full size image: ${selectedImage}`);
+              e.currentTarget.src = "/placeholder.svg";
+            }}
           />
         </div>
       )}

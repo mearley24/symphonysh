@@ -16,7 +16,7 @@ const MountedTVs = () => {
     { title: "Misc Installations", path: "/photos/mounted-tvs/misc", image: "/lovable-uploads/mounted tvs/Misc/IMG_0224.JPG" },
     { title: "Singletree Fireplace", path: "/photos/mounted-tvs/singletree-fp", image: "/lovable-uploads/mounted tvs/Singletree FP/IMG_1185.JPG" },
     { title: "West Vail Backbox", path: "/photos/mounted-tvs/west-vail-bb", image: "/lovable-uploads/mounted tvs/West Vail BB/IMG_1717.JPG" },
-    { title: "Wire Relocation", path: "/photos/mounted-tvs/wire-relocation", image: "/lovable-uploads/mounted tvs/Wire Relocation/IMG_2840.HEIC" },
+    { title: "Wire Relocation", path: "/photos/mounted-tvs/wire-relocation", image: "/lovable-uploads/mounted tvs/Wire Relocation/IMG_2841.HEIC" },
     { title: "Wood Media", path: "/photos/mounted-tvs/wood-media", image: "/lovable-uploads/mounted tvs/Wood Media/IMG_0510.JPG" },
   ];
 
@@ -40,9 +40,13 @@ const MountedTVs = () => {
               >
                 <div className="aspect-video overflow-hidden">
                   <img 
-                    src={category.image} 
+                    src={encodeURI(category.image)} 
                     alt={category.title} 
                     className="w-full h-full object-cover transform transition-all duration-300 scale-95 group-hover:scale-110"
+                    onError={(e) => {
+                      console.error(`Failed to load image: ${category.image}`);
+                      e.currentTarget.src = "/placeholder.svg";
+                    }}
                   />
                 </div>
                 <div className="p-4">
