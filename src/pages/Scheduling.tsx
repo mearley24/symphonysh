@@ -122,11 +122,12 @@ const Scheduling = () => {
     setIsSubmitting(true);
 
     try {
-      // Skip the edge function and insert directly into the database
-      const { error } = await supabase
+      // Insert appointment into the database
+      const formattedDate = format(date, 'yyyy-MM-dd');
+      const { data: appointmentData, error } = await supabase
         .from('appointments')
         .insert([{
-          date: format(date, 'yyyy-MM-dd'),
+          date: formattedDate,
           time: selectedTime,
           name: name.trim(),
           email: email.trim(),
@@ -134,11 +135,41 @@ const Scheduling = () => {
           message: message.trim(),
           service,
           status: 'pending'
-        }]);
+        }])
+        .select();
 
       if (error) {
         console.error("Database error:", error);
         throw new Error("Database error: " + error.message);
+      }
+
+      console.log("Appointment created:", appointmentData);
+      
+      // Call the notify-appointment function to send email notification
+      try {
+        const notifyResponse = await supabase.functions.invoke('notify-appointment', {
+          method: 'POST'
+        });
+        
+        if (notifyResponse.error) {
+          console.error("Notification error:", notifyResponse.error);
+        } else {
+          console.log("Notification sent:", notifyResponse.data);
+        }
+        
+        // Try to create calendar event
+        const calendarResponse = await supabase.functions.invoke('create-calendar-event', {
+          method: 'POST'
+        });
+        
+        if (calendarResponse.error) {
+          console.error("Calendar error:", calendarResponse.error);
+        } else {
+          console.log("Calendar event created:", calendarResponse.data);
+        }
+      } catch (notifyError) {
+        console.error("Failed to send notifications:", notifyError);
+        // We don't throw here to avoid failing the whole appointment process
       }
 
       toast({
