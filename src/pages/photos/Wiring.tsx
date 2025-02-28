@@ -1,13 +1,16 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import Header from '../../components/Header';
 import { Link } from 'react-router-dom';
-import { ArrowLeft } from 'lucide-react';
+import { ArrowLeft, X } from 'lucide-react';
 
 const Wiring = () => {
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
+
   const photos = [
-    "https://images.unsplash.com/photo-1518770660439-4636190af475",
-    // Add more wiring photos here
+    "/lovable-uploads/56480a40-adc0-4a59-912b-0309634ebf44.png",
+    "/lovable-uploads/860a30b2-c8df-4e9e-b327-3efecb18a16f.png",
+    "/lovable-uploads/df55cc4d-3261-458d-92d3-7acaae21361e.png"
   ];
 
   return (
@@ -25,6 +28,7 @@ const Wiring = () => {
               <div 
                 key={index} 
                 className="aspect-video rounded-lg overflow-hidden group cursor-pointer"
+                onClick={() => setSelectedImage(photo)}
               >
                 <img 
                   src={photo} 
@@ -36,6 +40,27 @@ const Wiring = () => {
           </div>
         </div>
       </section>
+
+      {/* Full-size image modal */}
+      {selectedImage && (
+        <div 
+          className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4"
+          onClick={() => setSelectedImage(null)}
+        >
+          <button 
+            className="absolute top-4 right-4 text-white hover:text-gray-300"
+            onClick={() => setSelectedImage(null)}
+          >
+            <X className="w-8 h-8" />
+          </button>
+          <img 
+            src={selectedImage} 
+            alt="Full size view" 
+            className="max-w-full max-h-[90vh] object-contain"
+            onClick={(e) => e.stopPropagation()}
+          />
+        </div>
+      )}
     </div>
   );
 };

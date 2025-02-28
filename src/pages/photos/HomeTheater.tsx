@@ -1,14 +1,16 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import Header from '../../components/Header';
 import { Link } from 'react-router-dom';
-import { ArrowLeft } from 'lucide-react';
+import { ArrowLeft, X } from 'lucide-react';
 
 const HomeTheater = () => {
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
+
   const photos = [
-    "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b",
-    "https://images.unsplash.com/photo-1461749280684-dccba630e2f6",
-    "https://images.unsplash.com/photo-1721322800607-8c38375eef04"
+    "/lovable-uploads/646c1725-c4e5-4cf9-9670-0d9633402150.png",
+    "/lovable-uploads/df55cc4d-3261-458d-92d3-7acaae21361e.png",
+    "/lovable-uploads/82ceba00-9f66-4905-b5a8-be6979b7f744.png"
   ];
 
   return (
@@ -25,18 +27,40 @@ const HomeTheater = () => {
             {photos.map((photo, index) => (
               <div 
                 key={index} 
-                className="aspect-video rounded-lg overflow-hidden group cursor-pointer"
+                className="aspect-video rounded-lg overflow-hidden cursor-pointer"
+                onClick={() => setSelectedImage(photo)}
               >
                 <img 
                   src={photo} 
                   alt={`Home Theater Setup ${index + 1}`} 
-                  className="w-full h-full object-cover transform transition-all duration-300 scale-95 group-hover:scale-110"
+                  className="w-full h-full object-cover"
                 />
               </div>
             ))}
           </div>
         </div>
       </section>
+
+      {/* Full-size image modal */}
+      {selectedImage && (
+        <div 
+          className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4"
+          onClick={() => setSelectedImage(null)}
+        >
+          <button 
+            className="absolute top-4 right-4 text-white hover:text-gray-300"
+            onClick={() => setSelectedImage(null)}
+          >
+            <X className="w-8 h-8" />
+          </button>
+          <img 
+            src={selectedImage} 
+            alt="Full size view" 
+            className="max-w-full max-h-[90vh] object-contain"
+            onClick={(e) => e.stopPropagation()}
+          />
+        </div>
+      )}
     </div>
   );
 };

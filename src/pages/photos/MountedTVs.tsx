@@ -8,9 +8,9 @@ const MountedTVs = () => {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
   const photos = [
-    "https://images.unsplash.com/photo-1483058712412-4245e9b90334",
-    "https://images.unsplash.com/photo-1460925895917-afdab827c52f",
-    "https://images.unsplash.com/photo-1605810230434-7631ac76ec81"
+    "/lovable-uploads/1d7a78ef-4d02-453d-aeea-81e50fb784b6.png",
+    "/lovable-uploads/66b3d52b-e7b9-476b-b902-f5bd6b8a3e76.png",
+    "/lovable-uploads/82ceba00-9f66-4905-b5a8-be6979b7f744.png"
   ];
 
   return (
