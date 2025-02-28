@@ -10,7 +10,7 @@ const Wiring = () => {
     "/lovable-uploads/wiring/IMG_0080.JPG",
     "/lovable-uploads/wiring/IMG_0136.JPG",
     "/lovable-uploads/wiring/IMG_0137.JPG",
-    "/lovable-uploads/wiring/IMG_0228 2.JPG",
+    "/lovable-uploads/wiring/IMG_0228%202.JPG", // URL encoded space
     "/lovable-uploads/wiring/IMG_0578.JPG",
     "/lovable-uploads/wiring/IMG_0611.JPG",
     "/lovable-uploads/wiring/IMG_1138.JPG",
