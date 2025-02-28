@@ -122,45 +122,21 @@ const Scheduling = () => {
     setIsSubmitting(true);
 
     try {
-      // First, create the appointment in the database
-      const { data: appointmentData, error: appointmentError } = await supabase
-        .from('appointments')
-        .insert([
-          {
-            date: format(date, 'yyyy-MM-dd'),
-            time: selectedTime,
-            name: name.trim(),
-            email: email.trim(),
-            phone: phone.trim(),
-            message: message.trim(),
-            service,
-            status: 'pending'
-          }
-        ])
-        .select()
-        .single();
-
-      if (appointmentError) throw appointmentError;
-
-      // Then, create the calendar event
-      const { error: calendarError } = await supabase.functions.invoke('create-calendar-event', {
+      // Use the edge function instead of direct database insert to bypass RLS issues
+      const { error } = await supabase.functions.invoke('create-appointment', {
         body: {
-          appointment: {
-            date: format(date, 'yyyy-MM-dd'),
-            time: selectedTime,
-            name: name.trim(),
-            email: email.trim(),
-            phone: phone.trim(),
-            message: message.trim(),
-            service: SERVICES.find(s => s.id === service)?.name || service
-          }
+          date: format(date, 'yyyy-MM-dd'),
+          time: selectedTime,
+          name: name.trim(),
+          email: email.trim(),
+          phone: phone.trim(),
+          message: message.trim(),
+          service,
+          status: 'pending'
         }
       });
 
-      if (calendarError) {
-        console.error('Calendar error:', calendarError);
-        throw new Error('Failed to create calendar event');
-      }
+      if (error) throw error;
 
       toast({
         title: "Appointment Scheduled!",
