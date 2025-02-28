@@ -48,6 +48,7 @@ export async function submitAppointment(appointmentData: AppointmentData) {
   
   try {
     // Call the notify-appointment function to send email notification
+    console.log("Sending email notification...");
     const notifyResponse = await supabase.functions.invoke('notify-appointment', {
       method: 'POST',
       body: {
@@ -66,11 +67,13 @@ export async function submitAppointment(appointmentData: AppointmentData) {
     
     if (notifyResponse.error) {
       console.error("Notification error:", notifyResponse.error);
+      throw new Error("Failed to send notification: " + notifyResponse.error.message);
     } else {
       console.log("Notification sent:", notifyResponse.data);
     }
     
     // Try to create calendar event
+    console.log("Creating calendar event...");
     const calendarResponse = await supabase.functions.invoke('create-calendar-event', {
       method: 'POST',
       body: {
@@ -89,12 +92,14 @@ export async function submitAppointment(appointmentData: AppointmentData) {
     
     if (calendarResponse.error) {
       console.error("Calendar error:", calendarResponse.error);
+      // Don't throw here to avoid failing the appointment process
     } else {
       console.log("Calendar event created:", calendarResponse.data);
     }
-  } catch (notifyError) {
-    console.error("Failed to send notifications:", notifyError);
+  } catch (notifyError: any) {
+    console.error("Failed to handle notifications:", notifyError);
     // We don't throw here to avoid failing the whole appointment process
+    // but we log the error for debugging
   }
 
   return appointmentData_?.[0];
