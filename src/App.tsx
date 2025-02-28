@@ -25,6 +25,20 @@ import Matterport from "./pages/Matterport";
 import Scheduling from "./pages/Scheduling";
 import Ava from "./pages/Ava";
 
+// Mounted TV subcategories
+import BCCondoFP from "./pages/photos/mounted-tvs/BCCondoFP";
+import BackboxFP from "./pages/photos/mounted-tvs/BackboxFP";
+import FPFrame from "./pages/photos/mounted-tvs/FPFrame";
+import FrameSonos from "./pages/photos/mounted-tvs/FrameSonos";
+import HP from "./pages/photos/mounted-tvs/HP";
+import Home from "./pages/photos/mounted-tvs/Home";
+import MantelMount from "./pages/photos/mounted-tvs/MantelMount";
+import Misc from "./pages/photos/mounted-tvs/Misc";
+import SingletreeFP from "./pages/photos/mounted-tvs/SingletreeFP";
+import WestVailBB from "./pages/photos/mounted-tvs/WestVailBB";
+import WireRelocation from "./pages/photos/mounted-tvs/WireRelocation";
+import WoodMedia from "./pages/photos/mounted-tvs/WoodMedia";
+
 const queryClient = new QueryClient();
 
 function App() {
@@ -43,9 +57,27 @@ function App() {
             <Route path="/matterport" element={<Matterport />} />
             <Route path="/scheduling" element={<Scheduling />} />
             <Route path="/ava" element={<Ava />} />
+            
+            {/* Main photo categories */}
             <Route path="/photos/mounted-tvs" element={<MountedTVs />} />
             <Route path="/photos/wiring" element={<Wiring />} />
             <Route path="/photos/home-theater" element={<HomeTheater />} />
+            
+            {/* Mounted TVs subcategories */}
+            <Route path="/photos/mounted-tvs/bc-condo-fp" element={<BCCondoFP />} />
+            <Route path="/photos/mounted-tvs/backbox-fp" element={<BackboxFP />} />
+            <Route path="/photos/mounted-tvs/fp-frame" element={<FPFrame />} />
+            <Route path="/photos/mounted-tvs/frame-sonos" element={<FrameSonos />} />
+            <Route path="/photos/mounted-tvs/hp" element={<HP />} />
+            <Route path="/photos/mounted-tvs/home" element={<Home />} />
+            <Route path="/photos/mounted-tvs/mantel-mount" element={<MantelMount />} />
+            <Route path="/photos/mounted-tvs/misc" element={<Misc />} />
+            <Route path="/photos/mounted-tvs/singletree-fp" element={<SingletreeFP />} />
+            <Route path="/photos/mounted-tvs/west-vail-bb" element={<WestVailBB />} />
+            <Route path="/photos/mounted-tvs/wire-relocation" element={<WireRelocation />} />
+            <Route path="/photos/mounted-tvs/wood-media" element={<WoodMedia />} />
+            
+            {/* Services routes */}
             <Route path="/services/smart-lighting" element={<SmartLighting />} />
             <Route path="/services/security-systems" element={<SecuritySystems />} />
             <Route path="/services/climate-control" element={<ClimateControl />} />
