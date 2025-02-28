@@ -19,19 +19,19 @@ const Projects = () => {
       title: "Mounted TVs",
       description: "Professional TV mounting and installation services",
       path: "/photos/mounted-tvs",
-      image: "/lovable-uploads/1d7a78ef-4d02-453d-aeea-81e50fb784b6.png",
+      image: "/lovable-uploads/mounted tvs/Misc/IMG_0224.JPG",
     },
     {
       title: "Wiring",
       description: "Clean and professional wiring solutions",
       path: "/photos/wiring",
-      image: "/lovable-uploads/56480a40-adc0-4a59-912b-0309634ebf44.png",
+      image: "/lovable-uploads/wiring/IMG_0136.JPG",
     },
     {
       title: "Home Theater",
       description: "Custom home theater installations",
       path: "/photos/home-theater",
-      image: "/lovable-uploads/646c1725-c4e5-4cf9-9670-0d9633402150.png",
+      image: "/lovable-uploads/home theater/IMG_0921.JPG",
     },
   ];
 
