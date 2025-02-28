@@ -49,6 +49,20 @@ export async function submitAppointment(appointmentData: AppointmentData) {
   try {
     // Call the notify-appointment function to send email notification
     console.log("Sending email notification...");
+    
+    // Enhanced logging to debug the function call
+    console.log("Function URL:", `${supabase.functions.url}/notify-appointment`);
+    console.log("Appointment payload:", {
+      id: appointmentData_?.[0]?.id,
+      date: formattedDate,
+      time: selectedTime,
+      name: name.trim(),
+      email: email.trim(),
+      phone: phone.trim(),
+      message: message.trim(),
+      service: serviceName
+    });
+    
     const notifyResponse = await supabase.functions.invoke('notify-appointment', {
       method: 'POST',
       body: {
@@ -64,6 +78,9 @@ export async function submitAppointment(appointmentData: AppointmentData) {
         }
       }
     });
+    
+    // Log the complete response from the function
+    console.log("Complete notify response:", JSON.stringify(notifyResponse));
     
     if (notifyResponse.error) {
       console.error("Notification error:", notifyResponse.error);
@@ -98,6 +115,7 @@ export async function submitAppointment(appointmentData: AppointmentData) {
     }
   } catch (notifyError: any) {
     console.error("Failed to handle notifications:", notifyError);
+    console.error("Error details:", notifyError.stack || "No stack trace available");
     // We don't throw here to avoid failing the whole appointment process
     // but we log the error for debugging
   }

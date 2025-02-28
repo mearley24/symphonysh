@@ -39,6 +39,8 @@ function formatDateTime(date: string, time: string) {
 }
 
 serve(async (req) => {
+  console.log("Notification function triggered");
+  
   // Handle CORS preflight requests
   if (req.method === "OPTIONS") {
     return new Response(null, {
@@ -47,8 +49,6 @@ serve(async (req) => {
   }
 
   try {
-    console.log("Notification function triggered");
-    
     // Parse the request body
     const requestData = await req.json();
     const { appointment } = requestData;
@@ -60,6 +60,9 @@ serve(async (req) => {
     }
     
     const { formattedDate, formattedTime } = formatDateTime(appointment.date, appointment.time);
+
+    // Log Resend API key (masked for security)
+    console.log("Using Resend API key:", resendApiKey ? "********" : "Missing API key");
 
     // Send email notification to the business
     const { data: businessEmailData, error: businessEmailError } = await resend.emails.send({
