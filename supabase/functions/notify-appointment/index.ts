@@ -55,17 +55,44 @@ serve(async (req) => {
     });
   }
 
+  // Handle direct browser visits or GET requests
+  if (req.method === "GET") {
+    console.log("Handling GET request (direct browser visit)");
+    return new Response(JSON.stringify({ 
+      message: "This is the notify-appointment API endpoint. POST requests with appointment data are required." 
+    }), {
+      headers: { ...corsHeaders, "Content-Type": "application/json" },
+      status: 200,
+    });
+  }
+
   try {
     console.log("Parsing request body...");
     // Parse the request body
     let requestData;
+    let bodyText = "";
+    
     try {
-      const bodyText = await req.text();
+      bodyText = await req.text();
       console.log("Raw request body:", bodyText);
+      
+      if (!bodyText || bodyText.trim() === "") {
+        throw new Error("Empty request body");
+      }
+      
       requestData = JSON.parse(bodyText);
     } catch (parseError) {
       console.error("Error parsing request body:", parseError);
-      throw new Error("Invalid JSON in request body");
+      return new Response(
+        JSON.stringify({ 
+          error: "Invalid JSON in request body", 
+          receivedData: bodyText 
+        }),
+        {
+          headers: { ...corsHeaders, "Content-Type": "application/json" },
+          status: 400,
+        }
+      );
     }
     
     const { appointment } = requestData;
@@ -73,7 +100,13 @@ serve(async (req) => {
     console.log("Appointment data received:", JSON.stringify(appointment));
     
     if (!appointment) {
-      throw new Error("No appointment data provided");
+      return new Response(
+        JSON.stringify({ error: "No appointment data provided" }),
+        {
+          headers: { ...corsHeaders, "Content-Type": "application/json" },
+          status: 400,
+        }
+      );
     }
     
     const { formattedDate, formattedTime } = formatDateTime(appointment.date, appointment.time);
@@ -202,4 +235,3 @@ serve(async (req) => {
     );
   }
 });
-

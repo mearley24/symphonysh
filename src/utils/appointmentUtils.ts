@@ -78,11 +78,15 @@ export async function submitAppointment(appointmentData: AppointmentData) {
       const functionUrl = "https://bxsdjxkbhjtdrrtjtyto.supabase.co/functions/v1/notify-appointment";
       console.log("Using direct fetch to URL:", functionUrl);
       
+      // Get the session token for authorization
+      const { data: { session } } = await supabase.auth.getSession();
+      const authToken = session?.access_token ? `Bearer ${session.access_token}` : '';
+      
       const fetchResponse = await fetch(functionUrl, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${supabase.auth.getSession()}`
+          'Authorization': authToken
         },
         body: JSON.stringify(payload)
       });
