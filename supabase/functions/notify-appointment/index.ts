@@ -86,7 +86,7 @@ serve(async (req) => {
     let businessEmailError;
     try {
       const businessEmailResult = await resend.emails.send({
-        from: "Symphony Smart Homes <notifications@resend.dev>", // Use a verified domain in Resend
+        from: "Symphony Smart Homes <notifications@symphonysh.com>", // Use verified domain
         to: ["info@symphonysh.com"],
         subject: `New Appointment: ${appointment.name}`,
         html: `
@@ -134,7 +134,7 @@ serve(async (req) => {
     let customerEmailError;
     try {
       const customerEmailResult = await resend.emails.send({
-        from: "Symphony Smart Homes <notifications@resend.dev>", // Use a verified domain in Resend
+        from: "Symphony Smart Homes <notifications@symphonysh.com>", // Use verified domain
         to: [appointment.email],
         subject: "Your Appointment Confirmation - Symphony Smart Homes",
         html: `
@@ -202,3 +202,4 @@ serve(async (req) => {
     );
   }
 });
+

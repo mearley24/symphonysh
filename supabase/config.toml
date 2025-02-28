@@ -45,4 +45,3 @@ verify_jwt = false
 
 [functions.appointment-trigger]
 verify_jwt = false
-

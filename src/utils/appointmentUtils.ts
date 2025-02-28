@@ -55,49 +55,47 @@ export async function submitAppointment(appointmentData: AppointmentData) {
     console.log("Sending email notification...");
     
     // Enhanced logging to debug the function call
-    console.log("Calling notify-appointment edge function...");
-    console.log("Appointment payload:", {
-      id: appointmentData_?.[0]?.id,
-      date: formattedDate,
-      time: selectedTime,
-      name: name.trim(),
-      email: email.trim(),
-      phone: phone.trim(),
-      message: message.trim(),
-      service: serviceName
-    });
+    console.log("Function Name: notify-appointment");
+    
+    // Create payload object
+    const payload = {
+      appointment: {
+        id: appointmentData_?.[0]?.id,
+        date: formattedDate,
+        time: selectedTime,
+        name: name.trim(),
+        email: email.trim(),
+        phone: phone.trim(),
+        message: message.trim(),
+        service: serviceName
+      }
+    };
+    
+    console.log("Appointment payload:", JSON.stringify(payload, null, 2));
     
     // Call the function with detailed error handling
     let notifyResponse;
     try {
+      console.log("Invoking notify-appointment function...");
       notifyResponse = await supabase.functions.invoke('notify-appointment', {
         method: 'POST',
-        body: {
-          appointment: {
-            id: appointmentData_?.[0]?.id,
-            date: formattedDate,
-            time: selectedTime,
-            name: name.trim(),
-            email: email.trim(),
-            phone: phone.trim(),
-            message: message.trim(),
-            service: serviceName
-          }
-        }
+        body: payload
       });
+      
+      console.log("Function invocation completed");
     } catch (invocationError) {
       console.error("Function invocation error:", invocationError);
-      throw new Error("Failed to invoke notification function: " + invocationError.message);
+      throw new Error("Failed to invoke notification function: " + JSON.stringify(invocationError));
     }
     
     // Log the complete response from the function
-    console.log("Complete notify response:", JSON.stringify(notifyResponse));
+    console.log("Complete notify response:", JSON.stringify(notifyResponse, null, 2));
     
     if (notifyResponse.error) {
       console.error("Notification error:", notifyResponse.error);
-      throw new Error("Failed to send notification: " + notifyResponse.error.message);
+      throw new Error("Failed to send notification: " + JSON.stringify(notifyResponse.error));
     } else {
-      console.log("Notification sent:", notifyResponse.data);
+      console.log("Notification sent successfully:", notifyResponse.data);
     }
     
     // Try to create calendar event
