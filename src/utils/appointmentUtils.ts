@@ -20,8 +20,12 @@ export async function submitAppointment(appointmentData: AppointmentData) {
     throw new Error("Missing required fields");
   }
 
+  console.log("Starting appointment submission process...");
+
   // Insert appointment into the database
   const formattedDate = format(date, 'yyyy-MM-dd');
+  console.log("Saving appointment to database...");
+  
   const { data: appointmentData_, error } = await supabase
     .from('appointments')
     .insert([{
@@ -41,7 +45,7 @@ export async function submitAppointment(appointmentData: AppointmentData) {
     throw new Error("Database error: " + error.message);
   }
 
-  console.log("Appointment created:", appointmentData_);
+  console.log("Appointment created successfully:", appointmentData_);
   
   // Get the service name from the ID
   const serviceName = SERVICES.find(s => s.id === service)?.name || service;
@@ -63,21 +67,28 @@ export async function submitAppointment(appointmentData: AppointmentData) {
       service: serviceName
     });
     
-    const notifyResponse = await supabase.functions.invoke('notify-appointment', {
-      method: 'POST',
-      body: {
-        appointment: {
-          id: appointmentData_?.[0]?.id,
-          date: formattedDate,
-          time: selectedTime,
-          name: name.trim(),
-          email: email.trim(),
-          phone: phone.trim(),
-          message: message.trim(),
-          service: serviceName
+    // Call the function with detailed error handling
+    let notifyResponse;
+    try {
+      notifyResponse = await supabase.functions.invoke('notify-appointment', {
+        method: 'POST',
+        body: {
+          appointment: {
+            id: appointmentData_?.[0]?.id,
+            date: formattedDate,
+            time: selectedTime,
+            name: name.trim(),
+            email: email.trim(),
+            phone: phone.trim(),
+            message: message.trim(),
+            service: serviceName
+          }
         }
-      }
-    });
+      });
+    } catch (invocationError) {
+      console.error("Function invocation error:", invocationError);
+      throw new Error("Failed to invoke notification function: " + invocationError.message);
+    }
     
     // Log the complete response from the function
     console.log("Complete notify response:", JSON.stringify(notifyResponse));
@@ -91,26 +102,33 @@ export async function submitAppointment(appointmentData: AppointmentData) {
     
     // Try to create calendar event
     console.log("Creating calendar event...");
-    const calendarResponse = await supabase.functions.invoke('create-calendar-event', {
-      method: 'POST',
-      body: {
-        appointment: {
-          id: appointmentData_?.[0]?.id,
-          date: formattedDate,
-          time: selectedTime,
-          name: name.trim(),
-          email: email.trim(),
-          phone: phone.trim(),
-          message: message.trim(),
-          service: serviceName
+    let calendarResponse;
+    try {
+      calendarResponse = await supabase.functions.invoke('create-calendar-event', {
+        method: 'POST',
+        body: {
+          appointment: {
+            id: appointmentData_?.[0]?.id,
+            date: formattedDate,
+            time: selectedTime,
+            name: name.trim(),
+            email: email.trim(),
+            phone: phone.trim(),
+            message: message.trim(),
+            service: serviceName
+          }
         }
-      }
-    });
+      });
+    } catch (calendarInvocationError) {
+      console.error("Calendar function invocation error:", calendarInvocationError);
+      console.log("Continuing despite calendar function error");
+      // Don't throw here to avoid failing the appointment process
+    }
     
-    if (calendarResponse.error) {
+    if (calendarResponse?.error) {
       console.error("Calendar error:", calendarResponse.error);
       // Don't throw here to avoid failing the appointment process
-    } else {
+    } else if (calendarResponse) {
       console.log("Calendar event created:", calendarResponse.data);
     }
   } catch (notifyError: any) {

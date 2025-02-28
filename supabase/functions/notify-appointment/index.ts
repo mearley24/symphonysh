@@ -3,13 +3,19 @@ import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2.48.1";
 import { Resend } from "npm:resend@2.0.0";
 
+// Debug logs at the top level for function initialization
+console.log("Notify appointment function initializing...");
+
 // Initialize Supabase client
 const supabaseUrl = Deno.env.get("SUPABASE_URL") || "";
 const supabaseKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") || "";
 const supabase = createClient(supabaseUrl, supabaseKey);
 
-// Initialize Resend
+// Log Resend API key status (without revealing the key)
 const resendApiKey = Deno.env.get("RESEND_API_KEY") || "";
+console.log("Resend API key available:", resendApiKey ? "Yes" : "No");
+
+// Initialize Resend
 const resend = new Resend(resendApiKey);
 
 // CORS headers
@@ -39,119 +45,156 @@ function formatDateTime(date: string, time: string) {
 }
 
 serve(async (req) => {
-  console.log("Notification function triggered");
+  console.log("Notification function triggered with method:", req.method);
   
   // Handle CORS preflight requests
   if (req.method === "OPTIONS") {
+    console.log("Handling OPTIONS request");
     return new Response(null, {
       headers: corsHeaders,
     });
   }
 
   try {
+    console.log("Parsing request body...");
     // Parse the request body
-    const requestData = await req.json();
+    let requestData;
+    try {
+      const bodyText = await req.text();
+      console.log("Raw request body:", bodyText);
+      requestData = JSON.parse(bodyText);
+    } catch (parseError) {
+      console.error("Error parsing request body:", parseError);
+      throw new Error("Invalid JSON in request body");
+    }
+    
     const { appointment } = requestData;
     
-    console.log("Appointment data:", JSON.stringify(appointment));
+    console.log("Appointment data received:", JSON.stringify(appointment));
     
     if (!appointment) {
       throw new Error("No appointment data provided");
     }
     
     const { formattedDate, formattedTime } = formatDateTime(appointment.date, appointment.time);
-
-    // Log Resend API key (masked for security)
-    console.log("Using Resend API key:", resendApiKey ? "********" : "Missing API key");
+    
+    console.log("Formatted date and time:", formattedDate, formattedTime);
 
     // Send email notification to the business
-    const { data: businessEmailData, error: businessEmailError } = await resend.emails.send({
-      from: "Symphony Smart Homes <notifications@resend.dev>", // Use a verified domain in Resend
-      to: ["info@symphonysh.com"],
-      subject: `New Appointment: ${appointment.name}`,
-      html: `
-        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #eee; border-radius: 10px;">
-          <h1 style="color: #333; text-align: center;">New Appointment Scheduled</h1>
-          <div style="background-color: #f8f9fa; padding: 15px; border-radius: 5px; margin-bottom: 20px;">
-            <h2 style="margin-top: 0; color: #0056b3;">${appointment.name}</h2>
-            <p style="margin: 5px 0;"><strong>Date:</strong> ${formattedDate}</p>
-            <p style="margin: 5px 0;"><strong>Time:</strong> ${formattedTime}</p>
-            <p style="margin: 5px 0;"><strong>Service:</strong> ${appointment.service}</p>
+    console.log("Sending business email...");
+    let businessEmailData;
+    let businessEmailError;
+    try {
+      const businessEmailResult = await resend.emails.send({
+        from: "Symphony Smart Homes <notifications@resend.dev>", // Use a verified domain in Resend
+        to: ["info@symphonysh.com"],
+        subject: `New Appointment: ${appointment.name}`,
+        html: `
+          <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #eee; border-radius: 10px;">
+            <h1 style="color: #333; text-align: center;">New Appointment Scheduled</h1>
+            <div style="background-color: #f8f9fa; padding: 15px; border-radius: 5px; margin-bottom: 20px;">
+              <h2 style="margin-top: 0; color: #0056b3;">${appointment.name}</h2>
+              <p style="margin: 5px 0;"><strong>Date:</strong> ${formattedDate}</p>
+              <p style="margin: 5px 0;"><strong>Time:</strong> ${formattedTime}</p>
+              <p style="margin: 5px 0;"><strong>Service:</strong> ${appointment.service}</p>
+            </div>
+            <div style="margin-bottom: 20px;">
+              <h3>Contact Information:</h3>
+              <p style="margin: 5px 0;"><strong>Email:</strong> ${appointment.email}</p>
+              <p style="margin: 5px 0;"><strong>Phone:</strong> ${appointment.phone}</p>
+            </div>
+            ${appointment.message ? `
+            <div style="margin-bottom: 20px;">
+              <h3>Message:</h3>
+              <p style="background-color: #f8f9fa; padding: 10px; border-radius: 5px;">${appointment.message}</p>
+            </div>
+            ` : ''}
+            <div style="text-align: center; margin-top: 30px; color: #666; font-size: 12px;">
+              <p>This is an automated notification from Symphony Smart Homes.</p>
+            </div>
           </div>
-          <div style="margin-bottom: 20px;">
-            <h3>Contact Information:</h3>
-            <p style="margin: 5px 0;"><strong>Email:</strong> ${appointment.email}</p>
-            <p style="margin: 5px 0;"><strong>Phone:</strong> ${appointment.phone}</p>
-          </div>
-          ${appointment.message ? `
-          <div style="margin-bottom: 20px;">
-            <h3>Message:</h3>
-            <p style="background-color: #f8f9fa; padding: 10px; border-radius: 5px;">${appointment.message}</p>
-          </div>
-          ` : ''}
-          <div style="text-align: center; margin-top: 30px; color: #666; font-size: 12px;">
-            <p>This is an automated notification from Symphony Smart Homes.</p>
-          </div>
-        </div>
-      `,
-    });
+        `,
+      });
+      businessEmailData = businessEmailResult;
+    } catch (error) {
+      console.error("Error sending business email:", error);
+      businessEmailError = error;
+    }
 
     if (businessEmailError) {
       console.error("Error sending business email:", businessEmailError);
-      throw new Error("Failed to send business email notification");
+      // We continue to try sending the customer email even if business email fails
+    } else {
+      console.log("Business email notification sent successfully:", businessEmailData);
     }
 
-    console.log("Business email notification sent successfully:", businessEmailData);
-
     // Send confirmation email to the customer
-    const { data: customerEmailData, error: customerEmailError } = await resend.emails.send({
-      from: "Symphony Smart Homes <notifications@resend.dev>", // Use a verified domain in Resend
-      to: [appointment.email],
-      subject: "Your Appointment Confirmation - Symphony Smart Homes",
-      html: `
-        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #eee; border-radius: 10px;">
-          <h1 style="color: #333; text-align: center;">Appointment Confirmation</h1>
-          <p style="font-size: 16px; line-height: 1.5;">Dear ${appointment.name},</p>
-          <p style="font-size: 16px; line-height: 1.5;">Thank you for scheduling a consultation with Symphony Smart Homes. We're looking forward to discussing your project.</p>
-          
-          <div style="background-color: #f8f9fa; padding: 15px; border-radius: 5px; margin: 20px 0;">
-            <h2 style="margin-top: 0; color: #0056b3;">Appointment Details</h2>
-            <p style="margin: 5px 0;"><strong>Date:</strong> ${formattedDate}</p>
-            <p style="margin: 5px 0;"><strong>Time:</strong> ${formattedTime}</p>
-            <p style="margin: 5px 0;"><strong>Service:</strong> ${appointment.service}</p>
+    console.log("Sending customer email...");
+    let customerEmailData;
+    let customerEmailError;
+    try {
+      const customerEmailResult = await resend.emails.send({
+        from: "Symphony Smart Homes <notifications@resend.dev>", // Use a verified domain in Resend
+        to: [appointment.email],
+        subject: "Your Appointment Confirmation - Symphony Smart Homes",
+        html: `
+          <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #eee; border-radius: 10px;">
+            <h1 style="color: #333; text-align: center;">Appointment Confirmation</h1>
+            <p style="font-size: 16px; line-height: 1.5;">Dear ${appointment.name},</p>
+            <p style="font-size: 16px; line-height: 1.5;">Thank you for scheduling a consultation with Symphony Smart Homes. We're looking forward to discussing your project.</p>
+            
+            <div style="background-color: #f8f9fa; padding: 15px; border-radius: 5px; margin: 20px 0;">
+              <h2 style="margin-top: 0; color: #0056b3;">Appointment Details</h2>
+              <p style="margin: 5px 0;"><strong>Date:</strong> ${formattedDate}</p>
+              <p style="margin: 5px 0;"><strong>Time:</strong> ${formattedTime}</p>
+              <p style="margin: 5px 0;"><strong>Service:</strong> ${appointment.service}</p>
+            </div>
+            
+            <p style="font-size: 16px; line-height: 1.5;">If you need to reschedule or have any questions, please contact us at info@symphonysh.com or call our office.</p>
+            
+            <p style="font-size: 16px; line-height: 1.5;">Best regards,<br>Symphony Smart Homes Team</p>
+            
+            <div style="text-align: center; margin-top: 30px; color: #666; font-size: 12px;">
+              <p>This is an automated confirmation. Please do not reply to this email.</p>
+            </div>
           </div>
-          
-          <p style="font-size: 16px; line-height: 1.5;">If you need to reschedule or have any questions, please contact us at info@symphonysh.com or call our office.</p>
-          
-          <p style="font-size: 16px; line-height: 1.5;">Best regards,<br>Symphony Smart Homes Team</p>
-          
-          <div style="text-align: center; margin-top: 30px; color: #666; font-size: 12px;">
-            <p>This is an automated confirmation. Please do not reply to this email.</p>
-          </div>
-        </div>
-      `,
-    });
+        `,
+      });
+      customerEmailData = customerEmailResult;
+    } catch (error) {
+      console.error("Error sending customer email:", error);
+      customerEmailError = error;
+    }
 
     if (customerEmailError) {
       console.error("Error sending customer email:", customerEmailError);
       // We don't throw here to ensure the function completes even if customer email fails
-      // The business has already been notified
     } else {
       console.log("Customer email confirmation sent successfully:", customerEmailData);
     }
 
+    // Return response with details of both email operations
     return new Response(JSON.stringify({ 
       success: true, 
-      businessEmail: businessEmailData,
-      customerEmail: customerEmailData
+      businessEmail: {
+        success: !businessEmailError,
+        data: businessEmailData,
+        error: businessEmailError ? businessEmailError.message : null
+      },
+      customerEmail: {
+        success: !customerEmailError,
+        data: customerEmailData,
+        error: customerEmailError ? customerEmailError.message : null
+      }
     }), {
       headers: { ...corsHeaders, "Content-Type": "application/json" },
       status: 200,
     });
   } catch (error: any) {
     console.error("Function error:", error.message);
+    console.error("Error stack:", error.stack);
     return new Response(
-      JSON.stringify({ error: error.message }),
+      JSON.stringify({ error: error.message, stack: error.stack }),
       {
         headers: { ...corsHeaders, "Content-Type": "application/json" },
         status: 500,
