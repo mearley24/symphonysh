@@ -71,19 +71,12 @@ export async function submitAppointment(appointmentData: AppointmentData) {
     
     console.log("Appointment payload for notification:", JSON.stringify(payload, null, 2));
     
-    // Check if the function exists (this doesn't guarantee it's deployed correctly, but it's a sanity check)
-    console.log("Checking Supabase function URLs:");
-    console.log("Project URL base:", supabase.supabaseUrl);
+    // Get Supabase function URL without accessing protected properties
+    console.log("Attempting to invoke notify-appointment function...");
     
     // Call the function with detailed error handling
     let notifyResponse;
     try {
-      console.log("Attempting to invoke notify-appointment function...");
-      
-      // Direct URL construction for logging purposes only
-      const functionUrl = `${supabase.supabaseUrl}/functions/v1/notify-appointment`;
-      console.log("Function URL (for reference only):", functionUrl);
-      
       notifyResponse = await supabase.functions.invoke('notify-appointment', {
         method: 'POST',
         body: payload
