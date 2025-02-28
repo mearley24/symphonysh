@@ -145,10 +145,25 @@ const Scheduling = () => {
 
       console.log("Appointment created:", appointmentData);
       
+      // Get the service name from the ID
+      const serviceName = SERVICES.find(s => s.id === service)?.name || service;
+      
       // Call the notify-appointment function to send email notification
       try {
         const notifyResponse = await supabase.functions.invoke('notify-appointment', {
-          method: 'POST'
+          method: 'POST',
+          body: {
+            appointment: {
+              id: appointmentData?.[0]?.id,
+              date: formattedDate,
+              time: selectedTime,
+              name: name.trim(),
+              email: email.trim(),
+              phone: phone.trim(),
+              message: message.trim(),
+              service: serviceName
+            }
+          }
         });
         
         if (notifyResponse.error) {
@@ -159,7 +174,19 @@ const Scheduling = () => {
         
         // Try to create calendar event
         const calendarResponse = await supabase.functions.invoke('create-calendar-event', {
-          method: 'POST'
+          method: 'POST',
+          body: {
+            appointment: {
+              id: appointmentData?.[0]?.id,
+              date: formattedDate,
+              time: selectedTime,
+              name: name.trim(),
+              email: email.trim(),
+              phone: phone.trim(),
+              message: message.trim(),
+              service: serviceName
+            }
+          }
         });
         
         if (calendarResponse.error) {
