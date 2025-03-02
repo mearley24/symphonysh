@@ -35,33 +35,6 @@ const Projects = () => {
     },
   ];
 
-  const featuredProjects = [
-    {
-      title: "Luxury Mountain Home Integration",
-      description: "Complete smart home integration including lighting, audio, security, and climate control",
-      image: "/lovable-uploads/home theater/IMG_0958.JPG",
-      tags: ["Smart Lighting", "Audio", "Security", "Climate"],
-    },
-    {
-      title: "Custom Home Theater Installation",
-      description: "High-end projector and surround sound system with acoustic treatments",
-      image: "/lovable-uploads/home theater/IMG_0980.JPG",
-      tags: ["Home Theater", "Audio", "Lighting"],
-    },
-    {
-      title: "Fireplace TV Mount With Concealed Wiring",
-      description: "Clean installation with all cables hidden within the wall",
-      image: "/lovable-uploads/mounted tvs/BC Condo FP/IMG_0677.JPG",
-      tags: ["TV Mounting", "Wiring", "Design"],
-    },
-    {
-      title: "Whole-Home Audio System",
-      description: "Seamless audio integration across multiple rooms with smartphone control",
-      image: "/lovable-uploads/mounted tvs/Frame Sonos/IMG_0022.JPG",
-      tags: ["Audio", "Networking", "Integration"],
-    },
-  ];
-
   return (
     <div className="min-h-screen bg-primary">
       <Header />
@@ -71,38 +44,6 @@ const Projects = () => {
           <p className="text-xl text-gray-300 text-center mb-16 max-w-2xl mx-auto">
             Discover our latest smart home transformations
           </p>
-
-          {/* Featured Projects Section */}
-          <div className="mb-24">
-            <h2 className="text-3xl font-bold text-white text-center mb-8">Featured Projects</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {featuredProjects.map((project, index) => (
-                <div 
-                  key={index}
-                  className="bg-secondary/40 rounded-lg overflow-hidden hover:bg-secondary/60 transition-all duration-300 border border-white/10"
-                >
-                  <div className="aspect-video overflow-hidden">
-                    <img 
-                      src={project.image}
-                      alt={project.title}
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                  <div className="p-6">
-                    <h3 className="text-xl font-semibold text-white mb-2">{project.title}</h3>
-                    <p className="text-gray-300 mb-4">{project.description}</p>
-                    <div className="flex flex-wrap gap-2">
-                      {project.tags.map((tag, i) => (
-                        <span key={i} className="bg-accent/20 text-accent text-xs px-2 py-1 rounded">
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
 
           {/* Photo Categories Section */}
           <div className="mb-24">
