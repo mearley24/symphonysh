@@ -3,6 +3,7 @@ import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import Header from "../components/Header";
+import SEO from "../components/SEO";
 
 const Projects = () => {
   const [selectedProject, setSelectedProject] = useState("ohEAHYLpcVD");
@@ -37,6 +38,11 @@ const Projects = () => {
 
   return (
     <div className="min-h-screen bg-primary">
+      <SEO 
+        title="Our Projects | Custom Audio/Video and Home Theater Installations"
+        description="Browse our latest smart home transformations including custom home theaters, professional TV mounting, and clean wiring solutions throughout Vail Valley, Colorado."
+        keywords="home theater installation, TV mounting, smart home projects, audio video installation, home automation projects, Vail Valley"
+      />
       <Header />
       <section className="pt-32 pb-20 px-6">
         <div className="max-w-4xl mx-auto">
@@ -103,6 +109,7 @@ const Projects = () => {
                   allowFullScreen
                   allow="autoplay; fullscreen; web-share; xr-spatial-tracking;"
                   className="w-full h-full"
+                  title={matterportProjects.find(p => p.id === selectedProject)?.title || "Virtual Tour"}
                 />
               </div>
             </div>

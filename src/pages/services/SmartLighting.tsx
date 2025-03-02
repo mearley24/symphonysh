@@ -1,5 +1,6 @@
 import { ArrowLeft, Lightbulb, Sun, Clock, Smartphone } from "lucide-react";
 import { Link } from "react-router-dom";
+import SEO from "../../components/SEO";
 
 const FeatureCard = ({ icon: Icon, title, description }: { icon: any; title: string; description: string }) => (
   <div className="bg-white/5 backdrop-blur-sm p-6 rounded-lg">
@@ -10,8 +11,37 @@ const FeatureCard = ({ icon: Icon, title, description }: { icon: any; title: str
 );
 
 const SmartLighting = () => {
+  const serviceSchema = {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "name": "Smart Lighting Installation",
+    "provider": {
+      "@type": "LocalBusiness",
+      "name": "Symphony Smart Homes",
+      "image": "/og-image.png",
+      "address": {
+        "@type": "PostalAddress",
+        "addressRegion": "CO",
+        "addressCountry": "US"
+      },
+      "priceRange": "$$"
+    },
+    "description": "Professional smart lighting installation services integrated with Control4 for Vail Valley homes and businesses.",
+    "areaServed": "Vail Valley, Colorado",
+    "serviceType": "Smart Home Automation"
+  };
+
   return (
     <div className="min-h-screen bg-primary">
+      <SEO 
+        title="Smart Lighting Solutions | Control4 Integration"
+        description="Professional smart lighting installation and automation services integrated with Control4. Create the perfect ambiance and save energy in your Vail Valley home."
+        keywords="smart lighting, home automation, Control4 lighting, energy efficient lighting, automated lighting control, Vail Valley"
+      />
+      <script type="application/ld+json">
+        {JSON.stringify(serviceSchema)}
+      </script>
+      
       <section className="pt-32 pb-20 px-6">
         <div className="max-w-6xl mx-auto">
           <Link to="/services" className="inline-flex items-center text-accent hover:text-accent/90 mb-8">

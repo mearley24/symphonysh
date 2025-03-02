@@ -2,6 +2,7 @@
 import { ArrowRight, Home, Shield, Lightbulb, Thermometer, Camera, Speaker, Network, Sun, Wrench } from "lucide-react";
 import { Link } from "react-router-dom";
 import Header from "../components/Header";
+import SEO from "../components/SEO";
 
 const ServiceCard = ({ icon: Icon, title, description, link }: { icon: any; title: string; description: string; link: string }) => (
   <Link to={link} className="block h-full">
@@ -19,6 +20,11 @@ const ServiceCard = ({ icon: Icon, title, description, link }: { icon: any; titl
 const Services = () => {
   return (
     <div className="min-h-screen bg-primary">
+      <SEO 
+        title="Smart Home Services | Audio, Video, Networking & More"
+        description="Symphony Smart Homes offers comprehensive home automation solutions including audio/video, networking, smart lighting, climate control, and security systems throughout Vail Valley."
+        keywords="smart home automation, home theater installation, audio video installation, networking, security systems, Control4, smart lighting, climate control, Vail Valley, Colorado"
+      />
       <Header />
       <main className="pt-28">
         <section className="py-20 px-6">
