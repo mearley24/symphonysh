@@ -72,13 +72,17 @@ const Wiring = () => {
             <div>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {generalPhotos.map((photo, index) => (
-                  <img 
-                    key={index}
-                    src={photo}
-                    alt={`General Wiring ${index + 1}`}
-                    className="w-full h-64 object-cover rounded-lg cursor-pointer hover:opacity-90 transition"
-                    onClick={() => window.location.href = photo}
-                  />
+                  <div 
+                    key={index} 
+                    className="aspect-video rounded-lg overflow-hidden bg-gray-800 cursor-pointer hover:opacity-90 transition"
+                    onClick={() => window.open(photo, '_blank')}
+                  >
+                    <img 
+                      src={photo}
+                      alt={`General Wiring ${index + 1}`}
+                      className="w-full h-full object-contain"
+                    />
+                  </div>
                 ))}
               </div>
             </div>
@@ -86,13 +90,17 @@ const Wiring = () => {
             <div>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {wireRelocationPhotos.map((photo, index) => (
-                  <img 
-                    key={index}
-                    src={photo}
-                    alt={`Wire Relocation ${index + 1}`}
-                    className="w-full h-64 object-cover rounded-lg cursor-pointer hover:opacity-90 transition"
-                    onClick={() => window.location.href = photo}
-                  />
+                  <div 
+                    key={index} 
+                    className="aspect-video rounded-lg overflow-hidden bg-gray-800 cursor-pointer hover:opacity-90 transition"
+                    onClick={() => window.open(photo, '_blank')}
+                  >
+                    <img 
+                      src={photo}
+                      alt={`Wire Relocation ${index + 1}`}
+                      className="w-full h-full object-contain"
+                    />
+                  </div>
                 ))}
               </div>
             </div>
