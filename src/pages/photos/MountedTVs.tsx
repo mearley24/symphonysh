@@ -3,41 +3,10 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Header from '../../components/Header';
 import { ArrowLeft, ImageOff } from 'lucide-react';
+import { mountedTVsCategories, getFixedImagePath } from '../../utils/photoUtils';
 
 const MountedTVs = () => {
   const [loadedImages, setLoadedImages] = useState<Record<string, boolean>>({});
-
-  const categories = [
-    { title: "BC Condo Fireplace", path: "/photos/mounted-tvs/bc-condo-fp", image: "/lovable-uploads/mounted tvs/BC Condo FP/IMG_0610.JPG" },
-    { title: "Backbox Fireplace", path: "/photos/mounted-tvs/backbox-fp", image: "/lovable-uploads/mounted tvs/Backbox FP/IMG_0024.JPG" },
-    { title: "Fireplace Frame", path: "/photos/mounted-tvs/fp-frame", image: "/lovable-uploads/mounted tvs/FP Frame/IMG_2189.JPG" },
-    { title: "Frame & Sonos", path: "/photos/mounted-tvs/frame-sonos", image: "/lovable-uploads/mounted tvs/Frame Sonos/IMG_0022.JPG" },
-    { title: "HP Installations", path: "/photos/mounted-tvs/hp", image: "/lovable-uploads/mounted tvs/HP/IMG_0179.JPG" },
-    { title: "Home Installations", path: "/photos/mounted-tvs/home", image: "/lovable-uploads/mounted tvs/Home/IMG_0659.JPG" },
-    { title: "Mantel Mount", path: "/photos/mounted-tvs/mantel-mount", image: "/lovable-uploads/mounted tvs/Mantel Mount/IMG_1090.JPG" },
-    { title: "Misc Installations", path: "/photos/mounted-tvs/misc", image: "/lovable-uploads/mounted tvs/Misc/IMG_0224.JPG" },
-    { title: "Singletree Fireplace", path: "/photos/mounted-tvs/singletree-fp", image: "/lovable-uploads/mounted tvs/Singletree FP/IMG_1185.JPG" },
-    { title: "West Vail Backbox", path: "/photos/mounted-tvs/west-vail-bb", image: "/lovable-uploads/mounted tvs/West Vail BB/IMG_1717.JPG" },
-    { title: "Wood Media", path: "/photos/mounted-tvs/wood-media", image: "/lovable-uploads/mounted tvs/Wood Media/IMG_0510.JPG" },
-  ];
-
-  // Fix image path issues - Updated to properly handle spaces in URLs
-  const getFixedImagePath = (path: string) => {
-    try {
-      // Make sure path starts with a slash
-      let cleanPath = path.startsWith('/') ? path : `/${path}`;
-      
-      // Remove any double slashes that aren't part of protocol
-      cleanPath = cleanPath.replace(/([^:])\/+/g, '$1/');
-      
-      // URL encode the path properly - don't encode spaces as %20, leave them as spaces
-      // This is crucial for the server to correctly interpret the paths
-      return cleanPath;
-    } catch (error) {
-      console.error(`Error fixing image path: ${path}`, error);
-      return '';
-    }
-  };
 
   const handleImageLoad = (image: string) => {
     console.log(`Successfully loaded image: ${image}`);
@@ -61,7 +30,7 @@ const MountedTVs = () => {
           <h1 className="text-4xl font-bold text-white mb-8">Mounted TVs</h1>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {categories.map((category, index) => (
+            {mountedTVsCategories.map((category, index) => (
               <Link 
                 key={index}
                 to={category.path}
