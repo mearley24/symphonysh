@@ -1,13 +1,12 @@
 
 import React from 'react';
 import PhotoGallery from '../../../components/PhotoGallery';
+import { mountedTVsCategories } from '../../../utils/photoUtils';
 
 const WoodMedia = () => {
-  const photos = [
-    "/lovable-uploads/mounted tvs/Wood Media/IMG_0340.JPG",
-    "/lovable-uploads/mounted tvs/Wood Media/IMG_0510.JPG",
-    "/lovable-uploads/mounted tvs/Wood Media/IMG_0511.JPG",
-  ];
+  // Find the Wood Media category in the mountedTVsCategories array
+  const category = mountedTVsCategories.find(cat => cat.title === "Wood Media");
+  const photos = category ? category.photos : [];
 
   return (
     <PhotoGallery 

@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import Header from './Header';
 import { Link } from 'react-router-dom';
 import { ArrowLeft, X, ImageOff } from 'lucide-react';
+import { getFixedImagePath } from '../utils/photoUtils';
 
 interface PhotoGalleryProps {
   title: string;
@@ -48,23 +49,6 @@ const PhotoGallery: React.FC<PhotoGalleryProps> = ({
 
   // Filter out images that failed to load after attempting to load them
   const filteredPhotos = processedPhotos.filter(photo => loadedImages[photo] !== false);
-
-  // Fix image path - ensure it doesn't have double slashes, spaces encoded properly
-  const getFixedImagePath = (path: string) => {
-    try {
-      // Don't apply URL encoding since it's causing issues
-      // Just make sure path starts with a slash and clean up double slashes
-      let cleanPath = path.startsWith('/') ? path : `/${path}`;
-      
-      // Remove any double slashes that aren't part of protocol
-      cleanPath = cleanPath.replace(/([^:])\/+/g, '$1/');
-      
-      return cleanPath;
-    } catch (error) {
-      console.error(`Error fixing image path: ${path}`, error);
-      return '';
-    }
-  };
 
   return (
     <div className="min-h-screen bg-primary">

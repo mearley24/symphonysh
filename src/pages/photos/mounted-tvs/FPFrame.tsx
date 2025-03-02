@@ -1,13 +1,12 @@
 
 import React from 'react';
 import PhotoGallery from '../../../components/PhotoGallery';
+import { mountedTVsCategories } from '../../../utils/photoUtils';
 
 const FPFrame = () => {
-  const photos = [
-    "/lovable-uploads/mounted tvs/FP Frame/IMG_2189.JPG",
-    "/lovable-uploads/mounted tvs/FP Frame/IMG_2190.JPG",
-    "/lovable-uploads/mounted tvs/FP Frame/IMG_2191.JPG",
-  ];
+  // Find the Fireplace Frame category in the mountedTVsCategories array
+  const category = mountedTVsCategories.find(cat => cat.title === "Fireplace Frame");
+  const photos = category ? category.photos : [];
 
   return (
     <PhotoGallery 

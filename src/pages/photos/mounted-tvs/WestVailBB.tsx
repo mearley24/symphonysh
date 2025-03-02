@@ -1,12 +1,12 @@
 
 import React from 'react';
 import PhotoGallery from '../../../components/PhotoGallery';
+import { mountedTVsCategories } from '../../../utils/photoUtils';
 
 const WestVailBB = () => {
-  const photos = [
-    "/lovable-uploads/mounted tvs/West Vail BB/IMG_1717.JPG",
-    "/lovable-uploads/mounted tvs/West Vail BB/IMG_1718.JPG",
-  ];
+  // Find the West Vail Backbox category in the mountedTVsCategories array
+  const category = mountedTVsCategories.find(cat => cat.title === "West Vail Backbox");
+  const photos = category ? category.photos : [];
 
   return (
     <PhotoGallery 
