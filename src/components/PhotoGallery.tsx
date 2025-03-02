@@ -1,9 +1,8 @@
-
 import React, { useState, useEffect } from 'react';
 import Header from './Header';
 import { Link } from 'react-router-dom';
 import { ArrowLeft, X, ImageOff } from 'lucide-react';
-import { getFixedImagePath } from '../utils/photoUtils';
+import { getFixedImagePath } from '../utils/photos';
 
 interface PhotoGalleryProps {
   title: string;
@@ -22,11 +21,8 @@ const PhotoGallery: React.FC<PhotoGalleryProps> = ({
   const [loadedImages, setLoadedImages] = useState<Record<string, boolean>>({});
   const [processedPhotos, setProcessedPhotos] = useState<string[]>([]);
 
-  // Process photo paths on component mount
   useEffect(() => {
-    // Convert any HEIC files to their JPG alternatives if available
     const processed = photos.map(photo => {
-      // Replace HEIC with JPG if it exists in the path
       if (photo.toUpperCase().endsWith('.HEIC')) {
         return photo.replace(/\.HEIC$/i, '.JPG');
       }
@@ -43,11 +39,9 @@ const PhotoGallery: React.FC<PhotoGalleryProps> = ({
 
   const handleImageError = (photo: string) => {
     console.error(`Failed to load image: ${photo}`);
-    // Mark the image as failed to load
     setLoadedImages(prev => ({ ...prev, [photo]: false }));
   };
 
-  // Filter out images that failed to load after attempting to load them
   const filteredPhotos = processedPhotos.filter(photo => loadedImages[photo] !== false);
 
   return (
@@ -94,7 +88,6 @@ const PhotoGallery: React.FC<PhotoGalleryProps> = ({
         </div>
       </section>
 
-      {/* Full-size image modal */}
       {selectedImage && (
         <div 
           className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4"
@@ -113,7 +106,6 @@ const PhotoGallery: React.FC<PhotoGalleryProps> = ({
             onClick={(e) => e.stopPropagation()}
             onError={(e) => {
               console.error(`Failed to load full size image: ${selectedImage}`);
-              // Add a placeholder or fallback content
               const div = document.createElement('div');
               div.className = "flex flex-col items-center justify-center text-white";
               div.innerHTML = `

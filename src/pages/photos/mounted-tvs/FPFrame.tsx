@@ -1,7 +1,7 @@
 
 import React from 'react';
 import PhotoGallery from '../../../components/PhotoGallery';
-import { mountedTVsCategories } from '../../../utils/photoUtils';
+import { mountedTVsCategories } from '../../../utils/photos';
 
 const FPFrame = () => {
   // Find the Fireplace Frame category in the mountedTVsCategories array

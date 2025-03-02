@@ -1,7 +1,7 @@
 
 import React from 'react';
 import PhotoGallery from '../../../components/PhotoGallery';
-import { mountedTVsCategories } from '../../../utils/photoUtils';
+import { mountedTVsCategories } from '../../../utils/photos';
 
 const WoodMedia = () => {
   // Find the Wood Media category in the mountedTVsCategories array

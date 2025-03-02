@@ -1,7 +1,7 @@
 
 import React from 'react';
 import PhotoGallery from '../../components/PhotoGallery';
-import { homeTheaterPhotos } from '../../utils/photoUtils';
+import { homeTheaterPhotos } from '../../utils/photos';
 
 const HomeTheater = () => {
   return <PhotoGallery title="Home Theater" photos={homeTheaterPhotos} />;
