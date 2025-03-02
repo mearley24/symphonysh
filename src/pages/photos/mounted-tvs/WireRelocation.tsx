@@ -3,10 +3,10 @@ import React from 'react';
 import PhotoGallery from '../../../components/PhotoGallery';
 
 const WireRelocation = () => {
-  // Using JPG files instead of HEIC to increase compatibility
+  // Use properly encoded paths with spaces properly encoded
   const photos = [
-    "/lovable-uploads/wiring/IMG_0611.JPG", // Use JPG instead of HEIC
-    "/lovable-uploads/wiring/IMG_1551.JPG", // Additional JPG image from wiring folder
+    "/lovable-uploads/wiring/IMG_0611.JPG",
+    "/lovable-uploads/wiring/IMG_1551.JPG",
     "/lovable-uploads/wiring/IMG_1552.JPG",
     "/lovable-uploads/wiring/IMG_1733.JPG"
   ];

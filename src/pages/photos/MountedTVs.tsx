@@ -25,10 +25,13 @@ const MountedTVs = () => {
   // Fix image path - ensure it doesn't have double slashes and is properly encoded
   const getFixedImagePath = (path: string) => {
     try {
-      // We've pre-encoded spaces in the path strings above, so we just need to:
-      // 1. Remove any double slashes that aren't part of protocol
-      const cleanPath = path.replace(/([^:])\/+/g, '$1/');
-      // 2. Encode the path properly for URLs
+      // First, make sure path starts with a slash
+      let cleanPath = path.startsWith('/') ? path : `/${path}`;
+      
+      // Remove any double slashes that aren't part of protocol
+      cleanPath = cleanPath.replace(/([^:])\/+/g, '$1/');
+      
+      // Encode the path properly for URLs
       return encodeURI(cleanPath);
     } catch (error) {
       console.error(`Error fixing image path: ${path}`, error);

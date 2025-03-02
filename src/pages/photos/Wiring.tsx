@@ -28,7 +28,7 @@ const Wiring = () => {
     "/lovable-uploads/wiring/IMG_1551.JPG",
     "/lovable-uploads/wiring/IMG_1552.JPG",
     "/lovable-uploads/wiring/IMG_1733.JPG",
-    "/lovable-uploads/wiring/IMG_1755.JPG",
+    "/lovable-uploads/wiring/IMG_1755.JPG"
   ];
 
   return <PhotoGallery title="Wiring" photos={photos} />;

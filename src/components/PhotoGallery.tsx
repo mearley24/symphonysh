@@ -49,17 +49,17 @@ const PhotoGallery: React.FC<PhotoGalleryProps> = ({
   // Filter out images that failed to load after attempting to load them
   const filteredPhotos = processedPhotos.filter(photo => loadedImages[photo] !== false);
 
-  // Fix image path - ensure it doesn't have double slashes, spaces encoded, and is properly encoded
+  // Fix image path - ensure it doesn't have double slashes, spaces encoded properly
   const getFixedImagePath = (path: string) => {
     try {
+      // First, make sure path starts with a slash
+      let cleanPath = path.startsWith('/') ? path : `/${path}`;
+      
       // Remove any double slashes that aren't part of protocol
-      let cleanPath = path.replace(/([^:])\/+/g, '$1/');
+      cleanPath = cleanPath.replace(/([^:])\/+/g, '$1/');
       
-      // Replace spaces with %20
-      cleanPath = cleanPath.replace(/ /g, '%20');
-      
-      // Encode the path properly for URLs
-      return encodeURI(cleanPath);
+      // Encode spaces and special characters properly
+      return encodeURI(cleanPath).replace(/%20/g, '%20');
     } catch (error) {
       console.error(`Error fixing image path: ${path}`, error);
       return '';
