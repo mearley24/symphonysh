@@ -50,6 +50,14 @@ const Header = () => {
                     All Services
                   </Link>
                 </DropdownMenuItem>
+                <DropdownMenuItem>
+                  <Link
+                    to="/projects"
+                    className="w-full text-sm text-gray-300 hover:text-white font-medium"
+                  >
+                    Our Projects
+                  </Link>
+                </DropdownMenuItem>
                 <DropdownMenuSeparator className="bg-white/10" />
                 <DropdownMenuItem>
                   <Link
