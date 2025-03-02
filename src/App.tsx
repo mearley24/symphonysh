@@ -36,7 +36,6 @@ import MantelMount from "./pages/photos/mounted-tvs/MantelMount";
 import Misc from "./pages/photos/mounted-tvs/Misc";
 import SingletreeFP from "./pages/photos/mounted-tvs/SingletreeFP";
 import WestVailBB from "./pages/photos/mounted-tvs/WestVailBB";
-import WireRelocation from "./pages/photos/mounted-tvs/WireRelocation";
 import WoodMedia from "./pages/photos/mounted-tvs/WoodMedia";
 
 const queryClient = new QueryClient();
@@ -74,7 +73,6 @@ function App() {
             <Route path="/photos/mounted-tvs/misc" element={<Misc />} />
             <Route path="/photos/mounted-tvs/singletree-fp" element={<SingletreeFP />} />
             <Route path="/photos/mounted-tvs/west-vail-bb" element={<WestVailBB />} />
-            <Route path="/photos/mounted-tvs/wire-relocation" element={<WireRelocation />} />
             <Route path="/photos/mounted-tvs/wood-media" element={<WoodMedia />} />
             
             {/* Services routes */}

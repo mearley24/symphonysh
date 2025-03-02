@@ -31,7 +31,18 @@ const Wiring = () => {
     "/lovable-uploads/wiring/IMG_1755.JPG"
   ];
 
-  return <PhotoGallery title="Wiring" photos={photos} />;
+  // Photos that were specifically in the Wire Relocation gallery
+  const wireRelocationPhotos = [
+    "/lovable-uploads/wiring/IMG_0611.JPG",
+    "/lovable-uploads/wiring/IMG_1551.JPG",
+    "/lovable-uploads/wiring/IMG_1552.JPG",
+    "/lovable-uploads/wiring/IMG_1733.JPG"
+  ];
+
+  // Combining all photos, removing duplicates
+  const allUniquePhotos = [...new Set([...photos, ...wireRelocationPhotos])];
+
+  return <PhotoGallery title="Wiring" photos={allUniquePhotos} />;
 };
 
 export default Wiring;

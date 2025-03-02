@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Header from '../../components/Header';
@@ -18,20 +17,13 @@ const MountedTVs = () => {
     { title: "Misc Installations", path: "/photos/mounted-tvs/misc", image: "/lovable-uploads/mounted%20tvs/Misc/IMG_0224.JPG" },
     { title: "Singletree Fireplace", path: "/photos/mounted-tvs/singletree-fp", image: "/lovable-uploads/mounted%20tvs/Singletree%20FP/IMG_1185.JPG" },
     { title: "West Vail Backbox", path: "/photos/mounted-tvs/west-vail-bb", image: "/lovable-uploads/mounted%20tvs/West%20Vail%20BB/IMG_1717.JPG" },
-    { title: "Wire Relocation", path: "/photos/mounted-tvs/wire-relocation", image: "/lovable-uploads/wiring/IMG_0611.JPG" },
     { title: "Wood Media", path: "/photos/mounted-tvs/wood-media", image: "/lovable-uploads/mounted%20tvs/Wood%20Media/IMG_0510.JPG" },
   ];
 
-  // Fix image path - ensure it doesn't have double slashes and is properly encoded
   const getFixedImagePath = (path: string) => {
     try {
-      // First, make sure path starts with a slash
       let cleanPath = path.startsWith('/') ? path : `/${path}`;
-      
-      // Remove any double slashes that aren't part of protocol
       cleanPath = cleanPath.replace(/([^:])\/+/g, '$1/');
-      
-      // Encode the path properly for URLs
       return encodeURI(cleanPath);
     } catch (error) {
       console.error(`Error fixing image path: ${path}`, error);
