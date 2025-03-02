@@ -1,9 +1,11 @@
 
 import React from 'react';
 import PhotoGallery from '../../components/PhotoGallery';
+import { Link } from 'react-router-dom';
+import Header from '../../components/Header';
+import { ArrowLeft } from 'lucide-react';
 
 const HomeTheater = () => {
-  // Use lower case extensions consistently
   const photos = [
     "/lovable-uploads/home%20theater/IMG_0509.JPG",
     "/lovable-uploads/home%20theater/IMG_0512.JPG",

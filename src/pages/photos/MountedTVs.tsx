@@ -1,10 +1,11 @@
+
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Header from '../../components/Header';
 import { ArrowLeft, ImageOff } from 'lucide-react';
 
 const MountedTVs = () => {
-  const [loadErrors, setLoadErrors] = useState<Record<string, boolean>>({});
+  const [loadedImages, setLoadedImages] = useState<Record<string, boolean>>({});
 
   const categories = [
     { title: "BC Condo Fireplace", path: "/photos/mounted-tvs/bc-condo-fp", image: "/lovable-uploads/mounted%20tvs/BC%20Condo%20FP/IMG_0610.JPG" },
@@ -20,10 +21,16 @@ const MountedTVs = () => {
     { title: "Wood Media", path: "/photos/mounted-tvs/wood-media", image: "/lovable-uploads/mounted%20tvs/Wood%20Media/IMG_0510.JPG" },
   ];
 
+  // Fix image path issues
   const getFixedImagePath = (path: string) => {
     try {
+      // Make sure path starts with a slash
       let cleanPath = path.startsWith('/') ? path : `/${path}`;
+      
+      // Remove any double slashes that aren't part of protocol
       cleanPath = cleanPath.replace(/([^:])\/+/g, '$1/');
+      
+      // URL encode the path properly
       return encodeURI(cleanPath);
     } catch (error) {
       console.error(`Error fixing image path: ${path}`, error);
@@ -31,14 +38,14 @@ const MountedTVs = () => {
     }
   };
 
-  const handleImageError = (image: string) => {
-    console.error(`Failed to load image: ${image}`);
-    setLoadErrors(prev => ({ ...prev, [image]: true }));
-  };
-
   const handleImageLoad = (image: string) => {
     console.log(`Successfully loaded image: ${image}`);
-    setLoadErrors(prev => ({ ...prev, [image]: false }));
+    setLoadedImages(prev => ({ ...prev, [image]: true }));
+  };
+
+  const handleImageError = (image: string) => {
+    console.error(`Failed to load image: ${image}`);
+    setLoadedImages(prev => ({ ...prev, [image]: false }));
   };
 
   return (
@@ -60,7 +67,7 @@ const MountedTVs = () => {
                 className="bg-secondary/50 rounded-lg overflow-hidden group hover:bg-secondary/80 transition-all duration-300"
               >
                 <div className="aspect-video overflow-hidden bg-secondary/30">
-                  {loadErrors[category.image] ? (
+                  {loadedImages[category.image] === false ? (
                     <div className="w-full h-full flex flex-col items-center justify-center text-gray-400 p-4">
                       <ImageOff className="w-12 h-12 mb-2" />
                       <p className="text-sm text-center">{category.title}</p>

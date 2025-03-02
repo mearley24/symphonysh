@@ -1,12 +1,12 @@
 
 import React, { useState } from 'react';
-import PhotoGallery from '../../components/PhotoGallery';
 import Header from '../../components/Header';
 import { Link } from 'react-router-dom';
-import { ArrowLeft } from 'lucide-react';
+import { ArrowLeft, ImageOff } from 'lucide-react';
 
 const Wiring = () => {
   const [selectedGallery, setSelectedGallery] = useState<'general' | 'relocation'>('general');
+  const [loadedImages, setLoadedImages] = useState<Record<string, boolean>>({});
   
   const generalPhotos = [
     "/lovable-uploads/wiring/71674303475__8894E961-8D43-47AC-906F-6F5262138D13.JPG",
@@ -40,6 +40,37 @@ const Wiring = () => {
     "/lovable-uploads/wiring/IMG_1733.JPG"
   ];
 
+  // Fix image path issues
+  const getFixedImagePath = (path: string) => {
+    try {
+      // Make sure path starts with a slash
+      let cleanPath = path.startsWith('/') ? path : `/${path}`;
+      
+      // Remove any double slashes that aren't part of protocol
+      cleanPath = cleanPath.replace(/([^:])\/+/g, '$1/');
+      
+      // URL encode the path properly
+      return encodeURI(cleanPath);
+    } catch (error) {
+      console.error(`Error fixing image path: ${path}`, error);
+      return '';
+    }
+  };
+
+  const handleImageLoad = (image: string) => {
+    console.log(`Successfully loaded image: ${image}`);
+    setLoadedImages(prev => ({ ...prev, [image]: true }));
+  };
+
+  const handleImageError = (image: string) => {
+    console.error(`Failed to load image: ${image}`);
+    setLoadedImages(prev => ({ ...prev, [image]: false }));
+  };
+
+  // Preview images for each gallery
+  const generalPreviewImage = generalPhotos[0];
+  const relocationPreviewImage = wireRelocationPhotos[0];
+
   return (
     <div className="min-h-screen bg-primary">
       <Header />
@@ -57,13 +88,35 @@ const Wiring = () => {
               className={`px-4 py-2 mr-4 font-medium ${selectedGallery === 'general' ? 'text-primary-foreground border-b-2 border-primary-foreground' : 'text-gray-400 hover:text-white'}`}
               onClick={() => setSelectedGallery('general')}
             >
-              General Wiring
+              <div className="flex items-center">
+                <div className="w-8 h-8 rounded overflow-hidden mr-2 bg-secondary/30">
+                  <img 
+                    src={getFixedImagePath(generalPreviewImage)} 
+                    alt="General Wiring Preview" 
+                    className="w-full h-full object-cover"
+                    onLoad={() => handleImageLoad(generalPreviewImage)}
+                    onError={() => handleImageError(generalPreviewImage)}
+                  />
+                </div>
+                General Wiring
+              </div>
             </button>
             <button 
               className={`px-4 py-2 font-medium ${selectedGallery === 'relocation' ? 'text-primary-foreground border-b-2 border-primary-foreground' : 'text-gray-400 hover:text-white'}`}
               onClick={() => setSelectedGallery('relocation')}
             >
-              Wire Relocation
+              <div className="flex items-center">
+                <div className="w-8 h-8 rounded overflow-hidden mr-2 bg-secondary/30">
+                  <img 
+                    src={getFixedImagePath(relocationPreviewImage)} 
+                    alt="Wire Relocation Preview" 
+                    className="w-full h-full object-cover"
+                    onLoad={() => handleImageLoad(relocationPreviewImage)}
+                    onError={() => handleImageError(relocationPreviewImage)}
+                  />
+                </div>
+                Wire Relocation
+              </div>
             </button>
           </div>
           
@@ -75,13 +128,22 @@ const Wiring = () => {
                   <div 
                     key={index} 
                     className="aspect-video rounded-lg overflow-hidden bg-gray-800 cursor-pointer hover:opacity-90 transition"
-                    onClick={() => window.open(photo, '_blank')}
+                    onClick={() => window.open(getFixedImagePath(photo), '_blank')}
                   >
-                    <img 
-                      src={photo}
-                      alt={`General Wiring ${index + 1}`}
-                      className="w-full h-full object-contain"
-                    />
+                    {loadedImages[photo] === false ? (
+                      <div className="w-full h-full flex flex-col items-center justify-center text-gray-400 p-4">
+                        <ImageOff className="w-12 h-12 mb-2" />
+                        <p className="text-sm text-center">Image could not be loaded</p>
+                      </div>
+                    ) : (
+                      <img 
+                        src={getFixedImagePath(photo)}
+                        alt={`General Wiring ${index + 1}`}
+                        className="w-full h-full object-contain"
+                        onLoad={() => handleImageLoad(photo)}
+                        onError={() => handleImageError(photo)}
+                      />
+                    )}
                   </div>
                 ))}
               </div>
@@ -93,13 +155,22 @@ const Wiring = () => {
                   <div 
                     key={index} 
                     className="aspect-video rounded-lg overflow-hidden bg-gray-800 cursor-pointer hover:opacity-90 transition"
-                    onClick={() => window.open(photo, '_blank')}
+                    onClick={() => window.open(getFixedImagePath(photo), '_blank')}
                   >
-                    <img 
-                      src={photo}
-                      alt={`Wire Relocation ${index + 1}`}
-                      className="w-full h-full object-contain"
-                    />
+                    {loadedImages[photo] === false ? (
+                      <div className="w-full h-full flex flex-col items-center justify-center text-gray-400 p-4">
+                        <ImageOff className="w-12 h-12 mb-2" />
+                        <p className="text-sm text-center">Image could not be loaded</p>
+                      </div>
+                    ) : (
+                      <img 
+                        src={getFixedImagePath(photo)}
+                        alt={`Wire Relocation ${index + 1}`}
+                        className="w-full h-full object-contain"
+                        onLoad={() => handleImageLoad(photo)}
+                        onError={() => handleImageError(photo)}
+                      />
+                    )}
                   </div>
                 ))}
               </div>
