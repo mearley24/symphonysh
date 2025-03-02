@@ -8,20 +8,20 @@ const MountedTVs = () => {
   const [loadedImages, setLoadedImages] = useState<Record<string, boolean>>({});
 
   const categories = [
-    { title: "BC Condo Fireplace", path: "/photos/mounted-tvs/bc-condo-fp", image: "/lovable-uploads/mounted%20tvs/BC%20Condo%20FP/IMG_0610.JPG" },
-    { title: "Backbox Fireplace", path: "/photos/mounted-tvs/backbox-fp", image: "/lovable-uploads/mounted%20tvs/Backbox%20FP/IMG_0024.JPG" },
-    { title: "Fireplace Frame", path: "/photos/mounted-tvs/fp-frame", image: "/lovable-uploads/mounted%20tvs/FP%20Frame/IMG_2189.JPG" },
-    { title: "Frame & Sonos", path: "/photos/mounted-tvs/frame-sonos", image: "/lovable-uploads/mounted%20tvs/Frame%20Sonos/IMG_0022.JPG" },
-    { title: "HP Installations", path: "/photos/mounted-tvs/hp", image: "/lovable-uploads/mounted%20tvs/HP/IMG_0179.JPG" },
-    { title: "Home Installations", path: "/photos/mounted-tvs/home", image: "/lovable-uploads/mounted%20tvs/Home/IMG_0659.JPG" },
-    { title: "Mantel Mount", path: "/photos/mounted-tvs/mantel-mount", image: "/lovable-uploads/mounted%20tvs/Mantel%20Mount/IMG_1090.JPG" },
-    { title: "Misc Installations", path: "/photos/mounted-tvs/misc", image: "/lovable-uploads/mounted%20tvs/Misc/IMG_0224.JPG" },
-    { title: "Singletree Fireplace", path: "/photos/mounted-tvs/singletree-fp", image: "/lovable-uploads/mounted%20tvs/Singletree%20FP/IMG_1185.JPG" },
-    { title: "West Vail Backbox", path: "/photos/mounted-tvs/west-vail-bb", image: "/lovable-uploads/mounted%20tvs/West%20Vail%20BB/IMG_1717.JPG" },
-    { title: "Wood Media", path: "/photos/mounted-tvs/wood-media", image: "/lovable-uploads/mounted%20tvs/Wood%20Media/IMG_0510.JPG" },
+    { title: "BC Condo Fireplace", path: "/photos/mounted-tvs/bc-condo-fp", image: "/lovable-uploads/mounted tvs/BC Condo FP/IMG_0610.JPG" },
+    { title: "Backbox Fireplace", path: "/photos/mounted-tvs/backbox-fp", image: "/lovable-uploads/mounted tvs/Backbox FP/IMG_0024.JPG" },
+    { title: "Fireplace Frame", path: "/photos/mounted-tvs/fp-frame", image: "/lovable-uploads/mounted tvs/FP Frame/IMG_2189.JPG" },
+    { title: "Frame & Sonos", path: "/photos/mounted-tvs/frame-sonos", image: "/lovable-uploads/mounted tvs/Frame Sonos/IMG_0022.JPG" },
+    { title: "HP Installations", path: "/photos/mounted-tvs/hp", image: "/lovable-uploads/mounted tvs/HP/IMG_0179.JPG" },
+    { title: "Home Installations", path: "/photos/mounted-tvs/home", image: "/lovable-uploads/mounted tvs/Home/IMG_0659.JPG" },
+    { title: "Mantel Mount", path: "/photos/mounted-tvs/mantel-mount", image: "/lovable-uploads/mounted tvs/Mantel Mount/IMG_1090.JPG" },
+    { title: "Misc Installations", path: "/photos/mounted-tvs/misc", image: "/lovable-uploads/mounted tvs/Misc/IMG_0224.JPG" },
+    { title: "Singletree Fireplace", path: "/photos/mounted-tvs/singletree-fp", image: "/lovable-uploads/mounted tvs/Singletree FP/IMG_1185.JPG" },
+    { title: "West Vail Backbox", path: "/photos/mounted-tvs/west-vail-bb", image: "/lovable-uploads/mounted tvs/West Vail BB/IMG_1717.JPG" },
+    { title: "Wood Media", path: "/photos/mounted-tvs/wood-media", image: "/lovable-uploads/mounted tvs/Wood Media/IMG_0510.JPG" },
   ];
 
-  // Fix image path issues
+  // Fix image path issues - Updated to properly handle spaces in URLs
   const getFixedImagePath = (path: string) => {
     try {
       // Make sure path starts with a slash
@@ -30,8 +30,9 @@ const MountedTVs = () => {
       // Remove any double slashes that aren't part of protocol
       cleanPath = cleanPath.replace(/([^:])\/+/g, '$1/');
       
-      // URL encode the path properly
-      return encodeURI(cleanPath);
+      // URL encode the path properly - don't encode spaces as %20, leave them as spaces
+      // This is crucial for the server to correctly interpret the paths
+      return cleanPath;
     } catch (error) {
       console.error(`Error fixing image path: ${path}`, error);
       return '';

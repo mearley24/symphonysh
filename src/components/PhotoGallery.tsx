@@ -52,14 +52,14 @@ const PhotoGallery: React.FC<PhotoGalleryProps> = ({
   // Fix image path - ensure it doesn't have double slashes, spaces encoded properly
   const getFixedImagePath = (path: string) => {
     try {
-      // First, make sure path starts with a slash
+      // Don't apply URL encoding since it's causing issues
+      // Just make sure path starts with a slash and clean up double slashes
       let cleanPath = path.startsWith('/') ? path : `/${path}`;
       
       // Remove any double slashes that aren't part of protocol
       cleanPath = cleanPath.replace(/([^:])\/+/g, '$1/');
       
-      // Encode spaces and special characters properly
-      return encodeURI(cleanPath).replace(/%20/g, '%20');
+      return cleanPath;
     } catch (error) {
       console.error(`Error fixing image path: ${path}`, error);
       return '';
