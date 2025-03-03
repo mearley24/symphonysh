@@ -2,6 +2,7 @@
 import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import Header from "../components/Header";
+import Footer from "../components/Footer";
 
 const Index = () => {
   return <div className="min-h-screen bg-primary">
@@ -73,11 +74,7 @@ const Index = () => {
         </div>
       </section>
 
-      <footer className="py-12 px-6 text-center text-gray-400 bg-primary">
-        <p className="text-sm">
-          © 2024 Symphony Smart Homes. All rights reserved.
-        </p>
-      </footer>
+      <Footer />
     </div>;
 };
 
