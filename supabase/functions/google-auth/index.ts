@@ -41,6 +41,7 @@ function getAuthUrl() {
     ],
     prompt: 'consent', // Force to get refresh token
     state: 'google_auth', // Add state parameter to identify this auth request
+    include_granted_scopes: true // Include any previously granted scopes
   });
 }
 
@@ -53,7 +54,9 @@ serve(async (req) => {
   }
 
   try {
+    console.log("Generating Google auth URL");
     const authUrl = getAuthUrl();
+    console.log("Auth URL generated:", authUrl);
     
     // For direct browser access, redirect instead of returning JSON
     const url = new URL(req.url);

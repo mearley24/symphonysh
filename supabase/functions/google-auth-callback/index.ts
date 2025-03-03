@@ -13,6 +13,9 @@ const GOOGLE_CLIENT_ID = Deno.env.get("GOOGLE_OAUTH_CLIENT_ID") || "";
 const GOOGLE_CLIENT_SECRET = Deno.env.get("GOOGLE_OAUTH_CLIENT_SECRET") || "";
 const REDIRECT_URI = `${supabaseUrl}/functions/v1/google-auth-callback`;
 
+// Frontend URL for redirecting back after auth
+const FRONTEND_URL = Deno.env.get("FRONTEND_URL") || "http://localhost:5173";
+
 // CORS headers
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -30,24 +33,58 @@ function getOAuth2Client() {
 
 // Save tokens to database
 async function saveTokens(tokens: any) {
-  // Store tokens in database
-  const { data, error } = await supabase
-    .from("google_tokens")
-    .insert([
-      {
-        access_token: tokens.access_token,
-        refresh_token: tokens.refresh_token || "", // Some flows might not return refresh token
-        expiry: new Date(tokens.expiry_date).toISOString(),
-      }
-    ])
-    .select();
+  try {
+    console.log("Saving tokens to database");
     
-  if (error) {
-    console.error('Error saving tokens:', error);
-    throw new Error('Failed to save tokens');
+    // Check if we already have tokens stored
+    const { data: existingTokens } = await supabase
+      .from("google_tokens")
+      .select("*")
+      .limit(1);
+    
+    if (existingTokens && existingTokens.length > 0) {
+      // Update existing token
+      const { data, error } = await supabase
+        .from("google_tokens")
+        .update({
+          access_token: tokens.access_token,
+          refresh_token: tokens.refresh_token || existingTokens[0].refresh_token, // Keep existing refresh token if not provided
+          expiry: new Date(tokens.expiry_date).toISOString(),
+          updated_at: new Date().toISOString()
+        })
+        .eq("id", existingTokens[0].id)
+        .select();
+        
+      if (error) {
+        console.error('Error updating tokens:', error);
+        throw new Error('Failed to update tokens');
+      }
+      
+      return data;
+    } else {
+      // Insert new token
+      const { data, error } = await supabase
+        .from("google_tokens")
+        .insert([
+          {
+            access_token: tokens.access_token,
+            refresh_token: tokens.refresh_token || "", 
+            expiry: new Date(tokens.expiry_date).toISOString(),
+          }
+        ])
+        .select();
+        
+      if (error) {
+        console.error('Error saving tokens:', error);
+        throw new Error('Failed to save tokens');
+      }
+      
+      return data;
+    }
+  } catch (error) {
+    console.error("Error saving tokens:", error);
+    throw error;
   }
-  
-  return data;
 }
 
 serve(async (req) => {
@@ -59,6 +96,8 @@ serve(async (req) => {
   }
 
   try {
+    console.log("Google auth callback received");
+    
     // Check if this is a POST request from our client-side code
     if (req.method === "POST") {
       const { code } = await req.json();
@@ -67,9 +106,13 @@ serve(async (req) => {
         throw new Error('No authorization code provided');
       }
       
+      console.log("Exchanging code for tokens");
+      
       // Exchange code for tokens
       const oauth2Client = getOAuth2Client();
       const { tokens } = await oauth2Client.getToken(code);
+      
+      console.log("Tokens received from Google");
       
       // Save tokens to database
       await saveTokens(tokens);
@@ -87,14 +130,21 @@ serve(async (req) => {
     // Get authorization code from URL
     const url = new URL(req.url);
     const code = url.searchParams.get('code');
+    const state = url.searchParams.get('state');
     
     if (!code) {
       throw new Error('No authorization code provided');
     }
     
+    if (state !== 'google_auth') {
+      throw new Error('Invalid state parameter');
+    }
+    
+    console.log("Received auth code, redirecting to frontend");
+    
     // For the direct browser callback, we redirect back to our app
     // with the code as a query parameter so our app can complete the flow
-    const redirectUrl = new URL('/scheduling', url.origin.replace('/functions/v1/google-auth-callback', ''));
+    const redirectUrl = new URL('/scheduling', FRONTEND_URL);
     redirectUrl.searchParams.set('code', code);
     redirectUrl.searchParams.set('state', 'google_auth');
     

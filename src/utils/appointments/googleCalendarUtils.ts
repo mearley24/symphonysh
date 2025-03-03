@@ -47,6 +47,8 @@ export async function fetchAvailableTimeSlots(date: Date): Promise<string[]> {
 // Function to redirect to Google Auth page
 export async function connectToGoogleCalendar() {
   try {
+    console.log("Starting Google Calendar connection process");
+    
     const { data, error } = await supabase.functions.invoke('google-auth', {
       method: 'GET'
     });
@@ -57,6 +59,8 @@ export async function connectToGoogleCalendar() {
     }
     
     if (data && data.authUrl) {
+      console.log("Got auth URL, redirecting:", data.authUrl);
+      
       // Redirect to Google Auth URL in the same window for better auth flow
       window.location.href = data.authUrl;
       return true;
@@ -86,6 +90,8 @@ export function handleGoogleAuthCallback() {
 // Function to complete the OAuth flow by exchanging code for token
 async function completeGoogleAuth(code: string) {
   try {
+    console.log("Completing Google auth with code");
+    
     const { data, error } = await supabase.functions.invoke('google-auth-callback', {
       method: 'POST',
       body: { code }
@@ -96,6 +102,7 @@ async function completeGoogleAuth(code: string) {
       throw error;
     }
     
+    console.log("Google auth completed successfully:", data);
     return data;
   } catch (error) {
     console.error("Failed to complete Google auth:", error);
