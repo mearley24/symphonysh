@@ -14,6 +14,7 @@ import SecuritySystems from "./pages/services/SecuritySystems";
 import Shades from "./pages/services/Shades";
 import SmartLighting from "./pages/services/SmartLighting";
 import Privacy from "./pages/Privacy";
+import Terms from "./pages/Terms";
 
 function App() {
   return (
@@ -33,6 +34,7 @@ function App() {
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/scheduling" element={<Scheduling />} />
+        <Route path="/terms" element={<Terms />} />
       </Routes>
     </div>
   );

@@ -10,6 +10,9 @@ const Footer = () => {
           <Link to="/privacy" className="hover:text-white transition-colors">
             Privacy Policy
           </Link>
+          <Link to="/terms" className="hover:text-white transition-colors">
+            Terms of Service
+          </Link>
         </div>
         <p className="text-sm">
           © 2024 Symphony Smart Homes. All rights reserved.
