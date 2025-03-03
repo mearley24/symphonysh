@@ -1,9 +1,17 @@
+
 import { Check } from "lucide-react";
 import Header from "../components/Header";
+import { Link } from "react-router-dom";
+import SEO from "../components/SEO";
 
 const About = () => {
   return (
     <div className="min-h-screen bg-primary">
+      <SEO 
+        title="About Us" 
+        description="Learn about Symphony Smart Homes and our mission to transform houses into intelligent, efficient living spaces."
+        keywords="smart home, home automation, about us, symphony smart homes"
+      />
       <Header />
       <section className="pt-32 pb-20 px-6">
         <div className="max-w-4xl mx-auto">
@@ -59,9 +67,16 @@ const About = () => {
       </section>
 
       <footer className="py-12 px-6 text-center text-gray-400 bg-primary">
-        <p className="text-sm">
-          © 2024 Symphony Smart Homes. All rights reserved.
-        </p>
+        <div className="max-w-4xl mx-auto">
+          <div className="flex flex-col md:flex-row justify-center items-center space-y-2 md:space-y-0 md:space-x-4 mb-4">
+            <Link to="/privacy" className="hover:text-white transition-colors">
+              Privacy Policy
+            </Link>
+          </div>
+          <p className="text-sm">
+            © 2024 Symphony Smart Homes. All rights reserved.
+          </p>
+        </div>
       </footer>
     </div>
   );

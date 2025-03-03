@@ -4,6 +4,8 @@ import { useState } from "react";
 import Header from "../components/Header";
 import { useToast } from "@/components/ui/use-toast";
 import { supabase } from "@/integrations/supabase/client";
+import { Link } from "react-router-dom";
+import SEO from "../components/SEO";
 
 const ContactInfo = ({ icon: Icon, title, content }: { icon: any; title: string; content: string }) => (
   <div className="flex items-center gap-4 bg-white/5 backdrop-blur-sm p-6 rounded-lg">
@@ -59,6 +61,11 @@ const Contact = () => {
 
   return (
     <div className="min-h-screen bg-primary">
+      <SEO 
+        title="Contact Us" 
+        description="Get in touch with our team of home automation experts at Symphony Smart Homes."
+        keywords="contact, smart home, automation, symphony smart homes"
+      />
       <Header />
       <section className="pt-32 pb-20 px-6">
         <div className="max-w-4xl mx-auto">
@@ -131,9 +138,16 @@ const Contact = () => {
       </section>
 
       <footer className="py-12 px-6 text-center text-gray-400 bg-primary">
-        <p className="text-sm">
-          © 2024 Symphony Smart Homes. All rights reserved.
-        </p>
+        <div className="max-w-4xl mx-auto">
+          <div className="flex flex-col md:flex-row justify-center items-center space-y-2 md:space-y-0 md:space-x-4 mb-4">
+            <Link to="/privacy" className="hover:text-white transition-colors">
+              Privacy Policy
+            </Link>
+          </div>
+          <p className="text-sm">
+            © 2024 Symphony Smart Homes. All rights reserved.
+          </p>
+        </div>
       </footer>
     </div>
   );
