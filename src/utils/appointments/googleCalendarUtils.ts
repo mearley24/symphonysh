@@ -43,3 +43,28 @@ export async function fetchAvailableTimeSlots(date: Date): Promise<string[]> {
     return DEFAULT_TIME_SLOTS;
   }
 }
+
+// Function to redirect to Google Auth page
+export async function connectToGoogleCalendar() {
+  try {
+    const { data, error } = await supabase.functions.invoke('google-auth', {
+      method: 'GET'
+    });
+    
+    if (error) {
+      console.error("Error connecting to Google Calendar:", error);
+      throw error;
+    }
+    
+    if (data && data.authUrl) {
+      // Open Google Auth URL in a new window
+      window.open(data.authUrl, '_blank', 'width=600,height=700');
+      return true;
+    }
+    
+    throw new Error("Failed to get Google auth URL");
+  } catch (error) {
+    console.error("Failed to connect to Google Calendar:", error);
+    throw error;
+  }
+}

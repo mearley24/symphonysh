@@ -11,7 +11,7 @@ const supabase = createClient(supabaseUrl, supabaseKey);
 // Google OAuth Credentials
 const GOOGLE_CLIENT_ID = Deno.env.get("GOOGLE_OAUTH_CLIENT_ID") || "";
 const GOOGLE_CLIENT_SECRET = Deno.env.get("GOOGLE_OAUTH_CLIENT_SECRET") || "";
-const REDIRECT_URI = "https://bxsdjxkbhjtdrrtjtyto.supabase.co/functions/v1/google-auth-callback";
+const REDIRECT_URI = `${supabaseUrl}/functions/v1/google-auth-callback`;
 
 // CORS headers
 const corsHeaders = {
@@ -34,7 +34,7 @@ function getAuthUrl() {
   
   return oauth2Client.generateAuthUrl({
     access_type: 'offline',
-    response_type: 'code', // Added the missing response_type parameter
+    response_type: 'code',
     scope: [
       'https://www.googleapis.com/auth/calendar',
       'https://www.googleapis.com/auth/calendar.events',
