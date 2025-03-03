@@ -48,4 +48,3 @@ verify_jwt = false
 
 [functions.available-time-slots]
 verify_jwt = false
-

@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 import { Calendar } from "@/components/ui/calendar";
 import { Button } from "@/components/ui/button";
-import { Info, Loader2, CalendarPlus, Check } from "lucide-react";
+import { Info, Loader2, CalendarPlus, Check, AlertTriangle } from "lucide-react";
 import { getAvailableTimeSlots } from "@/utils/appointments";
 import { connectToGoogleCalendar, handleGoogleAuthCallback } from "@/utils/appointments/googleCalendarUtils";
 import { useToast } from "@/components/ui/use-toast";
@@ -20,6 +20,7 @@ export function DateTimeSelector({ date, setDate, selectedTime, setSelectedTime 
   const [isLoading, setIsLoading] = useState(false);
   const [connectingCalendar, setConnectingCalendar] = useState(false);
   const [isCalendarConnected, setIsCalendarConnected] = useState(false);
+  const [authError, setAuthError] = useState<string | null>(null);
   const { toast } = useToast();
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
@@ -28,27 +29,60 @@ export function DateTimeSelector({ date, setDate, selectedTime, setSelectedTime 
   useEffect(() => {
     const code = searchParams.get('code');
     const state = searchParams.get('state');
+    const error = searchParams.get('error');
+    
+    // Handle errors from Google Auth
+    if (error) {
+      setConnectingCalendar(false);
+      let errorMessage = "An error occurred during Google authentication.";
+      
+      if (error === 'access_denied') {
+        errorMessage = "Authentication was denied. You may need to be added as a test user for this application.";
+        setAuthError('access_denied');
+      }
+      
+      // Clear URL params and show error message
+      navigate('/scheduling', { replace: true });
+      
+      toast({
+        title: "Calendar Connection Failed",
+        description: errorMessage,
+        variant: "destructive"
+      });
+      
+      return;
+    }
     
     if (code && state === 'google_auth') {
       setConnectingCalendar(true);
       
       const completeAuth = async () => {
         try {
-          await handleGoogleAuthCallback();
+          const result = await handleGoogleAuthCallback();
           
-          // Clear URL params and show success message
-          navigate('/scheduling', { replace: true });
-          
-          toast({
-            title: "Google Calendar Connected",
-            description: "Your calendar is now connected. Available time slots will be updated accordingly.",
-          });
-          
-          setIsCalendarConnected(true);
-          
-          // If date is already selected, refresh time slots
-          if (date) {
-            fetchTimeSlots(date);
+          if (result && result.error) {
+            setAuthError(result.error);
+            toast({
+              title: "Calendar Connection Failed",
+              description: "Could not connect to Google Calendar. You may need to be added as a test user.",
+              variant: "destructive"
+            });
+          } else {
+            // Clear URL params and show success message
+            navigate('/scheduling', { replace: true });
+            
+            toast({
+              title: "Google Calendar Connected",
+              description: "Your calendar is now connected. Available time slots will be updated accordingly.",
+            });
+            
+            setIsCalendarConnected(true);
+            setAuthError(null);
+            
+            // If date is already selected, refresh time slots
+            if (date) {
+              fetchTimeSlots(date);
+            }
           }
         } catch (error) {
           console.error("Failed to complete Google auth:", error);
@@ -142,6 +176,17 @@ export function DateTimeSelector({ date, setDate, selectedTime, setSelectedTime 
             {isCalendarConnected ? "Calendar Connected" : "Connect Calendar"}
           </Button>
         </div>
+
+        {authError === 'access_denied' && (
+          <div className="mb-4 p-3 bg-orange-500/20 border border-orange-500/40 rounded-md flex items-start gap-3">
+            <AlertTriangle className="h-5 w-5 text-orange-400 shrink-0 mt-0.5" />
+            <div className="text-sm text-white/90">
+              <p className="font-medium mb-1">Google OAuth testing mode</p>
+              <p>This app is in Google OAuth testing mode. Only approved test users can connect their calendars. Contact the administrator to be added as a test user.</p>
+            </div>
+          </div>
+        )}
+        
         <Calendar
           mode="single"
           selected={date}

@@ -61,6 +61,14 @@ export async function connectToGoogleCalendar() {
     if (data && data.authUrl) {
       console.log("Got auth URL, redirecting:", data.authUrl);
       
+      // Show warning about test mode
+      const isTestMode = true; // This is currently always true since the app is in testing
+      
+      if (isTestMode) {
+        console.warn("Google OAuth app is in test mode. Only test users can authenticate.");
+        alert("Important: This app's Google integration is in test mode. You'll need to use the Google account that's been added as a test user. If you see an 'app hasn't been verified' warning, click 'Continue' (it's safe for testing). Contact the administrator if you need access.");
+      }
+      
       // Redirect to Google Auth URL in the same window for better auth flow
       window.location.href = data.authUrl;
       return true;
@@ -78,6 +86,17 @@ export function handleGoogleAuthCallback() {
   const url = new URL(window.location.href);
   const code = url.searchParams.get('code');
   const state = url.searchParams.get('state');
+  const error = url.searchParams.get('error');
+  
+  if (error) {
+    console.error("Google auth error:", error);
+    // Handle the access_denied error specifically
+    if (error === 'access_denied') {
+      alert("Authentication was denied. This may happen if you're not a test user for this application or if you declined to give permission.");
+      return { error: 'access_denied' };
+    }
+    return { error };
+  }
   
   if (code && state === 'google_auth') {
     console.log("Detected Google auth callback with code, completing auth flow...");

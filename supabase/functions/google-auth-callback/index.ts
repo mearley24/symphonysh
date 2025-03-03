@@ -131,6 +131,25 @@ serve(async (req) => {
     const url = new URL(req.url);
     const code = url.searchParams.get('code');
     const state = url.searchParams.get('state');
+    const error = url.searchParams.get('error');
+    
+    // Handle errors from Google Auth
+    if (error) {
+      console.error('Google auth error:', error);
+      
+      // Redirect back to app with error parameter
+      const redirectUrl = new URL('/scheduling', FRONTEND_URL);
+      redirectUrl.searchParams.set('error', error);
+      redirectUrl.searchParams.set('state', 'google_auth');
+      
+      return new Response(null, {
+        status: 302,
+        headers: {
+          ...corsHeaders,
+          "Location": redirectUrl.toString()
+        }
+      });
+    }
     
     if (!code) {
       throw new Error('No authorization code provided');

@@ -72,7 +72,10 @@ serve(async (req) => {
       });
     }
     
-    return new Response(JSON.stringify({ authUrl }), {
+    return new Response(JSON.stringify({ 
+      authUrl,
+      note: "This application is in Google OAuth testing mode. Only approved test users can authenticate."
+    }), {
       headers: { ...corsHeaders, "Content-Type": "application/json" },
       status: 200,
     });
