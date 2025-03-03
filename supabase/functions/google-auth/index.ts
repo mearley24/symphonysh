@@ -40,6 +40,7 @@ function getAuthUrl() {
       'https://www.googleapis.com/auth/calendar.events',
     ],
     prompt: 'consent', // Force to get refresh token
+    state: 'google_auth', // Add state parameter to identify this auth request
   });
 }
 

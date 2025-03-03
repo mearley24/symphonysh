@@ -57,14 +57,48 @@ export async function connectToGoogleCalendar() {
     }
     
     if (data && data.authUrl) {
-      // Open Google Auth URL in a new window
-      window.open(data.authUrl, '_blank', 'width=600,height=700');
+      // Redirect to Google Auth URL in the same window for better auth flow
+      window.location.href = data.authUrl;
       return true;
     }
     
     throw new Error("Failed to get Google auth URL");
   } catch (error) {
     console.error("Failed to connect to Google Calendar:", error);
+    throw error;
+  }
+}
+
+// Function to check if we're returning from Google auth
+export function handleGoogleAuthCallback() {
+  const url = new URL(window.location.href);
+  const code = url.searchParams.get('code');
+  const state = url.searchParams.get('state');
+  
+  if (code && state === 'google_auth') {
+    console.log("Detected Google auth callback with code, completing auth flow...");
+    return completeGoogleAuth(code);
+  }
+  
+  return null;
+}
+
+// Function to complete the OAuth flow by exchanging code for token
+async function completeGoogleAuth(code: string) {
+  try {
+    const { data, error } = await supabase.functions.invoke('google-auth-callback', {
+      method: 'POST',
+      body: { code }
+    });
+    
+    if (error) {
+      console.error("Error completing Google auth:", error);
+      throw error;
+    }
+    
+    return data;
+  } catch (error) {
+    console.error("Failed to complete Google auth:", error);
     throw error;
   }
 }

@@ -2,10 +2,11 @@
 import { useState, useEffect } from "react";
 import { Calendar } from "@/components/ui/calendar";
 import { Button } from "@/components/ui/button";
-import { Info, Loader2, CalendarPlus } from "lucide-react";
+import { Info, Loader2, CalendarPlus, Check } from "lucide-react";
 import { getAvailableTimeSlots } from "@/utils/appointments";
-import { connectToGoogleCalendar } from "@/utils/appointments/googleCalendarUtils";
+import { connectToGoogleCalendar, handleGoogleAuthCallback } from "@/utils/appointments/googleCalendarUtils";
 import { useToast } from "@/components/ui/use-toast";
+import { useSearchParams, useNavigate } from "react-router-dom";
 
 interface DateTimeSelectorProps {
   date: Date | undefined;
@@ -18,35 +19,79 @@ export function DateTimeSelector({ date, setDate, selectedTime, setSelectedTime 
   const [availableTimeSlots, setAvailableTimeSlots] = useState<string[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [connectingCalendar, setConnectingCalendar] = useState(false);
+  const [isCalendarConnected, setIsCalendarConnected] = useState(false);
   const { toast } = useToast();
+  const [searchParams] = useSearchParams();
+  const navigate = useNavigate();
+
+  // Check for Google auth callback on component mount
+  useEffect(() => {
+    const code = searchParams.get('code');
+    const state = searchParams.get('state');
+    
+    if (code && state === 'google_auth') {
+      setConnectingCalendar(true);
+      
+      const completeAuth = async () => {
+        try {
+          await handleGoogleAuthCallback();
+          
+          // Clear URL params and show success message
+          navigate('/scheduling', { replace: true });
+          
+          toast({
+            title: "Google Calendar Connected",
+            description: "Your calendar is now connected. Available time slots will be updated accordingly.",
+          });
+          
+          setIsCalendarConnected(true);
+          
+          // If date is already selected, refresh time slots
+          if (date) {
+            fetchTimeSlots(date);
+          }
+        } catch (error) {
+          console.error("Failed to complete Google auth:", error);
+          toast({
+            title: "Connection Failed",
+            description: "Could not connect to Google Calendar. Please try again.",
+            variant: "destructive"
+          });
+        } finally {
+          setConnectingCalendar(false);
+        }
+      };
+      
+      completeAuth();
+    }
+  }, [searchParams, toast, navigate, date]);
 
   // Fetch available time slots when the date changes
   useEffect(() => {
-    async function fetchTimeSlots() {
-      if (!date) {
-        setAvailableTimeSlots([]);
-        return;
-      }
-      
-      setIsLoading(true);
-      try {
-        const slots = await getAvailableTimeSlots(date);
-        setAvailableTimeSlots(slots);
-      } catch (error) {
-        console.error("Error fetching available time slots:", error);
-        toast({
-          title: "Error Loading Time Slots",
-          description: "There was a problem loading available time slots. Please try again.",
-          variant: "destructive"
-        });
-        setAvailableTimeSlots([]);
-      } finally {
-        setIsLoading(false);
-      }
+    if (date) {
+      fetchTimeSlots(date);
+    } else {
+      setAvailableTimeSlots([]);
     }
-    
-    fetchTimeSlots();
-  }, [date, toast]);
+  }, [date]);
+
+  const fetchTimeSlots = async (selectedDate: Date) => {
+    setIsLoading(true);
+    try {
+      const slots = await getAvailableTimeSlots(selectedDate);
+      setAvailableTimeSlots(slots);
+    } catch (error) {
+      console.error("Error fetching available time slots:", error);
+      toast({
+        title: "Error Loading Time Slots",
+        description: "There was a problem loading available time slots. Please try again.",
+        variant: "destructive"
+      });
+      setAvailableTimeSlots([]);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   // Clear selected time if it's not in available slots
   useEffect(() => {
@@ -60,10 +105,7 @@ export function DateTimeSelector({ date, setDate, selectedTime, setSelectedTime 
     setConnectingCalendar(true);
     try {
       await connectToGoogleCalendar();
-      toast({
-        title: "Google Calendar",
-        description: "Authorization window opened. Please complete the process there.",
-      });
+      // No success toast here since we're redirecting away
     } catch (error) {
       console.error("Failed to connect to Google Calendar:", error);
       toast({
@@ -71,7 +113,6 @@ export function DateTimeSelector({ date, setDate, selectedTime, setSelectedTime 
         description: "Could not connect to Google Calendar. Please try again.",
         variant: "destructive"
       });
-    } finally {
       setConnectingCalendar(false);
     }
   };
@@ -88,15 +129,17 @@ export function DateTimeSelector({ date, setDate, selectedTime, setSelectedTime 
             variant="outline" 
             size="sm" 
             onClick={handleConnectCalendar}
-            disabled={connectingCalendar}
+            disabled={connectingCalendar || isCalendarConnected}
             className="bg-white/10 hover:bg-white/20 text-white border-white/20"
           >
             {connectingCalendar ? (
               <Loader2 className="h-4 w-4 animate-spin mr-2" />
+            ) : isCalendarConnected ? (
+              <Check className="h-4 w-4 mr-2" />
             ) : (
               <CalendarPlus className="h-4 w-4 mr-2" />
             )}
-            Connect Calendar
+            {isCalendarConnected ? "Calendar Connected" : "Connect Calendar"}
           </Button>
         </div>
         <Calendar

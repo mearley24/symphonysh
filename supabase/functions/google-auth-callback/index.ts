@@ -36,10 +36,11 @@ async function saveTokens(tokens: any) {
     .insert([
       {
         access_token: tokens.access_token,
-        refresh_token: tokens.refresh_token,
+        refresh_token: tokens.refresh_token || "", // Some flows might not return refresh token
         expiry: new Date(tokens.expiry_date).toISOString(),
       }
-    ]);
+    ])
+    .select();
     
   if (error) {
     console.error('Error saving tokens:', error);
@@ -58,6 +59,31 @@ serve(async (req) => {
   }
 
   try {
+    // Check if this is a POST request from our client-side code
+    if (req.method === "POST") {
+      const { code } = await req.json();
+      
+      if (!code) {
+        throw new Error('No authorization code provided');
+      }
+      
+      // Exchange code for tokens
+      const oauth2Client = getOAuth2Client();
+      const { tokens } = await oauth2Client.getToken(code);
+      
+      // Save tokens to database
+      await saveTokens(tokens);
+      
+      return new Response(
+        JSON.stringify({ success: true, message: "Google Calendar connected successfully" }),
+        {
+          headers: { ...corsHeaders, "Content-Type": "application/json" },
+          status: 200,
+        }
+      );
+    }
+    
+    // Direct browser access - this is called when Google redirects back to us
     // Get authorization code from URL
     const url = new URL(req.url);
     const code = url.searchParams.get('code');
@@ -66,151 +92,29 @@ serve(async (req) => {
       throw new Error('No authorization code provided');
     }
     
-    // Exchange code for tokens
-    const oauth2Client = getOAuth2Client();
-    const { tokens } = await oauth2Client.getToken(code);
+    // For the direct browser callback, we redirect back to our app
+    // with the code as a query parameter so our app can complete the flow
+    const redirectUrl = new URL('/scheduling', url.origin.replace('/functions/v1/google-auth-callback', ''));
+    redirectUrl.searchParams.set('code', code);
+    redirectUrl.searchParams.set('state', 'google_auth');
     
-    // Save tokens to database
-    await saveTokens(tokens);
-    
-    // Return success page
-    const html = `
-      <!DOCTYPE html>
-      <html>
-      <head>
-        <title>Google Calendar Connected</title>
-        <style>
-          body {
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            max-width: 600px;
-            margin: 0 auto;
-            padding: 20px;
-            text-align: center;
-          }
-          .container {
-            background-color: #f9f9f9;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            margin-top: 40px;
-          }
-          h1 {
-            color: #2c7be5;
-          }
-          .success-icon {
-            color: #28a745;
-            font-size: 64px;
-            margin-bottom: 20px;
-          }
-          p {
-            margin-bottom: 20px;
-          }
-          button {
-            background-color: #2c7be5;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 16px;
-          }
-          button:hover {
-            background-color: #1a68d1;
-          }
-        </style>
-      </head>
-      <body>
-        <div class="container">
-          <div class="success-icon">✓</div>
-          <h1>Google Calendar Connected Successfully!</h1>
-          <p>Your Symphony Smart Homes app is now connected to Google Calendar. New appointments will automatically be added to your calendar.</p>
-          <p>You can close this window and return to your application.</p>
-          <button onclick="window.close()">Close Window</button>
-        </div>
-      </body>
-      </html>
-    `;
-    
-    return new Response(html, {
-      headers: { "Content-Type": "text/html" },
-      status: 200,
+    return new Response(null, {
+      status: 302,
+      headers: {
+        ...corsHeaders,
+        "Location": redirectUrl.toString()
+      }
     });
   } catch (error) {
     console.error('Function error:', error.message);
     
-    // Return error page
-    const html = `
-      <!DOCTYPE html>
-      <html>
-      <head>
-        <title>Connection Error</title>
-        <style>
-          body {
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            max-width: 600px;
-            margin: 0 auto;
-            padding: 20px;
-            text-align: center;
-          }
-          .container {
-            background-color: #f9f9f9;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            margin-top: 40px;
-          }
-          h1 {
-            color: #dc3545;
-          }
-          .error-icon {
-            color: #dc3545;
-            font-size: 64px;
-            margin-bottom: 20px;
-          }
-          p {
-            margin-bottom: 20px;
-          }
-          pre {
-            background-color: #f5f5f5;
-            padding: 10px;
-            border-radius: 4px;
-            overflow-x: auto;
-            text-align: left;
-          }
-          button {
-            background-color: #2c7be5;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 16px;
-          }
-          button:hover {
-            background-color: #1a68d1;
-          }
-        </style>
-      </head>
-      <body>
-        <div class="container">
-          <div class="error-icon">✗</div>
-          <h1>Connection Error</h1>
-          <p>There was a problem connecting to Google Calendar:</p>
-          <pre>${error.message}</pre>
-          <p>Please try again or contact support if the problem persists.</p>
-          <button onclick="window.close()">Close Window</button>
-        </div>
-      </body>
-      </html>
-    `;
-    
-    return new Response(html, {
-      headers: { "Content-Type": "text/html" },
-      status: 500,
-    });
+    // Return error response
+    return new Response(
+      JSON.stringify({ error: error.message }),
+      {
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+        status: 500,
+      }
+    );
   }
 });
