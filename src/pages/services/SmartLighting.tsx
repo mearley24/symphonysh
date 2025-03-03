@@ -1,6 +1,7 @@
 import { ArrowLeft, Lightbulb, Sun, Clock, Smartphone } from "lucide-react";
 import { Link } from "react-router-dom";
 import SEO from "../../components/SEO";
+import Footer from "../../components/Footer";
 
 const FeatureCard = ({ icon: Icon, title, description }: { icon: any; title: string; description: string }) => (
   <div className="bg-white/5 backdrop-blur-sm p-6 rounded-lg">
@@ -79,7 +80,7 @@ const SmartLighting = () => {
             </div>
             <div className="bg-white/5 backdrop-blur-sm rounded-lg p-8">
               <img 
-                src="/lovable-uploads/499a491f-6a9a-4f6a-849b-90499909a94a.png"
+                src="https://images.unsplash.com/photo-1581090464777-f3220bbe1b8b?auto=format&fit=crop&q=80"
                 alt="Smart Lighting Control Interface with Automated Features"
                 className="rounded-lg w-full h-64 object-cover mb-6"
               />
@@ -120,11 +121,7 @@ const SmartLighting = () => {
         </div>
       </section>
 
-      <footer className="py-12 px-6 text-center text-gray-400 bg-primary">
-        <p className="text-sm">
-          © 2024 Symphony Smart Homes. All rights reserved.
-        </p>
-      </footer>
+      <Footer />
     </div>
   );
 };
