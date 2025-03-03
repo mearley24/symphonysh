@@ -1,3 +1,4 @@
+
 import { ArrowLeft, Lightbulb, Sun, Clock, Smartphone } from "lucide-react";
 import { Link } from "react-router-dom";
 import SEO from "../../components/SEO";
@@ -80,8 +81,8 @@ const SmartLighting = () => {
             </div>
             <div className="bg-white/5 backdrop-blur-sm rounded-lg p-8">
               <img 
-                src="https://images.unsplash.com/photo-1581090464777-f3220bbe1b8b?auto=format&fit=crop&q=80"
-                alt="Smart Lighting Control Interface with Automated Features"
+                src="https://images.unsplash.com/photo-1565814329452-e1efa11c5b89?auto=format&fit=crop&q=80"
+                alt="Smart Lighting System in Modern Home"
                 className="rounded-lg w-full h-64 object-cover mb-6"
               />
             </div>
