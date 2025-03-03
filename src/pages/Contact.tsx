@@ -1,11 +1,10 @@
-
 import { Mail, Phone, MapPin } from "lucide-react";
 import { useState } from "react";
 import Header from "../components/Header";
 import { useToast } from "@/components/ui/use-toast";
 import { supabase } from "@/integrations/supabase/client";
-import { Link } from "react-router-dom";
 import SEO from "../components/SEO";
+import Footer from "../components/Footer";
 
 const ContactInfo = ({ icon: Icon, title, content }: { icon: any; title: string; content: string }) => (
   <div className="flex items-center gap-4 bg-white/5 backdrop-blur-sm p-6 rounded-lg">
@@ -29,7 +28,6 @@ const Contact = () => {
     setIsSubmitting(true);
 
     try {
-      // Store message in the database directly instead of using edge function
       const { error } = await supabase
         .from('contact_submissions')
         .insert([
@@ -43,7 +41,6 @@ const Contact = () => {
         description: "We'll get back to you as soon as possible.",
       });
 
-      // Clear form
       setName("");
       setEmail("");
       setMessage("");
@@ -137,18 +134,7 @@ const Contact = () => {
         </div>
       </section>
 
-      <footer className="py-12 px-6 text-center text-gray-400 bg-primary">
-        <div className="max-w-4xl mx-auto">
-          <div className="flex flex-col md:flex-row justify-center items-center space-y-2 md:space-y-0 md:space-x-4 mb-4">
-            <Link to="/privacy" className="hover:text-white transition-colors">
-              Privacy Policy
-            </Link>
-          </div>
-          <p className="text-sm">
-            © 2024 Symphony Smart Homes. All rights reserved.
-          </p>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 };

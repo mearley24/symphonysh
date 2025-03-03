@@ -1,7 +1,7 @@
-
 import React from "react";
 import Header from "../components/Header";
 import SEO from "../components/SEO";
+import Footer from "../components/Footer";
 
 const Privacy = () => {
   return (
@@ -126,11 +126,7 @@ const Privacy = () => {
         </div>
       </section>
 
-      <footer className="py-12 px-6 text-center text-gray-400 bg-primary">
-        <p className="text-sm">
-          © 2024 Symphony Smart Homes. All rights reserved.
-        </p>
-      </footer>
+      <Footer />
     </div>
   );
 };
