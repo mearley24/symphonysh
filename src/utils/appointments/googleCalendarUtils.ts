@@ -66,7 +66,12 @@ export async function connectToGoogleCalendar() {
       
       if (isTestMode) {
         console.warn("Google OAuth app is in test mode. Only test users can authenticate.");
-        alert("Important: This app's Google integration is in test mode. You'll need to use the Google account that's been added as a test user. If you see an 'app hasn't been verified' warning, click 'Continue' (it's safe for testing). Contact the administrator if you need access.");
+        alert("Important: This app's Google integration is in test mode. You'll need to use a Google account that's been added as a test user.\n\n" +
+              "To complete Google verification, you'll need to:\n" +
+              "1. Create a demo video showing how your app uses Google Calendar\n" +
+              "2. Provide a privacy policy\n" +
+              "3. Submit for verification in Google Cloud Console\n\n" +
+              "If you see an 'app hasn't been verified' warning, click 'Continue' (it's safe for testing).");
       }
       
       // Redirect to Google Auth URL in the same window for better auth flow
@@ -92,7 +97,12 @@ export function handleGoogleAuthCallback() {
     console.error("Google auth error:", error);
     // Handle the access_denied error specifically
     if (error === 'access_denied') {
-      alert("Authentication was denied. This may happen if you're not a test user for this application or if you declined to give permission.");
+      alert("Authentication was denied. This may happen if you're not a test user for this application or if you declined to give permission.\n\n" +
+            "To verify your Google OAuth app, you need to:\n" +
+            "- Create a demonstration video showing how your app uses Google Calendar\n" +
+            "- Provide a privacy policy URL\n" +
+            "- Complete all required fields in the OAuth consent screen\n" +
+            "- Submit for verification in Google Cloud Console");
       return { error: 'access_denied' };
     }
     return { error };
