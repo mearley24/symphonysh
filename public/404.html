@@ -1,0 +1,35 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Redirecting...</title>
+  <script>
+    // Parse the URL path
+    const path = window.location.pathname;
+    const repoNameMatch = path.match(/\/([^\/]+)(\/|$)/);
+    const repoName = repoNameMatch ? repoNameMatch[1] : '';
+    
+    // Check if we're on GitHub Pages with a repo name
+    const isGitHubPages = repoName && repoName !== '404.html';
+    
+    // Get the actual path after repo name (or the full path if not on GitHub Pages)
+    const actualPath = isGitHubPages 
+      ? path.replace(`/${repoName}`, '') 
+      : path;
+    
+    // Build the redirect URL
+    const redirectUrl = window.location.origin + 
+      (isGitHubPages ? `/${repoName}` : '') + 
+      '/?redirect=' + encodeURIComponent(actualPath) +
+      window.location.search +
+      window.location.hash;
+    
+    // Redirect to the home page with the path info
+    window.location.replace(redirectUrl);
+  </script>
+</head>
+<body>
+  <p>Redirecting...</p>
+</body>
+</html>

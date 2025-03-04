@@ -1,6 +1,6 @@
 
-import React from 'react';
-import { Route, Routes, Navigate } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { Route, Routes, Navigate, useNavigate, useLocation } from 'react-router-dom';
 import Index from "./pages/Index";
 import Services from "./pages/Services";
 import About from "./pages/About";
@@ -19,6 +19,27 @@ import Terms from "./pages/Terms";
 import NotFound from "./pages/NotFound";
 
 function App() {
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  useEffect(() => {
+    // Check if we need to redirect based on the URL parameter
+    const params = new URLSearchParams(window.location.search);
+    const redirectPath = params.get('redirect');
+    
+    if (redirectPath) {
+      // Remove the 'redirect' parameter to avoid loops
+      params.delete('redirect');
+      
+      // Construct the new URL without the redirect parameter
+      const newSearch = params.toString();
+      const newPathWithSearch = redirectPath + (newSearch ? `?${newSearch}` : '');
+      
+      // Navigate to the intended path
+      navigate(newPathWithSearch, { replace: true });
+    }
+  }, [navigate]);
+
   return (
     <div className="App">
       <Routes>
