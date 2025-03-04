@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import Index from "./pages/Index";
@@ -31,10 +32,10 @@ function App() {
         <Route path="/services/shades" element={<Shades />} />
         <Route path="/services/smart-lighting" element={<SmartLighting />} />
         <Route path="/privacy" element={<Privacy />} />
+        <Route path="/terms" element={<Terms />} />
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/scheduling" element={<Scheduling />} />
-        <Route path="/terms" element={<Terms />} />
       </Routes>
     </div>
   );
