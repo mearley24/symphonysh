@@ -19,6 +19,22 @@ import Terms from "./pages/Terms";
 import NotFound from "./pages/NotFound";
 import Projects from "./pages/Projects";
 import Ava from "./pages/Ava";
+import MountedTVs from "./pages/photos/MountedTVs";
+import HomeTheater from "./pages/photos/HomeTheater";
+import Wiring from "./pages/photos/Wiring";
+
+// TV mounting subcategories
+import BCCondoFP from "./pages/photos/mounted-tvs/BCCondoFP";
+import BackboxFP from "./pages/photos/mounted-tvs/BackboxFP";
+import FPFrame from "./pages/photos/mounted-tvs/FPFrame";
+import FrameSonos from "./pages/photos/mounted-tvs/FrameSonos";
+import HP from "./pages/photos/mounted-tvs/HP";
+import Home from "./pages/photos/mounted-tvs/Home";
+import MantelMount from "./pages/photos/mounted-tvs/MantelMount";
+import Misc from "./pages/photos/mounted-tvs/Misc";
+import SingletreeFP from "./pages/photos/mounted-tvs/SingletreeFP";
+import WestVailBB from "./pages/photos/mounted-tvs/WestVailBB";
+import WoodMedia from "./pages/photos/mounted-tvs/WoodMedia";
 
 function App() {
   const navigate = useNavigate();
@@ -63,6 +79,25 @@ function App() {
         <Route path="/scheduling" element={<Scheduling />} />
         <Route path="/projects" element={<Projects />} />
         <Route path="/ava" element={<Ava />} />
+        
+        {/* Photo gallery routes */}
+        <Route path="/photos/mounted-tvs" element={<MountedTVs />} />
+        <Route path="/photos/home-theater" element={<HomeTheater />} />
+        <Route path="/photos/wiring" element={<Wiring />} />
+        
+        {/* Mounted TVs subcategory routes */}
+        <Route path="/photos/mounted-tvs/bc-condo-fp" element={<BCCondoFP />} />
+        <Route path="/photos/mounted-tvs/backbox-fp" element={<BackboxFP />} />
+        <Route path="/photos/mounted-tvs/fp-frame" element={<FPFrame />} />
+        <Route path="/photos/mounted-tvs/frame-sonos" element={<FrameSonos />} />
+        <Route path="/photos/mounted-tvs/hp" element={<HP />} />
+        <Route path="/photos/mounted-tvs/home" element={<Home />} />
+        <Route path="/photos/mounted-tvs/mantel-mount" element={<MantelMount />} />
+        <Route path="/photos/mounted-tvs/misc" element={<Misc />} />
+        <Route path="/photos/mounted-tvs/singletree-fp" element={<SingletreeFP />} />
+        <Route path="/photos/mounted-tvs/west-vail-bb" element={<WestVailBB />} />
+        <Route path="/photos/mounted-tvs/wood-media" element={<WoodMedia />} />
+        
         {/* Add a catch-all route */}
         <Route path="*" element={<NotFound />} />
       </Routes>
