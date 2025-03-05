@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { DndContext, closestCenter, KeyboardSensor, PointerSensor, useSensor, useSensors, DragEndEvent } from '@dnd-kit/core';
 import { arrayMove, SortableContext, sortableKeyboardCoordinates, useSortable, rectSortingStrategy } from '@dnd-kit/sortable';
@@ -6,7 +5,7 @@ import { CSS } from '@dnd-kit/utilities';
 import { Button } from "../ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "../ui/tabs";
 import { getFixedImagePath } from '../../utils/photos/types';
-import { ImageOff, Save, ArrowLeft, ArrowRight } from 'lucide-react';
+import { ImageOff, Save, ArrowLeft, ArrowRight, Code } from 'lucide-react';
 import { wiringPhotos } from '../../utils/photos/wiring';
 import { cn } from '../../lib/utils';
 import { toast } from "../../hooks/use-toast";
@@ -118,6 +117,7 @@ const PhotoManager = () => {
   
   const [activeTab, setActiveTab] = useState<GalleryType>('general');
   const [hasChanges, setHasChanges] = useState(false);
+  const [showCode, setShowCode] = useState(false);
 
   // Set up drag sensors
   const sensors = useSensors(
@@ -169,18 +169,10 @@ const PhotoManager = () => {
     setHasChanges(true);
   };
 
-  // Save changes to local storage
-  const saveChanges = () => {
-    localStorage.setItem('wiringPhotos', JSON.stringify(photos));
-    setHasChanges(false);
-    toast({
-      title: "Changes saved!",
-      description: "The photo order has been saved to local storage. Refresh the page to see the changes.",
-    });
-    
-    // Generate the code that would need to be updated in wiring.ts
-    const codeOutput = `
-// General Wiring
+  // Generate code for updating wiring.ts
+  const generateWiringTsCode = () => {
+    return `
+// Wiring Gallery
 export const wiringPhotos = {
   general: [
 ${photos.general.map(photo => `    "${photo}",`).join('\n')}
@@ -191,25 +183,17 @@ ${photos.rackWiring.map(photo => `    "${photo}",`).join('\n')}
   shadeWiring: [
 ${photos.shadeWiring.map(photo => `    "${photo}",`).join('\n')}
   ]
-};
-`;
-    
-    console.log("Update wiring.ts with this code:");
-    console.log(codeOutput);
+};`;
   };
 
-  // Load saved changes from local storage on component mount
-  useEffect(() => {
-    const savedPhotos = localStorage.getItem('wiringPhotos');
-    if (savedPhotos) {
-      try {
-        const parsedPhotos = JSON.parse(savedPhotos);
-        setPhotos(parsedPhotos);
-      } catch (error) {
-        console.error("Failed to parse saved photos:", error);
-      }
-    }
-  }, []);
+  // Save changes - now only generates code, doesn't use localStorage
+  const saveChanges = () => {
+    setShowCode(true);
+    toast({
+      title: "Code generated!",
+      description: "Copy the code below to update wiring.ts directly.",
+    });
+  };
 
   return (
     <div className="bg-primary text-white min-h-screen">
@@ -222,10 +206,20 @@ ${photos.shadeWiring.map(photo => `    "${photo}",`).join('\n')}
             disabled={!hasChanges}
             className={cn(!hasChanges && "opacity-50")}
           >
-            <Save className="mr-2 w-4 h-4" />
-            Save Changes
+            <Code className="mr-2 w-4 h-4" />
+            Generate Code
           </Button>
         </div>
+        
+        {showCode && (
+          <div className="mb-8 p-4 bg-gray-900 rounded-lg overflow-auto">
+            <h2 className="text-lg font-medium mb-2">Copy this code to update wiring.ts:</h2>
+            <pre className="text-sm text-gray-300 overflow-x-auto p-4 bg-black rounded">
+              {generateWiringTsCode()}
+            </pre>
+            <p className="mt-4 text-sm text-gray-400">Replace the entire content of the wiring.ts file with this code.</p>
+          </div>
+        )}
         
         <Tabs value={activeTab} onValueChange={(value) => setActiveTab(value as GalleryType)}>
           <TabsList className="mb-6">
@@ -268,8 +262,8 @@ ${photos.shadeWiring.map(photo => `    "${photo}",`).join('\n')}
           <ol className="list-decimal pl-5 space-y-2">
             <li>Drag and drop photos to reorder them within a gallery.</li>
             <li>Use the buttons that appear when hovering a photo to move it to another gallery.</li>
-            <li>Click "Save Changes" when you're done to save your changes to local storage.</li>
-            <li>Copy the code from the console log to update the wiring.ts file permanently.</li>
+            <li>Click "Generate Code" when you're done to generate the code to update wiring.ts.</li>
+            <li>Copy the generated code and replace the contents of wiring.ts with it.</li>
           </ol>
         </div>
       </div>
