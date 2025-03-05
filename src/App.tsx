@@ -22,6 +22,7 @@ import Ava from "./pages/Ava";
 import MountedTVs from "./pages/photos/MountedTVs";
 import HomeTheater from "./pages/photos/HomeTheater";
 import Wiring from "./pages/photos/Wiring";
+import WiringManager from "./pages/photos/WiringManager";
 
 // TV mounting subcategories
 import BCCondoFP from "./pages/photos/mounted-tvs/BCCondoFP";
@@ -84,6 +85,7 @@ function App() {
         <Route path="/photos/mounted-tvs" element={<MountedTVs />} />
         <Route path="/photos/home-theater" element={<HomeTheater />} />
         <Route path="/photos/wiring" element={<Wiring />} />
+        <Route path="/photos/wiring-manager" element={<WiringManager />} />
         
         {/* Mounted TVs subcategory routes */}
         <Route path="/photos/mounted-tvs/bc-condo-fp" element={<BCCondoFP />} />
