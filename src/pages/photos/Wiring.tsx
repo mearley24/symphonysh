@@ -13,12 +13,14 @@ type GalleryType = 'general' | 'rackWiring' | 'shadeWiring';
 const Wiring = () => {
   const [selectedGallery, setSelectedGallery] = useState<GalleryType>('general');
   const [loadedImages, setLoadedImages] = useState<Record<string, boolean>>({});
-  const [isLovableDev, setIsLovableDev] = useState(false);
+  const [isLovableDevEnvironment, setIsLovableDevEnvironment] = useState(false);
   
   // Check if we're in the Lovable.dev preview environment
   useEffect(() => {
     const hostname = window.location.hostname;
-    setIsLovableDev(hostname.includes('lovable.dev') || hostname.includes('localhost'));
+    const isDev = hostname.includes('lovable.dev') || hostname.includes('localhost');
+    console.log('Current hostname:', hostname, 'isDev:', isDev);
+    setIsLovableDevEnvironment(isDev);
   }, []);
   
   // Use the photos directly from the imported module
@@ -56,7 +58,7 @@ const Wiring = () => {
               Back to Projects
             </Link>
             
-            {isLovableDev && (
+            {isLovableDevEnvironment && (
               <Link to="/photos/wiring-manager">
                 <Button variant="outline" size="sm" className="text-white">
                   <Settings className="mr-2 w-4 h-4" />
