@@ -13,31 +13,30 @@
     // to the new URL with only a query string and hash fragment.
 
     // Parse the URL
-    const l = window.location;
-    const segmentCount = 1; // Adjust based on your repo name structure
-    const repoName = l.pathname.split('/')[1];  
+    var l = window.location;
     
-    // Only redirect if it's a 404 on a valid path
-    if (l.pathname.split('/').length > segmentCount && 
-        !l.pathname.includes('.') && 
-        l.hostname !== 'localhost') {
-      
-      let redirectPath = l.pathname.slice(l.pathname.indexOf('/', 1));
-      
-      // Handle case when pathname is just the repo name (e.g., /repo-name/)
-      if (redirectPath === '/' || !redirectPath) {
-        redirectPath = '/';
-      }
-      
-      // Build redirect URL
-      let redirectUrl = l.protocol + '//' + l.hostname + 
-                      (repoName ? '/' + repoName : '') + 
-                      '/?redirect=' + encodeURIComponent(redirectPath) +
-                      (l.search ? '&' + l.search.slice(1) : '') +
+    // Extract repository name from path (for GitHub Pages)
+    var pathSegments = l.pathname.split('/');
+    var repoName = pathSegments.length > 1 ? pathSegments[1] : '';
+    
+    // Check if we're on a GitHub Pages site with a custom domain or project page
+    var isGitHubPages = l.hostname.indexOf('github.io') !== -1;
+    
+    // Get the path after the repository name
+    var pathAfterRepo = isGitHubPages && repoName 
+      ? l.pathname.substring(repoName.length + 2) 
+      : l.pathname;
+    
+    // Only redirect if the path doesn't include a file extension (likely a route not a file)
+    if (!pathAfterRepo.includes('.')) {
+      // Create redirect URL
+      var redirectURL = l.protocol + '//' + l.hostname + 
+                      (isGitHubPages && repoName ? '/' + repoName : '') + 
+                      '/?p=' + encodeURIComponent(pathAfterRepo) +
+                      (l.search ? '&' + l.search.substring(1) : '') +
                       l.hash;
       
-      // Redirect to the new URL
-      window.location.replace(redirectUrl);
+      window.location.replace(redirectURL);
     }
   </script>
 </head>

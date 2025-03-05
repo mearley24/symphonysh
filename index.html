@@ -9,6 +9,20 @@
     <meta name="author" content="Symphony Smart Homes" />
     <meta property="og:image" content="/og-image.png" />
     <!-- Remove the base tag as it can interfere with routing -->
+    <!-- Single Page App redirect script -->
+    <script type="text/javascript">
+      // This script checks if a redirect is needed
+      (function(l) {
+        if (l.search[1] === '/' ) {
+          var decoded = l.search.slice(1).split('&').map(function(s) { 
+            return s.replace(/~and~/g, '&')
+          }).join('?');
+          window.history.replaceState(null, null,
+              l.pathname.slice(0, -1) + decoded + l.hash
+          );
+        }
+      }(window.location))
+    </script>
   </head>
 
   <body>

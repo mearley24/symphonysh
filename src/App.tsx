@@ -23,12 +23,13 @@ function App() {
   const location = useLocation();
 
   useEffect(() => {
-    // Check if we need to redirect based on the URL parameter
+    // Check for redirects from 404.html
     const params = new URLSearchParams(window.location.search);
-    const redirectPath = params.get('redirect');
+    const redirectPath = params.get('p') || params.get('redirect');
     
     if (redirectPath) {
-      // Remove the 'redirect' parameter to avoid loops
+      // Remove the redirect parameter
+      params.delete('p');
       params.delete('redirect');
       
       // Construct the new URL without the redirect parameter
