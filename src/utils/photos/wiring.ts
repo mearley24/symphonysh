@@ -8,8 +8,7 @@
 // Wiring Gallery
 export const wiringPhotos = {
   general: [
-    "/lovable-uploads/wiring/71674303475__8894E961-8D43-47AC-906F-6F5262138D13.JPG",
-    "/lovable-uploads/wiring/71674305301__BF3FF410-BB0F-4285-B21C-A7F9EDEBA8B3.JPG",
+    // Removed first two images
     "/lovable-uploads/wiring/71934397485__8C49F301-AD94-46A1-86EB-A779999B757F.JPG",
     "/lovable-uploads/wiring/IMG_0080.JPG",
     "/lovable-uploads/wiring/IMG_0136.JPG",
