@@ -1,19 +1,24 @@
+
 import React, { useState } from 'react';
 import Header from '../../components/Header';
 import { Link } from 'react-router-dom';
-import { ArrowLeft, ImageOff, Blinds } from 'lucide-react';
+import { ArrowLeft, Blinds } from 'lucide-react';
 import { wiringPhotos } from '../../utils/photos';
-import { getFixedImagePath } from '../../utils/photos/helpers';
+import GalleryTabButton from '../../components/photos/GalleryTabButton';
+import PhotoGalleryGrid from '../../components/photos/PhotoGalleryGrid';
+
+type GalleryType = 'general' | 'rackWiring' | 'shadeWiring';
 
 const Wiring = () => {
-  const [selectedGallery, setSelectedGallery] = useState<'general' | 'relocation' | 'rackWiring' | 'shadeWiring'>('general');
+  const [selectedGallery, setSelectedGallery] = useState<GalleryType>('general');
   const [loadedImages, setLoadedImages] = useState<Record<string, boolean>>({});
   
   // Get photos based on the selected gallery
-  const generalPhotos = wiringPhotos.general;
-  const wireRelocationPhotos = wiringPhotos.relocation;
-  const rackWiringPhotos = wiringPhotos.rackWiring;
-  const shadeWiringPhotos = wiringPhotos.shadeWiring;
+  const photos = {
+    general: wiringPhotos.general,
+    rackWiring: wiringPhotos.rackWiring,
+    shadeWiring: wiringPhotos.shadeWiring
+  };
 
   const handleImageLoad = (image: string) => {
     console.log(`Successfully loaded image: ${image}`);
@@ -26,10 +31,11 @@ const Wiring = () => {
   };
 
   // Preview images for each gallery
-  const generalPreviewImage = generalPhotos[0];
-  const relocationPreviewImage = wireRelocationPhotos[0];
-  const rackWiringPreviewImage = rackWiringPhotos[0];
-  const shadeWiringPreviewImage = shadeWiringPhotos[0];
+  const previewImages = {
+    general: photos.general[0],
+    rackWiring: photos.rackWiring[0],
+    shadeWiring: photos.shadeWiring[0]
+  };
 
   return (
     <div className="min-h-screen bg-primary">
@@ -44,213 +50,38 @@ const Wiring = () => {
           
           {/* Gallery selection tabs */}
           <div className="flex mb-8 border-b border-gray-700 overflow-x-auto">
-            <button 
-              className={`px-4 py-2 mr-4 font-medium ${selectedGallery === 'general' ? 'text-primary-foreground border-b-2 border-primary-foreground' : 'text-gray-400 hover:text-white'}`}
+            <GalleryTabButton 
+              isActive={selectedGallery === 'general'}
               onClick={() => setSelectedGallery('general')}
-            >
-              <div className="flex items-center">
-                <div className="w-8 h-8 rounded overflow-hidden mr-2 bg-secondary/30">
-                  <img 
-                    src={getFixedImagePath(generalPreviewImage)} 
-                    alt="General Wiring Preview" 
-                    className="w-full h-full object-cover"
-                    onLoad={() => handleImageLoad(generalPreviewImage)}
-                    onError={() => handleImageError(generalPreviewImage)}
-                  />
-                </div>
-                General Wiring
-              </div>
-            </button>
-            <button 
-              className={`px-4 py-2 mr-4 font-medium ${selectedGallery === 'rackWiring' ? 'text-primary-foreground border-b-2 border-primary-foreground' : 'text-gray-400 hover:text-white'}`}
+              previewImage={previewImages.general}
+              title="General Wiring"
+            />
+            
+            <GalleryTabButton 
+              isActive={selectedGallery === 'rackWiring'}
               onClick={() => setSelectedGallery('rackWiring')}
-            >
-              <div className="flex items-center">
-                <div className="w-8 h-8 rounded overflow-hidden mr-2 bg-secondary/30">
-                  <img 
-                    src={getFixedImagePath(rackWiringPreviewImage)} 
-                    alt="Rack Wiring Preview" 
-                    className="w-full h-full object-cover"
-                    onLoad={() => handleImageLoad(rackWiringPreviewImage)}
-                    onError={() => handleImageError(rackWiringPreviewImage)}
-                  />
-                </div>
-                Rack Wiring
-              </div>
-            </button>
-            <button 
-              className={`px-4 py-2 mr-4 font-medium ${selectedGallery === 'shadeWiring' ? 'text-primary-foreground border-b-2 border-primary-foreground' : 'text-gray-400 hover:text-white'}`}
+              previewImage={previewImages.rackWiring}
+              title="Rack Wiring"
+            />
+            
+            <GalleryTabButton 
+              isActive={selectedGallery === 'shadeWiring'}
               onClick={() => setSelectedGallery('shadeWiring')}
-            >
-              <div className="flex items-center">
-                <div className="w-8 h-8 rounded overflow-hidden mr-2 bg-secondary/30">
-                  <img 
-                    src={getFixedImagePath(shadeWiringPreviewImage)} 
-                    alt="Shade Wiring Preview" 
-                    className="w-full h-full object-cover"
-                    onLoad={() => handleImageLoad(shadeWiringPreviewImage)}
-                    onError={() => handleImageError(shadeWiringPreviewImage)}
-                  />
-                </div>
-                <Blinds className="w-4 h-4 mr-2" />
-                Shade Wiring
-              </div>
-            </button>
-            <button 
-              className={`px-4 py-2 font-medium ${selectedGallery === 'relocation' ? 'text-primary-foreground border-b-2 border-primary-foreground' : 'text-gray-400 hover:text-white'}`}
-              onClick={() => setSelectedGallery('relocation')}
-            >
-              <div className="flex items-center">
-                <div className="w-8 h-8 rounded overflow-hidden mr-2 bg-secondary/30">
-                  <img 
-                    src={getFixedImagePath(relocationPreviewImage)} 
-                    alt="Wire Relocation Preview" 
-                    className="w-full h-full object-cover"
-                    onLoad={() => handleImageLoad(relocationPreviewImage)}
-                    onError={() => handleImageError(relocationPreviewImage)}
-                  />
-                </div>
-                Wire Relocation
-              </div>
-            </button>
+              previewImage={previewImages.shadeWiring}
+              title="Shade Wiring"
+              icon={Blinds}
+            />
           </div>
           
-          {/* Conditional rendering based on selected gallery */}
-          {selectedGallery === 'general' && (
-            <div>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {generalPhotos.map((photo, index) => (
-                  <div 
-                    key={index} 
-                    className="aspect-video rounded-lg overflow-hidden bg-gray-800 cursor-pointer hover:opacity-90 transition relative"
-                    onClick={() => window.open(getFixedImagePath(photo), '_blank')}
-                  >
-                    {loadedImages[photo] === false ? (
-                      <div className="w-full h-full flex flex-col items-center justify-center text-gray-400 p-4">
-                        <ImageOff className="w-12 h-12 mb-2" />
-                        <p className="text-sm text-center">Image could not be loaded</p>
-                      </div>
-                    ) : (
-                      <>
-                        <div className="absolute top-2 left-2 bg-black/70 text-white px-2 py-1 rounded-md text-sm z-10">
-                          #{index + 1}
-                        </div>
-                        <img 
-                          src={getFixedImagePath(photo)}
-                          alt={`General Wiring ${index + 1}`}
-                          className="w-full h-full object-contain"
-                          onLoad={() => handleImageLoad(photo)}
-                          onError={() => handleImageError(photo)}
-                        />
-                      </>
-                    )}
-                  </div>
-                ))}
-              </div>
-            </div>
-          )}
-          
-          {selectedGallery === 'rackWiring' && (
-            <div>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {rackWiringPhotos.map((photo, index) => (
-                  <div 
-                    key={index} 
-                    className="aspect-video rounded-lg overflow-hidden bg-gray-800 cursor-pointer hover:opacity-90 transition relative"
-                    onClick={() => window.open(getFixedImagePath(photo), '_blank')}
-                  >
-                    {loadedImages[photo] === false ? (
-                      <div className="w-full h-full flex flex-col items-center justify-center text-gray-400 p-4">
-                        <ImageOff className="w-12 h-12 mb-2" />
-                        <p className="text-sm text-center">Image could not be loaded</p>
-                      </div>
-                    ) : (
-                      <>
-                        <div className="absolute top-2 left-2 bg-black/70 text-white px-2 py-1 rounded-md text-sm z-10">
-                          #{index + 1}
-                        </div>
-                        <img 
-                          src={getFixedImagePath(photo)}
-                          alt={`Rack Wiring ${index + 1}`}
-                          className="w-full h-full object-contain"
-                          onLoad={() => handleImageLoad(photo)}
-                          onError={() => handleImageError(photo)}
-                        />
-                      </>
-                    )}
-                  </div>
-                ))}
-              </div>
-            </div>
-          )}
-          
-          {selectedGallery === 'shadeWiring' && (
-            <div>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {shadeWiringPhotos.map((photo, index) => (
-                  <div 
-                    key={index} 
-                    className="aspect-video rounded-lg overflow-hidden bg-gray-800 cursor-pointer hover:opacity-90 transition relative"
-                    onClick={() => window.open(getFixedImagePath(photo), '_blank')}
-                  >
-                    {loadedImages[photo] === false ? (
-                      <div className="w-full h-full flex flex-col items-center justify-center text-gray-400 p-4">
-                        <ImageOff className="w-12 h-12 mb-2" />
-                        <p className="text-sm text-center">Image could not be loaded</p>
-                      </div>
-                    ) : (
-                      <>
-                        <div className="absolute top-2 left-2 bg-black/70 text-white px-2 py-1 rounded-md text-sm z-10">
-                          #{index + 1}
-                        </div>
-                        <img 
-                          src={getFixedImagePath(photo)}
-                          alt={`Shade Wiring ${index + 1}`}
-                          className="w-full h-full object-contain"
-                          onLoad={() => handleImageLoad(photo)}
-                          onError={() => handleImageError(photo)}
-                        />
-                      </>
-                    )}
-                  </div>
-                ))}
-              </div>
-            </div>
-          )}
-          
-          {selectedGallery === 'relocation' && (
-            <div>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {wireRelocationPhotos.map((photo, index) => (
-                  <div 
-                    key={index} 
-                    className="aspect-video rounded-lg overflow-hidden bg-gray-800 cursor-pointer hover:opacity-90 transition relative"
-                    onClick={() => window.open(getFixedImagePath(photo), '_blank')}
-                  >
-                    {loadedImages[photo] === false ? (
-                      <div className="w-full h-full flex flex-col items-center justify-center text-gray-400 p-4">
-                        <ImageOff className="w-12 h-12 mb-2" />
-                        <p className="text-sm text-center">Image could not be loaded</p>
-                      </div>
-                    ) : (
-                      <>
-                        <div className="absolute top-2 left-2 bg-black/70 text-white px-2 py-1 rounded-md text-sm z-10">
-                          #{index + 1}
-                        </div>
-                        <img 
-                          src={getFixedImagePath(photo)}
-                          alt={`Wire Relocation ${index + 1}`}
-                          className="w-full h-full object-contain"
-                          onLoad={() => handleImageLoad(photo)}
-                          onError={() => handleImageError(photo)}
-                        />
-                      </>
-                    )}
-                  </div>
-                ))}
-              </div>
-            </div>
-          )}
+          {/* Render the selected gallery */}
+          <PhotoGalleryGrid 
+            photos={photos[selectedGallery]}
+            galleryName={selectedGallery === 'general' ? 'General Wiring' : 
+                        selectedGallery === 'rackWiring' ? 'Rack Wiring' : 'Shade Wiring'}
+            loadedImages={loadedImages}
+            onImageLoad={handleImageLoad}
+            onImageError={handleImageError}
+          />
         </div>
       </section>
     </div>
