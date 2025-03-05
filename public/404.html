@@ -5,31 +5,44 @@
   <meta charset="utf-8">
   <title>Redirecting...</title>
   <script>
-    // Parse the URL path
-    const path = window.location.pathname;
-    const repoNameMatch = path.match(/\/([^\/]+)(\/|$)/);
-    const repoName = repoNameMatch ? repoNameMatch[1] : '';
+    // Single Page Apps for GitHub Pages
+    // MIT License
+    // https://github.com/rafgraph/spa-github-pages
+    // This script takes the current URL and converts the path and query
+    // string into just a query string, and then redirects the browser
+    // to the new URL with only a query string and hash fragment.
+
+    // Parse the URL
+    const l = window.location;
+    const segmentCount = 1; // Adjust based on your repo name structure
+    const repoName = l.pathname.split('/')[1];  
     
-    // Check if we're on GitHub Pages with a repo name
-    const isGitHubPages = repoName && repoName !== '404.html';
-    
-    // Get the actual path after repo name (or the full path if not on GitHub Pages)
-    const actualPath = isGitHubPages 
-      ? path.replace(`/${repoName}`, '') 
-      : path;
-    
-    // Build the redirect URL
-    const redirectUrl = window.location.origin + 
-      (isGitHubPages ? `/${repoName}` : '') + 
-      '/?redirect=' + encodeURIComponent(actualPath) +
-      window.location.search +
-      window.location.hash;
-    
-    // Redirect to the home page with the path info
-    window.location.replace(redirectUrl);
+    // Only redirect if it's a 404 on a valid path
+    if (l.pathname.split('/').length > segmentCount && 
+        !l.pathname.includes('.') && 
+        l.hostname !== 'localhost') {
+      
+      let redirectPath = l.pathname.slice(l.pathname.indexOf('/', 1));
+      
+      // Handle case when pathname is just the repo name (e.g., /repo-name/)
+      if (redirectPath === '/' || !redirectPath) {
+        redirectPath = '/';
+      }
+      
+      // Build redirect URL
+      let redirectUrl = l.protocol + '//' + l.hostname + 
+                      (repoName ? '/' + repoName : '') + 
+                      '/?redirect=' + encodeURIComponent(redirectPath) +
+                      (l.search ? '&' + l.search.slice(1) : '') +
+                      l.hash;
+      
+      // Redirect to the new URL
+      window.location.replace(redirectUrl);
+    }
   </script>
 </head>
 <body>
-  <p>Redirecting...</p>
+  <h1>Page not found</h1>
+  <p>If you're not being redirected automatically, <a href="/">click here to go to the homepage</a>.</p>
 </body>
 </html>
