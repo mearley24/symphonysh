@@ -1,4 +1,3 @@
-
 /**
  * Wiring Gallery Data
  * 
@@ -16,7 +15,8 @@ export const wiringPhotos = {
     // Original general wiring photos follow
     "/lovable-uploads/wiring/71934397485__8C49F301-AD94-46A1-86EB-A779999B757F.JPG",
     // Removed IMG_1161.JPG (was #5/index 4, now moved to Rack Wiring)
-    // Removed IMG_1499.JPG (was #6/index 5, now moved to Rack Wiring)
+    // Re-adding IMG_1499.JPG from Rack Wiring
+    "/lovable-uploads/wiring/IMG_1499.JPG",
     "/lovable-uploads/wiring/IMG_1755.JPG",
     // Adding all Wire Relocation photos
     "/lovable-uploads/wiring/IMG_0611.JPG",
@@ -34,8 +34,7 @@ export const wiringPhotos = {
     "/lovable-uploads/wiring/IMG_0578.JPG",
     "/lovable-uploads/wiring/IMG_1139.JPG",
     "/lovable-uploads/wiring/IMG_1311.JPG",
-    // Added #6 and #3 from General Wiring
-    "/lovable-uploads/wiring/IMG_1499.JPG",
+    // Keeping #7 (previously #3 from General Wiring)
     "/lovable-uploads/wiring/IMG_1161.JPG",
     // Removed IMG_1312.JPG (was #5)
     // Removed IMG_1313.JPG and IMG_1320.JPG (were #6 and #7)
