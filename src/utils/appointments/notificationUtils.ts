@@ -1,4 +1,3 @@
-
 import { supabase } from "../../integrations/supabase/client";
 import { AppointmentNotificationPayload, getServiceName } from "./types";
 
@@ -24,7 +23,7 @@ export async function sendEmailNotification(appointment: any, serviceName: strin
   
   try {
     // First try the direct fetch approach for better error visibility
-    const functionUrl = "https://bxsdjxkbhjtdrrtjtyto.supabase.co/functions/v1/notify-appointment";
+    const functionUrl = "https://symphonysh.supabase.co/functions/v1/notify-appointment";
     console.log("Using direct fetch to URL:", functionUrl);
     
     // Get the session token for authorization
