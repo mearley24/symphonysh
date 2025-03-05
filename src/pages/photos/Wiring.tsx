@@ -14,6 +14,13 @@ const Wiring = () => {
   const [selectedGallery, setSelectedGallery] = useState<GalleryType>('general');
   const [loadedImages, setLoadedImages] = useState<Record<string, boolean>>({});
   const [localPhotos, setLocalPhotos] = useState<typeof wiringPhotos | null>(null);
+  const [isLovableDev, setIsLovableDev] = useState(false);
+  
+  // Check if we're in the Lovable.dev preview environment
+  useEffect(() => {
+    const hostname = window.location.hostname;
+    setIsLovableDev(hostname.includes('lovable.dev') || hostname.includes('localhost'));
+  }, []);
   
   // Check if we have locally stored photo order
   useEffect(() => {
@@ -66,12 +73,14 @@ const Wiring = () => {
               Back to Projects
             </Link>
             
-            <Link to="/photos/wiring-manager">
-              <Button variant="outline" size="sm" className="text-white">
-                <Settings className="mr-2 w-4 h-4" />
-                Manage Photos
-              </Button>
-            </Link>
+            {isLovableDev && (
+              <Link to="/photos/wiring-manager">
+                <Button variant="outline" size="sm" className="text-white">
+                  <Settings className="mr-2 w-4 h-4" />
+                  Manage Photos
+                </Button>
+              </Link>
+            )}
           </div>
           
           <h1 className="text-4xl font-bold text-white mb-8">Wiring</h1>
