@@ -31,6 +31,7 @@ const SERVICES = [
   { id: "security-systems", name: "Security Systems" },
   { id: "maintenance", name: "Troubleshooting & Maintenance" },
   { id: "matterport-scan", name: "Matterport Scan" },
+  { id: "ava", name: "AVA Smart Remote" },
 ];
 
 export function AppointmentForm({

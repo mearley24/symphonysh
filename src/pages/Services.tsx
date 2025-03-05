@@ -1,5 +1,5 @@
 
-import { ArrowRight, Home, Shield, Lightbulb, Thermometer, Camera, Speaker, Network, Sun, Wrench } from "lucide-react";
+import { ArrowRight, Home, Shield, Lightbulb, Thermometer, Camera, Speaker, Network, Sun, Wrench, Smartphone } from "lucide-react";
 import { Link } from "react-router-dom";
 import Header from "../components/Header";
 import SEO from "../components/SEO";
@@ -82,6 +82,12 @@ const Services = () => {
                 title="Troubleshooting & Maintenance"
                 description="Professional system maintenance and technical support services."
                 link="/services/maintenance"
+              />
+              <ServiceCard
+                icon={Smartphone}
+                title="AVA Smart Remote"
+                description="The future of home control in your hands. Simple, intuitive, and powerful."
+                link="/ava"
               />
             </div>
           </div>

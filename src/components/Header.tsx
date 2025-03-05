@@ -127,7 +127,7 @@ const Header = () => {
                 <DropdownMenuItem>
                   <Link
                     to="/ava"
-                    className="w-full text-sm text-gray-300 hover:text-white"
+                    className="w-full text-sm text-gray-300 hover:text-white font-medium"
                   >
                     AVA Smart Remote
                   </Link>
