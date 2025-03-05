@@ -23,7 +23,7 @@ export const wiringPhotos = {
   rackWiring: [
     // Moved #1 from shadeWiring to rackWiring
     "/lovable-uploads/wiring/IMG_0136.JPG",
-    "/lovable-uploads/wiring/IMG_0080.JPG",
+    // Removed image #2 "/lovable-uploads/wiring/IMG_0080.JPG"
     "/lovable-uploads/wiring/IMG_0137.JPG",
     "/lovable-uploads/wiring/IMG_1138.JPG",
     // Adding photos #2 and #3 from General Wiring
