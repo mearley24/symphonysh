@@ -48,12 +48,12 @@ export function AppointmentForm({
           Service *
         </label>
         <Select value={service} onValueChange={setService}>
-          <SelectTrigger className="w-full bg-white/5 border border-white/10 text-white">
+          <SelectTrigger className="w-full bg-accent hover:bg-accent/90 text-white border-none">
             <SelectValue placeholder="Select a service" />
           </SelectTrigger>
-          <SelectContent>
+          <SelectContent className="bg-[rgb(0,9,24)] border-white/10">
             {SERVICES.map((service) => (
-              <SelectItem key={service.id} value={service.id}>
+              <SelectItem key={service.id} value={service.id} className="text-white hover:bg-accent/20 focus:bg-accent/20">
                 {service.name}
               </SelectItem>
             ))}
