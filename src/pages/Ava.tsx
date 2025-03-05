@@ -1,6 +1,8 @@
 
 import { ArrowLeft, Download, Smartphone, Wifi, Settings, Timer } from "lucide-react";
 import { Link } from "react-router-dom";
+import Header from "../components/Header";
+import SEO from "../components/SEO";
 
 const FeatureCard = ({ icon: Icon, title, description }: { icon: any; title: string; description: string }) => (
   <div className="bg-white/5 backdrop-blur-sm p-6 rounded-lg">
@@ -13,6 +15,12 @@ const FeatureCard = ({ icon: Icon, title, description }: { icon: any; title: str
 const Ava = () => {
   return (
     <div className="min-h-screen bg-primary">
+      <SEO 
+        title="AVA Smart Remote | Symphony Smart Homes"
+        description="Experience the future of home control with AVA Smart Remote - simple, intuitive, and powerful remote control for your smart home."
+        keywords="smart remote, home automation remote, smart home control, AVA remote, Symphony Smart Homes"
+      />
+      <Header />
       <section className="pt-32 pb-20 px-6">
         <div className="max-w-6xl mx-auto">
           <Link to="/" className="inline-flex items-center text-accent hover:text-accent/90 mb-8">
@@ -34,7 +42,7 @@ const Ava = () => {
               </p>
               <div className="space-y-4">
                 <a 
-                  href="https://bxsdjxkbhjtdrrtjtyto.supabase.co/storage/v1/object/public/ava-docs/AVA_User_Manual.pdf"
+                  href="https://symphonysh.supabase.co/storage/v1/object/public/ava-docs/AVA_User_Manual.pdf"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 bg-accent hover:bg-accent/90 text-white px-4 py-2 rounded-md transition-colors"
@@ -46,7 +54,7 @@ const Ava = () => {
             </div>
             <div className="bg-white/5 backdrop-blur-sm rounded-lg p-8">
               <img 
-                src="https://bxsdjxkbhjtdrrtjtyto.supabase.co/storage/v1/object/public/ava-docs/AVA_Remote.jpg"
+                src="https://symphonysh.supabase.co/storage/v1/object/public/ava-docs/AVA_Remote.jpg"
                 alt="AVA Smart Remote"
                 className="rounded-lg w-full h-64 object-cover mb-6"
               />

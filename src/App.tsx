@@ -17,6 +17,8 @@ import SmartLighting from "./pages/services/SmartLighting";
 import Privacy from "./pages/Privacy";
 import Terms from "./pages/Terms";
 import NotFound from "./pages/NotFound";
+import Projects from "./pages/Projects";
+import Ava from "./pages/Ava";
 
 function App() {
   const navigate = useNavigate();
@@ -59,6 +61,8 @@ function App() {
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/scheduling" element={<Scheduling />} />
+        <Route path="/projects" element={<Projects />} />
+        <Route path="/ava" element={<Ava />} />
         {/* Add a catch-all route */}
         <Route path="*" element={<NotFound />} />
       </Routes>
