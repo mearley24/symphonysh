@@ -34,9 +34,12 @@ const MountedTVs = () => {
               <Link 
                 key={index}
                 to={category.path}
-                className="bg-secondary/50 rounded-lg overflow-hidden group hover:bg-secondary/80 transition-all duration-300"
+                className="bg-secondary/50 rounded-lg overflow-hidden group hover:bg-secondary/80 transition-all duration-300 relative"
               >
-                <div className="aspect-video overflow-hidden bg-secondary/30">
+                <div className="aspect-video overflow-hidden bg-secondary/30 relative">
+                  <div className="absolute top-2 left-2 bg-black/70 text-white px-2 py-1 rounded-md text-sm z-10">
+                    Category #{index + 1}
+                  </div>
                   {loadedImages[category.image] === false ? (
                     <div className="w-full h-full flex flex-col items-center justify-center text-gray-400 p-4">
                       <ImageOff className="w-12 h-12 mb-2" />
@@ -54,6 +57,7 @@ const MountedTVs = () => {
                 </div>
                 <div className="p-4">
                   <h3 className="text-lg font-semibold text-white">{category.title}</h3>
+                  <p className="text-xs text-gray-300">{category.photos.length} photos</p>
                 </div>
               </Link>
             ))}

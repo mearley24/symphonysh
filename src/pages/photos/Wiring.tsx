@@ -83,7 +83,7 @@ const Wiring = () => {
                 {generalPhotos.map((photo, index) => (
                   <div 
                     key={index} 
-                    className="aspect-video rounded-lg overflow-hidden bg-gray-800 cursor-pointer hover:opacity-90 transition"
+                    className="aspect-video rounded-lg overflow-hidden bg-gray-800 cursor-pointer hover:opacity-90 transition relative"
                     onClick={() => window.open(getFixedImagePath(photo), '_blank')}
                   >
                     {loadedImages[photo] === false ? (
@@ -92,13 +92,18 @@ const Wiring = () => {
                         <p className="text-sm text-center">Image could not be loaded</p>
                       </div>
                     ) : (
-                      <img 
-                        src={getFixedImagePath(photo)}
-                        alt={`General Wiring ${index + 1}`}
-                        className="w-full h-full object-contain"
-                        onLoad={() => handleImageLoad(photo)}
-                        onError={() => handleImageError(photo)}
-                      />
+                      <>
+                        <div className="absolute top-2 left-2 bg-black/70 text-white px-2 py-1 rounded-md text-sm z-10">
+                          #{index + 1}
+                        </div>
+                        <img 
+                          src={getFixedImagePath(photo)}
+                          alt={`General Wiring ${index + 1}`}
+                          className="w-full h-full object-contain"
+                          onLoad={() => handleImageLoad(photo)}
+                          onError={() => handleImageError(photo)}
+                        />
+                      </>
                     )}
                   </div>
                 ))}
@@ -110,7 +115,7 @@ const Wiring = () => {
                 {wireRelocationPhotos.map((photo, index) => (
                   <div 
                     key={index} 
-                    className="aspect-video rounded-lg overflow-hidden bg-gray-800 cursor-pointer hover:opacity-90 transition"
+                    className="aspect-video rounded-lg overflow-hidden bg-gray-800 cursor-pointer hover:opacity-90 transition relative"
                     onClick={() => window.open(getFixedImagePath(photo), '_blank')}
                   >
                     {loadedImages[photo] === false ? (
@@ -119,13 +124,18 @@ const Wiring = () => {
                         <p className="text-sm text-center">Image could not be loaded</p>
                       </div>
                     ) : (
-                      <img 
-                        src={getFixedImagePath(photo)}
-                        alt={`Wire Relocation ${index + 1}`}
-                        className="w-full h-full object-contain"
-                        onLoad={() => handleImageLoad(photo)}
-                        onError={() => handleImageError(photo)}
-                      />
+                      <>
+                        <div className="absolute top-2 left-2 bg-black/70 text-white px-2 py-1 rounded-md text-sm z-10">
+                          #{index + 1}
+                        </div>
+                        <img 
+                          src={getFixedImagePath(photo)}
+                          alt={`Wire Relocation ${index + 1}`}
+                          className="w-full h-full object-contain"
+                          onLoad={() => handleImageLoad(photo)}
+                          onError={() => handleImageError(photo)}
+                        />
+                      </>
                     )}
                   </div>
                 ))}

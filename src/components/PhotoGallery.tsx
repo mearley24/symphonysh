@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import Header from './Header';
 import { Link } from 'react-router-dom';
@@ -64,7 +65,7 @@ const PhotoGallery: React.FC<PhotoGalleryProps> = ({
               {processedPhotos.map((photo, index) => (
                 <div 
                   key={index} 
-                  className="aspect-video rounded-lg overflow-hidden cursor-pointer group bg-secondary/20"
+                  className="aspect-video rounded-lg overflow-hidden cursor-pointer group bg-secondary/20 relative"
                   onClick={() => loadedImages[photo] && setSelectedImage(photo)}
                 >
                   {loadedImages[photo] === false ? (
@@ -73,13 +74,18 @@ const PhotoGallery: React.FC<PhotoGalleryProps> = ({
                       <p className="text-sm text-center">Image could not be loaded</p>
                     </div>
                   ) : (
-                    <img 
-                      src={getFixedImagePath(photo)} 
-                      alt={`${title} ${index + 1}`} 
-                      className="w-full h-full object-cover transform transition-all duration-300 scale-95 group-hover:scale-110"
-                      onLoad={() => handleImageLoad(photo)}
-                      onError={() => handleImageError(photo)}
-                    />
+                    <>
+                      <div className="absolute top-2 left-2 bg-black/70 text-white px-2 py-1 rounded-md text-sm z-10">
+                        #{index + 1}
+                      </div>
+                      <img 
+                        src={getFixedImagePath(photo)} 
+                        alt={`${title} ${index + 1}`} 
+                        className="w-full h-full object-cover transform transition-all duration-300 scale-95 group-hover:scale-110"
+                        onLoad={() => handleImageLoad(photo)}
+                        onError={() => handleImageError(photo)}
+                      />
+                    </>
                   )}
                 </div>
               ))}
@@ -99,26 +105,31 @@ const PhotoGallery: React.FC<PhotoGalleryProps> = ({
           >
             <X className="w-8 h-8" />
           </button>
-          <img 
-            src={getFixedImagePath(selectedImage)} 
-            alt="Full size view" 
-            className="max-w-full max-h-[90vh] object-contain"
-            onClick={(e) => e.stopPropagation()}
-            onError={(e) => {
-              console.error(`Failed to load full size image: ${selectedImage}`);
-              const div = document.createElement('div');
-              div.className = "flex flex-col items-center justify-center text-white";
-              div.innerHTML = `
-                <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mb-4">
-                  <line x1="2" y1="2" x2="22" y2="22"></line>
-                  <path d="M10.41 10.41a2 2 0 1 1 3.18 3.18"></path>
-                  <circle cx="12" cy="12" r="10"></circle>
-                </svg>
-                <p>Image could not be loaded</p>
-              `;
-              e.currentTarget.parentNode?.replaceChild(div, e.currentTarget);
-            }}
-          />
+          <div className="relative max-w-full max-h-[90vh]">
+            <img 
+              src={getFixedImagePath(selectedImage)} 
+              alt="Full size view" 
+              className="max-w-full max-h-[90vh] object-contain"
+              onClick={(e) => e.stopPropagation()}
+              onError={(e) => {
+                console.error(`Failed to load full size image: ${selectedImage}`);
+                const div = document.createElement('div');
+                div.className = "flex flex-col items-center justify-center text-white";
+                div.innerHTML = `
+                  <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mb-4">
+                    <line x1="2" y1="2" x2="22" y2="22"></line>
+                    <path d="M10.41 10.41a2 2 0 1 1 3.18 3.18"></path>
+                    <circle cx="12" cy="12" r="10"></circle>
+                  </svg>
+                  <p>Image could not be loaded</p>
+                `;
+                e.currentTarget.parentNode?.replaceChild(div, e.currentTarget);
+              }}
+            />
+            <div className="absolute top-2 left-2 bg-black/70 text-white px-2 py-1 rounded-md text-sm">
+              #{processedPhotos.indexOf(selectedImage) + 1}
+            </div>
+          </div>
         </div>
       )}
     </div>
