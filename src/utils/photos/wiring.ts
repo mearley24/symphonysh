@@ -8,7 +8,9 @@
 // Wiring Gallery
 export const wiringPhotos = {
   general: [
-    // Adding 6th and 7th photos from Rack Wiring as #1 and #2
+    // Moving #6 from Rack Wiring to be #1 in General Wiring
+    "/lovable-uploads/wiring/IMG_1322.JPG",
+    // Previous #1 and #2 from moving 6th and 7th photos from Rack Wiring
     "/lovable-uploads/wiring/IMG_1313.JPG",
     "/lovable-uploads/wiring/IMG_1320.JPG",
     // Original general wiring photos follow
@@ -35,7 +37,7 @@ export const wiringPhotos = {
     // Removed IMG_1312.JPG (was #5)
     // Removed IMG_1313.JPG and IMG_1320.JPG (were #6 and #7)
     // IMG_1321.JPG removed (was #8)
-    "/lovable-uploads/wiring/IMG_1322.JPG",
+    // Removed IMG_1322.JPG (was #6)
     "/lovable-uploads/wiring/IMG_1323.JPG",
     "/lovable-uploads/wiring/IMG_1324.JPG"
   ],
