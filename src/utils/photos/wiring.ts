@@ -21,8 +21,8 @@ export const wiringPhotos = {
     "/lovable-uploads/wiring/IMG_1733.JPG"
   ],
   rackWiring: [
-    // Removed image #1 (now moved to shadeWiring)
-    // Remove #5 (IMG_1312.JPG) and #8 (IMG_1321.JPG)
+    // Moved #1 from shadeWiring to rackWiring
+    "/lovable-uploads/wiring/IMG_0136.JPG",
     "/lovable-uploads/wiring/IMG_0080.JPG",
     "/lovable-uploads/wiring/IMG_0137.JPG",
     "/lovable-uploads/wiring/IMG_1138.JPG",
@@ -39,7 +39,8 @@ export const wiringPhotos = {
     "/lovable-uploads/wiring/IMG_1324.JPG"
   ],
   shadeWiring: [
-    "/lovable-uploads/wiring/IMG_0136.JPG", // Image #1 from Rack Wiring
+    // Moved #1 from rackWiring to shadeWiring
+    "/lovable-uploads/wiring/IMG_0080.JPG",
     "/lovable-uploads/wiring/IMG_0228 2.JPG" // Image #2 from General Wiring
   ]
 };
