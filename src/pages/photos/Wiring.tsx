@@ -21,7 +21,7 @@ const Wiring = () => {
     setIsLovableDev(hostname.includes('lovable.dev') || hostname.includes('localhost'));
   }, []);
   
-  // Use the photos directly from the imported module - no localStorage check
+  // Use the photos directly from the imported module
   const photos = {
     general: wiringPhotos.general,
     rackWiring: wiringPhotos.rackWiring,
