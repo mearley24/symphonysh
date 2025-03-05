@@ -10,8 +10,7 @@ export const wiringPhotos = {
   general: [
     // Removed first two images and image #2 (now moved to shadeWiring)
     "/lovable-uploads/wiring/71934397485__8C49F301-AD94-46A1-86EB-A779999B757F.JPG",
-    "/lovable-uploads/wiring/IMG_0578.JPG",
-    "/lovable-uploads/wiring/IMG_1139.JPG",
+    // Removed images #2 "/lovable-uploads/wiring/IMG_0578.JPG" and #3 "/lovable-uploads/wiring/IMG_1139.JPG" (moved to rackWiring)
     "/lovable-uploads/wiring/IMG_1161.JPG",
     "/lovable-uploads/wiring/IMG_1499.JPG",
     "/lovable-uploads/wiring/IMG_1755.JPG",
@@ -27,6 +26,9 @@ export const wiringPhotos = {
     "/lovable-uploads/wiring/IMG_0080.JPG",
     "/lovable-uploads/wiring/IMG_0137.JPG",
     "/lovable-uploads/wiring/IMG_1138.JPG",
+    // Adding photos #2 and #3 from General Wiring
+    "/lovable-uploads/wiring/IMG_0578.JPG",
+    "/lovable-uploads/wiring/IMG_1139.JPG",
     "/lovable-uploads/wiring/IMG_1311.JPG",
     // IMG_1312.JPG removed (was #5)
     "/lovable-uploads/wiring/IMG_1313.JPG",
