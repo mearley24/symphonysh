@@ -1,3 +1,4 @@
+
 /**
  * Wiring Gallery Data
  * 
@@ -7,9 +8,8 @@
 // Wiring Gallery
 export const wiringPhotos = {
   general: [
-    // Removed first two images
+    // Removed first two images and image #2 (now moved to shadeWiring)
     "/lovable-uploads/wiring/71934397485__8C49F301-AD94-46A1-86EB-A779999B757F.JPG",
-    "/lovable-uploads/wiring/IMG_0228 2.JPG",
     "/lovable-uploads/wiring/IMG_0578.JPG",
     "/lovable-uploads/wiring/IMG_1139.JPG",
     "/lovable-uploads/wiring/IMG_1161.JPG",
@@ -23,8 +23,8 @@ export const wiringPhotos = {
     "/lovable-uploads/wiring/IMG_1733.JPG"
   ],
   rackWiring: [
+    // Removed image #1 (now moved to shadeWiring)
     "/lovable-uploads/wiring/IMG_0080.JPG",
-    "/lovable-uploads/wiring/IMG_0136.JPG",
     "/lovable-uploads/wiring/IMG_0137.JPG",
     "/lovable-uploads/wiring/IMG_1138.JPG",
     "/lovable-uploads/wiring/IMG_1311.JPG",
@@ -35,5 +35,9 @@ export const wiringPhotos = {
     "/lovable-uploads/wiring/IMG_1322.JPG",
     "/lovable-uploads/wiring/IMG_1323.JPG",
     "/lovable-uploads/wiring/IMG_1324.JPG"
+  ],
+  shadeWiring: [
+    "/lovable-uploads/wiring/IMG_0136.JPG", // Image #1 from Rack Wiring
+    "/lovable-uploads/wiring/IMG_0228 2.JPG" // Image #2 from General Wiring
   ]
 };

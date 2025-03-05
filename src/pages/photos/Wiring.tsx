@@ -1,18 +1,19 @@
-
 import React, { useState } from 'react';
 import Header from '../../components/Header';
 import { Link } from 'react-router-dom';
-import { ArrowLeft, ImageOff } from 'lucide-react';
-import { wiringPhotos, getFixedImagePath } from '../../utils/photoUtils';
+import { ArrowLeft, ImageOff, Blinds } from 'lucide-react';
+import { wiringPhotos } from '../../utils/photos';
+import { getFixedImagePath } from '../../utils/photos/helpers';
 
 const Wiring = () => {
-  const [selectedGallery, setSelectedGallery] = useState<'general' | 'relocation' | 'rackWiring'>('general');
+  const [selectedGallery, setSelectedGallery] = useState<'general' | 'relocation' | 'rackWiring' | 'shadeWiring'>('general');
   const [loadedImages, setLoadedImages] = useState<Record<string, boolean>>({});
   
   // Get photos based on the selected gallery
   const generalPhotos = wiringPhotos.general;
   const wireRelocationPhotos = wiringPhotos.relocation;
   const rackWiringPhotos = wiringPhotos.rackWiring;
+  const shadeWiringPhotos = wiringPhotos.shadeWiring;
 
   const handleImageLoad = (image: string) => {
     console.log(`Successfully loaded image: ${image}`);
@@ -28,6 +29,7 @@ const Wiring = () => {
   const generalPreviewImage = generalPhotos[0];
   const relocationPreviewImage = wireRelocationPhotos[0];
   const rackWiringPreviewImage = rackWiringPhotos[0];
+  const shadeWiringPreviewImage = shadeWiringPhotos[0];
 
   return (
     <div className="min-h-screen bg-primary">
@@ -74,6 +76,24 @@ const Wiring = () => {
                   />
                 </div>
                 Rack Wiring
+              </div>
+            </button>
+            <button 
+              className={`px-4 py-2 mr-4 font-medium ${selectedGallery === 'shadeWiring' ? 'text-primary-foreground border-b-2 border-primary-foreground' : 'text-gray-400 hover:text-white'}`}
+              onClick={() => setSelectedGallery('shadeWiring')}
+            >
+              <div className="flex items-center">
+                <div className="w-8 h-8 rounded overflow-hidden mr-2 bg-secondary/30">
+                  <img 
+                    src={getFixedImagePath(shadeWiringPreviewImage)} 
+                    alt="Shade Wiring Preview" 
+                    className="w-full h-full object-cover"
+                    onLoad={() => handleImageLoad(shadeWiringPreviewImage)}
+                    onError={() => handleImageError(shadeWiringPreviewImage)}
+                  />
+                </div>
+                <Blinds className="w-4 h-4 mr-2" />
+                Shade Wiring
               </div>
             </button>
             <button 
@@ -152,6 +172,40 @@ const Wiring = () => {
                         <img 
                           src={getFixedImagePath(photo)}
                           alt={`Rack Wiring ${index + 1}`}
+                          className="w-full h-full object-contain"
+                          onLoad={() => handleImageLoad(photo)}
+                          onError={() => handleImageError(photo)}
+                        />
+                      </>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+          
+          {selectedGallery === 'shadeWiring' && (
+            <div>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {shadeWiringPhotos.map((photo, index) => (
+                  <div 
+                    key={index} 
+                    className="aspect-video rounded-lg overflow-hidden bg-gray-800 cursor-pointer hover:opacity-90 transition relative"
+                    onClick={() => window.open(getFixedImagePath(photo), '_blank')}
+                  >
+                    {loadedImages[photo] === false ? (
+                      <div className="w-full h-full flex flex-col items-center justify-center text-gray-400 p-4">
+                        <ImageOff className="w-12 h-12 mb-2" />
+                        <p className="text-sm text-center">Image could not be loaded</p>
+                      </div>
+                    ) : (
+                      <>
+                        <div className="absolute top-2 left-2 bg-black/70 text-white px-2 py-1 rounded-md text-sm z-10">
+                          #{index + 1}
+                        </div>
+                        <img 
+                          src={getFixedImagePath(photo)}
+                          alt={`Shade Wiring ${index + 1}`}
                           className="w-full h-full object-contain"
                           onLoad={() => handleImageLoad(photo)}
                           onError={() => handleImageError(photo)}
