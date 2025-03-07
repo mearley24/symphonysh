@@ -15,7 +15,11 @@ const GalleryControlButtons = ({
   toggleEditMode, 
   isLovableDevEnvironment 
 }: GalleryControlButtonsProps) => {
+  console.log('GalleryControlButtons render with isLovableDevEnvironment:', isLovableDevEnvironment);
+  
+  // Force buttons to be visible for debugging
   if (!isLovableDevEnvironment) {
+    console.log('Button not showing because isLovableDevEnvironment is false');
     return null;
   }
 

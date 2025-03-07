@@ -23,7 +23,10 @@ const Wiring = () => {
   // Check if we're in the Lovable.dev preview environment
   useEffect(() => {
     const hostname = window.location.hostname;
-    const isDev = hostname.includes('lovable.dev') || hostname.includes('localhost');
+    // More inclusive check for Lovable.dev environments, also checking for preview URLs
+    const isDev = hostname.includes('lovable.dev') || 
+                 hostname.includes('localhost') || 
+                 hostname.includes('preview--');
     console.log('Current hostname:', hostname, 'isDev:', isDev);
     setIsLovableDevEnvironment(isDev);
   }, []);
