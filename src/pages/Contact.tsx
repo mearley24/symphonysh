@@ -29,18 +29,12 @@ const Contact = () => {
     setIsSubmitting(true);
 
     try {
-      const response = await fetch(`${supabase.supabaseUrl}/functions/v1/send-contact-email`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${supabase.supabaseKey}`
-        },
+      const { data, error } = await supabase.functions.invoke('send-contact-email', {
         body: JSON.stringify({ name, email, message })
       });
 
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.error || 'Failed to send message');
+      if (error) {
+        throw new Error(error.message || 'Failed to send message');
       }
 
       toast({
