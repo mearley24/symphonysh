@@ -39,7 +39,7 @@ export const mountedTVsCategories: GalleryCategory[] = [
   { 
     title: "Fireplace Frame", 
     path: "/photos/mounted-tvs/fp-frame", 
-    image: "/lovable-uploads/mounted tvs/FP Frame/IMG_2189.JPG",
+    image: "/lovable-uploads/mounted tvs/FP Frame/IMG_2191.JPG", // Changed from IMG_2189.JPG to the third image (IMG_2191.JPG)
     photos: [
       "/lovable-uploads/mounted tvs/FP Frame/IMG_2189.JPG",
       "/lovable-uploads/mounted tvs/FP Frame/IMG_2190.JPG",
