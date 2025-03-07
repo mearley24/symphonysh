@@ -1,4 +1,3 @@
-
 /**
  * Wiring Gallery Data
  * 
@@ -11,9 +10,7 @@ export const wiringPhotos = {
     "/lovable-uploads/wiring/IMG_1311.JPG",
     "/lovable-uploads/wiring/IMG_1313.JPG",
     "/lovable-uploads/wiring/71934397485__8C49F301-AD94-46A1-86EB-A779999B757F.JPG",
-    "/lovable-uploads/wiring/IMG_1755.JPG",
     "/lovable-uploads/wiring/IMG_0611.JPG",
-    "/lovable-uploads/wiring/IMG_1551.JPG",
     "/lovable-uploads/wiring/IMG_1552.JPG",
     "/lovable-uploads/wiring/IMG_1733.JPG",
     "/lovable-uploads/wiring/IMG_1161.JPG"
