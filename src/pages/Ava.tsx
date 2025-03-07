@@ -42,7 +42,7 @@ const Ava = () => {
               </p>
               <div className="space-y-4">
                 <a 
-                  href="https://symphonysh.supabase.co/storage/v1/object/public/ava-docs/AVA_User_Manual.pdf"
+                  href="https://AVA.com"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 bg-accent hover:bg-accent/90 text-white px-4 py-2 rounded-md transition-colors"
