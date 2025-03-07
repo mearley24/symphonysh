@@ -6,6 +6,7 @@ import { useToast } from "@/components/ui/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import SEO from "../components/SEO";
 import Footer from "../components/Footer";
+import { Button } from "@/components/ui/button";
 
 const ContactInfo = ({ icon: Icon, title, content }: { icon: any; title: string; content: string }) => (
   <div className="flex items-center gap-4 bg-white/5 backdrop-blur-sm p-6 rounded-lg">
@@ -30,7 +31,7 @@ const Contact = () => {
 
     try {
       const { data, error } = await supabase.functions.invoke('send-contact-email', {
-        body: JSON.stringify({ name, email, message })
+        body: { name, email, message }
       });
 
       if (error) {
@@ -122,13 +123,13 @@ const Contact = () => {
                     className="w-full px-4 py-2 rounded-md bg-white/10 border border-white/20 text-white focus:outline-none focus:border-accent h-32"
                   ></textarea>
                 </div>
-                <button 
+                <Button 
                   type="submit"
                   disabled={isSubmitting}
                   className="w-full bg-accent hover:bg-accent/90 text-white px-6 py-3 rounded-md font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   {isSubmitting ? "Sending..." : "Send Message"}
-                </button>
+                </Button>
               </div>
             </form>
           </div>

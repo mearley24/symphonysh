@@ -34,6 +34,7 @@ serve(async (req) => {
       .single();
 
     if (dbError) {
+      console.error('Database error:', dbError);
       throw new Error(`Database error: ${dbError.message}`);
     }
 
