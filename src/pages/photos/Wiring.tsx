@@ -14,6 +14,7 @@ const Wiring = () => {
   const [loadedImages, setLoadedImages] = useState<Record<string, boolean>>({});
   const [isLovableDevEnvironment, setIsLovableDevEnvironment] = useState(false);
   const [isEditMode, setIsEditMode] = useState(false);
+  const [showButtons, setShowButtons] = useState(true); // New state for button visibility
   const [photos, setPhotos] = useState({
     general: wiringPhotos.general,
     rackWiring: wiringPhotos.rackWiring,
@@ -29,6 +30,45 @@ const Wiring = () => {
                  hostname.includes('preview--');
     console.log('Current hostname:', hostname, 'isDev:', isDev);
     setIsLovableDevEnvironment(isDev);
+    
+    // Function to toggle button visibility via URL parameter
+    const checkUrlForButtonVisibility = () => {
+      const urlParams = new URLSearchParams(window.location.search);
+      const hideButtons = urlParams.get('hideButtons');
+      if (hideButtons === 'true') {
+        setShowButtons(false);
+      } else if (hideButtons === 'false') {
+        setShowButtons(true);
+      }
+    };
+    
+    // Check URL parameters on initial load
+    checkUrlForButtonVisibility();
+    
+    // Listen for URL changes (for SPA navigation)
+    const handleUrlChange = () => {
+      checkUrlForButtonVisibility();
+    };
+    
+    window.addEventListener('popstate', handleUrlChange);
+    
+    return () => {
+      window.removeEventListener('popstate', handleUrlChange);
+    };
+  }, []);
+  
+  // Function to toggle button visibility programmatically
+  const toggleButtonVisibility = (visible: boolean) => {
+    setShowButtons(visible);
+  };
+  
+  // Expose the toggle function to the window object for external access
+  useEffect(() => {
+    (window as any).toggleGalleryButtons = toggleButtonVisibility;
+    
+    return () => {
+      delete (window as any).toggleGalleryButtons;
+    };
   }, []);
   
   const handleImageLoad = (image: string) => {
@@ -69,7 +109,8 @@ const Wiring = () => {
             <GalleryControlButtons 
               isEditMode={isEditMode} 
               toggleEditMode={toggleEditMode} 
-              isLovableDevEnvironment={isLovableDevEnvironment} 
+              isLovableDevEnvironment={isLovableDevEnvironment}
+              showButtons={showButtons}
             />
           </div>
           
