@@ -14,7 +14,7 @@ const Wiring = () => {
   const [loadedImages, setLoadedImages] = useState<Record<string, boolean>>({});
   const [isLovableDevEnvironment, setIsLovableDevEnvironment] = useState(false);
   const [isEditMode, setIsEditMode] = useState(false);
-  const [showButtons, setShowButtons] = useState(true); // New state for button visibility
+  const [showButtons, setShowButtons] = useState(false); // Changed default to false
   const [photos, setPhotos] = useState({
     general: wiringPhotos.general,
     rackWiring: wiringPhotos.rackWiring,
