@@ -54,9 +54,9 @@ const Ava = () => {
             </div>
             <div className="bg-white/5 backdrop-blur-sm rounded-lg p-8">
               <img 
-                src="https://symphonysh.supabase.co/storage/v1/object/public/ava-docs/AVA_Remote.jpg"
+                src="/lovable-uploads/cb28d9d7-ffb1-4fee-ad38-79069db78c59.png"
                 alt="AVA Smart Remote"
-                className="rounded-lg w-full h-64 object-cover mb-6"
+                className="rounded-lg w-full h-auto object-contain mb-6"
               />
             </div>
           </div>
