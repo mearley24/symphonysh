@@ -37,9 +37,6 @@ const MountedTVs = () => {
                 className="bg-secondary/50 rounded-lg overflow-hidden group hover:bg-secondary/80 transition-all duration-300 relative"
               >
                 <div className="aspect-video overflow-hidden bg-secondary/30 relative">
-                  <div className="absolute top-2 left-2 bg-black/70 text-white px-2 py-1 rounded-md text-sm z-10">
-                    Category #{index + 1}
-                  </div>
                   {loadedImages[category.image] === false ? (
                     <div className="w-full h-full flex flex-col items-center justify-center text-gray-400 p-4">
                       <ImageOff className="w-12 h-12 mb-2" />
