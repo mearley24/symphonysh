@@ -1,3 +1,4 @@
+
 /**
  * Mounted TVs Gallery Data
  * 
@@ -71,7 +72,7 @@ export const mountedTVsCategories: GalleryCategory[] = [
   { 
     title: "Home Installations", 
     path: "/photos/mounted-tvs/home", 
-    image: "/lovable-uploads/mounted tvs/Home/IMG_0659.JPG",
+    image: "/lovable-uploads/mounted tvs/Home/IMG_0665.JPG", // Changed from IMG_0659.JPG to the 7th image (IMG_0665.JPG)
     photos: [
       "/lovable-uploads/mounted tvs/Home/71355776563__D3C0B111-3E4E-4B32-A4BB-7B60F151C39A.JPG",
       "/lovable-uploads/mounted tvs/Home/IMG_0659.JPG",
