@@ -24,19 +24,6 @@ export const mountedTVsCategories: GalleryCategory[] = [
     ]
   },
   { 
-    title: "Backbox Fireplace", 
-    path: "/photos/mounted-tvs/backbox-fp", 
-    image: "/lovable-uploads/mounted tvs/Backbox FP/IMG_0024.JPG",
-    photos: [
-      "/lovable-uploads/mounted tvs/Backbox FP/IMG_0024.JPG",
-      "/lovable-uploads/mounted tvs/Backbox FP/IMG_0025.JPG",
-      "/lovable-uploads/mounted tvs/Backbox FP/IMG_0026.JPG",
-      "/lovable-uploads/mounted tvs/Backbox FP/IMG_0027.JPG",
-      "/lovable-uploads/mounted tvs/Backbox FP/IMG_0028.JPG",
-      "/lovable-uploads/mounted tvs/Backbox FP/IMG_0029.JPG"
-    ]
-  },
-  { 
     title: "Fireplace Frame", 
     path: "/photos/mounted-tvs/fp-frame", 
     image: "/lovable-uploads/mounted tvs/FP Frame/IMG_2191.JPG", // Changed from IMG_2189.JPG to the third image (IMG_2191.JPG)
@@ -145,7 +132,7 @@ export const mountedTVsCategories: GalleryCategory[] = [
   { 
     title: "West Vail Backbox", 
     path: "/photos/mounted-tvs/west-vail-bb", 
-    image: "/lovable-uploads/mounted tvs/West Vail BB/IMG_1717.JPG",
+    image: "/lovable-uploads/mounted tvs/West Vail BB/IMG_1718.JPG",
     photos: [
       "/lovable-uploads/mounted tvs/West Vail BB/IMG_1717.JPG",
       "/lovable-uploads/mounted tvs/West Vail BB/IMG_1718.JPG"
