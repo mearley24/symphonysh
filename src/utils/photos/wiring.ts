@@ -1,3 +1,4 @@
+
 /**
  * Wiring Gallery Data
  * 
@@ -18,7 +19,7 @@ export const wiringPhotos = {
   rackWiring: [
     "/lovable-uploads/wiring/IMG_1138.JPG",
     "/lovable-uploads/wiring/IMG_1320.JPG",
-    "/lovable-uploads/wiring/IMG_1139.JPG",
+    // Removed IMG_1139.JPG from here
     "/lovable-uploads/wiring/IMG_1324.JPG",
     "/lovable-uploads/wiring/IMG_1323.JPG",
     "/lovable-uploads/wiring/IMG_1322.JPG",
