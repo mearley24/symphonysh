@@ -15,7 +15,7 @@ const GalleryControlButtons = ({
   isEditMode, 
   toggleEditMode, 
   isLovableDevEnvironment,
-  showButtons = true // Default to showing buttons
+  showButtons = false // Default to showing buttons
 }: GalleryControlButtonsProps) => {
   console.log('GalleryControlButtons render with isLovableDevEnvironment:', isLovableDevEnvironment);
   
