@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import { ImageOff, X } from 'lucide-react';
+import { ImageOff, X, ChevronLeft, ChevronRight } from 'lucide-react';
 import { getFixedImagePath } from '../../utils/photos/types';
 
 interface PhotoGalleryGridProps {
@@ -19,6 +19,36 @@ const PhotoGalleryGrid: React.FC<PhotoGalleryGridProps> = ({
   onImageError
 }) => {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
+
+  const handlePrevImage = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (!selectedImage) return;
+    
+    const currentIndex = photos.indexOf(selectedImage);
+    const prevIndex = currentIndex > 0 ? currentIndex - 1 : photos.length - 1;
+    setSelectedImage(photos[prevIndex]);
+  };
+
+  const handleNextImage = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (!selectedImage) return;
+    
+    const currentIndex = photos.indexOf(selectedImage);
+    const nextIndex = currentIndex < photos.length - 1 ? currentIndex + 1 : 0;
+    setSelectedImage(photos[nextIndex]);
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === 'ArrowLeft') {
+      e.preventDefault();
+      handlePrevImage(e as unknown as React.MouseEvent);
+    } else if (e.key === 'ArrowRight') {
+      e.preventDefault();
+      handleNextImage(e as unknown as React.MouseEvent);
+    } else if (e.key === 'Escape') {
+      setSelectedImage(null);
+    }
+  };
 
   return (
     <>
@@ -52,11 +82,13 @@ const PhotoGalleryGrid: React.FC<PhotoGalleryGridProps> = ({
         ))}
       </div>
 
-      {/* Fullscreen image modal */}
+      {/* Fullscreen image modal with navigation */}
       {selectedImage && (
         <div 
           className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4"
           onClick={() => setSelectedImage(null)}
+          onKeyDown={handleKeyDown}
+          tabIndex={0}
         >
           <button 
             className="absolute top-4 right-4 text-white hover:text-gray-300"
@@ -64,6 +96,25 @@ const PhotoGalleryGrid: React.FC<PhotoGalleryGridProps> = ({
           >
             <X className="w-8 h-8" />
           </button>
+
+          {/* Previous button */}
+          <button 
+            className="absolute left-4 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full transition-colors"
+            onClick={handlePrevImage}
+            aria-label="Previous image"
+          >
+            <ChevronLeft className="w-8 h-8" />
+          </button>
+
+          {/* Next button */}
+          <button 
+            className="absolute right-4 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full transition-colors"
+            onClick={handleNextImage}
+            aria-label="Next image"
+          >
+            <ChevronRight className="w-8 h-8" />
+          </button>
+
           <div className="relative max-w-full max-h-[90vh]">
             <img 
               src={getFixedImagePath(selectedImage)}
@@ -86,7 +137,7 @@ const PhotoGalleryGrid: React.FC<PhotoGalleryGridProps> = ({
               }}
             />
             <div className="absolute top-2 left-2 bg-black/70 text-white px-2 py-1 rounded-md text-sm">
-              #{photos.indexOf(selectedImage) + 1}
+              #{photos.indexOf(selectedImage) + 1} / {photos.length}
             </div>
           </div>
         </div>
