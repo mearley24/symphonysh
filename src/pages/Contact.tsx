@@ -30,9 +30,13 @@ const Contact = () => {
     setIsSubmitting(true);
 
     try {
+      console.log("Sending contact form data:", { name, email, message });
+      
       const { data, error } = await supabase.functions.invoke('send-contact-email', {
         body: { name, email, message }
       });
+
+      console.log("Function response:", { data, error });
 
       if (error) {
         throw new Error(error.message || 'Failed to send message');

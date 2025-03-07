@@ -15,18 +15,47 @@ serve(async (req) => {
   }
 
   try {
-    const { name, email, message } = await req.json();
+    console.log("Request received by send-contact-email function");
+    
+    // Log the content type and body
+    console.log("Content-Type:", req.headers.get("content-type"));
+    const requestBody = await req.text();
+    console.log("Raw request body:", requestBody);
+    
+    // Parse the body
+    let name, email, message;
+    try {
+      const body = JSON.parse(requestBody);
+      console.log("Parsed request body:", body);
+      
+      name = body.name;
+      email = body.email;
+      message = body.message;
+    } catch (parseError) {
+      console.error("Error parsing request body:", parseError);
+      throw new Error("Invalid JSON in request body");
+    }
 
     if (!name || !email || !message) {
+      console.error("Missing required fields:", { name, email, message });
       throw new Error('Name, email, and message are required');
     }
 
     // Initialize Supabase client
-    const supabaseUrl = Deno.env.get('SUPABASE_URL')!;
-    const supabaseKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!;
+    const supabaseUrl = Deno.env.get('SUPABASE_URL');
+    const supabaseKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY');
+    
+    console.log("Supabase URL available:", !!supabaseUrl);
+    console.log("Supabase key available:", !!supabaseKey);
+    
+    if (!supabaseUrl || !supabaseKey) {
+      throw new Error('Missing Supabase environment variables');
+    }
+    
     const supabase = createClient(supabaseUrl, supabaseKey);
 
     // Store the submission in the database
+    console.log("Storing submission in database");
     const { data: submission, error: dbError } = await supabase
       .from('contact_submissions')
       .insert([{ name, email, message }])
@@ -38,15 +67,20 @@ serve(async (req) => {
       throw new Error(`Database error: ${dbError.message}`);
     }
 
+    console.log("Submission stored successfully:", submission);
+
     // Initialize Resend
     const resendApiKey = Deno.env.get('RESEND_API_KEY');
     if (!resendApiKey) {
+      console.error('RESEND_API_KEY environment variable is not set');
       throw new Error('RESEND_API_KEY environment variable is not set');
     }
     
+    console.log("Resend API key available, initializing Resend");
     const resend = new Resend(resendApiKey);
 
     // Send email to business
+    console.log("Sending email to business");
     const emailResponse = await resend.emails.send({
       from: "Symphony Smart Homes <notifications@symphonysh.com>",
       to: ["info@symphonysh.com"],
@@ -72,6 +106,7 @@ serve(async (req) => {
     console.log("Email sent:", emailResponse);
 
     // Send confirmation email to customer
+    console.log("Sending confirmation email to customer");
     const customerResponse = await resend.emails.send({
       from: "Symphony Smart Homes <notifications@symphonysh.com>",
       to: [email],
@@ -92,6 +127,7 @@ serve(async (req) => {
 
     console.log("Confirmation email sent:", customerResponse);
 
+    console.log("Function completed successfully");
     return new Response(JSON.stringify({ 
       success: true, 
       id: submission.id,
