@@ -16,6 +16,10 @@ serve(async (req) => {
   try {
     const { name, email, message } = await req.json();
 
+    if (!name || !email || !message) {
+      throw new Error('Name, email, and message are required');
+    }
+
     // Initialize Supabase client
     const supabaseUrl = Deno.env.get('SUPABASE_URL')!;
     const supabaseKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!;
@@ -32,8 +36,11 @@ serve(async (req) => {
       throw new Error(`Database error: ${dbError.message}`);
     }
 
-    // Since we're storing in the database, we'll return success
-    return new Response(JSON.stringify({ success: true }), {
+    // In a real production app, you would send an email here
+    // using services like Resend.com, SendGrid, etc.
+    // For now, we're just storing the submission in the database
+
+    return new Response(JSON.stringify({ success: true, id: submission.id }), {
       headers: { ...corsHeaders, 'Content-Type': 'application/json' },
     });
   } catch (error) {
