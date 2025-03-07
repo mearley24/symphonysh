@@ -30,17 +30,29 @@ const Contact = () => {
     setIsSubmitting(true);
 
     try {
-      console.log("Sending contact form data:", { name, email, message });
+      console.log("Form data:", { name, email, message });
+      console.log("Supabase URL:", supabase.functions.url);
       
-      const { data, error } = await supabase.functions.invoke('send-contact-email', {
-        body: { name, email, message }
+      // Direct fetch approach instead of using the SDK
+      const response = await fetch("https://symphonysh.supabase.co/functions/v1/send-contact-email", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${supabase.supabaseKey}`
+        },
+        body: JSON.stringify({ name, email, message })
       });
-
-      console.log("Function response:", { data, error });
-
-      if (error) {
-        throw new Error(error.message || 'Failed to send message');
+      
+      console.log("Response status:", response.status);
+      
+      if (!response.ok) {
+        const errorText = await response.text();
+        console.error("Error response:", errorText);
+        throw new Error(`Failed to send message: ${response.status} ${errorText}`);
       }
+      
+      const data = await response.json();
+      console.log("Success response:", data);
 
       toast({
         title: "Message Sent!",

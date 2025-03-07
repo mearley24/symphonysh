@@ -16,9 +16,13 @@ serve(async (req) => {
 
   try {
     console.log("Request received by send-contact-email function");
+    console.log("Request URL:", req.url);
+    console.log("Request method:", req.method);
     
-    // Log the content type and body
+    // Log the content type and headers
     console.log("Content-Type:", req.headers.get("content-type"));
+    console.log("Authorization:", req.headers.has("authorization") ? "Present" : "Missing");
+    
     const requestBody = await req.text();
     console.log("Raw request body:", requestBody);
     
@@ -45,7 +49,7 @@ serve(async (req) => {
     const supabaseUrl = Deno.env.get('SUPABASE_URL');
     const supabaseKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY');
     
-    console.log("Supabase URL available:", !!supabaseUrl);
+    console.log("Supabase URL:", supabaseUrl);
     console.log("Supabase key available:", !!supabaseKey);
     
     if (!supabaseUrl || !supabaseKey) {
@@ -54,20 +58,51 @@ serve(async (req) => {
     
     const supabase = createClient(supabaseUrl, supabaseKey);
 
-    // Store the submission in the database
-    console.log("Storing submission in database");
-    const { data: submission, error: dbError } = await supabase
-      .from('contact_submissions')
-      .insert([{ name, email, message }])
-      .select()
-      .single();
-
-    if (dbError) {
-      console.error('Database error:', dbError);
-      throw new Error(`Database error: ${dbError.message}`);
+    // Check if the contact_submissions table exists first
+    try {
+      console.log("Checking if contact_submissions table exists");
+      const { error: tableCheckError } = await supabase
+        .from('contact_submissions')
+        .select('id')
+        .limit(1);
+        
+      if (tableCheckError) {
+        console.error("Table check error:", tableCheckError);
+        if (tableCheckError.message.includes("does not exist")) {
+          console.log("Creating contact_submissions table");
+          const { error: createTableError } = await supabase.rpc('create_contact_submissions_table');
+          if (createTableError) {
+            console.error("Error creating table:", createTableError);
+            // Continue without storing in database
+          }
+        }
+      }
+    } catch (tableError) {
+      console.error("Error checking/creating table:", tableError);
+      // Continue without storing in database
     }
 
-    console.log("Submission stored successfully:", submission);
+    // Store the submission in the database
+    console.log("Attempting to store submission in database");
+    let submissionId = null;
+    try {
+      const { data: submission, error: dbError } = await supabase
+        .from('contact_submissions')
+        .insert([{ name, email, message }])
+        .select()
+        .single();
+
+      if (dbError) {
+        console.error('Database error:', dbError);
+        // Continue without storing
+      } else {
+        console.log("Submission stored successfully:", submission);
+        submissionId = submission.id;
+      }
+    } catch (storageError) {
+      console.error("Error storing submission:", storageError);
+      // Continue without storing
+    }
 
     // Initialize Resend
     const resendApiKey = Deno.env.get('RESEND_API_KEY');
@@ -130,7 +165,7 @@ serve(async (req) => {
     console.log("Function completed successfully");
     return new Response(JSON.stringify({ 
       success: true, 
-      id: submission.id,
+      id: submissionId,
       emailSent: !!emailResponse.id,
       confirmationSent: !!customerResponse.id 
     }), {
