@@ -1,4 +1,3 @@
-
 /**
  * Mounted TVs Gallery Data
  * 
@@ -59,7 +58,7 @@ export const mountedTVsCategories: GalleryCategory[] = [
   { 
     title: "HP Installations", 
     path: "/photos/mounted-tvs/hp", 
-    image: "/lovable-uploads/mounted tvs/HP/IMG_0179.JPG",
+    image: "/lovable-uploads/mounted tvs/HP/IMG_0182.JPG", // Changed from IMG_0179.JPG to the fourth image (IMG_0182.JPG)
     photos: [
       "/lovable-uploads/mounted tvs/HP/IMG_0179.JPG",
       "/lovable-uploads/mounted tvs/HP/IMG_0180.JPG",
