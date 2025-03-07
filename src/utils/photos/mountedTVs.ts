@@ -12,7 +12,7 @@ export const mountedTVsCategories: GalleryCategory[] = [
   { 
     title: "BC Condo Fireplace", 
     path: "/photos/mounted-tvs/bc-condo-fp", 
-    image: "/lovable-uploads/mounted tvs/BC Condo FP/IMG_0610.JPG",
+    image: "/lovable-uploads/mounted tvs/BC Condo FP/IMG_0677.JPG", // Changed from IMG_0610.JPG to the fifth image
     photos: [
       "/lovable-uploads/mounted tvs/BC Condo FP/70551934893__F08E6641-B90D-4FE9-96CB-B6043C9EFBB7.jpg",
       "/lovable-uploads/mounted tvs/BC Condo FP/70682259838__CA09AB38-91D5-434E-9D12-D8D3BEC77650.JPG",
