@@ -17,12 +17,7 @@ const GalleryControlButtons = ({
 }: GalleryControlButtonsProps) => {
   console.log('GalleryControlButtons render with isLovableDevEnvironment:', isLovableDevEnvironment);
   
-  // Force buttons to be visible for debugging
-  if (!isLovableDevEnvironment) {
-    console.log('Button not showing because isLovableDevEnvironment is false');
-    return null;
-  }
-
+  // Removed the environment check to show buttons in all environments
   return (
     <div className="flex gap-2">
       <Button 
