@@ -2,31 +2,12 @@
 import React, { useState, useEffect } from 'react';
 import Header from '../../components/Header';
 import { Link } from 'react-router-dom';
-import { ArrowLeft, Blinds, Settings, GripVertical, Save } from 'lucide-react';
+import { ArrowLeft, Blinds } from 'lucide-react';
 import { wiringPhotos } from '../../utils/photos';
 import GalleryTabButton from '../../components/photos/GalleryTabButton';
-import PhotoGalleryGrid from '../../components/photos/PhotoGalleryGrid';
-import { Button } from '../../components/ui/button';
 import { toast } from 'sonner';
-import { 
-  DndContext, 
-  closestCenter, 
-  KeyboardSensor, 
-  PointerSensor, 
-  useSensor, 
-  useSensors,
-  DragEndEvent 
-} from '@dnd-kit/core';
-import {
-  arrayMove,
-  SortableContext,
-  sortableKeyboardCoordinates,
-  useSortable,
-  verticalListSortingStrategy
-} from '@dnd-kit/sortable';
-import { CSS } from '@dnd-kit/utilities';
-
-type GalleryType = 'general' | 'rackWiring' | 'shadeWiring';
+import GalleryControlButtons from '../../components/photos/GalleryControlButtons';
+import EditablePhotoGallery, { GalleryType } from '../../components/photos/EditablePhotoGallery';
 
 const Wiring = () => {
   const [selectedGallery, setSelectedGallery] = useState<GalleryType>('general');
@@ -47,14 +28,6 @@ const Wiring = () => {
     setIsLovableDevEnvironment(isDev);
   }, []);
   
-  // DND sensors
-  const sensors = useSensors(
-    useSensor(PointerSensor),
-    useSensor(KeyboardSensor, {
-      coordinateGetter: sortableKeyboardCoordinates,
-    })
-  );
-
   const handleImageLoad = (image: string) => {
     console.log(`Successfully loaded image: ${image}`);
     setLoadedImages(prev => ({ ...prev, [image]: true }));
@@ -72,76 +45,11 @@ const Wiring = () => {
     shadeWiring: photos.shadeWiring[0]
   };
 
-  // Handle drag end to reorder photos
-  const handleDragEnd = (event: DragEndEvent) => {
-    const { active, over } = event;
-    
-    if (over && active.id !== over.id) {
-      setPhotos(currentPhotos => {
-        const currentGalleryPhotos = [...currentPhotos[selectedGallery]];
-        const oldIndex = currentGalleryPhotos.findIndex(photo => photo === active.id);
-        const newIndex = currentGalleryPhotos.findIndex(photo => photo === over.id);
-        
-        return {
-          ...currentPhotos,
-          [selectedGallery]: arrayMove(currentGalleryPhotos, oldIndex, newIndex),
-        };
-      });
-    }
-  };
-
   const toggleEditMode = () => {
     setIsEditMode(!isEditMode);
     if (isEditMode) {
       toast.success("Photo order saved!");
     }
-  };
-
-  const SortablePhotoItem = ({ photo, index }: { photo: string; index: number }) => {
-    const { attributes, listeners, setNodeRef, transform, transition } = useSortable({ id: photo });
-    
-    const style = {
-      transform: CSS.Transform.toString(transform),
-      transition
-    };
-    
-    return (
-      <div 
-        ref={setNodeRef}
-        style={style}
-        className="aspect-video rounded-lg overflow-hidden bg-gray-800 cursor-pointer hover:opacity-90 transition relative group"
-      >
-        {loadedImages[photo] === false ? (
-          <div className="w-full h-full flex flex-col items-center justify-center text-gray-400 p-4">
-            <div className="w-12 h-12 mb-2">Image could not be loaded</div>
-            <p className="text-sm text-center">Image could not be loaded</p>
-          </div>
-        ) : (
-          <>
-            <div className="absolute top-2 left-2 bg-black/70 text-white px-2 py-1 rounded-md text-sm z-10">
-              #{index + 1}
-            </div>
-            {isEditMode && (
-              <div 
-                {...attributes} 
-                {...listeners}
-                className="absolute top-2 right-2 bg-primary/70 text-white p-1 rounded-md cursor-grab active:cursor-grabbing z-10"
-              >
-                <GripVertical className="w-4 h-4" />
-              </div>
-            )}
-            <img 
-              src={photo}
-              alt={`Photo ${index + 1}`}
-              className="w-full h-full object-contain"
-              onLoad={() => handleImageLoad(photo)}
-              onError={() => handleImageError(photo)}
-              onClick={() => !isEditMode && window.open(photo, '_blank')}
-            />
-          </>
-        )}
-      </div>
-    );
   };
 
   return (
@@ -155,38 +63,11 @@ const Wiring = () => {
               Back to Projects
             </Link>
             
-            {/* Make sure the buttons are visible when in development environment */}
-            <div className="flex gap-2">
-              {isLovableDevEnvironment && (
-                <>
-                  <Button 
-                    variant={isEditMode ? "default" : "outline"} 
-                    size="sm" 
-                    className="text-white" 
-                    onClick={toggleEditMode}
-                  >
-                    {isEditMode ? (
-                      <>
-                        <Save className="mr-2 w-4 h-4" />
-                        Save Order
-                      </>
-                    ) : (
-                      <>
-                        <GripVertical className="mr-2 w-4 h-4" />
-                        Reorder Photos
-                      </>
-                    )}
-                  </Button>
-                  
-                  <Link to="/photos/wiring-manager">
-                    <Button variant="outline" size="sm" className="text-white">
-                      <Settings className="mr-2 w-4 h-4" />
-                      Manage Photos
-                    </Button>
-                  </Link>
-                </>
-              )}
-            </div>
+            <GalleryControlButtons 
+              isEditMode={isEditMode} 
+              toggleEditMode={toggleEditMode} 
+              isLovableDevEnvironment={isLovableDevEnvironment} 
+            />
           </div>
           
           <h1 className="text-4xl font-bold text-white mb-8">Wiring</h1>
@@ -217,33 +98,15 @@ const Wiring = () => {
           </div>
           
           {/* Render the selected gallery */}
-          {isEditMode ? (
-            <DndContext 
-              sensors={sensors}
-              collisionDetection={closestCenter}
-              onDragEnd={handleDragEnd}
-            >
-              <SortableContext 
-                items={photos[selectedGallery]}
-                strategy={verticalListSortingStrategy}
-              >
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                  {photos[selectedGallery].map((photo, index) => (
-                    <SortablePhotoItem key={photo} photo={photo} index={index} />
-                  ))}
-                </div>
-              </SortableContext>
-            </DndContext>
-          ) : (
-            <PhotoGalleryGrid 
-              photos={photos[selectedGallery]}
-              galleryName={selectedGallery === 'general' ? 'General Wiring' : 
-                          selectedGallery === 'rackWiring' ? 'Rack Wiring' : 'Shade Wiring'}
-              loadedImages={loadedImages}
-              onImageLoad={handleImageLoad}
-              onImageError={handleImageError}
-            />
-          )}
+          <EditablePhotoGallery
+            selectedGallery={selectedGallery}
+            photos={photos}
+            setPhotos={setPhotos}
+            isEditMode={isEditMode}
+            loadedImages={loadedImages}
+            onImageLoad={handleImageLoad}
+            onImageError={handleImageError}
+          />
         </div>
       </section>
     </div>
