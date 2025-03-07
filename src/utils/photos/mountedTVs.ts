@@ -49,7 +49,7 @@ export const mountedTVsCategories: GalleryCategory[] = [
   { 
     title: "Frame & Sonos", 
     path: "/photos/mounted-tvs/frame-sonos", 
-    image: "/lovable-uploads/mounted tvs/Frame Sonos/IMG_0022.JPG",
+    image: "/lovable-uploads/mounted tvs/Frame Sonos/IMG_0030.JPG", // Changed from IMG_0022.JPG to the third image (IMG_0030.JPG)
     photos: [
       "/lovable-uploads/mounted tvs/Frame Sonos/IMG_0022.JPG",
       "/lovable-uploads/mounted tvs/Frame Sonos/IMG_0023.JPG",
