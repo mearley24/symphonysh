@@ -155,35 +155,38 @@ const Wiring = () => {
               Back to Projects
             </Link>
             
-            {isLovableDevEnvironment && (
-              <div className="flex gap-2">
-                <Button 
-                  variant={isEditMode ? "default" : "outline"} 
-                  size="sm" 
-                  className="text-white" 
-                  onClick={toggleEditMode}
-                >
-                  {isEditMode ? (
-                    <>
-                      <Save className="mr-2 w-4 h-4" />
-                      Save Order
-                    </>
-                  ) : (
-                    <>
-                      <GripVertical className="mr-2 w-4 h-4" />
-                      Reorder Photos
-                    </>
-                  )}
-                </Button>
-                
-                <Link to="/photos/wiring-manager">
-                  <Button variant="outline" size="sm" className="text-white">
-                    <Settings className="mr-2 w-4 h-4" />
-                    Manage Photos
+            {/* Make sure the buttons are visible when in development environment */}
+            <div className="flex gap-2">
+              {isLovableDevEnvironment && (
+                <>
+                  <Button 
+                    variant={isEditMode ? "default" : "outline"} 
+                    size="sm" 
+                    className="text-white" 
+                    onClick={toggleEditMode}
+                  >
+                    {isEditMode ? (
+                      <>
+                        <Save className="mr-2 w-4 h-4" />
+                        Save Order
+                      </>
+                    ) : (
+                      <>
+                        <GripVertical className="mr-2 w-4 h-4" />
+                        Reorder Photos
+                      </>
+                    )}
                   </Button>
-                </Link>
-              </div>
-            )}
+                  
+                  <Link to="/photos/wiring-manager">
+                    <Button variant="outline" size="sm" className="text-white">
+                      <Settings className="mr-2 w-4 h-4" />
+                      Manage Photos
+                    </Button>
+                  </Link>
+                </>
+              )}
+            </div>
           </div>
           
           <h1 className="text-4xl font-bold text-white mb-8">Wiring</h1>
