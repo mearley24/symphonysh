@@ -31,14 +31,17 @@ const Contact = () => {
 
     try {
       console.log("Form data:", { name, email, message });
-      console.log("Supabase URL:", supabase.functions.url);
+      
+      // Create the full URL for the Edge Function
+      const functionUrl = `${import.meta.env.VITE_SUPABASE_URL || "https://symphonysh.supabase.co"}/functions/v1/send-contact-email`;
+      console.log("Using function URL:", functionUrl);
       
       // Direct fetch approach instead of using the SDK
-      const response = await fetch("https://symphonysh.supabase.co/functions/v1/send-contact-email", {
+      const response = await fetch(functionUrl, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "Authorization": `Bearer ${supabase.supabaseKey}`
+          // Don't include Authorization header for public functions
         },
         body: JSON.stringify({ name, email, message })
       });
