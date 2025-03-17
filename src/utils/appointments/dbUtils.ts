@@ -24,16 +24,23 @@ export async function saveAppointmentToDatabase(appointmentData: AppointmentData
     status: 'pending'
   };
   
-  const { data, error } = await supabase
-    .from('appointments')
-    .insert([formattedAppointment])
-    .select();
+  // Instead of using the typed Supabase client, we'll use the Edge Function
+  // that was created to handle appointment creation
+  const response = await fetch(`${window.location.origin}/api/create-appointment`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(formattedAppointment),
+  });
 
-  if (error) {
-    console.error("Database error:", error);
-    throw new Error("Database error: " + error.message);
+  if (!response.ok) {
+    const errorData = await response.json();
+    console.error("Database error:", errorData);
+    throw new Error("Database error: " + (errorData.error || response.statusText));
   }
 
+  const data = await response.json();
   console.log("Appointment created successfully:", data);
-  return data?.[0];
+  return data?.data;
 }

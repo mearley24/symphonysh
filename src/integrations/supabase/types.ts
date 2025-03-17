@@ -9,13 +9,132 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
-      [_ in never]: never
+      appointments: {
+        Row: {
+          created_at: string | null
+          date: string
+          email: string
+          id: string
+          message: string | null
+          name: string
+          phone: string
+          service: string
+          status: string | null
+          time: string
+          updated_at: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          date: string
+          email: string
+          id?: string
+          message?: string | null
+          name: string
+          phone: string
+          service: string
+          status?: string | null
+          time: string
+          updated_at?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          date?: string
+          email?: string
+          id?: string
+          message?: string | null
+          name?: string
+          phone?: string
+          service?: string
+          status?: string | null
+          time?: string
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
+      contact_submissions: {
+        Row: {
+          created_at: string | null
+          email: string
+          email_sent: boolean | null
+          id: string
+          message: string
+          name: string
+        }
+        Insert: {
+          created_at?: string | null
+          email: string
+          email_sent?: boolean | null
+          id?: string
+          message: string
+          name: string
+        }
+        Update: {
+          created_at?: string | null
+          email?: string
+          email_sent?: boolean | null
+          id?: string
+          message?: string
+          name?: string
+        }
+        Relationships: []
+      }
+      google_tokens: {
+        Row: {
+          access_token: string
+          created_at: string
+          expiry: string
+          id: string
+          refresh_token: string
+        }
+        Insert: {
+          access_token: string
+          created_at?: string
+          expiry: string
+          id?: string
+          refresh_token: string
+        }
+        Update: {
+          access_token?: string
+          created_at?: string
+          expiry?: string
+          id?: string
+          refresh_token?: string
+        }
+        Relationships: []
+      }
+      scheduling: {
+        Row: {
+          date: string
+          id: number
+          is_available: boolean | null
+          time_slot: string
+        }
+        Insert: {
+          date: string
+          id?: never
+          is_available?: boolean | null
+          time_slot: string
+        }
+        Update: {
+          date?: string
+          id?: never
+          is_available?: boolean | null
+          time_slot?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      update_time_slot_availability: {
+        Args: {
+          selected_date: string
+          selected_time: string
+        }
+        Returns: undefined
+      }
     }
     Enums: {
       [_ in never]: never
