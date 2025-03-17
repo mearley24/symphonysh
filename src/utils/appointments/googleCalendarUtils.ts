@@ -49,36 +49,16 @@ export async function connectToGoogleCalendar() {
   try {
     console.log("Starting Google Calendar connection process");
     
-    // Direct fetch to the Google auth function - more reliable than using the SDK
-    const functionUrl = `${import.meta.env.VITE_SUPABASE_URL || "https://symphonysh.supabase.co"}/functions/v1/google-auth`;
-    console.log("Using Google auth URL:", functionUrl);
+    // Directly redirect to Google Auth with the redirect parameter
+    // This approach bypasses the API call and directly uses the redirect flow
+    const supabaseUrl = import.meta.env.VITE_SUPABASE_URL || "https://symphonysh.supabase.co";
+    const authUrl = `${supabaseUrl}/functions/v1/google-auth?redirect=true`;
     
-    const response = await fetch(functionUrl, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    });
+    console.log("Redirecting to Google auth URL:", authUrl);
     
-    if (!response.ok) {
-      const errorText = await response.text();
-      console.error("Error connecting to Google Calendar:", errorText);
-      throw new Error(`Failed to get Google auth URL: ${response.status} ${errorText}`);
-    }
-    
-    const data = await response.json();
-    
-    if (data && data.authUrl) {
-      console.log("Got auth URL, redirecting:", data.authUrl);
-      
-      // Google OAuth app is now verified, so we don't need the test mode warning
-      
-      // Redirect to Google Auth URL in the same window for better auth flow
-      window.location.href = data.authUrl;
-      return true;
-    }
-    
-    throw new Error("Failed to get Google auth URL");
+    // Redirect directly to the Google Auth endpoint with redirect=true
+    window.location.href = authUrl;
+    return true;
   } catch (error) {
     console.error("Failed to connect to Google Calendar:", error);
     throw error;
