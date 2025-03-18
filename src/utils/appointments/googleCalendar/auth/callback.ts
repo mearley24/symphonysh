@@ -67,8 +67,16 @@ async function completeGoogleAuth(code: string) {
         }
       });
       console.log("Test connection status:", testResponse.status);
+      
+      // If the test connection fails, try calling the endpoint directly
+      if (!testResponse.ok) {
+        console.warn("Test connection not OK, status:", testResponse.status);
+        const testResponseText = await testResponse.text();
+        console.warn("Test connection response:", testResponseText);
+      }
     } catch (testError) {
-      console.warn("Test connection failed, but continuing with auth flow:", testError);
+      console.warn("Test connection failed:", testError);
+      console.warn("Test connection failed, but continuing with auth flow");
     }
     
     // Use fetch with timeout
@@ -82,7 +90,7 @@ async function completeGoogleAuth(code: string) {
         },
         body: JSON.stringify({ code })
       },
-      15000 // 15 second timeout for token exchange
+      20000 // 20 second timeout for token exchange to account for cold starts
     );
     
     if (!response.ok) {

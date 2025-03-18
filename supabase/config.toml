@@ -58,3 +58,4 @@ verify_jwt = false
 
 [functions.create-appointment]
 verify_jwt = false
+
