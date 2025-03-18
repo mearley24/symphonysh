@@ -22,6 +22,7 @@ export function useGoogleAuthCallback(
     const code = searchParams.get('code');
     const state = searchParams.get('state');
     const error = searchParams.get('error');
+    const success = searchParams.get('success');
     
     // Handle errors from Google Auth
     if (error) {
@@ -41,6 +42,29 @@ export function useGoogleAuthCallback(
         description: errorMessage,
         variant: "destructive"
       });
+      
+      return;
+    }
+    
+    // Handle success redirects from the edge function
+    if (success === 'true' && state === 'google_auth') {
+      setConnectingCalendar(false);
+      
+      // Clear URL params and show success message
+      navigate('/scheduling', { replace: true });
+      
+      toast({
+        title: "Google Calendar Connected",
+        description: "Your calendar is now connected. Available time slots will be updated accordingly."
+      });
+      
+      setIsCalendarConnected(true);
+      setAuthError(null);
+      
+      // If date is already selected, refresh time slots
+      if (date) {
+        fetchTimeSlots(date);
+      }
       
       return;
     }

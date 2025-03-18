@@ -13,12 +13,16 @@ const GOOGLE_CLIENT_ID = Deno.env.get("GOOGLE_OAUTH_CLIENT_ID") || "";
 const GOOGLE_CLIENT_SECRET = Deno.env.get("GOOGLE_OAUTH_CLIENT_SECRET") || "";
 const REDIRECT_URI = `${supabaseUrl}/functions/v1/google-auth-callback`;
 
+// Define frontend URL for return paths
+const FRONTEND_URL = Deno.env.get("FRONTEND_URL") || "https://bxsdjxkbhjtdrrtjtyto.supabase.co";
+
 // Debug info
 console.log("Function initialization");
 console.log("Supabase URL:", supabaseUrl);
 console.log("Redirect URI:", REDIRECT_URI);
 console.log("Client ID available:", GOOGLE_CLIENT_ID ? "Yes" : "No");
 console.log("Client Secret available:", GOOGLE_CLIENT_SECRET ? "Yes" : "No");
+console.log("Frontend URL:", FRONTEND_URL);
 
 // CORS headers
 const corsHeaders = {
@@ -54,10 +58,12 @@ function getAuthUrl() {
       scope: [
         'https://www.googleapis.com/auth/calendar',
         'https://www.googleapis.com/auth/calendar.events',
+        'email',
+        'profile',
       ],
+      include_granted_scopes: true, // Include any previously granted scopes
       prompt: 'consent', // Force to get refresh token
       state: 'google_auth', // Add state parameter to identify this auth request
-      include_granted_scopes: true // Include any previously granted scopes
     });
     
     console.log("Auth URL generated successfully");
@@ -122,7 +128,8 @@ serve(async (req) => {
     console.log("Returning auth URL as JSON");
     return new Response(JSON.stringify({ 
       authUrl,
-      note: "This application is in Google OAuth testing mode. Only approved test users can authenticate."
+      redirectUrl: authUrl,
+      note: "This application is using Google OAuth. Make sure you're using a test account if in development mode."
     }), {
       headers: { ...corsHeaders, "Content-Type": "application/json" },
       status: 200,

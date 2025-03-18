@@ -21,6 +21,8 @@ console.log("Function initialization");
 console.log("Supabase URL:", supabaseUrl);
 console.log("Redirect URI:", REDIRECT_URI);
 console.log("Frontend URL:", FRONTEND_URL);
+console.log("Client ID available:", GOOGLE_CLIENT_ID ? "Yes" : "No");
+console.log("Client Secret available:", GOOGLE_CLIENT_SECRET ? "Yes" : "No");
 
 // CORS headers
 const corsHeaders = {
@@ -30,6 +32,11 @@ const corsHeaders = {
 
 // Get Google OAuth2 client
 function getOAuth2Client() {
+  if (!GOOGLE_CLIENT_ID || !GOOGLE_CLIENT_SECRET) {
+    console.error("Missing Google OAuth credentials");
+    throw new Error("Google OAuth credentials are not configured properly");
+  }
+  
   return new google.auth.OAuth2(
     GOOGLE_CLIENT_ID,
     GOOGLE_CLIENT_SECRET,
@@ -139,6 +146,8 @@ serve(async (req) => {
     const state = url.searchParams.get('state');
     const error = url.searchParams.get('error');
     
+    console.log("Callback params:", { code: !!code, state, error });
+    
     // Handle errors from Google Auth
     if (error) {
       console.error('Google auth error:', error);
@@ -161,25 +170,47 @@ serve(async (req) => {
       throw new Error('No authorization code provided');
     }
     
-    if (state !== 'google_auth') {
-      throw new Error('Invalid state parameter');
+    console.log("Received auth code, exchanging for tokens");
+    
+    try {
+      // Exchange code for tokens immediately
+      const oauth2Client = getOAuth2Client();
+      const { tokens } = await oauth2Client.getToken(code);
+      
+      // Save tokens to database
+      await saveTokens(tokens);
+      
+      console.log("Successfully saved tokens, redirecting back to app");
+      
+      // Redirect back to the app with success parameter
+      const redirectUrl = new URL('/scheduling', FRONTEND_URL);
+      redirectUrl.searchParams.set('success', 'true');
+      redirectUrl.searchParams.set('state', 'google_auth');
+      
+      return new Response(null, {
+        status: 302,
+        headers: {
+          ...corsHeaders,
+          "Location": redirectUrl.toString()
+        }
+      });
+    } catch (tokenError) {
+      console.error("Error exchanging code for tokens:", tokenError);
+      
+      // For token exchange errors, redirect back to app with the code
+      // so our app can try again with different parameters
+      const redirectUrl = new URL('/scheduling', FRONTEND_URL);
+      redirectUrl.searchParams.set('code', code);
+      redirectUrl.searchParams.set('state', 'google_auth');
+      
+      return new Response(null, {
+        status: 302,
+        headers: {
+          ...corsHeaders,
+          "Location": redirectUrl.toString()
+        }
+      });
     }
-    
-    console.log("Received auth code, redirecting to frontend");
-    
-    // For the direct browser callback, we redirect back to our app
-    // with the code as a query parameter so our app can complete the flow
-    const redirectUrl = new URL('/scheduling', FRONTEND_URL);
-    redirectUrl.searchParams.set('code', code);
-    redirectUrl.searchParams.set('state', 'google_auth');
-    
-    return new Response(null, {
-      status: 302,
-      headers: {
-        ...corsHeaders,
-        "Location": redirectUrl.toString()
-      }
-    });
   } catch (error) {
     console.error('Function error:', error.message);
     
