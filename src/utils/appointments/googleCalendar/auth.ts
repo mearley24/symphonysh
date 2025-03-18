@@ -11,18 +11,32 @@ export async function connectToGoogleCalendar() {
     const timeoutId = setTimeout(() => controller.abort(), 7000); // 7 second timeout
     
     try {
-      // Get the base URL from the environment or fall back to the Supabase URL
-      let baseUrl = import.meta.env.VITE_SUPABASE_FUNCTIONS_URL || import.meta.env.VITE_SUPABASE_URL;
+      // Get the base URL from the environment or construct it from the Supabase URL
+      let baseUrl = import.meta.env.VITE_SUPABASE_FUNCTIONS_URL;
+      
+      if (!baseUrl) {
+        // If VITE_SUPABASE_FUNCTIONS_URL is not set, try to construct it from VITE_SUPABASE_URL
+        const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
+        if (supabaseUrl) {
+          // Remove trailing slash if present
+          const cleanUrl = supabaseUrl.replace(/\/$/, '');
+          baseUrl = `${cleanUrl}/functions/v1`;
+          console.log("Constructed functions URL from Supabase URL:", baseUrl);
+        } else {
+          console.error("No Supabase URL available to construct functions URL");
+          throw new Error("Missing Supabase URL configuration. Please check your environment variables.");
+        }
+      }
       
       // Ensure the URL doesn't have a trailing slash
       baseUrl = baseUrl ? baseUrl.replace(/\/$/, '') : '';
       
       if (!baseUrl) {
         console.error("No base URL available for functions");
-        throw new Error("Could not determine the Edge Functions URL");
+        throw new Error("Could not determine the Edge Functions URL. Please check your environment variables.");
       }
       
-      const functionUrl = `${baseUrl}/functions/v1/google-auth`;
+      const functionUrl = `${baseUrl}/google-auth`;
       console.log("Calling Google auth URL:", functionUrl);
       
       // Get the auth token
@@ -114,8 +128,22 @@ async function completeGoogleAuth(code: string) {
     const timeoutId = setTimeout(() => controller.abort(), 7000); // 7 second timeout
     
     try {
-      // Get the base URL from the environment or fall back to the Supabase URL
-      let baseUrl = import.meta.env.VITE_SUPABASE_FUNCTIONS_URL || import.meta.env.VITE_SUPABASE_URL;
+      // Get the base URL from the environment or construct it from the Supabase URL
+      let baseUrl = import.meta.env.VITE_SUPABASE_FUNCTIONS_URL;
+      
+      if (!baseUrl) {
+        // If VITE_SUPABASE_FUNCTIONS_URL is not set, try to construct it from VITE_SUPABASE_URL
+        const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
+        if (supabaseUrl) {
+          // Remove trailing slash if present
+          const cleanUrl = supabaseUrl.replace(/\/$/, '');
+          baseUrl = `${cleanUrl}/functions/v1`;
+          console.log("Constructed functions URL from Supabase URL:", baseUrl);
+        } else {
+          console.error("No Supabase URL available to construct functions URL");
+          throw new Error("Missing Supabase URL configuration. Please check your environment variables.");
+        }
+      }
       
       // Ensure the URL doesn't have a trailing slash
       baseUrl = baseUrl ? baseUrl.replace(/\/$/, '') : '';
@@ -125,7 +153,7 @@ async function completeGoogleAuth(code: string) {
         throw new Error("Could not determine the Edge Functions URL");
       }
       
-      const functionUrl = `${baseUrl}/functions/v1/google-auth-callback`;
+      const functionUrl = `${baseUrl}/google-auth-callback`;
       console.log("Calling Google auth callback URL:", functionUrl);
       
       // Get the auth token
@@ -184,8 +212,22 @@ export async function isGoogleCalendarConnected(): Promise<boolean> {
     const timeoutId = setTimeout(() => controller.abort(), 5000); // 5 second timeout
     
     try {
-      // Get the base URL from the environment or fall back to the Supabase URL
-      let baseUrl = import.meta.env.VITE_SUPABASE_FUNCTIONS_URL || import.meta.env.VITE_SUPABASE_URL;
+      // Get the base URL from the environment or construct it from the Supabase URL
+      let baseUrl = import.meta.env.VITE_SUPABASE_FUNCTIONS_URL;
+      
+      if (!baseUrl) {
+        // If VITE_SUPABASE_FUNCTIONS_URL is not set, try to construct it from VITE_SUPABASE_URL
+        const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
+        if (supabaseUrl) {
+          // Remove trailing slash if present
+          const cleanUrl = supabaseUrl.replace(/\/$/, '');
+          baseUrl = `${cleanUrl}/functions/v1`;
+          console.log("Constructed functions URL from Supabase URL:", baseUrl);
+        } else {
+          console.error("No Supabase URL available to construct functions URL");
+          return false;
+        }
+      }
       
       // Ensure the URL doesn't have a trailing slash
       baseUrl = baseUrl ? baseUrl.replace(/\/$/, '') : '';
@@ -195,7 +237,7 @@ export async function isGoogleCalendarConnected(): Promise<boolean> {
         return false;
       }
       
-      const functionUrl = `${baseUrl}/functions/v1/check-google-connection`;
+      const functionUrl = `${baseUrl}/check-google-connection`;
       console.log("Checking connection URL:", functionUrl);
       
       // Get the auth token
