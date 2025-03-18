@@ -1,8 +1,8 @@
 
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Loader2, CalendarPlus, Check, AlertTriangle, ExternalLink } from "lucide-react";
-import { connectToGoogleCalendar } from "@/utils/appointments/googleCalendar/auth/connect";
+import { Loader2, CalendarPlus, Check, AlertTriangle } from "lucide-react";
+import { connectToGoogleCalendar } from "@/utils/appointments/googleCalendar";
 import { useToast } from "@/components/ui/use-toast";
 import { Alert, AlertTitle, AlertDescription } from "@/components/ui/alert";
 
@@ -47,7 +47,8 @@ export function CalendarConnection({
         if (error.name === "FunctionsFetchError" || 
             error.message.includes("Failed to send a request to the Edge Function") ||
             error.message.includes("Failed to fetch") ||
-            error.message.includes("Request timed out")) {
+            error.message.includes("Request timed out") ||
+            error.message.includes("server might be unavailable")) {
           setEdgeFunctionError(true);
           errorMessage = "Could not connect to Supabase Edge Functions. The server might be temporarily unavailable.";
         }

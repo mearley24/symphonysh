@@ -8,6 +8,11 @@ export function handleGoogleAuthCallback() {
   const state = url.searchParams.get('state');
   const error = url.searchParams.get('error');
   
+  console.log("Checking for Google auth callback parameters:");
+  console.log("- code exists:", !!code);
+  console.log("- state:", state);
+  console.log("- error:", error || "none");
+  
   if (error) {
     console.error("Google auth error:", error);
     return { error };
@@ -15,7 +20,7 @@ export function handleGoogleAuthCallback() {
   
   if (code && state === 'google_auth') {
     console.log("Detected Google auth callback with code, completing auth flow...");
-    return completeGoogleAuth(code);
+    return { completeAuth: () => completeGoogleAuth(code) };
   }
   
   return null;
@@ -53,12 +58,15 @@ async function completeGoogleAuth(code: string) {
           'Authorization': accessToken ? `Bearer ${accessToken}` : ''
         },
         body: JSON.stringify({ code })
-      }
+      },
+      15000 // 15 second timeout for token exchange
     );
     
     if (!response.ok) {
+      const errorText = await response.text();
       console.error("Error completing Google auth, status:", response.status);
-      throw new Error(`Error response: ${response.status}`);
+      console.error("Error response:", errorText);
+      throw new Error(`Error response: ${response.status} - ${errorText}`);
     }
     
     const data = await response.json();
@@ -66,7 +74,14 @@ async function completeGoogleAuth(code: string) {
     return data;
   } catch (error) {
     console.error("Failed to complete Google auth:", error);
-    console.error("Error details:", error instanceof Error ? error.stack : "No stack trace");
-    throw error;
+    
+    let errorMessage = "Unknown error completing Google authentication";
+    
+    if (error instanceof Error) {
+      errorMessage = error.message;
+      console.error("Error details:", error.stack || "No stack trace available");
+    }
+    
+    throw new Error(errorMessage);
   }
 }

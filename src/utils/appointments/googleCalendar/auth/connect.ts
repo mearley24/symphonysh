@@ -6,8 +6,7 @@ export async function connectToGoogleCalendar() {
   try {
     console.log("Starting Google Calendar connection process");
     
-    // Use a direct URL instead of relying on dynamic base URL detection
-    // This ensures we're using a known working endpoint
+    // Get the base URL for edge functions
     const baseUrl = getEdgeFunctionsBaseUrl();
     
     console.log("Using Supabase URL:", baseUrl);
@@ -37,15 +36,19 @@ export async function connectToGoogleCalendar() {
           'Authorization': accessToken ? `Bearer ${accessToken}` : ''
         },
         body: JSON.stringify({ redirect: true })
-      }
+      },
+      15000 // Increased timeout to 15 seconds for auth requests
     );
     
     if (!response.ok) {
+      const errorText = await response.text();
       console.error("Error getting Google auth URL, status:", response.status);
-      throw new Error(`Error response: ${response.status}`);
+      console.error("Error response:", errorText);
+      throw new Error(`Error response: ${response.status} - ${errorText}`);
     }
     
     const data = await response.json();
+    console.log("Auth response data:", data);
     
     if (data && data.authUrl) {
       console.log("Redirecting to Google auth URL:", data.authUrl);
@@ -61,7 +64,14 @@ export async function connectToGoogleCalendar() {
     }
   } catch (error) {
     console.error("Failed to connect to Google Calendar:", error);
-    console.error("Error details:", error instanceof Error ? error.stack : "No stack trace");
-    throw error;
+    
+    let errorMessage = "Unknown error connecting to Google Calendar";
+    
+    if (error instanceof Error) {
+      errorMessage = error.message;
+      console.error("Error details:", error.stack || "No stack trace available");
+    }
+    
+    throw new Error(errorMessage);
   }
 }

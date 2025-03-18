@@ -48,18 +48,13 @@ export function useGoogleAuthCallback(
     if (code && state === 'google_auth') {
       setConnectingCalendar(true);
       
-      const completeAuth = async () => {
-        try {
-          const result = await handleGoogleAuthCallback();
-          
-          if (result && result.error) {
-            setAuthError(result.error);
-            toast({
-              title: "Calendar Connection Failed",
-              description: "Could not connect to Google Calendar. Please try again.",
-              variant: "destructive"
-            });
-          } else {
+      const callbackResult = handleGoogleAuthCallback();
+      
+      if (callbackResult && callbackResult.completeAuth) {
+        const completeAuth = async () => {
+          try {
+            const result = await callbackResult.completeAuth();
+            
             // Clear URL params and show success message
             navigate('/scheduling', { replace: true });
             
@@ -75,32 +70,37 @@ export function useGoogleAuthCallback(
             if (date) {
               fetchTimeSlots(date);
             }
+          } catch (error) {
+            console.error("Failed to complete Google auth:", error);
+            
+            // Determine if it's an edge function error
+            let errorMessage = "Could not connect to Google Calendar. Please try again.";
+            
+            if (error instanceof Error && 
+                (error.name === "FunctionsFetchError" || 
+                 error.message.includes("Failed to send a request to the Edge Function") ||
+                 error.message.includes("Failed to fetch") ||
+                 error.message.includes("Request timed out"))) {
+              errorMessage = "Could not connect to calendar service. The server might be temporarily unavailable.";
+            }
+            
+            // Still clear the URL params even on error
+            navigate('/scheduling', { replace: true });
+            
+            toast({
+              title: "Connection Failed",
+              description: errorMessage,
+              variant: "destructive"
+            });
+            
+            setAuthError(error instanceof Error ? error.message : "Unknown error");
+          } finally {
+            setConnectingCalendar(false);
           }
-        } catch (error) {
-          console.error("Failed to complete Google auth:", error);
-          
-          // Determine if it's an edge function error
-          let errorMessage = "Could not connect to Google Calendar. Please try again.";
-          
-          if (error instanceof Error && 
-              (error.name === "FunctionsFetchError" || 
-               error.message.includes("Failed to send a request to the Edge Function") ||
-               error.message.includes("Failed to fetch") ||
-               error.message.includes("Request timed out"))) {
-            errorMessage = "Could not connect to calendar service. The server might be temporarily unavailable.";
-          }
-          
-          toast({
-            title: "Connection Failed",
-            description: errorMessage,
-            variant: "destructive"
-          });
-        } finally {
-          setConnectingCalendar(false);
-        }
-      };
-      
-      completeAuth();
+        };
+        
+        completeAuth();
+      }
     }
   }, [searchParams, toast, navigate, date, fetchTimeSlots, setConnectingCalendar, setIsCalendarConnected, setAuthError]);
 }
