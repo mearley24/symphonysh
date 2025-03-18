@@ -1,6 +1,6 @@
 
 import { useState, useEffect } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useSearchParams, useNavigate } from "react-router-dom";
 import { useToast } from "@/components/ui/use-toast";
 import { PageLayout } from "./components/PageLayout";
 import { SchedulingForm } from "./components/SchedulingForm";
@@ -18,6 +18,7 @@ const Scheduling = () => {
   const [isMounted, setIsMounted] = useState(false);
   const [searchParams] = useSearchParams();
   const { toast } = useToast();
+  const navigate = useNavigate();
 
   // Mark component as rendered to help with debugging
   useEffect(() => {
@@ -58,6 +59,24 @@ const Scheduling = () => {
     });
   };
 
+  // Test navigation function - for debugging
+  const testNavigation = () => {
+    console.log("Testing navigation to confirmation page");
+    navigate("/scheduling/confirmation", {
+      state: { 
+        appointmentDetails: {
+          date: new Date(),
+          selectedTime: "10:00",
+          name: "Test User",
+          email: "test@example.com",
+          phone: "1234567890",
+          message: "Test message",
+          service: "audio-entertainment"
+        }
+      }
+    });
+  };
+
   // If the component hasn't rendered yet, show loading indicator
   if (!hasRendered) {
     console.log("Scheduling component not rendered yet");
@@ -79,6 +98,8 @@ const Scheduling = () => {
           {...formState}
           handleError={handleError}
         />
+        {/* Debug button - Comment out in production */}
+        {/* <button onClick={testNavigation} className="mt-4 text-sm text-gray-400">Test Navigation</button> */}
       </PageLayout>
     </ErrorHandler>
   );

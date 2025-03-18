@@ -1,5 +1,4 @@
 
-import { format } from "date-fns";
 import { AppointmentData, getServiceName } from "./types";
 import { saveAppointmentToDatabase } from "./dbUtils";
 import { sendEmailNotification } from "./notificationUtils";
