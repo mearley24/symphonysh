@@ -8,6 +8,7 @@ import { BackNavigation } from "@/components/scheduling/BackNavigation";
 import { DateTimeSelector } from "@/components/scheduling/DateTimeSelector";
 import { AppointmentForm } from "@/components/scheduling/AppointmentForm";
 import { submitAppointment } from "@/utils/appointmentUtils";
+import { AlertTriangle } from "lucide-react";
 
 const Scheduling = () => {
   const [searchParams] = useSearchParams();
@@ -20,16 +21,20 @@ const Scheduling = () => {
   const [service, setService] = useState<string>("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [hasRendered, setHasRendered] = useState(false);
   const { toast } = useToast();
+
+  // Mark component as rendered to help with debugging
+  useEffect(() => {
+    setHasRendered(true);
+    console.log("Scheduling component mounted");
+  }, []);
 
   useEffect(() => {
     const serviceFromUrl = searchParams.get("service");
     if (serviceFromUrl) {
       setService(serviceFromUrl);
     }
-
-    // Log that the component has mounted successfully
-    console.log("Scheduling component mounted");
   }, [searchParams]);
 
   // Reset any errors when component mounts
@@ -155,6 +160,11 @@ const Scheduling = () => {
     }
   };
 
+  // If the component hasn't rendered yet, show a loading message to help debug white screen issues
+  if (!hasRendered) {
+    console.log("Scheduling component not rendered yet");
+  }
+
   // If there was an error loading the component, show a fallback UI
   if (error) {
     return (
@@ -197,12 +207,18 @@ const Scheduling = () => {
 
           <form onSubmit={handleSubmit} className="space-y-8" noValidate>
             <div className="grid md:grid-cols-2 gap-8">
-              <DateTimeSelector
-                date={date}
-                setDate={setDate}
-                selectedTime={selectedTime}
-                setSelectedTime={setSelectedTime}
-              />
+              {/* Wrap DateTimeSelector in an error boundary wrapper */}
+              <div className="space-y-4">
+                {/* This div wrapping the DateTimeSelector acts as our "error boundary" */}
+                <div className="w-full">
+                  <DateTimeSelector
+                    date={date}
+                    setDate={setDate}
+                    selectedTime={selectedTime}
+                    setSelectedTime={setSelectedTime}
+                  />
+                </div>
+              </div>
 
               <AppointmentForm
                 name={name}

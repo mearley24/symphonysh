@@ -1,37 +1,64 @@
 
 import { useState, useEffect } from "react";
 import { isGoogleCalendarConnected } from "@/utils/appointments/googleCalendar";
+import { useToast } from "@/components/ui/use-toast";
 
-/**
- * Hook to check Google Calendar connection status
- */
 export function useCalendarConnectionStatus() {
-  const [isCalendarConnected, setIsCalendarConnected] = useState(false);
-  const [checkingConnection, setCheckingConnection] = useState(true);
+  const [isCalendarConnected, setIsCalendarConnected] = useState<boolean>(false);
+  const [checkingConnection, setCheckingConnection] = useState<boolean>(true);
+  const [connectionError, setConnectionError] = useState<Error | null>(null);
+  const { toast } = useToast();
 
-  // Check if calendar is connected on mount
+  // Check if Google Calendar is connected on component mount
   useEffect(() => {
-    const checkCalendarConnection = async () => {
+    let isMounted = true;
+    
+    async function checkConnection() {
       try {
         setCheckingConnection(true);
-        const connected = await isGoogleCalendarConnected();
-        setIsCalendarConnected(connected);
-        console.log("Google Calendar connection status:", connected);
+        console.log("Checking Google Calendar connection status...");
+        
+        const isConnected = await isGoogleCalendarConnected();
+        
+        if (isMounted) {
+          console.log("Google Calendar connection status:", isConnected);
+          setIsCalendarConnected(isConnected);
+          setConnectionError(null);
+        }
       } catch (error) {
-        console.error("Error checking calendar connection:", error);
-        // Don't show an error toast here as it would be disruptive on page load
-        // Just log it and continue with isCalendarConnected set to false
+        console.error("Error checking Google Calendar connection:", error);
+        
+        if (isMounted) {
+          setConnectionError(error instanceof Error ? error : new Error("Unknown error checking connection"));
+          setIsCalendarConnected(false);
+          
+          // Show toast for connection check error, but only if it's not a timeout
+          if (!(error instanceof Error && error.message.includes("timeout"))) {
+            toast({
+              title: "Connection Check Failed",
+              description: "Could not check calendar connection status.",
+              variant: "destructive"
+            });
+          }
+        }
       } finally {
-        setCheckingConnection(false);
+        if (isMounted) {
+          setCheckingConnection(false);
+        }
       }
-    };
+    }
     
-    checkCalendarConnection();
-  }, []);
+    checkConnection();
+    
+    return () => {
+      isMounted = false;
+    };
+  }, [toast]);
 
   return {
     isCalendarConnected,
     setIsCalendarConnected,
-    checkingConnection
+    checkingConnection,
+    connectionError
   };
 }
