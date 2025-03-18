@@ -7,6 +7,10 @@ const supabaseUrl = Deno.env.get("SUPABASE_URL") || "";
 const supabaseKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") || "";
 const supabase = createClient(supabaseUrl, supabaseKey);
 
+// Debug info
+console.log("Function initialization");
+console.log("Supabase URL:", supabaseUrl);
+
 // CORS headers
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -23,6 +27,8 @@ serve(async (req) => {
 
   try {
     console.log("Checking Google Calendar connection");
+    console.log("Request method:", req.method);
+    console.log("Request URL:", req.url);
     
     // Check if we have active tokens in the database
     const { data: tokens, error } = await supabase
@@ -35,6 +41,8 @@ serve(async (req) => {
       console.error("Error checking Google tokens:", error);
       throw error;
     }
+    
+    console.log("Token query result:", tokens ? "Found tokens" : "No tokens found");
     
     const connected = tokens && tokens.length > 0 && 
                       tokens[0].access_token && 

@@ -14,7 +14,13 @@ const GOOGLE_CLIENT_SECRET = Deno.env.get("GOOGLE_OAUTH_CLIENT_SECRET") || "";
 const REDIRECT_URI = `${supabaseUrl}/functions/v1/google-auth-callback`;
 
 // Frontend URL for redirecting back after auth
-const FRONTEND_URL = Deno.env.get("FRONTEND_URL") || "http://localhost:5173";
+const FRONTEND_URL = Deno.env.get("FRONTEND_URL") || "http://localhost:8080";
+
+// Debug info
+console.log("Function initialization");
+console.log("Supabase URL:", supabaseUrl);
+console.log("Redirect URI:", REDIRECT_URI);
+console.log("Frontend URL:", FRONTEND_URL);
 
 // CORS headers
 const corsHeaders = {
