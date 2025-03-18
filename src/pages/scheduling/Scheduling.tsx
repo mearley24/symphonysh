@@ -7,6 +7,8 @@ import { SchedulingForm } from "./components/SchedulingForm";
 import { ErrorDisplay } from "./components/ErrorDisplay";
 
 const Scheduling = () => {
+  console.log("Scheduling component rendering");
+  
   const [date, setDate] = useState<Date>();
   const [selectedTime, setSelectedTime] = useState<string>();
   const [name, setName] = useState("");
@@ -23,7 +25,7 @@ const Scheduling = () => {
   // Mark component as rendered to help with debugging
   useEffect(() => {
     setHasRendered(true);
-    console.log("Scheduling component mounted");
+    console.log("Scheduling component mounted and useEffect executed");
   }, []);
 
   // Set service from URL params
@@ -31,6 +33,7 @@ const Scheduling = () => {
     const serviceFromUrl = searchParams.get("service");
     if (serviceFromUrl) {
       setService(serviceFromUrl);
+      console.log("Service from URL:", serviceFromUrl);
     }
   }, [searchParams]);
 
@@ -57,9 +60,12 @@ const Scheduling = () => {
 
   // If there was an error loading the component, show a fallback UI
   if (error) {
+    console.log("Displaying error UI due to:", error);
     return <ErrorDisplay onRefresh={() => window.location.reload()} />;
   }
 
+  console.log("Rendering Scheduling component with PageLayout");
+  
   return (
     <PageLayout>
       <SchedulingForm
@@ -85,4 +91,5 @@ const Scheduling = () => {
   );
 };
 
+// Export the component
 export default Scheduling;

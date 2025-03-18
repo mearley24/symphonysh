@@ -21,7 +21,7 @@ export function DateTimeSelector({
   selectedTime, 
   setSelectedTime 
 }: DateTimeSelectorProps) {
-  console.log("DateTimeSelector rendering");
+  console.log("DateTimeSelector rendering with props:", { date, selectedTime });
   const [error, setError] = useState<string | null>(null);
   const [componentError, setComponentError] = useState<Error | null>(null);
   const [hasFatalError, setHasFatalError] = useState(false);
@@ -46,12 +46,16 @@ export function DateTimeSelector({
   }, []);
 
   try {
+    console.log("Initializing hooks in DateTimeSelector");
+    
     // Custom hooks for time slots management
     const { availableTimeSlots, isLoading, fetchTimeSlots } = useTimeSlots(
       date,
       selectedTime,
       setSelectedTime
     );
+
+    console.log("useTimeSlots initialized with:", { availableTimeSlots, isLoading });
 
     // Custom hook for Google Calendar authentication
     const { 
@@ -63,6 +67,13 @@ export function DateTimeSelector({
       retryConnectionCheck
     } = useGoogleCalendarAuth(date, fetchTimeSlots);
 
+    console.log("useGoogleCalendarAuth initialized with:", { 
+      connectingCalendar, 
+      isCalendarConnected, 
+      authError,
+      checkingConnection
+    });
+
     // Handle errors from hooks
     useEffect(() => {
       if (authError) {
@@ -73,7 +84,7 @@ export function DateTimeSelector({
 
     // If there's an internal component error, show it but don't break the UI
     if (componentError || hasFatalError) {
-      console.error("DateTimeSelector component error:", componentError);
+      console.error("DateTimeSelector component error:", componentError || "Fatal error occurred");
       return (
         <div className="space-y-4">
           <Alert variant="destructive" className="bg-red-500/20 border-red-500/40">
@@ -81,11 +92,14 @@ export function DateTimeSelector({
             <AlertDescription>
               There was a problem loading the calendar component. 
               Please try refreshing the page or contact support.
+              {componentError && ` Error: ${componentError.message}`}
             </AlertDescription>
           </Alert>
         </div>
       );
     }
+
+    console.log("Rendering DateTimeSelector UI components");
 
     return (
       <div className="space-y-4">

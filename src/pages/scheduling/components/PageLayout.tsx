@@ -1,5 +1,5 @@
 
-import React from "react";
+import React, { useEffect } from "react";
 import Header from "@/components/Header";
 import { BackNavigation } from "@/components/scheduling/BackNavigation";
 
@@ -8,6 +8,12 @@ interface PageLayoutProps {
 }
 
 export function PageLayout({ children }: PageLayoutProps) {
+  console.log("PageLayout rendering");
+  
+  useEffect(() => {
+    console.log("PageLayout mounted");
+  }, []);
+
   return (
     <div className="min-h-screen bg-primary">
       <Header />
