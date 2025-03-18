@@ -1,16 +1,18 @@
 
 import { getEdgeFunctionsBaseUrl, getAuthToken, createRequestWithTimeout } from './utils';
+import { supabase } from "@/integrations/supabase/client";
 
 // Function to redirect to Google Auth page
 export async function connectToGoogleCalendar() {
   try {
     console.log("Starting Google Calendar connection process");
     
+    // Get the base URL for edge functions
     const baseUrl = getEdgeFunctionsBaseUrl();
     
     if (!baseUrl) {
       console.error("No base URL available for functions");
-      throw new Error("Could not determine the Edge Functions URL. Please check your environment variables.");
+      throw new Error("Could not determine the Edge Functions URL. Please check your configuration.");
     }
     
     const functionUrl = `${baseUrl}/google-auth`;
