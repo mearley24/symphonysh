@@ -4,7 +4,7 @@ import { DateCalendar } from "./date-time-selector/DateCalendar";
 import { TimeSlots } from "./date-time-selector/TimeSlots";
 import { useGoogleCalendarAuth } from "./date-time-selector/useGoogleCalendarAuth";
 import { useTimeSlots } from "./date-time-selector/useTimeSlots";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { AlertTriangle } from "lucide-react";
 
@@ -25,6 +25,8 @@ export function DateTimeSelector({
   const [error, setError] = useState<string | null>(null);
   const [componentError, setComponentError] = useState<Error | null>(null);
   const [hasFatalError, setHasFatalError] = useState(false);
+  const hasLoggedError = useRef(false);
+  const apiErrorCount = useRef(0);
 
   // Error boundary functionality
   useEffect(() => {
@@ -35,7 +37,12 @@ export function DateTimeSelector({
       originalConsoleError(...args);
       
       const errorMessage = args.join(' ');
-      if (errorMessage.includes('React') || errorMessage.includes('Error')) {
+      if (
+        (errorMessage.includes('React') || errorMessage.includes('Error')) && 
+        !errorMessage.includes('Failed to fetch') &&
+        !hasLoggedError.current
+      ) {
+        hasLoggedError.current = true;
         setComponentError(new Error(errorMessage));
       }
     };
@@ -44,6 +51,45 @@ export function DateTimeSelector({
       console.error = originalConsoleError;
     };
   }, []);
+
+  // Fallback UI when API calls fail repeatedly
+  if (apiErrorCount.current > 3 || hasFatalError || componentError) {
+    console.log("DateTimeSelector showing error fallback UI");
+    
+    return (
+      <div className="space-y-4">
+        <Alert variant="destructive" className="bg-red-500/20 border-red-500/40">
+          <AlertTriangle className="h-4 w-4" />
+          <AlertDescription>
+            There was a problem loading the calendar. Please try again later or select a date and time manually.
+          </AlertDescription>
+        </Alert>
+        
+        <DateCalendar date={date} setDate={setDate} />
+        
+        {date && (
+          <div className="space-y-2">
+            <p className="text-sm text-white/80">Please select a time:</p>
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
+              {["9:00 AM", "10:00 AM", "11:00 AM", "1:00 PM", "2:00 PM", "3:00 PM"].map((time) => (
+                <button
+                  key={time}
+                  className={`py-2 px-4 rounded-md transition-colors ${
+                    selectedTime === time
+                      ? "bg-accent text-white"
+                      : "bg-white/10 hover:bg-white/20 text-white"
+                  }`}
+                  onClick={() => setSelectedTime(time)}
+                >
+                  {time}
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
+      </div>
+    );
+  }
 
   try {
     console.log("Initializing hooks in DateTimeSelector");
@@ -57,7 +103,7 @@ export function DateTimeSelector({
 
     console.log("useTimeSlots initialized with:", { availableTimeSlots, isLoading });
 
-    // Custom hook for Google Calendar authentication
+    // Custom hook for Google Calendar authentication with error handling
     const { 
       connectingCalendar, 
       setConnectingCalendar, 
@@ -65,7 +111,10 @@ export function DateTimeSelector({
       authError,
       checkingConnection,
       retryConnectionCheck
-    } = useGoogleCalendarAuth(date, fetchTimeSlots);
+    } = useGoogleCalendarAuth(date, fetchTimeSlots, () => {
+      apiErrorCount.current += 1;
+      console.log("API error count increased to:", apiErrorCount.current);
+    });
 
     console.log("useGoogleCalendarAuth initialized with:", { 
       connectingCalendar, 
@@ -81,23 +130,6 @@ export function DateTimeSelector({
         setError(authError);
       }
     }, [authError]);
-
-    // If there's an internal component error, show it but don't break the UI
-    if (componentError || hasFatalError) {
-      console.error("DateTimeSelector component error:", componentError || "Fatal error occurred");
-      return (
-        <div className="space-y-4">
-          <Alert variant="destructive" className="bg-red-500/20 border-red-500/40">
-            <AlertTriangle className="h-4 w-4" />
-            <AlertDescription>
-              There was a problem loading the calendar component. 
-              Please try refreshing the page or contact support.
-              {componentError && ` Error: ${componentError.message}`}
-            </AlertDescription>
-          </Alert>
-        </div>
-      );
-    }
 
     console.log("Rendering DateTimeSelector UI components");
 
@@ -141,6 +173,8 @@ export function DateTimeSelector({
             {err instanceof Error ? ` Error: ${err.message}` : ''}
           </AlertDescription>
         </Alert>
+        
+        <DateCalendar date={date} setDate={setDate} />
       </div>
     );
   }

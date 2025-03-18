@@ -1,94 +1,93 @@
 
-import { useState, useEffect } from "react";
-import { isGoogleCalendarConnected } from "@/utils/appointments/googleCalendar";
-import { useToast } from "@/components/ui/use-toast";
+import { useState, useEffect, useCallback } from "react";
+import { isGoogleCalendarConnected } from "@/utils/appointments/googleCalendar/auth/status";
 
 export function useCalendarConnectionStatus() {
   const [isCalendarConnected, setIsCalendarConnected] = useState<boolean>(false);
   const [checkingConnection, setCheckingConnection] = useState<boolean>(true);
-  const [connectionError, setConnectionError] = useState<Error | null>(null);
-  const [connectionAttempts, setConnectionAttempts] = useState<number>(0);
-  const [maxRetries] = useState<number>(2);
-  const { toast } = useToast();
+  const [connectionAttempts, setConnectionAttempts] = useState(0);
+  const [shouldStopChecking, setShouldStopChecking] = useState(false);
 
-  // Function to check connection with error handling and retries
-  const checkConnectionWithRetry = async (attempt: number = 0): Promise<void> => {
-    try {
-      setCheckingConnection(true);
-      console.log(`Checking Google Calendar connection status... (Attempt ${attempt + 1})`);
-      
-      const isConnected = await isGoogleCalendarConnected();
-      
-      console.log("Google Calendar connection status:", isConnected);
-      setIsCalendarConnected(isConnected);
-      setConnectionError(null);
-      setConnectionAttempts(0); // Reset attempts on success
-    } catch (error) {
-      console.error(`Failed to check Google Calendar connection (Attempt ${attempt + 1}):`, error);
-      
-      const errorMessage = error instanceof Error ? error.message : "Unknown error checking connection";
-      
-      // Check if we should retry
-      if (attempt < maxRetries) {
-        console.log(`Retrying connection check (${attempt + 1}/${maxRetries})...`);
-        setConnectionAttempts(attempt + 1);
-        
-        // Exponential backoff: 1s, 2s, 4s, etc.
-        const backoffTime = Math.min(1000 * Math.pow(2, attempt), 8000);
-        setTimeout(() => checkConnectionWithRetry(attempt + 1), backoffTime);
-        return;
-      }
-      
-      // Max retries reached, set final error state
-      setConnectionError(error instanceof Error ? error : new Error(errorMessage));
-      setIsCalendarConnected(false);
-      
-      // Only show toast for non-timeout errors or on final attempt
-      if (attempt >= maxRetries && 
-          !(error instanceof Error && error.message.includes("timeout"))) {
-        toast({
-          title: "Connection Check Failed",
-          description: "Could not check calendar connection status. Will continue without calendar integration.",
-          variant: "destructive"
-        });
-      }
-    } finally {
-      // Only set checking connection to false if this is the final attempt or successful
-      if (attempt >= maxRetries || isCalendarConnected) {
-        setCheckingConnection(false);
-      }
+  // Function to check connection with retry logic and error handling
+  const checkConnectionWithRetry = useCallback(async (attempts = 0): Promise<boolean> => {
+    if (attempts >= 2 || shouldStopChecking) {
+      console.log("Max connection check attempts reached or checking stopped");
+      setCheckingConnection(false);
+      return false;
     }
-  };
 
-  // Check if Google Calendar is connected on component mount
+    try {
+      console.log(`Checking calendar connection (attempt ${attempts + 1})`);
+      const isConnected = await isGoogleCalendarConnected();
+      console.log("Calendar connection status:", isConnected);
+      setIsCalendarConnected(!!isConnected);
+      setCheckingConnection(false);
+      return !!isConnected;
+    } catch (error) {
+      console.error("Error checking calendar connection:", error);
+      setConnectionAttempts(prev => prev + 1);
+      
+      // Don't retry immediately - just fail gracefully
+      setCheckingConnection(false);
+      return false;
+    }
+  }, [shouldStopChecking]);
+
+  // Function to retry connection check manually
+  const retryConnectionCheck = useCallback(() => {
+    if (connectionAttempts < 3) {
+      setCheckingConnection(true);
+      checkConnectionWithRetry(connectionAttempts);
+    }
+  }, [connectionAttempts, checkConnectionWithRetry]);
+
+  // Initial connection check
   useEffect(() => {
     let isMounted = true;
     
     const checkConnection = async () => {
-      if (isMounted) {
-        await checkConnectionWithRetry();
+      try {
+        if (!isMounted) return;
+        setCheckingConnection(true);
+        
+        const success = await checkConnectionWithRetry(0);
+        
+        if (!isMounted) return;
+        
+        if (!success && connectionAttempts < 1) {
+          // Only try once more after a delay
+          setTimeout(() => {
+            if (isMounted) {
+              checkConnectionWithRetry(connectionAttempts + 1);
+            }
+          }, 2000);
+        } else {
+          setCheckingConnection(false);
+        }
+      } catch (error) {
+        console.error("Error in connection check effect:", error);
+        if (isMounted) {
+          setCheckingConnection(false);
+        }
       }
     };
-    
-    checkConnection();
-    
+
+    // Add slight delay to avoid immediate API calls during mounting
+    const timer = setTimeout(() => {
+      checkConnection();
+    }, 500);
+
     return () => {
       isMounted = false;
+      clearTimeout(timer);
+      setShouldStopChecking(true);
     };
-  }, [toast]);
-
-  // Function to manually retry connection check
-  const retryConnectionCheck = async () => {
-    setConnectionAttempts(0);
-    setConnectionError(null);
-    await checkConnectionWithRetry();
-  };
+  }, []);
 
   return {
     isCalendarConnected,
     setIsCalendarConnected,
     checkingConnection,
-    connectionError,
     retryConnectionCheck
   };
 }

@@ -19,28 +19,37 @@ const Scheduling = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [hasRendered, setHasRendered] = useState(false);
+  const [isMounted, setIsMounted] = useState(false);
   const [searchParams] = useSearchParams();
   const { toast } = useToast();
 
   // Mark component as rendered to help with debugging
   useEffect(() => {
     setHasRendered(true);
+    setIsMounted(true);
     console.log("Scheduling component mounted and useEffect executed");
+    
+    return () => {
+      setIsMounted(false);
+    };
   }, []);
 
   // Set service from URL params
   useEffect(() => {
+    if (!isMounted) return;
+    
     const serviceFromUrl = searchParams.get("service");
     if (serviceFromUrl) {
       setService(serviceFromUrl);
       console.log("Service from URL:", serviceFromUrl);
     }
-  }, [searchParams]);
+  }, [searchParams, isMounted]);
 
   // Reset any errors when component mounts
   useEffect(() => {
+    if (!isMounted) return;
     setError(null);
-  }, []);
+  }, [isMounted]);
 
   // Handle any unexpected errors
   const handleError = (error: any) => {
@@ -56,6 +65,9 @@ const Scheduling = () => {
   // If the component hasn't rendered yet, log it for debugging
   if (!hasRendered) {
     console.log("Scheduling component not rendered yet");
+    return <div className="min-h-screen bg-primary flex items-center justify-center">
+      <p className="text-white">Loading scheduling page...</p>
+    </div>;
   }
 
   // If there was an error loading the component, show a fallback UI
