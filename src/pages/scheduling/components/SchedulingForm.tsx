@@ -84,6 +84,7 @@ export function SchedulingForm({
       };
       
       // Store the appointment details to session storage before submitting
+      // This is our primary fallback mechanism
       try {
         sessionStorage.setItem('appointmentDetails', JSON.stringify(appointmentDetails));
         console.log("Stored appointment details in session storage");
@@ -91,6 +92,7 @@ export function SchedulingForm({
         console.warn("Failed to store in session storage:", storageError);
       }
       
+      // Submit the appointment
       const result = await submitAppointment(appointmentDetails);
       
       console.log("Appointment submission result:", result);
@@ -101,35 +103,29 @@ export function SchedulingForm({
         description: "Your appointment has been scheduled successfully.",
       });
 
-      console.log("Attempting to navigate to confirmation page...");
+      console.log("Redirecting to confirmation page");
       
-      // Try to navigate first using navigate method
-      try {
-        // First try direct navigation with state
-        navigate("/scheduling/confirmation", { 
-          state: { appointmentDetails },
-          replace: true 
-        });
-        
-        // Set a fallback in case the navigate doesn't trigger
-        setTimeout(() => {
-          console.log("Navigation timeout - using direct location change");
-          window.location.href = "/scheduling/confirmation";
-        }, 100);
-      } catch (navError) {
-        console.error("Navigation failed:", navError);
-        // Fallback to direct URL change
-        window.location.href = "/scheduling/confirmation";
-      }
+      // Use direct navigation to avoid infinite loops
+      window.location.href = "/scheduling/confirmation";
       
     } catch (error) {
-      console.error("Scheduling error:", error);
+      console.error("Scheduling error:", error instanceof Error ? error.message : error);
+      
       toast({
         title: "Error",
         description: "There was a problem scheduling your appointment. Please try again.",
         variant: "destructive"
       });
-      handleError(error);
+      
+      if (typeof handleError === 'function') {
+        // Prevent recursive error handling
+        try {
+          handleError(error);
+        } catch (handlerError) {
+          console.warn("Error in error handler:", handlerError);
+        }
+      }
+      
       setIsSubmitting(false);
     }
   };
