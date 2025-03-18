@@ -4,8 +4,8 @@ import { supabase } from "@/integrations/supabase/client";
 // Get the base URL for Supabase Edge Functions
 export function getEdgeFunctionsBaseUrl(): string | null {
   try {
-    // Use the hardcoded Supabase URL
-    const supabaseUrl = "https://symphonysh.supabase.co";
+    // Extract the Supabase URL from the client
+    const supabaseUrl = import.meta.env.VITE_SUPABASE_URL || "https://bxsdjxkbhjtdrrtjtyto.supabase.co";
     
     if (supabaseUrl) {
       // Remove trailing slash if present
