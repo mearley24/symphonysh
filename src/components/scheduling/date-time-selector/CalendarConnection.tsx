@@ -27,6 +27,7 @@ export function CalendarConnection({
   const [connectionError, setConnectionError] = useState<string | null>(null);
   const [edgeFunctionError, setEdgeFunctionError] = useState<boolean>(false);
   const [detailedError, setDetailedError] = useState<string | null>(null);
+  const [showTroubleshooting, setShowTroubleshooting] = useState<boolean>(false);
 
   // Handle Google Calendar connection
   const handleConnectCalendar = async () => {
@@ -55,14 +56,15 @@ export function CalendarConnection({
         
         // Check if it's an edge function error
         if (error.name === "FunctionsFetchError" || 
-            error.message.includes("Failed to send a request to the Edge Function") ||
+            error.message.includes("Edge Function") ||
+            error.message.includes("Function endpoint not found") ||
             error.message.includes("Failed to fetch") ||
             error.message.includes("Request timed out") ||
             error.message.includes("server might be unavailable") ||
             error.message.includes("not found") ||
             error.message.includes("404")) {
           setEdgeFunctionError(true);
-          errorMessage = "Could not connect to Supabase Edge Functions. The server might be temporarily unavailable or functions not deployed.";
+          errorMessage = "Could not connect to Supabase Edge Functions. The functions might not be deployed correctly.";
         }
       }
       
@@ -71,7 +73,7 @@ export function CalendarConnection({
       toast({
         title: "Connection Failed",
         description: edgeFunctionError 
-          ? "Could not connect to calendar service. Server might be unavailable or functions not deployed."
+          ? "Could not connect to calendar service. Edge Functions may not be deployed properly."
           : "Could not connect to Google Calendar. Please try again later.",
         variant: "destructive"
       });
@@ -135,6 +137,17 @@ export function CalendarConnection({
               <RefreshCw className="h-4 w-4" />
             </Button>
           )}
+          
+          {edgeFunctionError && (
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={() => setShowTroubleshooting(!showTroubleshooting)}
+              className="bg-transparent hover:bg-white/10 text-white/70 border-none"
+            >
+              {showTroubleshooting ? "Hide Help" : "Show Help"}
+            </Button>
+          )}
         </div>
       </div>
 
@@ -143,9 +156,22 @@ export function CalendarConnection({
           <AlertTriangle className="h-4 w-4" />
           <AlertTitle>Edge Function Error</AlertTitle>
           <AlertDescription>
-            Could not connect to the calendar service. The Edge Functions might not be deployed or are temporarily unavailable.
-            <div className="mt-2 text-sm">
-              <p>You can still schedule appointments without connecting your calendar.</p>
+            <div className="space-y-2">
+              <p>Could not connect to the calendar service. The Edge Functions might not be deployed or are temporarily unavailable.</p>
+              <p className="text-sm">You can still schedule appointments without connecting your calendar.</p>
+              
+              {showTroubleshooting && (
+                <div className="mt-4 space-y-2 pt-2 border-t border-red-500/30">
+                  <p className="font-semibold">Troubleshooting steps:</p>
+                  <ol className="list-decimal list-inside space-y-1 text-sm">
+                    <li>Ensure Edge Functions are deployed in Supabase</li>
+                    <li>Verify GOOGLE_OAUTH_CLIENT_ID and GOOGLE_OAUTH_CLIENT_SECRET are set correctly in Supabase</li>
+                    <li>Check that the google-auth and google-auth-callback functions exist in Supabase</li>
+                    <li>Ensure you've configured the OAuth credentials correctly in Google Cloud Console</li>
+                  </ol>
+                </div>
+              )}
+              
               {detailedError && (
                 <details className="mt-2">
                   <summary className="cursor-pointer text-xs">Technical details</summary>
