@@ -21,20 +21,27 @@ export function CalendarConnection({
   setConnectingCalendar,
 }: CalendarConnectionProps) {
   const { toast } = useToast();
+  const [connectionError, setConnectionError] = useState<string | null>(null);
 
   // Handle Google Calendar connection
   const handleConnectCalendar = async () => {
     setConnectingCalendar(true);
+    setConnectionError(null);
+    
     try {
       await connectToGoogleCalendar();
       // No success toast here since we're redirecting away
     } catch (error) {
       console.error("Failed to connect to Google Calendar:", error);
+      const errorMessage = error instanceof Error ? error.message : "Unknown error";
+      setConnectionError(errorMessage);
+      
       toast({
         title: "Connection Failed",
-        description: "Could not connect to Google Calendar. Please try again.",
+        description: "Could not connect to Google Calendar. Please check the console for details.",
         variant: "destructive"
       });
+      
       setConnectingCalendar(false);
     }
   };
@@ -65,12 +72,14 @@ export function CalendarConnection({
         </div>
       </div>
 
-      {authError === 'access_denied' && (
+      {(authError === 'access_denied' || connectionError) && (
         <div className="mb-4 p-3 bg-orange-500/20 border border-orange-500/40 rounded-md flex items-start gap-3">
           <AlertTriangle className="h-5 w-5 text-orange-400 shrink-0 mt-0.5" />
           <div className="text-sm text-white/90">
             <p className="font-medium mb-1">Authentication Error</p>
-            <p>There was a problem connecting to Google Calendar. Please try again or contact support if the issue persists.</p>
+            <p>{authError === 'access_denied' 
+                ? "There was a problem connecting to Google Calendar. Please try again or contact support if the issue persists." 
+                : connectionError || "An unknown error occurred."}</p>
           </div>
         </div>
       )}
