@@ -1,12 +1,9 @@
 
-import { useState, useEffect } from "react";
-import { Calendar } from "@/components/ui/calendar";
-import { Button } from "@/components/ui/button";
-import { Info, Loader2, CalendarPlus, Check, AlertTriangle } from "lucide-react";
-import { getAvailableTimeSlots } from "@/utils/appointments";
-import { connectToGoogleCalendar, handleGoogleAuthCallback, isGoogleCalendarConnected } from "@/utils/appointments/googleCalendarUtils";
-import { useToast } from "@/components/ui/use-toast";
-import { useSearchParams, useNavigate } from "react-router-dom";
+import { CalendarConnection } from "./date-time-selector/CalendarConnection";
+import { DateCalendar } from "./date-time-selector/DateCalendar";
+import { TimeSlots } from "./date-time-selector/TimeSlots";
+import { useGoogleCalendarAuth } from "./date-time-selector/useGoogleCalendarAuth";
+import { useTimeSlots } from "./date-time-selector/useTimeSlots";
 
 interface DateTimeSelectorProps {
   date: Date | undefined;
@@ -15,253 +12,51 @@ interface DateTimeSelectorProps {
   setSelectedTime: (time: string) => void;
 }
 
-export function DateTimeSelector({ date, setDate, selectedTime, setSelectedTime }: DateTimeSelectorProps) {
-  const [availableTimeSlots, setAvailableTimeSlots] = useState<string[]>([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [connectingCalendar, setConnectingCalendar] = useState(false);
-  const [isCalendarConnected, setIsCalendarConnected] = useState(false);
-  const [authError, setAuthError] = useState<string | null>(null);
-  const [checkingConnection, setCheckingConnection] = useState(true);
-  const { toast } = useToast();
-  const [searchParams] = useSearchParams();
-  const navigate = useNavigate();
+export function DateTimeSelector({ 
+  date, 
+  setDate, 
+  selectedTime, 
+  setSelectedTime 
+}: DateTimeSelectorProps) {
+  // Custom hooks for time slots management
+  const { availableTimeSlots, isLoading, fetchTimeSlots } = useTimeSlots(
+    date,
+    selectedTime,
+    setSelectedTime
+  );
 
-  // Check if calendar is connected on mount
-  useEffect(() => {
-    const checkCalendarConnection = async () => {
-      try {
-        setCheckingConnection(true);
-        const connected = await isGoogleCalendarConnected();
-        setIsCalendarConnected(connected);
-        console.log("Google Calendar connection status:", connected);
-      } catch (error) {
-        console.error("Error checking calendar connection:", error);
-      } finally {
-        setCheckingConnection(false);
-      }
-    };
-    
-    checkCalendarConnection();
-  }, []);
-  
-  // Check for Google auth callback on component mount
-  useEffect(() => {
-    const code = searchParams.get('code');
-    const state = searchParams.get('state');
-    const error = searchParams.get('error');
-    
-    // Handle errors from Google Auth
-    if (error) {
-      setConnectingCalendar(false);
-      let errorMessage = "An error occurred during Google authentication.";
-      
-      if (error === 'access_denied') {
-        errorMessage = "Authentication was denied. Please try again.";
-        setAuthError('access_denied');
-      }
-      
-      // Clear URL params and show error message
-      navigate('/scheduling', { replace: true });
-      
-      toast({
-        title: "Calendar Connection Failed",
-        description: errorMessage,
-        variant: "destructive"
-      });
-      
-      return;
-    }
-    
-    if (code && state === 'google_auth') {
-      setConnectingCalendar(true);
-      
-      const completeAuth = async () => {
-        try {
-          const result = await handleGoogleAuthCallback();
-          
-          if (result && result.error) {
-            setAuthError(result.error);
-            toast({
-              title: "Calendar Connection Failed",
-              description: "Could not connect to Google Calendar. Please try again.",
-              variant: "destructive"
-            });
-          } else {
-            // Clear URL params and show success message
-            navigate('/scheduling', { replace: true });
-            
-            toast({
-              title: "Google Calendar Connected",
-              description: "Your calendar is now connected. Available time slots will be updated accordingly.",
-            });
-            
-            setIsCalendarConnected(true);
-            setAuthError(null);
-            
-            // If date is already selected, refresh time slots
-            if (date) {
-              fetchTimeSlots(date);
-            }
-          }
-        } catch (error) {
-          console.error("Failed to complete Google auth:", error);
-          toast({
-            title: "Connection Failed",
-            description: "Could not connect to Google Calendar. Please try again.",
-            variant: "destructive"
-          });
-        } finally {
-          setConnectingCalendar(false);
-        }
-      };
-      
-      completeAuth();
-    }
-  }, [searchParams, toast, navigate, date]);
-
-  // Fetch available time slots when the date changes
-  useEffect(() => {
-    if (date) {
-      fetchTimeSlots(date);
-    } else {
-      setAvailableTimeSlots([]);
-    }
-  }, [date]);
-
-  const fetchTimeSlots = async (selectedDate: Date) => {
-    setIsLoading(true);
-    try {
-      const slots = await getAvailableTimeSlots(selectedDate);
-      setAvailableTimeSlots(slots);
-    } catch (error) {
-      console.error("Error fetching available time slots:", error);
-      toast({
-        title: "Error Loading Time Slots",
-        description: "There was a problem loading available time slots. Please try again.",
-        variant: "destructive"
-      });
-      setAvailableTimeSlots([]);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  // Clear selected time if it's not in available slots
-  useEffect(() => {
-    if (selectedTime && availableTimeSlots.length > 0 && !availableTimeSlots.includes(selectedTime)) {
-      setSelectedTime("");
-    }
-  }, [availableTimeSlots, selectedTime, setSelectedTime]);
-
-  // Handle Google Calendar connection
-  const handleConnectCalendar = async () => {
-    setConnectingCalendar(true);
-    try {
-      await connectToGoogleCalendar();
-      // No success toast here since we're redirecting away
-    } catch (error) {
-      console.error("Failed to connect to Google Calendar:", error);
-      toast({
-        title: "Connection Failed",
-        description: "Could not connect to Google Calendar. Please try again.",
-        variant: "destructive"
-      });
-      setConnectingCalendar(false);
-    }
-  };
+  // Custom hook for Google Calendar authentication
+  const { 
+    connectingCalendar, 
+    setConnectingCalendar, 
+    isCalendarConnected, 
+    authError,
+    checkingConnection 
+  } = useGoogleCalendarAuth(date, fetchTimeSlots);
 
   return (
     <div className="space-y-4">
       <div className="bg-white/5 backdrop-blur-sm rounded-lg p-4">
-        <div className="flex items-center mb-4 justify-between">
-          <div className="flex items-center text-blue-200 space-x-2">
-            <Info size={16} />
-            <p className="text-sm">Select a weekday (Monday-Friday) for your appointment</p>
-          </div>
-          <Button 
-            variant="outline" 
-            size="sm" 
-            onClick={handleConnectCalendar}
-            disabled={connectingCalendar || isCalendarConnected || checkingConnection}
-            className="bg-white/10 hover:bg-white/20 text-white border-white/20"
-          >
-            {connectingCalendar || checkingConnection ? (
-              <Loader2 className="h-4 w-4 animate-spin mr-2" />
-            ) : isCalendarConnected ? (
-              <Check className="h-4 w-4 mr-2" />
-            ) : (
-              <CalendarPlus className="h-4 w-4 mr-2" />
-            )}
-            {connectingCalendar ? "Connecting..." : 
-             checkingConnection ? "Checking..." :
-             isCalendarConnected ? "Calendar Connected" : 
-             "Connect Calendar"}
-          </Button>
-        </div>
-
-        {authError === 'access_denied' && (
-          <div className="mb-4 p-3 bg-orange-500/20 border border-orange-500/40 rounded-md flex items-start gap-3">
-            <AlertTriangle className="h-5 w-5 text-orange-400 shrink-0 mt-0.5" />
-            <div className="text-sm text-white/90">
-              <p className="font-medium mb-1">Authentication Error</p>
-              <p>There was a problem connecting to Google Calendar. Please try again or contact support if the issue persists.</p>
-            </div>
-          </div>
-        )}
-        
-        <Calendar
-          mode="single"
-          selected={date}
-          onSelect={setDate}
-          className="bg-transparent text-white"
-          disabled={(date) => {
-            const now = new Date();
-            now.setHours(0, 0, 0, 0);
-            return (
-              date < now ||
-              date.getDay() === 0 ||
-              date.getDay() === 6
-            );
-          }}
+        <CalendarConnection
+          isCalendarConnected={isCalendarConnected}
+          connectingCalendar={connectingCalendar}
+          checkingConnection={checkingConnection}
+          authError={authError}
+          setConnectingCalendar={setConnectingCalendar}
         />
+        
+        <DateCalendar date={date} setDate={setDate} />
       </div>
 
       {date && (
-        <div className="bg-white/5 backdrop-blur-sm rounded-lg p-4">
-          <h3 className="text-lg font-medium text-white mb-4">Available Times</h3>
-          {isLoading ? (
-            <div className="flex justify-center py-8">
-              <Loader2 className="h-8 w-8 animate-spin text-white/70" />
-            </div>
-          ) : availableTimeSlots.length > 0 ? (
-            <div className="grid grid-cols-3 gap-2">
-              {availableTimeSlots.map((time) => (
-                <Button
-                  key={time}
-                  type="button"
-                  variant={selectedTime === time ? "default" : "secondary"}
-                  onClick={() => setSelectedTime(time)}
-                  className="w-full"
-                >
-                  {time}
-                </Button>
-              ))}
-            </div>
-          ) : (
-            <div className="text-center py-8 space-y-4">
-              <p className="text-white/70">
-                No available time slots for this date. Please select another date.
-              </p>
-              <Button 
-                variant="outline" 
-                onClick={() => setDate(undefined)}
-                className="bg-white/10 hover:bg-white/20 text-white border-white/20"
-              >
-                Choose a Different Date
-              </Button>
-            </div>
-          )}
-        </div>
+        <TimeSlots
+          date={date}
+          setDate={setDate}
+          selectedTime={selectedTime}
+          setSelectedTime={setSelectedTime}
+          isLoading={isLoading}
+          availableTimeSlots={availableTimeSlots}
+        />
       )}
     </div>
   );
