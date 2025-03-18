@@ -1,8 +1,8 @@
-
 import { useTimeSlots } from "./date-time-selector/useTimeSlots";
 import { ErrorFallback } from "./date-time-selector/ErrorFallback";
 import { MainContent } from "./date-time-selector/MainContent";
 import { useErrorHandling } from "./date-time-selector/hooks/useErrorHandling";
+import { DateCalendar } from "./date-time-selector/DateCalendar";
 import { AlertTriangle } from "lucide-react";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 
