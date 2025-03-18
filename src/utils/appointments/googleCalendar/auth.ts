@@ -11,22 +11,19 @@ export async function connectToGoogleCalendar() {
     const timeoutId = setTimeout(() => controller.abort(), 7000); // 7 second timeout
     
     try {
-      // Create a copy of the options without the signal to avoid TypeScript errors
-      const options = {
-        method: 'POST',
-        body: { redirect: true }
-      };
-
+      const functionUrl = `${import.meta.env.VITE_SUPABASE_URL || ''}/functions/v1/google-auth`;
+      
       // Use fetch directly with the signal for timeout control
       const response = await fetch(
-        `${supabase.functions.url}/google-auth`,
+        functionUrl,
         {
-          ...options,
+          method: 'POST',
           headers: {
             'Content-Type': 'application/json',
-            'Authorization': `Bearer ${supabase.auth.getSession().then(({ data }) => data.session?.access_token)}`
+            'Authorization': `Bearer ${await supabase.auth.getSession().then(({ data }) => data.session?.access_token)}`
           },
-          signal: controller.signal
+          signal: controller.signal,
+          body: JSON.stringify({ redirect: true })
         }
       );
       
@@ -97,9 +94,11 @@ async function completeGoogleAuth(code: string) {
     const timeoutId = setTimeout(() => controller.abort(), 7000); // 7 second timeout
     
     try {
+      const functionUrl = `${import.meta.env.VITE_SUPABASE_URL || ''}/functions/v1/google-auth-callback`;
+      
       // Use fetch directly with the signal for timeout control
       const response = await fetch(
-        `${supabase.functions.url}/google-auth-callback`,
+        functionUrl,
         {
           method: 'POST',
           headers: {
@@ -145,9 +144,11 @@ export async function isGoogleCalendarConnected(): Promise<boolean> {
     const timeoutId = setTimeout(() => controller.abort(), 5000); // 5 second timeout
     
     try {
+      const functionUrl = `${import.meta.env.VITE_SUPABASE_URL || ''}/functions/v1/check-google-connection`;
+      
       // Use direct fetch with signal for timeout
       const response = await fetch(
-        `${supabase.functions.url}/check-google-connection`,
+        functionUrl,
         {
           method: 'GET',
           headers: {
