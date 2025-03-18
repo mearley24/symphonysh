@@ -14,7 +14,7 @@ export async function submitAppointment(appointmentData: AppointmentData) {
 
   console.log("Starting appointment submission process...");
 
-  // Save appointment details to session storage as fallback
+  // Save appointment details to session storage as fallback - BEFORE any async operations
   try {
     sessionStorage.setItem('appointmentDetails', JSON.stringify(appointmentData));
     console.log("Saved appointment details to session storage as fallback");
@@ -36,9 +36,8 @@ export async function submitAppointment(appointmentData: AppointmentData) {
       // Send email notification with calendar attachment
       notificationResult = await sendEmailNotification(appointmentData_, serviceName);
       console.log("Notification result:", notificationResult);
-    } catch (notifyError: any) {
+    } catch (notifyError) {
       console.error("Failed to handle notifications:", notifyError);
-      console.error("Error details:", notifyError.stack || "No stack trace available");
       // We don't throw here to avoid failing the whole appointment process
     }
 

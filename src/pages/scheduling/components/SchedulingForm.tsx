@@ -95,31 +95,38 @@ export function SchedulingForm({
       
       console.log("Appointment submission result:", result);
       
-      // Check if we have notification information in the result
-      if (result?.businessEmail?.success || result?.customerEmail?.success) {
-        console.log("Email notifications were sent successfully!");
-        toast({
-          title: "Success",
-          description: "Your appointment has been scheduled and confirmation emails have been sent.",
-        });
-      } else {
-        console.log("Appointment was saved but notification status is unknown");
-        toast({
-          title: "Success",
-          description: "Your appointment has been scheduled successfully.",
-        });
-      }
+      // Show success toast
+      toast({
+        title: "Success",
+        description: "Your appointment has been scheduled successfully.",
+      });
 
       console.log("Attempting to navigate to confirmation page...");
-
-      // Force navigation to confirmation page using window.location
-      window.location.href = "/scheduling/confirmation";
       
-    } catch (error: any) {
+      // Try to navigate first using navigate method
+      try {
+        // First try direct navigation with state
+        navigate("/scheduling/confirmation", { 
+          state: { appointmentDetails },
+          replace: true 
+        });
+        
+        // Set a fallback in case the navigate doesn't trigger
+        setTimeout(() => {
+          console.log("Navigation timeout - using direct location change");
+          window.location.href = "/scheduling/confirmation";
+        }, 100);
+      } catch (navError) {
+        console.error("Navigation failed:", navError);
+        // Fallback to direct URL change
+        window.location.href = "/scheduling/confirmation";
+      }
+      
+    } catch (error) {
       console.error("Scheduling error:", error);
       toast({
         title: "Error",
-        description: error?.message || "There was a problem scheduling your appointment. Please try again.",
+        description: "There was a problem scheduling your appointment. Please try again.",
         variant: "destructive"
       });
       handleError(error);

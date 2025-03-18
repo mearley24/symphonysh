@@ -7,7 +7,7 @@ import { BackNavigation } from "@/components/scheduling/BackNavigation";
 import { getServiceName } from "@/utils/appointments/types";
 
 interface AppointmentDetails {
-  date?: Date;
+  date?: Date | string;
   selectedTime?: string;
   name?: string;
   email?: string;
@@ -22,7 +22,20 @@ export function ConfirmationPage() {
   
   useEffect(() => {
     console.log("Confirmation page rendered");
-    console.log("Location state:", location.state);
+    
+    // Function to safely parse stored data
+    const safelyParseData = (dataString: string | null): AppointmentDetails | null => {
+      if (!dataString) return null;
+      
+      try {
+        const parsedData = JSON.parse(dataString);
+        console.log("Successfully parsed data:", parsedData);
+        return parsedData;
+      } catch (error) {
+        console.error("Error parsing data:", error);
+        return null;
+      }
+    };
     
     // First try to get appointment details from router state
     let details = location.state?.appointmentDetails;
@@ -33,8 +46,10 @@ export function ConfirmationPage() {
       console.log("No appointment details in location state, trying session storage");
       try {
         const storedDetails = sessionStorage.getItem('appointmentDetails');
+        console.log("Raw session storage data:", storedDetails);
+        
         if (storedDetails) {
-          details = JSON.parse(storedDetails);
+          details = safelyParseData(storedDetails);
           console.log("Retrieved appointment details from session storage:", details);
         }
       } catch (error) {
