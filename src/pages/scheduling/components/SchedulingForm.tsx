@@ -1,7 +1,7 @@
 
 import { FormEvent } from "react";
 import { useToast } from "@/components/ui/use-toast";
-import { submitAppointment } from "@/utils/appointments"; // Fixed import path
+import { submitAppointment } from "@/utils/appointments"; 
 import { useFormValidation } from "./scheduling-form/FormValidation";
 import { FormLayout } from "./scheduling-form/FormLayout";
 import { useNavigate } from "react-router-dom";
@@ -73,7 +73,7 @@ export function SchedulingForm({
       // Log that we're starting the appointment submission
       console.log("Starting appointment submission process...");
       
-      const result = await submitAppointment({
+      const appointmentDetails = {
         date,
         selectedTime,
         name,
@@ -81,7 +81,17 @@ export function SchedulingForm({
         phone,
         message,
         service
-      });
+      };
+      
+      // Store the appointment details to session storage before submitting
+      try {
+        sessionStorage.setItem('appointmentDetails', JSON.stringify(appointmentDetails));
+        console.log("Stored appointment details in session storage");
+      } catch (storageError) {
+        console.warn("Failed to store in session storage:", storageError);
+      }
+      
+      const result = await submitAppointment(appointmentDetails);
       
       console.log("Appointment submission result:", result);
       
@@ -100,40 +110,10 @@ export function SchedulingForm({
         });
       }
 
-      // Store the appointment details to pass to the confirmation page
-      const appointmentDetails = {
-        date,
-        selectedTime,
-        name,
-        email,
-        phone,
-        message,
-        service
-      };
+      console.log("Attempting to navigate to confirmation page...");
 
-      console.log("Navigating to confirmation page with details:", appointmentDetails);
-
-      // Navigate to the confirmation page with appointment details - updated to use push
-      try {
-        // Use window.location as a fallback in case navigate doesn't work
-        navigate("/scheduling/confirmation", { 
-          state: { appointmentDetails },
-          replace: true // Use replace to avoid back button issues
-        });
-        
-        // Add a fallback if navigate doesn't trigger a change
-        setTimeout(() => {
-          console.log("Checking if navigation occurred...");
-          if (window.location.pathname !== "/scheduling/confirmation") {
-            console.log("Navigation may have failed, using window.location as fallback");
-            window.location.href = "/scheduling/confirmation";
-          }
-        }, 1000);
-      } catch (navError) {
-        console.error("Navigation error:", navError);
-        // Fallback to direct URL change if React Router navigation fails
-        window.location.href = "/scheduling/confirmation";
-      }
+      // Force navigation to confirmation page using window.location
+      window.location.href = "/scheduling/confirmation";
       
     } catch (error: any) {
       console.error("Scheduling error:", error);
@@ -143,7 +123,6 @@ export function SchedulingForm({
         variant: "destructive"
       });
       handleError(error);
-    } finally {
       setIsSubmitting(false);
     }
   };

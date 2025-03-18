@@ -22,29 +22,36 @@ export async function submitAppointment(appointmentData: AppointmentData) {
     console.warn("Could not save to session storage:", err);
   }
 
-  // Insert appointment into the database
-  const appointmentData_ = await saveAppointmentToDatabase(appointmentData);
-  
-  // Get the service name from the ID
-  const serviceName = getServiceName(service);
-  
-  // Send email notification
-  let notificationResult = null;
   try {
-    // Send email notification with calendar attachment
-    notificationResult = await sendEmailNotification(appointmentData_, serviceName);
-    console.log("Notification result:", notificationResult);
-  } catch (notifyError: any) {
-    console.error("Failed to handle notifications:", notifyError);
-    console.error("Error details:", notifyError.stack || "No stack trace available");
-    // We don't throw here to avoid failing the whole appointment process
-  }
+    // Insert appointment into the database
+    const appointmentData_ = await saveAppointmentToDatabase(appointmentData);
+    console.log("Appointment saved to database:", appointmentData_);
+    
+    // Get the service name from the ID
+    const serviceName = getServiceName(service);
+    
+    // Send email notification
+    let notificationResult = null;
+    try {
+      // Send email notification with calendar attachment
+      notificationResult = await sendEmailNotification(appointmentData_, serviceName);
+      console.log("Notification result:", notificationResult);
+    } catch (notifyError: any) {
+      console.error("Failed to handle notifications:", notifyError);
+      console.error("Error details:", notifyError.stack || "No stack trace available");
+      // We don't throw here to avoid failing the whole appointment process
+    }
 
-  return {
-    ...appointmentData_,
-    businessEmail: notificationResult?.businessEmail || null,
-    customerEmail: notificationResult?.customerEmail || null
-  };
+    return {
+      ...appointmentData_,
+      businessEmail: notificationResult?.businessEmail || null,
+      customerEmail: notificationResult?.customerEmail || null
+    };
+  } catch (error) {
+    console.error("Error in submitAppointment:", error);
+    // Re-throw the error so it can be caught by the form handler
+    throw error;
+  }
 }
 
 // This function can be simplified since we no longer need to fetch from Google Calendar
