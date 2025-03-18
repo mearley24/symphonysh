@@ -113,10 +113,27 @@ export function SchedulingForm({
 
       console.log("Navigating to confirmation page with details:", appointmentDetails);
 
-      // Navigate to the confirmation page with appointment details
-      navigate("/scheduling/confirmation", { 
-        state: { appointmentDetails } 
-      });
+      // Navigate to the confirmation page with appointment details - updated to use push
+      try {
+        // Use window.location as a fallback in case navigate doesn't work
+        navigate("/scheduling/confirmation", { 
+          state: { appointmentDetails },
+          replace: true // Use replace to avoid back button issues
+        });
+        
+        // Add a fallback if navigate doesn't trigger a change
+        setTimeout(() => {
+          console.log("Checking if navigation occurred...");
+          if (window.location.pathname !== "/scheduling/confirmation") {
+            console.log("Navigation may have failed, using window.location as fallback");
+            window.location.href = "/scheduling/confirmation";
+          }
+        }, 1000);
+      } catch (navError) {
+        console.error("Navigation error:", navError);
+        // Fallback to direct URL change if React Router navigation fails
+        window.location.href = "/scheduling/confirmation";
+      }
       
     } catch (error: any) {
       console.error("Scheduling error:", error);

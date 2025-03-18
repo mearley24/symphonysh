@@ -59,22 +59,32 @@ const Scheduling = () => {
     });
   };
 
-  // Test navigation function - for debugging
+  // Test navigation function - enabled for debugging
   const testNavigation = () => {
     console.log("Testing navigation to confirmation page");
-    navigate("/scheduling/confirmation", {
-      state: { 
-        appointmentDetails: {
-          date: new Date(),
-          selectedTime: "10:00",
-          name: "Test User",
-          email: "test@example.com",
-          phone: "1234567890",
-          message: "Test message",
-          service: "audio-entertainment"
-        }
-      }
-    });
+    const testAppointmentDetails = {
+      date: new Date(),
+      selectedTime: "10:00",
+      name: "Test User",
+      email: "test@example.com",
+      phone: "1234567890",
+      message: "Test message",
+      service: "audio-entertainment"
+    };
+    
+    // Save to session storage as backup
+    sessionStorage.setItem('appointmentDetails', JSON.stringify(testAppointmentDetails));
+    
+    // Try navigation
+    try {
+      navigate("/scheduling/confirmation", {
+        state: { appointmentDetails: testAppointmentDetails },
+        replace: true
+      });
+    } catch (error) {
+      console.error("Navigation failed:", error);
+      window.location.href = "/scheduling/confirmation";
+    }
   };
 
   // If the component hasn't rendered yet, show loading indicator
@@ -98,8 +108,8 @@ const Scheduling = () => {
           {...formState}
           handleError={handleError}
         />
-        {/* Debug button - Comment out in production */}
-        {/* <button onClick={testNavigation} className="mt-4 text-sm text-gray-400">Test Navigation</button> */}
+        {/* Debug button - Enabled for debugging */}
+        <button onClick={testNavigation} className="mt-4 text-sm text-gray-400">Test Navigation</button>
       </PageLayout>
     </ErrorHandler>
   );

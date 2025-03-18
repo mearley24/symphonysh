@@ -1,12 +1,12 @@
 
-import { useLocation, Link } from "react-router-dom";
+import { useLocation, Link, useNavigate } from "react-router-dom";
 import { format } from "date-fns";
 import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Calendar, Phone, Mail, MessageSquare, Clock } from "lucide-react";
 import { PageLayout } from "./PageLayout";
 import { SERVICES } from "@/components/scheduling/AppointmentForm";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 interface AppointmentDetails {
   date?: Date;
@@ -20,21 +20,58 @@ interface AppointmentDetails {
 
 export function ConfirmationPage() {
   const location = useLocation();
-  const appointmentDetails = location.state?.appointmentDetails as AppointmentDetails;
+  const navigate = useNavigate();
+  const [appointmentDetails, setAppointmentDetails] = useState<AppointmentDetails | null>(null);
+  const [loadingState, setLoadingState] = useState<'loading' | 'loaded' | 'error'>('loading');
 
   useEffect(() => {
     console.log("Confirmation page rendered");
     console.log("Location state:", location.state);
-    console.log("Appointment details:", appointmentDetails);
-  }, [location.state, appointmentDetails]);
+    
+    // Check if we have state with appointment details
+    if (location.state?.appointmentDetails) {
+      console.log("Appointment details from state:", location.state.appointmentDetails);
+      setAppointmentDetails(location.state.appointmentDetails);
+      setLoadingState('loaded');
+    } else {
+      console.log("No appointment details found in location state");
+      
+      // Check session storage as fallback
+      const storedDetails = sessionStorage.getItem('appointmentDetails');
+      if (storedDetails) {
+        try {
+          const parsedDetails = JSON.parse(storedDetails);
+          console.log("Retrieved appointment details from session storage:", parsedDetails);
+          setAppointmentDetails(parsedDetails);
+          setLoadingState('loaded');
+        } catch (error) {
+          console.error("Error parsing stored appointment details:", error);
+          setLoadingState('error');
+        }
+      } else {
+        console.log("No appointment details found in session storage either");
+        setLoadingState('error');
+      }
+    }
+  }, [location.state]);
 
   // Get service name from service ID
   const getServiceName = (serviceId: string): string => {
     return SERVICES.find(s => s.id === serviceId)?.name || serviceId;
   };
 
-  if (!appointmentDetails) {
-    console.log("No appointment details found in location state");
+  if (loadingState === 'loading') {
+    return (
+      <PageLayout>
+        <div className="text-center py-12">
+          <h2 className="text-2xl font-bold text-white mb-4">Loading confirmation details...</h2>
+        </div>
+      </PageLayout>
+    );
+  }
+
+  if (loadingState === 'error' || !appointmentDetails) {
+    console.log("Showing error state - no appointment details found");
     
     return (
       <PageLayout>

@@ -14,6 +14,14 @@ export async function submitAppointment(appointmentData: AppointmentData) {
 
   console.log("Starting appointment submission process...");
 
+  // Save appointment details to session storage as fallback
+  try {
+    sessionStorage.setItem('appointmentDetails', JSON.stringify(appointmentData));
+    console.log("Saved appointment details to session storage as fallback");
+  } catch (err) {
+    console.warn("Could not save to session storage:", err);
+  }
+
   // Insert appointment into the database
   const appointmentData_ = await saveAppointmentToDatabase(appointmentData);
   

@@ -64,18 +64,9 @@ function App() {
         <Route path="/services/shades" element={<Shades />} />
         <Route path="/services/smart-lighting" element={<SmartLighting />} />
         
-        <Route path="/scheduling" element={
-          <>
-            {console.log("Scheduling route matched")}
-            <Scheduling />
-          </>
-        } />
-        <Route path="/scheduling/confirmation" element={
-          <>
-            {console.log("Confirmation route matched")}
-            <ConfirmationPage />
-          </>
-        } />
+        {/* Scheduling routes - corrected the confirmation route */}
+        <Route path="/scheduling" element={<Scheduling />} />
+        <Route path="/scheduling/confirmation" element={<ConfirmationPage />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </>
