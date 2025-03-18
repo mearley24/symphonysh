@@ -1,7 +1,6 @@
-
 import { FormEvent } from "react";
 import { useToast } from "@/components/ui/use-toast";
-import { submitAppointment } from "@/utils/appointments"; // Fixed import path
+import { submitAppointment } from "@/utils/appointmentUtils"; 
 import { useFormValidation } from "./scheduling-form/FormValidation";
 import { FormLayout } from "./scheduling-form/FormLayout";
 import { useNavigate } from "react-router-dom";
