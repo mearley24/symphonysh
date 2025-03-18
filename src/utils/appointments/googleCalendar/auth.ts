@@ -11,19 +11,33 @@ export async function connectToGoogleCalendar() {
     const timeoutId = setTimeout(() => controller.abort(), 7000); // 7 second timeout
     
     try {
-      const { data, error } = await supabase.functions.invoke('google-auth', {
+      // Create a copy of the options without the signal to avoid TypeScript errors
+      const options = {
         method: 'POST',
-        body: { redirect: true },
-        signal: controller.signal
-      });
+        body: { redirect: true }
+      };
+
+      // Use fetch directly with the signal for timeout control
+      const response = await fetch(
+        `${supabase.functions.url}/google-auth`,
+        {
+          ...options,
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${supabase.auth.getSession().then(({ data }) => data.session?.access_token)}`
+          },
+          signal: controller.signal
+        }
+      );
       
       clearTimeout(timeoutId);
       
-      if (error) {
-        console.error("Error getting Google auth URL:", error);
-        console.error("Error details:", JSON.stringify(error, null, 2));
-        throw error;
+      if (!response.ok) {
+        console.error("Error getting Google auth URL, status:", response.status);
+        throw new Error(`Error response: ${response.status}`);
       }
+      
+      const data = await response.json();
       
       if (data && data.authUrl) {
         console.log("Redirecting to Google auth URL:", data.authUrl);
@@ -83,21 +97,28 @@ async function completeGoogleAuth(code: string) {
     const timeoutId = setTimeout(() => controller.abort(), 7000); // 7 second timeout
     
     try {
-      // Use the Supabase SDK to call the callback function
-      const { data, error } = await supabase.functions.invoke('google-auth-callback', {
-        method: 'POST',
-        body: { code },
-        signal: controller.signal
-      });
+      // Use fetch directly with the signal for timeout control
+      const response = await fetch(
+        `${supabase.functions.url}/google-auth-callback`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${await supabase.auth.getSession().then(({ data }) => data.session?.access_token)}`
+          },
+          body: JSON.stringify({ code }),
+          signal: controller.signal
+        }
+      );
       
       clearTimeout(timeoutId);
       
-      if (error) {
-        console.error("Error completing Google auth:", error);
-        console.error("Error details:", JSON.stringify(error, null, 2));
-        throw error;
+      if (!response.ok) {
+        console.error("Error completing Google auth, status:", response.status);
+        throw new Error(`Error response: ${response.status}`);
       }
       
+      const data = await response.json();
       console.log("Google auth completed successfully:", data);
       return data;
     } catch (e) {
@@ -124,19 +145,27 @@ export async function isGoogleCalendarConnected(): Promise<boolean> {
     const timeoutId = setTimeout(() => controller.abort(), 5000); // 5 second timeout
     
     try {
-      const { data, error } = await supabase.functions.invoke('check-google-connection', {
-        method: 'GET',
-        signal: controller.signal
-      });
+      // Use direct fetch with signal for timeout
+      const response = await fetch(
+        `${supabase.functions.url}/check-google-connection`,
+        {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${await supabase.auth.getSession().then(({ data }) => data.session?.access_token)}`
+          },
+          signal: controller.signal
+        }
+      );
       
       clearTimeout(timeoutId);
       
-      if (error) {
-        console.error("Error checking Google Calendar connection:", error);
-        console.error("Error details:", JSON.stringify(error, null, 2));
+      if (!response.ok) {
+        console.error("Error checking Google Calendar connection, status:", response.status);
         return false;
       }
       
+      const data = await response.json();
       console.log("Google Calendar connection check result:", data);
       return data?.connected === true;
     } catch (e) {

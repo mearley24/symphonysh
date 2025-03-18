@@ -104,7 +104,8 @@ export function useGoogleCalendarAuth(date: Date | undefined, fetchTimeSlots: (d
           if (error instanceof Error && 
               (error.name === "FunctionsFetchError" || 
                error.message.includes("Failed to send a request to the Edge Function") ||
-               error.message.includes("Failed to fetch"))) {
+               error.message.includes("Failed to fetch") ||
+               error.message.includes("Request timed out"))) {
             errorMessage = "Could not connect to calendar service. The server might be temporarily unavailable.";
           }
           
