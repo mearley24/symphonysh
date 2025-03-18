@@ -49,16 +49,29 @@ export async function connectToGoogleCalendar() {
   try {
     console.log("Starting Google Calendar connection process");
     
-    // Directly redirect to Google Auth with the redirect parameter
-    // This approach bypasses the API call and directly uses the redirect flow
-    const supabaseUrl = import.meta.env.VITE_SUPABASE_URL || "https://symphonysh.supabase.co";
-    const authUrl = `${supabaseUrl}/functions/v1/google-auth?redirect=true`;
+    // Use the supabase SDK to invoke the function - this should be more reliable
+    // than directly constructing URLs and making fetch requests
+    const { data, error } = await supabase.functions.invoke('google-auth', {
+      method: 'GET',
+      body: { redirect: true }
+    });
     
-    console.log("Redirecting to Google auth URL:", authUrl);
+    if (error) {
+      console.error("Error getting Google auth URL:", error);
+      throw error;
+    }
     
-    // Redirect directly to the Google Auth endpoint with redirect=true
-    window.location.href = authUrl;
-    return true;
+    if (data && data.authUrl) {
+      console.log("Redirecting to Google auth URL:", data.authUrl);
+      window.location.href = data.authUrl;
+      return true;
+    } else if (data && data.redirectUrl) {
+      console.log("Redirecting to Google auth URL:", data.redirectUrl);
+      window.location.href = data.redirectUrl;
+      return true;
+    }
+    
+    throw new Error("Failed to get Google auth URL from the server");
   } catch (error) {
     console.error("Failed to connect to Google Calendar:", error);
     throw error;
@@ -90,25 +103,17 @@ async function completeGoogleAuth(code: string) {
   try {
     console.log("Completing Google auth with code");
     
-    // Direct fetch to the callback function - more reliable than using the SDK
-    const functionUrl = `${import.meta.env.VITE_SUPABASE_URL || "https://symphonysh.supabase.co"}/functions/v1/google-auth-callback`;
-    console.log("Using callback URL:", functionUrl);
-    
-    const response = await fetch(functionUrl, {
+    // Use the Supabase SDK to call the callback function
+    const { data, error } = await supabase.functions.invoke('google-auth-callback', {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ code })
+      body: { code }
     });
     
-    if (!response.ok) {
-      const errorText = await response.text();
-      console.error("Error completing Google auth:", errorText);
-      throw new Error(`Failed to complete Google auth: ${response.status} ${errorText}`);
+    if (error) {
+      console.error("Error completing Google auth:", error);
+      throw error;
     }
     
-    const data = await response.json();
     console.log("Google auth completed successfully:", data);
     return data;
   } catch (error) {
@@ -120,21 +125,16 @@ async function completeGoogleAuth(code: string) {
 // Utility function to check if Google Calendar is connected
 export async function isGoogleCalendarConnected(): Promise<boolean> {
   try {
-    const functionUrl = `${import.meta.env.VITE_SUPABASE_URL || "https://symphonysh.supabase.co"}/functions/v1/check-google-connection`;
-    
-    const response = await fetch(functionUrl, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json'
-      }
+    const { data, error } = await supabase.functions.invoke('check-google-connection', {
+      method: 'GET'
     });
     
-    if (!response.ok) {
+    if (error) {
+      console.error("Error checking Google Calendar connection:", error);
       return false;
     }
     
-    const data = await response.json();
-    return data.connected === true;
+    return data?.connected === true;
   } catch (error) {
     console.error("Failed to check Google Calendar connection:", error);
     return false;
