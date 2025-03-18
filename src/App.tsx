@@ -4,6 +4,7 @@ import Scheduling from "./pages/scheduling";
 import NotFound from "./pages/NotFound";
 import { Toaster } from "@/components/ui/toaster";
 import { ConfirmationPage } from "./pages/scheduling/components/ConfirmationPage";
+import Index from "./pages/Index";
 
 function App() {
   console.log("App rendering, routes being set up");
@@ -12,7 +13,8 @@ function App() {
     <>
       <Toaster />
       <Routes>
-        <Route path="/" element={<NotFound />} />
+        <Route path="/" element={<Index />} />
+        <Route path="/index" element={<Index />} />
         <Route path="/scheduling" element={
           <>
             {console.log("Scheduling route matched")}
