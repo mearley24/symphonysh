@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Loader2, CalendarPlus, Check, AlertTriangle } from "lucide-react";
-import { connectToGoogleCalendar } from "@/utils/appointments/googleCalendarUtils";
+import { connectToGoogleCalendar } from "@/utils/appointments/googleCalendar";
 import { useToast } from "@/components/ui/use-toast";
 
 interface CalendarConnectionProps {

@@ -2,7 +2,10 @@
 import { useState, useEffect } from "react";
 import { useSearchParams, useNavigate } from "react-router-dom";
 import { useToast } from "@/components/ui/use-toast";
-import { handleGoogleAuthCallback, isGoogleCalendarConnected } from "@/utils/appointments/googleCalendarUtils";
+import { 
+  handleGoogleAuthCallback, 
+  isGoogleCalendarConnected 
+} from "@/utils/appointments/googleCalendar";
 
 export function useGoogleCalendarAuth(date: Date | undefined, fetchTimeSlots: (date: Date) => Promise<void>) {
   const [connectingCalendar, setConnectingCalendar] = useState(false);

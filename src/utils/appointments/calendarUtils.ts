@@ -1,6 +1,7 @@
 
 import { supabase } from "../../integrations/supabase/client";
 import { AppointmentNotificationPayload } from "./types";
+import { createCalendarEvent as createGoogleCalendarEvent } from "./googleCalendar";
 
 // Create calendar event for the appointment
 export async function createCalendarEvent(appointment: any, serviceName: string): Promise<any> {
