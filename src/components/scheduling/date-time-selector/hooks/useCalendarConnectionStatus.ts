@@ -1,4 +1,3 @@
-
 import { useState, useCallback } from "react";
 
 // Simplified hook that always returns connected = true

@@ -1,21 +1,22 @@
 
 import { Button } from "@/components/ui/button";
 import { Info } from "lucide-react";
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 
-export function CalendarConnection() {
+// Define the component props interface
+interface CalendarConnectionProps {
+  // These are the props we need to accept
+  isEmailNotificationsEnabled?: boolean;
+}
+
+export function CalendarConnection({ isEmailNotificationsEnabled = true }: CalendarConnectionProps) {
   return (
-    <div>
-      <Alert className="mb-4 bg-blue-500/20 border-blue-500/40">
-        <Info className="h-4 w-4" />
-        <AlertTitle>Email Notifications</AlertTitle>
-        <AlertDescription>
-          <p className="text-sm">
-            Appointment confirmations will be sent via email with calendar attachments 
-            that you can add to your preferred calendar application.
-          </p>
-        </AlertDescription>
-      </Alert>
+    <div className="mb-4 flex items-start gap-2 rounded-md bg-accent/20 p-3 text-sm">
+      <Info className="h-5 w-5 text-accent" />
+      <div>
+        <p>
+          When you schedule an appointment, you'll receive an email confirmation with calendar details that you can add to your calendar.
+        </p>
+      </div>
     </div>
   );
 }

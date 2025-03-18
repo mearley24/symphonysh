@@ -2,7 +2,6 @@
 import { CalendarConnection } from "./date-time-selector/CalendarConnection";
 import { DateCalendar } from "./date-time-selector/DateCalendar";
 import { TimeSlots } from "./date-time-selector/TimeSlots";
-import { useGoogleCalendarAuth } from "./date-time-selector/useGoogleCalendarAuth";
 import { useTimeSlots } from "./date-time-selector/useTimeSlots";
 import { useState, useEffect, useRef } from "react";
 import { Alert, AlertDescription } from "@/components/ui/alert";
@@ -103,47 +102,13 @@ export function DateTimeSelector({
 
     console.log("useTimeSlots initialized with:", { availableTimeSlots, isLoading });
 
-    // Custom hook for Google Calendar authentication with error handling
-    const { 
-      connectingCalendar, 
-      setConnectingCalendar, 
-      isCalendarConnected, 
-      authError,
-      checkingConnection,
-      retryConnectionCheck
-    } = useGoogleCalendarAuth(date, fetchTimeSlots, () => {
-      apiErrorCount.current += 1;
-      console.log("API error count increased to:", apiErrorCount.current);
-    });
-
-    console.log("useGoogleCalendarAuth initialized with:", { 
-      connectingCalendar, 
-      isCalendarConnected, 
-      authError,
-      checkingConnection
-    });
-
-    // Handle errors from hooks
-    useEffect(() => {
-      if (authError) {
-        console.error("Auth error:", authError);
-        setError(authError);
-      }
-    }, [authError]);
-
     console.log("Rendering DateTimeSelector UI components");
 
     return (
       <div className="space-y-4">
         <div className="bg-white/5 backdrop-blur-sm rounded-lg p-4">
-          <CalendarConnection
-            isCalendarConnected={isCalendarConnected}
-            connectingCalendar={connectingCalendar}
-            checkingConnection={checkingConnection}
-            authError={authError}
-            setConnectingCalendar={setConnectingCalendar}
-            retryConnectionCheck={retryConnectionCheck}
-          />
+          {/* Pass only the props that CalendarConnection expects */}
+          <CalendarConnection isEmailNotificationsEnabled={true} />
           
           <DateCalendar date={date} setDate={setDate} />
         </div>
