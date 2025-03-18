@@ -1,13 +1,10 @@
 
 import { serve } from "https://deno.land/std@0.170.0/http/server.ts";
-import { createClient } from "https://esm.sh/@supabase/supabase-js@2.7.1";
-import { google } from "npm:googleapis@126.0.1";
 import { 
-  getGoogleAuthClient, 
-  checkGoogleCalendarAvailability,
-  getBookedAppointmentTimes,
+  corsHeaders,
   DEFAULT_TIME_SLOTS,
-  corsHeaders
+  generateAvailableTimeSlots,
+  getBookedAppointmentTimes
 } from "./utils.ts";
 
 serve(async (req) => {
@@ -35,22 +32,22 @@ serve(async (req) => {
     
     console.log(`Processing available slots for date: ${date}`);
     
-    // Get slots that are available in Google Calendar
-    const calendarAvailableSlots = await checkGoogleCalendarAvailability(date);
+    // Generate all possible time slots
+    const allTimeSlots = generateAvailableTimeSlots();
     
     // Get slots that are already booked in our database
     const bookedAppointmentTimes = await getBookedAppointmentTimes(date);
     console.log("Booked appointment times:", bookedAppointmentTimes);
     
     // Filter out booked slots
-    const availableSlots = calendarAvailableSlots.filter(
+    const availableSlots = allTimeSlots.filter(
       slot => !bookedAppointmentTimes.includes(slot)
     );
     
     console.log("Final available slots:", availableSlots);
     
     return new Response(
-      JSON.stringify({ availableSlots }),
+      JSON.stringify({ availableSlots: availableSlots.length > 0 ? availableSlots : DEFAULT_TIME_SLOTS }),
       {
         headers: { ...corsHeaders, "Content-Type": "application/json" },
         status: 200,
@@ -59,7 +56,11 @@ serve(async (req) => {
   } catch (error) {
     console.error("Function error:", error);
     return new Response(
-      JSON.stringify({ error: "Internal server error", details: error.message }),
+      JSON.stringify({ 
+        error: "Internal server error", 
+        details: error.message,
+        availableSlots: DEFAULT_TIME_SLOTS // Return default slots on error
+      }),
       {
         headers: { ...corsHeaders, "Content-Type": "application/json" },
         status: 500,

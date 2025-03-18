@@ -28,7 +28,7 @@ serve(async (req) => {
       headers: { ...corsHeaders, "Content-Type": "application/json" },
       status: 200,
     });
-  } catch (error) {
+  } catch (error: any) {
     console.error('Function error:', error.message, error.stack);
     return new Response(
       JSON.stringify({ 

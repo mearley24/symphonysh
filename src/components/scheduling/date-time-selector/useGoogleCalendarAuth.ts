@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 
 // Simplified hook that doesn't actually do Google auth anymore
@@ -21,9 +22,9 @@ export function useGoogleCalendarAuth(
   return {
     connectingCalendar, 
     setConnectingCalendar, 
-    isCalendarConnected, // Always true now
+    isCalendarConnected: true, // Always true now
     authError,
-    checkingConnection,
+    checkingConnection: false,
     retryConnectionCheck
   };
 }
