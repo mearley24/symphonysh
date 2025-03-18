@@ -24,6 +24,7 @@ console.log("Client ID available:", GOOGLE_CLIENT_ID ? "Yes" : "No");
 console.log("Client Secret available:", GOOGLE_CLIENT_SECRET ? "Yes" : "No");
 console.log("Frontend URL:", FRONTEND_URL);
 console.log("Google Client ID:", GOOGLE_CLIENT_ID ? GOOGLE_CLIENT_ID.substring(0, 10) + "..." : "None");
+console.log("Google Client Secret length:", GOOGLE_CLIENT_SECRET ? GOOGLE_CLIENT_SECRET.length : 0);
 
 // CORS headers
 const corsHeaders = {
@@ -35,10 +36,20 @@ const corsHeaders = {
 function getOAuth2Client() {
   console.log("Getting OAuth2 client");
   
-  if (!GOOGLE_CLIENT_ID || !GOOGLE_CLIENT_SECRET) {
-    console.error("Missing Google OAuth credentials");
-    throw new Error("Google OAuth credentials are not configured properly");
+  if (!GOOGLE_CLIENT_ID) {
+    console.error("Missing Google OAuth Client ID");
+    throw new Error("Google OAuth Client ID is not configured");
   }
+  
+  if (!GOOGLE_CLIENT_SECRET) {
+    console.error("Missing Google OAuth Client Secret");
+    throw new Error("Google OAuth Client Secret is not configured");
+  }
+  
+  console.log("Creating OAuth2 client with credentials:");
+  console.log("- Client ID (first 10 chars):", GOOGLE_CLIENT_ID.substring(0, 10) + "...");
+  console.log("- Client Secret length:", GOOGLE_CLIENT_SECRET.length);
+  console.log("- Redirect URI:", REDIRECT_URI);
   
   return new google.auth.OAuth2(
     GOOGLE_CLIENT_ID,
@@ -88,6 +99,15 @@ serve(async (req) => {
   try {
     console.log("Google auth function triggered:", req.method);
     console.log("Request URL:", req.url);
+    
+    // Verify credentials are available
+    if (!GOOGLE_CLIENT_ID) {
+      throw new Error("Google OAuth Client ID is not configured");
+    }
+    
+    if (!GOOGLE_CLIENT_SECRET) {
+      throw new Error("Google OAuth Client Secret is not configured");
+    }
     
     // Generate auth URL
     console.log("Generating Google auth URL");
@@ -144,6 +164,7 @@ serve(async (req) => {
         stack: error.stack,
         googleClientIdAvailable: !!GOOGLE_CLIENT_ID,
         googleClientSecretAvailable: !!GOOGLE_CLIENT_SECRET,
+        googleClientSecretLength: GOOGLE_CLIENT_SECRET ? GOOGLE_CLIENT_SECRET.length : 0,
         redirectUriConfigured: REDIRECT_URI
       }),
       {

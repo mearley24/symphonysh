@@ -58,6 +58,19 @@ async function completeGoogleAuth(code: string) {
       console.warn("No access token available for authorization");
     }
     
+    // First, let's try to make a simple request to verify the function is accessible
+    try {
+      const testResponse = await fetch(`${baseUrl}/check-google-connection`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+      console.log("Test connection status:", testResponse.status);
+    } catch (testError) {
+      console.warn("Test connection failed, but continuing with auth flow:", testError);
+    }
+    
     // Use fetch with timeout
     const response = await createRequestWithTimeout(
       functionUrl,
@@ -73,14 +86,27 @@ async function completeGoogleAuth(code: string) {
     );
     
     if (!response.ok) {
-      const errorText = await response.text();
-      console.error("Error completing Google auth, status:", response.status);
-      console.error("Error response:", errorText);
+      let errorText = "";
+      try {
+        errorText = await response.text();
+        console.error("Error completing Google auth, status:", response.status);
+        console.error("Error response:", errorText);
+      } catch (textError) {
+        console.error("Could not read error response text:", textError);
+        errorText = "Could not read error response";
+      }
       throw new Error(`Error response: ${response.status} - ${errorText}`);
     }
     
-    const data = await response.json();
-    console.log("Google auth completed successfully:", data);
+    let data;
+    try {
+      data = await response.json();
+      console.log("Google auth completed successfully:", data);
+    } catch (jsonError) {
+      console.error("Error parsing response JSON:", jsonError);
+      throw new Error("Invalid response format from server");
+    }
+    
     return data;
   } catch (error) {
     console.error("Failed to complete Google auth:", error);
