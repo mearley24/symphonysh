@@ -26,6 +26,7 @@ export function CalendarConnection({
   const { toast } = useToast();
   const [connectionError, setConnectionError] = useState<string | null>(null);
   const [edgeFunctionError, setEdgeFunctionError] = useState<boolean>(false);
+  const [detailedError, setDetailedError] = useState<string | null>(null);
 
   // Handle Google Calendar connection
   const handleConnectCalendar = async () => {
@@ -37,6 +38,7 @@ export function CalendarConnection({
     setConnectingCalendar(true);
     setConnectionError(null);
     setEdgeFunctionError(false);
+    setDetailedError(null);
     
     try {
       console.log("Trying to connect to Google Calendar...");
@@ -49,15 +51,18 @@ export function CalendarConnection({
       
       if (error instanceof Error) {
         errorMessage = error.message;
+        setDetailedError(error.message);
         
         // Check if it's an edge function error
         if (error.name === "FunctionsFetchError" || 
             error.message.includes("Failed to send a request to the Edge Function") ||
             error.message.includes("Failed to fetch") ||
             error.message.includes("Request timed out") ||
-            error.message.includes("server might be unavailable")) {
+            error.message.includes("server might be unavailable") ||
+            error.message.includes("not found") ||
+            error.message.includes("404")) {
           setEdgeFunctionError(true);
-          errorMessage = "Could not connect to Supabase Edge Functions. The server might be temporarily unavailable.";
+          errorMessage = "Could not connect to Supabase Edge Functions. The server might be temporarily unavailable or functions not deployed.";
         }
       }
       
@@ -66,7 +71,7 @@ export function CalendarConnection({
       toast({
         title: "Connection Failed",
         description: edgeFunctionError 
-          ? "Could not connect to calendar service. Server might be unavailable."
+          ? "Could not connect to calendar service. Server might be unavailable or functions not deployed."
           : "Could not connect to Google Calendar. Please try again later.",
         variant: "destructive"
       });
@@ -136,11 +141,19 @@ export function CalendarConnection({
       {edgeFunctionError && (
         <Alert variant="destructive" className="mb-4 bg-red-500/20 border-red-500/40">
           <AlertTriangle className="h-4 w-4" />
-          <AlertTitle>Server Connection Error</AlertTitle>
+          <AlertTitle>Edge Function Error</AlertTitle>
           <AlertDescription>
-            Could not connect to the calendar service. The server might be temporarily unavailable.
+            Could not connect to the calendar service. The Edge Functions might not be deployed or are temporarily unavailable.
             <div className="mt-2 text-sm">
               <p>You can still schedule appointments without connecting your calendar.</p>
+              {detailedError && (
+                <details className="mt-2">
+                  <summary className="cursor-pointer text-xs">Technical details</summary>
+                  <div className="p-2 mt-1 bg-red-500/30 rounded text-xs whitespace-pre-wrap overflow-x-auto">
+                    {detailedError}
+                  </div>
+                </details>
+              )}
             </div>
           </AlertDescription>
         </Alert>
@@ -154,6 +167,14 @@ export function CalendarConnection({
             <p>{authError === 'access_denied' 
                 ? "There was a problem connecting to Google Calendar. Please try again or contact support if the issue persists." 
                 : connectionError || "An unknown error occurred."}</p>
+            {detailedError && (
+              <details className="mt-2">
+                <summary className="cursor-pointer text-xs">Technical details</summary>
+                <div className="p-2 mt-1 bg-orange-500/30 rounded text-xs whitespace-pre-wrap overflow-x-auto">
+                  {detailedError}
+                </div>
+              </details>
+            )}
           </div>
         </div>
       )}

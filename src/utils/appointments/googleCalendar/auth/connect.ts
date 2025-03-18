@@ -26,7 +26,22 @@ export async function connectToGoogleCalendar() {
       console.warn("No access token available for authorization - continuing anyway");
     }
     
-    // Try direct redirect approach first
+    // First try a direct fetch to check if the function exists
+    try {
+      console.log("Testing if the function endpoint is accessible");
+      const testResponse = await fetch(`${functionUrl}/ping`, { method: 'GET' });
+      console.log(`Function test response status: ${testResponse.status}`);
+      
+      if (testResponse.status === 404) {
+        console.error("Function endpoint not found - 404 error");
+        throw new Error("The Google authentication function could not be found. Please make sure the Edge Functions are deployed correctly.");
+      }
+    } catch (testError) {
+      console.log("Function test error (this might be expected):", testError);
+      // Continue anyway, as the ping endpoint may not exist
+    }
+    
+    // Try direct redirect approach
     try {
       console.log("Attempting direct redirect");
       const redirectUrl = `${functionUrl}?redirect=true`;
