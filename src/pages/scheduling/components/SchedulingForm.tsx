@@ -4,6 +4,7 @@ import { useToast } from "@/components/ui/use-toast";
 import { submitAppointment } from "@/utils/appointmentUtils";
 import { useFormValidation } from "./scheduling-form/FormValidation";
 import { FormLayout } from "./scheduling-form/FormLayout";
+import { useNavigate } from "react-router-dom";
 
 interface SchedulingFormProps {
   date: Date | undefined;
@@ -46,6 +47,7 @@ export function SchedulingForm({
 }: SchedulingFormProps) {
   const { toast } = useToast();
   const { validateForm } = useFormValidation();
+  const navigate = useNavigate();
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -78,19 +80,21 @@ export function SchedulingForm({
         service
       });
 
-      toast({
-        title: "Appointment Scheduled!",
-        description: "We'll contact you to confirm your appointment.",
-      });
+      // Store the appointment details to pass to the confirmation page
+      const appointmentDetails = {
+        date,
+        selectedTime,
+        name,
+        email,
+        phone,
+        message,
+        service
+      };
 
-      // Reset form
-      setDate(undefined);
-      setSelectedTime(undefined);
-      setName("");
-      setEmail("");
-      setPhone("");
-      setMessage("");
-      setService("");
+      // Navigate to the confirmation page with appointment details
+      navigate("/scheduling/confirmation", { 
+        state: { appointmentDetails } 
+      });
       
     } catch (error: any) {
       console.error("Scheduling error:", error);
