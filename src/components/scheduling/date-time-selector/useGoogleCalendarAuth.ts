@@ -26,6 +26,8 @@ export function useGoogleCalendarAuth(date: Date | undefined, fetchTimeSlots: (d
         console.log("Google Calendar connection status:", connected);
       } catch (error) {
         console.error("Error checking calendar connection:", error);
+        // Don't show an error toast here as it would be disruptive on page load
+        // Just log it and continue with isCalendarConnected set to false
       } finally {
         setCheckingConnection(false);
       }
@@ -95,9 +97,20 @@ export function useGoogleCalendarAuth(date: Date | undefined, fetchTimeSlots: (d
           }
         } catch (error) {
           console.error("Failed to complete Google auth:", error);
+          
+          // Determine if it's an edge function error
+          let errorMessage = "Could not connect to Google Calendar. Please try again.";
+          
+          if (error instanceof Error && 
+              (error.name === "FunctionsFetchError" || 
+               error.message.includes("Failed to send a request to the Edge Function") ||
+               error.message.includes("Failed to fetch"))) {
+            errorMessage = "Could not connect to calendar service. The server might be temporarily unavailable.";
+          }
+          
           toast({
             title: "Connection Failed",
-            description: "Could not connect to Google Calendar. Please try again.",
+            description: errorMessage,
             variant: "destructive"
           });
         } finally {
