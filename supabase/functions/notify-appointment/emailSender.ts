@@ -5,6 +5,8 @@ import { generateBusinessEmailHtml, generateCustomerEmailHtml } from "./emailTem
 
 // Get Resend API key from environment variables
 const resendApiKey = Deno.env.get("RESEND_API_KEY") || "";
+console.log("Resend API Key available:", !!resendApiKey);
+
 // Initialize Resend
 const resend = new Resend(resendApiKey);
 
@@ -15,6 +17,7 @@ export async function sendBusinessEmail(appointment: any, formattedDate: string,
   console.log("Sending business email to info@symphonysh.com...");
   try {
     const iCalEvent = generateICalEvent(appointment);
+    console.log("Generated iCal event for business email");
     
     const businessEmailResult = await resend.emails.send({
       from: "Symphony Smart Homes <notifications@symphonysh.com>",
@@ -33,6 +36,7 @@ export async function sendBusinessEmail(appointment: any, formattedDate: string,
     return { success: true, data: businessEmailResult, error: null };
   } catch (error) {
     console.error("Error sending business email:", error);
+    console.error("Error details:", JSON.stringify(error, null, 2));
     return { success: false, data: null, error };
   }
 }
@@ -49,6 +53,7 @@ export async function sendCustomerEmail(appointment: any, formattedDate: string,
   console.log(`Sending customer email to ${appointment.email}...`);
   try {
     const iCalEvent = generateICalEvent(appointment);
+    console.log("Generated iCal event for customer email");
     
     const customerEmailResult = await resend.emails.send({
       from: "Symphony Smart Homes <notifications@symphonysh.com>",
@@ -67,6 +72,7 @@ export async function sendCustomerEmail(appointment: any, formattedDate: string,
     return { success: true, data: customerEmailResult, error: null };
   } catch (error) {
     console.error("Error sending customer email:", error);
+    console.error("Error details:", JSON.stringify(error, null, 2));
     return { success: false, data: null, error };
   }
 }

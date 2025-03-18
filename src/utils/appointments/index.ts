@@ -13,6 +13,7 @@ export async function submitAppointment(appointmentData: AppointmentData) {
   }
 
   console.log("Starting appointment submission process...");
+  console.log("Appointment data:", JSON.stringify(appointmentData, null, 2));
 
   // Save appointment details to session storage as fallback - BEFORE any async operations
   try {
@@ -24,11 +25,13 @@ export async function submitAppointment(appointmentData: AppointmentData) {
 
   try {
     // Insert appointment into the database
+    console.log("Saving appointment to database...");
     const appointmentData_ = await saveAppointmentToDatabase(appointmentData);
     console.log("Appointment saved to database:", appointmentData_);
     
     // Get the service name from the ID
     const serviceName = getServiceName(service);
+    console.log("Service name resolved:", serviceName);
     
     // Send email notification
     try {
@@ -44,11 +47,13 @@ export async function submitAppointment(appointmentData: AppointmentData) {
       };
     } catch (notifyError) {
       console.error("Failed to send email notifications:", notifyError);
+      console.error("Error stack:", notifyError.stack);
       // We don't throw here to avoid failing the whole appointment process
       return appointmentData_;
     }
   } catch (error) {
     console.error("Error in submitAppointment:", error);
+    console.error("Error stack:", error.stack);
     
     // Instead of re-throwing, we'll return a local version of the appointment
     // This will allow the flow to continue even if the database save fails
@@ -63,6 +68,7 @@ export async function submitAppointment(appointmentData: AppointmentData) {
 
 // This function can be simplified since we no longer need to fetch from Google Calendar
 export async function getAvailableTimeSlots(date: Date) {
+  console.log("Getting available time slots for date:", date);
   // Generate time slots for full hours only (no half-hour slots)
   const standardTimeSlots = [];
   for (let hour = 9; hour <= 17; hour++) {
@@ -71,5 +77,6 @@ export async function getAvailableTimeSlots(date: Date) {
     }
   }
   
+  console.log("Generated time slots:", standardTimeSlots);
   return standardTimeSlots;
 }

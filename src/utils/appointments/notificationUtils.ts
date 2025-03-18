@@ -4,7 +4,12 @@ import { AppointmentNotificationPayload, getServiceName } from "./types";
 
 // Send email notification about the appointment
 export async function sendEmailNotification(appointment: any, serviceName: string): Promise<any> {
-  console.log("Sending email notification...");
+  console.log("Sending email notification with payload:", JSON.stringify({
+    appointment: {
+      ...appointment,
+      service: serviceName
+    }
+  }, null, 2));
   
   // Create payload object with properly formatted data
   const payload: AppointmentNotificationPayload = {
@@ -20,10 +25,10 @@ export async function sendEmailNotification(appointment: any, serviceName: strin
     }
   };
   
-  console.log("Appointment payload for notification:", JSON.stringify(payload, null, 2));
+  console.log("Prepared notification payload:", JSON.stringify(payload, null, 2));
   
   try {
-    console.log("Using Supabase function invoke method for email notifications");
+    console.log("Invoking notify-appointment function...");
     
     // Direct invoke of notify-appointment function
     const { data, error } = await supabase.functions.invoke('notify-appointment', {
@@ -39,6 +44,7 @@ export async function sendEmailNotification(appointment: any, serviceName: strin
     return data;
   } catch (error) {
     console.error("Email notification error:", error);
+    console.error("Error stack:", error.stack);
     throw error;
   }
 }
