@@ -26,8 +26,19 @@ export function getEdgeFunctionsBaseUrl(): string | null {
 // Get auth token
 export async function getAuthToken(): Promise<string | null> {
   try {
-    const { data: sessionData } = await supabase.auth.getSession();
+    const { data: sessionData, error } = await supabase.auth.getSession();
+    
+    if (error) {
+      console.error("Error getting session:", error);
+      return null;
+    }
+    
     const accessToken = sessionData?.session?.access_token;
+    
+    if (!accessToken) {
+      console.log("No access token found in session");
+    }
+    
     return accessToken || null;
   } catch (error) {
     console.error("Error getting auth token:", error);
@@ -64,7 +75,7 @@ export async function createRequestWithTimeout(
     console.log(`Response status: ${response.status}`);
     
     return response;
-  } catch (e) {
+  } catch (e: any) {
     clearTimeout(timeoutId);
     if (e.name === 'AbortError') {
       console.error("Request timed out:", url);

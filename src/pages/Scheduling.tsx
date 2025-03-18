@@ -19,6 +19,7 @@ const Scheduling = () => {
   const [message, setMessage] = useState("");
   const [service, setService] = useState<string>("");
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   const { toast } = useToast();
 
   useEffect(() => {
@@ -26,7 +27,26 @@ const Scheduling = () => {
     if (serviceFromUrl) {
       setService(serviceFromUrl);
     }
+
+    // Log that the component has mounted successfully
+    console.log("Scheduling component mounted");
   }, [searchParams]);
+
+  // Reset any errors when component mounts
+  useEffect(() => {
+    setError(null);
+  }, []);
+
+  // Handle any unexpected errors
+  const handleError = (error: any) => {
+    console.error("Scheduling error:", error);
+    setError(error?.message || "An unexpected error occurred");
+    toast({
+      title: "Error",
+      description: error?.message || "An unexpected error occurred. Please try again.",
+      variant: "destructive"
+    });
+  };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -123,17 +143,43 @@ const Scheduling = () => {
       setMessage("");
       setService("");
       
-    } catch (error) {
+    } catch (error: any) {
       console.error("Scheduling error:", error);
       toast({
         title: "Error",
-        description: "There was a problem scheduling your appointment. Please try again.",
+        description: error?.message || "There was a problem scheduling your appointment. Please try again.",
         variant: "destructive"
       });
     } finally {
       setIsSubmitting(false);
     }
   };
+
+  // If there was an error loading the component, show a fallback UI
+  if (error) {
+    return (
+      <div className="min-h-screen bg-primary">
+        <Header />
+        <section className="pt-32 pb-20 px-6">
+          <div className="max-w-4xl mx-auto">
+            <div className="mb-8">
+              <BackNavigation />
+              <h1 className="text-4xl font-bold text-white mb-4">Schedule a Consultation</h1>
+              <div className="bg-red-500/20 border border-red-500 rounded-lg p-4 my-4">
+                <p className="text-white">Sorry, we encountered an error loading the scheduling page. Please try refreshing the page or contact us directly.</p>
+                <Button 
+                  onClick={() => window.location.reload()} 
+                  className="mt-4 bg-white text-primary hover:bg-white/90"
+                >
+                  Refresh Page
+                </Button>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-primary">
@@ -178,6 +224,7 @@ const Scheduling = () => {
                 variant="secondary"
                 size="lg"
                 className="w-fit px-8 bg-white hover:bg-white/90 text-primary"
+                disabled={isSubmitting}
               >
                 {isSubmitting ? "Scheduling..." : "Schedule Consultation"}
               </Button>

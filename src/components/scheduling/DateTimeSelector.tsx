@@ -4,6 +4,7 @@ import { DateCalendar } from "./date-time-selector/DateCalendar";
 import { TimeSlots } from "./date-time-selector/TimeSlots";
 import { useGoogleCalendarAuth } from "./date-time-selector/useGoogleCalendarAuth";
 import { useTimeSlots } from "./date-time-selector/useTimeSlots";
+import { useState, useEffect } from "react";
 
 interface DateTimeSelectorProps {
   date: Date | undefined;
@@ -18,6 +19,8 @@ export function DateTimeSelector({
   selectedTime, 
   setSelectedTime 
 }: DateTimeSelectorProps) {
+  const [error, setError] = useState<string | null>(null);
+
   // Custom hooks for time slots management
   const { availableTimeSlots, isLoading, fetchTimeSlots } = useTimeSlots(
     date,
@@ -33,6 +36,20 @@ export function DateTimeSelector({
     authError,
     checkingConnection 
   } = useGoogleCalendarAuth(date, fetchTimeSlots);
+
+  // Handle errors from hooks
+  useEffect(() => {
+    if (authError) {
+      console.error("Auth error:", authError);
+      setError(authError);
+    }
+  }, [authError]);
+
+  // If there's an error, log it but don't break the UI
+  if (error) {
+    console.error("DateTimeSelector error:", error);
+    // Continue rendering, don't return early
+  }
 
   return (
     <div className="space-y-4">

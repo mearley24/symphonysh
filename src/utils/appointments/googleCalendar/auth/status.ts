@@ -29,7 +29,7 @@ export async function isGoogleCalendarConnected(): Promise<boolean> {
           'Authorization': accessToken ? `Bearer ${accessToken}` : ''
         }
       },
-      10000 // 10 second timeout
+      15000 // 15 second timeout to give more time for slower connections
     );
     
     if (!response.ok) {
