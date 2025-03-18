@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Calendar, Phone, Mail, MessageSquare, Clock } from "lucide-react";
 import { PageLayout } from "./PageLayout";
 import { SERVICES } from "@/components/scheduling/AppointmentForm";
+import { useEffect } from "react";
 
 interface AppointmentDetails {
   date?: Date;
@@ -21,12 +22,20 @@ export function ConfirmationPage() {
   const location = useLocation();
   const appointmentDetails = location.state?.appointmentDetails as AppointmentDetails;
 
+  useEffect(() => {
+    console.log("Confirmation page rendered");
+    console.log("Location state:", location.state);
+    console.log("Appointment details:", appointmentDetails);
+  }, [location.state, appointmentDetails]);
+
   // Get service name from service ID
   const getServiceName = (serviceId: string): string => {
     return SERVICES.find(s => s.id === serviceId)?.name || serviceId;
   };
 
   if (!appointmentDetails) {
+    console.log("No appointment details found in location state");
+    
     return (
       <PageLayout>
         <div className="text-center py-12">
@@ -44,8 +53,10 @@ export function ConfirmationPage() {
 
   const { date, selectedTime, name, email, phone, service, message } = appointmentDetails;
   
-  const formattedDate = date ? format(date, "EEEE, MMMM d, yyyy") : "Unknown date";
+  const formattedDate = date ? format(new Date(date), "EEEE, MMMM d, yyyy") : "Unknown date";
   const serviceName = service ? getServiceName(service) : "Consultation";
+
+  console.log("Rendering confirmation with:", { formattedDate, serviceName, name, email });
 
   return (
     <PageLayout>

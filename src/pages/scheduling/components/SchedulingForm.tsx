@@ -1,7 +1,7 @@
 
 import { FormEvent } from "react";
 import { useToast } from "@/components/ui/use-toast";
-import { submitAppointment } from "@/utils/appointmentUtils";
+import { submitAppointment } from "@/utils/appointments"; // Fixed import path
 import { useFormValidation } from "./scheduling-form/FormValidation";
 import { FormLayout } from "./scheduling-form/FormLayout";
 import { useNavigate } from "react-router-dom";
@@ -94,6 +94,10 @@ export function SchedulingForm({
         });
       } else {
         console.log("Appointment was saved but notification status is unknown");
+        toast({
+          title: "Success",
+          description: "Your appointment has been scheduled successfully.",
+        });
       }
 
       // Store the appointment details to pass to the confirmation page
@@ -106,6 +110,8 @@ export function SchedulingForm({
         message,
         service
       };
+
+      console.log("Navigating to confirmation page with details:", appointmentDetails);
 
       // Navigate to the confirmation page with appointment details
       navigate("/scheduling/confirmation", { 
