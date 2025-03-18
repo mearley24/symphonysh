@@ -2,9 +2,9 @@
 import { format } from "date-fns";
 import { supabase } from "../../../integrations/supabase/client";
 
-// Default available time slots
+// Default available time slots - only full hours, no half-hour slots
 const DEFAULT_TIME_SLOTS = [
-  "09:00", "10:00", "11:00", "13:00", "14:00", "15:00", "16:00"
+  "09:00", "10:00", "11:00", "13:00", "14:00", "15:00", "16:00", "17:00"
 ];
 
 // Function to fetch available time slots for a given date
@@ -31,8 +31,10 @@ export async function fetchAvailableTimeSlots(date: Date): Promise<string[]> {
     }
     
     if (data && Array.isArray(data.availableSlots)) {
-      console.log("Available time slots:", data.availableSlots);
-      return data.availableSlots;
+      // Filter to only include full hour slots (ending in :00)
+      const fullHourSlots = data.availableSlots.filter(slot => slot.endsWith(':00'));
+      console.log("Available time slots (full hours only):", fullHourSlots);
+      return fullHourSlots.length > 0 ? fullHourSlots : DEFAULT_TIME_SLOTS;
     }
     
     // Return default time slots if the API call fails

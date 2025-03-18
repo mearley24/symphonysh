@@ -1,4 +1,3 @@
-
 import { AppointmentData, getServiceName } from "./types";
 import { saveAppointmentToDatabase } from "./dbUtils";
 import { sendEmailNotification } from "./notificationUtils";
@@ -62,14 +61,11 @@ export async function submitAppointment(appointmentData: AppointmentData) {
 
 // This function can be simplified since we no longer need to fetch from Google Calendar
 export async function getAvailableTimeSlots(date: Date) {
-  // Generate standard time slots
+  // Generate time slots for full hours only (no half-hour slots)
   const standardTimeSlots = [];
   for (let hour = 9; hour <= 17; hour++) {
     if (hour !== 12) { // Skip lunch hour
       standardTimeSlots.push(`${hour}:00`);
-      if (hour !== 17) { // Don't add the :30 slot for 5pm
-        standardTimeSlots.push(`${hour}:30`);
-      }
     }
   }
   
