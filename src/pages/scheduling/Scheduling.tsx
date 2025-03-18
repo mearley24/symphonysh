@@ -5,18 +5,14 @@ import { useToast } from "@/components/ui/use-toast";
 import { PageLayout } from "./components/PageLayout";
 import { SchedulingForm } from "./components/SchedulingForm";
 import { ErrorDisplay } from "./components/ErrorDisplay";
+import { LoadingIndicator } from "./components/LoadingIndicator";
+import { ErrorHandler } from "./components/ErrorHandler";
+import { useFormState } from "./hooks/useFormState";
 
 const Scheduling = () => {
   console.log("Scheduling component rendering");
   
-  const [date, setDate] = useState<Date>();
-  const [selectedTime, setSelectedTime] = useState<string>();
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [phone, setPhone] = useState("");
-  const [message, setMessage] = useState("");
-  const [service, setService] = useState<string>("");
-  const [isSubmitting, setIsSubmitting] = useState(false);
+  const formState = useFormState();
   const [error, setError] = useState<string | null>(null);
   const [hasRendered, setHasRendered] = useState(false);
   const [isMounted, setIsMounted] = useState(false);
@@ -40,10 +36,10 @@ const Scheduling = () => {
     
     const serviceFromUrl = searchParams.get("service");
     if (serviceFromUrl) {
-      setService(serviceFromUrl);
+      formState.setService(serviceFromUrl);
       console.log("Service from URL:", serviceFromUrl);
     }
-  }, [searchParams, isMounted]);
+  }, [searchParams, isMounted, formState.setService]);
 
   // Reset any errors when component mounts
   useEffect(() => {
@@ -62,12 +58,10 @@ const Scheduling = () => {
     });
   };
 
-  // If the component hasn't rendered yet, log it for debugging
+  // If the component hasn't rendered yet, show loading indicator
   if (!hasRendered) {
     console.log("Scheduling component not rendered yet");
-    return <div className="min-h-screen bg-primary flex items-center justify-center">
-      <p className="text-white">Loading scheduling page...</p>
-    </div>;
+    return <LoadingIndicator />;
   }
 
   // If there was an error loading the component, show a fallback UI
@@ -79,27 +73,14 @@ const Scheduling = () => {
   console.log("Rendering Scheduling component with PageLayout");
   
   return (
-    <PageLayout>
-      <SchedulingForm
-        date={date}
-        setDate={setDate}
-        selectedTime={selectedTime}
-        setSelectedTime={setSelectedTime}
-        name={name}
-        setName={setName}
-        email={email}
-        setEmail={setEmail}
-        phone={phone}
-        setPhone={setPhone}
-        message={message}
-        setMessage={setMessage}
-        service={service}
-        setService={setService}
-        isSubmitting={isSubmitting}
-        setIsSubmitting={setIsSubmitting}
-        handleError={handleError}
-      />
-    </PageLayout>
+    <ErrorHandler onError={handleError}>
+      <PageLayout>
+        <SchedulingForm
+          {...formState}
+          handleError={handleError}
+        />
+      </PageLayout>
+    </ErrorHandler>
   );
 };
 
