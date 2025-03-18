@@ -32,6 +32,7 @@ export function CalendarConnection({
     setEdgeFunctionError(false);
     
     try {
+      console.log("Trying to connect to Google Calendar...");
       await connectToGoogleCalendar();
       // No success toast here since we're redirecting away
     } catch (error) {
