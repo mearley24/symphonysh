@@ -70,7 +70,7 @@ export function CalendarConnection({
     }
   };
 
-  // Handle retry connection check
+  // Handle retry connection check, making sure to properly handle the Promise
   const handleRetryConnectionCheck = async () => {
     if (retryConnectionCheck) {
       try {

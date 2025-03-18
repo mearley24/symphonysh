@@ -33,11 +33,11 @@ export function useCalendarConnectionStatus() {
     }
   }, [shouldStopChecking]);
 
-  // Function to retry connection check manually
-  const retryConnectionCheck = useCallback(() => {
+  // Function to retry connection check manually - ensure it returns a Promise
+  const retryConnectionCheck = useCallback(async (): Promise<void> => {
     if (connectionAttempts < 3) {
       setCheckingConnection(true);
-      checkConnectionWithRetry(connectionAttempts);
+      await checkConnectionWithRetry(connectionAttempts);
     }
   }, [connectionAttempts, checkConnectionWithRetry]);
 
