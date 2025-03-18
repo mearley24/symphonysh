@@ -5,15 +5,20 @@ import { sendBusinessEmail, sendCustomerEmail } from "./emailSender.ts";
 
 // Debug logs at the top level for function initialization
 console.log("Notify appointment function initializing...");
+console.log("Function environment check:");
+console.log("- RESEND_API_KEY available:", !!Deno.env.get("RESEND_API_KEY"));
 
 /**
  * Main serve function
  */
 serve(async (req) => {
-  console.log("Notification function triggered with method:", req.method);
+  console.log("========== Notification function triggered ==========");
+  console.log("Request method:", req.method);
+  console.log("Request headers:", Object.fromEntries(req.headers.entries()));
   
   // Handle CORS preflight requests
   if (req.method === "OPTIONS") {
+    console.log("Handling OPTIONS request");
     return new Response(null, {
       headers: corsHeaders,
     });
@@ -21,6 +26,7 @@ serve(async (req) => {
 
   // Handle direct browser visits or GET requests
   if (req.method === "GET") {
+    console.log("Handling GET request");
     return new Response(JSON.stringify({ 
       message: "This is the notify-appointment API endpoint. POST requests with appointment data are required." 
     }), {
@@ -85,6 +91,9 @@ serve(async (req) => {
     console.log("Sending customer email notification...");
     const customerEmailResult = await sendCustomerEmail(appointment, formattedDate, formattedTime);
     
+    console.log("Business email result:", JSON.stringify(businessEmailResult));
+    console.log("Customer email result:", JSON.stringify(customerEmailResult));
+    
     // Return response with details of both email operations
     return new Response(JSON.stringify({ 
       success: businessEmailResult.success || customerEmailResult.success, 
@@ -105,8 +114,14 @@ serve(async (req) => {
   } catch (error: any) {
     console.error("Function error:", error.message);
     console.error("Error stack:", error.stack);
+    console.error("Full error details:", JSON.stringify(error, Object.getOwnPropertyNames(error), 2));
+    
     return new Response(
-      JSON.stringify({ error: error.message, stack: error.stack }),
+      JSON.stringify({ 
+        error: error.message, 
+        stack: error.stack,
+        details: typeof error === 'object' ? JSON.stringify(error, Object.getOwnPropertyNames(error), 2) : String(error)
+      }),
       {
         headers: { ...corsHeaders, "Content-Type": "application/json" },
         status: 500,

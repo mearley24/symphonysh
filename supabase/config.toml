@@ -38,23 +38,6 @@ verify_jwt = false
 [functions.create-calendar-event]
 verify_jwt = false
 
-[functions.google-auth]
-verify_jwt = false
-
-[functions.google-auth-callback]
-verify_jwt = false
-
-[functions.appointment-trigger]
-verify_jwt = false
-
-[functions.available-time-slots]
-verify_jwt = false
-
 [functions.send-contact-email]
 verify_jwt = false
 
-[functions.check-google-connection]
-verify_jwt = false
-
-[functions.create-appointment]
-verify_jwt = false

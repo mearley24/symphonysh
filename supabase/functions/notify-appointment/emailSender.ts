@@ -5,7 +5,9 @@ import { generateBusinessEmailHtml, generateCustomerEmailHtml } from "./emailTem
 
 // Get Resend API key from environment variables
 const resendApiKey = Deno.env.get("RESEND_API_KEY") || "";
+console.log("Email sender initializing...");
 console.log("Resend API Key available:", !!resendApiKey);
+console.log("Resend API Key length:", resendApiKey.length);
 
 // Initialize Resend
 const resend = new Resend(resendApiKey);
@@ -19,6 +21,7 @@ export async function sendBusinessEmail(appointment: any, formattedDate: string,
     const iCalEvent = generateICalEvent(appointment);
     console.log("Generated iCal event for business email");
     
+    console.log("Preparing to call Resend API for business email");
     const businessEmailResult = await resend.emails.send({
       from: "Symphony Smart Homes <notifications@symphonysh.com>",
       to: ["info@symphonysh.com"],
@@ -32,11 +35,12 @@ export async function sendBusinessEmail(appointment: any, formattedDate: string,
       ],
     });
     
-    console.log("Business email notification sent successfully:", businessEmailResult);
+    console.log("Business email API call complete:", businessEmailResult);
     return { success: true, data: businessEmailResult, error: null };
   } catch (error) {
     console.error("Error sending business email:", error);
-    console.error("Error details:", JSON.stringify(error, null, 2));
+    console.error("Error details:", error instanceof Error ? error.message : JSON.stringify(error, null, 2));
+    console.error("Error stack:", error instanceof Error ? error.stack : "No stack trace available");
     return { success: false, data: null, error };
   }
 }
@@ -55,6 +59,7 @@ export async function sendCustomerEmail(appointment: any, formattedDate: string,
     const iCalEvent = generateICalEvent(appointment);
     console.log("Generated iCal event for customer email");
     
+    console.log("Preparing to call Resend API for customer email");
     const customerEmailResult = await resend.emails.send({
       from: "Symphony Smart Homes <notifications@symphonysh.com>",
       to: [appointment.email],
@@ -68,11 +73,12 @@ export async function sendCustomerEmail(appointment: any, formattedDate: string,
       ],
     });
     
-    console.log("Customer email confirmation sent successfully:", customerEmailResult);
+    console.log("Customer email API call complete:", customerEmailResult);
     return { success: true, data: customerEmailResult, error: null };
   } catch (error) {
     console.error("Error sending customer email:", error);
-    console.error("Error details:", JSON.stringify(error, null, 2));
+    console.error("Error details:", error instanceof Error ? error.message : JSON.stringify(error, null, 2));
+    console.error("Error stack:", error instanceof Error ? error.stack : "No stack trace available");
     return { success: false, data: null, error };
   }
 }

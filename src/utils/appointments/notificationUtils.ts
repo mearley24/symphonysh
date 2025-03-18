@@ -30,8 +30,8 @@ export async function sendEmailNotification(appointment: any, serviceName: strin
   try {
     console.log("Invoking notify-appointment function...");
     
-    // Output supabase URL for debugging
-    console.log("Supabase URL:", supabase.functions.url);
+    // Debug supabase function endpoint
+    console.log("Supabase functions endpoint available:", !!supabase.functions);
     
     // Direct invoke of notify-appointment function
     const { data, error } = await supabase.functions.invoke('notify-appointment', {
@@ -45,7 +45,7 @@ export async function sendEmailNotification(appointment: any, serviceName: strin
     
     console.log("Email notification results:", data);
     return data;
-  } catch (error) {
+  } catch (error: any) {
     console.error("Email notification error:", error);
     console.error("Error stack:", error.stack);
     console.error("Error details:", typeof error === 'object' ? JSON.stringify(error, null, 2) : error);
