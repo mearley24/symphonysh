@@ -4,7 +4,7 @@ import { supabase } from "@/integrations/supabase/client";
 // Get the base URL for Supabase Edge Functions
 export function getEdgeFunctionsBaseUrl(): string | null {
   try {
-    // First, try to use the hardcoded URL from the supabase client
+    // Use the hardcoded URL from the supabase client
     const supabaseUrl = "https://symphonysh.supabase.co";
     
     if (supabaseUrl) {
@@ -12,23 +12,6 @@ export function getEdgeFunctionsBaseUrl(): string | null {
       const cleanUrl = supabaseUrl.replace(/\/$/, '');
       const baseUrl = `${cleanUrl}/functions/v1`;
       console.log("Using Supabase URL from client config:", baseUrl);
-      return baseUrl;
-    }
-    
-    // Fallback to environment variables if available
-    const envUrl = import.meta.env.VITE_SUPABASE_FUNCTIONS_URL;
-    if (envUrl) {
-      const cleanUrl = envUrl.replace(/\/$/, '');
-      console.log("Using Supabase URL from env:", cleanUrl);
-      return cleanUrl;
-    }
-    
-    // Last resort, try to get it from the Supabase URL env var
-    const supabaseEnvUrl = import.meta.env.VITE_SUPABASE_URL;
-    if (supabaseEnvUrl) {
-      const cleanUrl = supabaseEnvUrl.replace(/\/$/, '');
-      const baseUrl = `${cleanUrl}/functions/v1`;
-      console.log("Using constructed Supabase URL from env:", baseUrl);
       return baseUrl;
     }
     
