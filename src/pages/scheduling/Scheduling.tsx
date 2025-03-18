@@ -2,7 +2,6 @@
 import { useState, useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 import { useToast } from "@/components/ui/use-toast";
-import Header from "@/components/Header";
 import { PageLayout } from "./components/PageLayout";
 import { SchedulingForm } from "./components/SchedulingForm";
 import { ErrorDisplay } from "./components/ErrorDisplay";

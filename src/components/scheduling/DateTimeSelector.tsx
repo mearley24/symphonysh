@@ -21,11 +21,14 @@ export function DateTimeSelector({
   selectedTime, 
   setSelectedTime 
 }: DateTimeSelectorProps) {
+  console.log("DateTimeSelector rendering");
   const [error, setError] = useState<string | null>(null);
   const [componentError, setComponentError] = useState<Error | null>(null);
+  const [hasFatalError, setHasFatalError] = useState(false);
 
   // Error boundary functionality
   useEffect(() => {
+    console.log("DateTimeSelector useEffect running");
     const originalConsoleError = console.error;
     console.error = (...args) => {
       // Log normally but also capture React errors
@@ -69,7 +72,7 @@ export function DateTimeSelector({
     }, [authError]);
 
     // If there's an internal component error, show it but don't break the UI
-    if (componentError) {
+    if (componentError || hasFatalError) {
       console.error("DateTimeSelector component error:", componentError);
       return (
         <div className="space-y-4">
@@ -114,6 +117,7 @@ export function DateTimeSelector({
   } catch (err) {
     // Global error catcher
     console.error("Caught error in DateTimeSelector:", err);
+    setHasFatalError(true);
     return (
       <div className="space-y-4">
         <Alert variant="destructive" className="bg-red-500/20 border-red-500/40">

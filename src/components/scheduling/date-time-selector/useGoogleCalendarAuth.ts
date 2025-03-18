@@ -4,6 +4,8 @@ import { useCalendarConnectionStatus } from "./hooks/useCalendarConnectionStatus
 import { useGoogleAuthCallback } from "./hooks/useGoogleAuthCallback";
 
 export function useGoogleCalendarAuth(date: Date | undefined, fetchTimeSlots: (date: Date) => Promise<void>) {
+  console.log("useGoogleCalendarAuth hook initialized");
+  
   const [connectingCalendar, setConnectingCalendar] = useState(false);
   const [authError, setAuthError] = useState<string | null>(null);
   
