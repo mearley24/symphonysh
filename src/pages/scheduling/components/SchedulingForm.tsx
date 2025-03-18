@@ -1,10 +1,9 @@
 
 import { FormEvent } from "react";
-import { Button } from "@/components/ui/button";
 import { useToast } from "@/components/ui/use-toast";
-import { DateTimeSelector } from "@/components/scheduling/DateTimeSelector";
-import { AppointmentForm } from "@/components/scheduling/AppointmentForm";
 import { submitAppointment } from "@/utils/appointmentUtils";
+import { useFormValidation } from "./scheduling-form/FormValidation";
+import { FormLayout } from "./scheduling-form/FormLayout";
 
 interface SchedulingFormProps {
   date: Date | undefined;
@@ -46,6 +45,7 @@ export function SchedulingForm({
   handleError
 }: SchedulingFormProps) {
   const { toast } = useToast();
+  const { validateForm } = useFormValidation();
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -61,57 +61,7 @@ export function SchedulingForm({
     });
 
     // Validate form fields
-    if (!date) {
-      toast({
-        title: "Missing Date",
-        description: "Please select a date for your appointment.",
-        variant: "destructive"
-      });
-      return;
-    }
-
-    if (!selectedTime) {
-      toast({
-        title: "Missing Time",
-        description: "Please select a time slot for your appointment.",
-        variant: "destructive"
-      });
-      return;
-    }
-
-    if (!name.trim()) {
-      toast({
-        title: "Missing Name",
-        description: "Please enter your name.",
-        variant: "destructive"
-      });
-      return;
-    }
-
-    if (!email.trim()) {
-      toast({
-        title: "Missing Email",
-        description: "Please enter your email address.",
-        variant: "destructive"
-      });
-      return;
-    }
-
-    if (!phone.trim()) {
-      toast({
-        title: "Missing Phone",
-        description: "Please enter your phone number.",
-        variant: "destructive"
-      });
-      return;
-    }
-
-    if (!service) {
-      toast({
-        title: "Missing Service",
-        description: "Please select a service for your consultation.",
-        variant: "destructive"
-      });
+    if (!validateForm({ date, selectedTime, name, email, phone, service })) {
       return;
     }
 
@@ -149,52 +99,30 @@ export function SchedulingForm({
         description: error?.message || "There was a problem scheduling your appointment. Please try again.",
         variant: "destructive"
       });
+      handleError(error);
     } finally {
       setIsSubmitting(false);
     }
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-8" noValidate>
-      <div className="grid md:grid-cols-2 gap-8">
-        {/* Wrap DateTimeSelector in an error boundary wrapper */}
-        <div className="space-y-4">
-          {/* This div wrapping the DateTimeSelector acts as our "error boundary" */}
-          <div className="w-full">
-            <DateTimeSelector
-              date={date}
-              setDate={setDate}
-              selectedTime={selectedTime}
-              setSelectedTime={setSelectedTime}
-            />
-          </div>
-        </div>
-
-        <AppointmentForm
-          name={name}
-          setName={setName}
-          email={email}
-          setEmail={setEmail}
-          phone={phone}
-          setPhone={setPhone}
-          message={message}
-          setMessage={setMessage}
-          service={service}
-          setService={setService}
-        />
-      </div>
-
-      <div className="flex justify-center">
-        <Button
-          type="submit"
-          variant="secondary"
-          size="lg"
-          className="w-fit px-8 bg-white hover:bg-white/90 text-primary"
-          disabled={isSubmitting}
-        >
-          {isSubmitting ? "Scheduling..." : "Schedule Consultation"}
-        </Button>
-      </div>
-    </form>
+    <FormLayout
+      date={date}
+      setDate={setDate}
+      selectedTime={selectedTime}
+      setSelectedTime={setSelectedTime}
+      name={name}
+      setName={setName}
+      email={email}
+      setEmail={setEmail}
+      phone={phone}
+      setPhone={setPhone}
+      message={message}
+      setMessage={setMessage}
+      service={service}
+      setService={setService}
+      isSubmitting={isSubmitting}
+      onSubmit={handleSubmit}
+    />
   );
 }
