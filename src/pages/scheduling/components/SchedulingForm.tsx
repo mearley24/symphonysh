@@ -70,7 +70,10 @@ export function SchedulingForm({
     setIsSubmitting(true);
 
     try {
-      await submitAppointment({
+      // Log that we're starting the appointment submission
+      console.log("Starting appointment submission process...");
+      
+      const result = await submitAppointment({
         date,
         selectedTime,
         name,
@@ -79,6 +82,19 @@ export function SchedulingForm({
         message,
         service
       });
+      
+      console.log("Appointment submission result:", result);
+      
+      // Check if we have notification information in the result
+      if (result?.businessEmail?.success || result?.customerEmail?.success) {
+        console.log("Email notifications were sent successfully!");
+        toast({
+          title: "Success",
+          description: "Your appointment has been scheduled and confirmation emails have been sent.",
+        });
+      } else {
+        console.log("Appointment was saved but notification status is unknown");
+      }
 
       // Store the appointment details to pass to the confirmation page
       const appointmentDetails = {
