@@ -29,6 +29,11 @@ export function CalendarConnection({
 
   // Handle Google Calendar connection
   const handleConnectCalendar = async () => {
+    if (connectingCalendar || isCalendarConnected || checkingConnection) {
+      console.log("Button clicked but already in progress or connected - ignoring");
+      return;
+    }
+    
     setConnectingCalendar(true);
     setConnectionError(null);
     setEdgeFunctionError(false);
@@ -81,6 +86,11 @@ export function CalendarConnection({
         });
       } catch (error) {
         console.error("Error retrying connection check:", error);
+        toast({
+          title: "Connection Check Failed",
+          description: "Could not check connection status. Please try again later.",
+          variant: "destructive"
+        });
       }
     }
   };
