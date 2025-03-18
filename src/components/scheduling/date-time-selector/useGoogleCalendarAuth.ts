@@ -11,7 +11,8 @@ export function useGoogleCalendarAuth(date: Date | undefined, fetchTimeSlots: (d
   const { 
     isCalendarConnected, 
     setIsCalendarConnected, 
-    checkingConnection 
+    checkingConnection,
+    retryConnectionCheck
   } = useCalendarConnectionStatus();
 
   // Custom hook for auth callback
@@ -28,6 +29,7 @@ export function useGoogleCalendarAuth(date: Date | undefined, fetchTimeSlots: (d
     setConnectingCalendar, 
     isCalendarConnected, 
     authError,
-    checkingConnection 
+    checkingConnection,
+    retryConnectionCheck
   };
 }

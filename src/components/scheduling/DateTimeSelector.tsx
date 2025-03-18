@@ -56,7 +56,8 @@ export function DateTimeSelector({
       setConnectingCalendar, 
       isCalendarConnected, 
       authError,
-      checkingConnection 
+      checkingConnection,
+      retryConnectionCheck
     } = useGoogleCalendarAuth(date, fetchTimeSlots);
 
     // Handle errors from hooks
@@ -92,6 +93,7 @@ export function DateTimeSelector({
             checkingConnection={checkingConnection}
             authError={authError}
             setConnectingCalendar={setConnectingCalendar}
+            retryConnectionCheck={retryConnectionCheck}
           />
           
           <DateCalendar date={date} setDate={setDate} />

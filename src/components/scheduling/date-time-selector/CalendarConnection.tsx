@@ -1,7 +1,7 @@
 
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Loader2, CalendarPlus, Check, AlertTriangle } from "lucide-react";
+import { Loader2, CalendarPlus, Check, AlertTriangle, RefreshCw } from "lucide-react";
 import { connectToGoogleCalendar } from "@/utils/appointments/googleCalendar";
 import { useToast } from "@/components/ui/use-toast";
 import { Alert, AlertTitle, AlertDescription } from "@/components/ui/alert";
@@ -12,6 +12,7 @@ interface CalendarConnectionProps {
   checkingConnection: boolean;
   authError: string | null;
   setConnectingCalendar: (connecting: boolean) => void;
+  retryConnectionCheck?: () => Promise<void>;
 }
 
 export function CalendarConnection({
@@ -20,6 +21,7 @@ export function CalendarConnection({
   checkingConnection,
   authError,
   setConnectingCalendar,
+  retryConnectionCheck
 }: CalendarConnectionProps) {
   const { toast } = useToast();
   const [connectionError, setConnectionError] = useState<string | null>(null);
@@ -68,6 +70,21 @@ export function CalendarConnection({
     }
   };
 
+  // Handle retry connection check
+  const handleRetryConnectionCheck = async () => {
+    if (retryConnectionCheck) {
+      try {
+        await retryConnectionCheck();
+        toast({
+          title: "Connection Check",
+          description: "Retrying connection check...",
+        });
+      } catch (error) {
+        console.error("Error retrying connection check:", error);
+      }
+    }
+  };
+
   return (
     <div>
       <div className="flex items-center mb-4 justify-between">
@@ -91,6 +108,18 @@ export function CalendarConnection({
              isCalendarConnected ? "Calendar Connected" : 
              "Connect Calendar"}
           </Button>
+
+          {retryConnectionCheck && !isCalendarConnected && !connectingCalendar && !checkingConnection && (
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={handleRetryConnectionCheck}
+              className="bg-transparent hover:bg-white/10 text-white/70 border-none"
+              title="Retry connection check"
+            >
+              <RefreshCw className="h-4 w-4" />
+            </Button>
+          )}
         </div>
       </div>
 
