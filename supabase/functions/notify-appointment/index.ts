@@ -7,6 +7,7 @@ import { sendBusinessEmail, sendCustomerEmail } from "./emailSender.ts";
 console.log("Notify appointment function initializing...");
 console.log("Function environment check:");
 console.log("- RESEND_API_KEY available:", !!Deno.env.get("RESEND_API_KEY"));
+console.log("- RESEND_API_KEY length:", Deno.env.get("RESEND_API_KEY")?.length || 0);
 
 /**
  * Main serve function

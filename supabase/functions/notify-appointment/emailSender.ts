@@ -8,6 +8,7 @@ const resendApiKey = Deno.env.get("RESEND_API_KEY") || "";
 console.log("Email sender initializing...");
 console.log("Resend API Key available:", !!resendApiKey);
 console.log("Resend API Key length:", resendApiKey.length);
+console.log("Resend API Key first 4 chars:", resendApiKey.substring(0, 4));
 
 // Initialize Resend
 const resend = new Resend(resendApiKey);
@@ -41,6 +42,11 @@ export async function sendBusinessEmail(appointment: any, formattedDate: string,
     console.error("Error sending business email:", error);
     console.error("Error details:", error instanceof Error ? error.message : JSON.stringify(error, null, 2));
     console.error("Error stack:", error instanceof Error ? error.stack : "No stack trace available");
+    
+    // Check if it's a Resend API error with specific format
+    const resendError = typeof error === 'object' && error !== null ? error : {};
+    console.error("Resend API Error:", JSON.stringify(resendError, null, 2));
+    
     return { success: false, data: null, error };
   }
 }
@@ -79,6 +85,11 @@ export async function sendCustomerEmail(appointment: any, formattedDate: string,
     console.error("Error sending customer email:", error);
     console.error("Error details:", error instanceof Error ? error.message : JSON.stringify(error, null, 2));
     console.error("Error stack:", error instanceof Error ? error.stack : "No stack trace available");
+    
+    // Check if it's a Resend API error with specific format
+    const resendError = typeof error === 'object' && error !== null ? error : {};
+    console.error("Resend API Error:", JSON.stringify(resendError, null, 2));
+    
     return { success: false, data: null, error };
   }
 }

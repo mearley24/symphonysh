@@ -35,9 +35,5 @@ additional_redirect_urls = ["http://localhost:8080"]
 [functions.notify-appointment]
 verify_jwt = false
 
-[functions.create-calendar-event]
-verify_jwt = false
-
 [functions.send-contact-email]
 verify_jwt = false
-
