@@ -1,3 +1,4 @@
+
 import { AppointmentData, getServiceName } from "./types";
 import { saveAppointmentToDatabase } from "./dbUtils";
 import { sendEmailNotification } from "./notificationUtils";
@@ -30,21 +31,22 @@ export async function submitAppointment(appointmentData: AppointmentData) {
     const serviceName = getServiceName(service);
     
     // Send email notification
-    let notificationResult = null;
     try {
       // Send email notification with calendar attachment
-      notificationResult = await sendEmailNotification(appointmentData_, serviceName);
+      console.log("Attempting to send email notifications...");
+      const notificationResult = await sendEmailNotification(appointmentData_, serviceName);
       console.log("Notification result:", notificationResult);
+      
+      return {
+        ...appointmentData_,
+        businessEmail: notificationResult?.businessEmail || null,
+        customerEmail: notificationResult?.customerEmail || null
+      };
     } catch (notifyError) {
-      console.error("Failed to handle notifications:", notifyError);
+      console.error("Failed to send email notifications:", notifyError);
       // We don't throw here to avoid failing the whole appointment process
+      return appointmentData_;
     }
-
-    return {
-      ...appointmentData_,
-      businessEmail: notificationResult?.businessEmail || null,
-      customerEmail: notificationResult?.customerEmail || null
-    };
   } catch (error) {
     console.error("Error in submitAppointment:", error);
     

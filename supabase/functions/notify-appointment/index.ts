@@ -151,14 +151,14 @@ function generateCustomerEmailHtml(appointment: any, formattedDate: string, form
  * Sends business notification email
  */
 async function sendBusinessEmail(appointment: any, formattedDate: string, formattedTime: string) {
-  console.log("Sending business email...");
+  console.log("Sending business email to info@symphonysh.com...");
   try {
     const iCalEvent = generateICalEvent(appointment, formattedDate, formattedTime);
     
     const businessEmailResult = await resend.emails.send({
       from: "Symphony Smart Homes <notifications@symphonysh.com>",
       to: ["info@symphonysh.com"],
-      subject: `New Appointment: ${appointment.name}`,
+      subject: `New Appointment: ${appointment.name} - ${appointment.service}`,
       html: generateBusinessEmailHtml(appointment, formattedDate, formattedTime),
       attachments: [
         {
@@ -180,7 +180,12 @@ async function sendBusinessEmail(appointment: any, formattedDate: string, format
  * Sends customer confirmation email
  */
 async function sendCustomerEmail(appointment: any, formattedDate: string, formattedTime: string) {
-  console.log("Sending customer email...");
+  if (!appointment.email) {
+    console.error("Cannot send customer email - no email address provided");
+    return { success: false, data: null, error: "No email address provided" };
+  }
+  
+  console.log(`Sending customer email to ${appointment.email}...`);
   try {
     const iCalEvent = generateICalEvent(appointment, formattedDate, formattedTime);
     
@@ -210,7 +215,6 @@ async function sendCustomerEmail(appointment: any, formattedDate: string, format
  */
 serve(async (req) => {
   console.log("Notification function triggered with method:", req.method);
-  console.log("Request headers:", Object.fromEntries(req.headers.entries()));
   
   // Handle CORS preflight requests
   if (req.method === "OPTIONS") {
@@ -234,10 +238,6 @@ serve(async (req) => {
     const bodyText = await req.text();
     console.log("Raw request body:", bodyText);
     
-    if (!bodyText || bodyText.trim() === "") {
-      throw new Error("Empty request body");
-    }
-    
     let requestData;
     try {
       requestData = JSON.parse(bodyText);
@@ -260,6 +260,7 @@ serve(async (req) => {
     
     // Validate appointment data
     if (!appointment) {
+      console.error("No appointment data provided in request");
       return new Response(
         JSON.stringify({ 
           error: "No appointment data provided",
@@ -277,6 +278,7 @@ serve(async (req) => {
     const missingFields = requiredFields.filter(field => !appointment[field]);
     
     if (missingFields.length > 0) {
+      console.error(`Missing required fields: ${missingFields.join(', ')}`);
       return new Response(
         JSON.stringify({ 
           error: "Missing required fields", 
@@ -290,19 +292,23 @@ serve(async (req) => {
       );
     }
     
+    console.log("All required fields are present, proceeding with email notifications");
+    
     // Format date and time
     const { formattedDate, formattedTime } = formatDateTime(appointment.date, appointment.time);
     console.log("Formatted date and time:", formattedDate, formattedTime);
     
     // Send business email
+    console.log("Sending business email notification...");
     const businessEmailResult = await sendBusinessEmail(appointment, formattedDate, formattedTime);
     
     // Send customer email
+    console.log("Sending customer email notification...");
     const customerEmailResult = await sendCustomerEmail(appointment, formattedDate, formattedTime);
     
     // Return response with details of both email operations
     return new Response(JSON.stringify({ 
-      success: true, 
+      success: businessEmailResult.success || customerEmailResult.success, 
       businessEmail: {
         success: businessEmailResult.success,
         data: businessEmailResult.data,

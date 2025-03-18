@@ -36,39 +36,30 @@ serve(async (req) => {
 
     console.log("Appointment created successfully:", data);
 
-    // Try to create calendar event if google-auth function is set up
+    // Format appointment data for notifications
+    const serviceName = appointmentData.service;
+    const formattedAppointment = {
+      ...data,
+      service: SERVICES.find(s => s.id === serviceName)?.name || serviceName
+    };
+    
+    // Send email notifications
     try {
-      const serviceName = appointmentData.service;
+      console.log("Attempting to send email notifications");
+      const notificationResponse = await supabase.functions.invoke('notify-appointment', {
+        body: { appointment: formattedAppointment }
+      });
       
-      // Format the appointment data for the calendar event
-      const eventData = {
-        appointment: {
-          ...appointmentData,
-          service: SERVICES.find(s => s.id === serviceName)?.name || serviceName
-        }
-      };
-
-      // Only attempt to create calendar event if tokens exist
-      const { data: tokens } = await supabase
-        .from('google_tokens')
-        .select('*')
-        .order('created_at', { ascending: false })
-        .limit(1);
-
-      if (tokens && tokens.length > 0) {
-        console.log("Found Google tokens, attempting to create calendar event");
-        // Try to create calendar event but don't throw if it fails
-        await supabase.functions.invoke('create-calendar-event', {
-          body: eventData
-        }).catch(e => {
-          console.error("Could not create calendar event, but appointment was saved:", e);
-        });
+      console.log("Email notification response:", notificationResponse);
+      
+      if (notificationResponse.error) {
+        console.error("Email notification error:", notificationResponse.error);
       } else {
-        console.log("No Google tokens found, skipping calendar event creation");
+        console.log("Email notifications sent successfully");
       }
-    } catch (calendarError) {
-      console.error("Calendar event creation failed but appointment was saved:", calendarError);
-      // Don't throw here, we still want to return success for the appointment
+    } catch (notificationError) {
+      console.error("Failed to send email notifications:", notificationError);
+      // Don't throw here, we still want to return the appointment data
     }
 
     return new Response(

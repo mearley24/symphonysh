@@ -9,13 +9,13 @@ export async function sendEmailNotification(appointment: any, serviceName: strin
   // Create payload object with properly formatted data
   const payload: AppointmentNotificationPayload = {
     appointment: {
-      id: appointment?.id,
+      id: appointment?.id || `temp-${Date.now()}`,
       date: appointment?.date,
       time: appointment?.time,
       name: appointment?.name,
       email: appointment?.email,
       phone: appointment?.phone,
-      message: appointment?.message,
+      message: appointment?.message || '',
       service: serviceName
     }
   };
@@ -23,79 +23,22 @@ export async function sendEmailNotification(appointment: any, serviceName: strin
   console.log("Appointment payload for notification:", JSON.stringify(payload, null, 2));
   
   try {
-    // First try the direct fetch approach for better error visibility
-    const functionUrl = `${window.location.origin}/api/notify-appointment`;
-    console.log("Using direct fetch to URL:", functionUrl);
+    console.log("Using Supabase function invoke method for email notifications");
     
-    // Get the session token for authorization
-    const { data: { session } } = await supabase.auth.getSession();
-    const authToken = session?.access_token ? `Bearer ${session.access_token}` : '';
-    
-    // Stringify the payload once and reuse the same string to ensure consistent formatting
-    const stringifiedPayload = JSON.stringify(payload);
-    console.log("Stringified payload:", stringifiedPayload);
-    
-    const fetchResponse = await fetch(functionUrl, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': authToken
-      },
-      body: stringifiedPayload
+    // Direct invoke of notify-appointment function
+    const { data, error } = await supabase.functions.invoke('notify-appointment', {
+      body: payload
     });
     
-    console.log("Direct fetch response status:", fetchResponse.status);
-    const responseText = await fetchResponse.text();
-    console.log("Direct fetch response:", responseText);
-    
-    try {
-      const jsonResponse = JSON.parse(responseText);
-      console.log("Parsed JSON response:", jsonResponse);
-      
-      if (jsonResponse.error) {
-        console.error("Error from function:", jsonResponse.error);
-        console.error("Error details:", jsonResponse.receivedData || "No additional details");
-      }
-      
-      return jsonResponse;
-    } catch (jsonError) {
-      console.log("Response is not valid JSON:", responseText);
-      throw new Error("Invalid JSON response from notification function");
+    if (error) {
+      console.error("Error invoking notify-appointment function:", error);
+      throw new Error(`Failed to send notification: ${error.message}`);
     }
-  } catch (fetchError) {
-    console.error("Direct fetch error:", fetchError);
-    console.log("Falling back to supabase.functions.invoke method...");
     
-    // Fallback to the supabase.functions.invoke method
-    console.log("Attempting to invoke notify-appointment function via SDK...");
-    
-    // Clean payload to ensure it's serializable
-    const cleanPayload = JSON.parse(JSON.stringify(payload));
-    console.log("Clean payload for SDK invocation:", cleanPayload);
-    
-    // Call the function with detailed error handling
-    try {
-      const notifyResponse = await supabase.functions.invoke('notify-appointment', {
-        method: 'POST',
-        body: cleanPayload
-      });
-      
-      console.log("Function invocation attempt completed");
-      console.log("SDK response:", JSON.stringify(notifyResponse, null, 2));
-      
-      if (notifyResponse.error) {
-        console.error("Notification error:", notifyResponse.error);
-        console.error("Error details:", JSON.stringify(notifyResponse.error, null, 2));
-        throw new Error("Failed to send notification. Check browser console for details.");
-      }
-      
-      return notifyResponse.data;
-    } catch (invocationError) {
-      console.error("Function invocation error:", invocationError);
-      console.error("Error type:", typeof invocationError);
-      console.error("Error properties:", Object.keys(invocationError));
-      console.error("Error stringified:", JSON.stringify(invocationError, null, 2));
-      throw new Error("Failed to invoke notification function. Check browser console for details.");
-    }
+    console.log("Email notification results:", data);
+    return data;
+  } catch (error) {
+    console.error("Email notification error:", error);
+    throw error;
   }
 }
