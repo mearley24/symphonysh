@@ -7,17 +7,20 @@ export function handleGoogleAuthCallback() {
   const code = url.searchParams.get('code');
   const state = url.searchParams.get('state');
   const error = url.searchParams.get('error');
+  const error_description = url.searchParams.get('error_description');
   const success = url.searchParams.get('success');
   
   console.log("Checking for Google auth callback parameters:");
   console.log("- code exists:", !!code);
   console.log("- state:", state);
   console.log("- error:", error || "none");
+  console.log("- error_description:", error_description || "none");
   console.log("- success:", success || "none");
   
   if (error) {
     console.error("Google auth error:", error);
-    return { error };
+    console.error("Error description:", error_description || "No description provided");
+    return { error, error_description };
   }
   
   if (success === 'true' && state === 'google_auth') {

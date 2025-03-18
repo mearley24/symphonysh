@@ -110,6 +110,8 @@ serve(async (req) => {
 
   try {
     console.log("Google auth callback received");
+    console.log("Request method:", req.method);
+    console.log("Request URL:", req.url);
     
     // Check if this is a POST request from our client-side code
     if (req.method === "POST") {
@@ -121,22 +123,56 @@ serve(async (req) => {
       
       console.log("Exchanging code for tokens");
       
-      // Exchange code for tokens
-      const oauth2Client = getOAuth2Client();
-      const { tokens } = await oauth2Client.getToken(code);
-      
-      console.log("Tokens received from Google");
-      
-      // Save tokens to database
-      await saveTokens(tokens);
-      
-      return new Response(
-        JSON.stringify({ success: true, message: "Google Calendar connected successfully" }),
-        {
-          headers: { ...corsHeaders, "Content-Type": "application/json" },
-          status: 200,
+      try {
+        // Exchange code for tokens
+        const oauth2Client = getOAuth2Client();
+        console.log("Getting token with code, redirect URI:", REDIRECT_URI);
+        
+        const { tokens } = await oauth2Client.getToken(code);
+        
+        console.log("Tokens received from Google:", JSON.stringify({
+          access_token_length: tokens.access_token ? tokens.access_token.length : 0,
+          refresh_token_exists: !!tokens.refresh_token,
+          expiry_date: tokens.expiry_date
+        }));
+        
+        // Save tokens to database
+        await saveTokens(tokens);
+        
+        return new Response(
+          JSON.stringify({ success: true, message: "Google Calendar connected successfully" }),
+          {
+            headers: { ...corsHeaders, "Content-Type": "application/json" },
+            status: 200,
+          }
+        );
+      } catch (tokenError) {
+        // Log detailed error information for debugging
+        console.error("Token exchange error details:", tokenError);
+        let errorDetails = "Unknown error";
+        let errorCode = "unknown_error";
+        
+        if (tokenError instanceof Error) {
+          errorDetails = tokenError.message;
+          // Try to extract Google's error code if possible
+          const errorJson = tokenError.toString().match(/{"error":"([^"]+)"/);
+          if (errorJson) {
+            errorCode = errorJson[1];
+          }
         }
-      );
+        
+        return new Response(
+          JSON.stringify({ 
+            error: "Failed to exchange code for tokens", 
+            details: errorDetails,
+            code: errorCode
+          }),
+          {
+            headers: { ...corsHeaders, "Content-Type": "application/json" },
+            status: 400,
+          }
+        );
+      }
     }
     
     // Direct browser access - this is called when Google redirects back to us
@@ -145,16 +181,26 @@ serve(async (req) => {
     const code = url.searchParams.get('code');
     const state = url.searchParams.get('state');
     const error = url.searchParams.get('error');
+    const error_description = url.searchParams.get('error_description');
     
-    console.log("Callback params:", { code: !!code, state, error });
+    console.log("Callback params:", { 
+      code: !!code, 
+      state, 
+      error,
+      error_description
+    });
     
     // Handle errors from Google Auth
     if (error) {
       console.error('Google auth error:', error);
+      console.error('Error description:', error_description || 'No description provided');
       
       // Redirect back to app with error parameter
       const redirectUrl = new URL('/scheduling', FRONTEND_URL);
       redirectUrl.searchParams.set('error', error);
+      if (error_description) {
+        redirectUrl.searchParams.set('error_description', error_description);
+      }
       redirectUrl.searchParams.set('state', 'google_auth');
       
       return new Response(null, {
@@ -175,7 +221,15 @@ serve(async (req) => {
     try {
       // Exchange code for tokens immediately
       const oauth2Client = getOAuth2Client();
+      console.log("Getting token with code, redirect URI:", REDIRECT_URI);
+      
       const { tokens } = await oauth2Client.getToken(code);
+      
+      console.log("Tokens received from Google:", JSON.stringify({
+        access_token_length: tokens.access_token ? tokens.access_token.length : 0,
+        refresh_token_exists: !!tokens.refresh_token,
+        expiry_date: tokens.expiry_date
+      }));
       
       // Save tokens to database
       await saveTokens(tokens);
@@ -197,10 +251,26 @@ serve(async (req) => {
     } catch (tokenError) {
       console.error("Error exchanging code for tokens:", tokenError);
       
-      // For token exchange errors, redirect back to app with the code
-      // so our app can try again with different parameters
+      // Log detailed error information
+      let errorDetails = "Unknown error";
+      let errorCode = "unknown_error";
+      
+      if (tokenError instanceof Error) {
+        errorDetails = tokenError.message;
+        console.error("Error stack:", tokenError.stack);
+        
+        // Try to extract Google's error code if possible
+        const errorJson = tokenError.toString().match(/{"error":"([^"]+)"/);
+        if (errorJson) {
+          errorCode = errorJson[1];
+        }
+      }
+      
+      // For token exchange errors, redirect back to app with detailed error info
       const redirectUrl = new URL('/scheduling', FRONTEND_URL);
-      redirectUrl.searchParams.set('code', code);
+      redirectUrl.searchParams.set('error', 'token_exchange_failed');
+      redirectUrl.searchParams.set('error_details', errorDetails);
+      redirectUrl.searchParams.set('error_code', errorCode);
       redirectUrl.searchParams.set('state', 'google_auth');
       
       return new Response(null, {
@@ -213,10 +283,14 @@ serve(async (req) => {
     }
   } catch (error) {
     console.error('Function error:', error.message);
+    console.error('Error stack:', error instanceof Error ? error.stack : 'No stack available');
     
     // Return error response
     return new Response(
-      JSON.stringify({ error: error.message }),
+      JSON.stringify({ 
+        error: error.message,
+        stack: error instanceof Error ? error.stack : 'No stack available'
+      }),
       {
         headers: { ...corsHeaders, "Content-Type": "application/json" },
         status: 500,

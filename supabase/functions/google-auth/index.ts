@@ -23,6 +23,7 @@ console.log("Redirect URI:", REDIRECT_URI);
 console.log("Client ID available:", GOOGLE_CLIENT_ID ? "Yes" : "No");
 console.log("Client Secret available:", GOOGLE_CLIENT_SECRET ? "Yes" : "No");
 console.log("Frontend URL:", FRONTEND_URL);
+console.log("Google Client ID:", GOOGLE_CLIENT_ID ? GOOGLE_CLIENT_ID.substring(0, 10) + "..." : "None");
 
 // CORS headers
 const corsHeaders = {
@@ -67,6 +68,7 @@ function getAuthUrl() {
     });
     
     console.log("Auth URL generated successfully");
+    console.log("Auth URL:", authUrl);
     return authUrl;
   } catch (error) {
     console.error("Error generating auth URL:", error);
