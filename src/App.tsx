@@ -5,6 +5,30 @@ import NotFound from "./pages/NotFound";
 import { Toaster } from "@/components/ui/toaster";
 import { ConfirmationPage } from "./pages/scheduling/components/ConfirmationPage";
 import Index from "./pages/Index";
+import About from "./pages/About";
+import Contact from "./pages/Contact";
+import Services from "./pages/Services";
+import Projects from "./pages/Projects";
+import Privacy from "./pages/Privacy";
+import Terms from "./pages/Terms";
+import Ava from "./pages/Ava";
+import Matterport from "./pages/Matterport";
+
+// Photo gallery pages
+import HomeTheater from "./pages/photos/HomeTheater";
+import MountedTVs from "./pages/photos/MountedTVs";
+import Wiring from "./pages/photos/Wiring";
+import WiringManager from "./pages/photos/WiringManager";
+
+// Service pages
+import AudioEntertainment from "./pages/services/AudioEntertainment";
+import ClimateControl from "./pages/services/ClimateControl";
+import HomeIntegration from "./pages/services/HomeIntegration";
+import Maintenance from "./pages/services/Maintenance";
+import Networking from "./pages/services/Networking";
+import SecuritySystems from "./pages/services/SecuritySystems";
+import Shades from "./pages/services/Shades";
+import SmartLighting from "./pages/services/SmartLighting";
 
 function App() {
   console.log("App rendering, routes being set up");
@@ -15,6 +39,31 @@ function App() {
       <Routes>
         <Route path="/" element={<Index />} />
         <Route path="/index" element={<Index />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/services" element={<Services />} />
+        <Route path="/projects" element={<Projects />} />
+        <Route path="/privacy" element={<Privacy />} />
+        <Route path="/terms" element={<Terms />} />
+        <Route path="/ava" element={<Ava />} />
+        <Route path="/matterport" element={<Matterport />} />
+        
+        {/* Photo gallery routes */}
+        <Route path="/photos/home-theater" element={<HomeTheater />} />
+        <Route path="/photos/mounted-tvs" element={<MountedTVs />} />
+        <Route path="/photos/wiring" element={<Wiring />} />
+        <Route path="/photos/wiring-manager" element={<WiringManager />} />
+        
+        {/* Service routes */}
+        <Route path="/services/audio-entertainment" element={<AudioEntertainment />} />
+        <Route path="/services/climate-control" element={<ClimateControl />} />
+        <Route path="/services/home-integration" element={<HomeIntegration />} />
+        <Route path="/services/maintenance" element={<Maintenance />} />
+        <Route path="/services/networking" element={<Networking />} />
+        <Route path="/services/security-systems" element={<SecuritySystems />} />
+        <Route path="/services/shades" element={<Shades />} />
+        <Route path="/services/smart-lighting" element={<SmartLighting />} />
+        
         <Route path="/scheduling" element={
           <>
             {console.log("Scheduling route matched")}
