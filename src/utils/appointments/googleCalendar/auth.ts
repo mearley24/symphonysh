@@ -11,7 +11,27 @@ export async function connectToGoogleCalendar() {
     const timeoutId = setTimeout(() => controller.abort(), 7000); // 7 second timeout
     
     try {
-      const functionUrl = `${import.meta.env.VITE_SUPABASE_URL || ''}/functions/v1/google-auth`;
+      // Get the base URL from the environment or fall back to the Supabase URL
+      let baseUrl = import.meta.env.VITE_SUPABASE_FUNCTIONS_URL || import.meta.env.VITE_SUPABASE_URL;
+      
+      // Ensure the URL doesn't have a trailing slash
+      baseUrl = baseUrl ? baseUrl.replace(/\/$/, '') : '';
+      
+      if (!baseUrl) {
+        console.error("No base URL available for functions");
+        throw new Error("Could not determine the Edge Functions URL");
+      }
+      
+      const functionUrl = `${baseUrl}/functions/v1/google-auth`;
+      console.log("Calling Google auth URL:", functionUrl);
+      
+      // Get the auth token
+      const { data: sessionData } = await supabase.auth.getSession();
+      const accessToken = sessionData?.session?.access_token;
+      
+      if (!accessToken) {
+        console.warn("No access token available for authorization");
+      }
       
       // Use fetch directly with the signal for timeout control
       const response = await fetch(
@@ -20,7 +40,7 @@ export async function connectToGoogleCalendar() {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
-            'Authorization': `Bearer ${await supabase.auth.getSession().then(({ data }) => data.session?.access_token)}`
+            'Authorization': accessToken ? `Bearer ${accessToken}` : ''
           },
           signal: controller.signal,
           body: JSON.stringify({ redirect: true })
@@ -94,7 +114,27 @@ async function completeGoogleAuth(code: string) {
     const timeoutId = setTimeout(() => controller.abort(), 7000); // 7 second timeout
     
     try {
-      const functionUrl = `${import.meta.env.VITE_SUPABASE_URL || ''}/functions/v1/google-auth-callback`;
+      // Get the base URL from the environment or fall back to the Supabase URL
+      let baseUrl = import.meta.env.VITE_SUPABASE_FUNCTIONS_URL || import.meta.env.VITE_SUPABASE_URL;
+      
+      // Ensure the URL doesn't have a trailing slash
+      baseUrl = baseUrl ? baseUrl.replace(/\/$/, '') : '';
+      
+      if (!baseUrl) {
+        console.error("No base URL available for functions");
+        throw new Error("Could not determine the Edge Functions URL");
+      }
+      
+      const functionUrl = `${baseUrl}/functions/v1/google-auth-callback`;
+      console.log("Calling Google auth callback URL:", functionUrl);
+      
+      // Get the auth token
+      const { data: sessionData } = await supabase.auth.getSession();
+      const accessToken = sessionData?.session?.access_token;
+      
+      if (!accessToken) {
+        console.warn("No access token available for authorization");
+      }
       
       // Use fetch directly with the signal for timeout control
       const response = await fetch(
@@ -103,7 +143,7 @@ async function completeGoogleAuth(code: string) {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
-            'Authorization': `Bearer ${await supabase.auth.getSession().then(({ data }) => data.session?.access_token)}`
+            'Authorization': accessToken ? `Bearer ${accessToken}` : ''
           },
           body: JSON.stringify({ code }),
           signal: controller.signal
@@ -144,7 +184,23 @@ export async function isGoogleCalendarConnected(): Promise<boolean> {
     const timeoutId = setTimeout(() => controller.abort(), 5000); // 5 second timeout
     
     try {
-      const functionUrl = `${import.meta.env.VITE_SUPABASE_URL || ''}/functions/v1/check-google-connection`;
+      // Get the base URL from the environment or fall back to the Supabase URL
+      let baseUrl = import.meta.env.VITE_SUPABASE_FUNCTIONS_URL || import.meta.env.VITE_SUPABASE_URL;
+      
+      // Ensure the URL doesn't have a trailing slash
+      baseUrl = baseUrl ? baseUrl.replace(/\/$/, '') : '';
+      
+      if (!baseUrl) {
+        console.error("No base URL available for functions");
+        return false;
+      }
+      
+      const functionUrl = `${baseUrl}/functions/v1/check-google-connection`;
+      console.log("Checking connection URL:", functionUrl);
+      
+      // Get the auth token
+      const { data: sessionData } = await supabase.auth.getSession();
+      const accessToken = sessionData?.session?.access_token;
       
       // Use direct fetch with signal for timeout
       const response = await fetch(
@@ -153,7 +209,7 @@ export async function isGoogleCalendarConnected(): Promise<boolean> {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
-            'Authorization': `Bearer ${await supabase.auth.getSession().then(({ data }) => data.session?.access_token)}`
+            'Authorization': accessToken ? `Bearer ${accessToken}` : ''
           },
           signal: controller.signal
         }
@@ -175,7 +231,8 @@ export async function isGoogleCalendarConnected(): Promise<boolean> {
         console.error("Request timed out when checking calendar connection");
         return false;
       }
-      throw e;
+      console.error("Error checking calendar connection:", e);
+      return false;
     }
   } catch (error) {
     console.error("Failed to check Google Calendar connection:", error);
