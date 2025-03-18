@@ -3,7 +3,18 @@ import { supabase } from "../../../../integrations/supabase/client";
 
 // Utility function to get base URL for Supabase edge functions
 export function getEdgeFunctionsBaseUrl(): string {
-  // First try to get the dedicated functions URL from env
+  // First check if we're using the Supabase client from integrations
+  const supabaseClientUrl = "https://symphonysh.supabase.co";
+  
+  if (supabaseClientUrl) {
+    // Remove trailing slash if present
+    const cleanUrl = supabaseClientUrl.replace(/\/$/, '');
+    const baseUrl = `${cleanUrl}/functions/v1`;
+    console.log("Using Supabase URL from client:", baseUrl);
+    return baseUrl;
+  }
+  
+  // Fallback to env variables if client URL isn't available (this is unlikely to happen now)
   let baseUrl = import.meta.env.VITE_SUPABASE_FUNCTIONS_URL;
   
   if (!baseUrl) {
