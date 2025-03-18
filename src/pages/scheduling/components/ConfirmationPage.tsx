@@ -97,14 +97,14 @@ export function ConfirmationPage() {
       <div className="max-w-3xl mx-auto p-6 rounded-lg">
         <BackNavigation />
         
-        <div className="text-center space-y-6 mt-8 animate-fade-up">
+        <div className="text-center space-y-6 mt-8 animate-fade-up text-white">
           <div className="space-y-4">
-            <h1 className="text-3xl font-bold">Appointment Confirmed</h1>
+            <h1 className="text-3xl font-bold text-white">Appointment Confirmed</h1>
             
             {appointmentDetails ? (
               <div className="space-y-8">
-                <p className="text-xl">
-                  Thank you, <span className="font-semibold">{appointmentDetails.name}</span>, for scheduling a consultation with Symphony Smart Homes!
+                <p className="text-xl text-white">
+                  Thank you, <span className="font-semibold text-white">{appointmentDetails.name}</span>, for scheduling a consultation with Symphony Smart Homes!
                 </p>
                 
                 <Card className="border border-white/10 bg-white/5 backdrop-blur-sm shadow-lg">
@@ -116,34 +116,34 @@ export function ConfirmationPage() {
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                       <div className="p-3 bg-white/10 rounded-md">
                         <p className="font-semibold text-accent">Date</p>
-                        <p>{formattedDate}</p>
+                        <p className="text-white">{formattedDate}</p>
                       </div>
                       
                       <div className="p-3 bg-white/10 rounded-md">
                         <p className="font-semibold text-accent">Time</p>
-                        <p>{appointmentDetails.selectedTime}</p>
+                        <p className="text-white">{appointmentDetails.selectedTime}</p>
                       </div>
                     </div>
                     
                     <div className="p-3 bg-white/10 rounded-md">
                       <p className="font-semibold text-accent">Service</p>
-                      <p>{serviceName}</p>
+                      <p className="text-white">{serviceName}</p>
                     </div>
                   </CardContent>
                 </Card>
                 
                 <div className="p-6 bg-white/5 backdrop-blur-sm border border-white/10 rounded-lg">
-                  <p className="text-lg">
-                    We've sent a confirmation to <span className="font-semibold">{appointmentDetails.email}</span>.
+                  <p className="text-lg text-white">
+                    We've sent a confirmation to <span className="font-semibold text-white">{appointmentDetails.email}</span>.
                   </p>
-                  <p className="mt-2">
+                  <p className="mt-2 text-white">
                     If you need to reschedule or have any questions, please don't hesitate to contact us.
                   </p>
                 </div>
               </div>
             ) : (
               <div className="p-6 bg-red-500/20 border border-red-500/40 rounded-lg">
-                <p>We couldn't retrieve your appointment details. Please contact us if you have any questions.</p>
+                <p className="text-white">We couldn't retrieve your appointment details. Please contact us if you have any questions.</p>
               </div>
             )}
           </div>
