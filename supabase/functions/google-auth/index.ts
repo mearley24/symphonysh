@@ -17,14 +17,13 @@ serve(async (req) => {
   }
 
   try {
-    console.log("Google auth function triggered:", req.method);
-    console.log("Request URL:", req.url);
+    console.log("Simplified auth function triggered:", req.method);
     
-    // For GET requests, return a simple test response
+    // Return a simplified response that indicates calendar functionality 
+    // now uses email notifications instead
     return new Response(JSON.stringify({ 
-      authUrl: "https://accounts.google.com/o/oauth2/v2/auth", // This is just a placeholder
-      status: "function_exists",
-      message: "Google auth function is accessible"
+      status: "email_only",
+      message: "Calendar functionality now uses email notifications. No Google auth required."
     }), {
       headers: { ...corsHeaders, "Content-Type": "application/json" },
       status: 200,

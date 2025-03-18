@@ -1,55 +1,27 @@
+import { useState } from "react";
 
-import { useState, useEffect, useCallback } from "react";
-import { useCalendarConnectionStatus } from "./hooks/useCalendarConnectionStatus";
-import { useGoogleAuthCallback } from "./hooks/useGoogleAuthCallback";
-
+// Simplified hook that doesn't actually do Google auth anymore
 export function useGoogleCalendarAuth(
   date: Date | undefined, 
   fetchTimeSlots: (date: Date) => Promise<void>,
   onApiError?: () => void
 ) {
-  console.log("useGoogleCalendarAuth hook initialized");
-  
+  // We don't need most of these states anymore, but we'll keep them
+  // to avoid breaking the interface expected by components using this hook
   const [connectingCalendar, setConnectingCalendar] = useState(false);
   const [authError, setAuthError] = useState<string | null>(null);
-  const [hasAttemptedConnection, setHasAttemptedConnection] = useState(false);
+  const [isCalendarConnected, setIsCalendarConnected] = useState<boolean>(true);
+  const [checkingConnection, setCheckingConnection] = useState<boolean>(false);
   
-  // Custom hook for connection status
-  const { 
-    isCalendarConnected, 
-    setIsCalendarConnected, 
-    checkingConnection,
-    retryConnectionCheck
-  } = useCalendarConnectionStatus();
-
-  // Handle API errors
-  const handleApiError = useCallback((error: Error) => {
-    console.error("API Error in Google Calendar Auth:", error);
-    if (onApiError) onApiError();
-    
-    // Only set auth error once to prevent rerenders
-    if (!hasAttemptedConnection) {
-      setAuthError("Unable to connect to calendar service. You can still book without calendar integration.");
-      setHasAttemptedConnection(true);
-    }
-  }, [onApiError, hasAttemptedConnection]);
-
-  // Custom hook for auth callback with error handling
-  useGoogleAuthCallback(
-    date, 
-    fetchTimeSlots,
-    setConnectingCalendar,
-    setIsCalendarConnected,
-    (error) => {
-      setAuthError(error);
-      handleApiError(new Error(error));
-    }
-  );
+  // No-op function for retryConnectionCheck
+  const retryConnectionCheck = async (): Promise<void> => {
+    return Promise.resolve();
+  };
 
   return {
     connectingCalendar, 
     setConnectingCalendar, 
-    isCalendarConnected, 
+    isCalendarConnected, // Always true now
     authError,
     checkingConnection,
     retryConnectionCheck

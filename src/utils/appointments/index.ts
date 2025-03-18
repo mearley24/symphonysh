@@ -3,7 +3,6 @@ import { format } from "date-fns";
 import { AppointmentData, getServiceName } from "./types";
 import { saveAppointmentToDatabase } from "./dbUtils";
 import { sendEmailNotification } from "./notificationUtils";
-import { fetchAvailableTimeSlots, createCalendarEvent } from "./googleCalendar";
 
 export type { AppointmentData } from "./types";
 
@@ -23,11 +22,8 @@ export async function submitAppointment(appointmentData: AppointmentData) {
   const serviceName = getServiceName(service);
   
   try {
-    // Send email notification
+    // Send email notification with calendar attachment
     await sendEmailNotification(appointmentData_, serviceName);
-    
-    // Create Google Calendar event
-    await createCalendarEvent(appointmentData_, serviceName);
   } catch (notifyError: any) {
     console.error("Failed to handle notifications:", notifyError);
     console.error("Error details:", notifyError.stack || "No stack trace available");
@@ -38,7 +34,18 @@ export async function submitAppointment(appointmentData: AppointmentData) {
   return appointmentData_;
 }
 
-// Export function to get available time slots
+// This function can be simplified since we no longer need to fetch from Google Calendar
 export async function getAvailableTimeSlots(date: Date) {
-  return await fetchAvailableTimeSlots(date);
+  // Generate standard time slots
+  const standardTimeSlots = [];
+  for (let hour = 9; hour <= 17; hour++) {
+    if (hour !== 12) { // Skip lunch hour
+      standardTimeSlots.push(`${hour}:00`);
+      if (hour !== 17) { // Don't add the :30 slot for 5pm
+        standardTimeSlots.push(`${hour}:30`);
+      }
+    }
+  }
+  
+  return standardTimeSlots;
 }

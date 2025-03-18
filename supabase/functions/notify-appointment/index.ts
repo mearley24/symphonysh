@@ -1,4 +1,3 @@
-
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2.48.1";
 import { Resend } from "npm:resend@2.0.0";
@@ -44,6 +43,52 @@ function formatDateTime(date: string, time: string) {
   const formattedTime = `${formattedHour}:${minute} ${period}`;
   
   return { formattedDate, formattedTime };
+}
+
+/**
+ * Generate an iCalendar format string for the appointment
+ */
+function generateICalEvent(appointment: any, formattedDate: string, formattedTime: string) {
+  // Parse the date and time to create start and end times
+  const startDate = new Date(appointment.date);
+  const [hours, minutes] = appointment.time.split(':').map(Number);
+  startDate.setHours(hours, minutes, 0, 0);
+  
+  // End time is 1 hour after start time
+  const endDate = new Date(startDate);
+  endDate.setHours(endDate.getHours() + 1);
+  
+  // Format dates for iCalendar
+  const formatICalDate = (date: Date) => {
+    return date.toISOString().replace(/[-:]/g, '').split('.')[0] + 'Z';
+  };
+  
+  const now = new Date();
+  
+  return `BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Symphony Smart Homes//Appointment//EN
+CALSCALE:GREGORIAN
+METHOD:REQUEST
+BEGIN:VEVENT
+DTSTART:${formatICalDate(startDate)}
+DTEND:${formatICalDate(endDate)}
+DTSTAMP:${formatICalDate(now)}
+ORGANIZER;CN=Symphony Smart Homes:mailto:info@symphonysh.com
+UID:${appointment.id || Math.random().toString(36).substring(2, 15)}@symphonysh.com
+ATTENDEE;CUTYPE=INDIVIDUAL;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;RSVP=TRUE;CN=${appointment.name}:mailto:${appointment.email}
+SUMMARY:Symphony Smart Homes: ${appointment.service} Consultation
+DESCRIPTION:Consultation for ${appointment.service}.\\n\\nClient: ${appointment.name}\\nPhone: ${appointment.phone}\\nEmail: ${appointment.email}\\n\\nMessage: ${appointment.message || 'No message provided'}
+LOCATION:Symphony Smart Homes
+STATUS:CONFIRMED
+SEQUENCE:0
+BEGIN:VALARM
+TRIGGER:-PT1H
+ACTION:DISPLAY
+DESCRIPTION:Reminder
+END:VALARM
+END:VEVENT
+END:VCALENDAR`;
 }
 
 /**
@@ -176,6 +221,8 @@ function generateCustomerEmailHtml(appointment: any, formattedDate: string, form
       
       <p style="font-size: 16px; line-height: 1.5;">If you need to reschedule or have any questions, please contact us at info@symphonysh.com or call our office.</p>
       
+      <p style="font-size: 16px; line-height: 1.5;">We've attached a calendar event to this email that you can add to your calendar.</p>
+      
       <p style="font-size: 16px; line-height: 1.5;">Best regards,<br>Symphony Smart Homes Team</p>
       
       <div style="text-align: center; margin-top: 30px; color: #666; font-size: 12px;">
@@ -191,11 +238,19 @@ function generateCustomerEmailHtml(appointment: any, formattedDate: string, form
 async function sendBusinessEmail(appointment: any, formattedDate: string, formattedTime: string) {
   console.log("Sending business email...");
   try {
+    const iCalEvent = generateICalEvent(appointment, formattedDate, formattedTime);
+    
     const businessEmailResult = await resend.emails.send({
       from: "Symphony Smart Homes <notifications@symphonysh.com>",
       to: ["info@symphonysh.com"],
       subject: `New Appointment: ${appointment.name}`,
       html: generateBusinessEmailHtml(appointment, formattedDate, formattedTime),
+      attachments: [
+        {
+          filename: 'appointment.ics',
+          content: iCalEvent,
+        },
+      ],
     });
     
     console.log("Business email notification sent successfully:", businessEmailResult);
@@ -212,11 +267,19 @@ async function sendBusinessEmail(appointment: any, formattedDate: string, format
 async function sendCustomerEmail(appointment: any, formattedDate: string, formattedTime: string) {
   console.log("Sending customer email...");
   try {
+    const iCalEvent = generateICalEvent(appointment, formattedDate, formattedTime);
+    
     const customerEmailResult = await resend.emails.send({
       from: "Symphony Smart Homes <notifications@symphonysh.com>",
       to: [appointment.email],
       subject: "Your Appointment Confirmation - Symphony Smart Homes",
       html: generateCustomerEmailHtml(appointment, formattedDate, formattedTime),
+      attachments: [
+        {
+          filename: 'appointment.ics',
+          content: iCalEvent,
+        },
+      ],
     });
     
     console.log("Customer email confirmation sent successfully:", customerEmailResult);
@@ -225,6 +288,24 @@ async function sendCustomerEmail(appointment: any, formattedDate: string, format
     console.error("Error sending customer email:", error);
     return { success: false, data: null, error };
   }
+}
+
+// Handle OPTIONS, GET, and Request functions
+function handleOptionsRequest() {
+  console.log("Handling OPTIONS request");
+  return new Response(null, {
+    headers: corsHeaders,
+  });
+}
+
+function handleGetRequest() {
+  console.log("Handling GET request (direct browser visit)");
+  return new Response(JSON.stringify({ 
+    message: "This is the notify-appointment API endpoint. POST requests with appointment data are required." 
+  }), {
+    headers: { ...corsHeaders, "Content-Type": "application/json" },
+    status: 200,
+  });
 }
 
 /**
@@ -236,13 +317,23 @@ async function handleRequest(req: Request) {
   
   try {
     // Parse request body
-    const { success, data: requestData, error: parseError } = await parseRequestBody(req);
+    const bodyText = await req.text();
+    console.log("Raw request body:", bodyText);
     
-    if (!success) {
+    if (!bodyText || bodyText.trim() === "") {
+      throw new Error("Empty request body");
+    }
+    
+    let requestData;
+    try {
+      requestData = JSON.parse(bodyText);
+      console.log("Successfully parsed request body:", JSON.stringify(requestData, null, 2));
+    } catch (parseError) {
+      console.error("Error parsing request body:", parseError);
       return new Response(
         JSON.stringify({ 
-          error: parseError.message, 
-          receivedData: parseError.details
+          error: "Invalid JSON in request body",
+          details: parseError.message
         }),
         {
           headers: { ...corsHeaders, "Content-Type": "application/json" },
@@ -254,12 +345,27 @@ async function handleRequest(req: Request) {
     const { appointment } = requestData;
     
     // Validate appointment data
-    const { valid, error: validationError, missingFields } = validateAppointmentData(appointment);
-    
-    if (!valid) {
+    if (!appointment) {
       return new Response(
         JSON.stringify({ 
-          error: validationError, 
+          error: "No appointment data provided",
+          receivedData: requestData
+        }),
+        {
+          headers: { ...corsHeaders, "Content-Type": "application/json" },
+          status: 400,
+        }
+      );
+    }
+    
+    // Validate required fields
+    const requiredFields = ['date', 'time', 'name', 'email', 'phone', 'service'];
+    const missingFields = requiredFields.filter(field => !appointment[field]);
+    
+    if (missingFields.length > 0) {
+      return new Response(
+        JSON.stringify({ 
+          error: "Missing required fields", 
           missingFields,
           receivedData: appointment
         }),
