@@ -5,6 +5,7 @@ import { format } from "date-fns";
 import { PageLayout } from "./PageLayout";
 import { BackNavigation } from "@/components/scheduling/BackNavigation";
 import { getServiceName } from "@/utils/appointments/types";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 interface AppointmentDetails {
   date?: Date | string;
@@ -96,39 +97,56 @@ export function ConfirmationPage() {
       <div className="max-w-3xl mx-auto p-6 rounded-lg">
         <BackNavigation />
         
-        <div className="text-center space-y-4 mt-6">
-          <h1 className="text-3xl font-bold">Appointment Confirmed</h1>
-          
-          {appointmentDetails ? (
-            <div className="space-y-6 mt-8">
-              <p className="text-xl">
-                Thank you, <span className="font-semibold">{appointmentDetails.name}</span>, for scheduling a consultation with Symphony Smart Homes!
-              </p>
-              
-              <div className="bg-white/5 backdrop-blur-sm p-6 rounded-lg mt-6">
-                <h2 className="text-2xl font-semibold mb-4">Appointment Details</h2>
+        <div className="text-center space-y-6 mt-8 animate-fade-up">
+          <div className="space-y-4">
+            <h1 className="text-3xl font-bold">Appointment Confirmed</h1>
+            
+            {appointmentDetails ? (
+              <div className="space-y-8">
+                <p className="text-xl">
+                  Thank you, <span className="font-semibold">{appointmentDetails.name}</span>, for scheduling a consultation with Symphony Smart Homes!
+                </p>
                 
-                <div className="space-y-2 text-lg">
-                  <p><span className="font-semibold">Date:</span> {formattedDate}</p>
-                  <p><span className="font-semibold">Time:</span> {appointmentDetails.selectedTime}</p>
-                  <p><span className="font-semibold">Service:</span> {serviceName}</p>
+                <Card className="border border-white/10 bg-white/5 backdrop-blur-sm shadow-lg">
+                  <CardHeader className="pb-2">
+                    <CardTitle className="text-2xl text-white">Appointment Details</CardTitle>
+                  </CardHeader>
+                  
+                  <CardContent className="space-y-3 text-white">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                      <div className="p-3 bg-white/10 rounded-md">
+                        <p className="font-semibold text-accent">Date</p>
+                        <p>{formattedDate}</p>
+                      </div>
+                      
+                      <div className="p-3 bg-white/10 rounded-md">
+                        <p className="font-semibold text-accent">Time</p>
+                        <p>{appointmentDetails.selectedTime}</p>
+                      </div>
+                    </div>
+                    
+                    <div className="p-3 bg-white/10 rounded-md">
+                      <p className="font-semibold text-accent">Service</p>
+                      <p>{serviceName}</p>
+                    </div>
+                  </CardContent>
+                </Card>
+                
+                <div className="p-6 bg-white/5 backdrop-blur-sm border border-white/10 rounded-lg">
+                  <p className="text-lg">
+                    We've sent a confirmation to <span className="font-semibold">{appointmentDetails.email}</span>.
+                  </p>
+                  <p className="mt-2">
+                    If you need to reschedule or have any questions, please don't hesitate to contact us.
+                  </p>
                 </div>
               </div>
-              
-              <div className="mt-6">
-                <p className="text-lg">
-                  We've sent a confirmation to <span className="font-semibold">{appointmentDetails.email}</span>.
-                </p>
-                <p className="mt-2">
-                  If you need to reschedule or have any questions, please don't hesitate to contact us.
-                </p>
+            ) : (
+              <div className="p-6 bg-red-500/20 border border-red-500/40 rounded-lg">
+                <p>We couldn't retrieve your appointment details. Please contact us if you have any questions.</p>
               </div>
-            </div>
-          ) : (
-            <div className="p-6 bg-red-500/20 border border-red-500/40 rounded-lg">
-              <p>We couldn't retrieve your appointment details. Please contact us if you have any questions.</p>
-            </div>
-          )}
+            )}
+          </div>
         </div>
       </div>
     </PageLayout>
