@@ -26,7 +26,8 @@ export async function sendEmailNotification(appointment: any, serviceName: strin
   };
   
   console.log("Prepared notification payload:", JSON.stringify(payload, null, 2));
-  console.log("Supabase URL:", supabase.functions.url);
+  // Remove direct access to the protected 'url' property
+  console.log("Supabase functions initialized and ready to invoke");
   
   try {
     console.log("Invoking notify-appointment function...");
