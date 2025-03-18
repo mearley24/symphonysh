@@ -49,10 +49,10 @@ export async function connectToGoogleCalendar() {
   try {
     console.log("Starting Google Calendar connection process");
     
-    // Use the supabase SDK to invoke the function - this should be more reliable
-    // than directly constructing URLs and making fetch requests
+    // The issue is here - GET requests can't have a body, so we need to use
+    // URL parameters instead or change to a POST request
     const { data, error } = await supabase.functions.invoke('google-auth', {
-      method: 'GET',
+      method: 'POST', // Changed from GET to POST
       body: { redirect: true }
     });
     

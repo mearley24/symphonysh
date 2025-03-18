@@ -58,11 +58,25 @@ serve(async (req) => {
     const authUrl = getAuthUrl();
     console.log("Auth URL generated:", authUrl);
     
-    // For direct browser access, redirect instead of returning JSON
-    const url = new URL(req.url);
-    const redirect = url.searchParams.get('redirect');
+    // Handle both GET and POST requests
+    let redirect = false;
     
-    if (redirect === 'true') {
+    // For POST requests, parse the body
+    if (req.method === "POST") {
+      try {
+        const body = await req.json();
+        redirect = body.redirect === true;
+      } catch (e) {
+        console.error("Error parsing request body:", e);
+      }
+    } else if (req.method === "GET") {
+      // For GET requests, check URL parameters
+      const url = new URL(req.url);
+      redirect = url.searchParams.get('redirect') === 'true';
+    }
+    
+    // For direct browser access or if redirect flag is true, redirect instead of returning JSON
+    if (redirect) {
       return new Response(null, {
         status: 302,
         headers: {
