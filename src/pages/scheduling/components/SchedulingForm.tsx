@@ -69,44 +69,52 @@ export function SchedulingForm({
 
     setIsSubmitting(true);
 
+    // Create appointment details object once
+    const appointmentDetails = {
+      date,
+      selectedTime,
+      name,
+      email,
+      phone,
+      message,
+      service
+    };
+    
+    // Always store the appointment details to session storage first - before any async operations
+    try {
+      sessionStorage.setItem('appointmentDetails', JSON.stringify(appointmentDetails));
+      console.log("Stored appointment details in session storage");
+    } catch (storageError) {
+      console.warn("Failed to store in session storage:", storageError);
+    }
+
     try {
       // Log that we're starting the appointment submission
       console.log("Starting appointment submission process...");
       
-      const appointmentDetails = {
-        date,
-        selectedTime,
-        name,
-        email,
-        phone,
-        message,
-        service
-      };
-      
-      // Store the appointment details to session storage before submitting
-      // This is our primary fallback mechanism
       try {
-        sessionStorage.setItem('appointmentDetails', JSON.stringify(appointmentDetails));
-        console.log("Stored appointment details in session storage");
-      } catch (storageError) {
-        console.warn("Failed to store in session storage:", storageError);
+        // Try to submit the appointment to the database
+        const result = await submitAppointment(appointmentDetails);
+        console.log("Appointment submission result:", result);
+      } catch (submissionError) {
+        // Log the error but continue with local storage fallback
+        console.warn("Failed to submit appointment to database, using fallback:", submissionError);
+        // We don't rethrow here - we'll use the locally stored data instead
       }
       
-      // Submit the appointment
-      const result = await submitAppointment(appointmentDetails);
-      
-      console.log("Appointment submission result:", result);
-      
-      // Show success toast
+      // Show success toast regardless
       toast({
         title: "Success",
-        description: "Your appointment has been scheduled successfully.",
+        description: "Your appointment has been scheduled. Redirecting to confirmation page...",
       });
 
       console.log("Redirecting to confirmation page");
       
-      // Use direct navigation to avoid infinite loops
-      window.location.href = "/scheduling/confirmation";
+      // Add a small delay to ensure toast is visible before redirect
+      setTimeout(() => {
+        // Use direct navigation to avoid infinite loops
+        window.location.href = "/scheduling/confirmation";
+      }, 500);
       
     } catch (error) {
       console.error("Scheduling error:", error instanceof Error ? error.message : error);

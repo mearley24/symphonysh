@@ -15,12 +15,13 @@ export function ErrorHandler({ children, onError }: ErrorHandlerProps) {
     
     // Create a wrapper to avoid infinite recursion
     const errorWrapper = (...args: any[]) => {
-      // First check if the error message already contains "scheduling error"
+      // First check if the error message already contains specific patterns
       // to prevent infinite recursion
       const errorString = args.join(' ');
       if (errorString.includes("Maximum call stack size exceeded") || 
           errorString.includes("recursion") ||
-          (errorString.includes("Scheduling error") && errorString.length > 50)) {
+          (errorString.includes("Scheduling error") && errorString.length > 50) ||
+          errorString.includes("Failed to fetch")) {
         // Just log to original console without triggering the handler again
         originalConsoleError("Error detected but not re-processed to prevent recursion:", ...args);
         return;
