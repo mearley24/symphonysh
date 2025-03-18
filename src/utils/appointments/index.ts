@@ -21,17 +21,23 @@ export async function submitAppointment(appointmentData: AppointmentData) {
   // Get the service name from the ID
   const serviceName = getServiceName(service);
   
+  // Send email notification
+  let notificationResult = null;
   try {
     // Send email notification with calendar attachment
-    await sendEmailNotification(appointmentData_, serviceName);
+    notificationResult = await sendEmailNotification(appointmentData_, serviceName);
+    console.log("Notification result:", notificationResult);
   } catch (notifyError: any) {
     console.error("Failed to handle notifications:", notifyError);
     console.error("Error details:", notifyError.stack || "No stack trace available");
     // We don't throw here to avoid failing the whole appointment process
-    // but we log the error for debugging
   }
 
-  return appointmentData_;
+  return {
+    ...appointmentData_,
+    businessEmail: notificationResult?.businessEmail || null,
+    customerEmail: notificationResult?.customerEmail || null
+  };
 }
 
 // This function can be simplified since we no longer need to fetch from Google Calendar

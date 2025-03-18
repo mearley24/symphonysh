@@ -1,16 +1,11 @@
+
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
-import { createClient } from "https://esm.sh/@supabase/supabase-js@2.48.1";
 import { Resend } from "npm:resend@2.0.0";
 
 // Debug logs at the top level for function initialization
 console.log("Notify appointment function initializing...");
 
-// Initialize Supabase client
-const supabaseUrl = Deno.env.get("SUPABASE_URL") || "";
-const supabaseKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") || "";
-const supabase = createClient(supabaseUrl, supabaseKey);
-
-// Log Resend API key status (without revealing the key)
+// Get Resend API key from environment variables
 const resendApiKey = Deno.env.get("RESEND_API_KEY") || "";
 console.log("Resend API key available:", resendApiKey ? "Yes" : "No");
 
@@ -74,7 +69,7 @@ BEGIN:VEVENT
 DTSTART:${formatICalDate(startDate)}
 DTEND:${formatICalDate(endDate)}
 DTSTAMP:${formatICalDate(now)}
-ORGANIZER;CN=Symphony Smart Homes:mailto:info@symphonysh.com
+ORGANIZER;CN=Symphony Smart Homes:mailto:notifications@symphonysh.com
 UID:${appointment.id || Math.random().toString(36).substring(2, 15)}@symphonysh.com
 ATTENDEE;CUTYPE=INDIVIDUAL;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;RSVP=TRUE;CN=${appointment.name}:mailto:${appointment.email}
 SUMMARY:Symphony Smart Homes: ${appointment.service} Consultation
@@ -89,86 +84,6 @@ DESCRIPTION:Reminder
 END:VALARM
 END:VEVENT
 END:VCALENDAR`;
-}
-
-/**
- * Handles OPTIONS requests for CORS
- */
-function handleOptionsRequest() {
-  console.log("Handling OPTIONS request");
-  return new Response(null, {
-    headers: corsHeaders,
-  });
-}
-
-/**
- * Handles GET requests (direct browser visits)
- */
-function handleGetRequest() {
-  console.log("Handling GET request (direct browser visit)");
-  return new Response(JSON.stringify({ 
-    message: "This is the notify-appointment API endpoint. POST requests with appointment data are required." 
-  }), {
-    headers: { ...corsHeaders, "Content-Type": "application/json" },
-    status: 200,
-  });
-}
-
-/**
- * Parses and validates the request body
- */
-async function parseRequestBody(req: Request) {
-  console.log("Parsing request body...");
-  
-  try {
-    const bodyText = await req.text();
-    console.log("Raw request body:", bodyText);
-    
-    if (!bodyText || bodyText.trim() === "") {
-      throw new Error("Empty request body");
-    }
-    
-    const requestData = JSON.parse(bodyText);
-    console.log("Successfully parsed request body:", JSON.stringify(requestData, null, 2));
-    
-    return { success: true, data: requestData, error: null };
-  } catch (parseError) {
-    console.error("Error parsing request body:", parseError);
-    return { 
-      success: false, 
-      data: null, 
-      error: {
-        message: "Invalid JSON in request body",
-        details: parseError.message
-      }
-    };
-  }
-}
-
-/**
- * Validates appointment data
- */
-function validateAppointmentData(appointment: any) {
-  if (!appointment) {
-    return { 
-      valid: false, 
-      error: "No appointment data provided" 
-    };
-  }
-  
-  // Validate required fields
-  const requiredFields = ['date', 'time', 'name', 'email', 'phone', 'service'];
-  const missingFields = requiredFields.filter(field => !appointment[field]);
-  
-  if (missingFields.length > 0) {
-    return { 
-      valid: false, 
-      error: "Missing required fields", 
-      missingFields 
-    };
-  }
-  
-  return { valid: true, error: null };
 }
 
 /**
@@ -290,30 +205,29 @@ async function sendCustomerEmail(appointment: any, formattedDate: string, format
   }
 }
 
-// Handle OPTIONS, GET, and Request functions
-function handleOptionsRequest() {
-  console.log("Handling OPTIONS request");
-  return new Response(null, {
-    headers: corsHeaders,
-  });
-}
-
-function handleGetRequest() {
-  console.log("Handling GET request (direct browser visit)");
-  return new Response(JSON.stringify({ 
-    message: "This is the notify-appointment API endpoint. POST requests with appointment data are required." 
-  }), {
-    headers: { ...corsHeaders, "Content-Type": "application/json" },
-    status: 200,
-  });
-}
-
 /**
- * Main request handler
+ * Main serve function
  */
-async function handleRequest(req: Request) {
+serve(async (req) => {
   console.log("Notification function triggered with method:", req.method);
   console.log("Request headers:", Object.fromEntries(req.headers.entries()));
+  
+  // Handle CORS preflight requests
+  if (req.method === "OPTIONS") {
+    return new Response(null, {
+      headers: corsHeaders,
+    });
+  }
+
+  // Handle direct browser visits or GET requests
+  if (req.method === "GET") {
+    return new Response(JSON.stringify({ 
+      message: "This is the notify-appointment API endpoint. POST requests with appointment data are required." 
+    }), {
+      headers: { ...corsHeaders, "Content-Type": "application/json" },
+      status: 200,
+    });
+  }
   
   try {
     // Parse request body
@@ -414,22 +328,4 @@ async function handleRequest(req: Request) {
       }
     );
   }
-}
-
-/**
- * Main serve function
- */
-serve(async (req) => {
-  // Handle CORS preflight requests
-  if (req.method === "OPTIONS") {
-    return handleOptionsRequest();
-  }
-
-  // Handle direct browser visits or GET requests
-  if (req.method === "GET") {
-    return handleGetRequest();
-  }
-  
-  // Handle POST requests
-  return handleRequest(req);
 });
