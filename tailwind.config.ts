@@ -45,6 +45,10 @@ export default {
           DEFAULT: "#1a1a1a",
           foreground: "#FFFFFF",
         },
+        popover: {
+          DEFAULT: "rgb(0, 9, 24)",
+          foreground: "#FFFFFF",
+        },
       },
       keyframes: {
         "fade-up": {
