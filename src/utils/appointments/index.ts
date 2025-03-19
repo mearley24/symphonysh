@@ -33,17 +33,39 @@ export async function submitAppointment(appointmentData: AppointmentData) {
     const serviceName = getServiceName(service);
     console.log("Service name resolved:", serviceName);
     
-    // Send email notification
+    // Send email notification using our new edge function
     try {
-      // Send email notification with calendar attachment
-      console.log("Attempting to send email notifications...");
-      const notificationResult = await sendEmailNotification(appointmentData_, serviceName);
-      console.log("Notification result:", notificationResult);
+      // Call the send-confirmation-email edge function directly
+      console.log("Attempting to send confirmation email...");
+      
+      const functionUrl = `${import.meta.env.VITE_SUPABASE_URL || "https://symphonysh.supabase.co"}/functions/v1/send-confirmation-email`;
+      console.log("Using function URL:", functionUrl);
+      
+      const emailResponse = await fetch(functionUrl, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: name.trim(),
+          email: email.trim(),
+          service: serviceName,
+          message: message?.trim()
+        })
+      });
+      
+      if (!emailResponse.ok) {
+        const errorText = await emailResponse.text();
+        console.error("Email function error response:", errorText);
+        throw new Error(`Failed to send confirmation email: ${emailResponse.status} ${errorText}`);
+      }
+      
+      const notificationResult = await emailResponse.json();
+      console.log("Confirmation email result:", notificationResult);
       
       return {
         ...appointmentData_,
-        businessEmail: notificationResult?.businessEmail || null,
-        customerEmail: notificationResult?.customerEmail || null
+        emailNotification: notificationResult
       };
     } catch (notifyError) {
       console.error("Failed to send email notifications:", notifyError);

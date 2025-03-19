@@ -48,7 +48,7 @@ serve(async (req) => {
       );
     }
     
-    const { name, email } = requestData;
+    const { name, email, service, message } = requestData;
     
     if (!name || !email) {
       console.error("Missing required fields:", { name, email });
@@ -100,6 +100,8 @@ serve(async (req) => {
             <h2 style="margin-top: 0; color: #0056b3;">Client Details</h2>
             <p style="margin: 5px 0;"><strong>Name:</strong> ${name}</p>
             <p style="margin: 5px 0;"><strong>Email:</strong> ${email}</p>
+            ${service ? `<p style="margin: 5px 0;"><strong>Service:</strong> ${service}</p>` : ''}
+            ${message ? `<p style="margin: 5px 0;"><strong>Message:</strong> ${message}</p>` : ''}
           </div>
           <div style="text-align: center; margin-top: 30px; color: #666; font-size: 12px;">
             <p>This is an automated notification from Symphony Smart Homes.</p>
