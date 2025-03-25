@@ -85,5 +85,19 @@ export async function getAvailableTimeSlots(date: Date) {
     }
   }
   
+  // Filter out past times if the date is today
+  const now = new Date();
+  const isToday = date.getDate() === now.getDate() && 
+                  date.getMonth() === now.getMonth() && 
+                  date.getFullYear() === now.getFullYear();
+  
+  if (isToday) {
+    const currentHour = now.getHours();
+    return standardTimeSlots.filter(timeSlot => {
+      const hour = parseInt(timeSlot.split(':')[0], 10);
+      return hour > currentHour;
+    });
+  }
+  
   return standardTimeSlots;
 }
