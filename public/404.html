@@ -3,45 +3,18 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Redirecting...</title>
+  <title>Symphony Smart Homes</title>
   <script>
     // Single Page Apps for GitHub Pages
     // MIT License
-    // https://github.com/rafgraph/spa-github-pages
-    // This script takes the current URL and converts the path and query
-    // string into just a query string, and then redirects the browser
-    // to the new URL with only a query string and hash fragment.
-
-    // Parse the URL
     var l = window.location;
-    
-    // Extract repository name from path (for GitHub Pages)
-    var pathSegments = l.pathname.split('/');
-    var repoName = pathSegments.length > 1 ? pathSegments[1] : '';
-    
-    // Check if we're on a GitHub Pages site with a custom domain or project page
-    var isGitHubPages = l.hostname.indexOf('github.io') !== -1;
-    
-    // Get the path after the repository name
-    var pathAfterRepo = isGitHubPages && repoName 
-      ? l.pathname.substring(repoName.length + 2) 
-      : l.pathname;
-    
-    // Only redirect if the path doesn't include a file extension (likely a route not a file)
-    if (!pathAfterRepo.includes('.')) {
-      // Create redirect URL
-      var redirectURL = l.protocol + '//' + l.hostname + 
-                      (isGitHubPages && repoName ? '/' + repoName : '') + 
-                      '/?p=' + encodeURIComponent(pathAfterRepo) +
-                      (l.search ? '&' + l.search.substring(1) : '') +
-                      l.hash;
-      
-      window.location.replace(redirectURL);
-    }
+    var path = l.pathname.slice(1);
+    var base = l.protocol + '//' + l.hostname + (l.port ? ':' + l.port : '');
+    var redirectURL = base + '/#' + path + (l.search || '') + (l.hash || '');
+    window.location.replace(redirectURL);
   </script>
 </head>
 <body>
-  <h1>Page not found</h1>
-  <p>If you're not being redirected automatically, <a href="/">click here to go to the homepage</a>.</p>
+  <p>Redirecting to homepage...</p>
 </body>
 </html>

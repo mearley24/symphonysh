@@ -64,9 +64,11 @@ function App() {
         <Route path="/services/shades" element={<Shades />} />
         <Route path="/services/smart-lighting" element={<SmartLighting />} />
         
-        {/* Scheduling routes - corrected the confirmation route */}
+        {/* Scheduling routes */}
         <Route path="/scheduling" element={<Scheduling />} />
         <Route path="/scheduling/confirmation" element={<ConfirmationPage />} />
+        
+        {/* 404 route should be the last one */}
         <Route path="*" element={<NotFound />} />
       </Routes>
     </>
