@@ -93,29 +93,36 @@ export function SchedulingForm({
       console.log("Starting appointment submission process...");
       
       try {
-        // Try to submit the appointment to the database
+        // Try to submit the appointment to the database and send emails
         const result = await submitAppointment(appointmentDetails);
         console.log("Appointment submission result:", result);
+        
+        // Show success toast
+        toast({
+          title: "Success",
+          description: "Your appointment has been scheduled. Redirecting to confirmation page...",
+        });
+
+        console.log("Redirecting to confirmation page");
+        
+        // Add a small delay to ensure toast is visible before redirect
+        setTimeout(() => {
+          navigate("/scheduling/confirmation");
+        }, 1000);
       } catch (submissionError) {
         // Log the error but continue with local storage fallback
-        console.warn("Failed to submit appointment to database, using fallback:", submissionError);
-        // We don't rethrow here - we'll use the locally stored data instead
+        console.error("Failed to submit appointment:", submissionError);
+        
+        toast({
+          title: "Partial Success",
+          description: "Your appointment was saved locally. We'll process it when connection is restored.",
+        });
+        
+        // Still redirect to confirmation page using session storage data
+        setTimeout(() => {
+          navigate("/scheduling/confirmation");
+        }, 1000);
       }
-      
-      // Show success toast regardless
-      toast({
-        title: "Success",
-        description: "Your appointment has been scheduled. Redirecting to confirmation page...",
-      });
-
-      console.log("Redirecting to confirmation page");
-      
-      // Add a small delay to ensure toast is visible before redirect
-      setTimeout(() => {
-        // Use direct navigation to avoid infinite loops
-        window.location.href = "/scheduling/confirmation";
-      }, 500);
-      
     } catch (error) {
       console.error("Scheduling error:", error instanceof Error ? error.message : error);
       

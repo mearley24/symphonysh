@@ -1,7 +1,6 @@
 
 import { AppointmentData, getServiceName } from "./types";
 import { saveAppointmentToDatabase } from "./dbUtils";
-import { sendEmailNotification } from "./notificationUtils";
 
 export type { AppointmentData } from "./types";
 
@@ -33,25 +32,35 @@ export async function submitAppointment(appointmentData: AppointmentData) {
     const serviceName = getServiceName(service);
     console.log("Service name resolved:", serviceName);
     
-    // Send email notification using our new edge function
+    // Send email notification using our edge function
     try {
       // Call the send-confirmation-email edge function directly
       console.log("Attempting to send confirmation email...");
       
-      const functionUrl = `${import.meta.env.VITE_SUPABASE_URL || "https://symphonysh.supabase.co"}/functions/v1/send-confirmation-email`;
+      // Get Supabase URL from env or use fallback
+      const supabaseUrl = import.meta.env.VITE_SUPABASE_URL || "https://symphonysh.supabase.co";
+      const functionUrl = `${supabaseUrl}/functions/v1/send-confirmation-email`;
       console.log("Using function URL:", functionUrl);
+      
+      // Prepare a comprehensive payload with all appointment details
+      const emailPayload = {
+        date: date.toISOString(),
+        selectedTime,
+        name: name.trim(),
+        email: email.trim(),
+        phone: phone.trim(),
+        service: serviceName,
+        message: message?.trim() || ""
+      };
+      
+      console.log("Sending email with payload:", JSON.stringify(emailPayload, null, 2));
       
       const emailResponse = await fetch(functionUrl, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({
-          name: name.trim(),
-          email: email.trim(),
-          service: serviceName,
-          message: message?.trim()
-        })
+        body: JSON.stringify(emailPayload)
       });
       
       if (!emailResponse.ok) {

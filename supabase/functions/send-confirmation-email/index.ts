@@ -7,15 +7,22 @@ const corsHeaders = {
   'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
 };
 
-const resendApiKey = Deno.env.get("RESEND_API_KEY") || "";
-console.log("Confirmation Email sender initializing...");
+// Initialize Resend with better error handling
+const resendApiKey = Deno.env.get("RESEND_API_KEY");
+if (!resendApiKey) {
+  console.error("CRITICAL ERROR: RESEND_API_KEY is not set in environment variables");
+}
+
+console.log("Confirmation Email function initializing...");
 console.log("Resend API Key available:", !!resendApiKey);
+console.log("Resend API Key length:", resendApiKey?.length || 0);
 
 const resend = new Resend(resendApiKey);
 
 serve(async (req) => {
   console.log("========== Confirmation Email function triggered ==========");
   console.log("Request method:", req.method);
+  console.log("Request headers:", Object.fromEntries(req.headers.entries()));
   
   // Handle CORS preflight requests
   if (req.method === "OPTIONS") {
@@ -48,8 +55,9 @@ serve(async (req) => {
       );
     }
     
-    const { name, email, service, message } = requestData;
+    const { name, email, service, message, date, selectedTime } = requestData;
     
+    // Validate required fields
     if (!name || !email) {
       console.error("Missing required fields:", { name, email });
       return new Response(
@@ -66,6 +74,28 @@ serve(async (req) => {
     
     console.log("All required fields are present, proceeding with email notifications");
     
+    // Format date if provided
+    let formattedDate = "Not specified";
+    let formattedTime = "Not specified";
+    
+    if (date) {
+      try {
+        const dateObj = new Date(date);
+        formattedDate = dateObj.toLocaleDateString("en-US", {
+          weekday: "long",
+          year: "numeric",
+          month: "long",
+          day: "numeric",
+        });
+        
+        if (selectedTime) {
+          formattedTime = selectedTime;
+        }
+      } catch (dateError) {
+        console.warn("Could not format date:", dateError);
+      }
+    }
+    
     // Send client confirmation email
     console.log(`Sending confirmation email to client: ${email}`);
     const clientEmailResult = await resend.emails.send({
@@ -77,6 +107,14 @@ serve(async (req) => {
           <h1 style="color: #333; text-align: center;">Thank You for Your Consultation Request</h1>
           <p style="font-size: 16px; line-height: 1.5;">Dear ${name},</p>
           <p style="font-size: 16px; line-height: 1.5;">Thank you for scheduling a consultation with Symphony Smart Homes.</p>
+          
+          <div style="background-color: #f8f9fa; padding: 15px; border-radius: 5px; margin: 20px 0;">
+            <h2 style="margin-top: 0; color: #0056b3;">Appointment Details</h2>
+            <p style="margin: 5px 0;"><strong>Date:</strong> ${formattedDate}</p>
+            <p style="margin: 5px 0;"><strong>Time:</strong> ${formattedTime}</p>
+            ${service ? `<p style="margin: 5px 0;"><strong>Service:</strong> ${service}</p>` : ''}
+          </div>
+          
           <p style="font-size: 16px; line-height: 1.5;">Our team will review your request and get back to you shortly to confirm the details.</p>
           <p style="font-size: 16px; line-height: 1.5;">If you have any questions in the meantime, please feel free to contact us at info@symphonysh.com.</p>
           <p style="font-size: 16px; line-height: 1.5;">Best regards,<br>Symphony Smart Homes Team</p>
@@ -100,6 +138,8 @@ serve(async (req) => {
             <h2 style="margin-top: 0; color: #0056b3;">Client Details</h2>
             <p style="margin: 5px 0;"><strong>Name:</strong> ${name}</p>
             <p style="margin: 5px 0;"><strong>Email:</strong> ${email}</p>
+            <p style="margin: 5px 0;"><strong>Date:</strong> ${formattedDate}</p>
+            <p style="margin: 5px 0;"><strong>Time:</strong> ${formattedTime}</p>
             ${service ? `<p style="margin: 5px 0;"><strong>Service:</strong> ${service}</p>` : ''}
             ${message ? `<p style="margin: 5px 0;"><strong>Message:</strong> ${message}</p>` : ''}
           </div>
@@ -124,11 +164,13 @@ serve(async (req) => {
   } catch (error) {
     console.error("Function error:", error);
     console.error("Error stack:", error.stack);
+    console.error("Full error details:", typeof error === 'object' ? JSON.stringify(error, Object.getOwnPropertyNames(error), 2) : String(error));
     
     return new Response(
       JSON.stringify({ 
         error: error.message, 
-        stack: error.stack
+        stack: error.stack,
+        details: typeof error === 'object' ? JSON.stringify(error, Object.getOwnPropertyNames(error), 2) : String(error)
       }),
       {
         headers: { ...corsHeaders, "Content-Type": "application/json" },
