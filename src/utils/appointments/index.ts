@@ -7,7 +7,7 @@ export type { AppointmentData } from "./types";
 export async function submitAppointment(appointmentData: AppointmentData) {
   const { date, selectedTime, name, email, phone, service, message } = appointmentData;
   
-  if (!date || !selectedTime || !name.trim() || !email.trim() || !phone.trim() || !service) {
+  if (!date || !selectedTime || !name?.trim() || !email?.trim() || !phone?.trim() || !service) {
     throw new Error("Missing required fields");
   }
 
@@ -40,21 +40,33 @@ export async function submitAppointment(appointmentData: AppointmentData) {
       
       console.log("Sending confirmation email with payload:", JSON.stringify(emailPayload));
       
-      const emailResponse = await fetch(functionUrl, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(emailPayload)
-      });
+      // Use fetch with timeout to prevent hanging
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 10000); // 10 second timeout
       
-      if (!emailResponse.ok) {
-        const errorText = await emailResponse.text();
-        console.error("Email function error:", errorText);
-        // Don't throw here, just log and continue
-      } else {
-        const result = await emailResponse.json();
-        console.log("Email confirmation sent:", result);
+      try {
+        const emailResponse = await fetch(functionUrl, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(emailPayload),
+          signal: controller.signal
+        });
+        
+        clearTimeout(timeoutId);
+        
+        if (!emailResponse.ok) {
+          const errorText = await emailResponse.text();
+          console.error("Email function error:", errorText);
+          // Don't throw here, just log and continue
+        } else {
+          const result = await emailResponse.json();
+          console.log("Email confirmation sent:", result);
+        }
+      } catch (fetchError) {
+        console.error("Failed to send email (fetch error):", fetchError);
+        // Continue despite email error
       }
     } catch (emailError) {
       console.error("Failed to send confirmation email:", emailError);
