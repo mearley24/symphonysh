@@ -69,7 +69,7 @@ export function SchedulingForm({
 
     setIsSubmitting(true);
 
-    // Create appointment details object once
+    // Create appointment details object
     const appointmentDetails = {
       date,
       selectedTime,
@@ -80,67 +80,49 @@ export function SchedulingForm({
       service
     };
     
-    // Always store the appointment details to session storage first - before any async operations
     try {
+      // Store to session storage as backup
       sessionStorage.setItem('appointmentDetails', JSON.stringify(appointmentDetails));
       console.log("Stored appointment details in session storage");
-    } catch (storageError) {
-      console.warn("Failed to store in session storage:", storageError);
-    }
-
-    try {
-      // Log that we're starting the appointment submission
-      console.log("Starting appointment submission process...");
       
-      try {
-        // Try to submit the appointment to the database and send emails
-        const result = await submitAppointment(appointmentDetails);
-        console.log("Appointment submission result:", result);
-        
-        // Show success toast
-        toast({
-          title: "Success",
-          description: "Your appointment has been scheduled. Redirecting to confirmation page...",
-        });
-
-        console.log("Redirecting to confirmation page");
-        
-        // Add a small delay to ensure toast is visible before redirect
-        setTimeout(() => {
-          navigate("/scheduling/confirmation");
-        }, 1000);
-      } catch (submissionError) {
-        // Log the error but continue with local storage fallback
-        console.error("Failed to submit appointment:", submissionError);
-        
-        toast({
-          title: "Partial Success",
-          description: "Your appointment was saved locally. We'll process it when connection is restored.",
-        });
-        
-        // Still redirect to confirmation page using session storage data
-        setTimeout(() => {
-          navigate("/scheduling/confirmation");
-        }, 1000);
-      }
+      // Submit appointment
+      const result = await submitAppointment(appointmentDetails);
+      console.log("Appointment submission result:", result);
+      
+      // Show success toast
+      toast({
+        title: "Success",
+        description: "Your appointment has been scheduled. Redirecting to confirmation page...",
+      });
+      
+      // Redirect with a small delay to ensure toast is visible
+      setTimeout(() => {
+        navigate("/scheduling/confirmation");
+      }, 1000);
+      
     } catch (error) {
       console.error("Scheduling error:", error instanceof Error ? error.message : error);
       
+      // Show toast with appropriate message
       toast({
-        title: "Error",
-        description: "There was a problem scheduling your appointment. Please try again.",
-        variant: "destructive"
+        title: "Note",
+        description: "Your appointment was saved locally. We'll process it when connection is restored.",
       });
       
+      // Still redirect to confirmation using session storage data
+      setTimeout(() => {
+        navigate("/scheduling/confirmation");
+      }, 1000);
+      
+      // Handle error if handler provided
       if (typeof handleError === 'function') {
-        // Prevent recursive error handling
         try {
           handleError(error);
         } catch (handlerError) {
           console.warn("Error in error handler:", handlerError);
         }
       }
-      
+    } finally {
       setIsSubmitting(false);
     }
   };

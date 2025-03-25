@@ -12,37 +12,22 @@ export async function submitAppointment(appointmentData: AppointmentData) {
   }
 
   console.log("Starting appointment submission process...");
-  console.log("Appointment data:", JSON.stringify(appointmentData, null, 2));
-
-  // Save appointment details to session storage as fallback - BEFORE any async operations
-  try {
-    sessionStorage.setItem('appointmentDetails', JSON.stringify(appointmentData));
-    console.log("Saved appointment details to session storage as fallback");
-  } catch (err) {
-    console.warn("Could not save to session storage:", err);
-  }
 
   try {
-    // Insert appointment into the database
+    // Save appointment to database
     console.log("Saving appointment to database...");
     const appointmentData_ = await saveAppointmentToDatabase(appointmentData);
     console.log("Appointment saved to database:", appointmentData_);
     
     // Get the service name from the ID
     const serviceName = getServiceName(service);
-    console.log("Service name resolved:", serviceName);
     
-    // Send email notification using our edge function
     try {
-      // Call the send-confirmation-email edge function directly
-      console.log("Attempting to send confirmation email...");
-      
-      // Get Supabase URL from env or use fallback
+      // Send email confirmation
       const supabaseUrl = import.meta.env.VITE_SUPABASE_URL || "https://symphonysh.supabase.co";
       const functionUrl = `${supabaseUrl}/functions/v1/send-confirmation-email`;
-      console.log("Using function URL:", functionUrl);
       
-      // Prepare a comprehensive payload with all appointment details
+      // Create a simple payload with all required fields
       const emailPayload = {
         date: date.toISOString(),
         selectedTime,
@@ -53,7 +38,7 @@ export async function submitAppointment(appointmentData: AppointmentData) {
         message: message?.trim() || ""
       };
       
-      console.log("Sending email with payload:", JSON.stringify(emailPayload, null, 2));
+      console.log("Sending confirmation email with payload:", JSON.stringify(emailPayload));
       
       const emailResponse = await fetch(functionUrl, {
         method: "POST",
@@ -65,29 +50,22 @@ export async function submitAppointment(appointmentData: AppointmentData) {
       
       if (!emailResponse.ok) {
         const errorText = await emailResponse.text();
-        console.error("Email function error response:", errorText);
-        throw new Error(`Failed to send confirmation email: ${emailResponse.status} ${errorText}`);
+        console.error("Email function error:", errorText);
+        // Don't throw here, just log and continue
+      } else {
+        const result = await emailResponse.json();
+        console.log("Email confirmation sent:", result);
       }
-      
-      const notificationResult = await emailResponse.json();
-      console.log("Confirmation email result:", notificationResult);
-      
-      return {
-        ...appointmentData_,
-        emailNotification: notificationResult
-      };
-    } catch (notifyError) {
-      console.error("Failed to send email notifications:", notifyError);
-      console.error("Error stack:", notifyError.stack);
-      // We don't throw here to avoid failing the whole appointment process
-      return appointmentData_;
+    } catch (emailError) {
+      console.error("Failed to send confirmation email:", emailError);
+      // Continue with the process even if email fails
     }
-  } catch (error) {
-    console.error("Error in submitAppointment:", error);
-    console.error("Error stack:", error.stack);
     
-    // Instead of re-throwing, we'll return a local version of the appointment
-    // This will allow the flow to continue even if the database save fails
+    return appointmentData_;
+  } catch (dbError) {
+    console.error("Database error:", dbError);
+    
+    // Return local version to allow flow to continue
     return {
       ...appointmentData,
       status: "pending-local-only",
@@ -97,17 +75,15 @@ export async function submitAppointment(appointmentData: AppointmentData) {
   }
 }
 
-// This function can be simplified since we no longer need to fetch from Google Calendar
+// Generate time slots from 9am to 5pm, skipping lunch hour
 export async function getAvailableTimeSlots(date: Date) {
-  console.log("Getting available time slots for date:", date);
-  // Generate time slots for full hours only (no half-hour slots)
   const standardTimeSlots = [];
+  
   for (let hour = 9; hour <= 17; hour++) {
     if (hour !== 12) { // Skip lunch hour
       standardTimeSlots.push(`${hour}:00`);
     }
   }
   
-  console.log("Generated time slots:", standardTimeSlots);
   return standardTimeSlots;
 }
