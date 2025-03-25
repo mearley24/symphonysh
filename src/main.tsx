@@ -20,12 +20,28 @@ window.addEventListener('unhandledrejection', (event) => {
   console.error("Unhandled Promise rejection:", event.reason);
 });
 
-ReactDOM.createRoot(document.getElementById('root')!).render(
-  <React.StrictMode>
-    <BrowserRouter>
-      <HelmetProvider>
-        <App />
-      </HelmetProvider>
-    </BrowserRouter>
-  </React.StrictMode>
-);
+// Wrap the render in a try-catch to prevent complete failure
+try {
+  ReactDOM.createRoot(document.getElementById('root')!).render(
+    <React.StrictMode>
+      <BrowserRouter>
+        <HelmetProvider>
+          <App />
+        </HelmetProvider>
+      </BrowserRouter>
+    </React.StrictMode>
+  );
+} catch (error) {
+  console.error("Failed to render application:", error);
+  // Render a minimal fallback UI
+  const rootElement = document.getElementById('root');
+  if (rootElement) {
+    rootElement.innerHTML = `
+      <div style="padding: 20px; text-align: center;">
+        <h1>Application Error</h1>
+        <p>We're sorry, but the application failed to load.</p>
+        <p>Please try refreshing the page.</p>
+      </div>
+    `;
+  }
+}

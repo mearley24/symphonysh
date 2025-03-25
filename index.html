@@ -22,6 +22,13 @@
         }
       }(window.location))
     </script>
+    <!-- Extra fallback to help with errors -->
+    <script type="text/javascript">
+      window.onerror = function(message, source, lineno, colno, error) {
+        console.error("Global error caught:", {message, source, lineno, colno, error});
+        return false;
+      };
+    </script>
   </head>
 
   <body>
