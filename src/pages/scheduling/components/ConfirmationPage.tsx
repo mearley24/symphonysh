@@ -17,8 +17,12 @@ interface AppointmentDetails {
   service?: string;
 }
 
+// Zapier webhook URL
+const ZAPIER_WEBHOOK_URL = "https://hooks.zapier.com/hooks/catch/22322669/2cwoj8b/";
+
 export function ConfirmationPage() {
   const [appointmentDetails, setAppointmentDetails] = useState<AppointmentDetails | null>(null);
+  const [notificationSent, setNotificationSent] = useState(false);
   const location = useLocation();
   
   useEffect(() => {
@@ -65,6 +69,48 @@ export function ConfirmationPage() {
       console.error("No valid appointment details found in state or session storage");
     }
   }, [location]);
+
+  // Send appointment data to Zapier webhook
+  useEffect(() => {
+    if (appointmentDetails && !notificationSent) {
+      console.log("Sending appointment details to Zapier webhook");
+      
+      const formattedDate = formatDate(appointmentDetails.date);
+      const serviceName = appointmentDetails?.service ? getServiceName(appointmentDetails.service) : "Service not available";
+      
+      // Format the data for Zapier
+      const payload = {
+        appointment: {
+          id: `new-${Date.now()}`,
+          name: appointmentDetails.name || 'Unknown',
+          email: appointmentDetails.email || 'No email provided',
+          phone: appointmentDetails.phone || 'No phone provided',
+          message: appointmentDetails.message || 'No message',
+          service: serviceName,
+          date: formattedDate,
+          time: appointmentDetails.selectedTime || 'Time not specified',
+          raw_data: JSON.stringify(appointmentDetails)
+        }
+      };
+      
+      // Send to Zapier webhook
+      try {
+        fetch(ZAPIER_WEBHOOK_URL, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          mode: "no-cors", // Required for cross-origin webhook calls
+          body: JSON.stringify(payload)
+        }).then(() => {
+          console.log("Zapier webhook triggered with payload:", payload);
+          setNotificationSent(true);
+        });
+      } catch (error) {
+        console.error("Error triggering Zapier webhook:", error);
+      }
+    }
+  }, [appointmentDetails, notificationSent]);
 
   const formatDate = (date: Date | string | undefined) => {
     if (!date) return "Date not available";
