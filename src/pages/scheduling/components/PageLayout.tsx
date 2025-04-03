@@ -1,9 +1,11 @@
+
 import React, { useEffect } from "react";
 import Header from "@/components/Header";
-import { BackNavigation } from "@/components/scheduling/BackNavigation";
+
 interface PageLayoutProps {
   children: React.ReactNode;
 }
+
 export function PageLayout({
   children
 }: PageLayoutProps) {
@@ -11,13 +13,12 @@ export function PageLayout({
   useEffect(() => {
     console.log("PageLayout mounted");
   }, []);
+  
   return <div className="min-h-screen bg-primary">
       <Header />
       
       <section className="pt-32 pb-20 px-6">
         <div className="max-w-4xl mx-auto">
-          
-
           {children}
         </div>
       </section>
