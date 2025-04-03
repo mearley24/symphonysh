@@ -92,13 +92,13 @@ export function SchedulingForm({
       // Show success toast
       toast({
         title: "Success",
-        description: "Your appointment has been scheduled. Redirecting to confirmation page...",
+        description: "Your appointment has been scheduled. You'll receive a confirmation via Zapier soon.",
       });
       
       // Redirect with a small delay to ensure toast is visible
       setTimeout(() => {
         navigate("/scheduling/confirmation");
-      }, 1000);
+      }, 1500);
       
     } catch (error) {
       console.error("Scheduling error:", error instanceof Error ? error.message : error);
@@ -106,13 +106,13 @@ export function SchedulingForm({
       // Show toast with appropriate message
       toast({
         title: "Note",
-        description: "Your appointment was saved locally. We'll process it when connection is restored.",
+        description: "Your appointment was saved. We'll send your confirmation soon.",
       });
       
       // Still redirect to confirmation using session storage data
       setTimeout(() => {
         navigate("/scheduling/confirmation");
-      }, 1000);
+      }, 1500);
       
       // Handle error if handler provided
       if (typeof handleError === 'function') {

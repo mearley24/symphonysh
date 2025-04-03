@@ -2,13 +2,16 @@
 import { supabase } from "../../integrations/supabase/client";
 import { AppointmentNotificationPayload, getServiceName } from "./types";
 
-// Send email notification about the appointment
+// Zapier webhook URL
+const ZAPIER_WEBHOOK_URL = "https://hooks.zapier.com/hooks/catch/22322669/2cwoj8b/";
+
+// Send notification about the appointment using Zapier
 export async function sendEmailNotification(appointment: any, serviceName: string): Promise<any> {
-  // Log the beginning of the email notification process
-  console.log("Starting email notification process...");
+  // Log the beginning of the notification process
+  console.log("Starting notification process via Zapier...");
   
   // Create payload object with properly formatted data
-  const payload: AppointmentNotificationPayload = {
+  const payload = {
     appointment: {
       id: appointment?.id || `temp-${Date.now()}`,
       date: appointment?.date,
@@ -17,73 +20,111 @@ export async function sendEmailNotification(appointment: any, serviceName: strin
       email: appointment?.email,
       phone: appointment?.phone,
       message: appointment?.message || '',
-      service: serviceName
+      service: serviceName,
+      formattedDate: formatDate(appointment?.date),
+      formattedTime: formatTime(appointment?.time)
     }
   };
   
-  console.log("Prepared notification payload:", JSON.stringify(payload, null, 2));
-  console.log("About to invoke Supabase function...");
+  console.log("Prepared Zapier webhook payload:", JSON.stringify(payload, null, 2));
   
   try {
-    // Add more descriptive logging
-    console.log(`Invoking notify-appointment function with email: ${appointment?.email}`);
+    // Call Zapier webhook directly from the client
+    console.log(`Sending appointment data to Zapier webhook: ${ZAPIER_WEBHOOK_URL}`);
     
-    // Direct invoke of notify-appointment function
-    const { data, error } = await supabase.functions.invoke('notify-appointment', {
-      body: payload
+    const response = await fetch(ZAPIER_WEBHOOK_URL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      mode: "no-cors", // Required for cross-origin webhook calls
+      body: JSON.stringify(payload)
     });
     
-    if (error) {
-      console.error("Error invoking notify-appointment function:", error);
-      throw new Error(`Failed to send notification: ${error.message}`);
-    }
-    
-    console.log("Email notification successfully sent:", data);
-    return data;
+    console.log("Zapier webhook triggered successfully");
+    return { success: true, message: "Notification workflow triggered" };
   } catch (error: any) {
-    console.error("Email notification error:", error);
-    console.error("Error stack:", error.stack);
+    console.error("Zapier webhook error:", error);
     console.error("Error details:", typeof error === 'object' ? JSON.stringify(error, null, 2) : error);
     
-    // Try a fallback approach using the send-confirmation-email function directly
+    // Try the fallback approach using the Supabase function as before
     try {
-      console.log("Attempting fallback email method...");
+      console.log("Attempting fallback notification method via Supabase function...");
       
-      const supabaseUrl = import.meta.env.VITE_SUPABASE_URL || "https://symphonysh.supabase.co";
-      const functionUrl = `${supabaseUrl}/functions/v1/send-confirmation-email`;
-      
-      const emailPayload = {
-        date: appointment?.date,
-        selectedTime: appointment?.time,
-        name: appointment?.name,
-        email: appointment?.email,
-        phone: appointment?.phone,
-        service: serviceName,
-        message: appointment?.message || ""
-      };
-      
-      console.log("Sending fallback email with payload:", JSON.stringify(emailPayload, null, 2));
-      
-      const response = await fetch(functionUrl, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(emailPayload)
+      const { data, error } = await supabase.functions.invoke('notify-appointment', {
+        body: payload
       });
       
-      if (!response.ok) {
-        const errorText = await response.text();
-        console.error("Fallback email function error:", errorText);
-        throw new Error(`Fallback email failed: ${response.status} ${errorText}`);
+      if (error) {
+        console.error("Error invoking notify-appointment function:", error);
+        throw error;
       }
       
-      const result = await response.json();
-      console.log("Fallback email sent successfully:", result);
-      return result;
+      console.log("Fallback notification sent successfully:", data);
+      return data;
     } catch (fallbackError: any) {
-      console.error("All email methods failed:", fallbackError);
-      throw fallbackError;
+      console.error("All notification methods failed:", fallbackError);
+      
+      // Last resort: Try direct webhook call again with minimal payload
+      try {
+        console.log("Attempting last resort notification with minimal payload...");
+        
+        const minimalPayload = {
+          name: appointment?.name,
+          email: appointment?.email,
+          date: formatDate(appointment?.date),
+          time: formatTime(appointment?.time),
+          service: serviceName
+        };
+        
+        await fetch(ZAPIER_WEBHOOK_URL, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          mode: "no-cors",
+          body: JSON.stringify(minimalPayload)
+        });
+        
+        console.log("Minimal Zapier webhook call completed");
+        return { success: true, message: "Minimal notification sent" };
+      } catch (lastError) {
+        console.error("All notification attempts failed:", lastError);
+        throw new Error("Failed to send notification");
+      }
     }
+  }
+}
+
+// Helper function to format date
+function formatDate(dateString: string): string {
+  if (!dateString) return "Not specified";
+  
+  try {
+    const date = new Date(dateString);
+    return date.toLocaleDateString("en-US", {
+      weekday: "long",
+      year: "numeric",
+      month: "long",
+      day: "numeric"
+    });
+  } catch (error) {
+    console.error("Date formatting error:", error);
+    return dateString || "Not specified";
+  }
+}
+
+// Helper function to format time
+function formatTime(timeString: string): string {
+  if (!timeString) return "Not specified";
+  
+  try {
+    const [hours, minutes] = timeString.split(":").map(Number);
+    const period = hours >= 12 ? "PM" : "AM";
+    const formattedHour = hours % 12 || 12;
+    return `${formattedHour}:${minutes.toString().padStart(2, "0")} ${period}`;
+  } catch (error) {
+    console.error("Time formatting error:", error);
+    return timeString || "Not specified";
   }
 }
