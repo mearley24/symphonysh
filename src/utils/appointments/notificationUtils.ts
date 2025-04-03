@@ -10,19 +10,20 @@ export async function sendEmailNotification(appointment: any, serviceName: strin
   // Log the beginning of the notification process
   console.log("Starting notification process via Zapier...");
   
-  // Create payload object with properly formatted data
+  // Create payload object with properly formatted data for email templates
   const payload = {
     appointment: {
       id: appointment?.id || `temp-${Date.now()}`,
-      date: appointment?.date,
-      time: appointment?.time,
-      name: appointment?.name,
-      email: appointment?.email,
-      phone: appointment?.phone,
+      name: appointment?.name || '',
+      email: appointment?.email || '',
+      phone: appointment?.phone || '',
       message: appointment?.message || '',
       service: serviceName,
-      formattedDate: formatDate(appointment?.date),
-      formattedTime: formatTime(appointment?.time)
+      date: formatDate(appointment?.date),
+      time: formatTime(appointment?.selectedTime || appointment?.time),
+      // Include raw data for any custom processing
+      raw_date: appointment?.date,
+      raw_time: appointment?.selectedTime || appointment?.time
     }
   };
   
@@ -73,7 +74,7 @@ export async function sendEmailNotification(appointment: any, serviceName: strin
           name: appointment?.name,
           email: appointment?.email,
           date: formatDate(appointment?.date),
-          time: formatTime(appointment?.time),
+          time: formatTime(appointment?.selectedTime || appointment?.time),
           service: serviceName
         };
         

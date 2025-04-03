@@ -91,8 +91,8 @@ export function SchedulingForm({
       
       // Show success toast
       toast({
-        title: "Success",
-        description: "Your appointment has been scheduled. You'll receive a confirmation via Zapier soon.",
+        title: "Appointment Scheduled",
+        description: "Your appointment has been scheduled. We'll send a confirmation email shortly.",
       });
       
       // Redirect with a small delay to ensure toast is visible
