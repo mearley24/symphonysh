@@ -6,6 +6,9 @@ import { PageLayout } from "./PageLayout";
 import { BackNavigation } from "@/components/scheduling/BackNavigation";
 import { getServiceName } from "@/utils/appointments/types";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Calendar, Download } from "lucide-react";
+import { generateICalendarFile } from "@/utils/appointments/calendarUtils";
 
 interface AppointmentDetails {
   date?: Date | string;
@@ -125,18 +128,48 @@ export function ConfirmationPage() {
     }
   };
 
+  // Handle calendar download
+  const handleCalendarDownload = () => {
+    if (!appointmentDetails || !appointmentDetails.date || !appointmentDetails.selectedTime) {
+      console.error("Cannot generate calendar file: missing appointment details");
+      return;
+    }
+    
+    try {
+      const serviceName = appointmentDetails?.service 
+        ? getServiceName(appointmentDetails.service) 
+        : "Symphony Smart Homes Appointment";
+      
+      const eventTitle = `Symphony Smart Homes: ${serviceName}`;
+      const eventDescription = `Appointment with Symphony Smart Homes for ${serviceName}. ${appointmentDetails.message || ''}`;
+      
+      const dateObj = typeof appointmentDetails.date === 'string' 
+        ? new Date(appointmentDetails.date) 
+        : appointmentDetails.date;
+      
+      // Generate and download the iCal file
+      generateICalendarFile({
+        title: eventTitle,
+        description: eventDescription,
+        location: "Symphony Smart Homes",
+        startDate: dateObj,
+        startTime: appointmentDetails.selectedTime,
+        durationMinutes: 60, // Default to 1 hour appointment
+        name: appointmentDetails.name || "Client",
+        email: appointmentDetails.email || "",
+      });
+      
+      console.log("Calendar file generated and download triggered");
+    } catch (error) {
+      console.error("Error generating calendar file:", error);
+    }
+  };
+
   // Format date as needed
   const formattedDate = appointmentDetails?.date ? formatDate(appointmentDetails.date) : "Date not available";
   
   // Get service name from ID
   const serviceName = appointmentDetails?.service ? getServiceName(appointmentDetails.service) : "Service not available";
-  
-  console.log("Rendering confirmation with:", {
-    formattedDate,
-    serviceName,
-    name: appointmentDetails?.name,
-    email: appointmentDetails?.email
-  });
 
   return (
     <PageLayout>
@@ -174,6 +207,17 @@ export function ConfirmationPage() {
                     <div className="p-3 bg-white/10 rounded-md">
                       <p className="font-semibold text-accent">Service</p>
                       <p className="text-white">{serviceName}</p>
+                    </div>
+
+                    <div className="mt-6 flex justify-center">
+                      <Button 
+                        onClick={handleCalendarDownload}
+                        className="bg-accent hover:bg-accent/80 text-black flex items-center gap-2"
+                      >
+                        <Calendar className="h-4 w-4" />
+                        <span>Add to Calendar</span>
+                        <Download className="h-4 w-4 ml-1" />
+                      </Button>
                     </div>
                   </CardContent>
                 </Card>
