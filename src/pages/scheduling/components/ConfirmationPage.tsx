@@ -1,3 +1,4 @@
+
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { format } from "date-fns";
@@ -5,9 +6,6 @@ import { PageLayout } from "./PageLayout";
 import { BackNavigation } from "@/components/scheduling/BackNavigation";
 import { getServiceName } from "@/utils/appointments/types";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Calendar, Download } from "lucide-react";
-import { generateICalendarFile } from "@/utils/appointments/calendarUtils";
 
 interface AppointmentDetails {
   date?: Date | string;
@@ -81,7 +79,7 @@ export function ConfirmationPage() {
       const formattedDate = formatDate(appointmentDetails.date);
       const serviceName = appointmentDetails?.service ? getServiceName(appointmentDetails.service) : "Service not available";
       
-      // Format the data for Zapier
+      // Format the data for Zapier - ensure address is included
       const payload = {
         appointment: {
           id: `new-${Date.now()}`,

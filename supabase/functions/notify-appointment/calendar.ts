@@ -32,8 +32,8 @@ ORGANIZER;CN=Symphony Smart Homes:mailto:notifications@symphonysh.com
 UID:${appointment.id || Math.random().toString(36).substring(2, 15)}@symphonysh.com
 ATTENDEE;CUTYPE=INDIVIDUAL;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;RSVP=TRUE;CN=${appointment.name}:mailto:${appointment.email}
 SUMMARY:Symphony Smart Homes: ${appointment.service} Consultation
-DESCRIPTION:Consultation for ${appointment.service}.\\n\\nClient: ${appointment.name}\\nPhone: ${appointment.phone}\\nEmail: ${appointment.email}\\n\\nMessage: ${appointment.message || 'No message provided'}
-LOCATION:Symphony Smart Homes
+DESCRIPTION:Consultation for ${appointment.service}.\\n\\nClient: ${appointment.name}\\nPhone: ${appointment.phone}\\nEmail: ${appointment.email}\\nAddress: ${appointment.address || 'Not provided'}\\n\\nMessage: ${appointment.message || 'No message provided'}
+LOCATION:${appointment.address || 'Symphony Smart Homes'}
 STATUS:CONFIRMED
 SEQUENCE:0
 BEGIN:VALARM
