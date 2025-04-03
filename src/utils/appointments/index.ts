@@ -5,9 +5,9 @@ import { saveAppointmentToDatabase } from "./dbUtils";
 export type { AppointmentData } from "./types";
 
 export async function submitAppointment(appointmentData: AppointmentData) {
-  const { date, selectedTime, name, email, phone, service, message } = appointmentData;
+  const { date, selectedTime, name, email, phone, address, service, message } = appointmentData;
   
-  if (!date || !selectedTime || !name?.trim() || !email?.trim() || !phone?.trim() || !service) {
+  if (!date || !selectedTime || !name?.trim() || !email?.trim() || !phone?.trim() || !address?.trim() || !service) {
     throw new Error("Missing required fields");
   }
 
@@ -34,6 +34,7 @@ export async function submitAppointment(appointmentData: AppointmentData) {
         name: name.trim(),
         email: email.trim(),
         phone: phone.trim(),
+        address: address.trim(),
         service: serviceName,
         message: message?.trim() || ""
       };

@@ -5,7 +5,7 @@ import { AppointmentData, FormattedAppointment } from "./types";
 
 // Save appointment to the database
 export async function saveAppointmentToDatabase(appointmentData: AppointmentData): Promise<any> {
-  const { date, selectedTime, name, email, phone, service, message } = appointmentData;
+  const { date, selectedTime, name, email, phone, address, service, message } = appointmentData;
   
   if (!date || !selectedTime) {
     throw new Error("Missing date or time");
@@ -19,6 +19,7 @@ export async function saveAppointmentToDatabase(appointmentData: AppointmentData
     name: name.trim(),
     email: email.trim(),
     phone: phone.trim(),
+    address: address.trim(),
     message: message.trim(),
     service,
     status: 'pending'
