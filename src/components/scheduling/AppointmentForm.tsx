@@ -15,6 +15,8 @@ interface AppointmentFormProps {
   setEmail: (email: string) => void;
   phone: string;
   setPhone: (phone: string) => void;
+  address: string;
+  setAddress: (address: string) => void;
   message: string;
   setMessage: (message: string) => void;
   service: string;
@@ -40,6 +42,7 @@ export function AppointmentForm({
   name, setName,
   email, setEmail,
   phone, setPhone,
+  address, setAddress,
   message, setMessage,
   service, setService
 }: AppointmentFormProps) {
@@ -124,6 +127,20 @@ export function AppointmentForm({
           onChange={(e) => setPhone(e.target.value)}
           className="w-full bg-white/5 border border-white/10 rounded-md px-4 py-2 text-white placeholder-gray-400"
           placeholder="(123) 456-7890"
+        />
+      </div>
+
+      <div>
+        <label htmlFor="address" className="block text-sm font-medium text-gray-300 mb-1">
+          Address *
+        </label>
+        <input
+          type="text"
+          id="address"
+          value={address}
+          onChange={(e) => setAddress(e.target.value)}
+          className="w-full bg-white/5 border border-white/10 rounded-md px-4 py-2 text-white placeholder-gray-400"
+          placeholder="Your address"
         />
       </div>
 

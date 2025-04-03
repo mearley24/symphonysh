@@ -7,6 +7,7 @@ export function useFormState() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
+  const [address, setAddress] = useState("");
   const [message, setMessage] = useState("");
   const [service, setService] = useState<string>("");
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -22,6 +23,8 @@ export function useFormState() {
     setEmail,
     phone,
     setPhone,
+    address,
+    setAddress,
     message,
     setMessage,
     service,

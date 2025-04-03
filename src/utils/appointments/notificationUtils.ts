@@ -17,6 +17,7 @@ export async function sendEmailNotification(appointment: any, serviceName: strin
       name: appointment?.name || '',
       email: appointment?.email || '',
       phone: appointment?.phone || '',
+      address: appointment?.address || '',
       message: appointment?.message || '',
       service: serviceName,
       date: formatDate(appointment?.date),
@@ -73,6 +74,8 @@ export async function sendEmailNotification(appointment: any, serviceName: strin
         const minimalPayload = {
           name: appointment?.name,
           email: appointment?.email,
+          phone: appointment?.phone,
+          address: appointment?.address,
           date: formatDate(appointment?.date),
           time: formatTime(appointment?.selectedTime || appointment?.time),
           service: serviceName

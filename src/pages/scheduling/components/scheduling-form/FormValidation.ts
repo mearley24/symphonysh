@@ -7,6 +7,7 @@ interface ValidationData {
   name: string;
   email: string;
   phone: string;
+  address: string;
   service: string;
 }
 
@@ -54,6 +55,15 @@ export const useFormValidation = () => {
       toast({
         title: "Missing Phone",
         description: "Please enter your phone number.",
+        variant: "destructive"
+      });
+      return false;
+    }
+
+    if (!data.address.trim()) {
+      toast({
+        title: "Missing Address",
+        description: "Please enter your address.",
         variant: "destructive"
       });
       return false;

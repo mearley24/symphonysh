@@ -16,6 +16,7 @@ interface AppointmentDetails {
   name?: string;
   email?: string;
   phone?: string;
+  address?: string;
   message?: string;
   service?: string;
 }
@@ -88,6 +89,7 @@ export function ConfirmationPage() {
           name: appointmentDetails.name || 'Unknown',
           email: appointmentDetails.email || 'No email provided',
           phone: appointmentDetails.phone || 'No phone provided',
+          address: appointmentDetails.address || 'No address provided',
           message: appointmentDetails.message || 'No message',
           service: serviceName,
           date: formattedDate,
@@ -151,7 +153,7 @@ export function ConfirmationPage() {
       generateICalendarFile({
         title: eventTitle,
         description: eventDescription,
-        location: "Symphony Smart Homes",
+        location: appointmentDetails.address || "Symphony Smart Homes",
         startDate: dateObj,
         startTime: appointmentDetails.selectedTime,
         durationMinutes: 60, // Default to 1 hour appointment
@@ -207,6 +209,11 @@ export function ConfirmationPage() {
                     <div className="p-3 bg-white/10 rounded-md">
                       <p className="font-semibold text-accent">Service</p>
                       <p className="text-white">{serviceName}</p>
+                    </div>
+                    
+                    <div className="p-3 bg-white/10 rounded-md">
+                      <p className="font-semibold text-accent">Address</p>
+                      <p className="text-white">{appointmentDetails.address || "Not provided"}</p>
                     </div>
 
                     <div className="mt-6 flex justify-center">

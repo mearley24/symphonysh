@@ -15,6 +15,8 @@ interface FormLayoutProps {
   setEmail: (email: string) => void;
   phone: string;
   setPhone: (phone: string) => void;
+  address: string;
+  setAddress: (address: string) => void;
   message: string;
   setMessage: (message: string) => void;
   service: string;
@@ -34,6 +36,8 @@ export function FormLayout({
   setEmail,
   phone,
   setPhone,
+  address,
+  setAddress,
   message,
   setMessage,
   service,
@@ -62,6 +66,8 @@ export function FormLayout({
           setEmail={setEmail}
           phone={phone}
           setPhone={setPhone}
+          address={address}
+          setAddress={setAddress}
           message={message}
           setMessage={setMessage}
           service={service}

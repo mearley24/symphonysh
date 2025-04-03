@@ -17,6 +17,8 @@ interface SchedulingFormProps {
   setEmail: (email: string) => void;
   phone: string;
   setPhone: (phone: string) => void;
+  address: string;
+  setAddress: (address: string) => void;
   message: string;
   setMessage: (message: string) => void;
   service: string;
@@ -37,6 +39,8 @@ export function SchedulingForm({
   setEmail,
   phone,
   setPhone,
+  address,
+  setAddress,
   message,
   setMessage,
   service,
@@ -58,12 +62,13 @@ export function SchedulingForm({
       name,
       email,
       phone,
+      address,
       service,
       message
     });
 
     // Validate form fields
-    if (!validateForm({ date, selectedTime, name, email, phone, service })) {
+    if (!validateForm({ date, selectedTime, name, email, phone, address, service })) {
       return;
     }
 
@@ -76,6 +81,7 @@ export function SchedulingForm({
       name,
       email,
       phone,
+      address,
       message,
       service
     };
@@ -139,6 +145,8 @@ export function SchedulingForm({
       setEmail={setEmail}
       phone={phone}
       setPhone={setPhone}
+      address={address}
+      setAddress={setAddress}
       message={message}
       setMessage={setMessage}
       service={service}

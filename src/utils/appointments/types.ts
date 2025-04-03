@@ -7,6 +7,7 @@ export interface AppointmentData {
   name: string;
   email: string;
   phone: string;
+  address: string;
   service: string;
   message: string;
 }
@@ -19,6 +20,7 @@ export interface AppointmentNotificationPayload {
     name: string;
     email: string;
     phone: string;
+    address: string;
     message: string;
     service: string;
   }
@@ -30,6 +32,7 @@ export interface FormattedAppointment {
   name: string;
   email: string;
   phone: string;
+  address: string;
   message: string;
   service: string;
   status: string;
