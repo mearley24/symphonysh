@@ -1,6 +1,6 @@
 
 import { Button } from "@/components/ui/button";
-import { Loader2 } from "lucide-react";
+import { Loader2, Clock, CalendarX } from "lucide-react";
 import { useState, useEffect } from "react";
 
 interface TimeSlotsProps {
@@ -90,8 +90,18 @@ export function TimeSlots({
                 disabled={!isSelectable}
               >
                 {timeSlot}
-                {isPastTime && <span className="ml-1 text-xs">(Past)</span>}
-                {isBooked && <span className="ml-1 text-xs">(Booked)</span>}
+                {isPastTime && (
+                  <span className="ml-1 text-xs flex items-center gap-1">
+                    <Clock className="h-3 w-3" />
+                    (Past)
+                  </span>
+                )}
+                {isBooked && !isPastTime && (
+                  <span className="ml-1 text-xs flex items-center gap-1">
+                    <CalendarX className="h-3 w-3" />
+                    (Booked)
+                  </span>
+                )}
               </Button>
             );
           })}
