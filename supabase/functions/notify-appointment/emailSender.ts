@@ -43,11 +43,26 @@ export async function sendBusinessEmail(appointment: any, formattedDate: string,
     console.error("Error details:", error instanceof Error ? error.message : JSON.stringify(error, null, 2));
     console.error("Error stack:", error instanceof Error ? error.stack : "No stack trace available");
     
-    // Check if it's a Resend API error with specific format
-    const resendError = typeof error === 'object' && error !== null ? error : {};
-    console.error("Resend API Error:", JSON.stringify(resendError, null, 2));
-    
-    return { success: false, data: null, error };
+    // Try a simpler email without attachment as fallback
+    try {
+      console.log("Attempting simplified business email as fallback...");
+      const fallbackResult = await resend.emails.send({
+        from: "Symphony Smart Homes <notifications@symphonysh.com>",
+        to: ["info@symphonysh.com"],
+        subject: `New Appointment: ${appointment.name} - ${appointment.service}`,
+        html: generateBusinessEmailHtml(appointment, formattedDate, formattedTime),
+      });
+      
+      console.log("Fallback business email sent:", fallbackResult);
+      return { success: true, data: fallbackResult, error: null };
+    } catch (fallbackError) {
+      console.error("Fallback business email also failed:", fallbackError);
+      // Check if it's a Resend API error with specific format
+      const resendError = typeof error === 'object' && error !== null ? error : {};
+      console.error("Resend API Error:", JSON.stringify(resendError, null, 2));
+      
+      return { success: false, data: null, error };
+    }
   }
 }
 
@@ -86,10 +101,25 @@ export async function sendCustomerEmail(appointment: any, formattedDate: string,
     console.error("Error details:", error instanceof Error ? error.message : JSON.stringify(error, null, 2));
     console.error("Error stack:", error instanceof Error ? error.stack : "No stack trace available");
     
-    // Check if it's a Resend API error with specific format
-    const resendError = typeof error === 'object' && error !== null ? error : {};
-    console.error("Resend API Error:", JSON.stringify(resendError, null, 2));
-    
-    return { success: false, data: null, error };
+    // Try a simpler email without attachment as fallback
+    try {
+      console.log("Attempting simplified customer email as fallback...");
+      const fallbackResult = await resend.emails.send({
+        from: "Symphony Smart Homes <notifications@symphonysh.com>",
+        to: [appointment.email],
+        subject: "Your Appointment Confirmation - Symphony Smart Homes",
+        html: generateCustomerEmailHtml(appointment, formattedDate, formattedTime),
+      });
+      
+      console.log("Fallback customer email sent:", fallbackResult);
+      return { success: true, data: fallbackResult, error: null };
+    } catch (fallbackError) {
+      console.error("Fallback customer email also failed:", fallbackError);
+      // Check if it's a Resend API error with specific format
+      const resendError = typeof error === 'object' && error !== null ? error : {};
+      console.error("Resend API Error:", JSON.stringify(resendError, null, 2));
+      
+      return { success: false, data: null, error };
+    }
   }
 }

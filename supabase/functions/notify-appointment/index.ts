@@ -29,7 +29,9 @@ serve(async (req) => {
   if (req.method === "GET") {
     console.log("Handling GET request");
     return new Response(JSON.stringify({ 
-      message: "This is the notify-appointment API endpoint. POST requests with appointment data are required." 
+      message: "This is the notify-appointment API endpoint. POST requests with appointment data are required.",
+      time: new Date().toISOString(),
+      status: "ready"
     }), {
       headers: { ...corsHeaders, "Content-Type": "application/json" },
       status: 200,
@@ -50,7 +52,8 @@ serve(async (req) => {
       return new Response(
         JSON.stringify({ 
           error: "Invalid JSON in request body",
-          details: parseError.message
+          details: parseError.message,
+          receivedText: bodyText
         }),
         {
           headers: { ...corsHeaders, "Content-Type": "application/json" },
@@ -98,15 +101,16 @@ serve(async (req) => {
     // Return response with details of both email operations
     return new Response(JSON.stringify({ 
       success: businessEmailResult.success || customerEmailResult.success, 
+      timestamp: new Date().toISOString(),
       businessEmail: {
         success: businessEmailResult.success,
         data: businessEmailResult.data,
-        error: businessEmailResult.error ? businessEmailResult.error.message : null
+        error: businessEmailResult.error ? (businessEmailResult.error instanceof Error ? businessEmailResult.error.message : String(businessEmailResult.error)) : null
       },
       customerEmail: {
         success: customerEmailResult.success,
         data: customerEmailResult.data,
-        error: customerEmailResult.error ? customerEmailResult.error.message : null
+        error: customerEmailResult.error ? (customerEmailResult.error instanceof Error ? customerEmailResult.error.message : String(customerEmailResult.error)) : null
       }
     }), {
       headers: { ...corsHeaders, "Content-Type": "application/json" },
@@ -121,6 +125,7 @@ serve(async (req) => {
       JSON.stringify({ 
         error: error.message, 
         stack: error.stack,
+        timestamp: new Date().toISOString(),
         details: typeof error === 'object' ? JSON.stringify(error, Object.getOwnPropertyNames(error), 2) : String(error)
       }),
       {

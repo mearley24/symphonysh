@@ -24,7 +24,7 @@ export function generateBusinessEmailHtml(appointment: any, formattedDate: strin
       </div>
       ` : ''}
       <div style="text-align: center; margin-top: 30px; color: #666; font-size: 12px;">
-        <p>This is an automated notification from Symphony Smart Homes.</p>
+        <p>This is an automated notification from Symphony Smart Homes. Generated at: ${new Date().toISOString()}</p>
       </div>
     </div>
   `;
@@ -54,7 +54,7 @@ export function generateCustomerEmailHtml(appointment: any, formattedDate: strin
       <p style="font-size: 16px; line-height: 1.5;">Best regards,<br>Symphony Smart Homes Team</p>
       
       <div style="text-align: center; margin-top: 30px; color: #666; font-size: 12px;">
-        <p>This is an automated confirmation. Please do not reply to this email.</p>
+        <p>This is an automated confirmation. Please do not reply to this email. Generated at: ${new Date().toISOString()}</p>
       </div>
     </div>
   `;
