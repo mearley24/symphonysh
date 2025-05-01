@@ -95,6 +95,8 @@ export function ConfirmationPage() {
         }
       };
       
+      console.log("Prepared Zapier webhook payload:", JSON.stringify(payload, null, 2));
+      
       // Send to Zapier webhook
       try {
         fetch(ZAPIER_WEBHOOK_URL, {

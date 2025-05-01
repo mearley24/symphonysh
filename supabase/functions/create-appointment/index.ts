@@ -40,6 +40,7 @@ serve(async (req) => {
     const serviceName = appointmentData.service;
     const formattedAppointment = {
       ...data,
+      address: appointmentData.address || "Not provided", // Ensure address is included
       service: SERVICES.find(s => s.id === serviceName)?.name || serviceName
     };
     
