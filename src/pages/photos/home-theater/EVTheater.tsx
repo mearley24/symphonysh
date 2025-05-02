@@ -3,7 +3,7 @@ import React from 'react';
 import PhotoGallery from '../../../components/PhotoGallery';
 import { homeTheaterCategories } from '../../../utils/photos';
 
-const Standard = () => {
+const EVTheater = () => {
   // Find the Eagle-Vail Theater category
   const category = homeTheaterCategories.find(cat => cat.title === "Eagle-Vail Theater");
   const photos = category ? category.photos : [];
@@ -18,4 +18,4 @@ const Standard = () => {
   );
 };
 
-export default Standard;
+export default EVTheater;

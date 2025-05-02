@@ -1,4 +1,3 @@
-
 import { Routes, Route } from "react-router-dom";
 import Scheduling from "./pages/scheduling";
 import NotFound from "./pages/NotFound";
@@ -17,7 +16,7 @@ import Matterport from "./pages/Matterport";
 // Photo gallery pages
 import HomeTheater from "./pages/photos/HomeTheater";
 import Featured from "./pages/photos/home-theater/Featured";
-import Standard from "./pages/photos/home-theater/Standard";
+import EVTheater from "./pages/photos/home-theater/EVTheater";
 import MountedTVs from "./pages/photos/MountedTVs";
 import Wiring from "./pages/photos/Wiring";
 import WiringManager from "./pages/photos/WiringManager";
@@ -67,7 +66,7 @@ function App() {
           {/* Photo gallery routes */}
           <Route path="/photos/home-theater" element={<HomeTheater />} />
           <Route path="/photos/home-theater/featured" element={<Featured />} />
-          <Route path="/photos/home-theater/standard" element={<Standard />} />
+          <Route path="/photos/home-theater/ev-theater" element={<EVTheater />} />
           <Route path="/photos/mounted-tvs" element={<MountedTVs />} />
           
           {/* Mounted TVs subcategories */}
