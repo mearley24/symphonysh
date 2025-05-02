@@ -56,3 +56,10 @@
     @apply transition-all duration-300 hover:translate-y-[-4px] hover:shadow-lg;
   }
 }
+
+/* Fix for mobile white background */
+#root, html, body {
+  background-color: #000000;
+  min-height: 100vh;
+}
+

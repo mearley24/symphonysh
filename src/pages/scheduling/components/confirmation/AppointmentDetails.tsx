@@ -1,93 +1,81 @@
 
-import { format } from "date-fns";
-import { getServiceName } from "@/utils/appointments/types";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { AlertTriangle } from "lucide-react";
+import { Alert, AlertDescription } from "@/components/ui/alert";
 
 interface AppointmentDetailsProps {
-  appointmentDetails: {
-    date?: Date | string;
-    selectedTime?: string;
-    name?: string;
-    email?: string;
-    phone?: string;
-    address?: string;
-    message?: string;
-    service?: string;
-  } | null;
+  appointmentDetails: any;
 }
 
 export function AppointmentDetails({ appointmentDetails }: AppointmentDetailsProps) {
+  // Format date for display
   const formatDate = (date: Date | string | undefined) => {
-    if (!date) return "Date not available";
-    
+    if (!date) return "Not specified";
     try {
-      // Check if date is a string and needs parsing
-      const dateObj = typeof date === 'string' ? new Date(date) : date;
-      return format(dateObj, 'EEEE, MMMM d, yyyy');
+      const dateObj = typeof date === "string" ? new Date(date) : date;
+      return dateObj.toLocaleDateString(undefined, {
+        weekday: "long",
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+      });
     } catch (error) {
       console.error("Error formatting date:", error);
       return "Invalid date";
     }
   };
 
-  // Format date as needed
-  const formattedDate = appointmentDetails?.date ? formatDate(appointmentDetails.date) : "Date not available";
-  
-  // Get service name from ID
-  const serviceName = appointmentDetails?.service ? getServiceName(appointmentDetails.service) : "Service not available";
-  
+  // If there are no details, show a warning
   if (!appointmentDetails) {
     return (
-      <div className="p-6 bg-red-500/20 border border-red-500/40 rounded-lg">
-        <p className="text-white">We couldn't retrieve your appointment details. Please contact us if you have any questions.</p>
-      </div>
+      <Alert variant="destructive" className="bg-red-500/20 border-red-500/40 mb-4">
+        <AlertTriangle className="h-4 w-4" />
+        <AlertDescription>
+          Unable to retrieve appointment details. Please contact us for assistance.
+        </AlertDescription>
+      </Alert>
     );
   }
 
   return (
-    <div className="space-y-8">
-      <p className="text-xl text-white">
-        Thank you, <span className="font-semibold text-white">{appointmentDetails.name}</span>, for scheduling a consultation with Symphony Smart Homes!
+    <div className="glass-dark p-6 rounded-lg shadow-lg text-left text-white">
+      <p className="mb-2">
+        <span className="font-semibold">Date:</span>{" "}
+        {formatDate(appointmentDetails.date)}
       </p>
-      
-      <Card className="border border-white/10 bg-white/5 backdrop-blur-sm shadow-lg">
-        <CardHeader className="pb-2">
-          <CardTitle className="text-2xl text-white">Appointment Details</CardTitle>
-        </CardHeader>
-        
-        <CardContent className="space-y-3 text-white">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-            <div className="p-3 bg-white/10 rounded-md">
-              <p className="font-semibold text-accent">Date</p>
-              <p className="text-white">{formattedDate}</p>
-            </div>
-            
-            <div className="p-3 bg-white/10 rounded-md">
-              <p className="font-semibold text-accent">Time</p>
-              <p className="text-white">{appointmentDetails.selectedTime}</p>
-            </div>
-          </div>
-          
-          <div className="p-3 bg-white/10 rounded-md">
-            <p className="font-semibold text-accent">Service</p>
-            <p className="text-white">{serviceName}</p>
-          </div>
-          
-          <div className="p-3 bg-white/10 rounded-md">
-            <p className="font-semibold text-accent">Address</p>
-            <p className="text-white">{appointmentDetails.address || "Not provided"}</p>
-          </div>
-        </CardContent>
-      </Card>
-      
-      <div className="p-6 bg-white/5 backdrop-blur-sm border border-white/10 rounded-lg">
-        <p className="text-lg text-white">
-          We've sent a confirmation to <span className="font-semibold text-white">{appointmentDetails.email}</span>.
+      <p className="mb-2">
+        <span className="font-semibold">Time:</span>{" "}
+        {appointmentDetails.selectedTime || "Not specified"}
+      </p>
+      <p className="mb-2">
+        <span className="font-semibold">Name:</span>{" "}
+        {appointmentDetails.name || "Not provided"}
+      </p>
+      <p className="mb-2">
+        <span className="font-semibold">Email:</span>{" "}
+        {appointmentDetails.email || "Not provided"}
+      </p>
+      <p className="mb-2">
+        <span className="font-semibold">Phone:</span>{" "}
+        {appointmentDetails.phone || "Not provided"}
+      </p>
+      {appointmentDetails.address && (
+        <p className="mb-2">
+          <span className="font-semibold">Address:</span>{" "}
+          {appointmentDetails.address}
         </p>
-        <p className="mt-2 text-white">
-          If you need to reschedule or have any questions, please don't hesitate to contact us.
-        </p>
-      </div>
+      )}
+      <p className="mb-2">
+        <span className="font-semibold">Service:</span>{" "}
+        {appointmentDetails.service
+          ? appointmentDetails.service.replace(/-/g, " ").replace(/\b\w/g, l => l.toUpperCase())
+          : "Not specified"}
+      </p>
+      {appointmentDetails.message && (
+        <div className="mt-4">
+          <p className="font-semibold mb-1">Message:</p>
+          <p className="italic">{appointmentDetails.message}</p>
+        </div>
+      )}
     </div>
   );
 }
