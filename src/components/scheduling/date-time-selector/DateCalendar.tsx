@@ -37,9 +37,9 @@ export function DateCalendar({ date, setDate }: DateCalendarProps) {
         styles={isMobile ? {
           caption_label: { color: '#ffffff' },
           day: { color: '#ffffff' },
-          day_today: { backgroundColor: 'rgba(255,255,255,0.1)', color: '#ffffff' },
-          day_selected: { backgroundColor: '#ca9f5c', color: '#ffffff' },
-          day_outside: { color: 'rgba(255,255,255,0.4)' }
+          today: { backgroundColor: 'rgba(255,255,255,0.1)', color: '#ffffff' },
+          selected: { backgroundColor: '#ca9f5c', color: '#ffffff' },
+          outside: { color: 'rgba(255,255,255,0.4)' }
         } : undefined}
       />
     </div>
