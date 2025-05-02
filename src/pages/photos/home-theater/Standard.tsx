@@ -4,13 +4,13 @@ import PhotoGallery from '../../../components/PhotoGallery';
 import { homeTheaterCategories } from '../../../utils/photos';
 
 const Standard = () => {
-  // Find the Standard Installations category
-  const category = homeTheaterCategories.find(cat => cat.title === "Standard Installations");
+  // Find the Eagle-Vail Theater category
+  const category = homeTheaterCategories.find(cat => cat.title === "Eagle-Vail Theater");
   const photos = category ? category.photos : [];
 
   return (
     <PhotoGallery 
-      title="Standard Installations" 
+      title="Eagle-Vail Theater" 
       photos={photos} 
       backLink="/photos/home-theater" 
       backText="Back to Home Theater"

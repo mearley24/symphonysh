@@ -19,7 +19,7 @@ export const homeTheaterCategories: GalleryCategory[] = [
     ]
   },
   { 
-    title: "Standard Installations", 
+    title: "Eagle-Vail Theater", 
     path: "/photos/home-theater/standard", 
     image: "/lovable-uploads/home theater/IMG_0920.JPG",
     photos: [
