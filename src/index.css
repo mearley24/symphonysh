@@ -49,7 +49,7 @@
   }
   
   .glass-dark {
-    @apply backdrop-blur-sm bg-white/5 border border-white/10;
+    @apply backdrop-blur-sm bg-black/50 border border-white/10;
   }
   
   .card-hover {
@@ -63,3 +63,38 @@
   min-height: 100vh;
 }
 
+/* Calendar mobile styling */
+.rdp {
+  --rdp-accent-color: #ca9f5c !important;
+  --rdp-background-color: rgba(202, 159, 92, 0.2) !important;
+  margin: 0 !important;
+}
+
+@media (max-width: 767px) {
+  .rdp-caption {
+    color: white !important;
+  }
+  
+  .rdp-head_cell, 
+  .rdp-day:not(.rdp-day_disabled) {
+    color: white !important;
+  }
+  
+  .rdp-day_today:not(.rdp-day_outside) {
+    background-color: rgba(255, 255, 255, 0.1) !important;
+    color: white !important;
+  }
+  
+  .rdp-day_selected:not(.rdp-day_outside):not(.rdp-day_disabled) {
+    background-color: var(--rdp-accent-color) !important;
+    color: white !important;
+  }
+  
+  .rdp-day_outside {
+    opacity: 0.4 !important;
+  }
+  
+  .rdp-button:hover:not([disabled]):not(.rdp-day_selected) {
+    background-color: rgba(255, 255, 255, 0.1) !important;
+  }
+}

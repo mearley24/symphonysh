@@ -22,7 +22,7 @@ export function MainContent({
 }: MainContentProps) {
   return (
     <div className="space-y-4">
-      <div className="bg-white/5 backdrop-blur-sm rounded-lg p-4">
+      <div className="glass-dark rounded-lg p-4">
         <CalendarConnection isEmailNotificationsEnabled={true} />
         <DateCalendar date={date} setDate={setDate} />
       </div>
