@@ -34,12 +34,10 @@ export function DateCalendar({ date, setDate }: DateCalendarProps) {
             date.getDay() === 6
           );
         }}
-        styles={isMobile ? {
-          caption_label: { color: '#ffffff' },
-          day: { color: '#ffffff' },
-          today: { backgroundColor: 'rgba(255,255,255,0.1)', color: '#ffffff' },
-          selected: { backgroundColor: '#ca9f5c', color: '#ffffff' },
-          outside: { color: 'rgba(255,255,255,0.4)' }
+        classNames={isMobile ? {
+          day_today: "bg-white/10 text-white",
+          day_selected: "bg-accent text-white hover:bg-accent hover:text-white",
+          day_outside: "text-white/40 opacity-50"
         } : undefined}
       />
     </div>
