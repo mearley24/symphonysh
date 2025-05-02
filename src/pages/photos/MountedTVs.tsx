@@ -1,12 +1,66 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Header from '../../components/Header';
 import { ArrowLeft, ImageOff } from 'lucide-react';
 import { mountedTVsCategories, getFixedImagePath } from '../../utils/photoUtils';
+import GalleryControlButtons from '../../components/photos/GalleryControlButtons';
 
 const MountedTVs = () => {
   const [loadedImages, setLoadedImages] = useState<Record<string, boolean>>({});
+  const [isEditMode, setIsEditMode] = useState(false);
+  const [isLovableDevEnvironment, setIsLovableDevEnvironment] = useState(false);
+  const [showButtons, setShowButtons] = useState(false); // Buttons hidden by default
+  
+  // Check if we're in the Lovable.dev preview environment
+  useEffect(() => {
+    const hostname = window.location.hostname;
+    // More inclusive check for Lovable.dev environments, also checking for preview URLs
+    const isDev = hostname.includes('lovable.dev') || 
+                 hostname.includes('localhost') || 
+                 hostname.includes('preview--');
+    console.log('Current hostname:', hostname, 'isDev:', isDev);
+    setIsLovableDevEnvironment(isDev);
+    
+    // Function to toggle button visibility via URL parameter
+    const checkUrlForButtonVisibility = () => {
+      const urlParams = new URLSearchParams(window.location.search);
+      const hideButtons = urlParams.get('hideButtons');
+      if (hideButtons === 'true') {
+        setShowButtons(false);
+      } else if (hideButtons === 'false') {
+        setShowButtons(true);
+      }
+    };
+    
+    // Check URL parameters on initial load
+    checkUrlForButtonVisibility();
+    
+    // Listen for URL changes (for SPA navigation)
+    const handleUrlChange = () => {
+      checkUrlForButtonVisibility();
+    };
+    
+    window.addEventListener('popstate', handleUrlChange);
+    
+    return () => {
+      window.removeEventListener('popstate', handleUrlChange);
+    };
+  }, []);
+  
+  // Function to toggle button visibility programmatically
+  const toggleButtonVisibility = (visible: boolean) => {
+    setShowButtons(visible);
+  };
+  
+  // Expose the toggle function to the window object for external access
+  useEffect(() => {
+    (window as any).toggleMountedTVButtons = toggleButtonVisibility;
+    
+    return () => {
+      delete (window as any).toggleMountedTVButtons;
+    };
+  }, []);
 
   const handleImageLoad = (image: string) => {
     console.log(`Successfully loaded image: ${image}`);
@@ -17,16 +71,34 @@ const MountedTVs = () => {
     console.error(`Failed to load image: ${image}`);
     setLoadedImages(prev => ({ ...prev, [image]: false }));
   };
+  
+  const toggleEditMode = () => {
+    setIsEditMode(!isEditMode);
+    if (isEditMode) {
+      // Would save changes here if we had editing functionality
+      console.log("Photo order would be saved here");
+    }
+  };
 
   return (
     <div className="min-h-screen bg-primary">
       <Header />
       <section className="pt-32 pb-20 px-6">
         <div className="max-w-6xl mx-auto">
-          <Link to="/projects" className="inline-flex items-center text-gray-300 hover:text-white mb-8">
-            <ArrowLeft className="w-4 h-4 mr-2" />
-            Back to Projects
-          </Link>
+          <div className="flex justify-between items-center mb-8">
+            <Link to="/projects" className="inline-flex items-center text-gray-300 hover:text-white">
+              <ArrowLeft className="w-4 h-4 mr-2" />
+              Back to Projects
+            </Link>
+            
+            <GalleryControlButtons 
+              isEditMode={isEditMode} 
+              toggleEditMode={toggleEditMode} 
+              isLovableDevEnvironment={isLovableDevEnvironment}
+              showButtons={showButtons}
+            />
+          </div>
+          
           <h1 className="text-4xl font-bold text-white mb-8">Mounted TVs</h1>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
