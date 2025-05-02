@@ -3,16 +3,11 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Header from '../../components/Header';
 import { ArrowLeft, ImageOff } from 'lucide-react';
-import { homeTheaterPhotos } from '../../utils/photos';
-import SEO from '../../components/SEO';
+import { homeTheaterCategories, getFixedImagePath } from '../../utils/photos';
 import GalleryControlButtons from '../../components/photos/GalleryControlButtons';
-import { getFixedImagePath } from '../../utils/photos';
+import SEO from '../../components/SEO';
 
 const HomeTheater = () => {
-  // Split the photos into two categories
-  const firstSetPhotos = homeTheaterPhotos.slice(0, 2);
-  const secondSetPhotos = homeTheaterPhotos.slice(2);
-  
   const [loadedImages, setLoadedImages] = useState<Record<string, boolean>>({});
   const [isEditMode, setIsEditMode] = useState(false);
   const [isLovableDevEnvironment, setIsLovableDevEnvironment] = useState(false);
@@ -111,70 +106,35 @@ const HomeTheater = () => {
           
           <h1 className="text-4xl font-bold text-white mb-8">Home Theater</h1>
           
-          {/* First Gallery - Photos #1-2 */}
-          <div className="mb-16">
-            <h2 className="text-2xl font-semibold text-white mb-6">Featured Installations</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {firstSetPhotos.map((photo, index) => (
-                <div 
-                  key={`first-${index}`} 
-                  className="aspect-video rounded-lg overflow-hidden cursor-pointer group bg-secondary/20 relative"
-                >
-                  {loadedImages[photo] === false ? (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {homeTheaterCategories.map((category, index) => (
+              <Link 
+                key={index}
+                to={category.path}
+                className="bg-secondary/50 rounded-lg overflow-hidden group hover:bg-secondary/80 transition-all duration-300 relative"
+              >
+                <div className="aspect-video overflow-hidden bg-secondary/30 relative">
+                  {loadedImages[category.image] === false ? (
                     <div className="w-full h-full flex flex-col items-center justify-center text-gray-400 p-4">
                       <ImageOff className="w-12 h-12 mb-2" />
-                      <p className="text-sm text-center">Image could not be loaded</p>
+                      <p className="text-sm text-center">{category.title}</p>
                     </div>
                   ) : (
-                    <>
-                      <div className="absolute top-2 left-2 bg-black/70 text-white px-2 py-1 rounded-md text-sm z-10">
-                        #{index + 1}
-                      </div>
-                      <img 
-                        src={getFixedImagePath(photo)} 
-                        alt={`Home Theater ${index + 1}`} 
-                        className="w-full h-full object-cover transform transition-all duration-300 scale-95 group-hover:scale-110"
-                        onLoad={() => handleImageLoad(photo)}
-                        onError={() => handleImageError(photo)}
-                      />
-                    </>
+                    <img 
+                      src={getFixedImagePath(category.image)} 
+                      alt={category.title} 
+                      className="w-full h-full object-cover transform transition-all duration-300 scale-95 group-hover:scale-110"
+                      onLoad={() => handleImageLoad(category.image)}
+                      onError={() => handleImageError(category.image)}
+                    />
                   )}
                 </div>
-              ))}
-            </div>
-          </div>
-          
-          {/* Second Gallery - Photos #3-11 */}
-          <div>
-            <h2 className="text-2xl font-semibold text-white mb-6">More Home Theater Projects</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {secondSetPhotos.map((photo, index) => (
-                <div 
-                  key={`second-${index}`} 
-                  className="aspect-video rounded-lg overflow-hidden cursor-pointer group bg-secondary/20 relative"
-                >
-                  {loadedImages[photo] === false ? (
-                    <div className="w-full h-full flex flex-col items-center justify-center text-gray-400 p-4">
-                      <ImageOff className="w-12 h-12 mb-2" />
-                      <p className="text-sm text-center">Image could not be loaded</p>
-                    </div>
-                  ) : (
-                    <>
-                      <div className="absolute top-2 left-2 bg-black/70 text-white px-2 py-1 rounded-md text-sm z-10">
-                        #{index + 3}
-                      </div>
-                      <img 
-                        src={getFixedImagePath(photo)} 
-                        alt={`Home Theater ${index + 3}`} 
-                        className="w-full h-full object-cover transform transition-all duration-300 scale-95 group-hover:scale-110"
-                        onLoad={() => handleImageLoad(photo)}
-                        onError={() => handleImageError(photo)}
-                      />
-                    </>
-                  )}
+                <div className="p-4">
+                  <h3 className="text-lg font-semibold text-white">{category.title}</h3>
+                  <p className="text-xs text-gray-300">{category.photos.length} photos</p>
                 </div>
-              ))}
-            </div>
+              </Link>
+            ))}
           </div>
         </div>
       </section>
