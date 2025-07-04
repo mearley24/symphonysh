@@ -75,51 +75,51 @@ const Services = () => {
         keywords="smart home services, Control4, home automation, home theater, security systems, smart lighting, Vail Valley"
       />
       
-      <section className="pt-20 pb-16">
-        <div className="text-center mb-16">
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">
+      <section className="pt-8 pb-16">
+        <div className="text-center mb-12">
+          <h1 className="text-3xl md:text-4xl font-bold text-white mb-4">
             Our Services
           </h1>
-          <p className="text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
+          <p className="text-lg md:text-xl text-gray-300 max-w-2xl mx-auto leading-relaxed">
             Comprehensive smart home solutions designed to enhance your lifestyle
           </p>
         </div>
 
-        <iPadGrid columns={2} gap="lg" className="mb-16">
+        <iPadGrid columns={2} gap="md" className="mb-12">
           {services.map((service, index) => (
             <Link key={index} to={service.link}>
               <iPadCard className="h-full">
-                <service.icon className="w-12 h-12 text-accent mb-4" />
-                <h3 className="text-2xl font-semibold text-white mb-3">{service.title}</h3>
-                <p className="text-gray-300 mb-6 text-lg leading-relaxed">{service.description}</p>
+                <service.icon className="w-10 h-10 text-accent mb-4" />
+                <h3 className="text-xl font-semibold text-white mb-2">{service.title}</h3>
+                <p className="text-gray-300 mb-4 text-base leading-relaxed">{service.description}</p>
                 
-                <ul className="space-y-2 mb-6">
+                <ul className="space-y-1 mb-4">
                   {service.features.map((feature, idx) => (
-                    <li key={idx} className="text-gray-400 flex items-center">
-                      <ArrowRight className="w-4 h-4 text-accent mr-2" />
+                    <li key={idx} className="text-gray-400 flex items-center text-sm">
+                      <ArrowRight className="w-3 h-3 text-accent mr-2" />
                       {feature}
                     </li>
                   ))}
                 </ul>
                 
-                <iPadButton variant="ghost" className="mt-auto">
-                  Learn More <ArrowRight className="w-4 h-4 ml-2" />
+                <iPadButton variant="ghost" size="sm" className="mt-auto">
+                  Learn More <ArrowRight className="w-3 h-3 ml-2" />
                 </iPadButton>
               </iPadCard>
             </Link>
           ))}
         </iPadGrid>
 
-        <iPadCard className="text-center">
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+        <iPadCard className="text-center max-w-2xl mx-auto">
+          <h2 className="text-2xl md:text-3xl font-bold text-white mb-3">
             Ready to Get Started?
           </h2>
-          <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
+          <p className="text-lg text-gray-300 mb-6">
             Let us design the perfect smart home solution for your needs.
           </p>
           <Link to="/scheduling">
-            <iPadButton size="lg">
-              Schedule Your Consultation <ArrowRight className="w-5 h-5 ml-2" />
+            <iPadButton size="md">
+              Schedule Your Consultation <ArrowRight className="w-4 h-4 ml-2" />
             </iPadButton>
           </Link>
         </iPadCard>

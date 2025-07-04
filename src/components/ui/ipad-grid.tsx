@@ -23,9 +23,9 @@ export const iPadGrid = ({
   };
   
   const gaps = {
-    sm: "gap-4",
-    md: "gap-6",
-    lg: "gap-8"
+    sm: "gap-3",
+    md: "gap-4",
+    lg: "gap-6"
   };
 
   return (

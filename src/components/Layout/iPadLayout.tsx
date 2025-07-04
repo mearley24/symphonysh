@@ -20,8 +20,8 @@ export const iPadLayout = ({
     <div className="min-h-screen bg-primary flex flex-col">
       {showHeader && <Header />}
       
-      <main className={`flex-1 px-6 md:px-12 lg:px-16 ${className}`}>
-        <div className="max-w-6xl mx-auto">
+      <main className={`flex-1 px-4 md:px-8 lg:px-12 ${className}`}>
+        <div className="max-w-4xl mx-auto">
           {children}
         </div>
       </main>

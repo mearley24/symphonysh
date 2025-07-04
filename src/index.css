@@ -25,7 +25,7 @@
     --muted: 0 0% 96.1%;
     --muted-foreground: 0 0% 45.1%;
 
-    --accent: 0 0% 96.1%;
+    --accent: 202 159 92;
     --accent-foreground: 0 0% 9%;
 
     --destructive: 0 84.2% 60.2%;
@@ -49,6 +49,7 @@
     /* iPad-optimized typography */
     font-size: 16px;
     line-height: 1.5;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
   }
   
   .glass-dark {
@@ -66,15 +67,15 @@
     }
     
     h1 {
-      font-size: 3rem;
-    }
-    
-    h2 {
       font-size: 2.5rem;
     }
     
-    h3 {
+    h2 {
       font-size: 2rem;
+    }
+    
+    h3 {
+      font-size: 1.5rem;
     }
   }
   
@@ -89,6 +90,18 @@
     scroll-behavior: smooth;
     -webkit-overflow-scrolling: touch;
   }
+
+  /* iOS-like rounded corners and shadows */
+  .ios-card {
+    border-radius: 24px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+  }
+
+  /* iOS-style blur effects */
+  .ios-blur {
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+  }
 }
 
 /* Fix for mobile white background */
@@ -99,7 +112,7 @@
 
 /* Calendar mobile styling */
 .rdp {
-  --rdp-accent-color: #ca9f5c !important;
+  --rdp-accent-color: hsl(202, 159, 92) !important;
   --rdp-background-color: rgba(202, 159, 92, 0.2) !important;
   margin: 0 !important;
 }
