@@ -88,23 +88,30 @@ const Services = () => {
         <IPadGrid columns={2} gap="sm" className="mb-6">
           {services.map((service, index) => (
             <Link key={index} to={service.link}>
-              <IPadCard className="h-full">
-                <service.icon className="w-6 h-6 text-accent mb-2" />
-                <h3 className="text-base font-semibold text-white mb-1">{service.title}</h3>
-                <p className="text-gray-300 mb-2 text-xs leading-relaxed">{service.description}</p>
-                
-                <ul className="space-y-1 mb-3">
-                  {service.features.map((feature, idx) => (
-                    <li key={idx} className="text-gray-400 flex items-center text-xs">
-                      <ArrowRight className="w-2 h-2 text-accent mr-1" />
-                      {feature}
-                    </li>
-                  ))}
-                </ul>
-                
-                <IPadButton variant="ghost" size="sm" className="mt-auto">
-                  Learn More <ArrowRight className="w-2 h-2" />
-                </IPadButton>
+              <IPadCard className="h-full p-4">
+                <div className="flex flex-col h-full">
+                  <service.icon className="w-5 h-5 text-accent mb-2" />
+                  <h3 className="text-sm font-semibold text-white mb-1">{service.title}</h3>
+                  <p className="text-gray-300 mb-2 text-xs leading-relaxed flex-grow">{service.description}</p>
+                  
+                  <div className="mb-3">
+                    <div className="flex flex-wrap gap-1 text-xs text-gray-400">
+                      {service.features.map((feature, idx) => (
+                        <span key={idx} className="flex items-center">
+                          <ArrowRight className="w-2 h-2 text-accent mr-1 flex-shrink-0" />
+                          {feature}
+                          {idx < service.features.length - 1 && <span className="mx-1">•</span>}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                  
+                  <div className="flex justify-center">
+                    <IPadButton variant="ghost" size="sm" className="text-xs px-4 py-2">
+                      Learn More <ArrowRight className="w-2 h-2" />
+                    </IPadButton>
+                  </div>
+                </div>
               </IPadCard>
             </Link>
           ))}
