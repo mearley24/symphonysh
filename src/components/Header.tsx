@@ -88,7 +88,7 @@ const Header = () => {
                     to="/services/shades"
                     className="w-full text-sm text-gray-300 hover:text-white"
                   >
-                    Smart Shades
+                    Shades
                   </Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem>
@@ -112,7 +112,7 @@ const Header = () => {
                     to="/services/security-systems"
                     className="w-full text-sm text-gray-300 hover:text-white"
                   >
-                    Security Systems
+                    Security
                   </Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem>

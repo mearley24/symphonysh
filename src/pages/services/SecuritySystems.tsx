@@ -20,7 +20,7 @@ const SecuritySystems = () => {
             Back to Services
           </Link>
 
-          <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">Security Systems</h1>
+          <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">Security</h1>
           <p className="text-xl text-gray-300 mb-12 max-w-2xl">
             Comprehensive security and surveillance solutions integrated with Control4 for complete peace of mind
           </p>

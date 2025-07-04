@@ -25,7 +25,7 @@ const Services = () => {
     },
     {
       icon: Shield,
-      title: "Security Systems",
+      title: "Security",
       description: "Advanced security solutions integrated with your smart home",
       link: "/services/security-systems",
       features: ["Smart cameras", "Access control", "Mobile monitoring"]
@@ -53,7 +53,7 @@ const Services = () => {
     },
     {
       icon: Sun,
-      title: "Smart Shades",
+      title: "Shades",
       description: "Automated window treatments for privacy and energy efficiency",
       link: "/services/shades",
       features: ["Motorized shades", "Smart scheduling", "Solar integration"]

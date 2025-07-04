@@ -20,7 +20,7 @@ const Shades = () => {
             Back to Services
           </Link>
 
-          <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">Smart Shades</h1>
+          <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">Shades</h1>
           <p className="text-xl text-gray-300 mb-12 max-w-2xl">
             Automated window treatments integrated with Control4 for enhanced comfort and energy efficiency
           </p>
@@ -51,7 +51,7 @@ const Shades = () => {
             <div className="bg-white/5 backdrop-blur-sm rounded-lg p-8">
               <img 
                 src="/lovable-uploads/82ceba00-9f66-4905-b5a8-be6979b7f744.png"
-                alt="Smart Shades Control Interface"
+                alt="Shades Control Interface"
                 className="rounded-lg w-full h-64 object-cover mb-6"
               />
             </div>
