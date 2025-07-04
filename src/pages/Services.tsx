@@ -1,99 +1,130 @@
 
-import { ArrowRight, Home, Shield, Lightbulb, Thermometer, Camera, Speaker, Network, Sun, Wrench, Smartphone } from "lucide-react";
 import { Link } from "react-router-dom";
-import Header from "../components/Header";
+import { ArrowRight, Home, Volume2, Shield, Lightbulb, Thermometer, Wifi, Wrench, Sun } from "lucide-react";
+import iPadLayout from "../components/Layout/iPadLayout";
+import iPadCard from "../components/ui/ipad-card";
+import iPadButton from "../components/ui/ipad-button";
+import iPadGrid from "../components/ui/ipad-grid";
 import SEO from "../components/SEO";
 
-const ServiceCard = ({ icon: Icon, title, description, link }: { icon: any; title: string; description: string; link: string }) => (
-  <Link to={link} className="block h-full">
-    <div className="bg-white/5 backdrop-blur-sm p-8 rounded-lg hover:bg-white/10 transition-all duration-300 h-full flex flex-col">
-      <Icon className="w-8 h-8 text-accent mb-4" />
-      <h3 className="text-xl font-semibold mb-3 text-white">{title}</h3>
-      <p className="text-gray-300 mb-4 flex-grow">{description}</p>
-      <div className="flex items-center text-accent mt-auto">
-        Learn More <ArrowRight className="w-4 h-4 ml-2" />
-      </div>
-    </div>
-  </Link>
-);
-
 const Services = () => {
+  const services = [
+    {
+      icon: Home,
+      title: "Home Automation",
+      description: "Complete Control4 integration for seamless smart home control",
+      link: "/services/home-integration",
+      features: ["Unified system control", "Custom automation", "Remote access"]
+    },
+    {
+      icon: Volume2,
+      title: "Audio & Entertainment",
+      description: "Premium home theater and multi-room audio systems",
+      link: "/services/audio-entertainment",
+      features: ["Home theaters", "Multi-room audio", "Streaming integration"]
+    },
+    {
+      icon: Shield,
+      title: "Security Systems",
+      description: "Advanced security solutions integrated with your smart home",
+      link: "/services/security-systems",
+      features: ["Smart cameras", "Access control", "Mobile monitoring"]
+    },
+    {
+      icon: Lightbulb,
+      title: "Smart Lighting",
+      description: "Intelligent lighting control throughout your home",
+      link: "/services/smart-lighting",
+      features: ["Automated scenes", "Energy efficiency", "Voice control"]
+    },
+    {
+      icon: Thermometer,
+      title: "Climate Control",
+      description: "Smart HVAC systems for optimal comfort and efficiency",
+      link: "/services/climate-control",
+      features: ["Smart thermostats", "Zone control", "Energy savings"]
+    },
+    {
+      icon: Wifi,
+      title: "Networking",
+      description: "Robust network infrastructure for your connected home",
+      link: "/services/networking",
+      features: ["WiFi optimization", "Wired networks", "Enterprise grade"]
+    },
+    {
+      icon: Sun,
+      title: "Smart Shades",
+      description: "Automated window treatments for privacy and energy efficiency",
+      link: "/services/shades",
+      features: ["Motorized shades", "Smart scheduling", "Solar integration"]
+    },
+    {
+      icon: Wrench,
+      title: "Maintenance",
+      description: "Ongoing support to keep your smart home running perfectly",
+      link: "/services/maintenance",
+      features: ["Regular updates", "24/7 support", "System optimization"]
+    }
+  ];
+
   return (
-    <div className="min-h-screen bg-primary">
+    <iPadLayout>
       <SEO 
-        title="Smart Home Services | Audio, Video, Networking & More"
-        description="Symphony Smart Homes offers comprehensive home automation solutions including audio/video, networking, smart lighting, climate control, and security systems throughout Vail Valley."
-        keywords="smart home automation, home theater installation, audio video installation, networking, security systems, Control4, smart lighting, climate control, Vail Valley, Colorado"
+        title="Smart Home Services - Control4 Automation in Vail Valley"
+        description="Complete smart home services including Control4 automation, home theaters, security systems, smart lighting, and more in Vail Valley, Colorado."
+        keywords="smart home services, Control4, home automation, home theater, security systems, smart lighting, Vail Valley"
       />
-      <Header />
-      <main className="pt-28">
-        <section className="py-20 px-6">
-          <div className="max-w-6xl mx-auto">
-            <h1 className="text-4xl md:text-5xl font-bold text-white text-center mb-4">Our Services</h1>
-            <p className="text-xl text-gray-300 text-center mb-16 max-w-2xl mx-auto">
-              Comprehensive home automation solutions powered by Control4
-            </p>
-            
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-              <ServiceCard
-                icon={Home}
-                title="Home Automation"
-                description="Seamless integration of all your smart home systems."
-                link="/services/home-integration"
-              />
-              <ServiceCard
-                icon={Speaker}
-                title="Audio & Entertainment"
-                description="Multi-room audio systems and home theater solutions."
-                link="/services/audio-entertainment"
-              />
-              <ServiceCard
-                icon={Lightbulb}
-                title="Smart Lighting"
-                description="Automated lighting systems that create the perfect ambiance and save energy."
-                link="/services/smart-lighting"
-              />
-              <ServiceCard
-                icon={Sun}
-                title="Smart Shades"
-                description="Automated window treatments for comfort and energy efficiency."
-                link="/services/shades"
-              />
-              <ServiceCard
-                icon={Network}
-                title="Networking"
-                description="Enterprise-grade networking solutions for reliable smart home performance."
-                link="/services/networking"
-              />
-              <ServiceCard
-                icon={Thermometer}
-                title="Climate Control"
-                description="Intelligent temperature control for optimal comfort and efficiency."
-                link="/services/climate-control"
-              />
-              <ServiceCard
-                icon={Shield}
-                title="Security Systems"
-                description="Advanced security solutions including cameras, smart locks, and monitoring."
-                link="/services/security-systems"
-              />
-              <ServiceCard
-                icon={Wrench}
-                title="Troubleshooting & Maintenance"
-                description="Professional system maintenance and technical support services."
-                link="/services/maintenance"
-              />
-              <ServiceCard
-                icon={Smartphone}
-                title="AVA Smart Remote"
-                description="The future of home control in your hands. Simple, intuitive, and powerful."
-                link="/ava"
-              />
-            </div>
-          </div>
-        </section>
-      </main>
-    </div>
+      
+      <section className="pt-20 pb-16">
+        <div className="text-center mb-16">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">
+            Our Services
+          </h1>
+          <p className="text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
+            Comprehensive smart home solutions designed to enhance your lifestyle
+          </p>
+        </div>
+
+        <iPadGrid columns={2} gap="lg" className="mb-16">
+          {services.map((service, index) => (
+            <Link key={index} to={service.link}>
+              <iPadCard className="h-full">
+                <service.icon className="w-12 h-12 text-accent mb-4" />
+                <h3 className="text-2xl font-semibold text-white mb-3">{service.title}</h3>
+                <p className="text-gray-300 mb-6 text-lg leading-relaxed">{service.description}</p>
+                
+                <ul className="space-y-2 mb-6">
+                  {service.features.map((feature, idx) => (
+                    <li key={idx} className="text-gray-400 flex items-center">
+                      <ArrowRight className="w-4 h-4 text-accent mr-2" />
+                      {feature}
+                    </li>
+                  ))}
+                </ul>
+                
+                <iPadButton variant="ghost" className="mt-auto">
+                  Learn More <ArrowRight className="w-4 h-4 ml-2" />
+                </iPadButton>
+              </iPadCard>
+            </Link>
+          ))}
+        </iPadGrid>
+
+        <iPadCard className="text-center">
+          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+            Ready to Get Started?
+          </h2>
+          <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
+            Let us design the perfect smart home solution for your needs.
+          </p>
+          <Link to="/scheduling">
+            <iPadButton size="lg">
+              Schedule Your Consultation <ArrowRight className="w-5 h-5 ml-2" />
+            </iPadButton>
+          </Link>
+        </iPadCard>
+      </section>
+    </iPadLayout>
   );
 };
 

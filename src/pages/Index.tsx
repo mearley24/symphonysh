@@ -1,81 +1,102 @@
 
-import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
-import Header from "../components/Header";
-import Footer from "../components/Footer";
+import { ArrowRight, Home, Wrench, Calendar, Image, Phone } from "lucide-react";
+import iPadLayout from "../components/Layout/iPadLayout";
+import iPadCard from "../components/ui/ipad-card";
+import iPadButton from "../components/ui/ipad-button";
+import iPadGrid from "../components/ui/ipad-grid";
+import SEO from "../components/SEO";
 
 const Index = () => {
-  return <div className="min-h-screen bg-primary">
-      <Header />
+  const services = [
+    {
+      icon: Home,
+      title: "Smart Home Integration",
+      description: "Complete Control4 automation solutions",
+      link: "/services/home-integration"
+    },
+    {
+      icon: Image,
+      title: "Home Theater Systems", 
+      description: "Premium entertainment experiences",
+      link: "/services/audio-entertainment"
+    },
+    {
+      icon: Wrench,
+      title: "Professional Installation",
+      description: "Expert setup and maintenance",
+      link: "/services/maintenance"
+    }
+  ];
+
+  return (
+    <iPadLayout>
+      <SEO 
+        title="Symphony Smart Homes - Premium Home Automation in Vail Valley"
+        description="Transform your Vail Valley home with Control4 smart home automation. Expert installation of home theaters, lighting, security, and integrated smart home systems."
+        keywords="smart home automation, Control4, home theater, Vail Valley, Colorado, home integration, smart lighting, security systems"
+      />
       
-      {/* Hero Section */}
-      <section className="min-h-[60vh] flex items-center justify-center relative overflow-hidden pt-24 sm:pt-0">
-        <div className="absolute inset-0 bg-gradient-to-b from-primary/50 to-primary z-10"></div>
-        <img src="https://images.unsplash.com/photo-1558002038-1055907df827?auto=format&fit=crop&q=80" alt="Smart Home Background" className="absolute inset-0 w-full h-full object-cover animate-[fade-in_1.5s_ease-out]" />
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 relative z-20">
-          <div className="text-center">
-            <p className="text-lg sm:text-xl text-gray-200 animate-[fade-up_1s_ease-out_200ms] mb-6 sm:mb-8 max-w-2xl mx-auto">
-              Transform your living space with intelligent home automation solutions powered by Control4
-            </p>
-            <Link to="/services" className="bg-accent hover:bg-accent/90 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-md font-medium inline-flex items-center gap-2 transition-colors animate-[fade-up_1s_ease-out_400ms]">
-              Explore Our Solutions
-              <ArrowRight className="w-5 h-5" />
+      <section className="pt-20 pb-16">
+        <div className="text-center mb-16">
+          <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight">
+            Symphony Smart Homes
+          </h1>
+          <p className="text-xl md:text-2xl text-gray-300 mb-8 max-w-3xl mx-auto leading-relaxed">
+            Transform your Vail Valley home with premium Control4 automation solutions
+          </p>
+          
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+            <Link to="/scheduling">
+              <iPadButton size="lg" className="w-full sm:w-auto">
+                Schedule Consultation <ArrowRight className="w-5 h-5 ml-2" />
+              </iPadButton>
+            </Link>
+            <Link to="/projects">
+              <iPadButton variant="secondary" size="lg" className="w-full sm:w-auto">
+                View Our Work <ArrowRight className="w-5 h-5 ml-2" />
+              </iPadButton>
             </Link>
           </div>
         </div>
-      </section>
 
-      {/* Features Section */}
-      <section className="py-24 relative overflow-hidden">
-        <div className="max-w-6xl mx-auto px-6">
-          <div className="grid md:grid-cols-3 gap-12">
-            <div className="text-center space-y-4 animate-[fade-up_1s_ease-out]">
-              <div className="w-16 h-16 bg-accent rounded-full flex items-center justify-center mx-auto mb-6">
-                <svg className="w-8 h-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z" />
-                </svg>
-              </div>
-              <h3 className="text-xl font-semibold text-white">Smart Integration</h3>
-              <p className="text-gray-300">Seamlessly connect and control all your home systems through one intuitive interface</p>
-            </div>
-            <div className="text-center space-y-4 animate-[fade-up_1s_ease-out_200ms]">
-              <div className="w-16 h-16 bg-accent rounded-full flex items-center justify-center mx-auto mb-6">
-                <svg className="w-8 h-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-                </svg>
-              </div>
-              <h3 className="text-xl font-semibold text-white">Energy Efficiency</h3>
-              <p className="text-gray-300">Optimize your home's energy usage with intelligent automation and monitoring</p>
-            </div>
-            <div className="text-center space-y-4 animate-[fade-up_1s_ease-out_400ms]">
-              <div className="w-16 h-16 bg-accent rounded-full flex items-center justify-center mx-auto mb-6">
-                <svg className="w-8 h-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2V7a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
-                </svg>
-              </div>
-              <h3 className="text-xl font-semibold text-white">Enhanced Security</h3>
-              <p className="text-gray-300">Protect your home with advanced security features and remote monitoring</p>
-            </div>
-          </div>
-        </div>
-      </section>
+        <iPadGrid columns={3} gap="lg" className="mb-16">
+          {services.map((service, index) => (
+            <Link key={index} to={service.link}>
+              <iPadCard>
+                <service.icon className="w-12 h-12 text-accent mb-4" />
+                <h3 className="text-2xl font-semibold text-white mb-3">{service.title}</h3>
+                <p className="text-gray-300 text-lg leading-relaxed">{service.description}</p>
+              </iPadCard>
+            </Link>
+          ))}
+        </iPadGrid>
 
-      {/* CTA Section */}
-      <section className="py-24 relative overflow-hidden bg-white/5">
-        <div className="max-w-6xl mx-auto px-6 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-6 animate-[fade-up_1s_ease-out]">Ready to Transform Your Home?</h2>
-          <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto animate-[fade-up_1s_ease-out_200ms]">
-            Let us create your perfect smart home experience with Control4
+        <iPadCard className="text-center">
+          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+            Ready to Upgrade Your Home?
+          </h2>
+          <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
+            Let us create the perfect smart home experience tailored to your lifestyle.
           </p>
-          <Link to="/contact" className="bg-accent hover:bg-accent/90 text-white px-8 py-4 rounded-md font-medium inline-flex items-center gap-2 transition-colors animate-[fade-up_1s_ease-out_400ms]">
-            Get Started
-            <ArrowRight className="w-5 h-5" />
-          </Link>
-        </div>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Link to="/contact">
+              <iPadButton size="lg">
+                <Phone className="w-5 h-5 mr-2" />
+                Get In Touch
+              </iPadButton>
+            </Link>
+            <Link to="/scheduling">
+              <iPadButton variant="secondary" size="lg">
+                <Calendar className="w-5 h-5 mr-2" />
+                Book Appointment
+              </iPadButton>
+            </Link>
+          </div>
+        </iPadCard>
       </section>
-
-      <Footer />
-    </div>;
+    </iPadLayout>
+  );
 };
 
 export default Index;

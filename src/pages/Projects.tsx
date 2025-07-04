@@ -1,128 +1,121 @@
 
-import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
-import { useState } from "react";
-import Header from "../components/Header";
+import { ArrowRight, Camera, Monitor, Cable } from "lucide-react";
+import iPadLayout from "../components/Layout/iPadLayout";
+import iPadCard from "../components/ui/ipad-card";
+import iPadButton from "../components/ui/ipad-button";
+import iPadGrid from "../components/ui/ipad-grid";
 import SEO from "../components/SEO";
 
 const Projects = () => {
-  const [selectedProject, setSelectedProject] = useState("ohEAHYLpcVD");
-
-  const matterportProjects = [
-    { id: "ohEAHYLpcVD", title: "Frost Creek Residence" },
-    { id: "vM2D6WVw9Jx", title: "Eagle Ranch Residence" },
-    { id: "JryTWXeEypj", title: "Avon Residence" },
-    { id: "thkE7sSu7S1", title: "Gypsum Residence" },
-  ];
-
-  const photoCategories = [
+  const portfolioSections = [
     {
-      title: "Mounted TVs",
-      description: "Professional TV mounting and installation services",
-      path: "/photos/mounted-tvs",
-      image: "/lovable-uploads/mounted tvs/Misc/IMG_0224.JPG",
-    },
-    {
-      title: "Wiring",
-      description: "Clean and professional wiring solutions",
-      path: "/photos/wiring",
-      image: "/lovable-uploads/wiring/IMG_0136.JPG",
-    },
-    {
+      icon: Monitor,
       title: "Home Theater",
-      description: "Custom home theater installations",
-      path: "/photos/home-theater",
-      image: "/lovable-uploads/home theater/IMG_0921.JPG",
+      description: "Premium home cinema installations with cutting-edge technology",
+      image: "/lovable-uploads/home theater/IMG_0509.JPG",
+      link: "/photos/home-theater",
+      count: "15+ installations"
     },
+    {
+      icon: Monitor,
+      title: "Mounted TVs",
+      description: "Expert TV mounting and media wall installations",
+      image: "/lovable-uploads/mounted tvs/Home/IMG_0659.JPG",
+      link: "/photos/mounted-tvs",
+      count: "50+ installations"
+    },
+    {
+      icon: Cable,
+      title: "Wiring & Infrastructure",
+      description: "Professional structured wiring and rack installations",
+      image: "/lovable-uploads/wiring/IMG_0578.JPG",
+      link: "/photos/wiring",
+      count: "100+ projects"
+    }
   ];
 
   return (
-    <div className="min-h-screen bg-primary">
+    <iPadLayout>
       <SEO 
-        title="Our Projects | Custom Audio/Video and Home Theater Installations"
-        description="Browse our latest smart home transformations including custom home theaters, professional TV mounting, and clean wiring solutions throughout Vail Valley, Colorado."
-        keywords="home theater installation, TV mounting, smart home projects, audio video installation, home automation projects, Vail Valley"
+        title="Our Project Portfolio - Smart Home Installations in Vail Valley"
+        description="Browse our portfolio of smart home installations including home theaters, TV mounting, and structured wiring projects throughout Vail Valley, Colorado."
+        keywords="smart home portfolio, home theater installation, TV mounting, structured wiring, Vail Valley projects"
       />
-      <Header />
-      <section className="pt-32 pb-20 px-6">
-        <div className="max-w-4xl mx-auto">
-          <h1 className="text-4xl md:text-5xl font-bold text-white text-center mb-4">Our Projects</h1>
-          <p className="text-xl text-gray-300 text-center mb-16 max-w-2xl mx-auto">
-            Discover our latest smart home transformations
+      
+      <section className="pt-20 pb-16">
+        <div className="text-center mb-16">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">
+            Our Work
+          </h1>
+          <p className="text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto leading-relaxed mb-8">
+            Explore our portfolio of premium smart home installations throughout Vail Valley
           </p>
+          <Link to="/scheduling">
+            <iPadButton size="lg">
+              <Camera className="w-5 h-5 mr-2" />
+              Schedule Your Project
+            </iPadButton>
+          </Link>
+        </div>
 
-          {/* Photo Categories Section */}
-          <div className="mb-24">
-            <h2 className="text-3xl font-bold text-white text-center mb-8">Project Categories</h2>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {photoCategories.map((category, index) => (
-                <Link 
-                  key={index}
-                  to={category.path}
-                  className="group bg-secondary/40 rounded-lg overflow-hidden hover:bg-secondary/60 transition-all duration-300 border border-white/10"
-                >
-                  <div className="aspect-video overflow-hidden">
+        <iPadGrid columns={1} gap="lg" className="mb-16">
+          {portfolioSections.map((section, index) => (
+            <Link key={index} to={section.link}>
+              <iPadCard className="grid md:grid-cols-2 gap-8 items-center">
+                <div className="order-2 md:order-1">
+                  <section.icon className="w-12 h-12 text-accent mb-4" />
+                  <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+                    {section.title}
+                  </h2>
+                  <p className="text-xl text-gray-300 mb-6 leading-relaxed">
+                    {section.description}
+                  </p>
+                  <div className="flex items-center justify-between">
+                    <span className="text-accent text-lg font-medium">
+                      {section.count}
+                    </span>
+                    <iPadButton variant="ghost">
+                      View Gallery <ArrowRight className="w-5 h-5 ml-2" />
+                    </iPadButton>
+                  </div>
+                </div>
+                <div className="order-1 md:order-2">
+                  <div className="aspect-video rounded-2xl overflow-hidden bg-secondary/30">
                     <img 
-                      src={category.image}
-                      alt={category.title}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                      src={section.image} 
+                      alt={section.title}
+                      className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
                     />
                   </div>
-                  <div className="p-4">
-                    <h3 className="text-lg font-semibold text-white mb-1">{category.title}</h3>
-                    <p className="text-sm text-gray-300 mb-2">{category.description}</p>
-                    <div className="flex items-center text-accent text-sm">
-                      View Gallery
-                      <ArrowRight className="ml-2 w-3 h-3" />
-                    </div>
-                  </div>
-                </Link>
-              ))}
-            </div>
-          </div>
+                </div>
+              </iPadCard>
+            </Link>
+          ))}
+        </iPadGrid>
 
-          {/* Matterport Section */}
-          <div className="mt-20">
-            <h2 className="text-3xl font-bold text-white text-center mb-8">Virtual Tours</h2>
-            <div className="space-y-8">
-              <div className="flex flex-wrap justify-center gap-4 mb-8">
-                {matterportProjects.map((project) => (
-                  <button
-                    key={project.id}
-                    onClick={() => setSelectedProject(project.id)}
-                    className={`px-4 py-2 rounded-md transition-colors ${
-                      selectedProject === project.id
-                        ? "bg-accent text-white"
-                        : "bg-white/5 text-gray-300 hover:bg-white/10"
-                    }`}
-                  >
-                    {project.title}
-                  </button>
-                ))}
-              </div>
-              <div className="aspect-video w-full max-w-4xl mx-auto rounded-lg overflow-hidden bg-white/5 border border-white/10">
-                <iframe
-                  width="100%"
-                  height="100%"
-                  src={`https://my.matterport.com/show/?m=${selectedProject}`}
-                  frameBorder="0"
-                  allowFullScreen
-                  allow="autoplay; fullscreen; web-share; xr-spatial-tracking;"
-                  className="w-full h-full"
-                  title={matterportProjects.find(p => p.id === selectedProject)?.title || "Virtual Tour"}
-                />
-              </div>
-            </div>
+        <iPadCard className="text-center">
+          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+            Ready to Start Your Project?
+          </h2>
+          <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
+            Let us bring your smart home vision to life with our expert installation services.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Link to="/contact">
+              <iPadButton size="lg">
+                Get a Quote
+              </iPadButton>
+            </Link>
+            <Link to="/about">
+              <iPadButton variant="secondary" size="lg">
+                Learn About Us
+              </iPadButton>
+            </Link>
           </div>
-        </div>
+        </iPadCard>
       </section>
-
-      <footer className="py-12 px-6 text-center text-gray-400 bg-primary">
-        <p className="text-sm">
-          © 2024 Symphony Smart Homes. All rights reserved.
-        </p>
-      </footer>
-    </div>
+    </iPadLayout>
   );
 };
 

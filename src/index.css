@@ -46,6 +46,9 @@
   body {
     @apply bg-primary text-foreground antialiased;
     font-feature-settings: "ss01", "ss02", "cv01", "cv02", "cv03";
+    /* iPad-optimized typography */
+    font-size: 16px;
+    line-height: 1.5;
   }
   
   .glass-dark {
@@ -54,6 +57,37 @@
   
   .card-hover {
     @apply transition-all duration-300 hover:translate-y-[-4px] hover:shadow-lg;
+  }
+  
+  /* iPad-specific optimizations */
+  @media (min-width: 768px) and (max-width: 1024px) {
+    body {
+      font-size: 18px;
+    }
+    
+    h1 {
+      font-size: 3rem;
+    }
+    
+    h2 {
+      font-size: 2.5rem;
+    }
+    
+    h3 {
+      font-size: 2rem;
+    }
+  }
+  
+  /* Enhanced touch targets for iPad */
+  button, a {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  
+  /* Smooth scrolling for iPad */
+  html {
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
   }
 }
 
@@ -96,5 +130,19 @@
   
   .rdp-button:hover:not([disabled]):not(.rdp-day_selected) {
     background-color: rgba(255, 255, 255, 0.1) !important;
+  }
+}
+
+/* iPad-specific animations and interactions */
+@media (hover: hover) and (pointer: fine) {
+  .hover\:scale-105:hover {
+    transform: scale(1.05);
+  }
+}
+
+/* Touch-friendly interactions for iPad */
+@media (hover: none) and (pointer: coarse) {
+  .active\:scale-95:active {
+    transform: scale(0.95);
   }
 }
