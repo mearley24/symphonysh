@@ -1,4 +1,3 @@
-
 import { Link } from "react-router-dom";
 import { ArrowRight, Home, Volume2, Shield, Lightbulb, Thermometer, Wifi, Wrench, Sun } from "lucide-react";
 import { iPadLayout as IPadLayout } from "../components/Layout/iPadLayout";
@@ -35,7 +34,7 @@ const Services = () => {
       title: "Smart Lighting",
       description: "Intelligent lighting control throughout your home",
       link: "/services/smart-lighting",
-      features: ["Automated scenes", "Energy efficiency", "Voice control"]
+      features: ["Smart scenes", "Energy efficiency", "Voice control"]
     },
     {
       icon: Thermometer,
@@ -54,7 +53,7 @@ const Services = () => {
     {
       icon: Sun,
       title: "Shades",
-      description: "Automated window treatments for privacy and energy efficiency",
+      description: "Window treatments for privacy and energy efficiency",
       link: "/services/shades",
       features: ["Motorized shades", "Smart scheduling", "Solar integration"]
     },
@@ -88,7 +87,7 @@ const Services = () => {
         <IPadGrid columns={2} gap="sm" className="mb-6">
           {services.map((service, index) => (
             <Link key={index} to={service.link}>
-              <IPadCard className="h-32 p-3 hover:border-accent/30 transition-all duration-300">
+              <IPadCard className="h-24 p-3 hover:border-accent/30 transition-all duration-300">
                 <div className="flex flex-col h-full">
                   <div className="flex items-start mb-2">
                     <service.icon className="w-4 h-4 text-accent mr-2 flex-shrink-0 mt-0.5" />
@@ -98,7 +97,7 @@ const Services = () => {
                     </div>
                   </div>
                   
-                  <div className="mb-2 flex-grow">
+                  <div className="flex-grow flex items-center">
                     <div className="flex flex-wrap gap-1 text-xs text-gray-400">
                       {service.features.map((feature, idx) => (
                         <span key={idx} className="flex items-center">
