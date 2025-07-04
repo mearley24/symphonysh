@@ -103,7 +103,7 @@ const Services = () => {
                 </ul>
                 
                 <IPadButton variant="ghost" size="sm" className="mt-auto">
-                  Learn More <ArrowRight className="w-2 h-2 ml-1" />
+                  Learn More <ArrowRight className="w-2 h-2" />
                 </IPadButton>
               </IPadCard>
             </Link>
@@ -119,7 +119,7 @@ const Services = () => {
           </p>
           <Link to="/scheduling">
             <IPadButton size="sm">
-              Schedule Your Consultation <ArrowRight className="w-3 h-3 ml-1" />
+              Schedule Your Consultation <ArrowRight className="w-3 h-3" />
             </IPadButton>
           </Link>
         </IPadCard>

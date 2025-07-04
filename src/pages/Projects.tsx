@@ -53,7 +53,7 @@ const Projects = () => {
           </p>
           <Link to="/scheduling">
             <IPadButton size="sm">
-              <Camera className="w-3 h-3 mr-1" />
+              <Camera className="w-3 h-3" />
               Schedule Your Project
             </IPadButton>
           </Link>
@@ -76,7 +76,7 @@ const Projects = () => {
                       {section.count}
                     </span>
                     <IPadButton variant="ghost" size="sm">
-                      View Gallery <ArrowRight className="w-3 h-3 ml-1" />
+                      View Gallery <ArrowRight className="w-3 h-3" />
                     </IPadButton>
                   </div>
                 </div>

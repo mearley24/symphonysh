@@ -49,12 +49,12 @@ const Index = () => {
           <div className="flex flex-col sm:flex-row gap-2 justify-center items-center max-w-md mx-auto">
             <Link to="/scheduling" className="w-full sm:w-auto">
               <IPadButton size="sm" className="w-full">
-                Schedule Consultation <ArrowRight className="w-3 h-3 ml-1" />
+                Schedule Consultation <ArrowRight className="w-3 h-3" />
               </IPadButton>
             </Link>
             <Link to="/projects" className="w-full sm:w-auto">
               <IPadButton variant="secondary" size="sm" className="w-full">
-                View Our Work <ArrowRight className="w-3 h-3 ml-1" />
+                View Our Work <ArrowRight className="w-3 h-3" />
               </IPadButton>
             </Link>
           </div>
@@ -82,13 +82,13 @@ const Index = () => {
           <div className="flex flex-col sm:flex-row gap-2 justify-center max-w-sm mx-auto">
             <Link to="/contact" className="w-full sm:w-auto">
               <IPadButton size="sm" className="w-full">
-                <Phone className="w-3 h-3 mr-1" />
+                <Phone className="w-3 h-3" />
                 Get In Touch
               </IPadButton>
             </Link>
             <Link to="/scheduling" className="w-full sm:w-auto">
               <IPadButton variant="secondary" size="sm" className="w-full">
-                <Calendar className="w-3 h-3 mr-1" />
+                <Calendar className="w-3 h-3" />
                 Book Appointment
               </IPadButton>
             </Link>
