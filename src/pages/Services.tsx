@@ -108,7 +108,7 @@ const Services = () => {
         </IPadGrid>
 
         <div className="flex justify-center">
-          <IPadCard className="text-center max-w-xl">
+          <IPadCard className="text-center max-w-sm p-4">
             <h2 className="text-lg md:text-xl font-bold text-white mb-2">
               Ready to Get Started?
             </h2>
