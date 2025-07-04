@@ -22,33 +22,33 @@ const SecuritySystems = () => {
 
           <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">Security</h1>
           <p className="text-xl text-gray-300 mb-12 max-w-2xl">
-            Comprehensive security and surveillance solutions integrated with Control4 for complete peace of mind
+            Advanced protection that thinks ahead, keeping your family and property safe 24/7
           </p>
 
           <div className="grid md:grid-cols-2 gap-12 mb-16">
             <div>
-              <h2 className="text-2xl font-semibold text-white mb-4">Integrated Security Solution</h2>
+              <h2 className="text-2xl font-semibold text-white mb-4">Peace of Mind, Automated</h2>
               <p className="text-gray-300 mb-6">
-                Our security systems seamlessly integrate with Control4's automation platform, providing 
-                unified control over your entire home security ecosystem. Monitor and manage your security 
-                system through Control4's intuitive interface, whether you're at home or away.
+                Your security system should work smarter, not harder. Our solutions learn your routines, 
+                recognize familiar faces, and distinguish between a family member arriving home and an 
+                unwelcome visitor. Get instant alerts that matter, not false alarms that don't.
               </p>
               <ul className="space-y-3 text-gray-300">
                 <li className="flex items-center">
                   <Lock className="w-5 h-5 text-accent mr-3" />
-                  Smart lock integration and monitoring
+                  Intelligent access control with user recognition
                 </li>
                 <li className="flex items-center">
                   <Camera className="w-5 h-5 text-accent mr-3" />
-                  HD surveillance cameras with night vision
+                  4K cameras with AI-powered motion detection
                 </li>
                 <li className="flex items-center">
                   <Bell className="w-5 h-5 text-accent mr-3" />
-                  Real-time alerts and notifications
+                  Smart alerts that learn your preferences
                 </li>
                 <li className="flex items-center">
                   <Eye className="w-5 h-5 text-accent mr-3" />
-                  24/7 professional monitoring available
+                  Optional professional monitoring services
                 </li>
               </ul>
             </div>
@@ -61,45 +61,45 @@ const SecuritySystems = () => {
             </div>
           </div>
 
-          <h2 className="text-2xl font-semibold text-white mb-8 text-center">Key Features</h2>
+          <h2 className="text-2xl font-semibold text-white mb-8 text-center">Intelligent Protection</h2>
           <div className="grid md:grid-cols-3 gap-6 mb-16">
             <FeatureCard
               icon={Lock}
-              title="Smart Access Control"
-              description="Manage and monitor all entry points with smart locks and access controls integrated with Control4."
+              title="Smart Entry Points"
+              description="Keyless entry with facial recognition, temporary access codes, and automatic locking."
             />
             <FeatureCard
               icon={Camera}
-              title="Video Surveillance"
-              description="HD cameras with night vision, smart motion detection, and cloud storage options."
+              title="Proactive Surveillance"
+              description="Cameras that recognize familiar faces and only alert you to genuine security concerns."
             />
             <FeatureCard
               icon={Bell}
-              title="Intelligent Alerts"
-              description="Receive instant notifications for any security events or unusual activity."
+              title="Contextual Alerts"
+              description="Notifications that understand the difference between your dog and an intruder."
             />
           </div>
 
           <div className="bg-white/5 backdrop-blur-sm p-8 rounded-lg mb-16">
-            <h2 className="text-2xl font-semibold text-white mb-4">Video Surveillance Features</h2>
+            <h2 className="text-2xl font-semibold text-white mb-4">Advanced Monitoring Features</h2>
             <div className="grid md:grid-cols-2 gap-8">
               <div>
                 <ul className="space-y-4 text-gray-300">
                   <li className="flex items-center">
                     <Camera className="w-5 h-5 text-accent mr-3" />
-                    HD cameras with wide-angle viewing
+                    Ultra-wide field cameras with color night vision
                   </li>
                   <li className="flex items-center">
                     <Eye className="w-5 h-5 text-accent mr-3" />
-                    Night vision capabilities
+                    AI-powered behavior analysis
                   </li>
                   <li className="flex items-center">
                     <Smartphone className="w-5 h-5 text-accent mr-3" />
-                    Mobile access and remote viewing
+                    Real-time mobile alerts with video clips
                   </li>
                   <li className="flex items-center">
                     <Wifi className="w-5 h-5 text-accent mr-3" />
-                    Cloud storage and local backup
+                    Secure cloud storage with local backup
                   </li>
                 </ul>
               </div>
@@ -114,9 +114,9 @@ const SecuritySystems = () => {
           </div>
 
           <div className="bg-white/5 backdrop-blur-sm p-8 rounded-lg text-center">
-            <h2 className="text-2xl font-semibold text-white mb-4">Protect Your Home Today</h2>
+            <h2 className="text-2xl font-semibold text-white mb-4">Secure Your Sanctuary</h2>
             <p className="text-gray-300 mb-6">
-              Let us design a comprehensive security solution tailored to your needs.
+              Experience security that adapts to your life, not the other way around.
             </p>
             <Link 
               to="/scheduling?service=security-systems"

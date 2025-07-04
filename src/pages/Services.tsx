@@ -88,7 +88,7 @@ const Services = () => {
         <IPadGrid columns={2} gap="sm" className="mb-6">
           {services.map((service, index) => (
             <Link key={index} to={service.link}>
-              <IPadCard className="h-32 p-3">
+              <IPadCard className="h-32 p-3 hover:border-accent/30 transition-all duration-300">
                 <div className="flex flex-col h-full">
                   <div className="flex items-start mb-2">
                     <service.icon className="w-4 h-4 text-accent mr-2 flex-shrink-0 mt-0.5" />
@@ -98,7 +98,7 @@ const Services = () => {
                     </div>
                   </div>
                   
-                  <div className="mb-2">
+                  <div className="mb-2 flex-grow">
                     <div className="flex flex-wrap gap-1 text-xs text-gray-400">
                       {service.features.map((feature, idx) => (
                         <span key={idx} className="flex items-center">
@@ -108,12 +108,6 @@ const Services = () => {
                         </span>
                       ))}
                     </div>
-                  </div>
-                  
-                  <div className="flex justify-center mt-auto">
-                    <button className="inline-flex items-center bg-accent hover:bg-accent/90 text-white px-4 py-2 rounded-md font-medium transition-colors text-xs">
-                      Learn More <ArrowRight className="w-3 h-3 ml-1" />
-                    </button>
                   </div>
                 </div>
               </IPadCard>

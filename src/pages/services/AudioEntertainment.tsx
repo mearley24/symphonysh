@@ -22,29 +22,29 @@ const AudioEntertainment = () => {
 
           <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">Audio Entertainment</h1>
           <p className="text-xl text-gray-300 mb-12 max-w-2xl">
-            Premium multi-room audio solutions powered by Control4's entertainment ecosystem
+            Fill every corner of your home with pristine sound that follows you from room to room
           </p>
 
           <div className="grid md:grid-cols-2 gap-12 mb-16">
             <div>
-              <h2 className="text-2xl font-semibold text-white mb-4">Control4 Audio Integration</h2>
+              <h2 className="text-2xl font-semibold text-white mb-4">Your Personal Concert Hall</h2>
               <p className="text-gray-300 mb-6">
-                Experience music throughout your home with our Control4-integrated audio solutions. 
-                Stream different music in every room, create custom playlists, and control everything 
-                from a single interface. Perfect for both everyday enjoyment and entertaining.
+                Whether you're hosting a dinner party or enjoying a quiet evening, our audio solutions adapt 
+                to every moment. Start your morning playlist in the bedroom, have it follow you to the kitchen, 
+                and seamlessly transition to the living room—all without missing a beat.
               </p>
               <ul className="space-y-3 text-gray-300">
                 <li className="flex items-center">
                   <Speaker className="w-5 h-5 text-accent mr-3" />
-                  Multi-room audio distribution
+                  Whole-home audio distribution
                 </li>
                 <li className="flex items-center">
                   <Music className="w-5 h-5 text-accent mr-3" />
-                  High-fidelity sound quality
+                  Audiophile-grade sound quality
                 </li>
                 <li className="flex items-center">
                   <Wifi className="w-5 h-5 text-accent mr-3" />
-                  Wireless streaming capabilities
+                  Seamless streaming from any device
                 </li>
               </ul>
             </div>
@@ -57,29 +57,29 @@ const AudioEntertainment = () => {
             </div>
           </div>
 
-          <h2 className="text-2xl font-semibold text-white mb-8 text-center">Key Features</h2>
+          <h2 className="text-2xl font-semibold text-white mb-8 text-center">Immersive Audio Solutions</h2>
           <div className="grid md:grid-cols-3 gap-6 mb-16">
             <FeatureCard
               icon={Speaker}
-              title="Multi-Room Audio"
-              description="Play different music in every room or sync them all together for whole-house audio."
+              title="Zone Management"
+              description="Independent control for each room, or sync everything for house-wide entertainment."
             />
             <FeatureCard
               icon={Radio}
-              title="Streaming Services"
-              description="Integrate with popular streaming services like Spotify, Apple Music, and more."
+              title="Universal Access"
+              description="Connect Spotify, Apple Music, Pandora, and more—your music, your way."
             />
             <FeatureCard
               icon={Settings}
-              title="Custom Controls"
-              description="Create personalized scenes and controls for different occasions and moods."
+              title="Mood-Based Scenes"
+              description="Pre-configured audio settings for dinner parties, relaxation, or energizing workouts."
             />
           </div>
 
           <div className="bg-white/5 backdrop-blur-sm p-8 rounded-lg text-center">
-            <h2 className="text-2xl font-semibold text-white mb-4">Elevate Your Audio Experience</h2>
+            <h2 className="text-2xl font-semibold text-white mb-4">Ready to Hear the Difference?</h2>
             <p className="text-gray-300 mb-6">
-              Let us design the perfect audio entertainment system for your home.
+              Experience how premium audio can transform your home's atmosphere.
             </p>
             <Link 
               to="/scheduling?service=audio-entertainment"

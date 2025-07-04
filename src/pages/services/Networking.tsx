@@ -22,29 +22,30 @@ const Networking = () => {
 
           <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">Home Networking</h1>
           <p className="text-xl text-gray-300 mb-12 max-w-2xl">
-            Enterprise-grade networking solutions integrated with Control4 for reliable smart home performance
+            Rock-solid connectivity that powers your entire smart home without breaking a sweat
           </p>
 
           <div className="grid md:grid-cols-2 gap-12 mb-16">
             <div>
-              <h2 className="text-2xl font-semibold text-white mb-4">Control4 Network Integration</h2>
+              <h2 className="text-2xl font-semibold text-white mb-4">The Foundation of Smart Living</h2>
               <p className="text-gray-300 mb-6">
-                Our networking solutions provide the robust foundation needed for your Control4 smart home 
-                system. With enterprise-grade equipment and professional installation, we ensure reliable 
-                connectivity for all your smart home devices and streaming needs.
+                Your smart home is only as good as its network. Buffering videos, dropped video calls, and 
+                unresponsive smart devices are signs of an inadequate network. We build enterprise-grade 
+                infrastructure that handles everything from 4K streaming to dozens of connected devices 
+                without missing a beat.
               </p>
               <ul className="space-y-3 text-gray-300">
                 <li className="flex items-center">
                   <Router className="w-5 h-5 text-accent mr-3" />
-                  Enterprise-grade networking equipment
+                  Commercial-grade equipment built to last
                 </li>
                 <li className="flex items-center">
                   <Wifi className="w-5 h-5 text-accent mr-3" />
-                  Whole-home WiFi coverage
+                  Seamless coverage in every corner
                 </li>
                 <li className="flex items-center">
                   <Network className="w-5 h-5 text-accent mr-3" />
-                  Network monitoring and support
+                  Proactive monitoring and maintenance
                 </li>
               </ul>
             </div>
@@ -57,29 +58,29 @@ const Networking = () => {
             </div>
           </div>
 
-          <h2 className="text-2xl font-semibold text-white mb-8 text-center">Key Features</h2>
+          <h2 className="text-2xl font-semibold text-white mb-8 text-center">Enterprise-Grade Solutions</h2>
           <div className="grid md:grid-cols-3 gap-6 mb-16">
             <FeatureCard
               icon={Router}
-              title="Professional Equipment"
-              description="Enterprise-grade routers and access points for reliable performance."
+              title="Professional Hardware"
+              description="Business-class routers and switches designed for 24/7 operation and maximum performance."
             />
             <FeatureCard
               icon={Globe}
-              title="Complete Coverage"
-              description="Strategically placed access points for whole-home WiFi coverage."
+              title="Strategic Placement"
+              description="Carefully positioned access points eliminate dead zones and ensure consistent speed."
             />
             <FeatureCard
               icon={Cloud}
-              title="Remote Management"
-              description="24/7 monitoring and remote support for your network."
+              title="Smart Management"
+              description="Automated updates, performance monitoring, and remote troubleshooting keep you connected."
             />
           </div>
 
           <div className="bg-white/5 backdrop-blur-sm p-8 rounded-lg text-center">
-            <h2 className="text-2xl font-semibold text-white mb-4">Ready to Upgrade Your Network?</h2>
+            <h2 className="text-2xl font-semibold text-white mb-4">Ready for Bulletproof Connectivity?</h2>
             <p className="text-gray-300 mb-6">
-              Let us design a professional networking solution for your smart home.
+              Build the network foundation your smart home deserves.
             </p>
             <Link 
               to="/scheduling?service=networking"

@@ -22,29 +22,30 @@ const Shades = () => {
 
           <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">Shades</h1>
           <p className="text-xl text-gray-300 mb-12 max-w-2xl">
-            Automated window treatments integrated with Control4 for enhanced comfort and energy efficiency
+            Automated window treatments that respond to sunlight, weather, and your daily routines
           </p>
 
           <div className="grid md:grid-cols-2 gap-12 mb-16">
             <div>
-              <h2 className="text-2xl font-semibold text-white mb-4">Control4 Shades Integration</h2>
+              <h2 className="text-2xl font-semibold text-white mb-4">Privacy and Comfort, Automated</h2>
               <p className="text-gray-300 mb-6">
-                Our smart shading solutions seamlessly integrate with Control4, allowing you to automate 
-                your window treatments for optimal comfort, privacy, and energy efficiency. Create schedules, 
-                scenes, and control your shades from any Control4 interface.
+                Picture waking up to shades that gradually open with the sunrise, automatically closing 
+                during the day's hottest hours to keep your home cool, then perfectly positioning 
+                themselves for your evening movie. Our motorized shades don't just follow schedules—they 
+                adapt to weather patterns and your lifestyle.
               </p>
               <ul className="space-y-3 text-gray-300">
                 <li className="flex items-center">
                   <Sun className="w-5 h-5 text-accent mr-3" />
-                  Automated sun protection
+                  Solar-responsive positioning
                 </li>
                 <li className="flex items-center">
                   <Clock className="w-5 h-5 text-accent mr-3" />
-                  Scheduled operations
+                  Lifestyle-based automation
                 </li>
                 <li className="flex items-center">
                   <Smartphone className="w-5 h-5 text-accent mr-3" />
-                  Multi-device control
+                  Voice and app control
                 </li>
               </ul>
             </div>
@@ -57,29 +58,29 @@ const Shades = () => {
             </div>
           </div>
 
-          <h2 className="text-2xl font-semibold text-white mb-8 text-center">Key Features</h2>
+          <h2 className="text-2xl font-semibold text-white mb-8 text-center">Intelligent Window Control</h2>
           <div className="grid md:grid-cols-3 gap-6 mb-16">
             <FeatureCard
               icon={SunDim}
-              title="Light Control"
-              description="Automatically adjust shades based on sunlight and time of day."
+              title="Dynamic Light Control"
+              description="Automatically filter harsh sunlight while preserving your views and natural illumination."
             />
             <FeatureCard
               icon={Clock}
-              title="Smart Scheduling"
-              description="Create custom schedules that align with your daily routines."
+              title="Routine Integration"
+              description="Coordinate with your daily schedule for privacy when needed, openness when desired."
             />
             <FeatureCard
               icon={Smartphone}
-              title="Remote Access"
-              description="Control your shades from anywhere using the Control4 app."
+              title="Effortless Operation"
+              description="Control individual shades or entire rooms with simple voice commands or mobile app."
             />
           </div>
 
           <div className="bg-white/5 backdrop-blur-sm p-8 rounded-lg text-center">
-            <h2 className="text-2xl font-semibold text-white mb-4">Enhance Your Home's Comfort</h2>
+            <h2 className="text-2xl font-semibold text-white mb-4">Transform Your Windows</h2>
             <p className="text-gray-300 mb-6">
-              Let us design the perfect smart shading solution for your home.
+              Experience the perfect balance of privacy, comfort, and energy efficiency.
             </p>
             <Link 
               to="/scheduling?service=shades"

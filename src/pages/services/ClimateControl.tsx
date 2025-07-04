@@ -22,29 +22,29 @@ const ClimateControl = () => {
 
           <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">Climate Control</h1>
           <p className="text-xl text-gray-300 mb-12 max-w-2xl">
-            Smart climate control systems integrated with Control4 for optimal comfort and efficiency
+            Perfect comfort in every room, automatically adjusted to your preferences and the weather outside
           </p>
 
           <div className="grid md:grid-cols-2 gap-12 mb-16">
             <div>
-              <h2 className="text-2xl font-semibold text-white mb-4">Control4 Climate Integration</h2>
+              <h2 className="text-2xl font-semibold text-white mb-4">Comfort That Anticipates</h2>
               <p className="text-gray-300 mb-6">
-                Our climate control solutions seamlessly integrate with Control4's automation platform, 
-                allowing you to manage your home's temperature, humidity, and air quality from a single interface. 
-                Create schedules, monitor energy usage, and maintain the perfect environment year-round.
+                Forget about walking into rooms that are too hot or too cold. Our intelligent climate systems 
+                learn your preferences, track weather patterns, and even consider your daily schedule to 
+                ensure every space is perfectly comfortable before you arrive.
               </p>
               <ul className="space-y-3 text-gray-300">
                 <li className="flex items-center">
                   <Thermometer className="w-5 h-5 text-accent mr-3" />
-                  Multi-zone temperature control
+                  Precision zone control for every room
                 </li>
                 <li className="flex items-center">
                   <BarChart className="w-5 h-5 text-accent mr-3" />
-                  Energy usage monitoring
+                  Real-time energy optimization
                 </li>
                 <li className="flex items-center">
                   <Cloud className="w-5 h-5 text-accent mr-3" />
-                  Smart humidity management
+                  Automatic humidity balancing
                 </li>
               </ul>
             </div>
@@ -57,29 +57,29 @@ const ClimateControl = () => {
             </div>
           </div>
 
-          <h2 className="text-2xl font-semibold text-white mb-8 text-center">Key Features</h2>
+          <h2 className="text-2xl font-semibold text-white mb-8 text-center">Intelligent Climate Features</h2>
           <div className="grid md:grid-cols-3 gap-6 mb-16">
             <FeatureCard
               icon={Sun}
-              title="Smart Scheduling"
-              description="Create custom schedules that adapt to your lifestyle and daily routines."
+              title="Predictive Heating"
+              description="Your home starts warming up before you wake up, cooling down before you sleep."
             />
             <FeatureCard
               icon={Wind}
-              title="Air Quality Control"
-              description="Monitor and maintain optimal air quality with smart ventilation control."
+              title="Air Quality Management"
+              description="Automatic ventilation control maintains fresh, healthy air throughout your home."
             />
             <FeatureCard
               icon={BarChart}
-              title="Energy Analytics"
-              description="Track and optimize your energy usage with detailed analytics and reports."
+              title="Efficiency Analytics"
+              description="Track energy usage patterns and receive suggestions for maximum savings."
             />
           </div>
 
           <div className="bg-white/5 backdrop-blur-sm p-8 rounded-lg text-center">
-            <h2 className="text-2xl font-semibold text-white mb-4">Ready to Transform Your Home?</h2>
+            <h2 className="text-2xl font-semibold text-white mb-4">Experience Perfect Comfort</h2>
             <p className="text-gray-300 mb-6">
-              Let us help you create the perfect climate control solution for your home.
+              Discover how intelligent climate control can enhance your comfort while reducing energy costs.
             </p>
             <Link 
               to="/scheduling?service=climate-control"

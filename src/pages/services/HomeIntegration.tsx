@@ -22,29 +22,29 @@ const HomeIntegration = () => {
 
           <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">Home Automation</h1>
           <p className="text-xl text-gray-300 mb-12 max-w-2xl">
-            Seamless integration of all your smart home systems with Control4
+            Transform your house into an intelligent living space where every system works in perfect harmony
           </p>
 
           <div className="grid md:grid-cols-2 gap-12 mb-16">
             <div>
-              <h2 className="text-2xl font-semibold text-white mb-4">Complete Control4 Integration</h2>
+              <h2 className="text-2xl font-semibold text-white mb-4">The Power of Control4</h2>
               <p className="text-gray-300 mb-6">
-                Transform your home into a fully integrated smart living space with Control4 at its heart. 
-                Connect and control all your systems - lighting, climate, security, entertainment, and more - 
-                through a single, intuitive interface.
+                Imagine walking into your home and having everything respond to your presence. Lights dim to the 
+                perfect level, your favorite music begins playing, the temperature adjusts automatically, and your 
+                security system disarms—all without lifting a finger. This is the magic of Control4 automation.
               </p>
               <ul className="space-y-3 text-gray-300">
                 <li className="flex items-center">
                   <Settings className="w-5 h-5 text-accent mr-3" />
-                  Unified system control
+                  One-touch control of multiple systems
                 </li>
                 <li className="flex items-center">
                   <Wifi className="w-5 h-5 text-accent mr-3" />
-                  Reliable connectivity
+                  Rock-solid wireless connectivity
                 </li>
                 <li className="flex items-center">
                   <Globe className="w-5 h-5 text-accent mr-3" />
-                  Remote access and control
+                  Control from anywhere in the world
                 </li>
               </ul>
             </div>
@@ -57,29 +57,29 @@ const HomeIntegration = () => {
             </div>
           </div>
 
-          <h2 className="text-2xl font-semibold text-white mb-8 text-center">Key Features</h2>
+          <h2 className="text-2xl font-semibold text-white mb-8 text-center">Why Choose Integration?</h2>
           <div className="grid md:grid-cols-3 gap-6 mb-16">
             <FeatureCard
               icon={Home}
-              title="Complete Integration"
-              description="Seamlessly connect all your smart home systems into one cohesive ecosystem."
+              title="Unified Experience"
+              description="No more juggling multiple apps. One interface controls your entire home ecosystem effortlessly."
             />
             <FeatureCard
               icon={Zap}
-              title="Automation"
-              description="Create powerful automation routines that make your home work for you."
+              title="Smart Scenes"
+              description="Create personalized experiences like 'Movie Night' or 'Good Morning' that adjust multiple systems instantly."
             />
             <FeatureCard
               icon={Lock}
-              title="Secure Platform"
-              description="Enterprise-grade security protecting your smart home network and data."
+              title="Enterprise Security"
+              description="Military-grade encryption protects your home network and personal data around the clock."
             />
           </div>
 
           <div className="bg-white/5 backdrop-blur-sm p-8 rounded-lg text-center">
-            <h2 className="text-2xl font-semibold text-white mb-4">Ready for Complete Home Automation?</h2>
+            <h2 className="text-2xl font-semibold text-white mb-4">Ready to Experience True Automation?</h2>
             <p className="text-gray-300 mb-6">
-              Let us create your perfect automated smart home experience.
+              Discover how a fully integrated smart home can simplify and enhance your daily life.
             </p>
             <Link 
               to="/scheduling?service=home-integration"
