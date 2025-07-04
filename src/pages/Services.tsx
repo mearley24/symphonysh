@@ -1,10 +1,10 @@
 
 import { Link } from "react-router-dom";
 import { ArrowRight, Home, Volume2, Shield, Lightbulb, Thermometer, Wifi, Wrench, Sun } from "lucide-react";
-import iPadLayout from "../components/Layout/iPadLayout";
-import iPadCard from "../components/ui/ipad-card";
-import iPadButton from "../components/ui/ipad-button";
-import iPadGrid from "../components/ui/ipad-grid";
+import { iPadLayout } from "../components/Layout/iPadLayout";
+import { iPadCard } from "../components/ui/ipad-card";
+import { iPadButton } from "../components/ui/ipad-button";
+import { iPadGrid } from "../components/ui/ipad-grid";
 import SEO from "../components/SEO";
 
 const Services = () => {
@@ -75,27 +75,27 @@ const Services = () => {
         keywords="smart home services, Control4, home automation, home theater, security systems, smart lighting, Vail Valley"
       />
       
-      <section className="pt-8 pb-16">
-        <div className="text-center mb-12">
-          <h1 className="text-3xl md:text-4xl font-bold text-white mb-4">
+      <section className="pt-6 pb-12">
+        <div className="text-center mb-8">
+          <h1 className="text-2xl md:text-3xl font-bold text-white mb-3">
             Our Services
           </h1>
-          <p className="text-lg md:text-xl text-gray-300 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-base md:text-lg text-gray-300 max-w-xl mx-auto leading-relaxed">
             Comprehensive smart home solutions designed to enhance your lifestyle
           </p>
         </div>
 
-        <iPadGrid columns={2} gap="md" className="mb-12">
+        <iPadGrid columns={2} gap="md" className="mb-8">
           {services.map((service, index) => (
             <Link key={index} to={service.link}>
               <iPadCard className="h-full">
-                <service.icon className="w-10 h-10 text-accent mb-4" />
-                <h3 className="text-xl font-semibold text-white mb-2">{service.title}</h3>
-                <p className="text-gray-300 mb-4 text-base leading-relaxed">{service.description}</p>
+                <service.icon className="w-8 h-8 text-accent mb-3" />
+                <h3 className="text-lg font-semibold text-white mb-2">{service.title}</h3>
+                <p className="text-gray-300 mb-3 text-sm leading-relaxed">{service.description}</p>
                 
                 <ul className="space-y-1 mb-4">
                   {service.features.map((feature, idx) => (
-                    <li key={idx} className="text-gray-400 flex items-center text-sm">
+                    <li key={idx} className="text-gray-400 flex items-center text-xs">
                       <ArrowRight className="w-3 h-3 text-accent mr-2" />
                       {feature}
                     </li>
@@ -111,10 +111,10 @@ const Services = () => {
         </iPadGrid>
 
         <iPadCard className="text-center max-w-2xl mx-auto">
-          <h2 className="text-2xl md:text-3xl font-bold text-white mb-3">
+          <h2 className="text-xl md:text-2xl font-bold text-white mb-3">
             Ready to Get Started?
           </h2>
-          <p className="text-lg text-gray-300 mb-6">
+          <p className="text-base text-gray-300 mb-5">
             Let us design the perfect smart home solution for your needs.
           </p>
           <Link to="/scheduling">

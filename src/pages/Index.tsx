@@ -1,10 +1,10 @@
 
 import { Link } from "react-router-dom";
 import { ArrowRight, Home, Wrench, Calendar, Image, Phone } from "lucide-react";
-import iPadLayout from "../components/Layout/iPadLayout";
-import iPadCard from "../components/ui/ipad-card";
-import iPadButton from "../components/ui/ipad-button";
-import iPadGrid from "../components/ui/ipad-grid";
+import { iPadLayout } from "../components/Layout/iPadLayout";
+import { iPadCard } from "../components/ui/ipad-card";
+import { iPadButton } from "../components/ui/ipad-button";
+import { iPadGrid } from "../components/ui/ipad-grid";
 import SEO from "../components/SEO";
 
 const Index = () => {
@@ -37,12 +37,12 @@ const Index = () => {
         keywords="smart home automation, Control4, home theater, Vail Valley, Colorado, home integration, smart lighting, security systems"
       />
       
-      <section className="pt-8 pb-16">
-        <div className="text-center mb-12">
-          <h1 className="text-4xl md:text-5xl font-bold text-white mb-4 leading-tight">
+      <section className="pt-6 pb-12">
+        <div className="text-center mb-8">
+          <h1 className="text-3xl md:text-4xl font-bold text-white mb-3 leading-tight">
             Symphony Smart Homes
           </h1>
-          <p className="text-lg md:text-xl text-gray-300 mb-8 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-base md:text-lg text-gray-300 mb-6 max-w-xl mx-auto leading-relaxed">
             Transform your Vail Valley home with premium Control4 automation solutions
           </p>
           
@@ -60,12 +60,12 @@ const Index = () => {
           </div>
         </div>
 
-        <iPadGrid columns={3} gap="md" className="mb-12">
+        <iPadGrid columns={3} gap="md" className="mb-8">
           {services.map((service, index) => (
             <Link key={index} to={service.link}>
-              <iPadCard className="text-center aspect-square flex flex-col justify-center items-center p-6">
+              <iPadCard className="text-center h-full flex flex-col justify-center items-center p-4">
                 <service.icon className="w-8 h-8 text-accent mb-3" />
-                <h3 className="text-lg font-semibold text-white mb-2">{service.title}</h3>
+                <h3 className="text-base font-semibold text-white mb-2">{service.title}</h3>
                 <p className="text-gray-300 text-sm leading-relaxed">{service.description}</p>
               </iPadCard>
             </Link>
@@ -73,10 +73,10 @@ const Index = () => {
         </iPadGrid>
 
         <iPadCard className="text-center max-w-2xl mx-auto">
-          <h2 className="text-2xl md:text-3xl font-bold text-white mb-3">
+          <h2 className="text-xl md:text-2xl font-bold text-white mb-3">
             Ready to Upgrade Your Home?
           </h2>
-          <p className="text-lg text-gray-300 mb-6 max-w-xl mx-auto">
+          <p className="text-base text-gray-300 mb-5 max-w-lg mx-auto">
             Let us create the perfect smart home experience tailored to your lifestyle.
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center max-w-md mx-auto">
