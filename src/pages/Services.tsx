@@ -1,3 +1,4 @@
+
 import { Link } from "react-router-dom";
 import { ArrowRight, Home, Volume2, Shield, Lightbulb, Thermometer, Wifi, Wrench, Sun } from "lucide-react";
 import { iPadLayout as IPadLayout } from "../components/Layout/iPadLayout";
@@ -87,26 +88,19 @@ const Services = () => {
         <IPadGrid columns={2} gap="sm" className="mb-6">
           {services.map((service, index) => (
             <Link key={index} to={service.link}>
-              <IPadCard className="h-24 p-3 hover:border-accent/30 transition-all duration-300">
-                <div className="flex flex-col h-full">
-                  <div className="flex items-start mb-2">
-                    <service.icon className="w-4 h-4 text-accent mr-2 flex-shrink-0 mt-0.5" />
-                    <div className="flex-grow">
-                      <h3 className="text-sm font-semibold text-white mb-1">{service.title}</h3>
-                      <p className="text-gray-300 text-xs leading-tight">{service.description}</p>
-                    </div>
-                  </div>
-                  
-                  <div className="flex-grow flex items-center">
-                    <div className="flex flex-wrap gap-1 text-xs text-gray-400">
-                      {service.features.map((feature, idx) => (
-                        <span key={idx} className="flex items-center">
-                          <ArrowRight className="w-2 h-2 text-accent mr-1 flex-shrink-0" />
-                          {feature}
-                          {idx < service.features.length - 1 && <span className="mx-1">•</span>}
-                        </span>
-                      ))}
-                    </div>
+              <IPadCard className="h-32 p-4 hover:border-accent/30 transition-all duration-300">
+                <div className="flex flex-col items-center text-center h-full justify-center space-y-2">
+                  <service.icon className="w-6 h-6 text-accent flex-shrink-0" />
+                  <h3 className="text-sm font-semibold text-white whitespace-nowrap">{service.title}</h3>
+                  <p className="text-gray-300 text-xs leading-tight line-clamp-1">{service.description}</p>
+                  <div className="flex items-center justify-center space-x-1 text-xs text-gray-400">
+                    {service.features.map((feature, idx) => (
+                      <span key={idx} className="flex items-center whitespace-nowrap">
+                        <ArrowRight className="w-2 h-2 text-accent mr-1 flex-shrink-0" />
+                        {feature}
+                        {idx < service.features.length - 1 && <span className="mx-1">•</span>}
+                      </span>
+                    ))}
                   </div>
                 </div>
               </IPadCard>
