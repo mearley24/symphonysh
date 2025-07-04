@@ -1,10 +1,10 @@
 
 import { Link } from "react-router-dom";
 import { ArrowRight, Camera, Monitor, Cable } from "lucide-react";
-import { iPadLayout } from "../components/Layout/iPadLayout";
-import { iPadCard } from "../components/ui/ipad-card";
-import { iPadButton } from "../components/ui/ipad-button";
-import { iPadGrid } from "../components/ui/ipad-grid";
+import { iPadLayout as IPadLayout } from "../components/Layout/iPadLayout";
+import { iPadCard as IPadCard } from "../components/ui/ipad-card";
+import { iPadButton as IPadButton } from "../components/ui/ipad-button";
+import { iPadGrid as IPadGrid } from "../components/ui/ipad-grid";
 import SEO from "../components/SEO";
 
 const Projects = () => {
@@ -36,48 +36,48 @@ const Projects = () => {
   ];
 
   return (
-    <iPadLayout>
+    <IPadLayout>
       <SEO 
         title="Our Project Portfolio - Smart Home Installations in Vail Valley"
         description="Browse our portfolio of smart home installations including home theaters, TV mounting, and structured wiring projects throughout Vail Valley, Colorado."
         keywords="smart home portfolio, home theater installation, TV mounting, structured wiring, Vail Valley projects"
       />
       
-      <section className="pt-6 pb-12">
-        <div className="text-center mb-8">
-          <h1 className="text-2xl md:text-3xl font-bold text-white mb-3">
+      <section className="pt-4 pb-8">
+        <div className="text-center mb-6">
+          <h1 className="text-xl md:text-2xl font-bold text-white mb-2">
             Our Work
           </h1>
-          <p className="text-base md:text-lg text-gray-300 max-w-xl mx-auto leading-relaxed mb-5">
+          <p className="text-sm md:text-base text-gray-300 max-w-lg mx-auto leading-relaxed mb-4">
             Explore our portfolio of premium smart home installations throughout Vail Valley
           </p>
           <Link to="/scheduling">
-            <iPadButton size="md">
-              <Camera className="w-4 h-4 mr-2" />
+            <IPadButton size="sm">
+              <Camera className="w-3 h-3 mr-1" />
               Schedule Your Project
-            </iPadButton>
+            </IPadButton>
           </Link>
         </div>
 
-        <iPadGrid columns={1} gap="md" className="mb-8">
+        <IPadGrid columns={1} gap="sm" className="mb-6">
           {portfolioSections.map((section, index) => (
             <Link key={index} to={section.link}>
-              <iPadCard className="grid md:grid-cols-2 gap-4 items-center">
+              <IPadCard className="grid md:grid-cols-2 gap-3 items-center">
                 <div className="order-2 md:order-1">
-                  <section.icon className="w-8 h-8 text-accent mb-3" />
-                  <h2 className="text-xl md:text-2xl font-bold text-white mb-2">
+                  <section.icon className="w-6 h-6 text-accent mb-2" />
+                  <h2 className="text-lg md:text-xl font-bold text-white mb-2">
                     {section.title}
                   </h2>
-                  <p className="text-base text-gray-300 mb-3 leading-relaxed">
+                  <p className="text-sm text-gray-300 mb-2 leading-relaxed">
                     {section.description}
                   </p>
                   <div className="flex items-center justify-between">
-                    <span className="text-accent text-sm font-medium">
+                    <span className="text-accent text-xs font-medium">
                       {section.count}
                     </span>
-                    <iPadButton variant="ghost" size="sm">
-                      View Gallery <ArrowRight className="w-4 h-4 ml-2" />
-                    </iPadButton>
+                    <IPadButton variant="ghost" size="sm">
+                      View Gallery <ArrowRight className="w-3 h-3 ml-1" />
+                    </IPadButton>
                   </div>
                 </div>
                 <div className="order-1 md:order-2">
@@ -89,33 +89,33 @@ const Projects = () => {
                     />
                   </div>
                 </div>
-              </iPadCard>
+              </IPadCard>
             </Link>
           ))}
-        </iPadGrid>
+        </IPadGrid>
 
-        <iPadCard className="text-center max-w-2xl mx-auto">
-          <h2 className="text-xl md:text-2xl font-bold text-white mb-3">
+        <IPadCard className="text-center max-w-xl mx-auto">
+          <h2 className="text-lg md:text-xl font-bold text-white mb-2">
             Ready to Start Your Project?
           </h2>
-          <p className="text-base text-gray-300 mb-5">
+          <p className="text-sm text-gray-300 mb-4">
             Let us bring your smart home vision to life with our expert installation services.
           </p>
-          <div className="flex flex-col sm:flex-row gap-3 justify-center max-w-md mx-auto">
+          <div className="flex flex-col sm:flex-row gap-2 justify-center max-w-sm mx-auto">
             <Link to="/contact" className="w-full sm:w-auto">
-              <iPadButton size="md" className="w-full">
+              <IPadButton size="sm" className="w-full">
                 Get a Quote
-              </iPadButton>
+              </IPadButton>
             </Link>
             <Link to="/about" className="w-full sm:w-auto">
-              <iPadButton variant="secondary" size="md" className="w-full">
+              <IPadButton variant="secondary" size="sm" className="w-full">
                 Learn About Us
-              </iPadButton>
+              </IPadButton>
             </Link>
           </div>
-        </iPadCard>
+        </IPadCard>
       </section>
-    </iPadLayout>
+    </IPadLayout>
   );
 };
 

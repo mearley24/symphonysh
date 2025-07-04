@@ -1,10 +1,10 @@
 
 import { Link } from "react-router-dom";
 import { ArrowRight, Home, Volume2, Shield, Lightbulb, Thermometer, Wifi, Wrench, Sun } from "lucide-react";
-import { iPadLayout } from "../components/Layout/iPadLayout";
-import { iPadCard } from "../components/ui/ipad-card";
-import { iPadButton } from "../components/ui/ipad-button";
-import { iPadGrid } from "../components/ui/ipad-grid";
+import { iPadLayout as IPadLayout } from "../components/Layout/iPadLayout";
+import { iPadCard as IPadCard } from "../components/ui/ipad-card";
+import { iPadButton as IPadButton } from "../components/ui/ipad-button";
+import { iPadGrid as IPadGrid } from "../components/ui/ipad-grid";
 import SEO from "../components/SEO";
 
 const Services = () => {
@@ -68,63 +68,63 @@ const Services = () => {
   ];
 
   return (
-    <iPadLayout>
+    <IPadLayout>
       <SEO 
         title="Smart Home Services - Control4 Automation in Vail Valley"
         description="Complete smart home services including Control4 automation, home theaters, security systems, smart lighting, and more in Vail Valley, Colorado."
         keywords="smart home services, Control4, home automation, home theater, security systems, smart lighting, Vail Valley"
       />
       
-      <section className="pt-6 pb-12">
-        <div className="text-center mb-8">
-          <h1 className="text-2xl md:text-3xl font-bold text-white mb-3">
+      <section className="pt-4 pb-8">
+        <div className="text-center mb-6">
+          <h1 className="text-xl md:text-2xl font-bold text-white mb-2">
             Our Services
           </h1>
-          <p className="text-base md:text-lg text-gray-300 max-w-xl mx-auto leading-relaxed">
+          <p className="text-sm md:text-base text-gray-300 max-w-lg mx-auto leading-relaxed">
             Comprehensive smart home solutions designed to enhance your lifestyle
           </p>
         </div>
 
-        <iPadGrid columns={2} gap="md" className="mb-8">
+        <IPadGrid columns={2} gap="sm" className="mb-6">
           {services.map((service, index) => (
             <Link key={index} to={service.link}>
-              <iPadCard className="h-full">
-                <service.icon className="w-8 h-8 text-accent mb-3" />
-                <h3 className="text-lg font-semibold text-white mb-2">{service.title}</h3>
-                <p className="text-gray-300 mb-3 text-sm leading-relaxed">{service.description}</p>
+              <IPadCard className="h-full">
+                <service.icon className="w-6 h-6 text-accent mb-2" />
+                <h3 className="text-base font-semibold text-white mb-1">{service.title}</h3>
+                <p className="text-gray-300 mb-2 text-xs leading-relaxed">{service.description}</p>
                 
-                <ul className="space-y-1 mb-4">
+                <ul className="space-y-1 mb-3">
                   {service.features.map((feature, idx) => (
                     <li key={idx} className="text-gray-400 flex items-center text-xs">
-                      <ArrowRight className="w-3 h-3 text-accent mr-2" />
+                      <ArrowRight className="w-2 h-2 text-accent mr-1" />
                       {feature}
                     </li>
                   ))}
                 </ul>
                 
-                <iPadButton variant="ghost" size="sm" className="mt-auto">
-                  Learn More <ArrowRight className="w-3 h-3 ml-2" />
-                </iPadButton>
-              </iPadCard>
+                <IPadButton variant="ghost" size="sm" className="mt-auto">
+                  Learn More <ArrowRight className="w-2 h-2 ml-1" />
+                </IPadButton>
+              </IPadCard>
             </Link>
           ))}
-        </iPadGrid>
+        </IPadGrid>
 
-        <iPadCard className="text-center max-w-2xl mx-auto">
-          <h2 className="text-xl md:text-2xl font-bold text-white mb-3">
+        <IPadCard className="text-center max-w-xl mx-auto">
+          <h2 className="text-lg md:text-xl font-bold text-white mb-2">
             Ready to Get Started?
           </h2>
-          <p className="text-base text-gray-300 mb-5">
+          <p className="text-sm text-gray-300 mb-4">
             Let us design the perfect smart home solution for your needs.
           </p>
           <Link to="/scheduling">
-            <iPadButton size="md">
-              Schedule Your Consultation <ArrowRight className="w-4 h-4 ml-2" />
-            </iPadButton>
+            <IPadButton size="sm">
+              Schedule Your Consultation <ArrowRight className="w-3 h-3 ml-1" />
+            </IPadButton>
           </Link>
-        </iPadCard>
+        </IPadCard>
       </section>
-    </iPadLayout>
+    </IPadLayout>
   );
 };
 
