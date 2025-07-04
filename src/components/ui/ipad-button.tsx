@@ -21,18 +21,18 @@ export const iPadButton = ({
   disabled = false,
   type = 'button'
 }: iPadButtonProps) => {
-  const baseClasses = "font-semibold rounded-2xl transition-all duration-200 active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-1";
+  const baseClasses = "font-semibold rounded-2xl transition-all duration-300 active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 border";
   
   const variants = {
-    primary: "bg-accent hover:bg-accent/90 text-white shadow-lg hover:shadow-xl",
-    secondary: "bg-white/10 hover:bg-white/20 text-white border border-white/20",
-    ghost: "hover:bg-white/10 text-white"
+    primary: "bg-gradient-to-r from-accent to-accent/90 hover:from-accent/90 hover:to-accent/80 text-white shadow-xl hover:shadow-2xl border-accent/20 hover:border-accent/30",
+    secondary: "bg-white/10 hover:bg-white/15 text-white border-white/20 hover:border-white/30 backdrop-blur-sm",
+    ghost: "hover:bg-white/10 text-white border-transparent hover:border-white/20"
   };
   
   const sizes = {
-    sm: "px-4 py-2 text-sm min-h-[36px]",
-    md: "px-6 py-3 text-base min-h-[44px]",
-    lg: "px-8 py-4 text-lg min-h-[52px]"
+    sm: "px-6 py-3 text-sm min-h-[44px]",
+    md: "px-8 py-4 text-base min-h-[52px]",
+    lg: "px-10 py-5 text-lg min-h-[60px]"
   };
 
   return (
