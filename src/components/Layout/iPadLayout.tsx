@@ -20,7 +20,7 @@ export const iPadLayout = ({
     <div className="min-h-screen bg-primary flex flex-col">
       {showHeader && <Header />}
       
-      <main className={`flex-1 px-4 md:px-8 lg:px-12 ${className}`}>
+      <main className={`flex-1 px-4 md:px-8 lg:px-12 ${showHeader ? 'pt-20 sm:pt-24' : ''} ${className}`}>
         <div className="max-w-4xl mx-auto">
           {children}
         </div>
