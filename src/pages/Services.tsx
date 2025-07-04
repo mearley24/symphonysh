@@ -1,4 +1,3 @@
-
 import { Link } from "react-router-dom";
 import { ArrowRight, Home, Volume2, Shield, Lightbulb, Thermometer, Wifi, Wrench, Sun } from "lucide-react";
 import { iPadLayout as IPadLayout } from "../components/Layout/iPadLayout";
@@ -108,19 +107,21 @@ const Services = () => {
           ))}
         </IPadGrid>
 
-        <IPadCard className="text-center max-w-xl mx-auto">
-          <h2 className="text-lg md:text-xl font-bold text-white mb-2">
-            Ready to Get Started?
-          </h2>
-          <p className="text-sm text-gray-300 mb-4">
-            Let us design the perfect smart home solution for your needs.
-          </p>
-          <Link to="/scheduling">
-            <IPadButton size="sm">
-              Schedule Your Consultation <ArrowRight className="w-3 h-3" />
-            </IPadButton>
-          </Link>
-        </IPadCard>
+        <div className="flex justify-center">
+          <IPadCard className="text-center max-w-xl">
+            <h2 className="text-lg md:text-xl font-bold text-white mb-2">
+              Ready to Get Started?
+            </h2>
+            <p className="text-sm text-gray-300 mb-4">
+              Let us design the perfect smart home solution for your needs.
+            </p>
+            <Link to="/scheduling">
+              <IPadButton size="sm">
+                Schedule Your Consultation <ArrowRight className="w-3 h-3" />
+              </IPadButton>
+            </Link>
+          </IPadCard>
+        </div>
       </section>
     </IPadLayout>
   );
