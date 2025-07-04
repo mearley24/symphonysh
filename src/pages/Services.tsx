@@ -1,4 +1,3 @@
-
 import { Link } from "react-router-dom";
 import { ArrowRight, Home, Volume2, Shield, Lightbulb, Thermometer, Wifi, Wrench, Sun } from "lucide-react";
 import { iPadLayout as IPadLayout } from "../components/Layout/iPadLayout";
@@ -80,7 +79,7 @@ const Services = () => {
           <h1 className="text-xl md:text-2xl font-bold text-white mb-2">
             Our Services
           </h1>
-          <p className="text-sm md:text-base text-gray-300 max-w-lg mx-auto leading-relaxed">
+          <p className="text-xs md:text-sm text-gray-300 max-w-2xl mx-auto leading-relaxed whitespace-nowrap">
             Comprehensive smart home solutions designed to enhance your lifestyle
           </p>
         </div>
