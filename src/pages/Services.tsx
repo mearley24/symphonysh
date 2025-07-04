@@ -10,8 +10,8 @@ const Services = () => {
   const services = [
     {
       icon: Home,
-      title: "Home Automation",
-      description: "Complete Control4 integration for seamless smart home control",
+      title: "Home Automation", 
+      description: "Control4 integration for seamless smart home control",
       link: "/services/home-integration",
       features: ["Unified system control", "Custom automation", "Remote access"]
     },
@@ -19,7 +19,7 @@ const Services = () => {
       icon: Volume2,
       title: "Audio & Entertainment",
       description: "Premium home theater and multi-room audio systems",
-      link: "/services/audio-entertainment",
+      link: "/services/audio-entertainment", 
       features: ["Home theaters", "Multi-room audio", "Streaming integration"]
     },
     {
