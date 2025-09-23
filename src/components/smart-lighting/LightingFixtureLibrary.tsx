@@ -3,9 +3,6 @@ import { Search, Filter, Plus, Eye } from 'lucide-react';
 import { Button } from '../ui/button';
 import { Input } from '../ui/input';
 import { iPadCard as IPadCard } from '../ui/ipad-card';
-import { Canvas } from '@react-three/fiber';
-import { OrbitControls, PerspectiveCamera } from '@react-three/drei';
-import { Suspense } from 'react';
 
 interface LightingFixture {
   id: string;
@@ -27,34 +24,92 @@ interface LightingFixtureLibraryProps {
   selectedFixtures: string[];
 }
 
-// Simple 3D Light Component with error handling
-const Light3D = ({ type, color = '#ffffff' }: { type: string; color?: string }) => {
-  try {
-    const getGeometry = () => {
-      switch (type) {
-        case 'recessed':
-          return <cylinderGeometry args={[0.3, 0.25, 0.1, 16]} />;
-        case 'pendant':
-          return <sphereGeometry args={[0.2, 16, 16]} />;
-        case 'sconce':
-          return <boxGeometry args={[0.3, 0.4, 0.1]} />;
-        case 'keypad':
-          return <boxGeometry args={[0.2, 0.3, 0.05]} />;
-        default:
-          return <sphereGeometry args={[0.2, 16, 16]} />;
-      }
-    };
+// 2D Fixture Representation Component
+const FixtureIcon = ({ type, color = '#ffffff' }: { type: string; color?: string }) => {
+  const getFixtureDisplay = () => {
+    switch (type) {
+      case 'recessed':
+        return (
+          <div className="relative">
+            <div className="w-16 h-16 rounded-full border-4 border-gray-300 flex items-center justify-center bg-gradient-to-br from-gray-200 to-gray-400">
+              <div className="w-8 h-8 rounded-full bg-yellow-300 shadow-lg" style={{ backgroundColor: color }}></div>
+            </div>
+            <div className="absolute -top-1 -right-1 text-xs bg-blue-500 text-white px-1 rounded">LED</div>
+          </div>
+        );
+      case 'pendant':
+        return (
+          <div className="relative">
+            <div className="w-16 h-20 flex flex-col items-center">
+              <div className="w-1 h-6 bg-gray-400"></div>
+              <div className="w-12 h-12 rounded-full bg-gradient-to-b from-gray-300 to-gray-600 flex items-center justify-center">
+                <div className="w-6 h-6 rounded-full" style={{ backgroundColor: color }}></div>
+              </div>
+            </div>
+          </div>
+        );
+      case 'sconce':
+        return (
+          <div className="relative">
+            <div className="w-16 h-16 bg-gradient-to-r from-gray-300 to-gray-500 rounded-lg flex items-center justify-center">
+              <div className="w-8 h-2 rounded" style={{ backgroundColor: color }}></div>
+            </div>
+          </div>
+        );
+      case 'keypad':
+        return (
+          <div className="relative">
+            <div className="w-16 h-20 bg-gray-800 rounded-lg p-2 flex flex-col justify-between">
+              <div className="grid grid-cols-2 gap-1">
+                <div className="w-3 h-3 bg-blue-400 rounded"></div>
+                <div className="w-3 h-3 bg-green-400 rounded"></div>
+                <div className="w-3 h-3 bg-yellow-400 rounded"></div>
+                <div className="w-3 h-3 bg-red-400 rounded"></div>
+              </div>
+              <div className="text-xs text-center text-gray-300">CTRL</div>
+            </div>
+          </div>
+        );
+      case 'strip':
+        return (
+          <div className="relative">
+            <div className="w-16 h-4 bg-gray-700 rounded-full flex items-center justify-center relative overflow-hidden">
+              <div className="w-full h-1 rounded-full" style={{ backgroundColor: color, opacity: 0.8 }}></div>
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white to-transparent opacity-20"></div>
+            </div>
+          </div>
+        );
+      case 'chandelier':
+        return (
+          <div className="relative">
+            <div className="w-16 h-20 flex flex-col items-center">
+              <div className="w-1 h-4 bg-gray-400"></div>
+              <div className="relative">
+                <div className="w-12 h-12 border-2 border-gray-400 rounded-full flex items-center justify-center">
+                  <div className="w-6 h-6 rounded-full" style={{ backgroundColor: color }}></div>
+                </div>
+                <div className="absolute -top-1 -left-1 w-3 h-3 rounded-full bg-yellow-300"></div>
+                <div className="absolute -top-1 -right-1 w-3 h-3 rounded-full bg-yellow-300"></div>
+                <div className="absolute -bottom-1 -left-1 w-3 h-3 rounded-full bg-yellow-300"></div>
+                <div className="absolute -bottom-1 -right-1 w-3 h-3 rounded-full bg-yellow-300"></div>
+              </div>
+            </div>
+          </div>
+        );
+      default:
+        return (
+          <div className="w-16 h-16 rounded-full bg-gradient-to-br from-gray-200 to-gray-400 flex items-center justify-center">
+            <div className="w-8 h-8 rounded-full" style={{ backgroundColor: color }}></div>
+          </div>
+        );
+    }
+  };
 
-    return (
-      <mesh rotation={[0.1, 0.1, 0]}>
-        {getGeometry()}
-        <meshStandardMaterial color={color} metalness={0.8} roughness={0.2} />
-      </mesh>
-    );
-  } catch (error) {
-    console.error('Error rendering 3D light:', error);
-    return null;
-  }
+  return (
+    <div className="flex items-center justify-center p-4">
+      {getFixtureDisplay()}
+    </div>
+  );
 };
 
 export const LightingFixtureLibrary = ({ onFixtureSelect, selectedFixtures }: LightingFixtureLibraryProps) => {
@@ -225,16 +280,7 @@ export const LightingFixtureLibrary = ({ onFixtureSelect, selectedFixtures }: Li
                 onClick={() => onFixtureSelect(fixture)}
               >
                 <div className="flex justify-between items-start mb-3">
-                  <div className="w-16 h-16 bg-gradient-to-br from-gray-700 to-gray-800 rounded-lg flex items-center justify-center">
-                    <span className="text-2xl">
-                      {fixture.type === 'recessed' && '●'}
-                      {fixture.type === 'pendant' && '◐'}
-                      {fixture.type === 'sconce' && '◑'}
-                      {fixture.type === 'keypad' && '▣'}
-                      {fixture.type === 'strip' && '▬'}
-                      {fixture.type === 'chandelier' && '❋'}
-                    </span>
-                  </div>
+                  <FixtureIcon type={fixture.type} color={fixture.type === 'keypad' ? '#4F46E5' : '#FFE4B5'} />
                   <Button
                     variant="secondary"
                     size="sm"
@@ -290,16 +336,8 @@ export const LightingFixtureLibrary = ({ onFixtureSelect, selectedFixtures }: Li
             {filteredFixtures.map((fixture) => (
               <div key={fixture.id} className="bg-white/5 rounded-lg p-4 border border-white/10">
                 <h4 className="text-white font-medium text-sm mb-2">{fixture.name}</h4>
-                <div className="h-40 bg-gray-900 rounded-lg">
-                  <Suspense fallback={<div className="flex items-center justify-center h-full text-white text-sm">Loading 3D...</div>}>
-                    <Canvas>
-                      <PerspectiveCamera makeDefault position={[0, 0, 2]} />
-                      <OrbitControls enableZoom={false} />
-                      <ambientLight intensity={0.5} />
-                      <pointLight position={[2, 2, 2]} />
-                      <Light3D type={fixture.type} />
-                    </Canvas>
-                  </Suspense>
+                <div className="h-40 bg-gray-900 rounded-lg flex items-center justify-center">
+                  <FixtureIcon type={fixture.type} color={fixture.type === 'keypad' ? '#4F46E5' : '#FFE4B5'} />
                 </div>
                 <div className="mt-2 flex justify-between items-center">
                   <span className="text-gray-400 text-xs">{fixture.brand}</span>
@@ -330,16 +368,8 @@ export const LightingFixtureLibrary = ({ onFixtureSelect, selectedFixtures }: Li
               </div>
 
               <div className="grid md:grid-cols-2 gap-6">
-                <div className="h-60 bg-gray-800 rounded-lg">
-                  <Suspense fallback={<div className="flex items-center justify-center h-full text-white">Loading 3D Model...</div>}>
-                    <Canvas>
-                      <PerspectiveCamera makeDefault position={[0, 0, 3]} />
-                      <OrbitControls />
-                      <ambientLight intensity={0.5} />
-                      <pointLight position={[2, 2, 2]} />
-                      <Light3D type={previewFixture.type} />
-                    </Canvas>
-                  </Suspense>
+                <div className="h-60 bg-gray-800 rounded-lg flex items-center justify-center">
+                  <FixtureIcon type={previewFixture.type} color={previewFixture.type === 'keypad' ? '#4F46E5' : '#FFE4B5'} />
                 </div>
 
                 <div className="space-y-4">
