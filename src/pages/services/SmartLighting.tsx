@@ -8,6 +8,9 @@ import { iPadButton as IPadButton } from "../../components/ui/ipad-button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "../../components/ui/tabs";
 import { Slider } from "../../components/ui/slider";
 import { Switch } from "../../components/ui/switch";
+import { BirdsEyeFloorPlan } from "../../components/smart-lighting/BirdsEyeFloorPlan";
+import { TroyVoiceAssistant } from "../../components/smart-lighting/TroyVoiceAssistant";
+import { LightingFixtureLibrary } from "../../components/smart-lighting/LightingFixtureLibrary";
 
 const InteractiveLightingDemo = () => {
   const [brightness, setBrightness] = useState([75]);
@@ -547,6 +550,46 @@ const StatCard = ({ icon: Icon, number, label, suffix = "" }: { icon: any; numbe
 };
 
 const SmartLighting = () => {
+  const [selectedRoom, setSelectedRoom] = useState('living-room');
+  const [brightness, setBrightness] = useState(75);
+  const [lightColor, setLightColor] = useState('#FFE4B5');
+  const [selectedFixtures, setSelectedFixtures] = useState<string[]>([]);
+
+  const handleVoiceCommand = (command: string) => {
+    const lowerCommand = command.toLowerCase();
+    
+    if (lowerCommand.includes('living room') || lowerCommand.includes('living-room')) {
+      setSelectedRoom('living-room');
+    } else if (lowerCommand.includes('kitchen')) {
+      setSelectedRoom('kitchen');
+    } else if (lowerCommand.includes('bedroom')) {
+      setSelectedRoom('bedroom');
+    } else if (lowerCommand.includes('office')) {
+      setSelectedRoom('office');
+    }
+    
+    if (lowerCommand.includes('brightness') || lowerCommand.includes('dim')) {
+      const match = lowerCommand.match(/(\d+)%?/);
+      if (match) {
+        setBrightness(parseInt(match[1]));
+      }
+    }
+    
+    if (lowerCommand.includes('turn off')) {
+      setBrightness(0);
+    } else if (lowerCommand.includes('turn on')) {
+      setBrightness(75);
+    }
+  };
+
+  const handleFixtureSelect = (fixture: any) => {
+    setSelectedFixtures(prev => 
+      prev.includes(fixture.id) 
+        ? prev.filter(id => id !== fixture.id)
+        : [...prev, fixture.id]
+    );
+  };
+
   const serviceSchema = {
     "@context": "https://schema.org",
     "@type": "Service",
@@ -599,10 +642,29 @@ const SmartLighting = () => {
           </p>
         </div>
 
-        {/* Interactive Demo & House Diagram */}
-        <div className="grid md:grid-cols-2 gap-6 mb-8">
+        {/* Interactive Demo Section */}
+        <div className="grid lg:grid-cols-2 gap-6 mb-8">
           <InteractiveLightingDemo />
-          <InteractiveHouseDiagram />
+          <TroyVoiceAssistant onCommand={handleVoiceCommand} />
+        </div>
+
+        {/* Enhanced Interactive Floor Plan */}
+        <div className="mb-8">
+          <BirdsEyeFloorPlan
+            selectedRoom={selectedRoom}
+            brightness={brightness}
+            lightColor={lightColor}
+            onRoomSelect={setSelectedRoom}
+            onFixtureSelect={(fixture) => console.log('Fixture selected:', fixture)}
+          />
+        </div>
+
+        {/* Lighting Fixture Library */}
+        <div className="mb-8">
+          <LightingFixtureLibrary
+            onFixtureSelect={handleFixtureSelect}
+            selectedFixtures={selectedFixtures}
+          />
         </div>
 
         {/* Stats Section */}
