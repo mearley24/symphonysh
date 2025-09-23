@@ -318,6 +318,213 @@ const InteractiveLightingDemo = () => {
   );
 };
 
+const InteractiveHouseDiagram = () => {
+  const [hoveredRoom, setHoveredRoom] = useState<string | null>(null);
+  const [activeRoom, setActiveRoom] = useState("living-room");
+
+  const rooms = {
+    "living-room": {
+      name: "Living Room",
+      path: "M50 180 L200 180 L200 120 L50 120 Z",
+      fact: "Smart lighting can reduce eye strain by 65% during TV watching",
+      benefit: "Automated scenes for entertainment",
+      color: "#4F46E5",
+      lightPosition: { x: 125, y: 150 }
+    },
+    "kitchen": {
+      name: "Kitchen", 
+      path: "M200 180 L350 180 L350 120 L200 120 Z",
+      fact: "Task lighting improves cooking accuracy by 40%",
+      benefit: "Bright whites for food prep, warm tones for dining",
+      color: "#059669",
+      lightPosition: { x: 275, y: 150 }
+    },
+    "bedroom": {
+      name: "Bedroom",
+      path: "M50 120 L200 120 L200 60 L50 60 Z", 
+      fact: "Circadian lighting improves sleep quality by 23%",
+      benefit: "Sunrise simulation & gradual dimming",
+      color: "#DC2626",
+      lightPosition: { x: 125, y: 90 }
+    },
+    "office": {
+      name: "Office",
+      path: "M200 120 L350 120 L350 60 L200 60 Z",
+      fact: "Proper lighting boosts productivity by 15%",
+      benefit: "Focus modes & daylight mimicking",
+      color: "#7C3AED", 
+      lightPosition: { x: 275, y: 90 }
+    }
+  };
+
+  const getCurrentRoomData = () => {
+    return rooms[activeRoom as keyof typeof rooms] || rooms["living-room"];
+  };
+
+  return (
+    <IPadCard className="p-6 overflow-hidden">
+      <h3 className="text-lg font-semibold text-white mb-4 text-center">
+        Smart Home Lighting Benefits
+      </h3>
+      
+      {/* Interactive House SVG */}
+      <div className="relative mb-6">
+        <svg 
+          viewBox="0 0 400 240" 
+          className="w-full h-64 bg-gradient-to-b from-blue-900/20 to-blue-900/5 rounded-lg border border-white/10"
+        >
+          {/* House Structure */}
+          <path 
+            d="M50 60 L200 20 L350 60 L350 180 L50 180 Z" 
+            fill="none" 
+            stroke="white" 
+            strokeWidth="2"
+            opacity="0.3"
+          />
+          
+          {/* Roof */}
+          <path 
+            d="M40 60 L200 15 L360 60 L350 60 L200 20 L50 60 Z" 
+            fill="white" 
+            opacity="0.1"
+          />
+          
+          {/* Room Divisions */}
+          <line x1="200" y1="60" x2="200" y2="180" stroke="white" strokeWidth="1" opacity="0.3" />
+          <line x1="50" y1="120" x2="350" y2="120" stroke="white" strokeWidth="1" opacity="0.3" />
+          
+          {/* Interactive Room Areas */}
+          {Object.entries(rooms).map(([roomId, room]) => (
+            <g key={roomId}>
+              {/* Room Area */}
+              <path
+                d={room.path}
+                fill={hoveredRoom === roomId ? room.color : "transparent"}
+                fillOpacity={hoveredRoom === roomId ? 0.3 : 0}
+                stroke={activeRoom === roomId ? room.color : "transparent"}
+                strokeWidth="2"
+                className="cursor-pointer transition-all duration-300"
+                onMouseEnter={() => setHoveredRoom(roomId)}
+                onMouseLeave={() => setHoveredRoom(null)}
+                onClick={() => setActiveRoom(roomId)}
+              />
+              
+              {/* Light Fixture */}
+              <circle
+                cx={room.lightPosition.x}
+                cy={room.lightPosition.y}
+                r="4"
+                fill={hoveredRoom === roomId || activeRoom === roomId ? room.color : "white"}
+                opacity={hoveredRoom === roomId || activeRoom === roomId ? 1 : 0.6}
+                className="transition-all duration-300"
+              />
+              
+              {/* Light Glow Effect */}
+              {(hoveredRoom === roomId || activeRoom === roomId) && (
+                <circle
+                  cx={room.lightPosition.x}
+                  cy={room.lightPosition.y}
+                  r="12"
+                  fill={room.color}
+                  opacity="0.2"
+                  className="animate-pulse"
+                />
+              )}
+              
+              {/* Room Label */}
+              <text
+                x={room.lightPosition.x}
+                y={room.lightPosition.y + 25}
+                textAnchor="middle"
+                className="fill-white text-xs font-medium"
+                opacity={hoveredRoom === roomId ? 1 : 0.7}
+              >
+                {room.name}
+              </text>
+            </g>
+          ))}
+          
+          {/* Energy Flow Lines */}
+          <defs>
+            <linearGradient id="energyGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stopColor="transparent" />
+              <stop offset="50%" stopColor="#10B981" stopOpacity="0.8" />
+              <stop offset="100%" stopColor="transparent" />
+            </linearGradient>
+          </defs>
+          
+          {activeRoom && (
+            <line
+              x1="200"
+              y1="200"
+              x2={rooms[activeRoom as keyof typeof rooms].lightPosition.x}
+              y2={rooms[activeRoom as keyof typeof rooms].lightPosition.y}
+              stroke="url(#energyGradient)"
+              strokeWidth="2"
+              className="animate-pulse"
+            />
+          )}
+        </svg>
+        
+        {/* Hover Tooltip */}
+        {hoveredRoom && (
+          <div className="absolute bottom-4 left-4 right-4 bg-black/80 backdrop-blur-sm rounded-lg p-4 border border-white/20 animate-fade-in">
+            <div className="flex items-start space-x-3">
+              <div 
+                className="w-3 h-3 rounded-full flex-shrink-0 mt-1"
+                style={{ backgroundColor: rooms[hoveredRoom as keyof typeof rooms].color }}
+              />
+              <div>
+                <h4 className="text-white font-semibold text-sm mb-1">
+                  {rooms[hoveredRoom as keyof typeof rooms].name}
+                </h4>
+                <p className="text-accent text-xs font-medium mb-1">
+                  💡 {rooms[hoveredRoom as keyof typeof rooms].fact}
+                </p>
+                <p className="text-gray-300 text-xs">
+                  {rooms[hoveredRoom as keyof typeof rooms].benefit}
+                </p>
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
+
+      {/* Current Room Details */}
+      <div className="bg-white/5 rounded-lg p-4">
+        <div className="flex items-center justify-between mb-3">
+          <div className="flex items-center space-x-2">
+            <div 
+              className="w-3 h-3 rounded-full"
+              style={{ backgroundColor: getCurrentRoomData().color }}
+            />
+            <h4 className="text-white font-semibold">{getCurrentRoomData().name}</h4>
+          </div>
+          <Lightbulb className="w-5 h-5 text-accent" />
+        </div>
+        
+        <div className="space-y-2">
+          <div className="flex items-start space-x-2">
+            <Zap className="w-4 h-4 text-accent mt-0.5 flex-shrink-0" />
+            <p className="text-gray-300 text-sm">{getCurrentRoomData().fact}</p>
+          </div>
+          <div className="flex items-start space-x-2">
+            <Eye className="w-4 h-4 text-accent mt-0.5 flex-shrink-0" />
+            <p className="text-gray-300 text-sm">{getCurrentRoomData().benefit}</p>
+          </div>
+        </div>
+      </div>
+
+      {/* Interactive Instructions */}
+      <div className="mt-4 text-center">
+        <p className="text-gray-400 text-xs">
+          Hover over rooms to discover smart lighting benefits • Click to explore
+        </p>
+      </div>
+    </IPadCard>
+  );
+};
+
 const StatCard = ({ icon: Icon, number, label, suffix = "" }: { icon: any; number: number; label: string; suffix?: string }) => {
   const [count, setCount] = useState(0);
 
@@ -392,28 +599,10 @@ const SmartLighting = () => {
           </p>
         </div>
 
-        {/* Interactive Demo Section */}
+        {/* Interactive Demo & House Diagram */}
         <div className="grid md:grid-cols-2 gap-6 mb-8">
           <InteractiveLightingDemo />
-          
-          <div>
-            <IPadCard className="p-6 h-full">
-              <h3 className="text-lg font-semibold text-white mb-4">Why Smart Lighting?</h3>
-              <div className="space-y-4">
-                {features.map((feature, index) => (
-                  <div key={index} className="flex items-start space-x-3 group">
-                    <div className="bg-accent/20 p-2 rounded-lg group-hover:bg-accent/30 transition-colors">
-                      <feature.icon className="w-5 h-5 text-accent" />
-                    </div>
-                    <div>
-                      <h4 className="text-white font-medium text-sm">{feature.title}</h4>
-                      <p className="text-gray-300 text-xs">{feature.desc}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </IPadCard>
-          </div>
+          <InteractiveHouseDiagram />
         </div>
 
         {/* Stats Section */}
