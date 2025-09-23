@@ -1,3 +1,4 @@
+import React from "react";
 import { ArrowLeft, Music, Speaker, Radio, Wifi, Settings, Volume2, Play, SkipForward, Heart } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
