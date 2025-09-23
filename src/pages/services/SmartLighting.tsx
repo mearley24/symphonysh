@@ -7,69 +7,214 @@ import { iPadCard as IPadCard } from "../../components/ui/ipad-card";
 import { iPadButton as IPadButton } from "../../components/ui/ipad-button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "../../components/ui/tabs";
 import { Slider } from "../../components/ui/slider";
+import { Switch } from "../../components/ui/switch";
 
 const InteractiveLightingDemo = () => {
   const [brightness, setBrightness] = useState([75]);
   const [selectedScene, setSelectedScene] = useState("relax");
   const [isAutoMode, setIsAutoMode] = useState(false);
+  const [selectedRoom, setSelectedRoom] = useState("living-room");
+  const [colorTemp, setColorTemp] = useState([3000]);
+  const [scheduleEnabled, setScheduleEnabled] = useState(false);
+  const [motionSensor, setMotionSensor] = useState(false);
+  const [energyUsage, setEnergyUsage] = useState(12);
+  const [currentTime, setCurrentTime] = useState(new Date());
 
-  const scenes = {
-    relax: { color: "hsl(45, 100%, 80%)", name: "Relax", brightness: 40 },
-    focus: { color: "hsl(210, 100%, 90%)", name: "Focus", brightness: 90 },
-    party: { color: "hsl(300, 100%, 70%)", name: "Party", brightness: 80 },
-    sleep: { color: "hsl(20, 100%, 60%)", name: "Sleep", brightness: 15 }
+  const rooms = {
+    "living-room": { name: "Living Room", lights: 6, occupied: true },
+    "kitchen": { name: "Kitchen", lights: 4, occupied: false },
+    "bedroom": { name: "Bedroom", lights: 3, occupied: false },
+    "office": { name: "Office", lights: 2, occupied: true }
   };
 
+  const scenes = {
+    relax: { 
+      color: "hsl(45, 100%, 80%)", 
+      name: "Relax", 
+      brightness: 40, 
+      temp: 2700,
+      description: "Warm, dim lighting for relaxation" 
+    },
+    focus: { 
+      color: "hsl(210, 100%, 90%)", 
+      name: "Focus", 
+      brightness: 90, 
+      temp: 5000,
+      description: "Bright, cool light for productivity" 
+    },
+    party: { 
+      color: "hsl(300, 100%, 70%)", 
+      name: "Party", 
+      brightness: 80, 
+      temp: 4000,
+      description: "Dynamic colors for entertainment" 
+    },
+    sleep: { 
+      color: "hsl(20, 100%, 60%)", 
+      name: "Sleep", 
+      brightness: 5, 
+      temp: 2200,
+      description: "Very warm, minimal light for bedtime" 
+    },
+    sunrise: {
+      color: "hsl(30, 100%, 85%)",
+      name: "Sunrise",
+      brightness: 60,
+      temp: 3500,
+      description: "Gradual morning wake-up simulation"
+    },
+    dinner: {
+      color: "hsl(40, 100%, 75%)",
+      name: "Dinner",
+      brightness: 55,
+      temp: 2800,
+      description: "Perfect ambiance for dining"
+    }
+  };
+
+  // Simulate time progression
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentTime(new Date());
+    }, 1000);
+    return () => clearInterval(timer);
+  }, []);
+
+  // Auto mode cycling
   useEffect(() => {
     if (isAutoMode) {
       const interval = setInterval(() => {
         const sceneKeys = Object.keys(scenes);
         const currentIndex = sceneKeys.indexOf(selectedScene);
         const nextIndex = (currentIndex + 1) % sceneKeys.length;
-        setSelectedScene(sceneKeys[nextIndex]);
-        setBrightness([scenes[sceneKeys[nextIndex] as keyof typeof scenes].brightness]);
-      }, 2000);
+        const nextScene = sceneKeys[nextIndex] as keyof typeof scenes;
+        setSelectedScene(nextScene);
+        setBrightness([scenes[nextScene].brightness]);
+        setColorTemp([scenes[nextScene].temp]);
+      }, 3000);
       return () => clearInterval(interval);
     }
   }, [isAutoMode, selectedScene]);
 
+  // Schedule-based automation
+  useEffect(() => {
+    if (scheduleEnabled) {
+      const hour = currentTime.getHours();
+      let autoScene = "relax";
+      
+      if (hour >= 6 && hour < 9) autoScene = "sunrise";
+      else if (hour >= 9 && hour < 17) autoScene = "focus";
+      else if (hour >= 17 && hour < 20) autoScene = "dinner";
+      else if (hour >= 20 && hour < 22) autoScene = "relax";
+      else autoScene = "sleep";
+      
+      if (selectedScene !== autoScene) {
+        setSelectedScene(autoScene);
+        setBrightness([scenes[autoScene as keyof typeof scenes].brightness]);
+        setColorTemp([scenes[autoScene as keyof typeof scenes].temp]);
+      }
+    }
+  }, [scheduleEnabled, currentTime]);
+
+  // Motion sensor effect
+  useEffect(() => {
+    if (motionSensor && rooms[selectedRoom as keyof typeof rooms].occupied) {
+      if (brightness[0] < 30) {
+        setBrightness([60]);
+      }
+    }
+  }, [motionSensor, selectedRoom]);
+
+  // Calculate energy usage based on settings
+  useEffect(() => {
+    const room = rooms[selectedRoom as keyof typeof rooms];
+    const baseUsage = room.lights * 8; // 8W per LED bulb
+    const actualUsage = (baseUsage * brightness[0]) / 100;
+    setEnergyUsage(Math.round(actualUsage));
+  }, [selectedRoom, brightness]);
+
   const currentScene = scenes[selectedScene as keyof typeof scenes];
+  const currentRoom = rooms[selectedRoom as keyof typeof rooms];
 
   return (
     <IPadCard className="p-6">
-      <h3 className="text-lg font-semibold text-white mb-4">Interactive Lighting Control</h3>
+      <div className="flex items-center justify-between mb-4">
+        <h3 className="text-lg font-semibold text-white">Smart Lighting Control</h3>
+        <div className="text-xs text-gray-300">
+          {currentTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+        </div>
+      </div>
       
-      {/* Light Bulb Visual */}
-      <div className="flex justify-center mb-6">
+      {/* Room Selection */}
+      <div className="grid grid-cols-2 gap-2 mb-4">
+        {Object.entries(rooms).map(([key, room]) => (
+          <button
+            key={key}
+            onClick={() => setSelectedRoom(key)}
+            className={`p-3 rounded-lg text-xs transition-all duration-300 relative ${
+              selectedRoom === key 
+                ? 'bg-accent text-white' 
+                : 'bg-white/10 text-gray-300 hover:bg-white/20'
+            }`}
+          >
+            <div className="flex items-center justify-between">
+              <span>{room.name}</span>
+              {room.occupied && (
+                <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
+              )}
+            </div>
+            <div className="text-xs opacity-70 mt-1">{room.lights} lights</div>
+          </button>
+        ))}
+      </div>
+
+      {/* Light Bulb Visual with Room Context */}
+      <div className="flex justify-center mb-6 relative">
         <div 
-          className="w-32 h-32 rounded-full flex items-center justify-center transition-all duration-500 relative"
+          className="w-24 h-24 rounded-full flex items-center justify-center transition-all duration-500 relative"
           style={{ 
             backgroundColor: currentScene.color,
             opacity: brightness[0] / 100,
-            boxShadow: `0 0 ${brightness[0]}px ${currentScene.color}`
+            boxShadow: `0 0 ${brightness[0]/2}px ${currentScene.color}`,
+            filter: `hue-rotate(${(colorTemp[0] - 3000) / 10}deg)`
           }}
         >
-          <Lightbulb className="w-16 h-16 text-gray-800" />
+          <Lightbulb className="w-12 h-12 text-gray-800" />
+        </div>
+        
+        {/* Energy Usage Indicator */}
+        <div className="absolute -top-2 -right-2 bg-green-500/20 text-green-400 text-xs px-2 py-1 rounded-full">
+          {energyUsage}W
         </div>
       </div>
 
+      {/* Current Scene Info */}
+      <div className="bg-white/5 rounded-lg p-3 mb-4">
+        <div className="flex items-center justify-between mb-2">
+          <h4 className="text-white font-medium text-sm">{currentScene.name} Scene</h4>
+          <span className="text-accent text-sm">{currentRoom.name}</span>
+        </div>
+        <p className="text-gray-300 text-xs">{currentScene.description}</p>
+      </div>
+
       {/* Scene Selector */}
-      <div className="grid grid-cols-4 gap-2 mb-4">
+      <div className="grid grid-cols-3 gap-2 mb-4">
         {Object.entries(scenes).map(([key, scene]) => (
           <button
             key={key}
             onClick={() => {
               setSelectedScene(key);
               setBrightness([scene.brightness]);
+              setColorTemp([scene.temp]);
             }}
-            className={`p-3 rounded-xl transition-all duration-300 ${
+            className={`p-2 rounded-lg transition-all duration-300 ${
               selectedScene === key 
                 ? 'bg-accent text-white' 
                 : 'bg-white/10 text-gray-300 hover:bg-white/20'
             }`}
           >
             <div 
-              className="w-4 h-4 rounded-full mx-auto mb-1"
+              className="w-3 h-3 rounded-full mx-auto mb-1"
               style={{ backgroundColor: scene.color }}
             />
             <span className="text-xs">{scene.name}</span>
@@ -77,29 +222,97 @@ const InteractiveLightingDemo = () => {
         ))}
       </div>
 
-      {/* Brightness Slider */}
-      <div className="mb-4">
-        <label className="text-sm text-gray-300 mb-2 block">Brightness: {brightness[0]}%</label>
-        <Slider
-          value={brightness}
-          onValueChange={setBrightness}
-          max={100}
-          step={1}
-          className="w-full"
-        />
+      {/* Controls */}
+      <div className="space-y-3 mb-4">
+        {/* Brightness */}
+        <div>
+          <div className="flex justify-between items-center mb-1">
+            <label className="text-sm text-gray-300">Brightness</label>
+            <span className="text-white text-sm">{brightness[0]}%</span>
+          </div>
+          <Slider
+            value={brightness}
+            onValueChange={setBrightness}
+            max={100}
+            step={1}
+            className="w-full"
+          />
+        </div>
+
+        {/* Color Temperature */}
+        <div>
+          <div className="flex justify-between items-center mb-1">
+            <label className="text-sm text-gray-300">Color Temperature</label>
+            <span className="text-white text-sm">{colorTemp[0]}K</span>
+          </div>
+          <Slider
+            value={colorTemp}
+            onValueChange={setColorTemp}
+            min={2200}
+            max={6500}
+            step={100}
+            className="w-full"
+          />
+          <div className="flex justify-between text-xs text-gray-400 mt-1">
+            <span>Warm</span>
+            <span>Cool</span>
+          </div>
+        </div>
       </div>
 
-      {/* Auto Mode Toggle */}
+      {/* Advanced Features */}
+      <div className="grid grid-cols-2 gap-3 mb-4">
+        <div className="bg-white/5 rounded-lg p-3">
+          <div className="flex items-center justify-between">
+            <div>
+              <div className="text-white text-sm font-medium">Schedule</div>
+              <div className="text-gray-300 text-xs">Auto adjust by time</div>
+            </div>
+            <Switch 
+              checked={scheduleEnabled} 
+              onCheckedChange={setScheduleEnabled}
+            />
+          </div>
+        </div>
+        
+        <div className="bg-white/5 rounded-lg p-3">
+          <div className="flex items-center justify-between">
+            <div>
+              <div className="text-white text-sm font-medium">Motion</div>
+              <div className="text-gray-300 text-xs">Sensor activation</div>
+            </div>
+            <Switch 
+              checked={motionSensor} 
+              onCheckedChange={setMotionSensor}
+            />
+          </div>
+        </div>
+      </div>
+
+      {/* Mode Toggles */}
       <div className="flex items-center justify-between">
-        <span className="text-sm text-gray-300">Auto Scene Demo</span>
+        <span className="text-sm text-gray-300">Demo Mode</span>
         <button
           onClick={() => setIsAutoMode(!isAutoMode)}
-          className={`p-2 rounded-lg transition-colors ${
-            isAutoMode ? 'bg-accent text-white' : 'bg-white/10 text-gray-300'
+          className={`flex items-center space-x-2 px-3 py-2 rounded-lg transition-colors ${
+            isAutoMode ? 'bg-accent text-white' : 'bg-white/10 text-gray-300 hover:bg-white/20'
           }`}
         >
           {isAutoMode ? <Pause className="w-4 h-4" /> : <Play className="w-4 h-4" />}
+          <span className="text-xs">{isAutoMode ? 'Stop' : 'Auto'}</span>
         </button>
+      </div>
+
+      {/* Energy & Status Bar */}
+      <div className="mt-4 pt-4 border-t border-white/10">
+        <div className="flex justify-between items-center text-xs">
+          <div className="text-gray-300">
+            Daily Savings: <span className="text-green-400">$2.40</span>
+          </div>
+          <div className="text-gray-300">
+            Active: <span className="text-white">{currentRoom.lights} lights</span>
+          </div>
+        </div>
       </div>
     </IPadCard>
   );
