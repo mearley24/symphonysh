@@ -1,139 +1,246 @@
-
-import { ArrowLeft, Shield, Lock, Bell, Eye, Smartphone, Wifi, Camera } from "lucide-react";
+import { ArrowLeft, Shield, Camera, Lock, Eye, AlertTriangle, Smartphone } from "lucide-react";
 import { Link } from "react-router-dom";
-
-const FeatureCard = ({ icon: Icon, title, description }: { icon: any; title: string; description: string }) => (
-  <div className="bg-white/5 backdrop-blur-sm p-6 rounded-lg">
-    <Icon className="w-6 h-6 text-accent mb-3" />
-    <h3 className="text-lg font-semibold text-white mb-2">{title}</h3>
-    <p className="text-gray-300">{description}</p>
-  </div>
-);
+import SEO from "../../components/SEO";
+import { iPadLayout as IPadLayout } from "../../components/Layout/iPadLayout";
+import { iPadCard as IPadCard } from "../../components/ui/ipad-card";
+import { iPadButton as IPadButton } from "../../components/ui/ipad-button";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "../../components/ui/tabs";
+import { SecuritySystemDemo } from "../../components/service-demos/SecuritySystemDemo";
 
 const SecuritySystems = () => {
+  const serviceSchema = {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "name": "Security Systems Installation",
+    "provider": {
+      "@type": "LocalBusiness",
+      "name": "Symphony Smart Homes",
+      "image": "/og-image.png",
+      "address": {
+        "@type": "PostalAddress",
+        "addressRegion": "CO",
+        "addressCountry": "US"
+      },
+      "priceRange": "$$"
+    },
+    "description": "Advanced smart security systems integrated with home automation for Vail Valley properties.",
+    "areaServed": "Vail Valley, Colorado",
+    "serviceType": "Security Systems"
+  };
+
+  const features = [
+    { icon: Camera, title: "4K Surveillance", desc: "Crystal clear video monitoring" },
+    { icon: Lock, title: "Smart Access Control", desc: "Keyless entry with mobile control" },
+    { icon: AlertTriangle, title: "AI-Powered Alerts", desc: "Intelligent threat detection" },
+    { icon: Eye, title: "24/7 Monitoring", desc: "Professional monitoring services" }
+  ];
+
   return (
-    <div className="min-h-screen bg-primary">
-      <section className="pt-32 pb-20 px-6">
-        <div className="max-w-6xl mx-auto">
-          <Link to="/services" className="inline-flex items-center text-accent hover:text-accent/90 mb-8">
-            <ArrowLeft className="w-4 h-4 mr-2" />
-            Back to Services
-          </Link>
+    <IPadLayout>
+      <SEO 
+        title="Security Systems | Smart Home Security Solutions"
+        description="Advanced security solutions seamlessly integrated with your smart home for complete peace of mind in Vail Valley, Colorado."
+        keywords="smart security, home security cameras, access control, smart locks, security monitoring, Vail Valley"
+      />
+      <script type="application/ld+json">
+        {JSON.stringify(serviceSchema)}
+      </script>
+      
+      <section className="pt-4 pb-8">
+        <Link to="/services" className="inline-flex items-center text-accent hover:text-accent/90 mb-6">
+          <ArrowLeft className="w-4 h-4 mr-2" />
+          Back to Services
+        </Link>
 
-          <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">Security</h1>
-          <p className="text-xl text-gray-300 mb-12 max-w-2xl">
-            Advanced protection that thinks ahead, keeping your family and property safe 24/7
+        {/* Hero Section */}
+        <div className="text-center mb-8">
+          <h1 className="text-3xl md:text-4xl font-bold text-white mb-4">Security Systems</h1>
+          <p className="text-gray-300 text-sm md:text-base max-w-2xl mx-auto mb-6">
+            Advanced security solutions seamlessly integrated with your smart home for complete peace of mind.
           </p>
+        </div>
 
-          <div className="grid md:grid-cols-2 gap-12 mb-16">
-            <div>
-              <h2 className="text-2xl font-semibold text-white mb-4">Peace of Mind, Automated</h2>
-              <p className="text-gray-300 mb-6">
-                Your security system should work smarter, not harder. Our solutions learn your routines, 
-                recognize familiar faces, and distinguish between a family member arriving home and an 
-                unwelcome visitor. Get instant alerts that matter, not false alarms that don't.
-              </p>
-              <ul className="space-y-3 text-gray-300">
-                <li className="flex items-center">
-                  <Lock className="w-5 h-5 text-accent mr-3" />
-                  Intelligent access control with user recognition
-                </li>
-                <li className="flex items-center">
-                  <Camera className="w-5 h-5 text-accent mr-3" />
-                  4K cameras with AI-powered motion detection
-                </li>
-                <li className="flex items-center">
-                  <Bell className="w-5 h-5 text-accent mr-3" />
-                  Smart alerts that learn your preferences
-                </li>
-                <li className="flex items-center">
-                  <Eye className="w-5 h-5 text-accent mr-3" />
-                  Optional professional monitoring services
-                </li>
-              </ul>
-            </div>
-            <div className="bg-white/5 backdrop-blur-sm rounded-lg p-8">
-              <img 
-                src="/lovable-uploads/860a30b2-c8df-4e9e-b327-3efecb18a16f.png"
-                alt="Comprehensive Home Security System"
-                className="rounded-lg w-full h-64 object-cover mb-6"
-              />
-            </div>
-          </div>
+        {/* Interactive Demo */}
+        <div className="mb-8">
+          <SecuritySystemDemo />
+        </div>
 
-          <h2 className="text-2xl font-semibold text-white mb-8 text-center">Intelligent Protection</h2>
-          <div className="grid md:grid-cols-3 gap-6 mb-16">
-            <FeatureCard
-              icon={Lock}
-              title="Smart Entry Points"
-              description="Keyless entry with facial recognition, temporary access codes, and automatic locking."
-            />
-            <FeatureCard
-              icon={Camera}
-              title="Proactive Surveillance"
-              description="Cameras that recognize familiar faces and only alert you to genuine security concerns."
-            />
-            <FeatureCard
-              icon={Bell}
-              title="Contextual Alerts"
-              description="Notifications that understand the difference between your dog and an intruder."
-            />
-          </div>
+        {/* Stats Section */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+          <IPadCard className="text-center p-4">
+            <div className="text-2xl font-bold text-white">4K</div>
+            <div className="text-xs text-gray-300">Video Resolution</div>
+          </IPadCard>
+          <IPadCard className="text-center p-4">
+            <div className="text-2xl font-bold text-white">24/7</div>
+            <div className="text-xs text-gray-300">Monitoring Available</div>
+          </IPadCard>
+          <IPadCard className="text-center p-4">
+            <div className="text-2xl font-bold text-white">AI</div>
+            <div className="text-xs text-gray-300">Smart Detection</div>
+          </IPadCard>
+          <IPadCard className="text-center p-4">
+            <div className="text-2xl font-bold text-white">∞</div>
+            <div className="text-xs text-gray-300">Cloud Storage</div>
+          </IPadCard>
+        </div>
 
-          <div className="bg-white/5 backdrop-blur-sm p-8 rounded-lg mb-16">
-            <h2 className="text-2xl font-semibold text-white mb-4">Advanced Monitoring Features</h2>
-            <div className="grid md:grid-cols-2 gap-8">
-              <div>
-                <ul className="space-y-4 text-gray-300">
-                  <li className="flex items-center">
-                    <Camera className="w-5 h-5 text-accent mr-3" />
-                    Ultra-wide field cameras with color night vision
-                  </li>
-                  <li className="flex items-center">
-                    <Eye className="w-5 h-5 text-accent mr-3" />
-                    AI-powered behavior analysis
-                  </li>
-                  <li className="flex items-center">
-                    <Smartphone className="w-5 h-5 text-accent mr-3" />
-                    Real-time mobile alerts with video clips
-                  </li>
-                  <li className="flex items-center">
-                    <Wifi className="w-5 h-5 text-accent mr-3" />
-                    Secure cloud storage with local backup
-                  </li>
-                </ul>
+        {/* Features Grid */}
+        <div className="grid md:grid-cols-4 gap-4 mb-8">
+          {features.map((feature, index) => (
+            <IPadCard key={index} className="p-4 text-center">
+              <div className="bg-accent/20 w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-3">
+                <feature.icon className="w-6 h-6 text-accent" />
               </div>
-              <div>
-                <img 
-                  src="https://images.unsplash.com/photo-1557317081-341c04601c13?auto=format&fit=crop&q=80"
-                  alt="Video Surveillance"
-                  className="rounded-lg w-full h-48 object-cover"
-                />
-              </div>
-            </div>
-          </div>
+              <h3 className="text-white font-semibold mb-1 text-sm">{feature.title}</h3>
+              <p className="text-gray-300 text-xs">{feature.desc}</p>
+            </IPadCard>
+          ))}
+        </div>
 
-          <div className="bg-white/5 backdrop-blur-sm p-8 rounded-lg text-center">
-            <h2 className="text-2xl font-semibold text-white mb-4">Secure Your Sanctuary</h2>
-            <p className="text-gray-300 mb-6">
-              Experience security that adapts to your life, not the other way around.
-            </p>
-            <Link 
-              to="/scheduling?service=security-systems"
-              className="inline-flex items-center bg-accent hover:bg-accent/90 text-white px-6 py-3 rounded-md font-medium transition-colors"
-            >
-              Schedule a Consultation
+        {/* Tabbed Content */}
+        <IPadCard className="mb-8">
+          <Tabs defaultValue="surveillance" className="w-full">
+            <TabsList className="grid w-full grid-cols-3 mb-6">
+              <TabsTrigger value="surveillance">Surveillance</TabsTrigger>
+              <TabsTrigger value="access">Access Control</TabsTrigger>
+              <TabsTrigger value="monitoring">Monitoring</TabsTrigger>
+            </TabsList>
+
+            <TabsContent value="surveillance" className="space-y-4">
+              <h3 className="text-lg font-semibold text-white mb-4">Video Surveillance Systems</h3>
+              <div className="grid md:grid-cols-2 gap-6">
+                <div className="space-y-4">
+                  <div className="bg-white/5 rounded-lg p-4">
+                    <h4 className="text-white font-medium mb-2">4K Resolution</h4>
+                    <p className="text-gray-300 text-sm">Ultra-high definition cameras with color night vision and HDR support.</p>
+                  </div>
+                  <div className="bg-white/5 rounded-lg p-4">
+                    <h4 className="text-white font-medium mb-2">AI Detection</h4>
+                    <p className="text-gray-300 text-sm">Smart motion detection that distinguishes between people, vehicles, and animals.</p>
+                  </div>
+                  <div className="bg-white/5 rounded-lg p-4">
+                    <h4 className="text-white font-medium mb-2">Cloud & Local Storage</h4>
+                    <p className="text-gray-300 text-sm">Secure cloud backup with local NVR for redundant video storage.</p>
+                  </div>
+                </div>
+                <div className="bg-white/5 rounded-lg p-4">
+                  <h4 className="text-white font-medium mb-3">Camera Packages</h4>
+                  <div className="space-y-3">
+                    <div className="flex justify-between items-center">
+                      <span className="text-gray-300 text-sm">4-Camera System</span>
+                      <span className="text-accent font-semibold">$2,400+</span>
+                    </div>
+                    <div className="flex justify-between items-center">
+                      <span className="text-gray-300 text-sm">8-Camera System</span>
+                      <span className="text-accent font-semibold">$4,200+</span>
+                    </div>
+                    <div className="flex justify-between items-center">
+                      <span className="text-gray-300 text-sm">16-Camera System</span>
+                      <span className="text-accent font-semibold">$7,800+</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </TabsContent>
+
+            <TabsContent value="access" className="space-y-4">
+              <h3 className="text-lg font-semibold text-white mb-4">Smart Access Control</h3>
+              <div className="grid md:grid-cols-2 gap-6">
+                <div className="space-y-4">
+                  <div className="bg-white/5 rounded-lg p-4">
+                    <h4 className="text-white font-medium mb-2">Smart Locks</h4>
+                    <p className="text-gray-300 text-sm">Keyless entry with fingerprint, code, and smartphone access.</p>
+                  </div>
+                  <div className="bg-white/5 rounded-lg p-4">
+                    <h4 className="text-white font-medium mb-2">Facial Recognition</h4>
+                    <p className="text-gray-300 text-sm">Advanced AI that recognizes family members and trusted guests.</p>
+                  </div>
+                  <div className="bg-white/5 rounded-lg p-4">
+                    <h4 className="text-white font-medium mb-2">Temporary Access</h4>
+                    <p className="text-gray-300 text-sm">Grant time-limited access to visitors, service providers, or guests.</p>
+                  </div>
+                </div>
+                <div className="bg-white/5 rounded-lg p-4">
+                  <h4 className="text-white font-medium mb-3">Access Solutions</h4>
+                  <div className="space-y-3">
+                    <div className="flex justify-between items-center">
+                      <span className="text-gray-300 text-sm">Smart Door Lock</span>
+                      <span className="text-accent font-semibold">$350+</span>
+                    </div>
+                    <div className="flex justify-between items-center">
+                      <span className="text-gray-300 text-sm">Garage Door Control</span>
+                      <span className="text-accent font-semibold">$280+</span>
+                    </div>
+                    <div className="flex justify-between items-center">
+                      <span className="text-gray-300 text-sm">Gate Access System</span>
+                      <span className="text-accent font-semibold">$1,200+</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </TabsContent>
+
+            <TabsContent value="monitoring" className="space-y-4">
+              <h3 className="text-lg font-semibold text-white mb-4">Professional Monitoring</h3>
+              <div className="grid md:grid-cols-2 gap-6">
+                <div className="space-y-4">
+                  <div className="bg-white/5 rounded-lg p-4">
+                    <h4 className="text-white font-medium mb-2">24/7 Monitoring</h4>
+                    <p className="text-gray-300 text-sm">Round-the-clock professional monitoring with emergency response.</p>
+                  </div>
+                  <div className="bg-white/5 rounded-lg p-4">
+                    <h4 className="text-white font-medium mb-2">Mobile Alerts</h4>
+                    <p className="text-gray-300 text-sm">Instant notifications with video clips sent to your smartphone.</p>
+                  </div>
+                  <div className="bg-white/5 rounded-lg p-4">
+                    <h4 className="text-white font-medium mb-2">Emergency Services</h4>
+                    <p className="text-gray-300 text-sm">Direct connection to local police, fire, and medical services.</p>
+                  </div>
+                </div>
+                <div className="bg-white/5 rounded-lg p-4">
+                  <h4 className="text-white font-medium mb-3">Monitoring Plans</h4>
+                  <div className="space-y-3">
+                    <div className="flex justify-between items-center">
+                      <span className="text-gray-300 text-sm">Self-Monitoring</span>
+                      <span className="text-accent font-semibold">Free</span>
+                    </div>
+                    <div className="flex justify-between items-center">
+                      <span className="text-gray-300 text-sm">Professional Basic</span>
+                      <span className="text-accent font-semibold">$29/mo</span>
+                    </div>
+                    <div className="flex justify-between items-center">
+                      <span className="text-gray-300 text-sm">Premium Service</span>
+                      <span className="text-accent font-semibold">$49/mo</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </TabsContent>
+          </Tabs>
+        </IPadCard>
+
+        {/* Call to Action */}
+        <IPadCard className="text-center">
+          <h2 className="text-2xl font-bold text-white mb-4">Secure Your Peace of Mind</h2>
+          <p className="text-gray-300 mb-6 max-w-xl mx-auto">
+            Protect what matters most with intelligent security that adapts to your lifestyle.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Link to="/scheduling?service=security-systems">
+              <IPadButton size="md">
+                Schedule Security Assessment
+              </IPadButton>
+            </Link>
+            <Link to="/projects">
+              <IPadButton variant="secondary" size="md">
+                View Security Projects
+              </IPadButton>
             </Link>
           </div>
-        </div>
+        </IPadCard>
       </section>
-
-      <footer className="py-12 px-6 text-center text-gray-400 bg-primary">
-        <p className="text-sm">
-          © 2024 Symphony Smart Homes. All rights reserved.
-        </p>
-      </footer>
-    </div>
+    </IPadLayout>
   );
 };
 
