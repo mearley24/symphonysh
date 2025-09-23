@@ -5,6 +5,7 @@ import { Input } from '../ui/input';
 import { iPadCard as IPadCard } from '../ui/ipad-card';
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls, PerspectiveCamera } from '@react-three/drei';
+import { Suspense } from 'react';
 
 interface LightingFixture {
   id: string;
@@ -26,29 +27,34 @@ interface LightingFixtureLibraryProps {
   selectedFixtures: string[];
 }
 
-// Simple 3D Light Component
+// Simple 3D Light Component with error handling
 const Light3D = ({ type, color = '#ffffff' }: { type: string; color?: string }) => {
-  const getGeometry = () => {
-    switch (type) {
-      case 'recessed':
-        return <cylinderGeometry args={[0.3, 0.25, 0.1, 16]} />;
-      case 'pendant':
-        return <sphereGeometry args={[0.2, 16, 16]} />;
-      case 'sconce':
-        return <boxGeometry args={[0.3, 0.4, 0.1]} />;
-      case 'keypad':
-        return <boxGeometry args={[0.2, 0.3, 0.05]} />;
-      default:
-        return <sphereGeometry args={[0.2, 16, 16]} />;
-    }
-  };
+  try {
+    const getGeometry = () => {
+      switch (type) {
+        case 'recessed':
+          return <cylinderGeometry args={[0.3, 0.25, 0.1, 16]} />;
+        case 'pendant':
+          return <sphereGeometry args={[0.2, 16, 16]} />;
+        case 'sconce':
+          return <boxGeometry args={[0.3, 0.4, 0.1]} />;
+        case 'keypad':
+          return <boxGeometry args={[0.2, 0.3, 0.05]} />;
+        default:
+          return <sphereGeometry args={[0.2, 16, 16]} />;
+      }
+    };
 
-  return (
-    <mesh rotation={[0.1, 0.1, 0]}>
-      {getGeometry()}
-      <meshStandardMaterial color={color} metalness={0.8} roughness={0.2} />
-    </mesh>
-  );
+    return (
+      <mesh rotation={[0.1, 0.1, 0]}>
+        {getGeometry()}
+        <meshStandardMaterial color={color} metalness={0.8} roughness={0.2} />
+      </mesh>
+    );
+  } catch (error) {
+    console.error('Error rendering 3D light:', error);
+    return null;
+  }
 };
 
 export const LightingFixtureLibrary = ({ onFixtureSelect, selectedFixtures }: LightingFixtureLibraryProps) => {
@@ -285,13 +291,15 @@ export const LightingFixtureLibrary = ({ onFixtureSelect, selectedFixtures }: Li
               <div key={fixture.id} className="bg-white/5 rounded-lg p-4 border border-white/10">
                 <h4 className="text-white font-medium text-sm mb-2">{fixture.name}</h4>
                 <div className="h-40 bg-gray-900 rounded-lg">
-                  <Canvas>
-                    <PerspectiveCamera makeDefault position={[0, 0, 2]} />
-                    <OrbitControls enableZoom={false} />
-                    <ambientLight intensity={0.5} />
-                    <pointLight position={[2, 2, 2]} />
-                    <Light3D type={fixture.type} />
-                  </Canvas>
+                  <Suspense fallback={<div className="flex items-center justify-center h-full text-white text-sm">Loading 3D...</div>}>
+                    <Canvas>
+                      <PerspectiveCamera makeDefault position={[0, 0, 2]} />
+                      <OrbitControls enableZoom={false} />
+                      <ambientLight intensity={0.5} />
+                      <pointLight position={[2, 2, 2]} />
+                      <Light3D type={fixture.type} />
+                    </Canvas>
+                  </Suspense>
                 </div>
                 <div className="mt-2 flex justify-between items-center">
                   <span className="text-gray-400 text-xs">{fixture.brand}</span>
@@ -323,13 +331,15 @@ export const LightingFixtureLibrary = ({ onFixtureSelect, selectedFixtures }: Li
 
               <div className="grid md:grid-cols-2 gap-6">
                 <div className="h-60 bg-gray-800 rounded-lg">
-                  <Canvas>
-                    <PerspectiveCamera makeDefault position={[0, 0, 3]} />
-                    <OrbitControls />
-                    <ambientLight intensity={0.5} />
-                    <pointLight position={[2, 2, 2]} />
-                    <Light3D type={previewFixture.type} />
-                  </Canvas>
+                  <Suspense fallback={<div className="flex items-center justify-center h-full text-white">Loading 3D Model...</div>}>
+                    <Canvas>
+                      <PerspectiveCamera makeDefault position={[0, 0, 3]} />
+                      <OrbitControls />
+                      <ambientLight intensity={0.5} />
+                      <pointLight position={[2, 2, 2]} />
+                      <Light3D type={previewFixture.type} />
+                    </Canvas>
+                  </Suspense>
                 </div>
 
                 <div className="space-y-4">
