@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { ArrowRight, Home, Volume2, Shield, Lightbulb, Thermometer, Wifi, Wrench, Sun, ChevronLeft, ChevronRight, Maximize2 } from "lucide-react";
-import { iPadLayout as IPadLayout } from "../components/Layout/iPadLayout";
-import { iPadCard as IPadCard } from "../components/ui/ipad-card";
-import { iPadButton as IPadButton } from "../components/ui/ipad-button";
+import { ArrowRight, Home, Volume2, Shield, Lightbulb, Thermometer, Wifi, Wrench, Sun, ChevronLeft, ChevronRight, Maximize2, Play } from "lucide-react";
+import { Control4Layout } from "../components/Layout/Control4Layout";
+import { Control4Card } from "../components/ui/control4-card";
+import { Control4Button } from "../components/ui/control4-button";
 import { Button } from "../components/ui/button";
 import SEO from "../components/SEO";
 
@@ -110,189 +110,172 @@ const Services = () => {
   const currentServiceData = services[currentService];
 
   return (
-    <IPadLayout>
+    <Control4Layout showHeader={false} className="h-screen overflow-hidden">
       <SEO 
         title="Smart Home Services - Control4 Automation in Vail Valley"
         description="Complete smart home services including Control4 automation, home theaters, security systems, smart lighting, and more in Vail Valley, Colorado."
         keywords="smart home services, Control4, home automation, home theater, security systems, smart lighting, Vail Valley"
       />
       
-      <section className="pt-4 pb-8">
-        <div className="text-center mb-8">
-          <h1 className="text-2xl md:text-3xl font-bold text-white mb-3">
-            Smart Home Services
-          </h1>
-          <p className="text-sm md:text-base text-gray-300 max-w-3xl mx-auto leading-relaxed">
-            Experience the future of home automation with our comprehensive suite of integrated smart home solutions
-          </p>
+      <div className="h-full flex flex-col">
+        {/* Header */}
+        <div className="flex items-center justify-between p-6 border-b border-slate-700/30">
+          <div>
+            <h1 className="text-2xl font-bold text-white mb-1">Smart Home Ecosystem</h1>
+            <p className="text-slate-400 text-sm">Integrated solutions for modern living</p>
+          </div>
+          <div className="flex items-center space-x-4">
+            <Control4Button 
+              variant="secondary" 
+              size="sm"
+              onClick={() => setIsAutoRotating(!isAutoRotating)}
+            >
+              {isAutoRotating ? 'Pause' : 'Auto Tour'} <Play className="w-4 h-4 ml-2" />
+            </Control4Button>
+            <Link to="/scheduling">
+              <Control4Button size="sm">
+                Get Started <ArrowRight className="w-4 h-4 ml-2" />
+              </Control4Button>
+            </Link>
+          </div>
         </div>
 
-        {/* Main Featured Service Display */}
-        <div className="mb-8">
-          <IPadCard className="p-0 overflow-hidden relative">
-            <div className={`bg-gradient-to-br ${currentServiceData.gradient} p-8 text-white relative`}>
-              {/* Background Pattern */}
-              <div className="absolute inset-0 opacity-10">
-                <div className="grid grid-cols-8 gap-4 h-full">
-                  {Array.from({ length: 32 }).map((_, i) => (
-                    <div key={i} className="border border-white/20 rounded"></div>
-                  ))}
+        {/* Main Content */}
+        <div className="flex-1 grid lg:grid-cols-3 gap-6 p-6 overflow-hidden">
+          
+          {/* Left - Featured Service */}
+          <div className="lg:col-span-2">
+            <Control4Card variant="glass" className="h-full p-0 overflow-hidden">
+              <div className={`bg-gradient-to-br ${currentServiceData.gradient} h-full relative`}>
+                {/* Background Pattern */}
+                <div className="absolute inset-0 opacity-10">
+                  <div className="grid grid-cols-12 gap-2 h-full p-4">
+                    {Array.from({ length: 48 }).map((_, i) => (
+                      <div key={i} className="border border-white/20 rounded"></div>
+                    ))}
+                  </div>
                 </div>
-              </div>
-              
-              {/* Content */}
-              <div className="relative z-10">
-                <div className="flex items-center justify-between mb-6">
-                  <div className="flex items-center space-x-4">
-                    <div className="p-4 bg-white/20 rounded-xl backdrop-blur-sm">
-                      <currentServiceData.icon className="w-8 h-8" />
+                
+                {/* Content */}
+                <div className="relative z-10 h-full flex flex-col p-8">
+                  <div className="flex items-center justify-between mb-6">
+                    <div className="flex items-center space-x-4">
+                      <div className="p-4 bg-white/20 rounded-xl backdrop-blur-sm">
+                        <currentServiceData.icon className="w-8 h-8 text-white" />
+                      </div>
+                      <div>
+                        <h2 className="text-2xl font-bold text-white">{currentServiceData.title}</h2>
+                        <p className="text-white/80">{currentServiceData.description}</p>
+                      </div>
                     </div>
-                    <div>
-                      <h2 className="text-2xl font-bold">{currentServiceData.title}</h2>
-                      <p className="text-white/80">{currentServiceData.description}</p>
+                    
+                    <div className="flex items-center space-x-2">
+                      <Button
+                        variant="secondary"
+                        size="sm"
+                        onClick={prevService}
+                        className="bg-white/20 hover:bg-white/30 text-white border-none"
+                      >
+                        <ChevronLeft className="w-4 h-4" />
+                      </Button>
+                      <Button
+                        variant="secondary"
+                        size="sm"
+                        onClick={nextService}
+                        className="bg-white/20 hover:bg-white/30 text-white border-none"
+                      >
+                        <ChevronRight className="w-4 h-4" />
+                      </Button>
+                    </div>
+                  </div>
+
+                  <div className="flex-1 flex items-center">
+                    <div className="grid md:grid-cols-2 gap-8 items-center w-full">
+                      <div>
+                        <p className="text-lg text-white/90 mb-6 leading-relaxed">
+                          {currentServiceData.preview}
+                        </p>
+                        
+                        <div className="flex flex-wrap gap-3 mb-6">
+                          {currentServiceData.features.map((feature, idx) => (
+                            <span 
+                              key={idx} 
+                              className="px-3 py-2 bg-white/20 rounded-full text-sm backdrop-blur-sm text-white"
+                            >
+                              {feature}
+                            </span>
+                          ))}
+                        </div>
+
+                        <Link to={currentServiceData.link}>
+                          <Control4Button className="bg-white text-gray-900 hover:bg-white/90">
+                            Explore {currentServiceData.title} <ArrowRight className="w-4 h-4 ml-2" />
+                          </Control4Button>
+                        </Link>
+                      </div>
+
+                      <div className="relative">
+                        <div className="aspect-square bg-white/10 rounded-2xl backdrop-blur-sm flex items-center justify-center">
+                          <currentServiceData.icon className="w-32 h-32 text-white/30" />
+                          <div className="absolute inset-4 border-2 border-white/20 rounded-xl animate-pulse"></div>
+                        </div>
+                      </div>
                     </div>
                   </div>
                   
-                  <div className="flex items-center space-x-2">
-                    <Button
-                      variant="secondary"
-                      size="sm"
-                      onClick={prevService}
-                      className="bg-white/20 hover:bg-white/30 text-white border-none"
-                    >
-                      <ChevronLeft className="w-4 h-4" />
-                    </Button>
-                    <Button
-                      variant="secondary"
-                      size="sm"
-                      onClick={() => setIsAutoRotating(!isAutoRotating)}
-                      className="bg-white/20 hover:bg-white/30 text-white border-none"
-                    >
-                      {isAutoRotating ? <Maximize2 className="w-4 h-4" /> : <ArrowRight className="w-4 h-4" />}
-                    </Button>
-                    <Button
-                      variant="secondary"
-                      size="sm"
-                      onClick={nextService}
-                      className="bg-white/20 hover:bg-white/30 text-white border-none"
-                    >
-                      <ChevronRight className="w-4 h-4" />
-                    </Button>
-                  </div>
-                </div>
-
-                <div className="grid md:grid-cols-2 gap-8 items-center">
-                  <div>
-                    <p className="text-lg text-white/90 mb-6 leading-relaxed">
-                      {currentServiceData.preview}
-                    </p>
-                    
-                    <div className="flex flex-wrap gap-3 mb-6">
-                      {currentServiceData.features.map((feature, idx) => (
-                        <span 
-                          key={idx} 
-                          className="px-3 py-1 bg-white/20 rounded-full text-sm backdrop-blur-sm"
-                        >
-                          {feature}
-                        </span>
-                      ))}
-                    </div>
-
-                    <Link to={currentServiceData.link}>
-                      <IPadButton className="bg-white text-gray-900 hover:bg-white/90">
-                        Explore {currentServiceData.title} <ArrowRight className="w-4 h-4 ml-2" />
-                      </IPadButton>
-                    </Link>
-                  </div>
-
-                  <div className="relative">
-                    <div className="aspect-square bg-white/10 rounded-2xl backdrop-blur-sm flex items-center justify-center">
-                      <currentServiceData.icon className="w-32 h-32 text-white/30" />
-                      <div className="absolute inset-4 border-2 border-white/20 rounded-xl animate-pulse"></div>
-                    </div>
+                  {/* Progress Indicator */}
+                  <div className="flex justify-center space-x-2 mt-6">
+                    {services.map((_, index) => (
+                      <button
+                        key={index}
+                        onClick={() => {
+                          setCurrentService(index);
+                          setIsAutoRotating(false);
+                        }}
+                        className={`h-2 rounded-full transition-all duration-300 ${
+                          index === currentService 
+                            ? 'w-8 bg-white' 
+                            : 'w-2 bg-white/30 hover:bg-white/50'
+                        }`}
+                      />
+                    ))}
                   </div>
                 </div>
               </div>
-            </div>
+            </Control4Card>
+          </div>
 
-            {/* Progress Indicator */}
-            <div className="p-4 bg-white/5">
-              <div className="flex justify-center space-x-2">
-                {services.map((_, index) => (
-                  <button
-                    key={index}
-                    onClick={() => {
-                      setCurrentService(index);
-                      setIsAutoRotating(false);
-                    }}
-                    className={`h-2 rounded-full transition-all duration-300 ${
-                      index === currentService 
-                        ? 'w-8 bg-white' 
-                        : 'w-2 bg-white/30 hover:bg-white/50'
-                    }`}
-                  />
+          {/* Right - Services Grid */}
+          <div className="space-y-4">
+            <div>
+              <h3 className="text-lg font-semibold text-white mb-4">All Services</h3>
+              <div className="grid grid-cols-1 gap-3">
+                {services.map((service, index) => (
+                  <Link key={index} to={service.link}>
+                    <Control4Card 
+                      variant={index === currentService ? "elevated" : "default"}
+                      glow={index === currentService}
+                      className="p-4 transition-all duration-300 cursor-pointer hover:scale-105"
+                    >
+                      <div className="flex items-center space-x-3">
+                        <div className={`p-2 rounded-lg bg-gradient-to-br ${service.gradient} transition-transform duration-300`}>
+                          <service.icon className="w-5 h-5 text-white" />
+                        </div>
+                        <div className="flex-1">
+                          <h4 className="text-white font-semibold text-sm">{service.title}</h4>
+                          <p className="text-slate-400 text-xs">{service.features[0]}</p>
+                        </div>
+                        <ArrowRight className="w-4 h-4 text-slate-500" />
+                      </div>
+                    </Control4Card>
+                  </Link>
                 ))}
               </div>
             </div>
-          </IPadCard>
+          </div>
         </div>
-
-        {/* Services Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-          {services.map((service, index) => (
-            <Link key={index} to={service.link}>
-              <IPadCard 
-                className={`h-32 p-4 transition-all duration-300 cursor-pointer ${
-                  index === currentService 
-                    ? 'border-accent bg-accent/10 scale-105' 
-                    : 'hover:border-accent/30 hover:scale-105'
-                } ${
-                  hoveredService === index ? 'animate-scale-in' : ''
-                }`}
-              >
-                <div className="flex flex-col items-center text-center h-full justify-center space-y-2">
-                  <div className={`p-2 rounded-lg bg-gradient-to-br ${service.gradient} transition-transform duration-300 ${
-                    hoveredService === index ? 'scale-110' : ''
-                  }`}>
-                    <service.icon className="w-5 h-5 text-white" />
-                  </div>
-                  <h3 className="text-xs font-semibold text-white">{service.title}</h3>
-                  <p className="text-gray-400 text-xs leading-tight line-clamp-1">
-                    {service.features[0]}
-                  </p>
-                </div>
-              </IPadCard>
-            </Link>
-          ))}
-        </div>
-
-        {/* Call to Action */}
-        <div className="flex justify-center">
-          <IPadCard className="text-center max-w-2xl p-6">
-            <div className="space-y-4">
-              <h2 className="text-xl font-bold text-white">
-                Ready to Transform Your Home?
-              </h2>
-              <p className="text-sm text-gray-300">
-                Let our experts design a custom smart home solution tailored to your lifestyle and needs.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-3 justify-center items-center">
-                <Link to="/scheduling">
-                  <IPadButton className="w-full sm:w-auto">
-                    Schedule Consultation <ArrowRight className="w-4 h-4 ml-2" />
-                  </IPadButton>
-                </Link>
-                <Link to="/projects">
-                  <IPadButton variant="secondary" className="w-full sm:w-auto">
-                    View Our Work
-                  </IPadButton>
-                </Link>
-              </div>
-            </div>
-          </IPadCard>
-        </div>
-      </section>
-    </IPadLayout>
+      </div>
+    </Control4Layout>
   );
 };
 
