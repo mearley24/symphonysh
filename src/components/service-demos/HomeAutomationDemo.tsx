@@ -5,6 +5,7 @@ import { iPadCard as IPadCard } from '../ui/ipad-card';
 import { Button } from '../ui/button';
 import { Switch } from '../ui/switch';
 import { Slider } from '../ui/slider';
+import { InteractiveHouseMap } from './InteractiveHouseMap';
 
 export const HomeAutomationDemo = () => {
   const [selectedRoom, setSelectedRoom] = useState('living-room');
@@ -59,14 +60,24 @@ export const HomeAutomationDemo = () => {
   };
 
   return (
-    <IPadCard className="p-6">
-      <div className="flex items-center justify-between mb-4">
-        <h3 className="text-lg font-semibold text-white">Control4 Home Automation</h3>
-        <div className="flex items-center space-x-2">
-          <Smartphone className="w-5 h-5 text-accent" />
-          <span className="text-green-400 text-xs">Connected</span>
+    <div className="grid lg:grid-cols-2 gap-6">
+      {/* Interactive House Map */}
+      <InteractiveHouseMap 
+        selectedRoom={selectedRoom}
+        currentScene={currentScene}
+        onRoomSelect={setSelectedRoom}
+        systemStatus={systemStatus}
+      />
+      
+      {/* Control Panel */}
+      <IPadCard className="p-6">
+        <div className="flex items-center justify-between mb-4">
+          <h3 className="text-lg font-semibold text-white">Control4 Home Automation</h3>
+          <div className="flex items-center space-x-2">
+            <Smartphone className="w-5 h-5 text-accent" />
+            <span className="text-green-400 text-xs">Connected</span>
+          </div>
         </div>
-      </div>
 
       {/* Main Control Panel */}
       <div className="grid grid-cols-2 gap-4 mb-6">
@@ -208,6 +219,7 @@ export const HomeAutomationDemo = () => {
           <span>Settings</span>
         </Button>
       </div>
-    </IPadCard>
+      </IPadCard>
+    </div>
   );
 };
