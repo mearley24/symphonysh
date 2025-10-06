@@ -13,7 +13,7 @@ const Projects = () => {
       icon: Monitor,
       title: "Home Theater",
       description: "Premium home cinema installations with cutting-edge technology",
-      image: "/lovable-uploads/home theater/IMG_0509.JPG",
+      image: "/lovable-uploads/home%20theater/IMG_0509.JPG",
       link: "/photos/home-theater",
       count: "15+ installations"
     },
@@ -21,7 +21,7 @@ const Projects = () => {
       icon: Monitor,
       title: "Mounted TVs",
       description: "Expert TV mounting and media wall installations",
-      image: "/lovable-uploads/mounted tvs/Home/IMG_0659.JPG",
+      image: "/lovable-uploads/mounted%20tvs/Home/IMG_0659.JPG",
       link: "/photos/mounted-tvs",
       count: "50+ installations"
     },
