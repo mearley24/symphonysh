@@ -1,11 +1,16 @@
 import { useState, useEffect } from 'react';
 import React from 'react';
-import { Home, Lightbulb, Thermometer, Shield, Volume2, Smartphone, Power, Settings } from 'lucide-react';
+import { Home, Lightbulb, Thermometer, Shield, Volume2, Smartphone, Power, Settings, ChevronDown } from 'lucide-react';
 import { iPadCard as IPadCard } from '../ui/ipad-card';
 import { Button } from '../ui/button';
 import { Switch } from '../ui/switch';
 import { Slider } from '../ui/slider';
 import { InteractiveHouseMap } from './InteractiveHouseMap';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuTrigger,
+} from '../ui/dropdown-menu';
 
 export const HomeAutomationDemo = () => {
   const [selectedRoom, setSelectedRoom] = useState('living-room');
@@ -17,13 +22,62 @@ export const HomeAutomationDemo = () => {
     entertainment: false
   });
   const [isAutoMode, setIsAutoMode] = useState(false);
+  const [lightLevels, setLightLevels] = useState<Record<string, number>>({
+    'living-room-0': 85,
+    'living-room-1': 90,
+    'living-room-2': 75,
+    'kitchen-0': 90,
+    'kitchen-1': 85,
+    'bedroom-0': 45,
+    'bedroom-1': 50,
+    'bedroom-2': 40,
+    'office-0': 100,
+    'office-1': 95,
+    'hallway-0': 50,
+  });
 
   const rooms = {
-    'living-room': { name: 'Living Room', temp: 72, lights: 85, devices: 8 },
-    'kitchen': { name: 'Kitchen', temp: 70, lights: 90, devices: 5 },
-    'bedroom': { name: 'Master Bedroom', temp: 68, lights: 45, devices: 6 },
-    'office': { name: 'Home Office', temp: 71, lights: 100, devices: 4 },
-    'hallway': { name: 'Hallway', temp: 70, lights: 50, devices: 2 }
+    'living-room': { 
+      name: 'Living Room', 
+      temp: 72, 
+      lights: [
+        { id: 'living-room-0', name: 'Recessed Load 1' },
+        { id: 'living-room-1', name: 'Recessed Load 2' },
+        { id: 'living-room-2', name: 'Accent Load' }
+      ]
+    },
+    'kitchen': { 
+      name: 'Kitchen', 
+      temp: 70, 
+      lights: [
+        { id: 'kitchen-0', name: 'Island Pendants' },
+        { id: 'kitchen-1', name: 'Under Cabinet' }
+      ]
+    },
+    'bedroom': { 
+      name: 'Master Bedroom', 
+      temp: 68, 
+      lights: [
+        { id: 'bedroom-0', name: 'Overhead Load' },
+        { id: 'bedroom-1', name: 'Bedside Load 1' },
+        { id: 'bedroom-2', name: 'Bedside Load 2' }
+      ]
+    },
+    'office': { 
+      name: 'Home Office', 
+      temp: 71, 
+      lights: [
+        { id: 'office-0', name: 'Desk Load' },
+        { id: 'office-1', name: 'Ceiling Load' }
+      ]
+    },
+    'hallway': { 
+      name: 'Hallway', 
+      temp: 70, 
+      lights: [
+        { id: 'hallway-0', name: 'Hallway Load' }
+      ]
+    }
   };
 
   const scenes = {
@@ -68,6 +122,7 @@ export const HomeAutomationDemo = () => {
         currentScene={currentScene}
         onRoomSelect={setSelectedRoom}
         systemStatus={systemStatus}
+        lightLevels={lightLevels}
       />
       
       {/* Control Panel */}
@@ -150,27 +205,57 @@ export const HomeAutomationDemo = () => {
 
       {/* Room Selection */}
       <div className="mb-4">
-        <h4 className="text-white font-medium mb-3">Room Control</h4>
+        <h4 className="text-white font-medium mb-3">Room & Load Control</h4>
         <div className="grid grid-cols-2 gap-2 mb-4">
           {Object.entries(rooms).map(([key, room]) => (
-            <button
-              key={key}
-              onClick={() => setSelectedRoom(key)}
-              className={`p-3 rounded-lg text-left transition-all duration-300 ${
-                selectedRoom === key 
-                  ? 'bg-accent text-white' 
-                  : 'bg-white/10 text-gray-300 hover:bg-white/20'
-              }`}
-            >
-              <div className="text-sm font-medium">{room.name}</div>
-              <div className="text-xs opacity-75">{room.devices} devices</div>
-            </button>
+            <DropdownMenu key={key}>
+              <DropdownMenuTrigger asChild>
+                <button
+                  className={`p-3 rounded-lg text-left transition-all duration-300 flex items-center justify-between ${
+                    selectedRoom === key 
+                      ? 'bg-accent text-white' 
+                      : 'bg-white/10 text-gray-300 hover:bg-white/20'
+                  }`}
+                  onClick={() => setSelectedRoom(key)}
+                >
+                  <div>
+                    <div className="text-sm font-medium">{room.name}</div>
+                    <div className="text-xs opacity-75">{room.lights.length} loads</div>
+                  </div>
+                  <ChevronDown className="w-4 h-4" />
+                </button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent className="w-64 bg-slate-900 border-slate-700 p-3" align="start">
+                <div className="space-y-3">
+                  {room.lights.map((light) => (
+                    <div key={light.id} className="space-y-2">
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center space-x-2">
+                          <Lightbulb className="w-3 h-3 text-yellow-400" />
+                          <span className="text-sm text-white">{light.name}</span>
+                        </div>
+                        <span className="text-xs text-gray-400">{lightLevels[light.id]}%</span>
+                      </div>
+                      <Slider
+                        value={[lightLevels[light.id]]}
+                        onValueChange={(value) => {
+                          setLightLevels(prev => ({ ...prev, [light.id]: value[0] }));
+                        }}
+                        max={100}
+                        step={1}
+                        className="w-full"
+                      />
+                    </div>
+                  ))}
+                </div>
+              </DropdownMenuContent>
+            </DropdownMenu>
           ))}
         </div>
 
         {/* Room Details */}
         <div className="bg-white/5 rounded-lg p-4">
-          <h5 className="text-white font-medium mb-3">{currentRoom.name} Controls</h5>
+          <h5 className="text-white font-medium mb-3">{currentRoom.name} Climate</h5>
           
           <div className="space-y-4">
             <div>
@@ -183,20 +268,6 @@ export const HomeAutomationDemo = () => {
                 onValueChange={() => {}}
                 min={60}
                 max={80}
-                step={1}
-                className="w-full"
-              />
-            </div>
-
-            <div>
-              <div className="flex justify-between items-center mb-2">
-                <span className="text-sm text-gray-300">Lighting</span>
-                <span className="text-white text-sm">{currentRoom.lights}%</span>
-              </div>
-              <Slider
-                value={[currentRoom.lights]}
-                onValueChange={() => {}}
-                max={100}
                 step={1}
                 className="w-full"
               />

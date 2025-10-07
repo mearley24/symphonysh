@@ -24,7 +24,8 @@ export const InteractiveHouseMap = ({
   selectedRoom, 
   currentScene, 
   onRoomSelect,
-  systemStatus 
+  systemStatus,
+  lightLevels 
 }: InteractiveHouseMapProps) => {
   // Blueprint-style connected floor plan
   const rooms: Room[] = [
