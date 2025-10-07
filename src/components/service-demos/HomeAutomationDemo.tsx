@@ -22,7 +22,8 @@ export const HomeAutomationDemo = () => {
     'living-room': { name: 'Living Room', temp: 72, lights: 85, devices: 8 },
     'kitchen': { name: 'Kitchen', temp: 70, lights: 90, devices: 5 },
     'bedroom': { name: 'Master Bedroom', temp: 68, lights: 45, devices: 6 },
-    'office': { name: 'Home Office', temp: 71, lights: 100, devices: 4 }
+    'office': { name: 'Home Office', temp: 71, lights: 100, devices: 4 },
+    'hallway': { name: 'Hallway', temp: 70, lights: 50, devices: 2 }
   };
 
   const scenes = {
