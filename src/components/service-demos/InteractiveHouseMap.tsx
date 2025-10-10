@@ -18,6 +18,7 @@ interface InteractiveHouseMapProps {
   systemStatus: {
     lights: boolean;
   };
+  lightLevels: Record<string, number>;
 }
 
 export const InteractiveHouseMap = ({ 
