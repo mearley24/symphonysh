@@ -1,12 +1,12 @@
-import { ArrowLeft, Home, Lightbulb, Shield, Volume2, Smartphone, Zap, Clock } from "lucide-react";
+import { useState } from "react";
+import { ArrowLeft, Home, Lightbulb, Shield, Thermometer, Volume2, Music, Tv, Grid3X3, Settings } from "lucide-react";
 import { Link } from "react-router-dom";
 import SEO from "../../components/SEO";
-import { Control4Layout } from "../../components/Layout/Control4Layout";
-import { Control4Card } from "../../components/ui/control4-card";
-import { Control4Button } from "../../components/ui/control4-button";
-import { HomeAutomationDemo } from "../../components/service-demos/HomeAutomationDemo";
+import { Control4Demo } from "../../components/service-demos/Control4Demo";
 
 const HomeIntegration = () => {
+  const [activeTab, setActiveTab] = useState("listen");
+
   const serviceSchema = {
     "@context": "https://schema.org",
     "@type": "Service",
@@ -27,15 +27,24 @@ const HomeIntegration = () => {
     "serviceType": "Smart Home Automation"
   };
 
-  const features = [
-    { icon: Zap, title: "One-Touch Control", desc: "Control everything with a single tap" },
-    { icon: Home, title: "Unified Experience", desc: "All systems work together seamlessly" },
-    { icon: Smartphone, title: "Remote Access", desc: "Control from anywhere in the world" },
-    { icon: Clock, title: "Smart Scenes", desc: "Automated routines for daily activities" }
+  const categoryTabs = [
+    { id: "listen", label: "Listen", icon: Music, badge: "1 Active" },
+    { id: "security", label: "Security", icon: Shield },
+    { id: "comfort", label: "Comfort", icon: Thermometer },
+    { id: "lighting", label: "Lighting", icon: Lightbulb, badge: "1 Light" },
+    { id: "services", label: "Services", icon: Settings },
+  ];
+
+  const bottomNav = [
+    { id: "home", icon: Home, label: "Home", filled: true },
+    { id: "rooms", icon: Home, label: "Rooms" },
+    { id: "favorites", icon: Grid3X3, label: "Favorites" },
+    { id: "scenes", icon: Tv, label: "Scenes" },
+    { id: "devices", icon: Grid3X3, label: "Devices" },
   ];
 
   return (
-    <Control4Layout>
+    <div className="min-h-screen bg-gradient-to-b from-[#4a3a8c] via-[#3d5a9c] to-[#2a6a9c] flex flex-col relative overflow-hidden">
       <SEO 
         title="Home Automation & Integration | Control4 Systems"
         description="Professional Control4 home automation and integration services. Unified smart home control for lighting, climate, security, and entertainment in Vail Valley."
@@ -45,87 +54,69 @@ const HomeIntegration = () => {
         {JSON.stringify(serviceSchema)}
       </script>
       
-      <section className="pt-4 pb-8 space-y-8">
-        <Link to="/services" className="inline-flex items-center text-accent hover:text-accent/90">
-          <ArrowLeft className="w-4 h-4 mr-2" />
-          Back to Services
+      {/* Status Bar Area */}
+      <div className="pt-2 px-4 flex justify-between items-center text-white/80 text-sm">
+        <Link to="/services" className="flex items-center gap-2 hover:text-white transition-colors">
+          <ArrowLeft className="w-5 h-5" />
         </Link>
+        <span className="font-medium text-lg text-white">Symphony Smart Homes</span>
+        <div className="w-5" />
+      </div>
 
-        {/* Hero Section */}
-        <div className="text-center">
-          <h1 className="text-3xl md:text-4xl font-bold text-white mb-4">Home Integration</h1>
-          <p className="text-gray-300 text-base max-w-2xl mx-auto">
-            Experience seamless smart home control with Control4 automation systems designed for modern living in Vail Valley.
-          </p>
+      {/* Category Tabs */}
+      <div className="px-4 py-4">
+        <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-hide">
+          {categoryTabs.map((tab) => (
+            <button
+              key={tab.id}
+              onClick={() => setActiveTab(tab.id)}
+              className={`flex items-center gap-2 px-4 py-2.5 rounded-full whitespace-nowrap transition-all duration-300 ${
+                activeTab === tab.id
+                  ? "bg-white/25 text-white shadow-lg backdrop-blur-sm"
+                  : "bg-white/10 text-white/80 hover:bg-white/15 backdrop-blur-sm"
+              }`}
+            >
+              <tab.icon className="w-4 h-4" />
+              <span className="text-sm font-medium">{tab.label}</span>
+              {tab.badge && (
+                <span className="text-xs opacity-75">{tab.badge}</span>
+              )}
+            </button>
+          ))}
         </div>
+      </div>
 
-        {/* Interactive Demo */}
-        <HomeAutomationDemo />
+      {/* Main Content Area */}
+      <div className="flex-1 px-4 pb-24 overflow-y-auto">
+        <Control4Demo activeTab={activeTab} />
+      </div>
 
-        {/* Key Features */}
-        <Control4Card>
-          <h2 className="text-2xl font-bold text-white mb-6 text-center">Why Choose Home Integration?</h2>
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {features.map((feature, index) => (
-              <div key={index} className="text-center">
-                <div className="bg-accent/20 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <feature.icon className="w-8 h-8 text-accent" />
-                </div>
-                <h3 className="text-white font-semibold mb-2">{feature.title}</h3>
-                <p className="text-gray-300 text-sm">{feature.desc}</p>
-              </div>
-            ))}
-          </div>
-        </Control4Card>
-
-        {/* Systems Integration */}
-        <Control4Card>
-          <h2 className="text-2xl font-bold text-white mb-6">Systems We Integrate</h2>
-          <div className="grid md:grid-cols-2 gap-6">
-            <div className="bg-white/5 rounded-lg p-6">
-              <Lightbulb className="w-8 h-8 text-accent mb-4" />
-              <h3 className="text-white font-semibold mb-3">Lighting Control</h3>
-              <p className="text-gray-300">Smart lighting scenes, automated schedules, and energy-efficient LED integration.</p>
-            </div>
-            <div className="bg-white/5 rounded-lg p-6">
-              <Shield className="w-8 h-8 text-accent mb-4" />
-              <h3 className="text-white font-semibold mb-3">Security Integration</h3>
-              <p className="text-gray-300">Cameras, door locks, motion sensors, and alarm systems unified in one interface.</p>
-            </div>
-            <div className="bg-white/5 rounded-lg p-6">
-              <Volume2 className="w-8 h-8 text-accent mb-4" />
-              <h3 className="text-white font-semibold mb-3">Audio/Video Systems</h3>
-              <p className="text-gray-300">Multi-room audio, home theaters, and streaming service integration.</p>
-            </div>
-            <div className="bg-white/5 rounded-lg p-6">
-              <Zap className="w-8 h-8 text-accent mb-4" />
-              <h3 className="text-white font-semibold mb-3">Climate Control</h3>
-              <p className="text-gray-300">Smart thermostats, HVAC systems, and automated temperature management.</p>
-            </div>
-          </div>
-        </Control4Card>
-
-        {/* Call to Action */}
-        <Control4Card className="text-center">
-          <h2 className="text-2xl font-bold text-white mb-4">Ready to Integrate Your Home?</h2>
-          <p className="text-gray-300 mb-8 max-w-xl mx-auto">
-            Transform your house into an intelligent home where everything works together seamlessly.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link to="/scheduling?service=home-integration">
-              <Control4Button size="lg">
-                Schedule Consultation
-              </Control4Button>
-            </Link>
-            <Link to="/projects">
-              <Control4Button variant="secondary" size="lg">
-                View Projects
-              </Control4Button>
-            </Link>
-          </div>
-        </Control4Card>
-      </section>
-    </Control4Layout>
+      {/* Bottom Navigation Dock */}
+      <div className="fixed bottom-0 left-0 right-0 bg-gradient-to-t from-[#1a3a5c]/95 to-[#1a3a5c]/80 backdrop-blur-xl border-t border-white/10">
+        <div className="flex justify-around items-center py-3 px-4 max-w-lg mx-auto">
+          {bottomNav.map((item) => (
+            <button
+              key={item.id}
+              className={`flex flex-col items-center gap-1 px-4 py-2 rounded-xl transition-all duration-300 ${
+                item.filled
+                  ? "text-white"
+                  : "text-white/60 hover:text-white/80"
+              }`}
+            >
+              <item.icon 
+                className={`w-6 h-6 ${item.filled ? "fill-white" : ""}`}
+                strokeWidth={item.filled ? 0 : 1.5}
+              />
+              <span className="text-xs">{item.label}</span>
+            </button>
+          ))}
+        </div>
+        {/* Home Indicator */}
+        <div className="flex justify-center pb-2">
+          <div className="w-32 h-1 bg-white/30 rounded-full" />
+        </div>
+      </div>
+    </div>
   );
 };
 
