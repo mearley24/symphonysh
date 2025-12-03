@@ -53,12 +53,14 @@ const SortableTab = ({
     opacity: isDragging ? 0.8 : 1,
   };
 
+  const IconComponent = tab.icon;
+  
   return (
     <button
       ref={setNodeRef}
       style={style}
       onClick={onClick}
-      className={`flex items-center gap-1 sm:gap-2 px-2.5 sm:px-4 py-2 sm:py-2.5 rounded-full whitespace-nowrap transition-all duration-300 touch-none ${
+      className={`flex flex-col items-center justify-center gap-0.5 px-3 sm:px-4 py-1.5 sm:py-2 rounded-xl whitespace-nowrap transition-all duration-300 touch-none min-w-[60px] sm:min-w-[70px] ${
         isActive
           ? "bg-white/25 text-white shadow-lg backdrop-blur-sm"
           : "bg-white/10 text-white/80 hover:bg-white/15 backdrop-blur-sm"
@@ -66,12 +68,9 @@ const SortableTab = ({
       {...attributes}
       {...listeners}
     >
-      <GripVertical className="w-3 h-3 text-white/40" />
-      <tab.icon className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
-      <span className="text-xs sm:text-sm font-medium">{tab.label}</span>
-      {tab.badge && (
-        <span className="text-[10px] sm:text-xs opacity-75 hidden sm:inline">{tab.badge}</span>
-      )}
+      <GripVertical className="w-3 h-3 text-white/30 mb-0.5" />
+      <IconComponent className="w-4 h-4 sm:w-5 sm:h-5" />
+      <span className="text-[10px] sm:text-xs font-medium">{tab.label}</span>
     </button>
   );
 };
