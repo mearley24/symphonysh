@@ -6,6 +6,12 @@ import {
 } from "lucide-react";
 import { Slider } from "../ui/slider";
 
+// Camera feed images
+import cameraFrontDoor from "@/assets/camera-front-door.jpg";
+import cameraGarage from "@/assets/camera-garage.jpg";
+import cameraBackyard from "@/assets/camera-backyard.jpg";
+import cameraSideYard from "@/assets/camera-side-yard.jpg";
+
 interface Control4DemoProps {
   activeTab: string;
 }
@@ -60,10 +66,16 @@ const MediaTile = ({
 );
 
 // Security Camera Tile
-const CameraTile = ({ name, location }: { name: string; location: string }) => (
+const CameraTile = ({ name, location, image }: { name: string; location: string; image?: string }) => (
   <GlassCard className="aspect-video relative overflow-hidden">
-    <div className="absolute inset-0 bg-gradient-to-br from-gray-800 to-gray-900 flex items-center justify-center">
-      <Camera className="w-8 h-8 text-white/30" />
+    <div className="absolute inset-0">
+      {image ? (
+        <img src={image} alt={name} className="w-full h-full object-cover" />
+      ) : (
+        <div className="w-full h-full bg-gradient-to-br from-gray-800 to-gray-900 flex items-center justify-center">
+          <Camera className="w-8 h-8 text-white/30" />
+        </div>
+      )}
     </div>
     <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-3">
       <p className="text-white text-sm font-medium">{name}</p>
@@ -187,7 +199,7 @@ export const Control4Demo = ({ activeTab }: Control4DemoProps) => {
       <div className="space-y-4 flex flex-col h-full">
         {/* Media Sources Grid */}
         <div className="grid grid-cols-2 gap-3">
-          <CameraTile name="Front Door" location="Now" />
+          <CameraTile name="Front Door" location="Now" image={cameraFrontDoor} />
           <div className="space-y-3">
             <MediaTile title="Matt's Spotify" icon={Play} iconBg="bg-green-500" />
             <MediaTile title="Living Apple TV" subtitle="Theater" icon={Play} iconBg="bg-gray-800" />
@@ -238,10 +250,10 @@ export const Control4Demo = ({ activeTab }: Control4DemoProps) => {
     return (
       <div className="space-y-4">
         <div className="grid grid-cols-2 gap-3">
-          <CameraTile name="Front Door" location="Studio" />
-          <CameraTile name="Garage" location="Studio" />
-          <CameraTile name="Backyard" location="Studio" />
-          <CameraTile name="Side Yard" location="Studio" />
+          <CameraTile name="Front Door" location="Studio" image={cameraFrontDoor} />
+          <CameraTile name="Garage" location="Studio" image={cameraGarage} />
+          <CameraTile name="Backyard" location="Studio" image={cameraBackyard} />
+          <CameraTile name="Side Yard" location="Studio" image={cameraSideYard} />
         </div>
         
         <GlassCard className="p-4">
