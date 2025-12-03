@@ -1,103 +1,153 @@
-
-import { ArrowLeft, Sun, SunDim, Clock, Smartphone } from "lucide-react";
-import { Link } from "react-router-dom";
-
-const FeatureCard = ({ icon: Icon, title, description }: { icon: any; title: string; description: string }) => (
-  <div className="bg-white/5 backdrop-blur-sm p-6 rounded-lg">
-    <Icon className="w-6 h-6 text-accent mb-3" />
-    <h3 className="text-lg font-semibold text-white mb-2">{title}</h3>
-    <p className="text-gray-300">{description}</p>
-  </div>
-);
+import { Sun, SunDim, Clock, Smartphone, ChevronUp, ChevronDown } from "lucide-react";
+import { useState } from "react";
+import Control4ServiceLayout, { GlassCard, StatsCard, FeatureCard, PricingItem, CTACard } from "../../components/Layout/Control4ServiceLayout";
+import { Slider } from "../../components/ui/slider";
 
 const Shades = () => {
-  return (
-    <div className="min-h-screen bg-primary">
-      <section className="pt-32 pb-20 px-6">
-        <div className="max-w-6xl mx-auto">
-          <Link to="/services" className="inline-flex items-center text-accent hover:text-accent/90 mb-8">
-            <ArrowLeft className="w-4 h-4 mr-2" />
-            Back to Services
-          </Link>
+  const [shadePositions, setShadePositions] = useState({
+    living: 75,
+    bedroom: 100,
+    kitchen: 50,
+    office: 25
+  });
 
-          <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">Shades</h1>
-          <p className="text-xl text-gray-300 mb-12 max-w-2xl">
-            Automated window treatments that respond to sunlight, weather, and your daily routines
-          </p>
+  const serviceSchema = {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "name": "Smart Shades",
+    "provider": {
+      "@type": "LocalBusiness",
+      "name": "Symphony Smart Homes"
+    },
+    "description": "Automated window treatments for privacy, comfort, and energy efficiency.",
+    "areaServed": "Vail Valley, Colorado"
+  };
 
-          <div className="grid md:grid-cols-2 gap-12 mb-16">
-            <div>
-              <h2 className="text-2xl font-semibold text-white mb-4">Privacy and Comfort, Automated</h2>
-              <p className="text-gray-300 mb-6">
-                Picture waking up to shades that gradually open with the sunrise, automatically closing 
-                during the day's hottest hours to keep your home cool, then perfectly positioning 
-                themselves for your evening movie. Our motorized shades don't just follow schedules—they 
-                adapt to weather patterns and your lifestyle.
-              </p>
-              <ul className="space-y-3 text-gray-300">
-                <li className="flex items-center">
-                  <Sun className="w-5 h-5 text-accent mr-3" />
-                  Solar-responsive positioning
-                </li>
-                <li className="flex items-center">
-                  <Clock className="w-5 h-5 text-accent mr-3" />
-                  Lifestyle-based automation
-                </li>
-                <li className="flex items-center">
-                  <Smartphone className="w-5 h-5 text-accent mr-3" />
-                  Voice and app control
-                </li>
-              </ul>
-            </div>
-            <div className="bg-white/5 backdrop-blur-sm rounded-lg p-8">
-              <img 
-                src="/lovable-uploads/82ceba00-9f66-4905-b5a8-be6979b7f744.png"
-                alt="Shades Control Interface"
-                className="rounded-lg w-full h-64 object-cover mb-6"
-              />
-            </div>
-          </div>
+  const updateShade = (room: keyof typeof shadePositions, value: number) => {
+    setShadePositions(prev => ({ ...prev, [room]: value }));
+  };
 
-          <h2 className="text-2xl font-semibold text-white mb-8 text-center">Intelligent Window Control</h2>
-          <div className="grid md:grid-cols-3 gap-6 mb-16">
-            <FeatureCard
-              icon={SunDim}
-              title="Dynamic Light Control"
-              description="Automatically filter harsh sunlight while preserving your views and natural illumination."
-            />
-            <FeatureCard
-              icon={Clock}
-              title="Routine Integration"
-              description="Coordinate with your daily schedule for privacy when needed, openness when desired."
-            />
-            <FeatureCard
-              icon={Smartphone}
-              title="Effortless Operation"
-              description="Control individual shades or entire rooms with simple voice commands or mobile app."
-            />
-          </div>
-
-          <div className="bg-white/5 backdrop-blur-sm p-8 rounded-lg text-center">
-            <h2 className="text-2xl font-semibold text-white mb-4">Transform Your Windows</h2>
-            <p className="text-gray-300 mb-6">
-              Experience the perfect balance of privacy, comfort, and energy efficiency.
-            </p>
-            <Link 
-              to="/scheduling?service=shades"
-              className="inline-flex items-center bg-accent hover:bg-accent/90 text-white px-6 py-3 rounded-md font-medium transition-colors"
-            >
-              Schedule a Consultation
-            </Link>
-          </div>
+  const ShadeControl = ({ room, label }: { room: keyof typeof shadePositions; label: string }) => (
+    <GlassCard className="p-4">
+      <div className="flex items-center justify-between mb-3">
+        <span className="text-white text-sm">{label}</span>
+        <span className="text-white/60 text-xs">{shadePositions[room]}%</span>
+      </div>
+      
+      {/* Visual shade representation */}
+      <div className="relative h-24 bg-gradient-to-b from-sky-400/30 to-sky-600/30 rounded-lg mb-3 overflow-hidden">
+        <div 
+          className="absolute top-0 left-0 right-0 bg-slate-700/90 transition-all duration-300"
+          style={{ height: `${100 - shadePositions[room]}%` }}
+        >
+          <div className="absolute bottom-0 left-0 right-0 h-2 bg-slate-600" />
         </div>
-      </section>
+      </div>
+      
+      <div className="flex items-center gap-2">
+        <button 
+          onClick={() => updateShade(room, Math.min(100, shadePositions[room] + 25))}
+          className="flex-1 p-2 bg-white/10 rounded-lg hover:bg-white/20 transition-colors"
+        >
+          <ChevronUp className="w-4 h-4 mx-auto text-white/80" />
+        </button>
+        <button 
+          onClick={() => updateShade(room, Math.max(0, shadePositions[room] - 25))}
+          className="flex-1 p-2 bg-white/10 rounded-lg hover:bg-white/20 transition-colors"
+        >
+          <ChevronDown className="w-4 h-4 mx-auto text-white/80" />
+        </button>
+      </div>
+    </GlassCard>
+  );
 
-      <footer className="py-12 px-6 text-center text-gray-400 bg-primary">
-        <p className="text-sm">
-          © 2024 Symphony Smart Homes. All rights reserved.
-        </p>
-      </footer>
-    </div>
+  return (
+    <Control4ServiceLayout
+      title="Smart Shades"
+      description="Automated window treatments that respond to sunlight, weather, and your daily routines."
+      keywords="smart shades, motorized blinds, window automation, Vail Valley"
+      serviceSchema={serviceSchema}
+      icon={Sun}
+      iconGradient="from-amber-500 to-orange-500"
+      subtitle="Automated window treatments"
+    >
+      <div className="space-y-4">
+        {/* Stats Row */}
+        <div className="grid grid-cols-4 gap-3">
+          <StatsCard value="30%" label="Energy Saved" />
+          <StatsCard value="Auto" label="Sun Tracking" />
+          <StatsCard value="Voice" label="Control" />
+          <StatsCard value="Quiet" label="Operation" />
+        </div>
+
+        {/* Scene Buttons */}
+        <GlassCard className="p-4">
+          <h3 className="text-white font-medium mb-3">Quick Scenes</h3>
+          <div className="grid grid-cols-4 gap-2">
+            {[
+              { name: "Open All", action: () => setShadePositions({ living: 100, bedroom: 100, kitchen: 100, office: 100 }) },
+              { name: "Close All", action: () => setShadePositions({ living: 0, bedroom: 0, kitchen: 0, office: 0 }) },
+              { name: "Morning", action: () => setShadePositions({ living: 75, bedroom: 50, kitchen: 100, office: 100 }) },
+              { name: "Movie", action: () => setShadePositions({ living: 0, bedroom: 25, kitchen: 50, office: 0 }) },
+            ].map((scene) => (
+              <button
+                key={scene.name}
+                onClick={scene.action}
+                className="p-3 bg-white/10 hover:bg-white/20 rounded-xl text-white text-xs transition-colors"
+              >
+                {scene.name}
+              </button>
+            ))}
+          </div>
+        </GlassCard>
+
+        {/* Shade Controls Grid */}
+        <div className="grid grid-cols-2 gap-3">
+          <ShadeControl room="living" label="Living Room" />
+          <ShadeControl room="bedroom" label="Bedroom" />
+          <ShadeControl room="kitchen" label="Kitchen" />
+          <ShadeControl room="office" label="Office" />
+        </div>
+
+        {/* Features */}
+        <div className="grid grid-cols-3 gap-3">
+          <FeatureCard
+            icon={SunDim}
+            title="Light Control"
+            description="Filter harsh sunlight automatically"
+            iconColor="text-amber-400"
+          />
+          <FeatureCard
+            icon={Clock}
+            title="Scheduled"
+            description="Set daily routines & scenes"
+            iconColor="text-blue-400"
+          />
+          <FeatureCard
+            icon={Smartphone}
+            title="App Control"
+            description="Control from anywhere"
+            iconColor="text-green-400"
+          />
+        </div>
+
+        {/* Pricing */}
+        <GlassCard className="p-4">
+          <h3 className="text-white font-medium mb-3">Shade Packages</h3>
+          <PricingItem label="Single Window" price="$450+" />
+          <PricingItem label="Room Package (4)" price="$1,600+" />
+          <PricingItem label="Whole Home" price="$4,000+" />
+        </GlassCard>
+
+        {/* CTA */}
+        <CTACard
+          title="Transform Your Windows"
+          description="Experience the perfect balance of privacy, comfort, and efficiency."
+          buttonText="Schedule Consultation"
+          buttonLink="/scheduling?service=shades"
+        />
+      </div>
+    </Control4ServiceLayout>
   );
 };
 

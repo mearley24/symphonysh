@@ -1,105 +1,136 @@
-import { ArrowLeft, Wrench, Check, List, AlertCircle } from "lucide-react";
-import { Link } from "react-router-dom";
-
-const FeatureCard = ({ icon: Icon, title, description }: { icon: any; title: string; description: string }) => (
-  <div className="bg-white/5 backdrop-blur-sm p-6 rounded-lg">
-    <Icon className="w-6 h-6 text-accent mb-3" />
-    <h3 className="text-lg font-semibold text-white mb-2">{title}</h3>
-    <p className="text-gray-300">{description}</p>
-  </div>
-);
+import { Wrench, Check, List, AlertCircle, Clock, Shield, Phone, Calendar } from "lucide-react";
+import Control4ServiceLayout, { GlassCard, StatsCard, FeatureCard, PricingItem, CTACard } from "../../components/Layout/Control4ServiceLayout";
 
 const Maintenance = () => {
+  const serviceSchema = {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "name": "Troubleshooting & Maintenance",
+    "provider": {
+      "@type": "LocalBusiness",
+      "name": "Symphony Smart Homes"
+    },
+    "description": "Professional maintenance and support services for smart home systems.",
+    "areaServed": "Vail Valley, Colorado"
+  };
+
+  const serviceTypes = [
+    { icon: Wrench, title: "Diagnostics", desc: "System health checks", status: "Available" },
+    { icon: Check, title: "Preventive", desc: "Regular maintenance", status: "Scheduled" },
+    { icon: AlertCircle, title: "Emergency", desc: "24/7 urgent support", status: "Active" },
+    { icon: List, title: "Updates", desc: "Software & firmware", status: "Auto" },
+  ];
+
+  const supportPlans = [
+    { 
+      name: "Basic Support",
+      features: ["Email support", "Business hours", "Remote diagnostics"],
+      price: "$49/mo"
+    },
+    { 
+      name: "Priority Support",
+      features: ["Phone & email", "Extended hours", "Same-day response"],
+      price: "$99/mo"
+    },
+    { 
+      name: "Premium Support",
+      features: ["24/7 availability", "On-site visits", "Priority scheduling"],
+      price: "$199/mo"
+    }
+  ];
+
   return (
-    <div className="min-h-screen bg-primary">
-      <section className="pt-32 pb-20 px-6">
-        <div className="max-w-6xl mx-auto">
-          <Link to="/services" className="inline-flex items-center text-accent hover:text-accent/90 mb-8">
-            <ArrowLeft className="w-4 h-4 mr-2" />
-            Back to Services
-          </Link>
-
-          <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">Troubleshooting & Maintenance</h1>
-          <p className="text-xl text-gray-300 mb-12 max-w-2xl">
-            Professional maintenance and support services to keep your smart home running smoothly
-          </p>
-
-          <div className="grid md:grid-cols-2 gap-12 mb-16">
-            <div>
-              <h2 className="text-2xl font-semibold text-white mb-4">Professional Support Services</h2>
-              <p className="text-gray-300 mb-6">
-                Our team of certified technicians provides comprehensive maintenance and troubleshooting 
-                services to ensure your Control4 system performs optimally. We offer both scheduled 
-                maintenance and rapid response support when issues arise.
-              </p>
-              <ul className="space-y-3 text-gray-300">
-                <li className="flex items-center">
-                  <Wrench className="w-5 h-5 text-accent mr-3" />
-                  Regular system maintenance
-                </li>
-                <li className="flex items-center">
-                  <Check className="w-5 h-5 text-accent mr-3" />
-                  Performance optimization
-                </li>
-                <li className="flex items-center">
-                  <List className="w-5 h-5 text-accent mr-3" />
-                  System updates and upgrades
-                </li>
-                <li className="flex items-center">
-                  <AlertCircle className="w-5 h-5 text-accent mr-3" />
-                  Emergency support
-                </li>
-              </ul>
-            </div>
-            <div className="bg-white/5 backdrop-blur-sm rounded-lg p-8">
-              <img 
-                src="/lovable-uploads/df55cc4d-3261-458d-92d3-7acaae21361e.png"
-                alt="Professional System Maintenance"
-                className="rounded-lg w-full h-64 object-cover mb-6"
-              />
-            </div>
-          </div>
-
-          <h2 className="text-2xl font-semibold text-white mb-8 text-center">Our Services</h2>
-          <div className="grid md:grid-cols-3 gap-6 mb-16">
-            <FeatureCard
-              icon={Wrench}
-              title="System Diagnostics"
-              description="Comprehensive system checks and performance analysis to identify and prevent issues."
-            />
-            <FeatureCard
-              icon={Check}
-              title="Preventive Maintenance"
-              description="Regular maintenance to ensure optimal performance and prevent system failures."
-            />
-            <FeatureCard
-              icon={AlertCircle}
-              title="Emergency Support"
-              description="Rapid response technical support for urgent system issues and failures."
-            />
-          </div>
-
-          <div className="bg-white/5 backdrop-blur-sm p-8 rounded-lg text-center">
-            <h2 className="text-2xl font-semibold text-white mb-4">Keep Your System Running Smoothly</h2>
-            <p className="text-gray-300 mb-6">
-              Contact us to learn more about our maintenance plans and support services.
-            </p>
-            <Link 
-              to="/scheduling?service=maintenance"
-              className="inline-flex items-center bg-accent hover:bg-accent/90 text-white px-6 py-3 rounded-md font-medium transition-colors"
-            >
-              Schedule a Consultation
-            </Link>
-          </div>
+    <Control4ServiceLayout
+      title="Maintenance"
+      description="Professional maintenance and support services to keep your smart home running smoothly."
+      keywords="smart home maintenance, troubleshooting, support, Vail Valley"
+      serviceSchema={serviceSchema}
+      icon={Wrench}
+      iconGradient="from-orange-500 to-red-500"
+      subtitle="Keep your system running smoothly"
+    >
+      <div className="space-y-4">
+        {/* Stats Row */}
+        <div className="grid grid-cols-4 gap-3">
+          <StatsCard value="<2hr" label="Response" />
+          <StatsCard value="24/7" label="Support" />
+          <StatsCard value="99%" label="Resolution" />
+          <StatsCard value="5★" label="Rating" />
         </div>
-      </section>
 
-      <footer className="py-12 px-6 text-center text-gray-400 bg-primary">
-        <p className="text-sm">
-          © 2024 Symphony Smart Homes. All rights reserved.
-        </p>
-      </footer>
-    </div>
+        {/* Service Types */}
+        <GlassCard className="p-4">
+          <h3 className="text-white font-medium mb-3">Service Types</h3>
+          <div className="grid grid-cols-2 gap-3">
+            {serviceTypes.map((service) => (
+              <div key={service.title} className="bg-white/5 rounded-xl p-4 flex items-start gap-3">
+                <div className="w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center flex-shrink-0">
+                  <service.icon className="w-5 h-5 text-accent" />
+                </div>
+                <div className="flex-1 min-w-0">
+                  <h4 className="text-white font-medium text-sm">{service.title}</h4>
+                  <p className="text-white/60 text-xs mb-1">{service.desc}</p>
+                  <span className="text-green-400 text-[10px] bg-green-500/20 px-2 py-0.5 rounded-full">
+                    {service.status}
+                  </span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </GlassCard>
+
+        {/* Support Plans */}
+        <div className="space-y-3">
+          <h3 className="text-white font-medium px-1">Support Plans</h3>
+          {supportPlans.map((plan) => (
+            <GlassCard key={plan.name} className="p-4">
+              <div className="flex items-center justify-between mb-3">
+                <h4 className="text-white font-semibold">{plan.name}</h4>
+                <span className="text-accent font-bold">{plan.price}</span>
+              </div>
+              <div className="space-y-2">
+                {plan.features.map((feature) => (
+                  <div key={feature} className="flex items-center gap-2">
+                    <Check className="w-4 h-4 text-green-400" />
+                    <span className="text-white/80 text-sm">{feature}</span>
+                  </div>
+                ))}
+              </div>
+            </GlassCard>
+          ))}
+        </div>
+
+        {/* Features */}
+        <div className="grid grid-cols-3 gap-3">
+          <FeatureCard
+            icon={Phone}
+            title="Direct Line"
+            description="Talk to real technicians"
+            iconColor="text-blue-400"
+          />
+          <FeatureCard
+            icon={Calendar}
+            title="Scheduled"
+            description="Regular check-ups"
+            iconColor="text-green-400"
+          />
+          <FeatureCard
+            icon={Shield}
+            title="Protected"
+            description="Extended warranties"
+            iconColor="text-purple-400"
+          />
+        </div>
+
+        {/* CTA */}
+        <CTACard
+          title="Keep Your System Running"
+          description="Contact us to learn more about our maintenance plans and support services."
+          buttonText="Schedule Service"
+          buttonLink="/scheduling?service=maintenance"
+        />
+      </div>
+    </Control4ServiceLayout>
   );
 };
 

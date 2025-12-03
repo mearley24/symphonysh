@@ -1,103 +1,138 @@
-
-import { ArrowLeft, Wifi, Network, Router, Globe, Cloud } from "lucide-react";
-import { Link } from "react-router-dom";
-
-const FeatureCard = ({ icon: Icon, title, description }: { icon: any; title: string; description: string }) => (
-  <div className="bg-white/5 backdrop-blur-sm p-6 rounded-lg">
-    <Icon className="w-6 h-6 text-accent mb-3" />
-    <h3 className="text-lg font-semibold text-white mb-2">{title}</h3>
-    <p className="text-gray-300">{description}</p>
-  </div>
-);
+import { Wifi, Network, Router, Globe, Cloud, Signal, Shield, Zap } from "lucide-react";
+import { useState } from "react";
+import Control4ServiceLayout, { GlassCard, StatsCard, FeatureCard, PricingItem, CTACard } from "../../components/Layout/Control4ServiceLayout";
 
 const Networking = () => {
+  const [activeDevices] = useState(47);
+
+  const serviceSchema = {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "name": "Home Networking",
+    "provider": {
+      "@type": "LocalBusiness",
+      "name": "Symphony Smart Homes"
+    },
+    "description": "Enterprise-grade networking for reliable smart home connectivity.",
+    "areaServed": "Vail Valley, Colorado"
+  };
+
+  const networkStats = [
+    { label: "Download", value: "940 Mbps", icon: Zap, color: "text-green-400" },
+    { label: "Upload", value: "880 Mbps", icon: Zap, color: "text-blue-400" },
+    { label: "Latency", value: "3 ms", icon: Signal, color: "text-yellow-400" },
+    { label: "Uptime", value: "99.9%", icon: Shield, color: "text-purple-400" },
+  ];
+
+  const devices = [
+    { name: "Smart TVs", count: 6, status: "online" },
+    { name: "Thermostats", count: 4, status: "online" },
+    { name: "Cameras", count: 8, status: "online" },
+    { name: "Speakers", count: 12, status: "online" },
+    { name: "Lights", count: 15, status: "online" },
+    { name: "Other", count: 2, status: "online" },
+  ];
+
   return (
-    <div className="min-h-screen bg-primary">
-      <section className="pt-32 pb-20 px-6">
-        <div className="max-w-6xl mx-auto">
-          <Link to="/services" className="inline-flex items-center text-accent hover:text-accent/90 mb-8">
-            <ArrowLeft className="w-4 h-4 mr-2" />
-            Back to Services
-          </Link>
-
-          <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">Home Networking</h1>
-          <p className="text-xl text-gray-300 mb-12 max-w-2xl">
-            Rock-solid connectivity that powers your entire smart home without breaking a sweat
-          </p>
-
-          <div className="grid md:grid-cols-2 gap-12 mb-16">
-            <div>
-              <h2 className="text-2xl font-semibold text-white mb-4">The Foundation of Smart Living</h2>
-              <p className="text-gray-300 mb-6">
-                Your smart home is only as good as its network. Buffering videos, dropped video calls, and 
-                unresponsive smart devices are signs of an inadequate network. We build enterprise-grade 
-                infrastructure that handles everything from 4K streaming to dozens of connected devices 
-                without missing a beat.
-              </p>
-              <ul className="space-y-3 text-gray-300">
-                <li className="flex items-center">
-                  <Router className="w-5 h-5 text-accent mr-3" />
-                  Commercial-grade equipment built to last
-                </li>
-                <li className="flex items-center">
-                  <Wifi className="w-5 h-5 text-accent mr-3" />
-                  Seamless coverage in every corner
-                </li>
-                <li className="flex items-center">
-                  <Network className="w-5 h-5 text-accent mr-3" />
-                  Proactive monitoring and maintenance
-                </li>
-              </ul>
-            </div>
-            <div className="bg-white/5 backdrop-blur-sm rounded-lg p-8">
-              <img 
-                src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80"
-                alt="Home Networking"
-                className="rounded-lg w-full h-64 object-cover mb-6"
-              />
-            </div>
-          </div>
-
-          <h2 className="text-2xl font-semibold text-white mb-8 text-center">Enterprise-Grade Solutions</h2>
-          <div className="grid md:grid-cols-3 gap-6 mb-16">
-            <FeatureCard
-              icon={Router}
-              title="Professional Hardware"
-              description="Business-class routers and switches designed for 24/7 operation and maximum performance."
-            />
-            <FeatureCard
-              icon={Globe}
-              title="Strategic Placement"
-              description="Carefully positioned access points eliminate dead zones and ensure consistent speed."
-            />
-            <FeatureCard
-              icon={Cloud}
-              title="Smart Management"
-              description="Automated updates, performance monitoring, and remote troubleshooting keep you connected."
-            />
-          </div>
-
-          <div className="bg-white/5 backdrop-blur-sm p-8 rounded-lg text-center">
-            <h2 className="text-2xl font-semibold text-white mb-4">Ready for Bulletproof Connectivity?</h2>
-            <p className="text-gray-300 mb-6">
-              Build the network foundation your smart home deserves.
-            </p>
-            <Link 
-              to="/scheduling?service=networking"
-              className="inline-flex items-center bg-accent hover:bg-accent/90 text-white px-6 py-3 rounded-md font-medium transition-colors"
-            >
-              Schedule a Consultation
-            </Link>
-          </div>
+    <Control4ServiceLayout
+      title="Home Networking"
+      description="Enterprise-grade networking that powers your entire smart home without breaking a sweat."
+      keywords="home networking, wifi, mesh network, smart home network, Vail Valley"
+      serviceSchema={serviceSchema}
+      icon={Wifi}
+      iconGradient="from-green-500 to-teal-500"
+      subtitle="Enterprise-grade connectivity"
+    >
+      <div className="space-y-4">
+        {/* Stats Row */}
+        <div className="grid grid-cols-4 gap-3">
+          <StatsCard value="1 Gbps" label="Speed" />
+          <StatsCard value={String(activeDevices)} label="Devices" />
+          <StatsCard value="100%" label="Coverage" />
+          <StatsCard value="24/7" label="Monitoring" />
         </div>
-      </section>
 
-      <footer className="py-12 px-6 text-center text-gray-400 bg-primary">
-        <p className="text-sm">
-          © 2024 Symphony Smart Homes. All rights reserved.
-        </p>
-      </footer>
-    </div>
+        {/* Network Status */}
+        <GlassCard className="p-4">
+          <div className="flex items-center justify-between mb-4">
+            <h3 className="text-white font-medium">Network Status</h3>
+            <div className="flex items-center gap-2">
+              <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
+              <span className="text-green-400 text-sm">All Systems Online</span>
+            </div>
+          </div>
+          
+          <div className="grid grid-cols-2 gap-3">
+            {networkStats.map((stat) => (
+              <div key={stat.label} className="bg-white/5 rounded-xl p-3 flex items-center gap-3">
+                <div className="w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center">
+                  <stat.icon className={`w-5 h-5 ${stat.color}`} />
+                </div>
+                <div>
+                  <p className="text-white font-semibold">{stat.value}</p>
+                  <p className="text-white/60 text-xs">{stat.label}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </GlassCard>
+
+        {/* Connected Devices */}
+        <GlassCard className="p-4">
+          <h3 className="text-white font-medium mb-3">Connected Devices</h3>
+          <div className="grid grid-cols-3 gap-2">
+            {devices.map((device) => (
+              <div key={device.name} className="bg-white/5 rounded-xl p-3 text-center">
+                <div className="text-xl font-bold text-white">{device.count}</div>
+                <div className="text-white/60 text-xs">{device.name}</div>
+                <div className="flex items-center justify-center gap-1 mt-1">
+                  <div className="w-1.5 h-1.5 bg-green-500 rounded-full" />
+                  <span className="text-green-400 text-[10px]">online</span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </GlassCard>
+
+        {/* Features */}
+        <div className="grid grid-cols-3 gap-3">
+          <FeatureCard
+            icon={Router}
+            title="Pro Hardware"
+            description="Business-class equipment"
+            iconColor="text-blue-400"
+          />
+          <FeatureCard
+            icon={Globe}
+            title="Full Coverage"
+            description="No dead zones anywhere"
+            iconColor="text-green-400"
+          />
+          <FeatureCard
+            icon={Cloud}
+            title="Smart Mgmt"
+            description="Remote monitoring & updates"
+            iconColor="text-purple-400"
+          />
+        </div>
+
+        {/* Pricing */}
+        <GlassCard className="p-4">
+          <h3 className="text-white font-medium mb-3">Network Packages</h3>
+          <PricingItem label="Basic (2,500 sq ft)" price="$1,200+" />
+          <PricingItem label="Standard (5,000 sq ft)" price="$2,400+" />
+          <PricingItem label="Premium (10,000+ sq ft)" price="$4,500+" />
+        </GlassCard>
+
+        {/* CTA */}
+        <CTACard
+          title="Bulletproof Connectivity"
+          description="Build the network foundation your smart home deserves."
+          buttonText="Schedule Assessment"
+          buttonLink="/scheduling?service=networking"
+        />
+      </div>
+    </Control4ServiceLayout>
   );
 };
 
