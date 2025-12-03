@@ -120,9 +120,18 @@ const Services = () => {
       <div className="h-full flex flex-col">
         {/* Header */}
         <div className="flex items-center justify-between p-6 border-b border-slate-700/30">
-          <div>
-            <h1 className="text-2xl font-bold text-white mb-1">Smart Home Ecosystem</h1>
-            <p className="text-slate-400 text-sm">Integrated solutions for modern living</p>
+          <div className="flex items-center gap-6">
+            <Link to="/">
+              <img 
+                src="/lovable-uploads/1d7a78ef-4d02-453d-aeea-81e50fb784b6.png" 
+                alt="Symphony Smart Homes Logo" 
+                className="h-12 w-auto hover:opacity-80 transition-opacity"
+              />
+            </Link>
+            <div>
+              <h1 className="text-2xl font-bold text-white mb-1">Smart Home Ecosystem</h1>
+              <p className="text-slate-400 text-sm">Integrated solutions for modern living</p>
+            </div>
           </div>
           <div className="flex items-center space-x-4">
             <Control4Button 
