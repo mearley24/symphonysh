@@ -64,22 +64,22 @@ const HomeIntegration = () => {
       </div>
 
       {/* Category Tabs */}
-      <div className="px-4 py-4">
-        <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-hide">
+      <div className="px-2 sm:px-4 py-2 sm:py-4">
+        <div className="flex gap-1.5 sm:gap-2 overflow-x-auto pb-2 scrollbar-hide justify-center">
           {categoryTabs.map((tab) => (
             <button
               key={tab.id}
               onClick={() => setActiveTab(tab.id)}
-              className={`flex items-center gap-2 px-4 py-2.5 rounded-full whitespace-nowrap transition-all duration-300 ${
+              className={`flex items-center gap-1 sm:gap-2 px-2.5 sm:px-4 py-2 sm:py-2.5 rounded-full whitespace-nowrap transition-all duration-300 ${
                 activeTab === tab.id
                   ? "bg-white/25 text-white shadow-lg backdrop-blur-sm"
                   : "bg-white/10 text-white/80 hover:bg-white/15 backdrop-blur-sm"
               }`}
             >
-              <tab.icon className="w-4 h-4" />
-              <span className="text-sm font-medium">{tab.label}</span>
+              <tab.icon className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+              <span className="text-xs sm:text-sm font-medium">{tab.label}</span>
               {tab.badge && (
-                <span className="text-xs opacity-75">{tab.badge}</span>
+                <span className="text-[10px] sm:text-xs opacity-75 hidden sm:inline">{tab.badge}</span>
               )}
             </button>
           ))}
@@ -87,33 +87,33 @@ const HomeIntegration = () => {
       </div>
 
       {/* Main Content Area */}
-      <div className="flex-1 px-4 pb-24 overflow-y-auto">
+      <div className="flex-1 px-2 sm:px-4 pb-24 overflow-y-auto">
         <Control4Demo activeTab={activeTab} />
       </div>
 
       {/* Bottom Navigation Dock */}
       <div className="fixed bottom-0 left-0 right-0 bg-gradient-to-t from-[#1a3a5c]/95 to-[#1a3a5c]/80 backdrop-blur-xl border-t border-white/10">
-        <div className="flex justify-around items-center py-3 px-4 max-w-lg mx-auto">
+        <div className="flex justify-around items-center py-2 sm:py-3 px-2 sm:px-4 max-w-lg mx-auto">
           {bottomNav.map((item) => (
             <button
               key={item.id}
-              className={`flex flex-col items-center gap-1 px-4 py-2 rounded-xl transition-all duration-300 ${
+              className={`flex flex-col items-center gap-0.5 sm:gap-1 px-2 sm:px-4 py-1.5 sm:py-2 rounded-xl transition-all duration-300 ${
                 item.filled
                   ? "text-white"
                   : "text-white/60 hover:text-white/80"
               }`}
             >
               <item.icon 
-                className={`w-6 h-6 ${item.filled ? "fill-white" : ""}`}
+                className={`w-5 h-5 sm:w-6 sm:h-6 ${item.filled ? "fill-white" : ""}`}
                 strokeWidth={item.filled ? 0 : 1.5}
               />
-              <span className="text-xs">{item.label}</span>
+              <span className="text-[10px] sm:text-xs">{item.label}</span>
             </button>
           ))}
         </div>
         {/* Home Indicator */}
-        <div className="flex justify-center pb-2">
-          <div className="w-32 h-1 bg-white/30 rounded-full" />
+        <div className="flex justify-center pb-1.5 sm:pb-2">
+          <div className="w-24 sm:w-32 h-1 bg-white/30 rounded-full" />
         </div>
       </div>
     </div>
