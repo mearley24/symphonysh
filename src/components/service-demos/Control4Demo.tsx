@@ -79,15 +79,10 @@ const SortableCard = ({ id, children, className = "" }: SortableCardProps) => {
     <div
       ref={setNodeRef}
       style={style}
-      className={`relative ${isDragging ? "scale-[1.02] shadow-xl" : ""} ${className}`}
+      className={`relative cursor-grab active:cursor-grabbing touch-none ${isDragging ? "scale-[1.02] shadow-xl" : ""} ${className}`}
+      {...attributes}
+      {...listeners}
     >
-      <div 
-        {...attributes} 
-        {...listeners}
-        className="absolute top-2 right-2 z-10 p-1.5 bg-white/20 hover:bg-white/30 rounded-lg cursor-grab active:cursor-grabbing touch-none transition-colors border border-white/10"
-      >
-        <GripVertical className="w-4 h-4 text-white/70" />
-      </div>
       {children}
     </div>
   );
