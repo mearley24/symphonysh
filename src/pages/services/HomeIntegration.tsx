@@ -82,7 +82,6 @@ const HomeIntegration = () => {
     { id: "security", label: "Security", icon: Shield },
     { id: "comfort", label: "Comfort", icon: Thermometer },
     { id: "lighting", label: "Lighting", icon: Lightbulb, badge: "1 Light" },
-    { id: "services", label: "Services", icon: Settings },
   ]);
 
   const sensors = useSensors(
