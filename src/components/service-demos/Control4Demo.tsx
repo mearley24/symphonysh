@@ -2,9 +2,26 @@ import { useState } from "react";
 import { 
   Shield, Camera, Lightbulb, Thermometer, Volume2, 
   Play, Pause, SkipBack, SkipForward, Shuffle, Repeat,
-  Plus, Minus, Settings, Fan
+  Plus, Minus, Settings, Fan, GripVertical
 } from "lucide-react";
 import { Slider } from "../ui/slider";
+import {
+  DndContext,
+  closestCenter,
+  KeyboardSensor,
+  PointerSensor,
+  useSensor,
+  useSensors,
+  DragEndEvent,
+} from "@dnd-kit/core";
+import {
+  arrayMove,
+  SortableContext,
+  sortableKeyboardCoordinates,
+  rectSortingStrategy,
+  useSortable,
+} from "@dnd-kit/sortable";
+import { CSS } from "@dnd-kit/utilities";
 
 // Camera feed images
 import cameraFrontDoor from "@/assets/camera-front-door.jpg";
@@ -33,6 +50,48 @@ const GlassCard = ({
     {children}
   </div>
 );
+
+// Sortable Card Wrapper
+interface SortableCardProps {
+  id: string;
+  children: React.ReactNode;
+  className?: string;
+}
+
+const SortableCard = ({ id, children, className = "" }: SortableCardProps) => {
+  const {
+    attributes,
+    listeners,
+    setNodeRef,
+    transform,
+    transition,
+    isDragging,
+  } = useSortable({ id });
+
+  const style = {
+    transform: CSS.Transform.toString(transform),
+    transition,
+    zIndex: isDragging ? 50 : undefined,
+    opacity: isDragging ? 0.8 : 1,
+  };
+
+  return (
+    <div
+      ref={setNodeRef}
+      style={style}
+      className={`relative ${isDragging ? "scale-105 shadow-xl" : ""} ${className}`}
+    >
+      <div 
+        {...attributes} 
+        {...listeners}
+        className="absolute top-1 right-1 z-10 p-1 bg-white/10 rounded-md cursor-grab active:cursor-grabbing touch-none"
+      >
+        <GripVertical className="w-3 h-3 text-white/50" />
+      </div>
+      {children}
+    </div>
+  );
+};
 
 // Media Tile
 const MediaTile = ({ 
@@ -190,55 +249,121 @@ export const Control4Demo = ({ activeTab }: Control4DemoProps) => {
     "front-exterior": 100,
   });
 
+  const [cardOrder, setCardOrder] = useState([
+    "camera-feed",
+    "spotify-section",
+    "devices-row1",
+    "devices-row2",
+    "more-sources",
+  ]);
+
+  const sensors = useSensors(
+    useSensor(PointerSensor, {
+      activationConstraint: {
+        distance: 8,
+      },
+    }),
+    useSensor(KeyboardSensor, {
+      coordinateGetter: sortableKeyboardCoordinates,
+    })
+  );
+
+  const handleCardDragEnd = (event: DragEndEvent) => {
+    const { active, over } = event;
+
+    if (over && active.id !== over.id) {
+      setCardOrder((items) => {
+        const oldIndex = items.indexOf(active.id as string);
+        const newIndex = items.indexOf(over.id as string);
+        return arrayMove(items, oldIndex, newIndex);
+      });
+    }
+  };
+
   const updateLight = (id: string, value: number) => {
     setLightLevels(prev => ({ ...prev, [id]: value }));
+  };
+
+  const renderCard = (cardId: string) => {
+    switch (cardId) {
+      case "camera-feed":
+        return (
+          <SortableCard key={cardId} id={cardId}>
+            <div className="grid grid-cols-2 gap-2 sm:gap-3">
+              <CameraTile name="Front Door" location="Now" image={cameraFrontDoor} />
+              <div className="space-y-2 sm:space-y-3">
+                <MediaTile title="Matt's Spotify" icon={Play} iconBg="bg-green-500" />
+                <MediaTile title="Living Apple TV" subtitle="Theater" icon={Play} iconBg="bg-gray-800" />
+              </div>
+            </div>
+          </SortableCard>
+        );
+      case "devices-row1":
+        return (
+          <SortableCard key={cardId} id={cardId}>
+            <div className="grid grid-cols-2 gap-2 sm:gap-3">
+              <GlassCard className="p-2.5 sm:p-4 flex items-center justify-center gap-2 sm:gap-3">
+                <Camera className="w-5 h-5 sm:w-6 sm:h-6 text-white/80" />
+                <div>
+                  <p className="text-white text-xs sm:text-sm font-medium">Front Door</p>
+                  <p className="text-white/60 text-[10px] sm:text-xs">Studio</p>
+                </div>
+              </GlassCard>
+              <GlassCard className="p-2.5 sm:p-4 flex items-center justify-center gap-2 sm:gap-3">
+                <Camera className="w-5 h-5 sm:w-6 sm:h-6 text-white/80" />
+                <div>
+                  <p className="text-white text-xs sm:text-sm font-medium">Garage</p>
+                  <p className="text-white/60 text-[10px] sm:text-xs">Studio</p>
+                </div>
+              </GlassCard>
+            </div>
+          </SortableCard>
+        );
+      case "devices-row2":
+        return (
+          <SortableCard key={cardId} id={cardId}>
+            <div className="grid grid-cols-2 gap-2 sm:gap-3">
+              <GlassCard className="p-2.5 sm:p-4 flex items-center justify-center gap-2 sm:gap-3">
+                <Camera className="w-5 h-5 sm:w-6 sm:h-6 text-white/80" />
+                <div>
+                  <p className="text-white text-xs sm:text-sm font-medium">Backyard</p>
+                  <p className="text-white/60 text-[10px] sm:text-xs">Studio</p>
+                </div>
+              </GlassCard>
+              <MediaTile title="Daily Mix 1" subtitle="Matt's Spotify" icon={Play} iconBg="bg-purple-600" />
+            </div>
+          </SortableCard>
+        );
+      case "more-sources":
+        return (
+          <SortableCard key={cardId} id={cardId}>
+            <div className="grid grid-cols-2 gap-2 sm:gap-3">
+              <MediaTile title="Living Fire TV" subtitle="Theater" icon={Play} iconBg="bg-orange-500" />
+              <MediaTile title="Plex" subtitle="Theater" icon={Play} iconBg="bg-yellow-600" />
+            </div>
+          </SortableCard>
+        );
+      default:
+        return null;
+    }
   };
 
   if (activeTab === "listen") {
     return (
       <div className="space-y-2 sm:space-y-4 flex flex-col h-full">
-        {/* Media Sources Grid */}
-        <div className="grid grid-cols-2 gap-2 sm:gap-3">
-          <CameraTile name="Front Door" location="Now" image={cameraFrontDoor} />
-          <div className="space-y-2 sm:space-y-3">
-            <MediaTile title="Matt's Spotify" icon={Play} iconBg="bg-green-500" />
-            <MediaTile title="Living Apple TV" subtitle="Theater" icon={Play} iconBg="bg-gray-800" />
-          </div>
-        </div>
-        
-        {/* Device Tiles */}
-        <div className="grid grid-cols-2 gap-2 sm:gap-3">
-          <GlassCard className="p-2.5 sm:p-4 flex items-center justify-center gap-2 sm:gap-3">
-            <Camera className="w-5 h-5 sm:w-6 sm:h-6 text-white/80" />
-            <div>
-              <p className="text-white text-xs sm:text-sm font-medium">Front Door</p>
-              <p className="text-white/60 text-[10px] sm:text-xs">Studio</p>
+        <DndContext
+          sensors={sensors}
+          collisionDetection={closestCenter}
+          onDragEnd={handleCardDragEnd}
+        >
+          <SortableContext items={cardOrder} strategy={rectSortingStrategy}>
+            <div className="space-y-2 sm:space-y-4">
+              {cardOrder.map((cardId) => renderCard(cardId))}
             </div>
-          </GlassCard>
-          <GlassCard className="p-2.5 sm:p-4 flex items-center justify-center gap-2 sm:gap-3">
-            <Camera className="w-5 h-5 sm:w-6 sm:h-6 text-white/80" />
-            <div>
-              <p className="text-white text-xs sm:text-sm font-medium">Garage</p>
-              <p className="text-white/60 text-[10px] sm:text-xs">Studio</p>
-            </div>
-          </GlassCard>
-          <GlassCard className="p-2.5 sm:p-4 flex items-center justify-center gap-2 sm:gap-3">
-            <Camera className="w-5 h-5 sm:w-6 sm:h-6 text-white/80" />
-            <div>
-              <p className="text-white text-xs sm:text-sm font-medium">Backyard</p>
-              <p className="text-white/60 text-[10px] sm:text-xs">Studio</p>
-            </div>
-          </GlassCard>
-          <MediaTile title="Daily Mix 1" subtitle="Matt's Spotify" icon={Play} iconBg="bg-purple-600" />
-        </div>
+          </SortableContext>
+        </DndContext>
 
-        {/* More Sources */}
-        <div className="grid grid-cols-2 gap-2 sm:gap-3">
-          <MediaTile title="Living Fire TV" subtitle="Theater" icon={Play} iconBg="bg-orange-500" />
-          <MediaTile title="Plex" subtitle="Theater" icon={Play} iconBg="bg-yellow-600" />
-        </div>
-
-        {/* Now Playing */}
+        {/* Now Playing - Locked at bottom */}
         <div className="mt-auto pt-2 sm:pt-4">
           <NowPlayingBar />
         </div>
