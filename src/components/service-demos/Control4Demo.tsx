@@ -257,6 +257,27 @@ export const Control4Demo = ({ activeTab }: Control4DemoProps) => {
     "more-sources",
   ]);
 
+  const [securityCardOrder, setSecurityCardOrder] = useState([
+    "cameras-grid",
+    "security-status",
+  ]);
+
+  const [comfortCardOrder, setComfortCardOrder] = useState([
+    "climate-control",
+    "room-temps",
+  ]);
+
+  const [lightingCardOrder, setLightingCardOrder] = useState([
+    "lighting-tabs",
+    "lower-tv-lights",
+    "mudroom-lights",
+  ]);
+
+  const [servicesCardOrder, setServicesCardOrder] = useState([
+    "consultation-cta",
+    "services-grid",
+  ]);
+
   const sensors = useSensors(
     useSensor(PointerSensor, {
       activationConstraint: {
@@ -273,6 +294,50 @@ export const Control4Demo = ({ activeTab }: Control4DemoProps) => {
 
     if (over && active.id !== over.id) {
       setCardOrder((items) => {
+        const oldIndex = items.indexOf(active.id as string);
+        const newIndex = items.indexOf(over.id as string);
+        return arrayMove(items, oldIndex, newIndex);
+      });
+    }
+  };
+
+  const handleSecurityDragEnd = (event: DragEndEvent) => {
+    const { active, over } = event;
+    if (over && active.id !== over.id) {
+      setSecurityCardOrder((items) => {
+        const oldIndex = items.indexOf(active.id as string);
+        const newIndex = items.indexOf(over.id as string);
+        return arrayMove(items, oldIndex, newIndex);
+      });
+    }
+  };
+
+  const handleComfortDragEnd = (event: DragEndEvent) => {
+    const { active, over } = event;
+    if (over && active.id !== over.id) {
+      setComfortCardOrder((items) => {
+        const oldIndex = items.indexOf(active.id as string);
+        const newIndex = items.indexOf(over.id as string);
+        return arrayMove(items, oldIndex, newIndex);
+      });
+    }
+  };
+
+  const handleLightingDragEnd = (event: DragEndEvent) => {
+    const { active, over } = event;
+    if (over && active.id !== over.id) {
+      setLightingCardOrder((items) => {
+        const oldIndex = items.indexOf(active.id as string);
+        const newIndex = items.indexOf(over.id as string);
+        return arrayMove(items, oldIndex, newIndex);
+      });
+    }
+  };
+
+  const handleServicesDragEnd = (event: DragEndEvent) => {
+    const { active, over } = event;
+    if (over && active.id !== over.id) {
+      setServicesCardOrder((items) => {
         const oldIndex = items.indexOf(active.id as string);
         const newIndex = items.indexOf(over.id as string);
         return arrayMove(items, oldIndex, newIndex);
@@ -372,204 +437,311 @@ export const Control4Demo = ({ activeTab }: Control4DemoProps) => {
   }
 
   if (activeTab === "security") {
+    const renderSecurityCard = (cardId: string) => {
+      switch (cardId) {
+        case "cameras-grid":
+          return (
+            <SortableCard key={cardId} id={cardId}>
+              <div className="grid grid-cols-2 gap-2 sm:gap-3">
+                <CameraTile name="Front Door" location="Studio" image={cameraFrontDoor} />
+                <CameraTile name="Garage" location="Studio" image={cameraGarage} />
+                <CameraTile name="Backyard" location="Studio" image={cameraBackyard} />
+                <CameraTile name="Side Yard" location="Studio" image={cameraSideYard} />
+              </div>
+            </SortableCard>
+          );
+        case "security-status":
+          return (
+            <SortableCard key={cardId} id={cardId}>
+              <GlassCard className="p-3 sm:p-4">
+                <div className="flex items-center justify-between mb-3 sm:mb-4">
+                  <h3 className="text-white font-medium text-sm sm:text-base">Security Status</h3>
+                  <div className="flex items-center gap-1.5 sm:gap-2">
+                    <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-green-500 rounded-full" />
+                    <span className="text-green-400 text-xs sm:text-sm">Armed</span>
+                  </div>
+                </div>
+                <div className="grid grid-cols-2 gap-2 sm:gap-3">
+                  <button className="bg-green-500/20 border border-green-500/30 rounded-lg sm:rounded-xl p-2.5 sm:p-3 text-green-400 text-xs sm:text-sm font-medium hover:bg-green-500/30 transition-colors">
+                    Stay
+                  </button>
+                  <button className="bg-white/10 border border-white/20 rounded-lg sm:rounded-xl p-2.5 sm:p-3 text-white text-xs sm:text-sm font-medium hover:bg-white/20 transition-colors">
+                    Away
+                  </button>
+                  <button className="bg-white/10 border border-white/20 rounded-lg sm:rounded-xl p-2.5 sm:p-3 text-white text-xs sm:text-sm font-medium hover:bg-white/20 transition-colors">
+                    Night
+                  </button>
+                  <button className="bg-red-500/20 border border-red-500/30 rounded-lg sm:rounded-xl p-2.5 sm:p-3 text-red-400 text-xs sm:text-sm font-medium hover:bg-red-500/30 transition-colors">
+                    Disarm
+                  </button>
+                </div>
+              </GlassCard>
+            </SortableCard>
+          );
+        default:
+          return null;
+      }
+    };
+
     return (
       <div className="space-y-2 sm:space-y-4">
-        <div className="grid grid-cols-2 gap-2 sm:gap-3">
-          <CameraTile name="Front Door" location="Studio" image={cameraFrontDoor} />
-          <CameraTile name="Garage" location="Studio" image={cameraGarage} />
-          <CameraTile name="Backyard" location="Studio" image={cameraBackyard} />
-          <CameraTile name="Side Yard" location="Studio" image={cameraSideYard} />
-        </div>
-        
-        <GlassCard className="p-3 sm:p-4">
-          <div className="flex items-center justify-between mb-3 sm:mb-4">
-            <h3 className="text-white font-medium text-sm sm:text-base">Security Status</h3>
-            <div className="flex items-center gap-1.5 sm:gap-2">
-              <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-green-500 rounded-full" />
-              <span className="text-green-400 text-xs sm:text-sm">Armed</span>
+        <DndContext
+          sensors={sensors}
+          collisionDetection={closestCenter}
+          onDragEnd={handleSecurityDragEnd}
+        >
+          <SortableContext items={securityCardOrder} strategy={rectSortingStrategy}>
+            <div className="space-y-2 sm:space-y-4">
+              {securityCardOrder.map((cardId) => renderSecurityCard(cardId))}
             </div>
-          </div>
-          <div className="grid grid-cols-2 gap-2 sm:gap-3">
-            <button className="bg-green-500/20 border border-green-500/30 rounded-lg sm:rounded-xl p-2.5 sm:p-3 text-green-400 text-xs sm:text-sm font-medium hover:bg-green-500/30 transition-colors">
-              Stay
-            </button>
-            <button className="bg-white/10 border border-white/20 rounded-lg sm:rounded-xl p-2.5 sm:p-3 text-white text-xs sm:text-sm font-medium hover:bg-white/20 transition-colors">
-              Away
-            </button>
-            <button className="bg-white/10 border border-white/20 rounded-lg sm:rounded-xl p-2.5 sm:p-3 text-white text-xs sm:text-sm font-medium hover:bg-white/20 transition-colors">
-              Night
-            </button>
-            <button className="bg-red-500/20 border border-red-500/30 rounded-lg sm:rounded-xl p-2.5 sm:p-3 text-red-400 text-xs sm:text-sm font-medium hover:bg-red-500/30 transition-colors">
-              Disarm
-            </button>
-          </div>
-        </GlassCard>
+          </SortableContext>
+        </DndContext>
       </div>
     );
   }
 
   if (activeTab === "comfort") {
+    const renderComfortCard = (cardId: string) => {
+      switch (cardId) {
+        case "climate-control":
+          return (
+            <SortableCard key={cardId} id={cardId}>
+              <GlassCard className="p-3 sm:p-4">
+                <div className="flex items-center justify-between mb-3 sm:mb-4">
+                  <h3 className="text-white font-medium text-sm sm:text-base">Climate Control</h3>
+                  <Thermometer className="w-4 h-4 sm:w-5 sm:h-5 text-blue-400" />
+                </div>
+                
+                <div className="text-center py-3 sm:py-6">
+                  <div className="text-4xl sm:text-6xl font-light text-white mb-1 sm:mb-2">72°</div>
+                  <p className="text-white/60 text-xs sm:text-sm">Current Temperature</p>
+                </div>
+                
+                <div className="flex items-center justify-center gap-3 sm:gap-4 mb-4 sm:mb-6">
+                  <button className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-blue-500/20 border border-blue-500/30 flex items-center justify-center text-blue-400 hover:bg-blue-500/30 transition-colors">
+                    <Minus className="w-5 h-5 sm:w-6 sm:h-6" />
+                  </button>
+                  <div className="text-center">
+                    <p className="text-white text-xl sm:text-2xl font-medium">70°</p>
+                    <p className="text-white/60 text-[10px] sm:text-xs">Set Point</p>
+                  </div>
+                  <button className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-orange-500/20 border border-orange-500/30 flex items-center justify-center text-orange-400 hover:bg-orange-500/30 transition-colors">
+                    <Plus className="w-5 h-5 sm:w-6 sm:h-6" />
+                  </button>
+                </div>
+                
+                <div className="grid grid-cols-3 gap-1.5 sm:gap-2">
+                  <button className="bg-white/10 rounded-lg sm:rounded-xl p-2 sm:p-3 text-white text-xs sm:text-sm hover:bg-white/20 transition-colors">
+                    <Fan className="w-4 h-4 sm:w-5 sm:h-5 mx-auto mb-0.5 sm:mb-1" />
+                    Auto
+                  </button>
+                  <button className="bg-blue-500/20 border border-blue-500/30 rounded-lg sm:rounded-xl p-2 sm:p-3 text-blue-400 text-xs sm:text-sm">
+                    <Thermometer className="w-4 h-4 sm:w-5 sm:h-5 mx-auto mb-0.5 sm:mb-1" />
+                    Cool
+                  </button>
+                  <button className="bg-white/10 rounded-lg sm:rounded-xl p-2 sm:p-3 text-white text-xs sm:text-sm hover:bg-white/20 transition-colors">
+                    <Thermometer className="w-4 h-4 sm:w-5 sm:h-5 mx-auto mb-0.5 sm:mb-1" />
+                    Heat
+                  </button>
+                </div>
+              </GlassCard>
+            </SortableCard>
+          );
+        case "room-temps":
+          return (
+            <SortableCard key={cardId} id={cardId}>
+              <div className="grid grid-cols-2 gap-2 sm:gap-3">
+                {[
+                  { room: "Living Room", temp: 72 },
+                  { room: "Kitchen", temp: 71 },
+                  { room: "Master Bedroom", temp: 68 },
+                  { room: "Office", temp: 70 },
+                ].map((item) => (
+                  <GlassCard key={item.room} className="p-2.5 sm:p-4">
+                    <p className="text-white/60 text-[10px] sm:text-xs mb-0.5 sm:mb-1">{item.room}</p>
+                    <p className="text-white text-xl sm:text-2xl font-medium">{item.temp}°</p>
+                  </GlassCard>
+                ))}
+              </div>
+            </SortableCard>
+          );
+        default:
+          return null;
+      }
+    };
+
     return (
       <div className="space-y-2 sm:space-y-4">
-        <GlassCard className="p-3 sm:p-4">
-          <div className="flex items-center justify-between mb-3 sm:mb-4">
-            <h3 className="text-white font-medium text-sm sm:text-base">Climate Control</h3>
-            <Thermometer className="w-4 h-4 sm:w-5 sm:h-5 text-blue-400" />
-          </div>
-          
-          <div className="text-center py-3 sm:py-6">
-            <div className="text-4xl sm:text-6xl font-light text-white mb-1 sm:mb-2">72°</div>
-            <p className="text-white/60 text-xs sm:text-sm">Current Temperature</p>
-          </div>
-          
-          <div className="flex items-center justify-center gap-3 sm:gap-4 mb-4 sm:mb-6">
-            <button className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-blue-500/20 border border-blue-500/30 flex items-center justify-center text-blue-400 hover:bg-blue-500/30 transition-colors">
-              <Minus className="w-5 h-5 sm:w-6 sm:h-6" />
-            </button>
-            <div className="text-center">
-              <p className="text-white text-xl sm:text-2xl font-medium">70°</p>
-              <p className="text-white/60 text-[10px] sm:text-xs">Set Point</p>
+        <DndContext
+          sensors={sensors}
+          collisionDetection={closestCenter}
+          onDragEnd={handleComfortDragEnd}
+        >
+          <SortableContext items={comfortCardOrder} strategy={rectSortingStrategy}>
+            <div className="space-y-2 sm:space-y-4">
+              {comfortCardOrder.map((cardId) => renderComfortCard(cardId))}
             </div>
-            <button className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-orange-500/20 border border-orange-500/30 flex items-center justify-center text-orange-400 hover:bg-orange-500/30 transition-colors">
-              <Plus className="w-5 h-5 sm:w-6 sm:h-6" />
-            </button>
-          </div>
-          
-          <div className="grid grid-cols-3 gap-1.5 sm:gap-2">
-            <button className="bg-white/10 rounded-lg sm:rounded-xl p-2 sm:p-3 text-white text-xs sm:text-sm hover:bg-white/20 transition-colors">
-              <Fan className="w-4 h-4 sm:w-5 sm:h-5 mx-auto mb-0.5 sm:mb-1" />
-              Auto
-            </button>
-            <button className="bg-blue-500/20 border border-blue-500/30 rounded-lg sm:rounded-xl p-2 sm:p-3 text-blue-400 text-xs sm:text-sm">
-              <Thermometer className="w-4 h-4 sm:w-5 sm:h-5 mx-auto mb-0.5 sm:mb-1" />
-              Cool
-            </button>
-            <button className="bg-white/10 rounded-lg sm:rounded-xl p-2 sm:p-3 text-white text-xs sm:text-sm hover:bg-white/20 transition-colors">
-              <Thermometer className="w-4 h-4 sm:w-5 sm:h-5 mx-auto mb-0.5 sm:mb-1" />
-              Heat
-            </button>
-          </div>
-        </GlassCard>
-        
-        {/* Room Temps */}
-        <div className="grid grid-cols-2 gap-2 sm:gap-3">
-          {[
-            { room: "Living Room", temp: 72 },
-            { room: "Kitchen", temp: 71 },
-            { room: "Master Bedroom", temp: 68 },
-            { room: "Office", temp: 70 },
-          ].map((item) => (
-            <GlassCard key={item.room} className="p-2.5 sm:p-4">
-              <p className="text-white/60 text-[10px] sm:text-xs mb-0.5 sm:mb-1">{item.room}</p>
-              <p className="text-white text-xl sm:text-2xl font-medium">{item.temp}°</p>
-            </GlassCard>
-          ))}
-        </div>
+          </SortableContext>
+        </DndContext>
       </div>
     );
   }
 
   if (activeTab === "lighting") {
+    const renderLightingCard = (cardId: string) => {
+      switch (cardId) {
+        case "lighting-tabs":
+          return (
+            <SortableCard key={cardId} id={cardId}>
+              <div className="flex gap-3 sm:gap-4 border-b border-white/20 pb-2">
+                <button className="text-white font-medium text-xs sm:text-sm border-b-2 border-white pb-2">Lights</button>
+                <button className="text-white/60 hover:text-white/80 transition-colors text-xs sm:text-sm pb-2">Scenes</button>
+              </div>
+            </SortableCard>
+          );
+        case "lower-tv-lights":
+          return (
+            <SortableCard key={cardId} id={cardId}>
+              <div>
+                <h4 className="text-white/60 text-[10px] sm:text-xs uppercase tracking-wider mb-2 sm:mb-3">LOWER TV</h4>
+                <GlassCard className="p-2.5 sm:p-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-4 sm:gap-x-6">
+                    <LightControl 
+                      name="Ceiling Fan" 
+                      icon={Fan} 
+                      value={lightLevels["ceiling-fan"]} 
+                      onChange={(v) => updateLight("ceiling-fan", v)} 
+                    />
+                    <LightControl 
+                      name="Sink" 
+                      icon={Lightbulb} 
+                      value={lightLevels["sink"]} 
+                      onChange={(v) => updateLight("sink", v)} 
+                    />
+                    <LightControl 
+                      name="Counter" 
+                      icon={Lightbulb} 
+                      value={lightLevels["counter"]} 
+                      onChange={(v) => updateLight("counter", v)} 
+                    />
+                    <LightControl 
+                      name="Chandelier" 
+                      icon={Lightbulb} 
+                      value={lightLevels["chandelier"]} 
+                      onChange={(v) => updateLight("chandelier", v)} 
+                    />
+                  </div>
+                </GlassCard>
+              </div>
+            </SortableCard>
+          );
+        case "mudroom-lights":
+          return (
+            <SortableCard key={cardId} id={cardId}>
+              <div>
+                <h4 className="text-white/60 text-[10px] sm:text-xs uppercase tracking-wider mb-2 sm:mb-3">MUDROOM</h4>
+                <GlassCard className="p-2.5 sm:p-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-4 sm:gap-x-6">
+                    <LightControl 
+                      name="Hall Ceiling" 
+                      icon={Lightbulb} 
+                      value={lightLevels["hall-ceiling"]} 
+                      onChange={(v) => updateLight("hall-ceiling", v)} 
+                    />
+                    <LightControl 
+                      name="Ceiling" 
+                      icon={Lightbulb} 
+                      value={lightLevels["ceiling"]} 
+                      onChange={(v) => updateLight("ceiling", v)} 
+                    />
+                    <LightControl 
+                      name="Front Exterior" 
+                      icon={Lightbulb} 
+                      value={lightLevels["front-exterior"]} 
+                      onChange={(v) => updateLight("front-exterior", v)} 
+                    />
+                  </div>
+                </GlassCard>
+              </div>
+            </SortableCard>
+          );
+        default:
+          return null;
+      }
+    };
+
     return (
       <div className="space-y-2 sm:space-y-4">
-        {/* Tabs */}
-        <div className="flex gap-3 sm:gap-4 border-b border-white/20 pb-2">
-          <button className="text-white font-medium text-xs sm:text-sm border-b-2 border-white pb-2">Lights</button>
-          <button className="text-white/60 hover:text-white/80 transition-colors text-xs sm:text-sm pb-2">Scenes</button>
-        </div>
-        
-        {/* Room Groups */}
-        <div className="space-y-3 sm:space-y-4">
-          <div>
-            <h4 className="text-white/60 text-[10px] sm:text-xs uppercase tracking-wider mb-2 sm:mb-3">LOWER TV</h4>
-            <GlassCard className="p-2.5 sm:p-4">
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-4 sm:gap-x-6">
-                <LightControl 
-                  name="Ceiling Fan" 
-                  icon={Fan} 
-                  value={lightLevels["ceiling-fan"]} 
-                  onChange={(v) => updateLight("ceiling-fan", v)} 
-                />
-                <LightControl 
-                  name="Sink" 
-                  icon={Lightbulb} 
-                  value={lightLevels["sink"]} 
-                  onChange={(v) => updateLight("sink", v)} 
-                />
-                <LightControl 
-                  name="Counter" 
-                  icon={Lightbulb} 
-                  value={lightLevels["counter"]} 
-                  onChange={(v) => updateLight("counter", v)} 
-                />
-                <LightControl 
-                  name="Chandelier" 
-                  icon={Lightbulb} 
-                  value={lightLevels["chandelier"]} 
-                  onChange={(v) => updateLight("chandelier", v)} 
-                />
-              </div>
-            </GlassCard>
-          </div>
-          
-          <div>
-            <h4 className="text-white/60 text-[10px] sm:text-xs uppercase tracking-wider mb-2 sm:mb-3">MUDROOM</h4>
-            <GlassCard className="p-2.5 sm:p-4">
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-4 sm:gap-x-6">
-                <LightControl 
-                  name="Hall Ceiling" 
-                  icon={Lightbulb} 
-                  value={lightLevels["hall-ceiling"]} 
-                  onChange={(v) => updateLight("hall-ceiling", v)} 
-                />
-                <LightControl 
-                  name="Ceiling" 
-                  icon={Lightbulb} 
-                  value={lightLevels["ceiling"]} 
-                  onChange={(v) => updateLight("ceiling", v)} 
-                />
-                <LightControl 
-                  name="Front Exterior" 
-                  icon={Lightbulb} 
-                  value={lightLevels["front-exterior"]} 
-                  onChange={(v) => updateLight("front-exterior", v)} 
-                />
-              </div>
-            </GlassCard>
-          </div>
-        </div>
+        <DndContext
+          sensors={sensors}
+          collisionDetection={closestCenter}
+          onDragEnd={handleLightingDragEnd}
+        >
+          <SortableContext items={lightingCardOrder} strategy={rectSortingStrategy}>
+            <div className="space-y-2 sm:space-y-4">
+              {lightingCardOrder.map((cardId) => renderLightingCard(cardId))}
+            </div>
+          </SortableContext>
+        </DndContext>
       </div>
     );
   }
 
   // Services tab
+  const renderServicesCard = (cardId: string) => {
+    switch (cardId) {
+      case "consultation-cta":
+        return (
+          <SortableCard key={cardId} id={cardId}>
+            <GlassCard className="p-4 sm:p-6 text-center">
+              <Shield className="w-10 h-10 sm:w-12 sm:h-12 text-accent mx-auto mb-3 sm:mb-4" />
+              <h3 className="text-white text-lg sm:text-xl font-medium mb-1 sm:mb-2">Professional Installation</h3>
+              <p className="text-white/60 text-xs sm:text-sm mb-3 sm:mb-4">
+                Experience the full Control4 ecosystem with professional installation from Symphony Smart Homes.
+              </p>
+              <button className="bg-accent hover:bg-accent/90 text-white px-4 sm:px-6 py-2.5 sm:py-3 rounded-lg sm:rounded-xl text-sm font-medium transition-colors">
+                Schedule Consultation
+              </button>
+            </GlassCard>
+          </SortableCard>
+        );
+      case "services-grid":
+        return (
+          <SortableCard key={cardId} id={cardId}>
+            <div className="grid grid-cols-2 gap-2 sm:gap-3">
+              {[
+                { title: "Lighting", desc: "Smart scenes & schedules", icon: Lightbulb },
+                { title: "Climate", desc: "Energy-efficient comfort", icon: Thermometer },
+                { title: "Security", desc: "Cameras & monitoring", icon: Shield },
+                { title: "Audio/Video", desc: "Multi-room entertainment", icon: Volume2 },
+              ].map((service) => (
+                <GlassCard key={service.title} className="p-3 sm:p-4">
+                  <service.icon className="w-6 h-6 sm:w-8 sm:h-8 text-accent mb-2 sm:mb-3" />
+                  <h4 className="text-white font-medium text-xs sm:text-sm">{service.title}</h4>
+                  <p className="text-white/60 text-[10px] sm:text-xs">{service.desc}</p>
+                </GlassCard>
+              ))}
+            </div>
+          </SortableCard>
+        );
+      default:
+        return null;
+    }
+  };
+
   return (
     <div className="space-y-2 sm:space-y-4">
-      <GlassCard className="p-4 sm:p-6 text-center">
-        <Shield className="w-10 h-10 sm:w-12 sm:h-12 text-accent mx-auto mb-3 sm:mb-4" />
-        <h3 className="text-white text-lg sm:text-xl font-medium mb-1 sm:mb-2">Professional Installation</h3>
-        <p className="text-white/60 text-xs sm:text-sm mb-3 sm:mb-4">
-          Experience the full Control4 ecosystem with professional installation from Symphony Smart Homes.
-        </p>
-        <button className="bg-accent hover:bg-accent/90 text-white px-4 sm:px-6 py-2.5 sm:py-3 rounded-lg sm:rounded-xl text-sm font-medium transition-colors">
-          Schedule Consultation
-        </button>
-      </GlassCard>
-      
-      <div className="grid grid-cols-2 gap-2 sm:gap-3">
-        {[
-          { title: "Lighting", desc: "Smart scenes & schedules", icon: Lightbulb },
-          { title: "Climate", desc: "Energy-efficient comfort", icon: Thermometer },
-          { title: "Security", desc: "Cameras & monitoring", icon: Shield },
-          { title: "Audio/Video", desc: "Multi-room entertainment", icon: Volume2 },
-        ].map((service) => (
-          <GlassCard key={service.title} className="p-3 sm:p-4">
-            <service.icon className="w-6 h-6 sm:w-8 sm:h-8 text-accent mb-2 sm:mb-3" />
-            <h4 className="text-white font-medium text-xs sm:text-sm">{service.title}</h4>
-            <p className="text-white/60 text-[10px] sm:text-xs">{service.desc}</p>
-          </GlassCard>
-        ))}
-      </div>
+      <DndContext
+        sensors={sensors}
+        collisionDetection={closestCenter}
+        onDragEnd={handleServicesDragEnd}
+      >
+        <SortableContext items={servicesCardOrder} strategy={rectSortingStrategy}>
+          <div className="space-y-2 sm:space-y-4">
+            {servicesCardOrder.map((cardId) => renderServicesCard(cardId))}
+          </div>
+        </SortableContext>
+      </DndContext>
     </div>
   );
 };
