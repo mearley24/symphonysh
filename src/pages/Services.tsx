@@ -1,290 +1,214 @@
-import { Link } from "react-router-dom";
-import { useState, useEffect } from "react";
-import { ArrowRight, Home, Volume2, Shield, Lightbulb, Thermometer, Wifi, Wrench, Sun, ChevronLeft, ChevronRight, Maximize2, Play } from "lucide-react";
-import { Control4Layout } from "../components/Layout/Control4Layout";
-import { Control4Card } from "../components/ui/control4-card";
-import { Control4Button } from "../components/ui/control4-button";
-import { Button } from "../components/ui/button";
+import { Link, useLocation } from "react-router-dom";
+import { useState } from "react";
+import { 
+  ArrowRight, Home, Volume2, Shield, Lightbulb, Thermometer, 
+  Wifi, Wrench, Sun, Grid3X3, Heart, Star, Settings 
+} from "lucide-react";
 import SEO from "../components/SEO";
 
 const Services = () => {
-  const [currentService, setCurrentService] = useState(0);
-  const [isAutoRotating, setIsAutoRotating] = useState(true);
-  const [hoveredService, setHoveredService] = useState<number | null>(null);
+  const location = useLocation();
 
   const services = [
     {
       icon: Home,
       title: "Home Automation", 
-      description: "Control4 integration for seamless smart home control",
+      description: "Unified smart home control",
       link: "/services/home-integration",
-      features: ["Unified system control", "Custom automation", "Remote access"],
       gradient: "from-blue-600 to-purple-700",
-      preview: "Smart home control at your fingertips with integrated lighting, climate, and entertainment systems."
+      badge: "Popular"
     },
     {
       icon: Volume2,
       title: "Audio & Entertainment",
-      description: "Premium home theater and multi-room audio systems",
+      description: "Multi-room audio & theater",
       link: "/services/audio-entertainment", 
-      features: ["Home theaters", "Multi-room audio", "Streaming integration"],
       gradient: "from-purple-600 to-pink-700",
-      preview: "Immersive audio experiences with wireless multi-room streaming and cinema-quality sound."
     },
     {
       icon: Shield,
       title: "Security",
-      description: "Advanced security solutions integrated with your smart home",
+      description: "Cameras & access control",
       link: "/services/security-systems",
-      features: ["Smart cameras", "Access control", "Mobile monitoring"],
-      gradient: "from-red-600 to-orange-700",
-      preview: "Complete security monitoring with smart cameras, locks, and 24/7 mobile access."
+      gradient: "from-red-500 to-pink-600",
     },
     {
       icon: Lightbulb,
       title: "Smart Lighting",
-      description: "Intelligent lighting control throughout your home",
+      description: "Intelligent illumination",
       link: "/services/smart-lighting",
-      features: ["Smart scenes", "Energy efficiency", "Voice control"],
-      gradient: "from-yellow-500 to-orange-600",
-      preview: "Dynamic lighting that adapts to your lifestyle with voice control and energy savings."
+      gradient: "from-yellow-500 to-amber-600",
     },
     {
       icon: Thermometer,
       title: "Climate Control",
-      description: "Smart HVAC systems for optimal comfort and efficiency",
+      description: "Smart temperature management",
       link: "/services/climate-control",
-      features: ["Smart thermostats", "Zone control", "Energy savings"],
-      gradient: "from-green-500 to-teal-600",
-      preview: "Intelligent climate systems that learn your preferences and optimize energy usage."
+      gradient: "from-blue-500 to-cyan-500",
     },
     {
       icon: Wifi,
       title: "Networking",
-      description: "Robust network infrastructure for your connected home",
+      description: "Enterprise-grade WiFi",
       link: "/services/networking",
-      features: ["WiFi optimization", "Wired networks", "Enterprise grade"],
-      gradient: "from-cyan-500 to-blue-600",
-      preview: "Enterprise-grade networking with seamless WiFi coverage throughout your entire home."
+      gradient: "from-green-500 to-teal-500",
     },
     {
       icon: Sun,
       title: "Shades",
-      description: "Window treatments for privacy and energy efficiency",
+      description: "Automated window treatments",
       link: "/services/shades",
-      features: ["Motorized shades", "Smart scheduling", "Solar integration"],
-      gradient: "from-amber-500 to-yellow-600",
-      preview: "Automated window treatments that respond to sunlight and enhance energy efficiency."
+      gradient: "from-amber-500 to-orange-500",
     },
     {
       icon: Wrench,
       title: "Maintenance",
-      description: "Ongoing support to keep your smart home running perfectly",
+      description: "24/7 support & service",
       link: "/services/maintenance",
-      features: ["Regular updates", "24/7 support", "System optimization"],
-      gradient: "from-gray-600 to-slate-700",
-      preview: "Professional maintenance and support to keep your smart home systems running smoothly."
+      gradient: "from-orange-500 to-red-500",
     }
   ];
 
-  // Auto-rotate through services
-  useEffect(() => {
-    if (isAutoRotating) {
-      const timer = setInterval(() => {
-        setCurrentService((prev) => (prev + 1) % services.length);
-      }, 4000);
-      return () => clearInterval(timer);
-    }
-  }, [isAutoRotating, services.length]);
-
-  const nextService = () => {
-    setCurrentService((prev) => (prev + 1) % services.length);
-    setIsAutoRotating(false);
-  };
-
-  const prevService = () => {
-    setCurrentService((prev) => (prev - 1 + services.length) % services.length);
-    setIsAutoRotating(false);
-  };
-
-  const currentServiceData = services[currentService];
+  const bottomNav = [
+    { icon: Home, label: "Home", path: "/services/home-integration" },
+    { icon: Grid3X3, label: "Services", path: "/services" },
+    { icon: Heart, label: "Projects", path: "/projects" },
+    { icon: Star, label: "About", path: "/about" },
+    { icon: Settings, label: "Contact", path: "/contact" },
+  ];
 
   return (
-    <Control4Layout showHeader={false} className="h-screen overflow-hidden">
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-950 to-slate-900 text-white overflow-hidden">
       <SEO 
         title="Smart Home Services - Control4 Automation in Vail Valley"
         description="Complete smart home services including Control4 automation, home theaters, security systems, smart lighting, and more in Vail Valley, Colorado."
         keywords="smart home services, Control4, home automation, home theater, security systems, smart lighting, Vail Valley"
       />
       
-      <div className="h-full flex flex-col">
-        {/* Header */}
-        <div className="flex items-center justify-between p-6 border-b border-slate-700/30">
-          <div className="flex items-center gap-6">
-            <Link to="/">
-              <img 
-                src="/lovable-uploads/1d7a78ef-4d02-453d-aeea-81e50fb784b6.png" 
-                alt="Symphony Smart Homes Logo" 
-                className="h-12 w-auto hover:opacity-80 transition-opacity"
-              />
-            </Link>
-            <div>
-              <h1 className="text-2xl font-bold text-white mb-1">Smart Home Ecosystem</h1>
-              <p className="text-slate-400 text-sm">Integrated solutions for modern living</p>
-            </div>
+      {/* Status Bar */}
+      <div className="h-6 bg-black/30 flex items-center justify-between px-6 text-xs text-white/60">
+        <span>Symphony</span>
+        <span>●●●●● LTE</span>
+      </div>
+
+      {/* Header */}
+      <div className="flex items-center justify-between px-6 py-4 border-b border-white/10">
+        <div className="flex items-center gap-3">
+          <div className="p-2 rounded-xl bg-gradient-to-br from-purple-600 to-blue-600">
+            <Grid3X3 className="w-5 h-5 text-white" />
           </div>
-          <div className="flex items-center space-x-4">
-            <Control4Button 
-              variant="secondary" 
-              size="sm"
-              onClick={() => setIsAutoRotating(!isAutoRotating)}
-            >
-              {isAutoRotating ? 'Pause' : 'Auto Tour'} <Play className="w-4 h-4 ml-2" />
-            </Control4Button>
-            <Link to="/scheduling">
-              <Control4Button size="sm">
-                Get Started <ArrowRight className="w-4 h-4 ml-2" />
-              </Control4Button>
-            </Link>
+          <div>
+            <h1 className="text-lg font-semibold text-white">Services</h1>
+            <p className="text-xs text-white/60">Smart Home Solutions</p>
           </div>
         </div>
+        <Link 
+          to="/scheduling" 
+          className="px-4 py-2 bg-white/10 hover:bg-white/20 rounded-xl text-sm font-medium transition-colors"
+        >
+          Schedule
+        </Link>
+      </div>
 
-        {/* Main Content */}
-        <div className="flex-1 grid lg:grid-cols-3 gap-6 p-6 overflow-hidden">
-          
-          {/* Left - Featured Service */}
-          <div className="lg:col-span-2">
-            <Control4Card variant="glass" className="h-full p-0 overflow-hidden">
-              <div className={`bg-gradient-to-br ${currentServiceData.gradient} h-full relative`}>
-                {/* Background Pattern */}
-                <div className="absolute inset-0 opacity-10">
-                  <div className="grid grid-cols-12 gap-2 h-full p-4">
-                    {Array.from({ length: 48 }).map((_, i) => (
-                      <div key={i} className="border border-white/20 rounded"></div>
-                    ))}
-                  </div>
-                </div>
-                
-                {/* Content */}
-                <div className="relative z-10 h-full flex flex-col p-8">
-                  <div className="flex items-center justify-between mb-6">
-                    <div className="flex items-center space-x-4">
-                      <div className="p-4 bg-white/20 rounded-xl backdrop-blur-sm">
-                        <currentServiceData.icon className="w-8 h-8 text-white" />
-                      </div>
-                      <div>
-                        <h2 className="text-2xl font-bold text-white">{currentServiceData.title}</h2>
-                        <p className="text-white/80">{currentServiceData.description}</p>
-                      </div>
-                    </div>
-                    
-                    <div className="flex items-center space-x-2">
-                      <Button
-                        variant="secondary"
-                        size="sm"
-                        onClick={prevService}
-                        className="bg-white/20 hover:bg-white/30 text-white border-none"
-                      >
-                        <ChevronLeft className="w-4 h-4" />
-                      </Button>
-                      <Button
-                        variant="secondary"
-                        size="sm"
-                        onClick={nextService}
-                        className="bg-white/20 hover:bg-white/30 text-white border-none"
-                      >
-                        <ChevronRight className="w-4 h-4" />
-                      </Button>
-                    </div>
-                  </div>
-
-                  <div className="flex-1 flex items-center">
-                    <div className="grid md:grid-cols-2 gap-8 items-center w-full">
-                      <div>
-                        <p className="text-lg text-white/90 mb-6 leading-relaxed">
-                          {currentServiceData.preview}
-                        </p>
-                        
-                        <div className="flex flex-wrap gap-3 mb-6">
-                          {currentServiceData.features.map((feature, idx) => (
-                            <span 
-                              key={idx} 
-                              className="px-3 py-2 bg-white/20 rounded-full text-sm backdrop-blur-sm text-white"
-                            >
-                              {feature}
-                            </span>
-                          ))}
-                        </div>
-
-                        <Link to={currentServiceData.link}>
-                          <Control4Button className="bg-white text-gray-900 hover:bg-white/90">
-                            Explore {currentServiceData.title} <ArrowRight className="w-4 h-4 ml-2" />
-                          </Control4Button>
-                        </Link>
-                      </div>
-
-                      <div className="relative">
-                        <div className="aspect-square bg-white/10 rounded-2xl backdrop-blur-sm flex items-center justify-center">
-                          <currentServiceData.icon className="w-32 h-32 text-white/30" />
-                          <div className="absolute inset-4 border-2 border-white/20 rounded-xl animate-pulse"></div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  
-                  {/* Progress Indicator */}
-                  <div className="flex justify-center space-x-2 mt-6">
-                    {services.map((_, index) => (
-                      <button
-                        key={index}
-                        onClick={() => {
-                          setCurrentService(index);
-                          setIsAutoRotating(false);
-                        }}
-                        className={`h-2 rounded-full transition-all duration-300 ${
-                          index === currentService 
-                            ? 'w-8 bg-white' 
-                            : 'w-2 bg-white/30 hover:bg-white/50'
-                        }`}
-                      />
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </Control4Card>
+      {/* Main Content */}
+      <div className="flex-1 overflow-auto pb-24 px-4 py-4" style={{ maxHeight: 'calc(100vh - 140px)' }}>
+        <div className="space-y-4">
+          {/* Hero Card */}
+          <div className="bg-gradient-to-br from-purple-600/30 to-blue-600/30 backdrop-blur-md rounded-2xl border border-white/20 p-6">
+            <h2 className="text-xl font-bold text-white mb-2">Smart Home Ecosystem</h2>
+            <p className="text-white/70 text-sm mb-4">
+              Complete integration of lighting, climate, security, and entertainment—all controlled from one interface.
+            </p>
+            <Link 
+              to="/services/home-integration"
+              className="inline-flex items-center gap-2 px-4 py-2 bg-white/20 hover:bg-white/30 rounded-xl text-sm font-medium transition-colors"
+            >
+              Explore Control4 <ArrowRight className="w-4 h-4" />
+            </Link>
           </div>
 
-          {/* Right - Services Grid */}
-          <div className="space-y-4">
-            <div>
-              <h3 className="text-lg font-semibold text-white mb-4">All Services</h3>
-              <div className="grid grid-cols-1 gap-3">
-                {services.map((service, index) => (
-                  <Link key={index} to={service.link}>
-                    <Control4Card 
-                      variant={index === currentService ? "elevated" : "default"}
-                      glow={index === currentService}
-                      className="p-4 transition-all duration-300 cursor-pointer hover:scale-105"
-                    >
-                      <div className="flex items-center space-x-3">
-                        <div className={`p-2 rounded-lg bg-gradient-to-br ${service.gradient} transition-transform duration-300`}>
-                          <service.icon className="w-5 h-5 text-white" />
-                        </div>
-                        <div className="flex-1">
-                          <h4 className="text-white font-semibold text-sm">{service.title}</h4>
-                          <p className="text-slate-400 text-xs">{service.features[0]}</p>
-                        </div>
-                        <ArrowRight className="w-4 h-4 text-slate-500" />
-                      </div>
-                    </Control4Card>
-                  </Link>
-                ))}
+          {/* Services Grid */}
+          <div className="grid grid-cols-2 gap-3">
+            {services.map((service, index) => (
+              <Link key={index} to={service.link}>
+                <div className="bg-white/10 backdrop-blur-md rounded-2xl border border-white/20 p-4 transition-all duration-300 hover:bg-white/15 hover:border-white/30 hover:scale-[1.02] relative overflow-hidden group">
+                  {/* Background gradient on hover */}
+                  <div className={`absolute inset-0 bg-gradient-to-br ${service.gradient} opacity-0 group-hover:opacity-20 transition-opacity duration-300`} />
+                  
+                  {/* Badge */}
+                  {service.badge && (
+                    <div className="absolute top-2 right-2 px-2 py-0.5 bg-accent/20 text-accent text-[10px] rounded-full">
+                      {service.badge}
+                    </div>
+                  )}
+                  
+                  {/* Content */}
+                  <div className="relative z-10">
+                    <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${service.gradient} flex items-center justify-center mb-3`}>
+                      <service.icon className="w-6 h-6 text-white" />
+                    </div>
+                    <h3 className="text-white font-semibold text-sm mb-1">{service.title}</h3>
+                    <p className="text-white/60 text-xs">{service.description}</p>
+                  </div>
+                </div>
+              </Link>
+            ))}
+          </div>
+
+          {/* Quick Stats */}
+          <div className="grid grid-cols-4 gap-3">
+            {[
+              { value: "500+", label: "Projects" },
+              { value: "15+", label: "Years" },
+              { value: "24/7", label: "Support" },
+              { value: "5★", label: "Rating" },
+            ].map((stat) => (
+              <div key={stat.label} className="bg-white/10 backdrop-blur-md rounded-2xl border border-white/20 p-3 text-center">
+                <div className="text-lg font-bold text-white">{stat.value}</div>
+                <div className="text-[10px] text-white/60">{stat.label}</div>
               </div>
-            </div>
+            ))}
+          </div>
+
+          {/* CTA Card */}
+          <div className="bg-white/10 backdrop-blur-md rounded-2xl border border-white/20 p-6 text-center">
+            <h3 className="text-lg font-bold text-white mb-2">Ready to Get Started?</h3>
+            <p className="text-white/60 text-sm mb-4">
+              Schedule a free consultation with our smart home experts.
+            </p>
+            <Link 
+              to="/scheduling"
+              className="inline-block px-6 py-3 bg-accent hover:bg-accent/90 text-white rounded-xl font-medium transition-colors"
+            >
+              Schedule Consultation
+            </Link>
           </div>
         </div>
       </div>
-    </Control4Layout>
+
+      {/* Bottom Navigation Dock */}
+      <div className="fixed bottom-0 left-0 right-0 bg-black/40 backdrop-blur-xl border-t border-white/10">
+        <div className="flex justify-around items-center py-3 px-4">
+          {bottomNav.map((item) => {
+            const isActive = location.pathname === item.path;
+            return (
+              <Link
+                key={item.label}
+                to={item.path}
+                className={`flex flex-col items-center gap-1 px-3 py-1 rounded-lg transition-all ${
+                  isActive 
+                    ? "text-white bg-white/10" 
+                    : "text-white/50 hover:text-white/80"
+                }`}
+              >
+                <item.icon className="w-5 h-5" />
+                <span className="text-[10px]">{item.label}</span>
+              </Link>
+            );
+          })}
+        </div>
+      </div>
+    </div>
   );
 };
 
