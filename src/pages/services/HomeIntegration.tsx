@@ -60,7 +60,7 @@ const SortableTab = ({
       ref={setNodeRef}
       style={style}
       onClick={onClick}
-      className={`flex items-center justify-center gap-1 px-2.5 sm:px-3 py-1.5 sm:py-2 rounded-full whitespace-nowrap transition-all duration-300 touch-none ${
+      className={`flex items-center justify-center gap-1.5 px-2.5 sm:px-3 py-1.5 sm:py-2 rounded-full whitespace-nowrap transition-all duration-300 touch-none ${
         isActive
           ? "bg-white/25 text-white shadow-lg backdrop-blur-sm"
           : "bg-white/10 text-white/80 hover:bg-white/15 backdrop-blur-sm"
@@ -68,8 +68,7 @@ const SortableTab = ({
       {...attributes}
       {...listeners}
     >
-      <GripVertical className="w-2.5 h-2.5 text-white/40" />
-      <IconComponent className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
+      <IconComponent className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
       <span className="text-[10px] sm:text-xs font-medium">{tab.label}</span>
     </button>
   );
