@@ -159,3 +159,24 @@
     transform: scale(0.95);
   }
 }
+
+/* Hide scrollbar utility */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* Control4 App Styles */
+.c4-gradient {
+  background: linear-gradient(180deg, #4a3a8c 0%, #3d5a9c 50%, #2a6a9c 100%);
+}
+
+.c4-glass {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
