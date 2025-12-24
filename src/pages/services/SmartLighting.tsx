@@ -80,7 +80,6 @@ const SmartLighting = () => {
           {/* Interactive Floor Plan */}
           <div className="mb-4">
             <InteractiveLightingFloorPlan
-              brightness={brightness}
               colorTemp={colorTemp}
               selectedRoom={selectedRoom}
               onRoomSelect={setSelectedRoom}
