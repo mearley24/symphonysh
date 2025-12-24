@@ -61,13 +61,9 @@ export const InteractiveLightingFloorPlan = ({
       width: 140,
       height: 100,
       lights: [
-        { id: 'l1', x: 50, y: 45, name: 'Recessed 1', type: 'recessed' },
-        { id: 'l2', x: 90, y: 45, name: 'Recessed 2', type: 'recessed' },
-        { id: 'l3', x: 130, y: 45, name: 'Recessed 3', type: 'recessed' },
-        { id: 'l4', x: 70, y: 85, name: 'Floor Lamp', type: 'lamp' },
-        { id: 'l5', x: 110, y: 85, name: 'Table Lamp', type: 'lamp' },
-        { id: 'l6', x: 30, y: 65, name: 'Sconce L', type: 'sconce' },
-        { id: 'l7', x: 150, y: 65, name: 'Sconce R', type: 'sconce' },
+        { id: 'l1', x: 90, y: 50, name: 'Recessed', type: 'recessed' },
+        { id: 'l2', x: 50, y: 85, name: 'Floor Lamp', type: 'lamp' },
+        { id: 'l3', x: 130, y: 85, name: 'Sconce', type: 'sconce' },
       ]
     },
     {
@@ -78,12 +74,9 @@ export const InteractiveLightingFloorPlan = ({
       width: 120,
       height: 70,
       lights: [
-        { id: 'k1', x: 200, y: 40, name: 'Pendant 1', type: 'pendant' },
-        { id: 'k2', x: 230, y: 40, name: 'Pendant 2', type: 'pendant' },
-        { id: 'k3', x: 260, y: 40, name: 'Pendant 3', type: 'pendant' },
-        { id: 'k4', x: 180, y: 70, name: 'Under Cab 1', type: 'under-cabinet' },
-        { id: 'k5', x: 210, y: 70, name: 'Under Cab 2', type: 'under-cabinet' },
-        { id: 'k6', x: 240, y: 70, name: 'Under Cab 3', type: 'under-cabinet' },
+        { id: 'k1', x: 200, y: 50, name: 'Pendant', type: 'pendant' },
+        { id: 'k2', x: 250, y: 50, name: 'Recessed', type: 'recessed' },
+        { id: 'k3', x: 220, y: 70, name: 'Under Cabinet', type: 'under-cabinet' },
       ]
     },
     {
@@ -94,9 +87,8 @@ export const InteractiveLightingFloorPlan = ({
       width: 80,
       height: 70,
       lights: [
-        { id: 'd1', x: 200, y: 120, name: 'Chandelier', type: 'chandelier' },
-        { id: 'd2', x: 175, y: 105, name: 'Sconce L', type: 'sconce' },
-        { id: 'd3', x: 225, y: 105, name: 'Sconce R', type: 'sconce' },
+        { id: 'd1', x: 200, y: 125, name: 'Chandelier', type: 'chandelier' },
+        { id: 'd2', x: 175, y: 110, name: 'Sconce', type: 'sconce' },
       ]
     },
     {
@@ -107,11 +99,9 @@ export const InteractiveLightingFloorPlan = ({
       width: 100,
       height: 90,
       lights: [
-        { id: 'b1', x: 270, y: 115, name: 'Ceiling', type: 'recessed' },
-        { id: 'b2', x: 300, y: 115, name: 'Ceiling 2', type: 'recessed' },
-        { id: 'b3', x: 255, y: 150, name: 'Bedside L', type: 'lamp' },
-        { id: 'b4', x: 325, y: 150, name: 'Bedside R', type: 'lamp' },
-        { id: 'b5', x: 290, y: 165, name: 'Closet', type: 'recessed' },
+        { id: 'b1', x: 290, y: 115, name: 'Recessed', type: 'recessed' },
+        { id: 'b2', x: 260, y: 150, name: 'Lamp', type: 'lamp' },
+        { id: 'b3', x: 320, y: 150, name: 'Sconce', type: 'sconce' },
       ]
     },
     {
@@ -122,9 +112,8 @@ export const InteractiveLightingFloorPlan = ({
       width: 80,
       height: 70,
       lights: [
-        { id: 'o1', x: 50, y: 145, name: 'Desk Lamp', type: 'lamp' },
-        { id: 'o2', x: 80, y: 145, name: 'Overhead', type: 'recessed' },
-        { id: 'o3', x: 35, y: 165, name: 'Floor Lamp', type: 'lamp' },
+        { id: 'o1', x: 60, y: 145, name: 'Recessed', type: 'recessed' },
+        { id: 'o2', x: 40, y: 170, name: 'Desk Lamp', type: 'lamp' },
       ]
     },
     {
@@ -135,9 +124,8 @@ export const InteractiveLightingFloorPlan = ({
       width: 60,
       height: 50,
       lights: [
-        { id: 'bt1', x: 260, y: 200, name: 'Vanity L', type: 'sconce' },
-        { id: 'bt2', x: 285, y: 200, name: 'Vanity R', type: 'sconce' },
-        { id: 'bt3', x: 272, y: 215, name: 'Shower', type: 'recessed' },
+        { id: 'bt1', x: 270, y: 200, name: 'Sconce', type: 'sconce' },
+        { id: 'bt2', x: 270, y: 218, name: 'Recessed', type: 'recessed' },
       ]
     },
     {
@@ -148,9 +136,7 @@ export const InteractiveLightingFloorPlan = ({
       width: 60,
       height: 110,
       lights: [
-        { id: 'h1', x: 130, y: 145, name: 'Hall 1', type: 'recessed' },
-        { id: 'h2', x: 130, y: 180, name: 'Hall 2', type: 'recessed' },
-        { id: 'h3', x: 130, y: 215, name: 'Hall 3', type: 'recessed' },
+        { id: 'h1', x: 130, y: 175, name: 'Recessed', type: 'recessed' },
       ]
     }
   ];
