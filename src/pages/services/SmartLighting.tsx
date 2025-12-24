@@ -1,9 +1,9 @@
-import { Lightbulb, Sun, Clock, Smartphone, Zap, Eye, Palette, Play, Pause, Fan } from "lucide-react";
+import { Lightbulb, Clock, Eye, Palette } from "lucide-react";
 import { useState, useEffect } from "react";
 import Control4ServiceLayout, { GlassCard, StatsCard, FeatureCard, PricingItem, CTACard } from "../../components/Layout/Control4ServiceLayout";
 import { Slider } from "../../components/ui/slider";
 import { Switch } from "../../components/ui/switch";
-
+import { InteractiveLightingFloorPlan } from "../../components/smart-lighting/InteractiveLightingFloorPlan";
 const SmartLighting = () => {
   const [brightness, setBrightness] = useState(75);
   const [colorTemp, setColorTemp] = useState(3500);
@@ -69,7 +69,7 @@ const SmartLighting = () => {
 
         {/* Main Light Control */}
         <GlassCard className="p-4">
-          <div className="flex items-center justify-between mb-4">
+          <div className="flex items-center justify-between mb-3">
             <h3 className="text-white font-medium">Light Control</h3>
             <div className="flex items-center gap-2">
               <span className="text-white/60 text-sm">Auto</span>
@@ -77,18 +77,14 @@ const SmartLighting = () => {
             </div>
           </div>
           
-          {/* Light Bulb Visual */}
-          <div className="flex justify-center mb-6">
-            <div 
-              className="w-24 h-24 rounded-full flex items-center justify-center transition-all duration-500"
-              style={{ 
-                backgroundColor: currentScene?.color.replace('bg-', '') || '#fbbf24',
-                opacity: brightness / 100,
-                boxShadow: `0 0 ${brightness/2}px ${brightness/3}px rgba(251, 191, 36, ${brightness/200})`,
-              }}
-            >
-              <Lightbulb className="w-12 h-12 text-gray-800" />
-            </div>
+          {/* Interactive Floor Plan */}
+          <div className="mb-4">
+            <InteractiveLightingFloorPlan
+              brightness={brightness}
+              colorTemp={colorTemp}
+              selectedRoom={selectedRoom}
+              onRoomSelect={setSelectedRoom}
+            />
           </div>
 
           {/* Brightness */}
