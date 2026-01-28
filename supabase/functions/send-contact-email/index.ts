@@ -15,93 +15,44 @@ serve(async (req) => {
   }
 
   try {
-    console.log("Request received by send-contact-email function");
-    console.log("Request URL:", req.url);
-    console.log("Request method:", req.method);
-    
-    // Log the content type and headers
-    console.log("Content-Type:", req.headers.get("content-type"));
-    console.log("Authorization:", req.headers.has("authorization") ? "Present" : "Missing");
-    
-    const requestBody = await req.text();
-    console.log("Raw request body:", requestBody);
-    
-    // Parse the body
-    let name, email, message;
+    // Parse request body
+    let name: string | undefined;
+    let email: string | undefined;
+    let message: string | undefined;
+
     try {
-      const body = JSON.parse(requestBody);
-      console.log("Parsed request body:", body);
-      
-      name = body.name;
-      email = body.email;
-      message = body.message;
-    } catch (parseError) {
-      console.error("Error parsing request body:", parseError);
+      const body = await req.json();
+      name = body?.name;
+      email = body?.email;
+      message = body?.message;
+    } catch {
       throw new Error("Invalid JSON in request body");
     }
 
     if (!name || !email || !message) {
-      console.error("Missing required fields:", { name, email, message });
-      throw new Error('Name, email, and message are required');
+      throw new Error("Name, email, and message are required");
     }
 
-    // Initialize Supabase client
-    const supabaseUrl = Deno.env.get('SUPABASE_URL');
-    const supabaseKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY');
-    
-    console.log("Supabase URL:", supabaseUrl);
-    console.log("Supabase key available:", !!supabaseKey);
-    
+    // Initialize Supabase client (service role)
+    const supabaseUrl = Deno.env.get("SUPABASE_URL");
+    const supabaseKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY");
+
     if (!supabaseUrl || !supabaseKey) {
-      throw new Error('Missing Supabase environment variables');
+      throw new Error("Missing Supabase environment variables");
     }
-    
+
     const supabase = createClient(supabaseUrl, supabaseKey);
 
-    // Check if the contact_submissions table exists first
-    try {
-      console.log("Checking if contact_submissions table exists");
-      const { error: tableCheckError } = await supabase
-        .from('contact_submissions')
-        .select('id')
-        .limit(1);
-        
-      if (tableCheckError) {
-        console.error("Table check error:", tableCheckError);
-        if (tableCheckError.message.includes("does not exist")) {
-          console.log("Creating contact_submissions table");
-          const { error: createTableError } = await supabase.rpc('create_contact_submissions_table');
-          if (createTableError) {
-            console.error("Error creating table:", createTableError);
-            // Continue without storing in database
-          }
-        }
-      }
-    } catch (tableError) {
-      console.error("Error checking/creating table:", tableError);
-      // Continue without storing in database
-    }
+    // Store the submission in the database (table created via migrations)
+    let submissionId: string | null = null;
+    const { data: submission, error: dbError } = await supabase
+      .from("contact_submissions")
+      .insert([{ name, email, message }])
+      .select("id")
+      .single();
 
-    // Store the submission in the database
-    console.log("Attempting to store submission in database");
-    let submissionId = null;
-    try {
-      const { data: submission, error: dbError } = await supabase
-        .from('contact_submissions')
-        .insert([{ name, email, message }])
-        .select()
-        .single();
-
-      if (dbError) {
-        console.error('Database error:', dbError);
-        // Continue without storing
-      } else {
-        console.log("Submission stored successfully:", submission);
-        submissionId = submission.id;
-      }
-    } catch (storageError) {
-      console.error("Error storing submission:", storageError);
-      // Continue without storing
+    if (!dbError && submission?.id) {
+      submissionId = submission.id;
     }
 
     // Initialize Resend
