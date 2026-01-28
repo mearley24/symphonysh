@@ -62,7 +62,25 @@ This project is built with .
 
 ## How can I deploy this project?
 
-Simply open [Lovable](https://lovable.dev/projects/3878c065-e9da-4a6e-bfdb-371ba3159d6e) and click on Share -> Publish.
+This repo is deployed via Netlify (recommended for custom domains). You can also use Lovable for UI changes.
+
+### Supabase (backend)
+This project uses Supabase project `bxsdjxkbhjtdrrtjtyto`.
+
+**Contact form:** the `/contact` page calls the Supabase Edge Function `send-contact-email`, which:
+- stores submissions in `public.contact_submissions`
+- sends emails via Resend (`RESEND_API_KEY` secret required)
+
+To set it up:
+1) Apply migrations (includes `20260128_create_contact_submissions.sql`).
+2) Deploy edge functions (including `send-contact-email`).
+3) Set Supabase function secrets:
+   - `RESEND_API_KEY`
+   - `SUPABASE_SERVICE_ROLE_KEY` (available to functions by default)
+
+If the contact form is returning 500s, the first two things to check are:
+- the `contact_submissions` table exists (migration applied)
+- `RESEND_API_KEY` is set for the functions environment
 
 ## I want to use a custom domain - is that possible?
 
