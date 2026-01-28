@@ -1,207 +1,131 @@
-import { Link, useLocation } from "react-router-dom";
-import { 
-  Check, Home, Grid3X3, Heart, Star, Settings, 
-  Award, Users, Clock, Shield, MapPin, Phone
-} from "lucide-react";
+import { Link } from "react-router-dom";
+import { ArrowRight, Award, Calendar, Check, Shield, Star, Users } from "lucide-react";
 import SEO from "../components/SEO";
+import Header from "@/components/Header";
 
-const About = () => {
-  const location = useLocation();
+const stats = [
+  { value: "15+", label: "Years Experience", icon: Award },
+  { value: "500+", label: "Projects Completed", icon: Star },
+  { value: "24/7", label: "Support", icon: Shield },
+  { value: "Local", label: "Vail Valley", icon: Users },
+];
 
-  const bottomNav = [
-    { icon: Home, label: "Home", path: "/" },
-    { icon: Grid3X3, label: "Services", path: "/services" },
-    { icon: Heart, label: "Projects", path: "/projects" },
-    { icon: Star, label: "About", path: "/about" },
-    { icon: Settings, label: "Contact", path: "/contact" },
-  ];
+const bullets = [
+  "Control4 expertise (design + install + support)",
+  "Clean installs: wiring, racks, and finishes done right",
+  "Reliable networking built for always-on systems",
+  "Thoughtful UX: simple scenes, predictable behavior",
+  "Long-term support and maintenance",
+];
 
-  const stats = [
-    { value: "15+", label: "Years Experience", icon: Clock },
-    { value: "500+", label: "Projects Completed", icon: Award },
-    { value: "100%", label: "Satisfaction", icon: Star },
-    { value: "24/7", label: "Support", icon: Shield },
-  ];
-
-  const whyChooseUs = [
-    "Control4 Certified Dealers",
-    "Expert installation team",
-    "24/7 support service",
-    "Custom solutions",
-    "Latest technology",
-    "Local Vail Valley specialists",
-  ];
-
-  const values = [
-    "Quality excellence",
-    "Customer satisfaction",
-    "Innovation focus",
-    "Reliable service",
-    "Transparent pricing",
-    "Long-term partnerships",
-  ];
-
+export default function About() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-950 to-slate-900 text-white overflow-hidden">
-      <SEO 
-        title="About Us - Symphony Smart Homes" 
-        description="Learn about Symphony Smart Homes and our mission to transform houses into intelligent, efficient living spaces in Vail Valley."
-        keywords="smart home, home automation, about us, symphony smart homes, Vail Valley"
+    <div className="min-h-screen c4-gradient text-white">
+      <SEO
+        title="About - Symphony Smart Homes"
+        description="Learn about Symphony Smart Homes—Control4 smart home design, installation, and support in Vail Valley, Colorado."
+        keywords="about, smart home, Control4, home automation, Vail Valley"
       />
-      
-      {/* Status Bar */}
-      <div className="h-6 bg-black/30 flex items-center justify-between px-6 text-xs text-white/60">
-        <span>Symphony</span>
-        <span>●●●●● LTE</span>
-      </div>
 
-      {/* Header */}
-      <div className="flex items-center justify-between px-6 py-4 border-b border-white/10">
-        <div className="flex items-center gap-3">
-          <div className="p-2 rounded-xl bg-gradient-to-br from-amber-500 to-orange-600">
-            <Star className="w-5 h-5 text-white" />
-          </div>
-          <div>
-            <h1 className="text-lg font-semibold text-white">About Us</h1>
-            <p className="text-xs text-white/60">Our Story & Mission</p>
-          </div>
-        </div>
-        <Link 
-          to="/contact" 
-          className="px-4 py-2 bg-white/10 hover:bg-white/20 rounded-xl text-sm font-medium transition-colors"
-        >
-          Contact
-        </Link>
-      </div>
+      <Header />
 
-      {/* Main Content */}
-      <div className="flex-1 overflow-auto pb-24 px-4 py-4" style={{ maxHeight: 'calc(100vh - 140px)' }}>
-        <div className="space-y-4">
-          {/* Hero */}
-          <div className="bg-gradient-to-br from-amber-500/30 to-orange-600/30 backdrop-blur-md rounded-2xl border border-white/20 p-6 text-center">
-            <img 
-              src="/lovable-uploads/1d7a78ef-4d02-453d-aeea-81e50fb784b6.png" 
-              alt="Symphony Smart Homes" 
-              className="h-12 w-auto mx-auto mb-3"
-            />
-            <h2 className="text-xl font-bold text-white mb-2">Symphony Smart Homes</h2>
-            <p className="text-white/70 text-sm">
-              Leading the way in smart home automation technology in Vail Valley
+      <main className="pt-24 sm:pt-28">
+        {/* HERO */}
+        <section className="max-w-6xl mx-auto px-4 sm:px-6">
+          <div className="c4-surface rounded-3xl p-6 sm:p-10">
+            <h1 className="text-3xl sm:text-4xl font-semibold tracking-tight">About Symphony</h1>
+            <p className="text-white/70 mt-3 max-w-3xl">
+              We build Control4 systems that feel effortless. That means reliable infrastructure, clean installs,
+              and support after the install—because smart homes aren’t "set it and forget it." They’re living systems.
             </p>
-          </div>
 
-          {/* Stats */}
-          <div className="grid grid-cols-4 gap-3">
-            {stats.map((stat) => (
-              <div key={stat.label} className="bg-white/10 backdrop-blur-md rounded-2xl border border-white/20 p-3 text-center">
-                <stat.icon className="w-5 h-5 text-accent mx-auto mb-1" />
-                <div className="text-lg font-bold text-white">{stat.value}</div>
-                <div className="text-[9px] text-white/60">{stat.label}</div>
+            <div className="mt-6 flex flex-col sm:flex-row gap-3">
+              <Link
+                to="/scheduling"
+                className="inline-flex items-center justify-center gap-2 bg-accent hover:bg-accent/90 text-white px-5 py-3 rounded-xl font-medium transition-colors"
+              >
+                <Calendar className="w-4 h-4" />
+                Schedule a consultation
+              </Link>
+              <Link
+                to="/projects"
+                className="inline-flex items-center justify-center gap-2 bg-white/10 hover:bg-white/15 border border-white/10 px-5 py-3 rounded-xl font-medium transition-colors"
+              >
+                View our work <ArrowRight className="w-4 h-4" />
+              </Link>
+            </div>
+          </div>
+        </section>
+
+        {/* STATS */}
+        <section className="max-w-6xl mx-auto px-4 sm:px-6 mt-8">
+          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+            {stats.map((s) => (
+              <div key={s.label} className="c4-tile rounded-2xl p-5">
+                <div className="flex items-center gap-3">
+                  <div className="h-10 w-10 rounded-xl bg-white/5 flex items-center justify-center">
+                    <s.icon className="w-5 h-5 text-white/80" />
+                  </div>
+                  <div>
+                    <div className="text-xl font-semibold">{s.value}</div>
+                    <div className="text-white/60 text-sm">{s.label}</div>
+                  </div>
+                </div>
               </div>
             ))}
           </div>
+        </section>
 
-          {/* Mission */}
-          <div className="bg-white/10 backdrop-blur-md rounded-2xl border border-white/20 p-5">
-            <h3 className="text-white font-semibold mb-3">Our Mission</h3>
-            <p className="text-white/70 text-sm leading-relaxed">
-              At Symphony Smart Homes, we're dedicated to transforming houses into intelligent, 
-              efficient, and comfortable living spaces. Our mission is to bring the future of 
-              home automation to your doorstep with solutions that enhance your lifestyle.
-            </p>
-          </div>
-
-          {/* Why Choose Us & Values */}
-          <div className="grid grid-cols-2 gap-3">
-            <div className="bg-white/10 backdrop-blur-md rounded-2xl border border-white/20 p-4">
-              <h3 className="text-white font-semibold text-sm mb-3">Why Choose Us</h3>
-              <div className="space-y-2">
-                {whyChooseUs.map((item, index) => (
-                  <div key={index} className="flex items-center gap-2">
-                    <Check className="w-3 h-3 text-accent flex-shrink-0" />
-                    <span className="text-white/70 text-xs">{item}</span>
+        {/* WHY */}
+        <section className="max-w-6xl mx-auto px-4 sm:px-6 mt-10">
+          <div className="grid gap-6 lg:grid-cols-2">
+            <div className="c4-surface rounded-3xl p-6 sm:p-8">
+              <h2 className="text-2xl font-semibold">What we care about</h2>
+              <p className="text-white/70 mt-2">
+                The goal isn’t more gadgets—it’s a home that behaves predictably and is easy to live with.
+              </p>
+              <div className="mt-5 space-y-3">
+                {bullets.map((b) => (
+                  <div key={b} className="flex items-start gap-2">
+                    <Check className="w-4 h-4 text-accent mt-0.5" />
+                    <div className="text-white/75">{b}</div>
                   </div>
                 ))}
               </div>
             </div>
-            <div className="bg-white/10 backdrop-blur-md rounded-2xl border border-white/20 p-4">
-              <h3 className="text-white font-semibold text-sm mb-3">Our Values</h3>
-              <div className="space-y-2">
-                {values.map((item, index) => (
-                  <div key={index} className="flex items-center gap-2">
-                    <Check className="w-3 h-3 text-accent flex-shrink-0" />
-                    <span className="text-white/70 text-xs">{item}</span>
-                  </div>
-                ))}
+
+            <div className="c4-surface rounded-3xl p-6 sm:p-8">
+              <h2 className="text-2xl font-semibold">Next step</h2>
+              <p className="text-white/70 mt-2">
+                A quick consultation gets us aligned on goals, budget, and timeline.
+              </p>
+              <div className="mt-6 flex flex-col gap-3">
+                <Link
+                  to="/contact"
+                  className="inline-flex items-center justify-center gap-2 bg-white/10 hover:bg-white/15 border border-white/10 px-5 py-3 rounded-xl font-medium transition-colors"
+                >
+                  Message us
+                </Link>
+                <Link
+                  to="/scheduling"
+                  className="inline-flex items-center justify-center gap-2 bg-accent hover:bg-accent/90 text-white px-5 py-3 rounded-xl font-medium transition-colors"
+                >
+                  Schedule
+                  <ArrowRight className="w-4 h-4" />
+                </Link>
+              </div>
+
+              <div className="mt-6 text-white/50 text-sm">
+                Serving Vail Valley, Colorado.
               </div>
             </div>
           </div>
+        </section>
 
-          {/* Team */}
-          <div className="bg-white/10 backdrop-blur-md rounded-2xl border border-white/20 p-5">
-            <div className="flex items-center gap-3 mb-3">
-              <Users className="w-5 h-5 text-accent" />
-              <h3 className="text-white font-semibold">Our Team</h3>
-            </div>
-            <p className="text-white/70 text-sm leading-relaxed mb-3">
-              Our team consists of certified Control4 professionals with decades of combined 
-              experience in home automation, audio/video systems, and network infrastructure.
-            </p>
-            <div className="flex items-center gap-2 text-white/50 text-xs">
-              <MapPin className="w-3 h-3" />
-              <span>Proudly serving Vail Valley, Colorado</span>
-            </div>
-          </div>
-
-          {/* CTA */}
-          <div className="bg-accent/20 backdrop-blur-md rounded-2xl border border-accent/30 p-5 text-center">
-            <h3 className="text-white font-semibold mb-2">Ready to Get Started?</h3>
-            <p className="text-white/60 text-sm mb-4">
-              Let us transform your home into a smart living space.
-            </p>
-            <div className="flex gap-3 justify-center">
-              <Link 
-                to="/contact"
-                className="px-4 py-2 bg-white/20 hover:bg-white/30 rounded-xl text-sm font-medium transition-colors"
-              >
-                <Phone className="w-4 h-4 inline mr-2" />
-                Contact Us
-              </Link>
-              <Link 
-                to="/scheduling"
-                className="px-4 py-2 bg-accent hover:bg-accent/90 rounded-xl text-sm font-medium transition-colors"
-              >
-                Schedule Consultation
-              </Link>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Bottom Navigation Dock */}
-      <div className="fixed bottom-0 left-0 right-0 bg-black/40 backdrop-blur-xl border-t border-white/10">
-        <div className="flex justify-around items-center py-3 px-4">
-          {bottomNav.map((item) => {
-            const isActive = location.pathname === item.path;
-            return (
-              <Link
-                key={item.label}
-                to={item.path}
-                className={`flex flex-col items-center gap-1 px-3 py-1 rounded-lg transition-all ${
-                  isActive 
-                    ? "text-white bg-white/10" 
-                    : "text-white/50 hover:text-white/80"
-                }`}
-              >
-                <item.icon className="w-5 h-5" />
-                <span className="text-[10px]">{item.label}</span>
-              </Link>
-            );
-          })}
-        </div>
-      </div>
+        <section className="max-w-6xl mx-auto px-4 sm:px-6 mt-10 pb-16">
+          <div className="text-center text-xs text-white/50">© {new Date().getFullYear()} Symphony Smart Homes</div>
+        </section>
+      </main>
     </div>
   );
-};
-
-export default About;
+}

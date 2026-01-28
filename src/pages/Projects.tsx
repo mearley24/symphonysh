@@ -1,208 +1,157 @@
-import { Link, useLocation } from "react-router-dom";
-import { 
-  ArrowRight, Camera, Monitor, Cable, Home, Grid3X3, Heart, 
-  Star, Settings, Play, Calendar
-} from "lucide-react";
+import { Link } from "react-router-dom";
+import { ArrowRight, Calendar, Cable, Monitor } from "lucide-react";
 import SEO from "../components/SEO";
+import Header from "@/components/Header";
 
-const Projects = () => {
-  const location = useLocation();
+const portfolioSections = [
+  {
+    icon: Monitor,
+    title: "Home Theaters",
+    description: "Premium home cinema installations.",
+    image: "/lovable-uploads/home theater/IMG_0979.JPG",
+    link: "/photos/home-theater",
+  },
+  {
+    icon: Monitor,
+    title: "Mounted TVs",
+    description: "Clean TV mounting + media wall installs.",
+    image: "/lovable-uploads/mounted tvs/Home/IMG_0659.JPG",
+    link: "/photos/mounted-tvs",
+  },
+  {
+    icon: Cable,
+    title: "Wiring & Infrastructure",
+    description: "Structured wiring and rack installations.",
+    image: "/lovable-uploads/wiring/IMG_1138.JPG",
+    link: "/photos/wiring",
+  },
+];
 
-  const bottomNav = [
-    { icon: Home, label: "Home", path: "/" },
-    { icon: Grid3X3, label: "Services", path: "/services" },
-    { icon: Heart, label: "Projects", path: "/projects" },
-    { icon: Star, label: "About", path: "/about" },
-    { icon: Settings, label: "Contact", path: "/contact" },
-  ];
+const recentProjects = [
+  { img: "/lovable-uploads/home theater/IMG_0980.JPG", title: "Media Room" },
+  { img: "/lovable-uploads/mounted tvs/Misc/IMG_0875.JPG", title: "Living Room TV" },
+  { img: "/lovable-uploads/wiring/IMG_1311.JPG", title: "Network Rack" },
+  { img: "/lovable-uploads/home theater/IMG_0981.JPG", title: "Theater Seating" },
+];
 
-  const portfolioSections = [
-    {
-      icon: Monitor,
-      title: "Home Theater",
-      description: "Premium home cinema installations with cutting-edge technology",
-      image: "/lovable-uploads/home theater/IMG_0979.JPG",
-      link: "/photos/home-theater",
-      count: "15+",
-      gradient: "from-purple-600 to-pink-700"
-    },
-    {
-      icon: Monitor,
-      title: "Mounted TVs",
-      description: "Expert TV mounting and media wall installations",
-      image: "/lovable-uploads/mounted tvs/Home/IMG_0659.JPG",
-      link: "/photos/mounted-tvs",
-      count: "50+",
-      gradient: "from-blue-600 to-purple-700"
-    },
-    {
-      icon: Cable,
-      title: "Wiring & Infrastructure",
-      description: "Professional structured wiring and rack installations",
-      image: "/lovable-uploads/wiring/IMG_1138.JPG",
-      link: "/photos/wiring",
-      count: "100+",
-      gradient: "from-green-500 to-teal-600"
-    }
-  ];
-
-  const recentProjects = [
-    { img: "/lovable-uploads/home theater/IMG_0980.JPG", title: "Media Room" },
-    { img: "/lovable-uploads/mounted tvs/Misc/IMG_0875.JPG", title: "Living Room TV" },
-    { img: "/lovable-uploads/wiring/IMG_1311.JPG", title: "Network Rack" },
-    { img: "/lovable-uploads/home theater/IMG_0981.JPG", title: "Theater Seating" },
-  ];
-
+export default function Projects() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-950 to-slate-900 text-white overflow-hidden">
-      <SEO 
-        title="Our Project Portfolio - Smart Home Installations in Vail Valley"
-        description="Browse our portfolio of smart home installations including home theaters, TV mounting, and structured wiring projects throughout Vail Valley, Colorado."
+    <div className="min-h-screen c4-gradient text-white">
+      <SEO
+        title="Projects - Symphony Smart Homes"
+        description="Browse our portfolio of smart home installations across Vail Valley, Colorado."
         keywords="smart home portfolio, home theater installation, TV mounting, structured wiring, Vail Valley projects"
       />
-      
-      {/* Status Bar */}
-      <div className="h-6 bg-black/30 flex items-center justify-between px-6 text-xs text-white/60">
-        <span>Symphony</span>
-        <span>●●●●● LTE</span>
-      </div>
 
-      {/* Header */}
-      <div className="flex items-center justify-between px-6 py-4 border-b border-white/10">
-        <div className="flex items-center gap-3">
-          <div className="p-2 rounded-xl bg-gradient-to-br from-pink-500 to-rose-600">
-            <Heart className="w-5 h-5 text-white" />
-          </div>
-          <div>
-            <h1 className="text-lg font-semibold text-white">Our Work</h1>
-            <p className="text-xs text-white/60">Project Portfolio</p>
-          </div>
-        </div>
-        <Link 
-          to="/scheduling" 
-          className="px-4 py-2 bg-accent hover:bg-accent/90 rounded-xl text-sm font-medium transition-colors"
-        >
-          Start Project
-        </Link>
-      </div>
+      <Header />
 
-      {/* Main Content */}
-      <div className="flex-1 overflow-auto pb-24 px-4 py-4" style={{ maxHeight: 'calc(100vh - 140px)' }}>
-        <div className="space-y-4">
-          {/* Stats Row */}
-          <div className="grid grid-cols-3 gap-3">
+      <main className="pt-24 sm:pt-28">
+        {/* HERO */}
+        <section className="max-w-6xl mx-auto px-4 sm:px-6">
+          <div className="c4-surface rounded-3xl p-6 sm:p-10">
+            <h1 className="text-3xl sm:text-4xl font-semibold tracking-tight">Our Work</h1>
+            <p className="text-white/70 mt-3 max-w-2xl">
+              A few examples of installs we’re proud of—clean wiring, thoughtful design, and systems that feel effortless.
+            </p>
+            <div className="mt-6 flex flex-col sm:flex-row gap-3">
+              <Link
+                to="/scheduling"
+                className="inline-flex items-center justify-center gap-2 bg-accent hover:bg-accent/90 text-white px-5 py-3 rounded-xl font-medium transition-colors"
+              >
+                <Calendar className="w-4 h-4" />
+                Start a project
+              </Link>
+              <Link
+                to="/contact"
+                className="inline-flex items-center justify-center gap-2 bg-white/10 hover:bg-white/15 border border-white/10 px-5 py-3 rounded-xl font-medium transition-colors"
+              >
+                Get a quote <ArrowRight className="w-4 h-4" />
+              </Link>
+            </div>
+          </div>
+        </section>
+
+        {/* SECTIONS */}
+        <section className="max-w-6xl mx-auto px-4 sm:px-6 mt-8">
+          <div className="grid gap-3 lg:grid-cols-3">
             {portfolioSections.map((section) => (
-              <div key={section.title} className="bg-white/10 backdrop-blur-md rounded-2xl border border-white/20 p-3 text-center">
-                <div className="text-xl font-bold text-white">{section.count}</div>
-                <div className="text-[10px] text-white/60">{section.title}</div>
-              </div>
-            ))}
-          </div>
-
-          {/* Portfolio Sections */}
-          {portfolioSections.map((section, index) => (
-            <Link key={index} to={section.link}>
-              <div className="bg-white/10 backdrop-blur-md rounded-2xl border border-white/20 overflow-hidden hover:bg-white/15 transition-all hover:scale-[1.01]">
-                <div className="aspect-video relative">
-                  <img 
-                    src={section.image} 
-                    alt={section.title}
-                    className="w-full h-full object-cover"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-                  <div className="absolute top-3 left-3">
-                    <div className={`w-10 h-10 rounded-xl bg-gradient-to-br ${section.gradient} flex items-center justify-center`}>
-                      <section.icon className="w-5 h-5 text-white" />
-                    </div>
-                  </div>
-                  <div className="absolute bottom-0 left-0 right-0 p-4">
-                    <div className="flex items-center justify-between">
-                      <div>
-                        <h3 className="text-white font-semibold">{section.title}</h3>
-                        <p className="text-white/60 text-xs">{section.description}</p>
-                      </div>
-                      <div className="flex items-center gap-1 text-accent">
-                        <span className="text-sm">View</span>
-                        <ArrowRight className="w-4 h-4" />
+              <Link key={section.title} to={section.link} className="block">
+                <div className="c4-surface rounded-3xl overflow-hidden hover:bg-white/5 transition-colors h-full">
+                  <div className="aspect-video relative">
+                    <img
+                      src={section.image}
+                      alt={section.title}
+                      className="absolute inset-0 w-full h-full object-cover opacity-85"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/10 to-transparent" />
+                    <div className="absolute bottom-0 left-0 right-0 p-5">
+                      <div className="flex items-start justify-between gap-4">
+                        <div>
+                          <div className="text-white font-semibold">{section.title}</div>
+                          <div className="text-white/60 text-sm mt-1">{section.description}</div>
+                        </div>
+                        <div className="text-accent inline-flex items-center gap-1 text-sm">
+                          View <ArrowRight className="w-4 h-4" />
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            </Link>
-          ))}
+              </Link>
+            ))}
+          </div>
+        </section>
 
-          {/* Recent Projects Grid */}
-          <div>
-            <h3 className="text-white/60 text-xs uppercase tracking-wider mb-3 px-1">Recent Work</h3>
-            <div className="grid grid-cols-2 gap-3">
-              {recentProjects.map((project, index) => (
-                <Link key={index} to="/photos/home-theater">
-                  <div className="bg-white/10 backdrop-blur-md rounded-2xl border border-white/20 overflow-hidden hover:scale-[1.02] transition-all">
-                    <div className="aspect-square relative">
-                      <img src={project.img} alt={project.title} className="w-full h-full object-cover" />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
-                      <div className="absolute bottom-2 left-2 right-2">
-                        <span className="text-white text-xs font-medium">{project.title}</span>
-                      </div>
-                      <div className="absolute top-2 right-2 w-6 h-6 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center">
-                        <Play className="w-3 h-3 text-white" />
-                      </div>
+        {/* RECENT */}
+        <section className="max-w-6xl mx-auto px-4 sm:px-6 mt-10 pb-16">
+          <div className="flex items-end justify-between gap-4">
+            <div>
+              <h2 className="text-2xl font-semibold">Recent</h2>
+              <p className="text-white/70 mt-2">Quick snapshots from recent installs.</p>
+            </div>
+          </div>
+
+          <div className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+            {recentProjects.map((p) => (
+              <Link key={p.title} to="/projects" className="block">
+                <div className="c4-tile rounded-2xl overflow-hidden hover:bg-white/5 transition-colors">
+                  <div className="aspect-square relative">
+                    <img src={p.img} alt={p.title} className="absolute inset-0 w-full h-full object-cover opacity-90" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
+                    <div className="absolute bottom-0 left-0 right-0 p-3">
+                      <div className="text-white text-sm font-medium">{p.title}</div>
                     </div>
                   </div>
+                </div>
+              </Link>
+            ))}
+          </div>
+
+          <div className="mt-10">
+            <div className="c4-surface rounded-3xl p-6 sm:p-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
+              <div>
+                <h3 className="text-2xl font-semibold">Want yours to look this clean?</h3>
+                <p className="text-white/70 mt-2">We’ll help you design it, install it, and support it.</p>
+              </div>
+              <div className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
+                <Link
+                  to="/contact"
+                  className="inline-flex items-center justify-center gap-2 bg-white/10 hover:bg-white/15 border border-white/10 px-5 py-3 rounded-xl font-medium transition-colors"
+                >
+                  Get a quote
                 </Link>
-              ))}
+                <Link
+                  to="/scheduling"
+                  className="inline-flex items-center justify-center gap-2 bg-accent hover:bg-accent/90 text-white px-5 py-3 rounded-xl font-medium transition-colors"
+                >
+                  Schedule
+                  <ArrowRight className="w-4 h-4" />
+                </Link>
+              </div>
             </div>
           </div>
-
-          {/* CTA */}
-          <div className="bg-accent/20 backdrop-blur-md rounded-2xl border border-accent/30 p-5 text-center">
-            <Camera className="w-8 h-8 text-accent mx-auto mb-2" />
-            <h3 className="text-white font-semibold mb-1">Start Your Project</h3>
-            <p className="text-white/60 text-xs mb-4">Let us bring your smart home vision to life</p>
-            <div className="flex gap-3 justify-center">
-              <Link 
-                to="/contact"
-                className="px-4 py-2 bg-white/20 hover:bg-white/30 rounded-xl text-sm font-medium transition-colors"
-              >
-                Get a Quote
-              </Link>
-              <Link 
-                to="/scheduling"
-                className="px-4 py-2 bg-accent hover:bg-accent/90 rounded-xl text-sm font-medium transition-colors flex items-center gap-2"
-              >
-                <Calendar className="w-4 h-4" />
-                Schedule
-              </Link>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Bottom Navigation Dock */}
-      <div className="fixed bottom-0 left-0 right-0 bg-black/40 backdrop-blur-xl border-t border-white/10">
-        <div className="flex justify-around items-center py-3 px-4">
-          {bottomNav.map((item) => {
-            const isActive = location.pathname === item.path;
-            return (
-              <Link
-                key={item.label}
-                to={item.path}
-                className={`flex flex-col items-center gap-1 px-3 py-1 rounded-lg transition-all ${
-                  isActive 
-                    ? "text-white bg-white/10" 
-                    : "text-white/50 hover:text-white/80"
-                }`}
-              >
-                <item.icon className="w-5 h-5" />
-                <span className="text-[10px]">{item.label}</span>
-              </Link>
-            );
-          })}
-        </div>
-      </div>
+        </section>
+      </main>
     </div>
   );
-};
-
-export default Projects;
+}
