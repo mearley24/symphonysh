@@ -65,63 +65,79 @@ serve(async (req) => {
     console.log("Resend API key available, initializing Resend");
     const resend = new Resend(resendApiKey);
 
-    // Send email to business
-    console.log("Sending email to business");
-    const emailResponse = await resend.emails.send({
-      from: "Symphony Smart Homes <notifications@symphonysh.com>",
-      to: ["info@symphonysh.com"],
-      subject: "New Contact Form Submission",
-      html: `
-        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #eee; border-radius: 10px;">
-          <h1 style="color: #333; text-align: center;">New Contact Form Submission</h1>
-          <div style="background-color: #f8f9fa; padding: 15px; border-radius: 5px; margin-bottom: 20px;">
-            <h2 style="margin-top: 0; color: #0056b3;">${name}</h2>
-            <p style="margin: 5px 0;"><strong>Email:</strong> ${email}</p>
-          </div>
-          <div style="margin-bottom: 20px;">
-            <h3>Message:</h3>
-            <p style="background-color: #f8f9fa; padding: 10px; border-radius: 5px;">${message}</p>
-          </div>
-          <div style="text-align: center; margin-top: 30px; color: #666; font-size: 12px;">
-            <p>This is an automated notification from Symphony Smart Homes.</p>
-          </div>
-        </div>
-      `,
-    });
+    // Send emails (track status explicitly)
+    let emailSent = false;
+    let confirmationSent = false;
 
-    console.log("Email sent:", emailResponse);
-
-    // Send confirmation email to customer
-    console.log("Sending confirmation email to customer");
-    const customerResponse = await resend.emails.send({
-      from: "Symphony Smart Homes <notifications@symphonysh.com>",
-      to: [email],
-      subject: "Thank you for contacting Symphony Smart Homes",
-      html: `
-        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #eee; border-radius: 10px;">
-          <h1 style="color: #333; text-align: center;">We've Received Your Message</h1>
-          <p style="font-size: 16px; line-height: 1.5;">Dear ${name},</p>
-          <p style="font-size: 16px; line-height: 1.5;">Thank you for contacting Symphony Smart Homes. We have received your message and our team will review it shortly.</p>
-          <p style="font-size: 16px; line-height: 1.5;">We aim to respond to all inquiries within 1-2 business days.</p>
-          <p style="font-size: 16px; line-height: 1.5;">Best regards,<br>Symphony Smart Homes Team</p>
-          <div style="text-align: center; margin-top: 30px; color: #666; font-size: 12px;">
-            <p>This is an automated confirmation. Please do not reply to this email.</p>
+    try {
+      await resend.emails.send({
+        from: "Symphony Smart Homes <notifications@symphonysh.com>",
+        to: ["info@symphonysh.com"],
+        subject: "New Contact Form Submission",
+        html: `
+          <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #eee; border-radius: 10px;">
+            <h1 style="color: #333; text-align: center;">New Contact Form Submission</h1>
+            <div style="background-color: #f8f9fa; padding: 15px; border-radius: 5px; margin-bottom: 20px;">
+              <h2 style="margin-top: 0; color: #0056b3;">${name}</h2>
+              <p style="margin: 5px 0;"><strong>Email:</strong> ${email}</p>
+            </div>
+            <div style="margin-bottom: 20px;">
+              <h3>Message:</h3>
+              <p style="background-color: #f8f9fa; padding: 10px; border-radius: 5px;">${message}</p>
+            </div>
+            <div style="text-align: center; margin-top: 30px; color: #666; font-size: 12px;">
+              <p>This is an automated notification from Symphony Smart Homes.</p>
+            </div>
           </div>
-        </div>
-      `,
-    });
+        `,
+      });
+      emailSent = true;
+    } catch (e) {
+      console.error("Failed to send business email:", e);
+    }
 
-    console.log("Confirmation email sent:", customerResponse);
+    try {
+      await resend.emails.send({
+        from: "Symphony Smart Homes <notifications@symphonysh.com>",
+        to: [email],
+        subject: "Thank you for contacting Symphony Smart Homes",
+        html: `
+          <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #eee; border-radius: 10px;">
+            <h1 style="color: #333; text-align: center;">We've Received Your Message</h1>
+            <p style="font-size: 16px; line-height: 1.5;">Dear ${name},</p>
+            <p style="font-size: 16px; line-height: 1.5;">Thank you for contacting Symphony Smart Homes. We have received your message and our team will review it shortly.</p>
+            <p style="font-size: 16px; line-height: 1.5;">We aim to respond to all inquiries within 1-2 business days.</p>
+            <p style="font-size: 16px; line-height: 1.5;">Best regards,<br>Symphony Smart Homes Team</p>
+            <div style="text-align: center; margin-top: 30px; color: #666; font-size: 12px;">
+              <p>This is an automated confirmation. Please do not reply to this email.</p>
+            </div>
+          </div>
+        `,
+      });
+      confirmationSent = true;
+    } catch (e) {
+      console.error("Failed to send customer confirmation:", e);
+    }
 
-    console.log("Function completed successfully");
-    return new Response(JSON.stringify({ 
-      success: true, 
-      id: submissionId,
-      emailSent: !!emailResponse.id,
-      confirmationSent: !!customerResponse.id 
-    }), {
-      headers: { ...corsHeaders, 'Content-Type': 'application/json' },
-    });
+    // best-effort update status
+    if (submissionId) {
+      await supabase
+        .from("contact_submissions")
+        .update({ email_sent: emailSent && confirmationSent })
+        .eq("id", submissionId);
+    }
+
+    if (!emailSent && !confirmationSent) {
+      return new Response(JSON.stringify({ error: "Email delivery failed" }), {
+        status: 502,
+        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+      });
+    }
+
+    return new Response(
+      JSON.stringify({ success: true, id: submissionId, emailSent, confirmationSent }),
+      { headers: { ...corsHeaders, 'Content-Type': 'application/json' } },
+    );
   } catch (error) {
     console.error('Error in send-contact-email function:', error);
     return new Response(

@@ -7,6 +7,7 @@ import { ConfirmationPage } from "./pages/scheduling/components/ConfirmationPage
 import Index from "./pages/Index";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
+import AdminLeads from "./pages/AdminLeads";
 import Services from "./pages/Services";
 import Projects from "./pages/Projects";
 import Privacy from "./pages/Privacy";
@@ -58,6 +59,7 @@ function App() {
           <Route path="/index" element={<Index />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/admin/leads" element={<AdminLeads />} />
           <Route path="/services" element={<Services />} />
           <Route path="/projects" element={<Projects />} />
           <Route path="/privacy" element={<Privacy />} />
