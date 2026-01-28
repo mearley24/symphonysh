@@ -1,4 +1,4 @@
-import { Wifi, Check } from "lucide-react";
+import { Wifi } from "lucide-react";
 import MarketingServiceLayout from "@/components/Layout/MarketingServiceLayout";
 import { NetworkingDemo } from "@/components/service-demos/NetworkingDemo";
 
@@ -12,12 +12,31 @@ export default function Networking() {
     areaServed: "Vail Valley, Colorado",
   };
 
-  const bullets = [
-    "Wi‑Fi design that matches your floor plan (not guesswork)",
-    "Wired backhaul where it matters",
-    "Clean rack builds and labeling",
-    "Network segmentation for IoT and guests",
-    "Remote monitoring and support",
+  const tiles = [
+    {
+      t: "Wi‑Fi design",
+      d: "AP placement based on your floor plan—not guesswork.",
+    },
+    {
+      t: "Wired where it matters",
+      d: "Backhaul and hardwired drops for stability.",
+    },
+    {
+      t: "Rack + labeling",
+      d: "Clean builds that are serviceable later.",
+    },
+    {
+      t: "Segmentation",
+      d: "IoT + guest separation for reliability/security.",
+    },
+    {
+      t: "Monitoring",
+      d: "Proactive support when something degrades.",
+    },
+    {
+      t: "Smart-home ready",
+      d: "Foundation for Control4, cameras, AV, and more.",
+    },
   ];
 
   return (
@@ -28,31 +47,33 @@ export default function Networking() {
       serviceSchema={serviceSchema}
       icon={Wifi}
     >
-      <div className="grid gap-6 lg:grid-cols-2">
+      {/* Keep tiles first (smaller, calmer) */}
+      <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+        {tiles.map((x) => (
+          <div key={x.t} className="c4-tile rounded-2xl p-4">
+            <div className="font-medium text-sm">{x.t}</div>
+            <div className="text-white/60 text-sm mt-1 leading-relaxed">{x.d}</div>
+          </div>
+        ))}
+      </div>
+
+      <div className="mt-8 grid gap-6 lg:grid-cols-2">
         <div className="c4-surface rounded-3xl p-6 sm:p-8">
           <h2 className="text-2xl font-semibold">Why it matters</h2>
           <p className="text-white/70 mt-3">
             Most “smart home problems” are actually network problems. We build the foundation so everything else stays stable.
           </p>
-
-          <div className="mt-5 space-y-3">
-            {bullets.map((b) => (
-              <div key={b} className="flex items-start gap-2">
-                <Check className="w-4 h-4 text-accent mt-0.5" />
-                <div className="text-white/75">{b}</div>
-              </div>
-            ))}
-          </div>
         </div>
 
-        <div className="c4-tile rounded-2xl p-6 sm:p-8">
+        <div className="c4-surface rounded-3xl p-6 sm:p-8">
           <h2 className="text-2xl font-semibold">Typical outcomes</h2>
-          <div className="mt-3 text-white/70">
+          <p className="text-white/70 mt-3">
             Faster roaming, fewer dead zones, reliable streaming, and systems that don’t randomly “go offline.”
-          </div>
+          </p>
         </div>
       </div>
 
+      {/* Demo (secondary) */}
       <div className="mt-8">
         <details className="c4-surface rounded-3xl p-6 sm:p-8">
           <summary className="cursor-pointer select-none">
