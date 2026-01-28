@@ -1,6 +1,7 @@
 import { Wifi } from "lucide-react";
 import MarketingServiceLayout from "@/components/Layout/MarketingServiceLayout";
 import { NetworkingDemo } from "@/components/service-demos/NetworkingDemo";
+import SpeedAdvisor from "@/components/SpeedAdvisor";
 
 export default function Networking() {
   const serviceSchema = {
@@ -73,8 +74,26 @@ export default function Networking() {
         </div>
       </div>
 
-      {/* Demo (secondary) */}
+      {/* Speed test + recommendation (secondary) */}
       <div className="mt-8">
+        <details className="c4-surface rounded-3xl p-6 sm:p-8">
+          <summary className="cursor-pointer select-none">
+            <div className="flex items-center justify-between gap-4">
+              <div>
+                <div className="text-xl font-semibold">Test your speeds (optional)</div>
+                <div className="text-white/70 mt-1">Internet + LAN → recommended upgrades.</div>
+              </div>
+              <span className="text-white/50 text-sm">Expand</span>
+            </div>
+          </summary>
+          <div className="mt-6">
+            <SpeedAdvisor />
+          </div>
+        </details>
+      </div>
+
+      {/* Demo (secondary) */}
+      <div className="mt-6">
         <details className="c4-surface rounded-3xl p-6 sm:p-8">
           <summary className="cursor-pointer select-none">
             <div className="flex items-center justify-between gap-4">
