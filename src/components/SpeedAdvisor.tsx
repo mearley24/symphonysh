@@ -34,22 +34,27 @@ export default function SpeedAdvisor() {
   const [quickRunning, setQuickRunning] = useState(false);
   const [quickError, setQuickError] = useState<string | null>(null);
 
-  // Package placeholders — fill with your starting-at installed pricing later.
-  const packages: Array<{ tier: TierName; startingAtInstalled: number | null; blurb: string }> = [
+  // Starting-at INSTALLED pricing (public-facing)
+  // Current rule: installed ≈ MSRP_total * 2.4 (rounded to nearest $250)
+  // NOTE: These are baseline examples and will be refined as we build out the SKU catalog.
+  const packages: Array<{ tier: TierName; startingAtInstalled: number | null; blurb: string; basis?: string }> = [
     {
       tier: "1Gb",
-      startingAtInstalled: null,
+      startingAtInstalled: 4750,
       blurb: "Rock-solid gigabit switching + Wi‑Fi designed for coverage and roaming.",
+      basis: "Example baseline: router + switch + 2 APs (MSRP-based)",
     },
     {
       tier: "2.5Gb",
-      startingAtInstalled: null,
+      startingAtInstalled: 7250,
       blurb: "2.5Gb backbone for high-performance homes, racks, and multiple 4K streams.",
+      basis: "Example baseline: multi‑gig-ready core + 2 APs (MSRP-based)",
     },
     {
       tier: "10Gb",
-      startingAtInstalled: null,
+      startingAtInstalled: 9500,
       blurb: "10Gb core for large homes, media servers/NAS, and demanding workflows.",
+      basis: "Example baseline: 10Gb-capable core + 2 APs (MSRP-based)",
     },
   ];
 
@@ -192,6 +197,7 @@ export default function SpeedAdvisor() {
                     <Wifi className="w-4 h-4 text-white/50" />
                   </div>
                   <div className="text-white/60 text-sm mt-2">{p.blurb}</div>
+                  {p.basis ? <div className="text-white/45 text-xs mt-2">{p.basis}</div> : null}
                   <div className="mt-4 text-white/70 text-sm">
                     Starting at{" "}
                     <span className="text-white font-semibold">
