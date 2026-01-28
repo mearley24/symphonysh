@@ -19,14 +19,14 @@ const Index = () => {
   ];
 
   const allServices = [
-    { icon: Home, title: "Automation", link: "/services/home-integration", gradient: "from-blue-600 to-purple-700", desc: "Control4 integration" },
-    { icon: Volume2, title: "Audio", link: "/services/audio-entertainment", gradient: "from-purple-600 to-pink-700", desc: "Multi-room & theater" },
-    { icon: Shield, title: "Security", link: "/services/security-systems", gradient: "from-red-500 to-pink-600", desc: "Cameras & access" },
-    { icon: Lightbulb, title: "Lighting", link: "/services/smart-lighting", gradient: "from-yellow-500 to-amber-600", desc: "Smart illumination" },
-    { icon: Thermometer, title: "Climate", link: "/services/climate-control", gradient: "from-blue-500 to-cyan-500", desc: "HVAC control" },
-    { icon: Wifi, title: "Networking", link: "/services/networking", gradient: "from-green-500 to-teal-500", desc: "Enterprise WiFi" },
-    { icon: Sun, title: "Shades", link: "/services/shades", gradient: "from-amber-500 to-orange-500", desc: "Window automation" },
-    { icon: Wrench, title: "Maintenance", link: "/services/maintenance", gradient: "from-orange-500 to-red-500", desc: "24/7 support" },
+    { icon: Home, title: "Automation", link: "/services/home-integration", desc: "Control4 integration" },
+    { icon: Volume2, title: "Audio", link: "/services/audio-entertainment", desc: "Multi-room & theater" },
+    { icon: Shield, title: "Security", link: "/services/security-systems", desc: "Cameras & access" },
+    { icon: Lightbulb, title: "Lighting", link: "/services/smart-lighting", desc: "Smart illumination" },
+    { icon: Thermometer, title: "Climate", link: "/services/climate-control", desc: "HVAC control" },
+    { icon: Wifi, title: "Networking", link: "/services/networking", desc: "Enterprise WiFi" },
+    { icon: Sun, title: "Shades", link: "/services/shades", desc: "Window automation" },
+    { icon: Wrench, title: "Maintenance", link: "/services/maintenance", desc: "24/7 support" },
   ];
 
   const bottomNav = [
@@ -38,30 +38,39 @@ const Index = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-950 to-slate-900 text-white overflow-hidden">
+    <div className="min-h-screen c4-gradient text-white overflow-hidden">
       <SEO 
         title="Symphony Smart Homes - Premium Home Automation in Vail Valley"
         description="Transform your Vail Valley home with Control4 smart home automation. Expert installation of home theaters, lighting, security, and integrated smart home systems."
         keywords="smart home automation, Control4, home theater, Vail Valley, Colorado, home integration, smart lighting, security systems"
       />
       
-      {/* Status Bar */}
-      <div className="h-6 bg-black/30 flex items-center justify-between px-6 text-xs text-white/60">
-        <span>Symphony</span>
-        <span>●●●●● LTE</span>
-      </div>
+      {/* Top Bar (Control4-ish) */}
+      <div className="px-4 pt-4">
+        <div className="flex items-start justify-between">
+          <div>
+            <h1 className="text-xl font-semibold tracking-tight">Symphony Smart Homes</h1>
+            <div className="flex items-center gap-2 text-white/60 text-sm mt-1">
+              <MapPin className="w-4 h-4" />
+              <span>Vail Valley, Colorado</span>
+            </div>
+          </div>
+          <Link
+            to="/scheduling"
+            className="c4-pill c4-pill-active rounded-2xl px-4 py-2 text-sm font-medium hover:bg-white/15 transition-colors"
+          >
+            Schedule
+          </Link>
+        </div>
 
-      {/* Category Tabs - Centered */}
-      <div className="flex justify-center px-4 py-3 border-b border-white/10">
-        <div className="flex gap-2 bg-white/5 p-1 rounded-xl">
+        {/* Primary Pills */}
+        <div className="mt-4 flex flex-wrap gap-2">
           {categoryTabs.map((tab) => (
             <button
               key={tab.id}
               onClick={() => setActiveTab(tab.id)}
-              className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all ${
-                activeTab === tab.id
-                  ? "bg-accent text-white"
-                  : "text-white/60 hover:text-white hover:bg-white/10"
+              className={`c4-pill rounded-full px-4 py-2 text-sm font-medium transition-colors flex items-center gap-2 ${
+                activeTab === tab.id ? "c4-pill-active" : "hover:bg-white/10"
               }`}
             >
               <tab.icon className="w-4 h-4" />
@@ -72,53 +81,50 @@ const Index = () => {
       </div>
 
       {/* Main Content */}
-      <div className="flex-1 overflow-auto pb-24 px-4 py-4" style={{ maxHeight: 'calc(100vh - 140px)' }}>
+      <div className="flex-1 overflow-auto pb-24 px-4 py-6" style={{ maxHeight: 'calc(100vh - 160px)' }}>
         
         {/* Home Tab */}
         {activeTab === "home" && (
           <div className="space-y-4">
-            {/* Hero Card */}
-            <div className="bg-gradient-to-br from-purple-600/40 to-blue-600/40 backdrop-blur-md rounded-2xl border border-white/20 p-6 text-center">
-              <img 
-                src="/lovable-uploads/1d7a78ef-4d02-453d-aeea-81e50fb784b6.png" 
-                alt="Symphony Smart Homes" 
-                className="h-12 w-auto mx-auto mb-3"
-              />
-              <h1 className="text-xl font-bold text-white mb-1">Symphony Smart Homes</h1>
-              <p className="text-white/70 text-sm mb-1">Premium Control4 Automation</p>
-              <div className="flex items-center justify-center gap-1 text-white/50 text-xs mb-4">
-                <MapPin className="w-3 h-3" />
-                <span>Vail Valley, Colorado</span>
-              </div>
-              <div className="flex gap-3 justify-center">
-                <Link 
+            {/* Hero */}
+            <div className="c4-surface rounded-3xl p-6">
+              <div className="flex items-center gap-3">
+                <div className="h-10 w-10 rounded-2xl bg-white/10 flex items-center justify-center">
+                  <img
+                    src="/lovable-uploads/1d7a78ef-4d02-453d-aeea-81e50fb784b6.png"
+                    alt="Symphony Smart Homes"
+                    className="h-6 w-auto"
+                  />
+                </div>
+                <div className="flex-1">
+                  <div className="text-white/70 text-sm">Premium Control4 Automation</div>
+                  <div className="text-white text-lg font-semibold leading-tight">Design • Install • Support</div>
+                </div>
+                <Link
                   to="/services/home-integration"
-                  className="inline-flex items-center gap-2 px-4 py-2 bg-white/20 hover:bg-white/30 rounded-xl text-sm font-medium transition-colors"
+                  className="c4-pill rounded-2xl px-4 py-2 text-sm font-medium hover:bg-white/10 transition-colors inline-flex items-center gap-2"
                 >
-                  <Play className="w-4 h-4" /> Live Demo
-                </Link>
-                <Link 
-                  to="/scheduling"
-                  className="inline-flex items-center gap-2 px-4 py-2 bg-accent hover:bg-accent/90 rounded-xl text-sm font-medium transition-colors"
-                >
-                  Schedule <ArrowRight className="w-4 h-4" />
+                  <Play className="w-4 h-4" /> Demo
                 </Link>
               </div>
-            </div>
 
-            {/* Quick Services - 2x2 */}
-            <div className="grid grid-cols-2 gap-3">
-              {allServices.slice(0, 4).map((service, index) => (
-                <Link key={index} to={service.link}>
-                  <div className={`bg-gradient-to-br ${service.gradient} rounded-2xl p-4 transition-all duration-300 hover:scale-[1.02]`}>
-                    <div className="w-10 h-10 bg-white/20 rounded-xl flex items-center justify-center mb-2">
-                      <service.icon className="w-5 h-5 text-white" />
+              <div className="mt-5 grid grid-cols-2 gap-3">
+                {allServices.slice(0, 4).map((service, index) => (
+                  <Link key={index} to={service.link} className="block">
+                    <div className="c4-tile rounded-2xl p-4 hover:bg-white/5 transition-colors">
+                      <div className="flex items-center gap-3">
+                        <div className="h-10 w-10 rounded-xl bg-white/5 flex items-center justify-center">
+                          <service.icon className="w-5 h-5 text-white/80" />
+                        </div>
+                        <div className="min-w-0">
+                          <div className="text-white font-medium text-sm truncate">{service.title}</div>
+                          <div className="text-white/60 text-xs truncate">{service.desc}</div>
+                        </div>
+                      </div>
                     </div>
-                    <h3 className="text-white font-semibold text-sm">{service.title}</h3>
-                    <p className="text-white/70 text-xs">{service.desc}</p>
-                  </div>
-                </Link>
-              ))}
+                  </Link>
+                ))}
+              </div>
             </div>
 
             {/* Stats Row */}
@@ -241,8 +247,8 @@ const Index = () => {
               </div>
               <h3 className="text-white font-semibold mb-2">Call Us</h3>
               <p className="text-white/60 text-sm mb-4">Speak directly with our team</p>
-              <a href="tel:+19705551234" className="inline-block px-6 py-3 bg-accent hover:bg-accent/90 rounded-xl text-white font-medium transition-colors">
-                (970) 555-1234
+              <a href="tel:+19705193013" className="inline-block px-6 py-3 bg-accent hover:bg-accent/90 rounded-xl text-white font-medium transition-colors">
+                (970) 519-3013
               </a>
             </div>
 

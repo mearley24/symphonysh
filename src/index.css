@@ -169,14 +169,37 @@
   display: none;
 }
 
-/* Control4 App Styles */
+/* Control4-inspired Styles */
 .c4-gradient {
-  background: linear-gradient(180deg, #4a3a8c 0%, #3d5a9c 50%, #2a6a9c 100%);
+  background: radial-gradient(1200px 800px at 50% 0%, rgba(142, 94, 214, 0.55) 0%, rgba(61, 90, 156, 0.35) 35%, rgba(10, 18, 34, 0.95) 100%),
+    linear-gradient(180deg, #4a3a8c 0%, #3d5a9c 45%, #2a6a9c 100%);
 }
 
-.c4-glass {
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+.c4-surface {
+  background: rgba(0, 0, 0, 0.45);
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+
+.c4-tile {
+  background: rgba(0, 0, 0, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.02), 0 10px 28px rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+
+.c4-pill {
+  background: rgba(0, 0, 0, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.02);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+
+.c4-pill-active {
+  background: rgba(255, 255, 255, 0.10);
+  border-color: rgba(255, 255, 255, 0.16);
 }
