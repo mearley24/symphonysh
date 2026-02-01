@@ -1,6 +1,7 @@
 import { Volume2, Check, ArrowRight } from "lucide-react";
 import MarketingServiceLayout from "@/components/Layout/MarketingServiceLayout";
 import { AudioEntertainmentDemo } from "@/components/service-demos/AudioEntertainmentDemo";
+import ServicePackages from "@/components/ServicePackages";
 
 export default function AudioEntertainment() {
   const serviceSchema = {
@@ -63,7 +64,49 @@ export default function AudioEntertainment() {
         </div>
       </div>
 
+      {/* Packages (secondary) */}
       <div className="mt-8">
+        <details className="c4-surface rounded-3xl p-6 sm:p-8">
+          <summary className="cursor-pointer select-none">
+            <div className="flex items-center justify-between gap-4">
+              <div>
+                <div className="text-xl font-semibold">Packages + starting prices (optional)</div>
+                <div className="text-white/70 mt-1">Two common starting points (MSRP-based).</div>
+              </div>
+              <span className="text-white/50 text-sm">Expand</span>
+            </div>
+          </summary>
+          <div className="mt-6">
+            <ServicePackages
+              packages={[
+                {
+                  name: "Essential",
+                  tagline: "Clean sound + reliable control",
+                  msrpBaseline: 3500,
+                  includes: [
+                    "Living room TV + sound system",
+                    "Streaming/source integration",
+                    "Professional install + calibration",
+                  ],
+                },
+                {
+                  name: "Signature",
+                  tagline: "Theater-first experience",
+                  msrpBaseline: 7500,
+                  includes: [
+                    "Dedicated home theater / media room",
+                    "Surround sound + tuning",
+                    "Control4 scene integration (if applicable)",
+                  ],
+                },
+              ]}
+            />
+          </div>
+        </details>
+      </div>
+
+      {/* Demo (secondary) */}
+      <div className="mt-6">
         <details className="c4-surface rounded-3xl p-6 sm:p-8">
           <summary className="cursor-pointer select-none">
             <div className="flex items-center justify-between gap-4">
