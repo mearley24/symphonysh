@@ -24,7 +24,8 @@ serve(async (req) => {
       );
     }
 
-    const vaultUrl = `https://symphonysmarthomes.com/vault?code=${access_code}`;
+    // Primary vault URL - clients will need to be on local network or Tailscale
+    const vaultUrl = `http://bob.local:8801/?code=${access_code}`;
     
     // Send vault access email to client
     const result = await resend.emails.send({
@@ -65,6 +66,11 @@ serve(async (req) => {
           <p style="font-size: 16px; line-height: 1.5;">
             Your credentials are encrypted and stored securely. Our installers will use them 
             to set up your devices without you needing to be present for every login.
+          </p>
+          
+          <p style="font-size: 16px; line-height: 1.5;">
+            <strong>Note:</strong> You'll need to be on the same network as your Symphony system 
+            to access the vault, or we can walk you through remote access during your consultation.
           </p>
           
           <p style="font-size: 16px; line-height: 1.5;">
