@@ -14,6 +14,7 @@ import Privacy from "./pages/Privacy";
 import Terms from "./pages/Terms";
 import Ava from "./pages/Ava";
 import Matterport from "./pages/Matterport";
+import Vault from "./pages/Vault";
 
 // Photo gallery pages
 import HomeTheater from "./pages/photos/HomeTheater";
@@ -66,6 +67,7 @@ function App() {
           <Route path="/terms" element={<Terms />} />
           <Route path="/ava" element={<Ava />} />
           <Route path="/matterport" element={<Matterport />} />
+          <Route path="/vault" element={<Vault />} />
           
           {/* Photo gallery routes */}
           <Route path="/photos/home-theater" element={<HomeTheater />} />
