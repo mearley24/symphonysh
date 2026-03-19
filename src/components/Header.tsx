@@ -51,12 +51,11 @@ const Header = () => {
             {/* Logo - splits left */}
             <Link to="/" className="shrink-0 pointer-events-auto relative z-10">
               <img
-                src="/lovable-uploads/1d7a78ef-4d02-453d-aeea-81e50fb784b6.png"
+                src="/lovable-uploads/symphony-logo-transparent.png"
                 alt="Symphony Smart Homes"
                 className={`w-auto transition-all duration-500 ${
                   scrolled ? 'h-14 sm:h-16' : 'h-32 sm:h-40 mb-3'
                 }`}
-                style={{ backgroundColor: 'hsl(0 0% 7% / 0.85)', borderRadius: '8px' }}
               />
             </Link>
 
