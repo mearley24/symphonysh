@@ -42,7 +42,7 @@ const Header = () => {
           scrolled ? "bg-primary/90 backdrop-blur-xl border-b border-white/[0.06]" : ""
         }`}
       >
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 pt-5 pb-2">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 pt-5 pb-4">
           {/* Centered logo */}
           <div className="flex justify-center mb-2">
             <Link to="/" className="shrink-0">
@@ -67,7 +67,7 @@ const Header = () => {
           </div>
 
           {/* Menu */}
-          <div className="flex justify-center">
+          <div className="flex justify-center mt-1">
             <button
               onClick={() => setMenuOpen(!menuOpen)}
               className="inline-flex items-center gap-2 text-white/40 hover:text-white text-sm tracking-widest uppercase transition-colors"
