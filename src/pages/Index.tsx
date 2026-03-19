@@ -95,7 +95,7 @@ const Index = () => {
           className="w-full h-full object-cover"
           loading="eager"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-primary/80 via-primary/90 to-primary/95" />
+        <div className="absolute inset-0 bg-gradient-to-b from-primary/60 via-primary/75 to-primary/90" />
       </div>
 
       <div className="relative z-10">
