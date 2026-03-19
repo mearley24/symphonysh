@@ -47,7 +47,8 @@ const Header = () => {
               <img
                 src="/lovable-uploads/1d7a78ef-4d02-453d-aeea-81e50fb784b6.png"
                 alt="Symphony Smart Homes"
-                className="h-32 sm:h-40 w-auto mix-blend-lighten"
+                className="h-32 sm:h-40 w-auto"
+                style={{ backgroundColor: 'hsl(0 0% 7% / 0.85)', borderRadius: '8px' }}
               />
             </Link>
           </div>
