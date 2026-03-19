@@ -7,14 +7,12 @@ import { ConfirmationPage } from "./pages/scheduling/components/ConfirmationPage
 import Index from "./pages/Index";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
-import AdminLeads from "./pages/AdminLeads";
 import Services from "./pages/Services";
 import Projects from "./pages/Projects";
 import Privacy from "./pages/Privacy";
 import Terms from "./pages/Terms";
 import Ava from "./pages/Ava";
 import Matterport from "./pages/Matterport";
-import Vault from "./pages/Vault";
 
 // Photo gallery pages
 import HomeTheater from "./pages/photos/HomeTheater";
@@ -60,14 +58,12 @@ function App() {
           <Route path="/index" element={<Index />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
-          <Route path="/admin/leads" element={<AdminLeads />} />
           <Route path="/services" element={<Services />} />
           <Route path="/projects" element={<Projects />} />
           <Route path="/privacy" element={<Privacy />} />
           <Route path="/terms" element={<Terms />} />
           <Route path="/ava" element={<Ava />} />
           <Route path="/matterport" element={<Matterport />} />
-          <Route path="/vault" element={<Vault />} />
           
           {/* Photo gallery routes */}
           <Route path="/photos/home-theater" element={<HomeTheater />} />

@@ -15,44 +15,93 @@ serve(async (req) => {
   }
 
   try {
-    // Parse request body
-    let name: string | undefined;
-    let email: string | undefined;
-    let message: string | undefined;
-
+    console.log("Request received by send-contact-email function");
+    console.log("Request URL:", req.url);
+    console.log("Request method:", req.method);
+    
+    // Log the content type and headers
+    console.log("Content-Type:", req.headers.get("content-type"));
+    console.log("Authorization:", req.headers.has("authorization") ? "Present" : "Missing");
+    
+    const requestBody = await req.text();
+    console.log("Raw request body:", requestBody);
+    
+    // Parse the body
+    let name, email, message;
     try {
-      const body = await req.json();
-      name = body?.name;
-      email = body?.email;
-      message = body?.message;
-    } catch {
+      const body = JSON.parse(requestBody);
+      console.log("Parsed request body:", body);
+      
+      name = body.name;
+      email = body.email;
+      message = body.message;
+    } catch (parseError) {
+      console.error("Error parsing request body:", parseError);
       throw new Error("Invalid JSON in request body");
     }
 
     if (!name || !email || !message) {
-      throw new Error("Name, email, and message are required");
+      console.error("Missing required fields:", { name, email, message });
+      throw new Error('Name, email, and message are required');
     }
 
-    // Initialize Supabase client (service role)
-    const supabaseUrl = Deno.env.get("SUPABASE_URL");
-    const supabaseKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY");
-
+    // Initialize Supabase client
+    const supabaseUrl = Deno.env.get('SUPABASE_URL');
+    const supabaseKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY');
+    
+    console.log("Supabase URL:", supabaseUrl);
+    console.log("Supabase key available:", !!supabaseKey);
+    
     if (!supabaseUrl || !supabaseKey) {
-      throw new Error("Missing Supabase environment variables");
+      throw new Error('Missing Supabase environment variables');
     }
-
+    
     const supabase = createClient(supabaseUrl, supabaseKey);
 
-    // Store the submission in the database (table created via migrations)
-    let submissionId: string | null = null;
-    const { data: submission, error: dbError } = await supabase
-      .from("contact_submissions")
-      .insert([{ name, email, message }])
-      .select("id")
-      .single();
+    // Check if the contact_submissions table exists first
+    try {
+      console.log("Checking if contact_submissions table exists");
+      const { error: tableCheckError } = await supabase
+        .from('contact_submissions')
+        .select('id')
+        .limit(1);
+        
+      if (tableCheckError) {
+        console.error("Table check error:", tableCheckError);
+        if (tableCheckError.message.includes("does not exist")) {
+          console.log("Creating contact_submissions table");
+          const { error: createTableError } = await supabase.rpc('create_contact_submissions_table');
+          if (createTableError) {
+            console.error("Error creating table:", createTableError);
+            // Continue without storing in database
+          }
+        }
+      }
+    } catch (tableError) {
+      console.error("Error checking/creating table:", tableError);
+      // Continue without storing in database
+    }
 
-    if (!dbError && submission?.id) {
-      submissionId = submission.id;
+    // Store the submission in the database
+    console.log("Attempting to store submission in database");
+    let submissionId = null;
+    try {
+      const { data: submission, error: dbError } = await supabase
+        .from('contact_submissions')
+        .insert([{ name, email, message }])
+        .select()
+        .single();
+
+      if (dbError) {
+        console.error('Database error:', dbError);
+        // Continue without storing
+      } else {
+        console.log("Submission stored successfully:", submission);
+        submissionId = submission.id;
+      }
+    } catch (storageError) {
+      console.error("Error storing submission:", storageError);
+      // Continue without storing
     }
 
     // Initialize Resend
@@ -65,79 +114,63 @@ serve(async (req) => {
     console.log("Resend API key available, initializing Resend");
     const resend = new Resend(resendApiKey);
 
-    // Send emails (track status explicitly)
-    let emailSent = false;
-    let confirmationSent = false;
-
-    try {
-      await resend.emails.send({
-        from: "Symphony Smart Homes <notifications@symphonysh.com>",
-        to: ["info@symphonysh.com"],
-        subject: "New Contact Form Submission",
-        html: `
-          <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #eee; border-radius: 10px;">
-            <h1 style="color: #333; text-align: center;">New Contact Form Submission</h1>
-            <div style="background-color: #f8f9fa; padding: 15px; border-radius: 5px; margin-bottom: 20px;">
-              <h2 style="margin-top: 0; color: #0056b3;">${name}</h2>
-              <p style="margin: 5px 0;"><strong>Email:</strong> ${email}</p>
-            </div>
-            <div style="margin-bottom: 20px;">
-              <h3>Message:</h3>
-              <p style="background-color: #f8f9fa; padding: 10px; border-radius: 5px;">${message}</p>
-            </div>
-            <div style="text-align: center; margin-top: 30px; color: #666; font-size: 12px;">
-              <p>This is an automated notification from Symphony Smart Homes.</p>
-            </div>
+    // Send email to business
+    console.log("Sending email to business");
+    const emailResponse = await resend.emails.send({
+      from: "Symphony Smart Homes <notifications@symphonysh.com>",
+      to: ["info@symphonysh.com"],
+      subject: "New Contact Form Submission",
+      html: `
+        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #eee; border-radius: 10px;">
+          <h1 style="color: #333; text-align: center;">New Contact Form Submission</h1>
+          <div style="background-color: #f8f9fa; padding: 15px; border-radius: 5px; margin-bottom: 20px;">
+            <h2 style="margin-top: 0; color: #0056b3;">${name}</h2>
+            <p style="margin: 5px 0;"><strong>Email:</strong> ${email}</p>
           </div>
-        `,
-      });
-      emailSent = true;
-    } catch (e) {
-      console.error("Failed to send business email:", e);
-    }
-
-    try {
-      await resend.emails.send({
-        from: "Symphony Smart Homes <notifications@symphonysh.com>",
-        to: [email],
-        subject: "Thank you for contacting Symphony Smart Homes",
-        html: `
-          <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #eee; border-radius: 10px;">
-            <h1 style="color: #333; text-align: center;">We've Received Your Message</h1>
-            <p style="font-size: 16px; line-height: 1.5;">Dear ${name},</p>
-            <p style="font-size: 16px; line-height: 1.5;">Thank you for contacting Symphony Smart Homes. We have received your message and our team will review it shortly.</p>
-            <p style="font-size: 16px; line-height: 1.5;">We aim to respond to all inquiries within 1-2 business days.</p>
-            <p style="font-size: 16px; line-height: 1.5;">Best regards,<br>Symphony Smart Homes Team</p>
-            <div style="text-align: center; margin-top: 30px; color: #666; font-size: 12px;">
-              <p>This is an automated confirmation. Please do not reply to this email.</p>
-            </div>
+          <div style="margin-bottom: 20px;">
+            <h3>Message:</h3>
+            <p style="background-color: #f8f9fa; padding: 10px; border-radius: 5px;">${message}</p>
           </div>
-        `,
-      });
-      confirmationSent = true;
-    } catch (e) {
-      console.error("Failed to send customer confirmation:", e);
-    }
+          <div style="text-align: center; margin-top: 30px; color: #666; font-size: 12px;">
+            <p>This is an automated notification from Symphony Smart Homes.</p>
+          </div>
+        </div>
+      `,
+    });
 
-    // best-effort update status
-    if (submissionId) {
-      await supabase
-        .from("contact_submissions")
-        .update({ email_sent: emailSent && confirmationSent })
-        .eq("id", submissionId);
-    }
+    console.log("Email sent:", emailResponse);
 
-    if (!emailSent && !confirmationSent) {
-      return new Response(JSON.stringify({ error: "Email delivery failed" }), {
-        status: 502,
-        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
-      });
-    }
+    // Send confirmation email to customer
+    console.log("Sending confirmation email to customer");
+    const customerResponse = await resend.emails.send({
+      from: "Symphony Smart Homes <notifications@symphonysh.com>",
+      to: [email],
+      subject: "Thank you for contacting Symphony Smart Homes",
+      html: `
+        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #eee; border-radius: 10px;">
+          <h1 style="color: #333; text-align: center;">We've Received Your Message</h1>
+          <p style="font-size: 16px; line-height: 1.5;">Dear ${name},</p>
+          <p style="font-size: 16px; line-height: 1.5;">Thank you for contacting Symphony Smart Homes. We have received your message and our team will review it shortly.</p>
+          <p style="font-size: 16px; line-height: 1.5;">We aim to respond to all inquiries within 1-2 business days.</p>
+          <p style="font-size: 16px; line-height: 1.5;">Best regards,<br>Symphony Smart Homes Team</p>
+          <div style="text-align: center; margin-top: 30px; color: #666; font-size: 12px;">
+            <p>This is an automated confirmation. Please do not reply to this email.</p>
+          </div>
+        </div>
+      `,
+    });
 
-    return new Response(
-      JSON.stringify({ success: true, id: submissionId, emailSent, confirmationSent }),
-      { headers: { ...corsHeaders, 'Content-Type': 'application/json' } },
-    );
+    console.log("Confirmation email sent:", customerResponse);
+
+    console.log("Function completed successfully");
+    return new Response(JSON.stringify({ 
+      success: true, 
+      id: submissionId,
+      emailSent: !!emailResponse.id,
+      confirmationSent: !!customerResponse.id 
+    }), {
+      headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+    });
   } catch (error) {
     console.error('Error in send-contact-email function:', error);
     return new Response(

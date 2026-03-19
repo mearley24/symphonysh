@@ -28,11 +28,11 @@ const Header = () => {
           {/* Centered phone button */}
           <div className="absolute left-1/2 transform -translate-x-1/2">
             <a 
-              href="tel:+19705193014" 
+              href="tel:+19705193013" 
               className="inline-flex items-center gap-2 bg-accent hover:bg-accent/90 text-white px-3 sm:px-4 py-2 rounded-md transition-colors text-sm sm:text-base"
             >
               <Phone className="w-4 h-4" />
-              <span className="hidden sm:inline">(970) 519-3014</span>
+              <span className="hidden sm:inline">(970) 519-3013</span>
             </a>
           </div>
 
