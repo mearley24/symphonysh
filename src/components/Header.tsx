@@ -124,9 +124,9 @@ const Header = () => {
             </Link>
             <a
               href="tel:+19705193013"
-              className="inline-flex items-center gap-2 text-white/50 hover:text-white/80 text-sm transition-colors"
+              className="inline-flex items-center gap-2.5 text-white/50 hover:text-white/80 text-lg transition-colors"
             >
-              <Phone className="w-3.5 h-3.5" />
+              <Phone className="w-5 h-5" />
               (970) 519-3013
             </a>
           </div>
