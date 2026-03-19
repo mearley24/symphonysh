@@ -107,18 +107,19 @@ const Index = () => {
           <div className="absolute top-1/2 right-[15%] -translate-y-1/2 w-[500px] h-[500px] bg-accent/[0.04] rounded-full blur-[120px] animate-[pulse_6s_ease-in-out_infinite]" />
 
           <div className="relative max-w-5xl mx-auto px-4 sm:px-6 pt-16 sm:pt-24 pb-20 sm:pb-32">
-            <div className="max-w-2xl">
-              <p className="animate-fade-in text-accent font-semibold text-sm tracking-widest uppercase mb-4 flex items-center gap-2">
+            <div className="max-w-2xl mx-auto text-center">
+              <p className="animate-fade-in text-accent font-semibold text-sm tracking-widest uppercase mb-4 inline-flex items-center gap-2">
                 <span className="w-8 h-px bg-accent" />
                 Vail Valley Smart Home Integrator
+                <span className="w-8 h-px bg-accent" />
               </p>
               <h1 className="animate-fade-in text-5xl sm:text-6xl lg:text-7xl font-extrabold leading-[0.95] mb-6 text-white [animation-delay:100ms]">
                 We build smart homes that just work.
               </h1>
-              <p className="animate-fade-in text-white/60 text-lg sm:text-xl leading-relaxed mb-10 max-w-lg [animation-delay:200ms]">
+              <p className="animate-fade-in text-white/60 text-lg sm:text-xl leading-relaxed mb-10 max-w-lg mx-auto [animation-delay:200ms]">
                 One team from pre-wire to programming — reliable technology for homeowners and builders across Eagle County.
               </p>
-              <div className="animate-fade-in flex flex-col sm:flex-row gap-3 [animation-delay:300ms]">
+              <div className="animate-fade-in flex flex-col sm:flex-row gap-3 justify-center [animation-delay:300ms]">
                 <Link
                   to="/scheduling"
                   className="group inline-flex items-center justify-center gap-2 bg-accent hover:bg-accent/90 text-white px-7 py-4 rounded-lg font-medium transition-all text-base shadow-lg shadow-accent/20 hover:shadow-accent/30"
@@ -134,16 +135,11 @@ const Index = () => {
                   (970) 519-3013
                 </a>
               </div>
-            </div>
 
-            {/* Floating badge */}
-            <div className="animate-fade-in hidden md:flex absolute bottom-12 right-8 lg:right-12 bg-secondary/90 backdrop-blur-md border border-white/10 rounded-xl p-4 items-center gap-3 shadow-2xl shadow-black/30 [animation-delay:500ms]">
-              <div className="w-10 h-10 rounded-lg bg-accent/10 flex items-center justify-center">
-                <MapPin className="w-5 h-5 text-accent" />
-              </div>
-              <div>
-                <p className="text-white font-semibold text-sm">Eagle County</p>
-                <p className="text-white/40 text-xs">Vail · Beaver Creek · Edwards · Avon</p>
+              {/* Location badge — below CTAs */}
+              <div className="animate-fade-in inline-flex items-center gap-2 mt-8 text-white/40 text-sm [animation-delay:500ms]">
+                <MapPin className="w-3.5 h-3.5 text-accent" />
+                <span>Vail · Beaver Creek · Edwards · Avon · Eagle</span>
               </div>
             </div>
           </div>
