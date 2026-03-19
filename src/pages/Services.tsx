@@ -4,6 +4,8 @@ import { useState } from "react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import SEO from "../components/SEO";
+import PageBackground from "../components/PageBackground";
+import bgServices from "../assets/bg-services.jpg";
 
 const Services = () => {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
