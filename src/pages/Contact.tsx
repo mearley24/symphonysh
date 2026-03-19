@@ -74,11 +74,11 @@ export default function Contact() {
                 Schedule a consultation
               </Link>
               <a
-                href="tel:+19705193013"
+                href="tel:+19705193014"
                 className="inline-flex items-center justify-center gap-2 bg-white/10 hover:bg-white/15 border border-white/10 px-5 py-3 rounded-xl font-medium transition-colors"
               >
                 <Phone className="w-4 h-4" />
-                Call (970) 519-3013
+                Call (970) 519-3014
               </a>
             </div>
           </div>
