@@ -119,8 +119,8 @@ const Index = () => {
             <div className="relative">
               <div className="aspect-[4/3] rounded-2xl overflow-hidden border border-white/10">
                 <img
-                  src="/lovable-uploads/home theater/IMG_0979.JPG"
-                  alt="Home theater installation by Symphony Smart Homes in Vail Valley"
+                  src={heroImage}
+                  alt="Luxury smart home with ambient lighting and mountain views by Symphony Smart Homes"
                   className="w-full h-full object-cover"
                   loading="eager"
                 />
