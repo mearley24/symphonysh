@@ -29,7 +29,7 @@ const Projects = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-primary text-primary-foreground">
+    <PageBackground image={bgProjects}>
       <SEO
         title="Our Work | Smart Home Projects in Vail Valley"
         description="Browse our portfolio of smart home installations: home theaters, TV mounting, and structured wiring across Vail Valley and Eagle County."
