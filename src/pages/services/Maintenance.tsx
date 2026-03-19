@@ -36,7 +36,7 @@ const Maintenance = () => {
 
   return (
     <PageBackground image={bgMaintenance}>
-      <SEO title="Maintenance & Support | Vail Valley" description="Smart home maintenance, troubleshooting, and support. Remote diagnostics and on-site service in Vail Valley." keywords="smart home maintenance, troubleshooting, support, service, Vail Valley" schema={serviceSchema} />
+      <SEO title="Smart Home Repair & Support | Vail Valley" description="Smart home troubleshooting, maintenance, and system support. Remote diagnostics and on-site service in Vail Valley & Eagle County." keywords="smart home repair, system support, troubleshooting, maintenance, Vail Valley" schema={serviceSchema} breadcrumbs={[{ name: "Home", url: "/" }, { name: "Services", url: "/services" }, { name: "Maintenance", url: "/services/maintenance" }]} />
       <Header />
 
       <section className="pt-36 sm:pt-44 pb-16 sm:pb-20 px-4 sm:px-6">

@@ -36,7 +36,7 @@ const AudioEntertainment = () => {
 
   return (
     <PageBackground image={bgAudio}>
-      <SEO title="Audio & Home Theater | Vail Valley" description="Multi-room audio, home theaters, and outdoor speakers. Professional installation in Vail Valley and Eagle County." keywords="home theater, multi-room audio, Sonos, Dolby Atmos, Vail Valley" schema={serviceSchema} />
+      <SEO title="Home Theater & Audio Installation | Vail Valley" description="Custom home theaters, Dolby Atmos, multi-room audio, and outdoor speakers. AV installation in Vail Valley & Eagle County. Call today." keywords="home theater Vail Valley, AV installation Eagle County, multi-room audio, Dolby Atmos" schema={serviceSchema} breadcrumbs={[{ name: "Home", url: "/" }, { name: "Services", url: "/services" }, { name: "Audio & Entertainment", url: "/services/audio-entertainment" }]} />
       <Header />
 
       <section className="pt-36 sm:pt-44 pb-16 sm:pb-20 px-4 sm:px-6">

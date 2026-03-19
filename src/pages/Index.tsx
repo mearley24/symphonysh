@@ -63,18 +63,47 @@ const Index = () => {
   const serviceSchema = {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
+    "@id": "https://symphonysh.com/#business",
     "name": "Symphony Smart Homes",
-    "description": "Professional smart home integration, pre-wire, installation, and maintenance serving Vail Valley and Eagle County, Colorado.",
-    "areaServed": "Vail Valley, Eagle County, Colorado",
-    "telephone": "+1-970-519-3013",
+    "description": "Professional smart home integration, pre-wire, installation, and maintenance serving Vail Valley and Eagle County, Colorado. Certified Control4 dealer.",
     "url": "https://symphonysh.com",
+    "telephone": "+1-970-519-3013",
+    "email": "info@symphonysh.com",
+    "areaServed": [
+      { "@type": "Place", "name": "Vail Valley, Colorado" },
+      { "@type": "Place", "name": "Eagle County, Colorado" },
+      { "@type": "Place", "name": "Vail, Colorado" },
+      { "@type": "Place", "name": "Beaver Creek, Colorado" },
+      { "@type": "Place", "name": "Edwards, Colorado" },
+      { "@type": "Place", "name": "Avon, Colorado" }
+    ],
     "address": {
       "@type": "PostalAddress",
+      "addressLocality": "Eagle County",
       "addressRegion": "CO",
-      "addressLocality": "Eagle County"
+      "addressCountry": "US"
     },
-    "sameAs": [],
-    "serviceType": ["Smart Home Installation", "Pre-Wire", "Home Automation", "Matterport 3D Scanning"]
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": 39.6403,
+      "longitude": -106.3742
+    },
+    "serviceType": [
+      "Smart Home Integration",
+      "Home Automation",
+      "Control4 Installation",
+      "Pre-Wiring & Structured Cabling",
+      "AV Installation",
+      "Home Theater Installation",
+      "Smart Lighting",
+      "Motorized Shades",
+      "Home Networking",
+      "Security Camera Installation",
+      "Matterport 3D Scanning"
+    ],
+    "priceRange": "$$$$",
+    "image": "https://symphonysh.com/og-image.png",
+    "sameAs": []
   };
 
   return (

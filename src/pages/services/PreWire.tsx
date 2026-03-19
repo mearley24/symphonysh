@@ -47,10 +47,11 @@ const serviceSchema = {
 const PreWire = () => (
   <PageBackground image={bgPrewire}>
     <SEO
-      title="Pre-Wire & Structured Wiring | Symphony Smart Homes"
-      description="Professional pre-wire and structured cabling for new builds and renovations in Vail Valley. Clean, organized low-voltage wiring for audio, video, networking, and automation."
-      keywords="pre-wire, structured wiring, low voltage, new construction, Vail Valley, Eagle County, Cat6, speaker wire"
+      title="Pre-Wire & Structured Cabling | Vail Valley"
+      description="Pre-wiring for new construction and retrofits in Eagle County. Cat6, speaker wire, HDMI, and low-voltage cabling done right the first time."
+      keywords="pre-wiring new construction, structured cabling Vail Valley, low voltage wiring Eagle County"
       schema={serviceSchema}
+      breadcrumbs={[{ name: "Home", url: "/" }, { name: "Services", url: "/services" }, { name: "Pre-Wire", url: "/services/prewire" }]}
     />
     <Header />
 

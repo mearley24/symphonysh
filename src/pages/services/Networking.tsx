@@ -36,7 +36,7 @@ const Networking = () => {
 
   return (
     <PageBackground image={bgNetworking}>
-      <SEO title="Home Networking | Vail Valley" description="Enterprise-grade home networking: Wi-Fi, structured cabling, and managed switches for Vail Valley homes." keywords="home networking, wifi, mesh network, structured cabling, Vail Valley" schema={serviceSchema} />
+      <SEO title="Home Networking & Wi-Fi | Vail Valley, CO" description="Enterprise-grade home networking for Vail Valley homes. Structured cabling, managed Wi-Fi, and network racks. Reliable connectivity guaranteed." keywords="home networking Vail Valley, wifi installation Eagle County, structured cabling, network rack" schema={serviceSchema} breadcrumbs={[{ name: "Home", url: "/" }, { name: "Services", url: "/services" }, { name: "Networking", url: "/services/networking" }]} />
       <Header />
 
       <section className="pt-36 sm:pt-44 pb-16 sm:pb-20 px-4 sm:px-6">
