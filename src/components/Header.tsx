@@ -38,12 +38,12 @@ const Header = () => {
   return (
     <>
       <header
-        className="fixed top-0 left-0 right-0 z-50"
+        className="fixed top-0 left-0 right-0 z-50 pointer-events-none"
       >
         <div className="max-w-6xl mx-auto px-4 sm:px-6 pt-5 pb-3">
           {/* Centered logo */}
           <div className="flex justify-center mb-3">
-            <Link to="/" className="shrink-0">
+            <Link to="/" className="shrink-0 pointer-events-auto">
               <img
                 src="/lovable-uploads/1d7a78ef-4d02-453d-aeea-81e50fb784b6.png"
                 alt="Symphony Smart Homes"
