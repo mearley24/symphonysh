@@ -98,7 +98,7 @@ const Index = () => {
               We build smart homes that just work.
               </h1>
               <p className="text-white/60 text-base sm:text-lg leading-relaxed mb-8">
-                We design, install, and maintain reliable smart home technology for homeowners and builders across Eagle County. Pre-wire to programming, one team handles it all.
+                Pre-wire to programming. One team, every detail, no excuses. Serving Vail Valley and Eagle County.
               </p>
               <div className="flex flex-col sm:flex-row gap-3">
                 <Link
