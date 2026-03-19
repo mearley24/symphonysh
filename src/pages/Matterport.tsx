@@ -27,9 +27,10 @@ const Matterport = () => {
   return (
     <PageBackground image={bgMatterport}>
       <SEO
-        title="Matterport 3D Scanning | Vail Valley"
-        description="Professional Matterport 3D virtual tours for real estate, construction documentation, and property records in Vail Valley and Eagle County."
-        keywords="matterport, 3D scanning, virtual tour, real estate photography, Vail Valley"
+        title="Matterport 3D Scanning | Vail Valley, CO"
+        description="Professional Matterport 3D virtual tours for Vail Valley real estate, construction documentation, and pre-construction planning."
+        keywords="Matterport Vail Valley, 3D scanning Eagle County, virtual tour, pre-construction scan"
+        breadcrumbs={[{ name: "Home", url: "/" }, { name: "Matterport", url: "/matterport" }]}
       />
       <Header />
 

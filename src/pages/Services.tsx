@@ -84,10 +84,11 @@ const Services = () => {
   return (
     <PageBackground image={bgServices}>
       <SEO
-        title="Smart Home Services | Vail Valley"
-        description="Complete smart home services: automation, audio, security, lighting, networking, and more. Serving Vail Valley and Eagle County, Colorado."
-        keywords="smart home services, home automation, audio, security, lighting, networking, Vail Valley"
+        title="Smart Home Services | Vail Valley, CO"
+        description="Full-service smart home integration: automation, audio, lighting, security, networking, and more. Serving Vail Valley & Eagle County."
+        keywords="smart home services Vail Valley, home automation Eagle County, AV installation, Control4 dealer"
         schema={serviceSchema}
+        breadcrumbs={[{ name: "Home", url: "/" }, { name: "Services", url: "/services" }]}
       />
       <Header />
 

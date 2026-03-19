@@ -93,10 +93,11 @@ const Walkthrough = () => {
   return (
     <PageBackground image={bgWalkthrough}>
       <SEO
-        title="Structured Wiring & Pre-Wire | Vail Valley"
-        description="Future-proof your home with professional structured wiring. Pre-wire packages for new builds and renovations in Vail Valley & Eagle County."
-        keywords="structured wiring, pre-wire, low voltage wiring, Vail Valley, Eagle County, smart home wiring, Cat6"
+        title="Site Walkthrough & Pre-Wire Consultation"
+        description="Schedule a site walkthrough for your new build or renovation. Pre-wire consultation for smart home wiring in Vail Valley & Eagle County."
+        keywords="site walkthrough, pre-wire consultation, new construction wiring, Vail Valley, Eagle County"
         schema={schema}
+        breadcrumbs={[{ name: "Home", url: "/" }, { name: "Walkthrough", url: "/walkthrough" }]}
       />
 
       <Header />
