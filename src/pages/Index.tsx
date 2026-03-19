@@ -14,7 +14,7 @@ const Index = () => {
       icon: Cable,
       title: "Pre-Wire & Structured Wiring",
       description: "Future-proof your new build or renovation with clean, organized low-voltage wiring for audio, video, networking, and automation.",
-      link: "/walkthrough",
+      link: "/services/prewire",
     },
     {
       icon: Monitor,
