@@ -79,7 +79,7 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-primary text-primary-foreground">
       <SEO
-        title="Symphony Smart Homes | Smart Home Integration in Vail Valley"
+        title="Smart Home Integration in Vail Valley"
         description="Professional smart home pre-wire, installation, and maintenance in Vail Valley & Eagle County. Trusted local integrators for new builds and existing homes."
         keywords="smart home installation, pre-wire, home automation, Vail Valley, Eagle County, Control4, TV mounting, home theater"
         schema={serviceSchema}
