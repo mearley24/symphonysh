@@ -79,14 +79,22 @@ const Index = () => {
     ],
     "address": {
       "@type": "PostalAddress",
-      "addressLocality": "Eagle County",
+      "streetAddress": "45 Aspen Glen Ct",
+      "addressLocality": "Edwards",
       "addressRegion": "CO",
+      "postalCode": "81632",
       "addressCountry": "US"
     },
     "geo": {
       "@type": "GeoCoordinates",
       "latitude": 39.6403,
       "longitude": -106.3742
+    },
+    "openingHoursSpecification": {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+      "opens": "08:00",
+      "closes": "17:00"
     },
     "serviceType": [
       "Smart Home Integration",
