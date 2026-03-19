@@ -39,7 +39,7 @@ const ClimateControl = () => {
       <SEO title="Climate Control | Vail Valley" description="Smart thermostat and HVAC integration for Vail Valley homes. Zoned control, scheduling, and energy monitoring." keywords="smart thermostat, climate control, HVAC, zoned heating, Vail Valley" schema={serviceSchema} />
       <Header />
 
-      <section className="pt-24 sm:pt-32 pb-16 sm:pb-20 px-4 sm:px-6">
+      <section className="pt-36 sm:pt-44 pb-16 sm:pb-20 px-4 sm:px-6">
         <div className="max-w-4xl mx-auto">
           <Link to="/services" className="inline-flex items-center gap-1.5 text-white/40 hover:text-white/70 text-sm mb-8 transition-colors"><ArrowLeft className="w-3.5 h-3.5" /> All Services</Link>
           <div className="flex items-center gap-3 mb-4">
