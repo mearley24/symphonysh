@@ -15,16 +15,18 @@ const Privacy = () => {
         keywords="privacy policy, data protection, symphony smart homes, privacy"
       />
       <Header />
-      <section className="pt-32 pb-20 px-6">
-        <div className="max-w-4xl mx-auto">
-          <h1 className="text-4xl md:text-5xl font-bold text-white text-center mb-4">Privacy Policy</h1>
-          <p className="text-xl text-gray-300 text-center mb-16">
-            Last updated: {new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
+      <section className="pt-48 md:pt-56 pb-20 px-6">
+        <div className="max-w-4xl mx-auto text-center mb-16">
+          <h1 className="text-4xl md:text-6xl font-bold uppercase tracking-tight text-white mb-4">Privacy Policy</h1>
+          <p className="text-lg text-gray-400">
+            Last updated: June 1, 2024
           </p>
-          
-          <div className="bg-white/5 backdrop-blur-sm p-8 rounded-lg mb-12 text-gray-300 space-y-6">
+        </div>
+
+        <div className="max-w-4xl mx-auto space-y-6">
+          <div className="bg-black/20 backdrop-blur-sm p-8 rounded-lg text-gray-300 space-y-8">
             <section>
-              <h2 className="text-2xl font-semibold text-white mb-4">1. Introduction</h2>
+              <h2 className="text-xl font-semibold text-white mb-3">1. Introduction</h2>
               <p>
                 Symphony Smart Homes ("we," "our," or "us") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website and use our services.
               </p>
@@ -32,9 +34,9 @@ const Privacy = () => {
                 We use your data to provide and improve our services. By using our services, you agree to the collection and use of information in accordance with this policy.
               </p>
             </section>
-            
+
             <section>
-              <h2 className="text-2xl font-semibold text-white mb-4">2. Information We Collect</h2>
+              <h2 className="text-xl font-semibold text-white mb-3">2. Information We Collect</h2>
               <p>
                 <strong className="text-white">Personal Information:</strong> Name, email address, phone number, and address when you schedule appointments or contact us.
               </p>
@@ -45,9 +47,9 @@ const Privacy = () => {
                 <strong className="text-white">Device Information:</strong> We may collect information about your device, including IP address, browser type, and operating system.
               </p>
             </section>
-            
+
             <section>
-              <h2 className="text-2xl font-semibold text-white mb-4">3. How We Use Your Information</h2>
+              <h2 className="text-xl font-semibold text-white mb-3">3. How We Use Your Information</h2>
               <ul className="list-disc pl-6 space-y-2">
                 <li>To provide and maintain our services</li>
                 <li>To schedule and manage appointments</li>
@@ -58,9 +60,9 @@ const Privacy = () => {
                 <li>To detect, prevent, and address technical issues</li>
               </ul>
             </section>
-            
+
             <section>
-              <h2 className="text-2xl font-semibold text-white mb-4">4. Google Calendar Integration</h2>
+              <h2 className="text-xl font-semibold text-white mb-3">4. Google Calendar Integration</h2>
               <p>
                 Our service integrates with Google Calendar to check for availability and schedule appointments. We request limited access to your Google Calendar data for the sole purpose of scheduling and managing appointments.
               </p>
@@ -71,16 +73,16 @@ const Privacy = () => {
                 You can revoke our access to your Google Calendar at any time through your Google Account settings.
               </p>
             </section>
-            
+
             <section>
-              <h2 className="text-2xl font-semibold text-white mb-4">5. Data Security</h2>
+              <h2 className="text-xl font-semibold text-white mb-3">5. Data Security</h2>
               <p>
                 The security of your data is important to us, but no method of transmission over the Internet or electronic storage is 100% secure. While we strive to use commercially acceptable means to protect your personal information, we cannot guarantee its absolute security.
               </p>
             </section>
-            
+
             <section>
-              <h2 className="text-2xl font-semibold text-white mb-4">6. Third-Party Services</h2>
+              <h2 className="text-xl font-semibold text-white mb-3">6. Third-Party Services</h2>
               <p>
                 We may employ third-party companies and individuals to facilitate our service, provide the service on our behalf, perform service-related services, or assist us in analyzing how our service is used.
               </p>
@@ -88,24 +90,22 @@ const Privacy = () => {
                 These third parties have access to your personal information only to perform these tasks on our behalf and are obligated not to disclose or use it for any other purpose.
               </p>
             </section>
-            
+
             <section>
-              <h2 className="text-2xl font-semibold text-white mb-4">7. Your Data Protection Rights</h2>
-              <p>
-                You have the following data protection rights:
-              </p>
+              <h2 className="text-xl font-semibold text-white mb-3">7. Your Data Protection Rights</h2>
+              <p>You have the following data protection rights:</p>
               <ul className="list-disc pl-6 space-y-2 mt-2">
                 <li>The right to access, update, or delete the information we have on you</li>
-                <li>The right of rectification - the right to have your information corrected if it is inaccurate or incomplete</li>
+                <li>The right of rectification — the right to have your information corrected if it is inaccurate or incomplete</li>
                 <li>The right to object to our processing of your personal data</li>
-                <li>The right to restriction - the right to request that we restrict the processing of your personal information</li>
-                <li>The right to data portability - the right to receive a copy of your personal data in a structured, machine-readable format</li>
+                <li>The right to restriction — the right to request that we restrict the processing of your personal information</li>
+                <li>The right to data portability — the right to receive a copy of your personal data in a structured, machine-readable format</li>
                 <li>The right to withdraw consent at any time where we relied on your consent to process your personal information</li>
               </ul>
             </section>
-            
+
             <section>
-              <h2 className="text-2xl font-semibold text-white mb-4">8. Changes to This Privacy Policy</h2>
+              <h2 className="text-xl font-semibold text-white mb-3">8. Changes to This Privacy Policy</h2>
               <p>
                 We may update our Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page and updating the "Last updated" date at the top of this page.
               </p>
@@ -113,12 +113,10 @@ const Privacy = () => {
                 You are advised to review this Privacy Policy periodically for any changes. Changes to this Privacy Policy are effective when they are posted on this page.
               </p>
             </section>
-            
+
             <section>
-              <h2 className="text-2xl font-semibold text-white mb-4">9. Contact Us</h2>
-              <p>
-                If you have any questions about this Privacy Policy, please contact us:
-              </p>
+              <h2 className="text-xl font-semibold text-white mb-3">9. Contact Us</h2>
+              <p>If you have any questions about this Privacy Policy, please contact us:</p>
               <ul className="list-disc pl-6 space-y-2 mt-2">
                 <li>By email: info@symphonysh.com</li>
                 <li>By phone: (970) 519-3013</li>
