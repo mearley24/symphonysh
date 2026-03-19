@@ -17,7 +17,7 @@ const About = () => {
   };
 
   return (
-    <div className="min-h-screen bg-primary text-primary-foreground">
+    <PageBackground image={bgAbout}>
       <SEO
         title="About Symphony Smart Homes | Vail Valley"
         description="Local smart home integrators serving Vail Valley and Eagle County. We design, install, and maintain reliable smart home technology."
