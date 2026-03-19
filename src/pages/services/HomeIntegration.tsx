@@ -90,7 +90,7 @@ export default function HomeIntegration() {
             </div>
           </summary>
           <div className="mt-6">
-            <Control4Demo />
+            <Control4Demo activeTab="lighting" />
           </div>
         </details>
       </div>
