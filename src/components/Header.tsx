@@ -56,7 +56,7 @@ const Header = () => {
           <div className="flex justify-center">
             <button
               onClick={() => setMenuOpen(!menuOpen)}
-              className="inline-flex items-center gap-2 text-white/40 hover:text-white text-sm tracking-widest uppercase transition-colors"
+              className="pointer-events-auto inline-flex items-center gap-2 text-white/40 hover:text-white text-sm tracking-widest uppercase transition-colors"
               aria-label="Toggle menu"
             >
               {menuOpen ? <X className="w-5 h-5" /> : <MenuIcon className="w-5 h-5" />}
