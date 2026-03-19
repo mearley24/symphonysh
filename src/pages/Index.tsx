@@ -89,47 +89,61 @@ const Index = () => {
       <Header />
 
       {/* Hero */}
-      <section className="relative pt-24 sm:pt-32 pb-16 sm:pb-24 px-4 sm:px-6">
-        <div className="max-w-5xl mx-auto">
-          <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
-            <div>
-              <p className="text-accent font-medium text-sm tracking-wide uppercase mb-3">Design. Install. Maintain.</p>
-              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight mb-5 text-white">
+      <section className="relative pt-16 sm:pt-20 overflow-hidden">
+        {/* Full-bleed background image */}
+        <div className="absolute inset-0">
+          <img
+            src={heroImage}
+            alt=""
+            aria-hidden="true"
+            className="w-full h-full object-cover"
+            loading="eager"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-primary via-primary/95 to-primary/60" />
+          <div className="absolute inset-0 bg-gradient-to-t from-primary via-transparent to-primary/80" />
+        </div>
+
+        {/* Subtle animated glow */}
+        <div className="absolute top-1/2 right-[15%] -translate-y-1/2 w-[500px] h-[500px] bg-accent/[0.04] rounded-full blur-[120px] animate-[pulse_6s_ease-in-out_infinite]" />
+
+        <div className="relative max-w-5xl mx-auto px-4 sm:px-6 pt-16 sm:pt-24 pb-20 sm:pb-32">
+          <div className="max-w-2xl">
+            <p className="animate-fade-in text-accent font-semibold text-sm tracking-widest uppercase mb-4 flex items-center gap-2">
+              <span className="w-8 h-px bg-accent" />
+              Design. Install. Maintain.
+            </p>
+            <h1 className="animate-fade-in text-4xl sm:text-5xl lg:text-6xl font-bold leading-[1.1] mb-6 text-white [animation-delay:100ms]">
               We build smart homes that just work.
-              </h1>
-              <p className="text-white/60 text-base sm:text-lg leading-relaxed mb-8">
-                Pre-wire to programming. One team, every detail, no excuses. Serving Vail Valley and Eagle County.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-3">
-                <Link
-                  to="/walkthrough"
-                  className="inline-flex items-center justify-center gap-2 bg-accent hover:bg-accent/90 text-white px-6 py-3.5 rounded-lg font-medium transition-colors text-base"
-                >
-                  Schedule a Walkthrough
-                  <ArrowRight className="w-4 h-4" />
-                </Link>
-                <a
-                  href="tel:+19705193013"
-                  className="inline-flex items-center justify-center gap-2 border border-white/20 hover:border-white/40 hover:bg-white/5 text-white px-6 py-3.5 rounded-lg font-medium transition-colors text-base"
-                >
-                  <Phone className="w-4 h-4" />
-                  Call Now
-                </a>
-              </div>
+            </h1>
+            <p className="animate-fade-in text-white/60 text-lg sm:text-xl leading-relaxed mb-10 max-w-lg [animation-delay:200ms]">
+              Pre-wire to programming. One team, every detail, no excuses. Serving Vail Valley and Eagle County.
+            </p>
+            <div className="animate-fade-in flex flex-col sm:flex-row gap-3 [animation-delay:300ms]">
+              <Link
+                to="/scheduling"
+                className="group inline-flex items-center justify-center gap-2 bg-accent hover:bg-accent/90 text-white px-7 py-4 rounded-lg font-medium transition-all text-base shadow-lg shadow-accent/20 hover:shadow-accent/30"
+              >
+                Schedule a Walkthrough
+                <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5" />
+              </Link>
+              <a
+                href="tel:+19705193013"
+                className="inline-flex items-center justify-center gap-2 border border-white/20 hover:border-white/40 hover:bg-white/5 text-white px-7 py-4 rounded-lg font-medium transition-all text-base backdrop-blur-sm"
+              >
+                <Phone className="w-4 h-4" />
+                (970) 519-3013
+              </a>
             </div>
-            <div className="relative">
-              <div className="aspect-[4/3] rounded-2xl overflow-hidden border border-white/10">
-                <img
-                  src={heroImage}
-                  alt="Luxury smart home with ambient lighting and mountain views by Symphony Smart Homes"
-                  className="w-full h-full object-cover"
-                  loading="eager"
-                />
-              </div>
-              <div className="absolute -bottom-4 -left-4 bg-secondary border border-white/10 rounded-xl p-3 hidden sm:block">
-                <p className="text-accent text-sm font-semibold">Serving Eagle County</p>
-                <p className="text-white/50 text-xs">Vail · Beaver Creek · Edwards · Avon</p>
-              </div>
+          </div>
+
+          {/* Floating badge */}
+          <div className="animate-fade-in hidden md:flex absolute bottom-12 right-8 lg:right-12 bg-secondary/90 backdrop-blur-md border border-white/10 rounded-xl p-4 items-center gap-3 shadow-2xl shadow-black/30 [animation-delay:500ms]">
+            <div className="w-10 h-10 rounded-lg bg-accent/10 flex items-center justify-center">
+              <MapPin className="w-5 h-5 text-accent" />
+            </div>
+            <div>
+              <p className="text-white font-semibold text-sm">Eagle County</p>
+              <p className="text-white/40 text-xs">Vail · Beaver Creek · Edwards · Avon</p>
             </div>
           </div>
         </div>
