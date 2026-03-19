@@ -31,35 +31,39 @@ const Header = () => {
   return (
     <>
       <header className="fixed top-0 left-0 right-0 z-50">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 py-4">
-          <div className="flex items-center justify-between">
-            {/* Logo */}
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 pt-5 pb-3">
+          {/* Centered logo */}
+          <div className="flex justify-center mb-3">
             <Link to="/" className="shrink-0">
               <img
                 src="/lovable-uploads/1d7a78ef-4d02-453d-aeea-81e50fb784b6.png"
                 alt="Symphony Smart Homes"
-                className="h-9 w-auto"
+                className="h-12 sm:h-14 w-auto"
               />
             </Link>
+          </div>
 
-            {/* Right side — phone + hamburger only */}
-            <div className="flex items-center gap-1">
-              <a
-                href="tel:+19705193013"
-                className="hidden sm:inline-flex items-center justify-center w-10 h-10 rounded-full text-white/50 hover:text-white hover:bg-white/[0.08] transition-colors"
-                aria-label="Call us"
-              >
-                <Phone className="w-4 h-4" />
-              </a>
+          {/* Call + menu row */}
+          <div className="flex items-center justify-center gap-3">
+            <a
+              href="tel:+19705193013"
+              className="inline-flex items-center gap-1.5 text-white/50 hover:text-white text-xs tracking-wide uppercase transition-colors"
+              aria-label="Call us"
+            >
+              <Phone className="w-3.5 h-3.5" />
+              <span className="hidden sm:inline">(970) 519-3013</span>
+            </a>
 
-              <button
-                onClick={() => setMenuOpen(!menuOpen)}
-                className="inline-flex items-center justify-center w-10 h-10 rounded-full text-white/60 hover:text-white hover:bg-white/[0.08] transition-colors"
-                aria-label="Toggle menu"
-              >
-                {menuOpen ? <X className="w-5 h-5" /> : <MenuIcon className="w-5 h-5" />}
-              </button>
-            </div>
+            <span className="w-px h-4 bg-white/15" />
+
+            <button
+              onClick={() => setMenuOpen(!menuOpen)}
+              className="inline-flex items-center gap-1.5 text-white/50 hover:text-white text-xs tracking-wide uppercase transition-colors"
+              aria-label="Toggle menu"
+            >
+              {menuOpen ? <X className="w-4 h-4" /> : <MenuIcon className="w-4 h-4" />}
+              <span>Menu</span>
+            </button>
           </div>
         </div>
       </header>
@@ -70,20 +74,20 @@ const Header = () => {
           menuOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
         }`}
       >
-        <div className="absolute inset-0 bg-primary/95 backdrop-blur-xl" onClick={() => setMenuOpen(false)} />
+        <div className="absolute inset-0 bg-primary/98 backdrop-blur-2xl" onClick={() => setMenuOpen(false)} />
         
         <nav className="relative z-10 flex flex-col items-center justify-center min-h-screen px-6 py-20">
           {/* Main nav links */}
-          <div className="space-y-1 text-center mb-8">
+          <div className="space-y-2 text-center mb-10">
             {navLinks.map((link) => (
               <Link
                 key={link.path}
                 to={link.path}
                 onClick={() => setMenuOpen(false)}
-                className={`block text-3xl sm:text-4xl font-semibold py-2 transition-colors ${
+                className={`block text-4xl sm:text-5xl font-bold py-2 transition-colors ${
                   isActive(link.path)
                     ? "text-white"
-                    : "text-white/30 hover:text-white"
+                    : "text-white/50 hover:text-white"
                 }`}
               >
                 {link.label}
@@ -92,7 +96,7 @@ const Header = () => {
           </div>
 
           {/* Service sub-links */}
-          <div className="flex flex-wrap justify-center gap-x-4 gap-y-1 max-w-md mb-12">
+          <div className="flex flex-wrap justify-center gap-x-5 gap-y-2 max-w-lg mb-14">
             {serviceLinks.map((s) => (
               <Link
                 key={s.path}
@@ -101,7 +105,7 @@ const Header = () => {
                 className={`text-sm transition-colors ${
                   isActive(s.path)
                     ? "text-accent"
-                    : "text-white/25 hover:text-white/60"
+                    : "text-white/40 hover:text-white/70"
                 }`}
               >
                 {s.label}
@@ -114,13 +118,13 @@ const Header = () => {
             <Link
               to="/scheduling"
               onClick={() => setMenuOpen(false)}
-              className="inline-flex items-center justify-center bg-accent hover:bg-accent/90 text-white text-base font-medium px-8 py-3 rounded-lg transition-colors"
+              className="inline-flex items-center justify-center bg-accent hover:bg-accent/90 text-white text-base font-medium px-8 py-3.5 rounded-lg transition-colors"
             >
               Book Consultation
             </Link>
             <a
               href="tel:+19705193013"
-              className="inline-flex items-center gap-2 text-white/40 hover:text-white/70 text-sm transition-colors"
+              className="inline-flex items-center gap-2 text-white/50 hover:text-white/80 text-sm transition-colors"
             >
               <Phone className="w-3.5 h-3.5" />
               (970) 519-3013
