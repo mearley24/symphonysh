@@ -42,32 +42,20 @@ const Header = () => {
           scrolled ? "bg-primary/90 backdrop-blur-xl border-b border-white/[0.06]" : ""
         }`}
       >
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 pt-5 pb-4">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 pt-5 pb-3">
           {/* Centered logo */}
-          <div className="flex justify-center mb-2">
+          <div className="flex justify-center mb-3">
             <Link to="/" className="shrink-0">
               <img
                 src="/lovable-uploads/1d7a78ef-4d02-453d-aeea-81e50fb784b6.png"
                 alt="Symphony Smart Homes"
-                className="h-14 sm:h-16 w-auto"
+                className="h-16 sm:h-20 w-auto"
               />
             </Link>
           </div>
 
-          {/* Call */}
-          <div className="flex justify-center mb-2">
-            <a
-              href="tel:+19705193013"
-              className="inline-flex items-center gap-2 text-white/50 hover:text-white text-sm tracking-wide transition-colors"
-              aria-label="Call us"
-            >
-              <Phone className="w-4 h-4" />
-              <span>(970) 519-3013</span>
-            </a>
-          </div>
-
           {/* Menu */}
-          <div className="flex justify-center mt-1">
+          <div className="flex justify-center">
             <button
               onClick={() => setMenuOpen(!menuOpen)}
               className="inline-flex items-center gap-2 text-white/40 hover:text-white text-sm tracking-widest uppercase transition-colors"
@@ -136,9 +124,9 @@ const Header = () => {
             </Link>
             <a
               href="tel:+19705193013"
-              className="inline-flex items-center gap-2 text-white/50 hover:text-white/80 text-sm transition-colors"
+              className="inline-flex items-center gap-2.5 text-white/50 hover:text-white/80 text-lg transition-colors"
             >
-              <Phone className="w-3.5 h-3.5" />
+              <Phone className="w-5 h-5" />
               (970) 519-3013
             </a>
           </div>
