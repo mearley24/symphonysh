@@ -8,6 +8,7 @@ interface SEOProps {
   canonicalUrl?: string;
   ogImage?: string;
   ogType?: 'website' | 'article';
+  schema?: Record<string, unknown>;
 }
 
 const SEO = ({
