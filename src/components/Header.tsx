@@ -49,7 +49,7 @@ const Header = () => {
               <img
                 src="/lovable-uploads/1d7a78ef-4d02-453d-aeea-81e50fb784b6.png"
                 alt="Symphony Smart Homes"
-                className="h-16 sm:h-20 w-auto"
+                className="h-32 sm:h-40 w-auto"
               />
             </Link>
           </div>
