@@ -95,7 +95,7 @@ const Index = () => {
             <div>
               <p className="text-accent font-medium text-sm tracking-wide uppercase mb-3">Vail Valley's Smart Home Integrator</p>
               <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight mb-5 text-white">
-                Smart home systems that actually work — and keep working.
+              We build smart homes that just work.
               </h1>
               <p className="text-white/60 text-base sm:text-lg leading-relaxed mb-8">
                 We design, install, and maintain reliable smart home technology for homeowners and builders across Eagle County. Pre-wire to programming, one team handles it all.
