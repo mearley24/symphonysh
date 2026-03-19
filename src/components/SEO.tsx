@@ -17,7 +17,8 @@ const SEO = ({
   keywords,
   canonicalUrl,
   ogImage = '/og-image.png',
-  ogType = 'website'
+  ogType = 'website',
+  schema
 }: SEOProps) => {
   const siteName = 'Symphony Smart Homes';
   const fullTitle = `${title} | ${siteName}`;
