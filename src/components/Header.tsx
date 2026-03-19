@@ -38,7 +38,9 @@ const Header = () => {
   return (
     <>
       <header
-        className="fixed top-0 left-0 right-0 z-50 pointer-events-none transition-all duration-500"
+        className={`fixed top-0 left-0 right-0 pointer-events-none transition-all duration-500 ${
+          scrolled ? 'z-0' : 'z-50'
+        }`}
       >
         <div className={`max-w-6xl mx-auto px-4 sm:px-6 transition-all duration-500 ${
           scrolled ? 'pt-2 pb-1' : 'pt-5 pb-3'
