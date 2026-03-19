@@ -42,9 +42,10 @@ const Header = () => {
           scrolled ? "bg-primary/90 backdrop-blur-xl border-b border-white/[0.06]" : ""
         }`}
       >
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 pt-5 pb-3">
-          {/* Centered logo */}
-          <div className="flex justify-center mb-3">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 pt-5 pb-2">
+          {/* Call button top-right */}
+          <div className="flex items-center justify-between mb-3">
+            <div className="w-10" />
             <Link to="/" className="shrink-0">
               <img
                 src="/lovable-uploads/1d7a78ef-4d02-453d-aeea-81e50fb784b6.png"
@@ -52,24 +53,20 @@ const Header = () => {
                 className="h-12 sm:h-14 w-auto"
               />
             </Link>
-          </div>
-
-          {/* Call + menu row */}
-          <div className="flex items-center justify-center gap-3">
             <a
               href="tel:+19705193013"
-              className="inline-flex items-center gap-1.5 text-white/50 hover:text-white text-xs tracking-wide uppercase transition-colors"
+              className="inline-flex items-center justify-center w-10 h-10 rounded-full text-white/50 hover:text-white hover:bg-white/[0.08] transition-colors"
               aria-label="Call us"
             >
-              <Phone className="w-3.5 h-3.5" />
-              <span className="hidden sm:inline">(970) 519-3013</span>
+              <Phone className="w-4 h-4" />
             </a>
+          </div>
 
-            <span className="w-px h-4 bg-white/15" />
-
+          {/* Menu button */}
+          <div className="flex justify-center">
             <button
               onClick={() => setMenuOpen(!menuOpen)}
-              className="inline-flex items-center gap-1.5 text-white/50 hover:text-white text-xs tracking-wide uppercase transition-colors"
+              className="inline-flex items-center gap-1.5 text-white/40 hover:text-white text-xs tracking-widest uppercase transition-colors"
               aria-label="Toggle menu"
             >
               {menuOpen ? <X className="w-4 h-4" /> : <MenuIcon className="w-4 h-4" />}

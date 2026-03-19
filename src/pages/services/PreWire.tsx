@@ -150,7 +150,7 @@ const PreWire = () => (
     </section>
 
     <Footer />
-  </div>
+  </PageBackground>
 );
 
 export default PreWire;
