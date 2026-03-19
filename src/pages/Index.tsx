@@ -9,14 +9,6 @@ import SEO from "../components/SEO";
 
 const Index = () => {
   const location = useLocation();
-  const [activeTab, setActiveTab] = useState("home");
-
-  const categoryTabs = [
-    { id: "home", label: "Home", icon: Home },
-    { id: "services", label: "Services", icon: Grid3X3 },
-    { id: "projects", label: "Projects", icon: Tv },
-    { id: "contact", label: "Contact", icon: Phone },
-  ];
 
   const allServices = [
     { icon: Home, title: "Automation", link: "/services/home-integration", gradient: "from-blue-600 to-purple-700", desc: "Control4 integration" },
@@ -37,8 +29,15 @@ const Index = () => {
     { icon: Settings, label: "Contact", path: "/contact" },
   ];
 
+  const stats = [
+    { value: "500+", label: "Projects" },
+    { value: "15+", label: "Years" },
+    { value: "24/7", label: "Support" },
+    { value: "5★", label: "Rating" },
+  ];
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-950 to-slate-900 text-white overflow-hidden">
+    <div className="h-screen bg-gradient-to-br from-slate-900 via-purple-950 to-slate-900 text-white overflow-hidden flex flex-col">
       <SEO 
         title="Symphony Smart Homes - Premium Home Automation in Vail Valley"
         description="Transform your Vail Valley home with Control4 smart home automation. Expert installation of home theaters, lighting, security, and integrated smart home systems."
@@ -46,234 +45,102 @@ const Index = () => {
       />
       
       {/* Status Bar */}
-      <div className="h-6 bg-black/30 flex items-center justify-between px-6 text-xs text-white/60">
+      <div className="h-6 bg-black/30 flex items-center justify-between px-6 text-xs text-white/60 shrink-0">
         <span>Symphony</span>
         <span>●●●●● LTE</span>
       </div>
 
-      {/* Category Tabs - Centered */}
-      <div className="flex justify-center px-4 py-3 border-b border-white/10">
-        <div className="flex gap-2 bg-white/5 p-1 rounded-xl">
-          {categoryTabs.map((tab) => (
-            <button
-              key={tab.id}
-              onClick={() => setActiveTab(tab.id)}
-              className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all ${
-                activeTab === tab.id
-                  ? "bg-accent text-white"
-                  : "text-white/60 hover:text-white hover:bg-white/10"
-              }`}
-            >
-              <tab.icon className="w-4 h-4" />
-              {tab.label}
-            </button>
-          ))}
-        </div>
-      </div>
-
-      {/* Main Content */}
-      <div className="flex-1 overflow-auto pb-24 px-4 py-4" style={{ maxHeight: 'calc(100vh - 140px)' }}>
+      {/* Main Dashboard Content */}
+      <div className="flex-1 overflow-hidden px-4 py-3 flex flex-col gap-3 pb-20">
         
-        {/* Home Tab */}
-        {activeTab === "home" && (
-          <div className="space-y-4">
-            {/* Hero Card */}
-            <div className="bg-gradient-to-br from-purple-600/40 to-blue-600/40 backdrop-blur-md rounded-2xl border border-white/20 p-6 text-center">
+        {/* Hero Row — Logo + text left, accent image right */}
+        <div className="flex items-center gap-4 bg-gradient-to-r from-purple-600/30 to-blue-600/30 backdrop-blur-md rounded-2xl border border-white/15 p-4 shrink-0">
+          <div className="flex-1 min-w-0">
+            <div className="flex items-center gap-3 mb-2">
               <img 
                 src="/lovable-uploads/1d7a78ef-4d02-453d-aeea-81e50fb784b6.png" 
                 alt="Symphony Smart Homes" 
-                className="h-12 w-auto mx-auto mb-3"
+                className="h-10 w-auto"
               />
-              <h1 className="text-xl font-bold text-white mb-1">Symphony Smart Homes</h1>
-              <p className="text-white/70 text-sm mb-1">Premium Control4 Automation</p>
-              <div className="flex items-center justify-center gap-1 text-white/50 text-xs mb-4">
-                <MapPin className="w-3 h-3" />
-                <span>Vail Valley, Colorado</span>
-              </div>
-              <div className="flex gap-3 justify-center">
-                <Link 
-                  to="/services/home-integration"
-                  className="inline-flex items-center gap-2 px-4 py-2 bg-white/20 hover:bg-white/30 rounded-xl text-sm font-medium transition-colors"
-                >
-                  <Play className="w-4 h-4" /> Live Demo
-                </Link>
-                <Link 
-                  to="/scheduling"
-                  className="inline-flex items-center gap-2 px-4 py-2 bg-accent hover:bg-accent/90 rounded-xl text-sm font-medium transition-colors"
-                >
-                  Schedule <ArrowRight className="w-4 h-4" />
-                </Link>
+              <div>
+                <h1 className="text-lg font-bold text-white leading-tight">Symphony Smart Homes</h1>
+                <p className="text-white/60 text-xs">Premium Control4 Automation</p>
               </div>
             </div>
-
-            {/* Quick Services - 2x2 */}
-            <div className="grid grid-cols-2 gap-3">
-              {allServices.slice(0, 4).map((service, index) => (
-                <Link key={index} to={service.link}>
-                  <div className={`bg-gradient-to-br ${service.gradient} rounded-2xl p-4 transition-all duration-300 hover:scale-[1.02]`}>
-                    <div className="w-10 h-10 bg-white/20 rounded-xl flex items-center justify-center mb-2">
-                      <service.icon className="w-5 h-5 text-white" />
-                    </div>
-                    <h3 className="text-white font-semibold text-sm">{service.title}</h3>
-                    <p className="text-white/70 text-xs">{service.desc}</p>
-                  </div>
-                </Link>
-              ))}
+            <div className="flex items-center gap-1 text-white/50 text-xs mb-3">
+              <MapPin className="w-3 h-3" />
+              <span>Vail Valley, Colorado</span>
             </div>
-
-            {/* Stats Row */}
-            <div className="grid grid-cols-4 gap-3">
-              {[
-                { value: "500+", label: "Projects" },
-                { value: "15+", label: "Years" },
-                { value: "24/7", label: "Support" },
-                { value: "5★", label: "Rating" },
-              ].map((stat) => (
-                <div key={stat.label} className="bg-white/10 backdrop-blur-md rounded-2xl border border-white/20 p-3 text-center">
-                  <div className="text-lg font-bold text-white">{stat.value}</div>
-                  <div className="text-[10px] text-white/60">{stat.label}</div>
-                </div>
-              ))}
-            </div>
-
-            {/* Featured Project */}
-            <Link to="/projects">
-              <div className="bg-white/10 backdrop-blur-md rounded-2xl border border-white/20 overflow-hidden">
-                <div className="aspect-video bg-gradient-to-br from-slate-800 to-slate-900 relative">
-                  <img 
-                    src="/lovable-uploads/home theater/IMG_0979.JPG" 
-                    alt="Featured Project" 
-                    className="w-full h-full object-cover opacity-80"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
-                  <div className="absolute bottom-0 left-0 right-0 p-4">
-                    <span className="text-accent text-xs font-medium">Featured Project</span>
-                    <h3 className="text-white font-semibold">Home Theater Installation</h3>
-                    <p className="text-white/60 text-xs">View all projects →</p>
-                  </div>
-                </div>
-              </div>
-            </Link>
-          </div>
-        )}
-
-        {/* Services Tab - All Services */}
-        {activeTab === "services" && (
-          <div className="space-y-4">
-            <div className="text-center mb-2">
-              <h2 className="text-lg font-bold text-white">Our Services</h2>
-              <p className="text-white/60 text-xs">Complete smart home solutions</p>
-            </div>
-            
-            <div className="grid grid-cols-2 gap-3">
-              {allServices.map((service, index) => (
-                <Link key={index} to={service.link}>
-                  <div className="bg-white/10 backdrop-blur-md rounded-2xl border border-white/20 p-4 transition-all duration-300 hover:bg-white/15 hover:scale-[1.02] group">
-                    <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${service.gradient} flex items-center justify-center mb-3`}>
-                      <service.icon className="w-6 h-6 text-white" />
-                    </div>
-                    <h3 className="text-white font-semibold text-sm">{service.title}</h3>
-                    <p className="text-white/60 text-xs">{service.desc}</p>
-                  </div>
-                </Link>
-              ))}
-            </div>
-
-            {/* View All Link */}
-            <Link to="/services">
-              <div className="bg-accent/20 backdrop-blur-md rounded-2xl border border-accent/30 p-4 text-center hover:bg-accent/30 transition-colors">
-                <span className="text-white text-sm font-medium">View All Services</span>
-                <ArrowRight className="w-4 h-4 inline ml-2" />
-              </div>
-            </Link>
-          </div>
-        )}
-
-        {/* Projects Tab */}
-        {activeTab === "projects" && (
-          <div className="space-y-4">
-            <div className="text-center mb-2">
-              <h2 className="text-lg font-bold text-white">Our Work</h2>
-              <p className="text-white/60 text-xs">Recent installations</p>
-            </div>
-            
-            <div className="grid grid-cols-2 gap-3">
-              {[
-                { title: "Home Theater", img: "/lovable-uploads/home theater/IMG_0979.JPG" },
-                { title: "TV Mounting", img: "/lovable-uploads/mounted tvs/Home/IMG_0659.JPG" },
-                { title: "Wiring", img: "/lovable-uploads/wiring/IMG_1138.JPG" },
-                { title: "Media Room", img: "/lovable-uploads/home theater/IMG_0980.JPG" },
-              ].map((project, index) => (
-                <Link key={index} to="/projects">
-                  <div className="bg-white/10 backdrop-blur-md rounded-2xl border border-white/20 overflow-hidden hover:scale-[1.02] transition-all">
-                    <div className="aspect-square relative">
-                      <img src={project.img} alt={project.title} className="w-full h-full object-cover" />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
-                      <div className="absolute bottom-2 left-2">
-                        <span className="text-white text-sm font-medium">{project.title}</span>
-                      </div>
-                    </div>
-                  </div>
-                </Link>
-              ))}
-            </div>
-
-            <Link to="/projects">
-              <div className="bg-white/10 backdrop-blur-md rounded-2xl border border-white/20 p-4 text-center hover:bg-white/15 transition-colors">
-                <span className="text-white text-sm font-medium">View Full Portfolio</span>
-                <ArrowRight className="w-4 h-4 inline ml-2" />
-              </div>
-            </Link>
-          </div>
-        )}
-
-        {/* Contact Tab */}
-        {activeTab === "contact" && (
-          <div className="space-y-4">
-            <div className="text-center mb-2">
-              <h2 className="text-lg font-bold text-white">Get In Touch</h2>
-              <p className="text-white/60 text-xs">We're here to help</p>
-            </div>
-
-            <div className="bg-white/10 backdrop-blur-md rounded-2xl border border-white/20 p-6 text-center">
-              <div className="w-16 h-16 bg-accent/20 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Phone className="w-8 h-8 text-accent" />
-              </div>
-              <h3 className="text-white font-semibold mb-2">Call Us</h3>
-              <p className="text-white/60 text-sm mb-4">Speak directly with our team</p>
-              <a href="tel:+19705193013" className="inline-block px-6 py-3 bg-accent hover:bg-accent/90 rounded-xl text-white font-medium transition-colors">
-                (970) 519-3013
-              </a>
-            </div>
-
-            <div className="grid grid-cols-2 gap-3">
-              <Link to="/contact">
-                <div className="bg-white/10 backdrop-blur-md rounded-2xl border border-white/20 p-4 text-center hover:bg-white/15 transition-colors h-full">
-                  <Settings className="w-6 h-6 text-white/80 mx-auto mb-2" />
-                  <span className="text-white text-sm font-medium">Contact Form</span>
-                  <p className="text-white/50 text-xs mt-1">Send a message</p>
-                </div>
+            <div className="flex gap-2">
+              <Link 
+                to="/services/home-integration"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white/15 hover:bg-white/25 rounded-lg text-xs font-medium transition-colors"
+              >
+                <Play className="w-3 h-3" /> Live Demo
               </Link>
-              <Link to="/scheduling">
-                <div className="bg-accent/20 backdrop-blur-md rounded-2xl border border-accent/30 p-4 text-center hover:bg-accent/30 transition-colors h-full">
-                  <Calendar className="w-6 h-6 text-accent mx-auto mb-2" />
-                  <span className="text-white text-sm font-medium">Schedule</span>
-                  <p className="text-white/50 text-xs mt-1">Free consultation</p>
-                </div>
+              <Link 
+                to="/scheduling"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-accent hover:bg-accent/90 rounded-lg text-xs font-medium transition-colors"
+              >
+                Schedule <ArrowRight className="w-3 h-3" />
               </Link>
             </div>
-
-            <div className="bg-white/5 rounded-2xl p-4">
-              <div className="flex items-center gap-3 mb-3">
-                <MapPin className="w-5 h-5 text-accent" />
-                <span className="text-white text-sm">Serving Vail Valley, Colorado</span>
-              </div>
-              <p className="text-white/50 text-xs">
-                Eagle, Vail, Avon, Beaver Creek, Edwards, and surrounding areas
-              </p>
-            </div>
           </div>
-        )}
+          {/* Small accent image */}
+          <div className="w-28 h-28 rounded-xl overflow-hidden shrink-0 border border-white/10">
+            <img 
+              src="/lovable-uploads/home theater/IMG_0979.JPG" 
+              alt="Home Theater Installation" 
+              className="w-full h-full object-cover"
+            />
+          </div>
+        </div>
+
+        {/* Stats Row */}
+        <div className="grid grid-cols-4 gap-2 shrink-0">
+          {stats.map((stat) => (
+            <div key={stat.label} className="bg-white/8 backdrop-blur-md rounded-xl border border-white/10 p-2 text-center">
+              <div className="text-base font-bold text-white">{stat.value}</div>
+              <div className="text-[10px] text-white/50">{stat.label}</div>
+            </div>
+          ))}
+        </div>
+
+        {/* Services Grid — 4x2 */}
+        <div className="flex-1 grid grid-cols-4 grid-rows-2 gap-2 min-h-0">
+          {allServices.map((service, index) => (
+            <Link key={index} to={service.link} className="min-h-0">
+              <div className={`bg-gradient-to-br ${service.gradient} rounded-xl p-3 h-full flex flex-col justify-between transition-all duration-200 hover:scale-[1.02] hover:shadow-lg`}>
+                <div className="w-9 h-9 bg-white/20 rounded-lg flex items-center justify-center mb-1.5">
+                  <service.icon className="w-4.5 h-4.5 text-white" />
+                </div>
+                <div>
+                  <h3 className="text-white font-semibold text-sm leading-tight">{service.title}</h3>
+                  <p className="text-white/70 text-[10px] leading-tight mt-0.5">{service.desc}</p>
+                </div>
+              </div>
+            </Link>
+          ))}
+        </div>
+
+        {/* Bottom Actions Row */}
+        <div className="grid grid-cols-3 gap-2 shrink-0">
+          <a href="tel:+19705193013" className="bg-white/8 backdrop-blur-md rounded-xl border border-white/10 p-3 text-center hover:bg-white/12 transition-colors">
+            <Phone className="w-5 h-5 text-green-400 mx-auto mb-1" />
+            <span className="text-white text-xs font-medium block">(970) 519-3013</span>
+            <span className="text-white/40 text-[10px]">Call Now</span>
+          </a>
+          <Link to="/scheduling" className="bg-accent/20 backdrop-blur-md rounded-xl border border-accent/30 p-3 text-center hover:bg-accent/30 transition-colors">
+            <Calendar className="w-5 h-5 text-accent mx-auto mb-1" />
+            <span className="text-white text-xs font-medium block">Schedule</span>
+            <span className="text-white/40 text-[10px]">Free Consult</span>
+          </Link>
+          <Link to="/projects" className="bg-white/8 backdrop-blur-md rounded-xl border border-white/10 p-3 text-center hover:bg-white/12 transition-colors">
+            <Tv className="w-5 h-5 text-purple-400 mx-auto mb-1" />
+            <span className="text-white text-xs font-medium block">Portfolio</span>
+            <span className="text-white/40 text-[10px]">View Work</span>
+          </Link>
+        </div>
       </div>
 
       {/* Bottom Navigation Dock */}
