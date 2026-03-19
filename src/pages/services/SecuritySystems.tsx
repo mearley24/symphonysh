@@ -36,7 +36,7 @@ const SecuritySystems = () => {
 
   return (
     <PageBackground image={bgSecurity}>
-      <SEO title="Security Systems | Vail Valley" description="Smart security cameras, locks, and monitoring for Vail Valley homes. Professional installation integrated with home automation." keywords="security cameras, smart locks, home security, alarm monitoring, Vail Valley" schema={serviceSchema} />
+      <SEO title="Smart Security & Cameras | Vail Valley, CO" description="Smart security cameras, locks, and monitoring for Vail Valley homes. Professionally installed and integrated with home automation." keywords="security cameras Vail Valley, smart locks Eagle County, home security installation" schema={serviceSchema} breadcrumbs={[{ name: "Home", url: "/" }, { name: "Services", url: "/services" }, { name: "Security", url: "/services/security-systems" }]} />
       <Header />
 
       <section className="pt-36 sm:pt-44 pb-16 sm:pb-20 px-4 sm:px-6">

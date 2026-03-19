@@ -36,7 +36,7 @@ const Shades = () => {
 
   return (
     <PageBackground image={bgShades}>
-      <SEO title="Motorized Shades | Vail Valley" description="Automated motorized shades and window treatments for Vail Valley homes. Lutron, QMotion, and more." keywords="motorized shades, automated blinds, window treatments, Lutron shades, Vail Valley" schema={serviceSchema} />
+      <SEO title="Motorized Shades & Blinds | Vail Valley, CO" description="Automated motorized shades for Vail Valley homes. Lutron, QMotion, and Hunter Douglas. Integrated with Control4 home automation." keywords="motorized shades Vail Valley, automated blinds Eagle County, Lutron shades, window treatments" schema={serviceSchema} breadcrumbs={[{ name: "Home", url: "/" }, { name: "Services", url: "/services" }, { name: "Shades", url: "/services/shades" }]} />
       <Header />
 
       <section className="pt-36 sm:pt-44 pb-16 sm:pb-20 px-4 sm:px-6">

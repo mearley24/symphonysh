@@ -36,7 +36,7 @@ const ClimateControl = () => {
 
   return (
     <PageBackground image={bgClimate}>
-      <SEO title="Climate Control | Vail Valley" description="Smart thermostat and HVAC integration for Vail Valley homes. Zoned control, scheduling, and energy monitoring." keywords="smart thermostat, climate control, HVAC, zoned heating, Vail Valley" schema={serviceSchema} />
+      <SEO title="Smart Climate Control | Vail Valley, CO" description="Smart thermostat and HVAC integration for Vail Valley mountain homes. Zoned heating, cooling schedules, and energy monitoring." keywords="smart thermostat Vail Valley, climate control Eagle County, HVAC integration, zoned heating" schema={serviceSchema} breadcrumbs={[{ name: "Home", url: "/" }, { name: "Services", url: "/services" }, { name: "Climate Control", url: "/services/climate-control" }]} />
       <Header />
 
       <section className="pt-36 sm:pt-44 pb-16 sm:pb-20 px-4 sm:px-6">

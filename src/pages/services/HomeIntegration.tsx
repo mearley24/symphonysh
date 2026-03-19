@@ -38,7 +38,7 @@ const HomeIntegration = () => {
 
   return (
     <PageBackground image={bgHomeIntegration}>
-      <SEO title="Home Automation & Control4 | Vail Valley" description="Professional Control4 home automation: lighting, climate, audio, security, and shades unified in one system. Serving Vail Valley." keywords="Control4, home automation, smart home integration, Vail Valley" schema={serviceSchema} />
+      <SEO title="Control4 Home Automation Installer | Vail Valley" description="Certified Control4 dealer in Eagle County. Whole-home automation — lighting, audio, climate, security, and shades. Book a consultation." keywords="Control4 installer Eagle County, home automation Vail Valley, smart home integrator" schema={serviceSchema} breadcrumbs={[{ name: "Home", url: "/" }, { name: "Services", url: "/services" }, { name: "Home Automation", url: "/services/home-integration" }]} />
       <Header />
 
       <section className="pt-36 sm:pt-44 pb-16 sm:pb-20 px-4 sm:px-6">
