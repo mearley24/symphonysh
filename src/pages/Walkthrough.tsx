@@ -127,7 +127,7 @@ const Walkthrough = () => {
 
           <div className="flex flex-col sm:flex-row gap-3">
             <Link
-              to="/scheduling"
+              to="/scheduling?service=walkthrough"
               className="inline-flex items-center justify-center gap-2 bg-accent hover:bg-accent/90 text-white px-6 py-3.5 rounded-lg font-medium transition-colors text-base"
             >
               Schedule a Walkthrough
@@ -159,31 +159,36 @@ const Walkthrough = () => {
               {
                 title: "Data & Networking",
                 desc: "Cat6/Cat6A Ethernet to every room, outdoor access points, and centralized switching for seamless wired and wireless coverage.",
+                link: "/networking",
               },
               {
                 title: "Audio & Video",
                 desc: "Speaker wire for in-wall and in-ceiling speakers, HDMI conduit for TV locations, and pre-wire for whole-home AV distribution.",
+                link: "/services/audio-entertainment",
               },
               {
                 title: "Security & Cameras",
                 desc: "Dedicated PoE runs for IP cameras, doorbell cameras, and sensor wiring for alarm and access control systems.",
+                link: "/services/security-systems",
               },
               {
                 title: "Automation & Control",
                 desc: "Low-voltage wiring for motorized shades, lighting keypads, control panels, and smart thermostats — all routed cleanly to a central hub.",
+                link: "/services/home-integration",
               },
             ].map((item, i) => (
-              <div
+              <Link
                 key={i}
-                className="bg-secondary/80 border border-white/8 rounded-xl p-6"
+                to={item.link}
+                className="bg-secondary/80 border border-white/8 rounded-xl p-6 hover:border-white/20 hover:bg-secondary transition-colors group"
               >
-                <h3 className="text-white font-semibold text-lg mb-2">
+                <h3 className="text-white font-semibold text-lg mb-2 group-hover:text-accent transition-colors">
                   {item.title}
                 </h3>
                 <p className="text-white/50 text-sm leading-relaxed">
                   {item.desc}
                 </p>
-              </div>
+              </Link>
             ))}
           </div>
         </div>
@@ -345,7 +350,7 @@ const Walkthrough = () => {
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <Link
-              to="/scheduling"
+              to="/scheduling?service=walkthrough"
               className="inline-flex items-center justify-center gap-2 bg-accent hover:bg-accent/90 text-white px-8 py-4 rounded-lg font-medium transition-colors text-base"
             >
               Schedule a Walkthrough
