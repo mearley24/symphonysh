@@ -7,6 +7,9 @@ import { homeTheaterCategories, getFixedImagePath } from '../../utils/photos';
 import GalleryControlButtons from '../../components/photos/GalleryControlButtons';
 import SEO from '../../components/SEO';
 
+import PageBackground from "../../components/PageBackground";
+import bgProjects from "../../assets/bg-projects.jpg";
+
 const HomeTheater = () => {
   const [loadedImages, setLoadedImages] = useState<Record<string, boolean>>({});
   const [isEditMode, setIsEditMode] = useState(false);
@@ -81,7 +84,7 @@ const HomeTheater = () => {
   };
 
   return (
-    <div className="min-h-screen bg-primary">
+    <PageBackground image={bgProjects}>
       <SEO 
         title="Custom Home Theater Installations in Vail Valley"
         description="Browse our portfolio of custom home theater installations. We design and install premium home cinema systems throughout Vail Valley, Colorado."
@@ -111,9 +114,9 @@ const HomeTheater = () => {
               <Link 
                 key={index}
                 to={category.path}
-                className="bg-secondary/50 rounded-lg overflow-hidden group hover:bg-secondary/80 transition-all duration-300 relative"
+                className="bg-secondary/50 rounded-lg overflow-hidden group hover:bg-black/40 backdrop-blur-sm transition-all duration-300 relative"
               >
-                <div className="aspect-video overflow-hidden bg-secondary/30 relative">
+                <div className="aspect-video overflow-hidden bg-black/20 backdrop-blur-sm relative">
                   {loadedImages[category.image] === false ? (
                     <div className="w-full h-full flex flex-col items-center justify-center text-gray-400 p-4">
                       <ImageOff className="w-12 h-12 mb-2" />
@@ -138,7 +141,7 @@ const HomeTheater = () => {
           </div>
         </div>
       </section>
-    </div>
+    </PageBackground>
   );
 };
 

@@ -9,6 +9,9 @@ import { toast } from 'sonner';
 import GalleryControlButtons from '../../components/photos/GalleryControlButtons';
 import EditablePhotoGallery, { GalleryType } from '../../components/photos/EditablePhotoGallery';
 
+import PageBackground from "../../components/PageBackground";
+import bgPrewire from "../../assets/bg-prewire.jpg";
+
 const Wiring = () => {
   const [selectedGallery, setSelectedGallery] = useState<GalleryType>('general');
   const [loadedImages, setLoadedImages] = useState<Record<string, boolean>>({});
@@ -96,7 +99,7 @@ const Wiring = () => {
   };
 
   return (
-    <div className="min-h-screen bg-primary">
+    <PageBackground image={bgPrewire}>
       <Header />
       <section className="pt-32 pb-20 px-6">
         <div className="max-w-6xl mx-auto">
@@ -153,7 +156,7 @@ const Wiring = () => {
           />
         </div>
       </section>
-    </div>
+    </PageBackground>
   );
 };
 

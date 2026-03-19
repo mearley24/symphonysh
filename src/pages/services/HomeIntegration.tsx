@@ -5,6 +5,9 @@ import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import SEO from "../../components/SEO";
 
+import PageBackground from "../../components/PageBackground";
+import bgHomeIntegration from "../../assets/bg-home-integration.jpg";
+
 const HomeIntegration = () => {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
 
@@ -34,7 +37,7 @@ const HomeIntegration = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-primary text-primary-foreground">
+    <PageBackground image={bgHomeIntegration}>
       <SEO title="Home Automation & Control4 | Vail Valley" description="Professional Control4 home automation: lighting, climate, audio, security, and shades unified in one system. Serving Vail Valley." keywords="Control4, home automation, smart home integration, Vail Valley" schema={serviceSchema} />
       <Header />
 
@@ -54,13 +57,13 @@ const HomeIntegration = () => {
         </div>
       </section>
 
-      <section className="py-16 sm:py-24 px-4 sm:px-6 bg-secondary/30 border-y border-white/5">
+      <section className="py-16 sm:py-24 px-4 sm:px-6 bg-black/20 backdrop-blur-sm border-y border-white/5">
         <div className="max-w-4xl mx-auto">
           <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">Capabilities</p>
           <h2 className="text-2xl sm:text-3xl font-bold text-white mb-10">What you can control</h2>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {capabilities.map((item, i) => (
-              <div key={i} className="bg-secondary/80 border border-white/8 rounded-xl p-5">
+              <div key={i} className="bg-black/40 backdrop-blur-sm border border-white/8 rounded-xl p-5">
                 <div className="w-10 h-10 rounded-lg bg-accent/10 flex items-center justify-center mb-3"><item.icon className="w-5 h-5 text-accent" /></div>
                 <h3 className="text-white font-semibold mb-1">{item.title}</h3>
                 <p className="text-white/50 text-sm leading-relaxed">{item.description}</p>
@@ -90,7 +93,7 @@ const HomeIntegration = () => {
         </div>
       </section>
 
-      <section className="py-16 sm:py-24 px-4 sm:px-6 bg-secondary/30 border-y border-white/5">
+      <section className="py-16 sm:py-24 px-4 sm:px-6 bg-black/20 backdrop-blur-sm border-y border-white/5">
         <div className="max-w-3xl mx-auto">
           <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">FAQ</p>
           <h2 className="text-2xl sm:text-3xl font-bold text-white mb-10">Automation Questions</h2>
@@ -120,7 +123,7 @@ const HomeIntegration = () => {
       </section>
 
       <Footer />
-    </div>
+    </PageBackground>
   );
 };
 

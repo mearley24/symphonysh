@@ -3,9 +3,12 @@ import Header from "../components/Header";
 import SEO from "../components/SEO";
 import Footer from "../components/Footer";
 
+import PageBackground from "../components/PageBackground";
+import bgAbout from "../assets/bg-about.jpg";
+
 const Privacy = () => {
   return (
-    <div className="min-h-screen bg-primary">
+    <PageBackground image={bgAbout}>
       <SEO 
         title="Privacy Policy" 
         description="Privacy Policy for Symphony Smart Homes - Learn how we collect, use, and protect your information."
@@ -127,7 +130,7 @@ const Privacy = () => {
       </section>
 
       <Footer />
-    </div>
+    </PageBackground>
   );
 };
 

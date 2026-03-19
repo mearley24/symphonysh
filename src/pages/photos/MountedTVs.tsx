@@ -6,6 +6,9 @@ import { ArrowLeft, ImageOff } from 'lucide-react';
 import { mountedTVsCategories, getFixedImagePath } from '../../utils/photoUtils';
 import GalleryControlButtons from '../../components/photos/GalleryControlButtons';
 
+import PageBackground from "../../components/PageBackground";
+import bgProjects from "../../assets/bg-projects.jpg";
+
 const MountedTVs = () => {
   const [loadedImages, setLoadedImages] = useState<Record<string, boolean>>({});
   const [isEditMode, setIsEditMode] = useState(false);
@@ -81,7 +84,7 @@ const MountedTVs = () => {
   };
 
   return (
-    <div className="min-h-screen bg-primary">
+    <PageBackground image={bgProjects}>
       <Header />
       <section className="pt-32 pb-20 px-6">
         <div className="max-w-6xl mx-auto">
@@ -106,9 +109,9 @@ const MountedTVs = () => {
               <Link 
                 key={index}
                 to={category.path}
-                className="bg-secondary/50 rounded-lg overflow-hidden group hover:bg-secondary/80 transition-all duration-300 relative"
+                className="bg-secondary/50 rounded-lg overflow-hidden group hover:bg-black/40 backdrop-blur-sm transition-all duration-300 relative"
               >
-                <div className="aspect-video overflow-hidden bg-secondary/30 relative">
+                <div className="aspect-video overflow-hidden bg-black/20 backdrop-blur-sm relative">
                   {loadedImages[category.image] === false ? (
                     <div className="w-full h-full flex flex-col items-center justify-center text-gray-400 p-4">
                       <ImageOff className="w-12 h-12 mb-2" />
@@ -133,7 +136,7 @@ const MountedTVs = () => {
           </div>
         </div>
       </section>
-    </div>
+    </PageBackground>
   );
 };
 

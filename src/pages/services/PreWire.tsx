@@ -4,6 +4,9 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import SEO from "@/components/SEO";
 
+import PageBackground from "@/components/PageBackground";
+import bgPrewire from "../../assets/bg-prewire.jpg";
+
 const capabilities = [
   { title: "New Construction Pre-Wire", desc: "Structured cabling installed during the rough-in phase — speaker wire, Cat6, coax, HDMI, and control wiring planned around your floor plan." },
   { title: "Retrofit & Renovation", desc: "Adding smart home wiring to an existing home. We route cables through walls, attics, and crawl spaces with minimal disruption." },
@@ -42,7 +45,7 @@ const serviceSchema = {
 };
 
 const PreWire = () => (
-  <div className="min-h-screen bg-primary text-primary-foreground">
+  <PageBackground image={bgPrewire}>
     <SEO
       title="Pre-Wire & Structured Wiring | Symphony Smart Homes"
       description="Professional pre-wire and structured cabling for new builds and renovations in Vail Valley. Clean, organized low-voltage wiring for audio, video, networking, and automation."
@@ -82,7 +85,7 @@ const PreWire = () => (
         <h2 className="text-2xl sm:text-3xl font-bold text-white mb-10">Wiring Done Right the First Time</h2>
         <div className="grid sm:grid-cols-2 gap-4">
           {capabilities.map((c, i) => (
-            <div key={i} className="bg-secondary/80 border border-white/[0.08] rounded-xl p-6">
+            <div key={i} className="bg-black/40 backdrop-blur-sm border border-white/[0.08] rounded-xl p-6">
               <h3 className="text-white font-semibold text-lg mb-2">{c.title}</h3>
               <p className="text-white/50 text-sm leading-relaxed">{c.desc}</p>
             </div>
@@ -92,7 +95,7 @@ const PreWire = () => (
     </section>
 
     {/* Benefits */}
-    <section className="py-16 bg-secondary/30 border-y border-white/[0.06]">
+    <section className="py-16 bg-black/20 backdrop-blur-sm border-y border-white/[0.06]">
       <div className="max-w-4xl mx-auto px-4 sm:px-6">
         <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">Why It Matters</p>
         <h2 className="text-2xl sm:text-3xl font-bold text-white mb-10">The Foundation of Every Great System</h2>
@@ -114,7 +117,7 @@ const PreWire = () => (
         <h2 className="text-2xl sm:text-3xl font-bold text-white mb-10">Pre-Wire FAQ</h2>
         <div className="space-y-4">
           {faqs.map((faq, i) => (
-            <details key={i} className="group bg-secondary/80 border border-white/[0.08] rounded-xl">
+            <details key={i} className="group bg-black/40 backdrop-blur-sm border border-white/[0.08] rounded-xl">
               <summary className="flex items-center gap-3 cursor-pointer p-5 text-white font-medium text-sm list-none [&::-webkit-details-marker]:hidden">
                 <HelpCircle className="w-4 h-4 text-accent shrink-0" />
                 {faq.q}
