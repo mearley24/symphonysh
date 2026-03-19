@@ -46,6 +46,7 @@ import Networking from "./pages/services/Networking";
 import SecuritySystems from "./pages/services/SecuritySystems";
 import Shades from "./pages/services/Shades";
 import SmartLighting from "./pages/services/SmartLighting";
+import PreWire from "./pages/services/PreWire";
 
 function App() {
   try {
