@@ -96,8 +96,8 @@ export default function Contact() {
                   </div>
                   <div>
                     <div className="font-medium">Phone</div>
-                    <a href="tel:+19705193013" className="text-white/70 hover:text-white">
-                      (970) 519-3013
+                    <a href="tel:+19705193014" className="text-white/70 hover:text-white">
+                      (970) 519-3014
                     </a>
                   </div>
                 </div>
