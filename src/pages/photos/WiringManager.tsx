@@ -5,9 +5,12 @@ import { Link } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
 import PhotoManager from '../../components/photos/PhotoManager';
 
+import PageBackground from "../../components/PageBackground";
+import bgPrewire from "../../assets/bg-prewire.jpg";
+
 const WiringManager = () => {
   return (
-    <div className="min-h-screen bg-primary">
+    <PageBackground image={bgPrewire}>
       <Header />
       <section className="pt-32 pb-20 px-6">
         <div className="max-w-6xl mx-auto">
@@ -19,7 +22,7 @@ const WiringManager = () => {
           <PhotoManager />
         </div>
       </section>
-    </div>
+    </PageBackground>
   );
 };
 

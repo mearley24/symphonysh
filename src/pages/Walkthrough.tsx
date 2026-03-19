@@ -5,6 +5,9 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import SEO from "../components/SEO";
 
+import PageBackground from "../components/PageBackground";
+import bgWalkthrough from "../assets/bg-walkthrough.jpg";
+
 const packages = [
   {
     name: "Essential",
@@ -88,7 +91,7 @@ const Walkthrough = () => {
   };
 
   return (
-    <div className="min-h-screen bg-primary text-primary-foreground">
+    <PageBackground image={bgWalkthrough}>
       <SEO
         title="Structured Wiring & Pre-Wire | Vail Valley"
         description="Future-proof your home with professional structured wiring. Pre-wire packages for new builds and renovations in Vail Valley & Eagle County."
@@ -145,7 +148,7 @@ const Walkthrough = () => {
       </section>
 
       {/* What We Run */}
-      <section className="py-16 sm:py-20 px-4 sm:px-6 bg-secondary/30 border-y border-white/5">
+      <section className="py-16 sm:py-20 px-4 sm:px-6 bg-black/20 backdrop-blur-sm border-y border-white/5">
         <div className="max-w-4xl mx-auto">
           <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">
             What We Install
@@ -180,7 +183,7 @@ const Walkthrough = () => {
               <Link
                 key={i}
                 to={item.link}
-                className="bg-secondary/80 border border-white/8 rounded-xl p-6 hover:border-white/20 hover:bg-secondary transition-colors group"
+                className="bg-black/40 backdrop-blur-sm border border-white/8 rounded-xl p-6 hover:border-white/20 hover:bg-black/50 transition-colors group"
               >
                 <h3 className="text-white font-semibold text-lg mb-2 group-hover:text-accent transition-colors">
                   {item.title}
@@ -214,7 +217,7 @@ const Walkthrough = () => {
                 className={`rounded-xl border p-6 flex flex-col ${
                   pkg.featured
                     ? "border-accent/40 bg-accent/5"
-                    : "border-white/8 bg-secondary/80"
+                    : "border-white/8 bg-black/40 backdrop-blur-sm"
                 }`}
               >
                 {pkg.featured && (
@@ -246,7 +249,7 @@ const Walkthrough = () => {
       </section>
 
       {/* Process */}
-      <section className="py-16 sm:py-20 px-4 sm:px-6 bg-secondary/30 border-y border-white/5">
+      <section className="py-16 sm:py-20 px-4 sm:px-6 bg-black/20 backdrop-blur-sm border-y border-white/5">
         <div className="max-w-4xl mx-auto">
           <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">
             Our Process
@@ -340,7 +343,7 @@ const Walkthrough = () => {
       </section>
 
       {/* Final CTA */}
-      <section className="py-16 sm:py-20 px-4 sm:px-6 bg-secondary/30 border-t border-white/5">
+      <section className="py-16 sm:py-20 px-4 sm:px-6 bg-black/20 backdrop-blur-sm border-t border-white/5">
         <div className="max-w-3xl mx-auto text-center">
           <h2 className="text-2xl sm:text-3xl font-bold text-white mb-4">
             Let's plan your wiring.
@@ -368,7 +371,7 @@ const Walkthrough = () => {
       </section>
 
       <Footer />
-    </div>
+    </PageBackground>
   );
 };
 

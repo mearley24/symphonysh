@@ -5,6 +5,9 @@ import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import SEO from "../../components/SEO";
 
+import PageBackground from "../../components/PageBackground";
+import bgShades from "../../assets/bg-shades.jpg";
+
 const Shades = () => {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
 
@@ -32,7 +35,7 @@ const Shades = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-primary text-primary-foreground">
+    <PageBackground image={bgShades}>
       <SEO title="Motorized Shades | Vail Valley" description="Automated motorized shades and window treatments for Vail Valley homes. Lutron, QMotion, and more." keywords="motorized shades, automated blinds, window treatments, Lutron shades, Vail Valley" schema={serviceSchema} />
       <Header />
 
@@ -52,13 +55,13 @@ const Shades = () => {
         </div>
       </section>
 
-      <section className="py-16 sm:py-24 px-4 sm:px-6 bg-secondary/30 border-y border-white/5">
+      <section className="py-16 sm:py-24 px-4 sm:px-6 bg-black/20 backdrop-blur-sm border-y border-white/5">
         <div className="max-w-4xl mx-auto">
           <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">What We Install</p>
           <h2 className="text-2xl sm:text-3xl font-bold text-white mb-10">Shade solutions</h2>
           <div className="grid sm:grid-cols-2 gap-5">
             {capabilities.map((item, i) => (
-              <div key={i} className="bg-secondary/80 border border-white/8 rounded-xl p-6">
+              <div key={i} className="bg-black/40 backdrop-blur-sm border border-white/8 rounded-xl p-6">
                 <div className="w-10 h-10 rounded-lg bg-accent/10 flex items-center justify-center mb-3"><item.icon className="w-5 h-5 text-accent" /></div>
                 <h3 className="text-white font-semibold text-lg mb-2">{item.title}</h3>
                 <p className="text-white/50 text-sm leading-relaxed">{item.description}</p>
@@ -88,7 +91,7 @@ const Shades = () => {
         </div>
       </section>
 
-      <section className="py-16 sm:py-24 px-4 sm:px-6 bg-secondary/30 border-y border-white/5">
+      <section className="py-16 sm:py-24 px-4 sm:px-6 bg-black/20 backdrop-blur-sm border-y border-white/5">
         <div className="max-w-3xl mx-auto">
           <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">FAQ</p>
           <h2 className="text-2xl sm:text-3xl font-bold text-white mb-10">Shade Questions</h2>
@@ -118,7 +121,7 @@ const Shades = () => {
       </section>
 
       <Footer />
-    </div>
+    </PageBackground>
   );
 };
 

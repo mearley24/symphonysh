@@ -4,9 +4,12 @@ import Header from "../components/Header";
 import SEO from "../components/SEO";
 import Footer from "../components/Footer";
 
+import PageBackground from "../components/PageBackground";
+import bgAbout from "../assets/bg-about.jpg";
+
 const Terms = () => {
   return (
-    <div className="min-h-screen bg-primary">
+    <PageBackground image={bgAbout}>
       <SEO 
         title="Terms of Service" 
         description="Terms of Service for Symphony Smart Homes."
@@ -111,7 +114,7 @@ const Terms = () => {
         </div>
       </section>
       <Footer />
-    </div>
+    </PageBackground>
   );
 };
 

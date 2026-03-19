@@ -4,9 +4,12 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import SEO from "../components/SEO";
 
+import PageBackground from "../components/PageBackground";
+import bgHomeIntegration from "../assets/bg-home-integration.jpg";
+
 const Ava = () => {
   return (
-    <div className="min-h-screen bg-primary text-primary-foreground">
+    <PageBackground image={bgHomeIntegration}>
       <SEO
         title="AVA Smart Remote | Symphony Smart Homes"
         description="Experience the future of home control with AVA Smart Remote — simple, intuitive, and powerful."
@@ -41,10 +44,10 @@ const Ava = () => {
       </section>
 
       {/* Product Image + Features */}
-      <section className="py-16 sm:py-24 px-4 sm:px-6 bg-secondary/30 border-y border-white/5">
+      <section className="py-16 sm:py-24 px-4 sm:px-6 bg-black/20 backdrop-blur-sm border-y border-white/5">
         <div className="max-w-4xl mx-auto">
           <div className="grid md:grid-cols-2 gap-10 items-center">
-            <div className="bg-secondary/80 border border-white/8 rounded-xl p-8">
+            <div className="bg-black/40 backdrop-blur-sm border border-white/8 rounded-xl p-8">
               <img
                 src="/lovable-uploads/cb28d9d7-ffb1-4fee-ad38-79069db78c59.png"
                 alt="AVA Smart Remote"
@@ -95,7 +98,7 @@ const Ava = () => {
       </section>
 
       <Footer />
-    </div>
+    </PageBackground>
   );
 };
 
