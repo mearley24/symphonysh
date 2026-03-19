@@ -3,6 +3,8 @@ import { ArrowRight, Phone, ArrowLeft, CheckCircle2, MapPin } from "lucide-react
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import SEO from "../components/SEO";
+import PageBackground from "../components/PageBackground";
+import bgAbout from "../assets/bg-about.jpg";
 
 const About = () => {
   const serviceSchema = {
@@ -15,7 +17,7 @@ const About = () => {
   };
 
   return (
-    <div className="min-h-screen bg-primary text-primary-foreground">
+    <PageBackground image={bgAbout}>
       <SEO
         title="About Symphony Smart Homes | Vail Valley"
         description="Local smart home integrators serving Vail Valley and Eagle County. We design, install, and maintain reliable smart home technology."
@@ -42,7 +44,7 @@ const About = () => {
       </section>
 
       {/* What We Believe */}
-      <section className="py-16 sm:py-24 px-4 sm:px-6 bg-secondary/30 border-y border-white/5">
+      <section className="py-16 sm:py-24 px-4 sm:px-6 bg-black/20 backdrop-blur-sm border-y border-white/5">
         <div className="max-w-4xl mx-auto">
           <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">How We Work</p>
           <h2 className="text-2xl sm:text-3xl font-bold text-white mb-10">Built on a few simple principles</h2>
@@ -92,7 +94,7 @@ const About = () => {
       </section>
 
       {/* CTA */}
-      <section className="py-16 sm:py-20 px-4 sm:px-6 bg-secondary/30 border-t border-white/5">
+      <section className="py-16 sm:py-20 px-4 sm:px-6 bg-black/20 backdrop-blur-sm border-t border-white/5">
         <div className="max-w-3xl mx-auto text-center">
           <h2 className="text-2xl sm:text-3xl font-bold text-white mb-4">Want to work together?</h2>
           <p className="text-white/50 text-base mb-8 max-w-xl mx-auto">
@@ -110,7 +112,7 @@ const About = () => {
       </section>
 
       <Footer />
-    </div>
+    </PageBackground>
   );
 };
 

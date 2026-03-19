@@ -4,6 +4,8 @@ import { useState } from "react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import SEO from "../components/SEO";
+import PageBackground from "../components/PageBackground";
+import bgMatterport from "../assets/bg-matterport.jpg";
 
 const Matterport = () => {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
@@ -23,7 +25,7 @@ const Matterport = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-primary text-primary-foreground">
+    <PageBackground image={bgMatterport}>
       <SEO
         title="Matterport 3D Scanning | Vail Valley"
         description="Professional Matterport 3D virtual tours for real estate, construction documentation, and property records in Vail Valley and Eagle County."
@@ -64,14 +66,14 @@ const Matterport = () => {
       </section>
 
       {/* Use Cases */}
-      <section className="py-16 sm:py-24 px-4 sm:px-6 bg-secondary/30 border-y border-white/5">
+      <section className="py-16 sm:py-24 px-4 sm:px-6 bg-black/20 backdrop-blur-sm border-y border-white/5">
         <div className="max-w-4xl mx-auto">
           <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">Use Cases</p>
           <h2 className="text-2xl sm:text-3xl font-bold text-white mb-10">Who benefits from 3D scanning</h2>
 
           <div className="grid sm:grid-cols-2 gap-5">
             {useCases.map((item, i) => (
-              <div key={i} className="bg-secondary/80 border border-white/8 rounded-xl p-6">
+              <div key={i} className="bg-black/40 backdrop-blur-sm border border-white/8 rounded-xl p-6">
                 <div className="w-11 h-11 rounded-lg bg-accent/10 flex items-center justify-center mb-4">
                   <item.icon className="w-5 h-5 text-accent" />
                 </div>
@@ -108,7 +110,7 @@ const Matterport = () => {
       </section>
 
       {/* FAQ */}
-      <section className="py-16 sm:py-24 px-4 sm:px-6 bg-secondary/30 border-y border-white/5">
+      <section className="py-16 sm:py-24 px-4 sm:px-6 bg-black/20 backdrop-blur-sm border-y border-white/5">
         <div className="max-w-3xl mx-auto">
           <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">FAQ</p>
           <h2 className="text-2xl sm:text-3xl font-bold text-white mb-10">Questions about Matterport</h2>
@@ -149,7 +151,7 @@ const Matterport = () => {
       </section>
 
       <Footer />
-    </div>
+    </PageBackground>
   );
 };
 

@@ -4,6 +4,8 @@ import { useState } from "react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import SEO from "../components/SEO";
+import PageBackground from "../components/PageBackground";
+import bgServices from "../assets/bg-services.jpg";
 
 const Services = () => {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
@@ -80,7 +82,7 @@ const Services = () => {
   };
 
   return (
-    <div className="min-h-screen bg-primary text-primary-foreground">
+    <PageBackground image={bgServices}>
       <SEO
         title="Smart Home Services | Vail Valley"
         description="Complete smart home services: automation, audio, security, lighting, networking, and more. Serving Vail Valley and Eagle County, Colorado."
@@ -117,7 +119,7 @@ const Services = () => {
       </section>
 
       {/* Services Grid */}
-      <section className="py-16 sm:py-24 px-4 sm:px-6 bg-secondary/30 border-y border-white/5">
+      <section className="py-16 sm:py-24 px-4 sm:px-6 bg-black/20 backdrop-blur-sm border-y border-white/5">
         <div className="max-w-5xl mx-auto">
           <div className="text-center mb-12">
             <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">What We Do</p>
@@ -126,7 +128,7 @@ const Services = () => {
           <div className="grid sm:grid-cols-2 gap-4">
             {services.map((service, i) => (
               <Link key={i} to={service.link} className="group">
-                <div className="bg-secondary/80 border border-white/8 rounded-xl p-6 h-full hover:border-accent/30 hover:bg-secondary transition-all duration-200">
+                <div className="bg-black/40 backdrop-blur-sm border border-white/8 rounded-xl p-6 h-full hover:border-accent/30 hover:bg-black/50 transition-all duration-200">
                   <div className="w-11 h-11 rounded-lg bg-accent/10 flex items-center justify-center mb-4 group-hover:bg-accent/20 transition-colors">
                     <service.icon className="w-5 h-5 text-accent" />
                   </div>
@@ -169,7 +171,7 @@ const Services = () => {
       </section>
 
       {/* FAQ */}
-      <section className="py-16 sm:py-24 px-4 sm:px-6 bg-secondary/30 border-y border-white/5">
+      <section className="py-16 sm:py-24 px-4 sm:px-6 bg-black/20 backdrop-blur-sm border-y border-white/5">
         <div className="max-w-3xl mx-auto">
           <div className="text-center mb-12">
             <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">FAQ</p>
@@ -212,7 +214,7 @@ const Services = () => {
       </section>
 
       <Footer />
-    </div>
+    </PageBackground>
   );
 };
 
