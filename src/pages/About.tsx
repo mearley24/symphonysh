@@ -35,7 +35,7 @@ const About = () => {
 
           <p className="text-accent font-medium text-sm tracking-wide uppercase mb-3">About Us</p>
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight mb-5 text-white">
-            We're a small team that does this one thing well.
+            The Vail Valley's trusted smart home team — from first wire to final walkthrough.
           </h1>
           <p className="text-white/60 text-base sm:text-lg leading-relaxed mb-8 max-w-2xl">
             Symphony Smart Homes is a local smart home integration company based in Eagle County, Colorado. We design, install, and support smart home technology for homeowners and builders across the Vail Valley.
