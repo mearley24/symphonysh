@@ -46,6 +46,7 @@ import Networking from "./pages/services/Networking";
 import SecuritySystems from "./pages/services/SecuritySystems";
 import Shades from "./pages/services/Shades";
 import SmartLighting from "./pages/services/SmartLighting";
+import PreWire from "./pages/services/PreWire";
 
 function App() {
   try {
@@ -101,7 +102,8 @@ function App() {
           <Route path="/networking" element={<Networking />} />
           <Route path="/services/security-systems" element={<SecuritySystems />} />
           <Route path="/services/shades" element={<Shades />} />
-          <Route path="/services/smart-lighting" element={<SmartLighting />} />
+           <Route path="/services/smart-lighting" element={<SmartLighting />} />
+           <Route path="/services/prewire" element={<PreWire />} />
           
           {/* Scheduling routes */}
           <Route path="/scheduling" element={<Scheduling />} />
