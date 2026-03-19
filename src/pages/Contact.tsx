@@ -42,7 +42,7 @@ const Contact = () => {
   };
 
   return (
-    <div className="min-h-screen bg-primary text-primary-foreground">
+    <PageBackground image={bgContact}>
       <SEO
         title="Contact Us | Symphony Smart Homes"
         description="Get in touch with Symphony Smart Homes. Call, email, or send us a message. Serving Vail Valley and Eagle County, Colorado."
