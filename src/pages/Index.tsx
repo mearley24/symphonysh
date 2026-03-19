@@ -78,7 +78,7 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen bg-primary text-primary-foreground">
+    <div className="min-h-screen bg-primary text-primary-foreground relative">
       <SEO
         title="Smart Home Integration in Vail Valley"
         description="Professional smart home pre-wire, installation, and maintenance in Vail Valley & Eagle County. Trusted local integrators for new builds and existing homes."
@@ -86,273 +86,270 @@ const Index = () => {
         schema={serviceSchema}
       />
 
-      <Header />
+      {/* Full-page background image */}
+      <div className="fixed inset-0 z-0">
+        <img
+          src={heroImage}
+          alt=""
+          aria-hidden="true"
+          className="w-full h-full object-cover"
+          loading="eager"
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-primary/80 via-primary/90 to-primary/95" />
+      </div>
 
-      {/* Hero */}
-      <section className="relative pt-16 sm:pt-20 overflow-hidden">
-        {/* Full-bleed background image */}
-        <div className="absolute inset-0">
-          <img
-            src={heroImage}
-            alt=""
-            aria-hidden="true"
-            className="w-full h-full object-cover"
-            loading="eager"
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-primary via-primary/95 to-primary/60" />
-          <div className="absolute inset-0 bg-gradient-to-t from-primary via-transparent to-primary/80" />
-        </div>
+      <div className="relative z-10">
+        <Header />
 
-        {/* Subtle animated glow */}
-        <div className="absolute top-1/2 right-[15%] -translate-y-1/2 w-[500px] h-[500px] bg-accent/[0.04] rounded-full blur-[120px] animate-[pulse_6s_ease-in-out_infinite]" />
+        {/* Hero */}
+        <section className="relative pt-16 sm:pt-20 overflow-hidden">
+          {/* Subtle animated glow */}
+          <div className="absolute top-1/2 right-[15%] -translate-y-1/2 w-[500px] h-[500px] bg-accent/[0.04] rounded-full blur-[120px] animate-[pulse_6s_ease-in-out_infinite]" />
 
-        <div className="relative max-w-5xl mx-auto px-4 sm:px-6 pt-16 sm:pt-24 pb-20 sm:pb-32">
-          <div className="max-w-2xl">
-            <p className="animate-fade-in text-accent font-semibold text-sm tracking-widest uppercase mb-4 flex items-center gap-2">
-              <span className="w-8 h-px bg-accent" />
-              Vail Valley Smart Home Integrator
+          <div className="relative max-w-5xl mx-auto px-4 sm:px-6 pt-16 sm:pt-24 pb-20 sm:pb-32">
+            <div className="max-w-2xl">
+              <p className="animate-fade-in text-accent font-semibold text-sm tracking-widest uppercase mb-4 flex items-center gap-2">
+                <span className="w-8 h-px bg-accent" />
+                Vail Valley Smart Home Integrator
+              </p>
+              <h1 className="animate-fade-in text-5xl sm:text-6xl lg:text-7xl font-extrabold leading-[0.95] mb-6 text-white [animation-delay:100ms]">
+                We build smart homes that just work.
+              </h1>
+              <p className="animate-fade-in text-white/60 text-lg sm:text-xl leading-relaxed mb-10 max-w-lg [animation-delay:200ms]">
+                One team from pre-wire to programming — reliable technology for homeowners and builders across Eagle County.
+              </p>
+              <div className="animate-fade-in flex flex-col sm:flex-row gap-3 [animation-delay:300ms]">
+                <Link
+                  to="/scheduling"
+                  className="group inline-flex items-center justify-center gap-2 bg-accent hover:bg-accent/90 text-white px-7 py-4 rounded-lg font-medium transition-all text-base shadow-lg shadow-accent/20 hover:shadow-accent/30"
+                >
+                  Schedule a Walkthrough
+                  <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5" />
+                </Link>
+                <a
+                  href="tel:+19705193013"
+                  className="inline-flex items-center justify-center gap-2 border border-white/20 hover:border-white/40 hover:bg-white/5 text-white px-7 py-4 rounded-lg font-medium transition-all text-base backdrop-blur-sm"
+                >
+                  <Phone className="w-4 h-4" />
+                  (970) 519-3013
+                </a>
+              </div>
+            </div>
+
+            {/* Floating badge */}
+            <div className="animate-fade-in hidden md:flex absolute bottom-12 right-8 lg:right-12 bg-secondary/90 backdrop-blur-md border border-white/10 rounded-xl p-4 items-center gap-3 shadow-2xl shadow-black/30 [animation-delay:500ms]">
+              <div className="w-10 h-10 rounded-lg bg-accent/10 flex items-center justify-center">
+                <MapPin className="w-5 h-5 text-accent" />
+              </div>
+              <div>
+                <p className="text-white font-semibold text-sm">Eagle County</p>
+                <p className="text-white/40 text-xs">Vail · Beaver Creek · Edwards · Avon</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Trust Strip */}
+        <section className="border-y border-white/10 py-6 sm:py-8 px-4 sm:px-6 bg-black/30 backdrop-blur-sm">
+          <div className="max-w-5xl mx-auto">
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 text-center">
+              <div>
+                <p className="text-white font-semibold text-lg">Local</p>
+                <p className="text-white/50 text-sm">Based in the valley</p>
+              </div>
+              <div>
+                <p className="text-white font-semibold text-lg">Licensed</p>
+                <p className="text-white/50 text-sm">& fully insured</p>
+              </div>
+              <div>
+                <p className="text-white font-semibold text-lg">Full-Service</p>
+                <p className="text-white/50 text-sm">Wire to support</p>
+              </div>
+              <div>
+                <p className="text-white font-semibold text-lg">Responsive</p>
+                <p className="text-white/50 text-sm">We answer the phone</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Services */}
+        <section className="py-16 sm:py-24 px-4 sm:px-6" id="services">
+          <div className="max-w-5xl mx-auto">
+            <div className="text-center mb-12">
+              <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">What We Do</p>
+              <h2 className="text-2xl sm:text-3xl font-bold text-white">Core Services</h2>
+            </div>
+            <div className="grid sm:grid-cols-2 gap-4">
+              {services.map((service, i) => (
+                <Link key={i} to={service.link} className="group">
+                  <div className="bg-black/40 backdrop-blur-sm border border-white/8 rounded-xl p-6 h-full hover:border-accent/30 hover:bg-black/50 transition-all duration-200">
+                    <div className="w-11 h-11 rounded-lg bg-accent/10 flex items-center justify-center mb-4 group-hover:bg-accent/20 transition-colors">
+                      <service.icon className="w-5 h-5 text-accent" />
+                    </div>
+                    <h3 className="text-white font-semibold text-lg mb-2">{service.title}</h3>
+                    <p className="text-white/50 text-sm leading-relaxed">{service.description}</p>
+                    <span className="inline-flex items-center gap-1 text-accent text-sm font-medium mt-4 group-hover:gap-2 transition-all">
+                      Learn more <ArrowRight className="w-3.5 h-3.5" />
+                    </span>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* How It Works */}
+        <section className="py-16 sm:py-24 px-4 sm:px-6 bg-black/20 backdrop-blur-sm border-y border-white/5">
+          <div className="max-w-5xl mx-auto">
+            <div className="text-center mb-12">
+              <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">Our Process</p>
+              <h2 className="text-2xl sm:text-3xl font-bold text-white">How It Works</h2>
+            </div>
+            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+              {steps.map((step, i) => (
+                <div key={i} className="relative">
+                  <span className="text-accent/20 text-5xl font-bold absolute -top-2 -left-1">{step.number}</span>
+                  <div className="pt-10">
+                    <h3 className="text-white font-semibold text-base mb-2">{step.title}</h3>
+                    <p className="text-white/50 text-sm leading-relaxed">{step.description}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Why Symphony */}
+        <section className="py-16 sm:py-24 px-4 sm:px-6">
+          <div className="max-w-5xl mx-auto">
+            <div className="text-center mb-12">
+              <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">Why Us</p>
+              <h2 className="text-2xl sm:text-3xl font-bold text-white">Why Homeowners Choose Symphony</h2>
+            </div>
+            <div className="grid sm:grid-cols-2 gap-5">
+              {differentiators.map((item, i) => (
+                <div key={i} className="flex gap-4 p-5 rounded-xl border border-white/5 hover:border-white/10 transition-colors bg-black/20 backdrop-blur-sm">
+                  <CheckCircle2 className="w-5 h-5 text-accent shrink-0 mt-0.5" />
+                  <div>
+                    <h3 className="text-white font-semibold mb-1">{item.title}</h3>
+                    <p className="text-white/50 text-sm leading-relaxed">{item.description}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* FAQ */}
+        <section className="py-16 sm:py-24 px-4 sm:px-6 bg-black/20 backdrop-blur-sm border-y border-white/5">
+          <div className="max-w-3xl mx-auto">
+            <div className="text-center mb-12">
+              <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">FAQ</p>
+              <h2 className="text-2xl sm:text-3xl font-bold text-white">Common Questions</h2>
+            </div>
+            <div className="space-y-2">
+              {faqs.map((faq, i) => (
+                <div key={i} className="border border-white/8 rounded-xl overflow-hidden bg-black/20 backdrop-blur-sm">
+                  <button
+                    onClick={() => setOpenFaq(openFaq === i ? null : i)}
+                    className="w-full flex items-center justify-between p-5 text-left hover:bg-white/5 transition-colors"
+                    aria-expanded={openFaq === i}
+                  >
+                    <span className="text-white font-medium text-sm sm:text-base pr-4">{faq.q}</span>
+                    <ChevronDown className={`w-4 h-4 text-white/40 shrink-0 transition-transform duration-200 ${openFaq === i ? "rotate-180" : ""}`} />
+                  </button>
+                  {openFaq === i && (
+                    <div className="px-5 pb-5 pt-0">
+                      <p className="text-white/50 text-sm leading-relaxed">{faq.a}</p>
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Final CTA */}
+        <section className="py-16 sm:py-24 px-4 sm:px-6">
+          <div className="max-w-3xl mx-auto text-center">
+            <h2 className="text-2xl sm:text-3xl font-bold text-white mb-4">Ready to get started?</h2>
+            <p className="text-white/50 text-base mb-8 max-w-xl mx-auto">
+              Whether you're building new, renovating, or just need something fixed — reach out. No pressure, no sales pitch.
             </p>
-            <h1 className="animate-fade-in text-5xl sm:text-6xl lg:text-7xl font-extrabold leading-[0.95] mb-6 text-white [animation-delay:100ms]">
-              We build smart homes that just work.
-            </h1>
-            <p className="animate-fade-in text-white/60 text-lg sm:text-xl leading-relaxed mb-10 max-w-lg [animation-delay:200ms]">
-              One team from pre-wire to programming — reliable technology for homeowners and builders across Eagle County.
-            </p>
-            <div className="animate-fade-in flex flex-col sm:flex-row gap-3 [animation-delay:300ms]">
+            <div className="flex flex-col sm:flex-row gap-3 justify-center">
               <Link
-                to="/scheduling"
-                className="group inline-flex items-center justify-center gap-2 bg-accent hover:bg-accent/90 text-white px-7 py-4 rounded-lg font-medium transition-all text-base shadow-lg shadow-accent/20 hover:shadow-accent/30"
+                to="/walkthrough"
+                className="inline-flex items-center justify-center gap-2 bg-accent hover:bg-accent/90 text-white px-8 py-4 rounded-lg font-medium transition-colors text-base"
               >
                 Schedule a Walkthrough
-                <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5" />
+                <ArrowRight className="w-4 h-4" />
               </Link>
               <a
                 href="tel:+19705193013"
-                className="inline-flex items-center justify-center gap-2 border border-white/20 hover:border-white/40 hover:bg-white/5 text-white px-7 py-4 rounded-lg font-medium transition-all text-base backdrop-blur-sm"
+                className="inline-flex items-center justify-center gap-2 border border-white/20 hover:border-white/40 hover:bg-white/5 text-white px-8 py-4 rounded-lg font-medium transition-colors text-base"
               >
                 <Phone className="w-4 h-4" />
-                (970) 519-3013
+                Call Now
               </a>
             </div>
           </div>
+        </section>
 
-          {/* Floating badge */}
-          <div className="animate-fade-in hidden md:flex absolute bottom-12 right-8 lg:right-12 bg-secondary/90 backdrop-blur-md border border-white/10 rounded-xl p-4 items-center gap-3 shadow-2xl shadow-black/30 [animation-delay:500ms]">
-            <div className="w-10 h-10 rounded-lg bg-accent/10 flex items-center justify-center">
-              <MapPin className="w-5 h-5 text-accent" />
-            </div>
-            <div>
-              <p className="text-white font-semibold text-sm">Eagle County</p>
-              <p className="text-white/40 text-xs">Vail · Beaver Creek · Edwards · Avon</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Trust Strip */}
-      <section className="border-y border-white/10 py-6 sm:py-8 px-4 sm:px-6 bg-secondary/50">
-        <div className="max-w-5xl mx-auto">
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 text-center">
-            <div>
-              <p className="text-white font-semibold text-lg">Local</p>
-              <p className="text-white/50 text-sm">Vail Valley based</p>
-            </div>
-            <div>
-              <p className="text-white font-semibold text-lg">Licensed</p>
-              <p className="text-white/50 text-sm">& fully insured</p>
-            </div>
-            <div>
-              <p className="text-white font-semibold text-lg">Full-Service</p>
-              <p className="text-white/50 text-sm">Pre-wire to support</p>
-            </div>
-            <div>
-              <p className="text-white font-semibold text-lg">Responsive</p>
-              <p className="text-white/50 text-sm">We answer the phone</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Services */}
-      <section className="py-16 sm:py-24 px-4 sm:px-6" id="services">
-        <div className="max-w-5xl mx-auto">
-          <div className="text-center mb-12">
-            <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">What We Do</p>
-            <h2 className="text-2xl sm:text-3xl font-bold text-white">Core Services</h2>
-          </div>
-          <div className="grid sm:grid-cols-2 gap-4">
-            {services.map((service, i) => (
-              <Link key={i} to={service.link} className="group">
-                <div className="bg-secondary/80 border border-white/8 rounded-xl p-6 h-full hover:border-accent/30 hover:bg-secondary transition-all duration-200">
-                  <div className="w-11 h-11 rounded-lg bg-accent/10 flex items-center justify-center mb-4 group-hover:bg-accent/20 transition-colors">
-                    <service.icon className="w-5 h-5 text-accent" />
-                  </div>
-                  <h3 className="text-white font-semibold text-lg mb-2">{service.title}</h3>
-                  <p className="text-white/50 text-sm leading-relaxed">{service.description}</p>
-                  <span className="inline-flex items-center gap-1 text-accent text-sm font-medium mt-4 group-hover:gap-2 transition-all">
-                    Learn more <ArrowRight className="w-3.5 h-3.5" />
-                  </span>
-                </div>
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* How It Works */}
-      <section className="py-16 sm:py-24 px-4 sm:px-6 bg-secondary/30 border-y border-white/5">
-        <div className="max-w-5xl mx-auto">
-          <div className="text-center mb-12">
-            <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">Our Process</p>
-            <h2 className="text-2xl sm:text-3xl font-bold text-white">How It Works</h2>
-          </div>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {steps.map((step, i) => (
-              <div key={i} className="relative">
-                <span className="text-accent/20 text-5xl font-bold absolute -top-2 -left-1">{step.number}</span>
-                <div className="pt-10">
-                  <h3 className="text-white font-semibold text-base mb-2">{step.title}</h3>
-                  <p className="text-white/50 text-sm leading-relaxed">{step.description}</p>
-                </div>
+        {/* Footer */}
+        <footer className="border-t border-white/10 py-10 px-4 sm:px-6 bg-black/40 backdrop-blur-sm">
+          <div className="max-w-5xl mx-auto">
+            <div className="grid sm:grid-cols-3 gap-8 mb-8">
+              <div>
+                <img
+                  src="/lovable-uploads/1d7a78ef-4d02-453d-aeea-81e50fb784b6.png"
+                  alt="Symphony Smart Homes"
+                  className="h-10 w-auto mb-3"
+                />
+                <p className="text-white/40 text-sm leading-relaxed">
+                  Professional smart home integration for the Vail Valley.
+                </p>
               </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Why Symphony */}
-      <section className="py-16 sm:py-24 px-4 sm:px-6">
-        <div className="max-w-5xl mx-auto">
-          <div className="text-center mb-12">
-            <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">Why Us</p>
-            <h2 className="text-2xl sm:text-3xl font-bold text-white">Why Homeowners Choose Symphony</h2>
-          </div>
-          <div className="grid sm:grid-cols-2 gap-5">
-            {differentiators.map((item, i) => (
-              <div key={i} className="flex gap-4 p-5 rounded-xl border border-white/5 hover:border-white/10 transition-colors">
-                <CheckCircle2 className="w-5 h-5 text-accent shrink-0 mt-0.5" />
-                <div>
-                  <h3 className="text-white font-semibold mb-1">{item.title}</h3>
-                  <p className="text-white/50 text-sm leading-relaxed">{item.description}</p>
-                </div>
+              <div>
+                <h4 className="text-white font-semibold text-sm mb-3">Services</h4>
+                <ul className="space-y-2">
+                  <li><Link to="/services/prewire" className="text-white/40 hover:text-white/70 text-sm transition-colors">Pre-Wire & Networking</Link></li>
+                  <li><Link to="/install" className="text-white/40 hover:text-white/70 text-sm transition-colors">Installation & Integration</Link></li>
+                  <li><Link to="/troubleshooting" className="text-white/40 hover:text-white/70 text-sm transition-colors">Maintenance</Link></li>
+                  <li><Link to="/matterport" className="text-white/40 hover:text-white/70 text-sm transition-colors">Matterport 3D Scanning</Link></li>
+                </ul>
               </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* FAQ */}
-      <section className="py-16 sm:py-24 px-4 sm:px-6 bg-secondary/30 border-y border-white/5">
-        <div className="max-w-3xl mx-auto">
-          <div className="text-center mb-12">
-            <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">FAQ</p>
-            <h2 className="text-2xl sm:text-3xl font-bold text-white">Common Questions</h2>
-          </div>
-          <div className="space-y-2">
-            {faqs.map((faq, i) => (
-              <div key={i} className="border border-white/8 rounded-xl overflow-hidden">
-                <button
-                  onClick={() => setOpenFaq(openFaq === i ? null : i)}
-                  className="w-full flex items-center justify-between p-5 text-left hover:bg-white/3 transition-colors"
-                  aria-expanded={openFaq === i}
-                >
-                  <span className="text-white font-medium text-sm sm:text-base pr-4">{faq.q}</span>
-                  <ChevronDown className={`w-4 h-4 text-white/40 shrink-0 transition-transform duration-200 ${openFaq === i ? "rotate-180" : ""}`} />
-                </button>
-                {openFaq === i && (
-                  <div className="px-5 pb-5 pt-0">
-                    <p className="text-white/50 text-sm leading-relaxed">{faq.a}</p>
-                  </div>
-                )}
+              <div>
+                <h4 className="text-white font-semibold text-sm mb-3">Contact</h4>
+                <ul className="space-y-2">
+                  <li>
+                    <a href="tel:+19705193013" className="text-white/40 hover:text-white/70 text-sm transition-colors flex items-center gap-2">
+                      <Phone className="w-3.5 h-3.5" /> (970) 519-3013
+                    </a>
+                  </li>
+                  <li>
+                    <Link to="/contact" className="text-white/40 hover:text-white/70 text-sm transition-colors flex items-center gap-2">
+                      <Mail className="w-3.5 h-3.5" /> Contact Form
+                    </Link>
+                  </li>
+                  <li>
+                    <span className="text-white/40 text-sm flex items-center gap-2">
+                      <MapPin className="w-3.5 h-3.5" /> Eagle County, Colorado
+                    </span>
+                  </li>
+                </ul>
               </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Final CTA */}
-      <section className="py-16 sm:py-24 px-4 sm:px-6">
-        <div className="max-w-3xl mx-auto text-center">
-          <h2 className="text-2xl sm:text-3xl font-bold text-white mb-4">Ready to get started?</h2>
-          <p className="text-white/50 text-base mb-8 max-w-xl mx-auto">
-            Whether you're building new, renovating, or just need something fixed — give us a call or send a message. No pressure, no sales pitch.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-3 justify-center">
-            <Link
-              to="/walkthrough"
-              className="inline-flex items-center justify-center gap-2 bg-accent hover:bg-accent/90 text-white px-8 py-4 rounded-lg font-medium transition-colors text-base"
-            >
-              Schedule a Walkthrough
-              <ArrowRight className="w-4 h-4" />
-            </Link>
-            <a
-              href="tel:+19705193013"
-              className="inline-flex items-center justify-center gap-2 border border-white/20 hover:border-white/40 hover:bg-white/5 text-white px-8 py-4 rounded-lg font-medium transition-colors text-base"
-            >
-              <Phone className="w-4 h-4" />
-              Call Now
-            </a>
-          </div>
-          <div className="flex items-center justify-center gap-2 mt-6 text-white/30 text-sm">
-            <MapPin className="w-3.5 h-3.5" />
-            <span>Serving Vail, Beaver Creek, Avon, Edwards, Eagle & surrounding areas</span>
-          </div>
-        </div>
-      </section>
-
-      {/* Footer */}
-      <footer className="border-t border-white/10 py-10 px-4 sm:px-6 bg-secondary/50">
-        <div className="max-w-5xl mx-auto">
-          <div className="grid sm:grid-cols-3 gap-8 mb-8">
-            <div>
-              <img
-                src="/lovable-uploads/1d7a78ef-4d02-453d-aeea-81e50fb784b6.png"
-                alt="Symphony Smart Homes"
-                className="h-10 w-auto mb-3"
-              />
-              <p className="text-white/40 text-sm leading-relaxed">
-                Professional smart home integration for Vail Valley and Eagle County.
-              </p>
             </div>
-            <div>
-              <h4 className="text-white font-semibold text-sm mb-3">Services</h4>
-              <ul className="space-y-2">
-                <li><Link to="/services/prewire" className="text-white/40 hover:text-white/70 text-sm transition-colors">Pre-Wire & Networking</Link></li>
-                <li><Link to="/install" className="text-white/40 hover:text-white/70 text-sm transition-colors">Installation & Integration</Link></li>
-                <li><Link to="/troubleshooting" className="text-white/40 hover:text-white/70 text-sm transition-colors">Maintenance</Link></li>
-                <li><Link to="/matterport" className="text-white/40 hover:text-white/70 text-sm transition-colors">Matterport 3D Scanning</Link></li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="text-white font-semibold text-sm mb-3">Contact</h4>
-              <ul className="space-y-2">
-                <li>
-                  <a href="tel:+19705193013" className="text-white/40 hover:text-white/70 text-sm transition-colors flex items-center gap-2">
-                    <Phone className="w-3.5 h-3.5" /> (970) 519-3013
-                  </a>
-                </li>
-                <li>
-                  <Link to="/contact" className="text-white/40 hover:text-white/70 text-sm transition-colors flex items-center gap-2">
-                    <Mail className="w-3.5 h-3.5" /> Contact Form
-                  </Link>
-                </li>
-                <li>
-                  <span className="text-white/40 text-sm flex items-center gap-2">
-                    <MapPin className="w-3.5 h-3.5" /> Eagle County, Colorado
-                  </span>
-                </li>
-              </ul>
+            <div className="border-t border-white/8 pt-6 flex flex-col sm:flex-row justify-between items-center gap-3">
+              <p className="text-white/30 text-xs">© {new Date().getFullYear()} Symphony Smart Homes. All rights reserved.</p>
+              <div className="flex gap-4">
+                <Link to="/privacy" className="text-white/30 hover:text-white/50 text-xs transition-colors">Privacy Policy</Link>
+                <Link to="/terms" className="text-white/30 hover:text-white/50 text-xs transition-colors">Terms</Link>
+              </div>
             </div>
           </div>
-          <div className="border-t border-white/8 pt-6 flex flex-col sm:flex-row justify-between items-center gap-3">
-            <p className="text-white/30 text-xs">© {new Date().getFullYear()} Symphony Smart Homes. All rights reserved.</p>
-            <div className="flex gap-4">
-              <Link to="/privacy" className="text-white/30 hover:text-white/50 text-xs transition-colors">Privacy Policy</Link>
-              <Link to="/terms" className="text-white/30 hover:text-white/50 text-xs transition-colors">Terms</Link>
-            </div>
-          </div>
-        </div>
-      </footer>
+        </footer>
+      </div>
     </div>
   );
 };
