@@ -82,7 +82,7 @@ const Services = () => {
   };
 
   return (
-    <div className="min-h-screen bg-primary text-primary-foreground">
+    <PageBackground image={bgServices}>
       <SEO
         title="Smart Home Services | Vail Valley"
         description="Complete smart home services: automation, audio, security, lighting, networking, and more. Serving Vail Valley and Eagle County, Colorado."
