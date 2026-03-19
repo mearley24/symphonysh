@@ -345,7 +345,7 @@ const Walkthrough = () => {
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <Link
-              to="/scheduling"
+              to="/scheduling?service=walkthrough"
               className="inline-flex items-center justify-center gap-2 bg-accent hover:bg-accent/90 text-white px-8 py-4 rounded-lg font-medium transition-colors text-base"
             >
               Schedule a Walkthrough
