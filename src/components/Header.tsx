@@ -43,33 +43,37 @@ const Header = () => {
         }`}
       >
         <div className="max-w-6xl mx-auto px-4 sm:px-6 pt-5 pb-2">
-          {/* Call button top-right */}
-          <div className="flex items-center justify-between mb-3">
-            <div className="w-10" />
+          {/* Centered logo */}
+          <div className="flex justify-center mb-2">
             <Link to="/" className="shrink-0">
               <img
                 src="/lovable-uploads/1d7a78ef-4d02-453d-aeea-81e50fb784b6.png"
                 alt="Symphony Smart Homes"
-                className="h-12 sm:h-14 w-auto"
+                className="h-14 sm:h-16 w-auto"
               />
             </Link>
+          </div>
+
+          {/* Call */}
+          <div className="flex justify-center mb-2">
             <a
               href="tel:+19705193013"
-              className="inline-flex items-center justify-center w-10 h-10 rounded-full text-white/50 hover:text-white hover:bg-white/[0.08] transition-colors"
+              className="inline-flex items-center gap-2 text-white/50 hover:text-white text-sm tracking-wide transition-colors"
               aria-label="Call us"
             >
               <Phone className="w-4 h-4" />
+              <span>(970) 519-3013</span>
             </a>
           </div>
 
-          {/* Menu button */}
+          {/* Menu */}
           <div className="flex justify-center">
             <button
               onClick={() => setMenuOpen(!menuOpen)}
-              className="inline-flex items-center gap-1.5 text-white/40 hover:text-white text-xs tracking-widest uppercase transition-colors"
+              className="inline-flex items-center gap-2 text-white/40 hover:text-white text-sm tracking-widest uppercase transition-colors"
               aria-label="Toggle menu"
             >
-              {menuOpen ? <X className="w-4 h-4" /> : <MenuIcon className="w-4 h-4" />}
+              {menuOpen ? <X className="w-5 h-5" /> : <MenuIcon className="w-5 h-5" />}
               <span>Menu</span>
             </button>
           </div>
