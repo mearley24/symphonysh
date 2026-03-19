@@ -93,7 +93,7 @@ const Index = () => {
         <div className="max-w-5xl mx-auto">
           <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
             <div>
-              <p className="text-accent font-medium text-sm tracking-wide uppercase mb-3">Vail Valley's Smart Home Integrator</p>
+              <p className="text-accent font-medium text-sm tracking-wide uppercase mb-3">Design. Install. Maintain.</p>
               <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight mb-5 text-white">
               We build smart homes that just work.
               </h1>
