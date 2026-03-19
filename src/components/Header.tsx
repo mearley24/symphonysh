@@ -44,10 +44,10 @@ const Header = () => {
           scrolled ? 'pt-2 pb-1' : 'pt-5 pb-3'
         }`}>
           <div className={`flex items-center transition-all duration-500 ${
-            scrolled ? 'justify-start gap-4' : 'flex-col items-center'
+            scrolled ? 'justify-between' : 'flex-col items-center'
           }`}>
-            {/* Logo */}
-            <Link to="/" className="shrink-0 pointer-events-auto">
+            {/* Logo - splits left */}
+            <Link to="/" className="shrink-0 pointer-events-auto relative z-10">
               <img
                 src="/lovable-uploads/1d7a78ef-4d02-453d-aeea-81e50fb784b6.png"
                 alt="Symphony Smart Homes"
@@ -58,7 +58,7 @@ const Header = () => {
               />
             </Link>
 
-            {/* Menu */}
+            {/* Menu - splits right */}
             <button
               onClick={() => setMenuOpen(!menuOpen)}
               className="pointer-events-auto inline-flex items-center gap-2 text-white/40 hover:text-white text-sm tracking-widest uppercase transition-colors"
