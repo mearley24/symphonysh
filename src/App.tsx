@@ -98,6 +98,7 @@ function App() {
           <Route path="/services/home-integration" element={<HomeIntegration />} />
           <Route path="/services/maintenance" element={<Maintenance />} />
           <Route path="/services/networking" element={<Networking />} />
+          <Route path="/networking" element={<Networking />} />
           <Route path="/services/security-systems" element={<SecuritySystems />} />
           <Route path="/services/shades" element={<Shades />} />
           <Route path="/services/smart-lighting" element={<SmartLighting />} />
