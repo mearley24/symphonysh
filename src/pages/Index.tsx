@@ -25,7 +25,7 @@ const Index = () => {
       icon: Wrench,
       title: "Maintenance & Troubleshooting",
       description: "Keep your systems running smoothly. We diagnose issues, update firmware, and resolve problems — on-site or remotely.",
-      link: "/services/maintenance",
+      link: "/troubleshooting",
     },
     {
       icon: ScanLine,
