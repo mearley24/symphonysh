@@ -100,20 +100,20 @@ const Index = () => {
                 We design, install, and maintain reliable smart home technology for homeowners and builders across Eagle County. Pre-wire to programming, one team handles it all.
               </p>
               <div className="flex flex-col sm:flex-row gap-3">
-                <a
-                  href="tel:+19705193013"
+                <Link
+                  to="/walkthrough"
                   className="inline-flex items-center justify-center gap-2 bg-accent hover:bg-accent/90 text-white px-6 py-3.5 rounded-lg font-medium transition-colors text-base"
                 >
-                  <Phone className="w-4 h-4" />
-                  (970) 519-3013
-                </a>
-                <Link
-                  to="/contact"
-                  className="inline-flex items-center justify-center gap-2 border border-white/20 hover:border-white/40 hover:bg-white/5 text-white px-6 py-3.5 rounded-lg font-medium transition-colors text-base"
-                >
-                  Request a Consultation
+                  Schedule a Walkthrough
                   <ArrowRight className="w-4 h-4" />
                 </Link>
+                <a
+                  href="tel:+19705193013"
+                  className="inline-flex items-center justify-center gap-2 border border-white/20 hover:border-white/40 hover:bg-white/5 text-white px-6 py-3.5 rounded-lg font-medium transition-colors text-base"
+                >
+                  <Phone className="w-4 h-4" />
+                  Call Now
+                </a>
               </div>
             </div>
             <div className="relative">
