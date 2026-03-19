@@ -8,6 +8,7 @@ interface SEOProps {
   canonicalUrl?: string;
   ogImage?: string;
   ogType?: 'website' | 'article';
+  schema?: Record<string, unknown>;
 }
 
 const SEO = ({
@@ -16,7 +17,8 @@ const SEO = ({
   keywords,
   canonicalUrl,
   ogImage = '/og-image.png',
-  ogType = 'website'
+  ogType = 'website',
+  schema
 }: SEOProps) => {
   const siteName = 'Symphony Smart Homes';
   const fullTitle = `${title} | ${siteName}`;
@@ -36,6 +38,11 @@ const SEO = ({
       <meta name="twitter:title" content={fullTitle} />
       <meta name="twitter:description" content={description} />
       <meta name="twitter:image" content={ogImage} />
+      {schema && (
+        <script type="application/ld+json">
+          {JSON.stringify(schema)}
+        </script>
+      )}
     </Helmet>
   );
 };
