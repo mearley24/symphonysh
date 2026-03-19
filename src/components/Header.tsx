@@ -67,7 +67,7 @@ const Header = () => {
           </div>
 
           {/* Menu */}
-          <div className="flex justify-center">
+          <div className="flex justify-center mt-1">
             <button
               onClick={() => setMenuOpen(!menuOpen)}
               className="inline-flex items-center gap-2 text-white/40 hover:text-white text-sm tracking-widest uppercase transition-colors"
