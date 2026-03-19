@@ -25,7 +25,7 @@ const Matterport = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-primary text-primary-foreground">
+    <PageBackground image={bgMatterport}>
       <SEO
         title="Matterport 3D Scanning | Vail Valley"
         description="Professional Matterport 3D virtual tours for real estate, construction documentation, and property records in Vail Valley and Eagle County."
