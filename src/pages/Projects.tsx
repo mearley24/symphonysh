@@ -55,11 +55,11 @@ const Projects = () => {
       </section>
 
       {/* Portfolio */}
-      <section className="py-16 sm:py-24 px-4 sm:px-6 bg-secondary/30 border-y border-white/5">
+      <section className="py-16 sm:py-24 px-4 sm:px-6 bg-black/20 backdrop-blur-sm border-y border-white/5">
         <div className="max-w-5xl mx-auto space-y-6">
           {portfolioSections.map((section, i) => (
             <Link key={i} to={section.link} className="block group">
-              <div className="bg-secondary/80 border border-white/8 rounded-xl overflow-hidden hover:border-accent/30 transition-all duration-200">
+              <div className="bg-black/40 backdrop-blur-sm border border-white/8 rounded-xl overflow-hidden hover:border-accent/30 transition-all duration-200">
                 <div className="aspect-[16/7] relative">
                   <img src={section.image} alt={section.title} className="w-full h-full object-cover" loading="lazy" />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />

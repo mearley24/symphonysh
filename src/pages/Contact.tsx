@@ -68,7 +68,7 @@ const Contact = () => {
       </section>
 
       {/* Contact Info + Form */}
-      <section className="py-16 sm:py-24 px-4 sm:px-6 bg-secondary/30 border-y border-white/5">
+      <section className="py-16 sm:py-24 px-4 sm:px-6 bg-black/20 backdrop-blur-sm border-y border-white/5">
         <div className="max-w-4xl mx-auto">
           <div className="grid md:grid-cols-5 gap-10">
             {/* Info Column */}
@@ -115,7 +115,7 @@ const Contact = () => {
 
             {/* Form Column */}
             <div className="md:col-span-3">
-              <div className="bg-secondary/80 border border-white/8 rounded-xl p-6">
+              <div className="bg-black/40 backdrop-blur-sm border border-white/8 rounded-xl p-6">
                 <h3 className="text-white font-semibold mb-5">Send a Message</h3>
                 <form onSubmit={handleSubmit} className="space-y-4">
                   <div>
