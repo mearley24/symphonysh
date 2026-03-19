@@ -102,7 +102,7 @@ const Index = () => {
         <Header />
 
         {/* Hero */}
-        <section className="relative pt-16 sm:pt-20 overflow-hidden">
+        <section className="relative pt-48 sm:pt-56 overflow-hidden">
           {/* Subtle animated glow */}
           <div className="absolute top-1/2 right-[15%] -translate-y-1/2 w-[500px] h-[500px] bg-accent/[0.04] rounded-full blur-[120px] animate-[pulse_6s_ease-in-out_infinite]" />
 
