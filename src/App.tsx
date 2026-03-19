@@ -1,5 +1,6 @@
 
 import { Routes, Route } from "react-router-dom";
+import Walkthrough from "./pages/Walkthrough";
 import Scheduling from "./pages/scheduling";
 import NotFound from "./pages/NotFound";
 import { Toaster } from "@/components/ui/toaster";
@@ -89,7 +90,7 @@ function App() {
           <Route path="/photos/wiring-manager" element={<WiringManager />} />
           
           {/* Service routes */}
-          <Route path="/walkthrough" element={<Networking />} />
+          <Route path="/walkthrough" element={<Walkthrough />} />
           <Route path="/install" element={<HomeIntegration />} />
           <Route path="/troubleshooting" element={<Maintenance />} />
           <Route path="/services/audio-entertainment" element={<AudioEntertainment />} />
