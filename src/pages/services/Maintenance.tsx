@@ -1,136 +1,124 @@
-import { Wrench, Check, List, AlertCircle, Clock, Shield, Phone, Calendar } from "lucide-react";
-import Control4ServiceLayout, { GlassCard, StatsCard, FeatureCard, PricingItem, CTACard } from "../../components/Layout/Control4ServiceLayout";
+import { Link } from "react-router-dom";
+import { ArrowRight, Phone, ArrowLeft, Wrench, CheckCircle2, ChevronDown, Shield, Calendar, PhoneCall } from "lucide-react";
+import { useState } from "react";
+import Header from "../../components/Header";
+import Footer from "../../components/Footer";
+import SEO from "../../components/SEO";
 
 const Maintenance = () => {
+  const [openFaq, setOpenFaq] = useState<number | null>(null);
+
   const serviceSchema = {
     "@context": "https://schema.org",
     "@type": "Service",
-    "name": "Troubleshooting & Maintenance",
-    "provider": {
-      "@type": "LocalBusiness",
-      "name": "Symphony Smart Homes"
-    },
-    "description": "Professional maintenance and support services for smart home systems.",
-    "areaServed": "Vail Valley, Colorado"
+    "name": "Maintenance & Support",
+    "provider": { "@type": "LocalBusiness", "name": "Symphony Smart Homes", "telephone": "+1-970-519-3013" },
+    "description": "Professional maintenance and support for smart home systems in Vail Valley.",
+    "areaServed": "Vail Valley, Colorado",
   };
 
-  const serviceTypes = [
-    { icon: Wrench, title: "Diagnostics", desc: "System health checks", status: "Available" },
-    { icon: Check, title: "Preventive", desc: "Regular maintenance", status: "Scheduled" },
-    { icon: AlertCircle, title: "Emergency", desc: "24/7 urgent support", status: "Active" },
-    { icon: List, title: "Updates", desc: "Software & firmware", status: "Auto" },
+  const capabilities = [
+    { icon: PhoneCall, title: "Remote Diagnostics", description: "Many issues can be resolved remotely — a quick call or remote session often fixes the problem without a site visit." },
+    { icon: Wrench, title: "On-Site Service", description: "When remote won't cut it, we come to you. Same-day and next-day appointments available for most issues." },
+    { icon: Shield, title: "Firmware & Updates", description: "We keep your system software current — Control4, network equipment, cameras, and more. Updates are tested before deployment." },
+    { icon: Calendar, title: "Preventive Maintenance", description: "Scheduled system check-ups to catch issues before they become problems. Battery replacements, connection checks, and performance optimization." },
   ];
 
-  const supportPlans = [
-    { 
-      name: "Basic Support",
-      features: ["Email support", "Business hours", "Remote diagnostics"],
-      price: "$49/mo"
-    },
-    { 
-      name: "Priority Support",
-      features: ["Phone & email", "Extended hours", "Same-day response"],
-      price: "$99/mo"
-    },
-    { 
-      name: "Premium Support",
-      features: ["24/7 availability", "On-site visits", "Priority scheduling"],
-      price: "$199/mo"
-    }
+  const faqs = [
+    { q: "Do I need a maintenance plan?", a: "Not necessarily, but it's recommended — especially for larger systems. Plans include proactive monitoring, priority scheduling, and discounted service rates. You can also call us for one-off service anytime." },
+    { q: "How quickly can you respond?", a: "For plan members, we typically respond within a few hours. For one-off service calls, we schedule within 1–2 business days in most cases. Emergency service is available 24/7." },
+    { q: "What does a service call cost?", a: "One-off service calls are billed at an hourly rate plus travel. Maintenance plan members get discounted rates and may have included service hours. Contact us for current pricing." },
+    { q: "Can you fix systems you didn't install?", a: "Usually, yes. We'll assess the system, diagnose the issue, and let you know what's needed. If the system was installed by another integrator, we may recommend a system audit first." },
   ];
 
   return (
-    <Control4ServiceLayout
-      title="Maintenance"
-      description="Professional maintenance and support services to keep your smart home running smoothly."
-      keywords="smart home maintenance, troubleshooting, support, Vail Valley"
-      serviceSchema={serviceSchema}
-      icon={Wrench}
-      iconGradient="from-orange-500 to-red-500"
-      subtitle="Keep your system running smoothly"
-    >
-      <div className="space-y-4">
-        {/* Stats Row */}
-        <div className="grid grid-cols-4 gap-3">
-          <StatsCard value="<2hr" label="Response" />
-          <StatsCard value="24/7" label="Support" />
-          <StatsCard value="99%" label="Resolution" />
-          <StatsCard value="5★" label="Rating" />
-        </div>
+    <div className="min-h-screen bg-primary text-primary-foreground">
+      <SEO title="Maintenance & Support | Vail Valley" description="Smart home maintenance, troubleshooting, and support. Remote diagnostics and on-site service in Vail Valley." keywords="smart home maintenance, troubleshooting, support, service, Vail Valley" schema={serviceSchema} />
+      <Header />
 
-        {/* Service Types */}
-        <GlassCard className="p-4">
-          <h3 className="text-white font-medium mb-3">Service Types</h3>
-          <div className="grid grid-cols-2 gap-3">
-            {serviceTypes.map((service) => (
-              <div key={service.title} className="bg-white/5 rounded-xl p-4 flex items-start gap-3">
-                <div className="w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center flex-shrink-0">
-                  <service.icon className="w-5 h-5 text-accent" />
-                </div>
-                <div className="flex-1 min-w-0">
-                  <h4 className="text-white font-medium text-sm">{service.title}</h4>
-                  <p className="text-white/60 text-xs mb-1">{service.desc}</p>
-                  <span className="text-green-400 text-[10px] bg-green-500/20 px-2 py-0.5 rounded-full">
-                    {service.status}
-                  </span>
-                </div>
+      <section className="pt-24 sm:pt-32 pb-16 sm:pb-20 px-4 sm:px-6">
+        <div className="max-w-4xl mx-auto">
+          <Link to="/services" className="inline-flex items-center gap-1.5 text-white/40 hover:text-white/70 text-sm mb-8 transition-colors"><ArrowLeft className="w-3.5 h-3.5" /> All Services</Link>
+          <div className="flex items-center gap-3 mb-4">
+            <div className="w-11 h-11 rounded-lg bg-accent/10 flex items-center justify-center"><Wrench className="w-5 h-5 text-accent" /></div>
+            <p className="text-accent font-medium text-sm tracking-wide uppercase">Maintenance & Support</p>
+          </div>
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight mb-5 text-white">When something needs attention, we're here.</h1>
+          <p className="text-white/60 text-base sm:text-lg leading-relaxed mb-8 max-w-2xl">Smart home systems need ongoing care — firmware updates, troubleshooting, and the occasional repair. We provide remote diagnostics and on-site service to keep everything running smoothly.</p>
+          <div className="flex flex-col sm:flex-row gap-3">
+            <Link to="/scheduling?service=maintenance" className="inline-flex items-center justify-center gap-2 bg-accent hover:bg-accent/90 text-white px-6 py-3.5 rounded-lg font-medium transition-colors text-base">Schedule Service <ArrowRight className="w-4 h-4" /></Link>
+            <a href="tel:+19705193013" className="inline-flex items-center justify-center gap-2 border border-white/20 hover:border-white/40 hover:bg-white/5 text-white px-6 py-3.5 rounded-lg font-medium transition-colors text-base"><Phone className="w-4 h-4" /> Call Now</a>
+          </div>
+        </div>
+      </section>
+
+      <section className="py-16 sm:py-24 px-4 sm:px-6 bg-secondary/30 border-y border-white/5">
+        <div className="max-w-4xl mx-auto">
+          <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">What We Offer</p>
+          <h2 className="text-2xl sm:text-3xl font-bold text-white mb-10">Support services</h2>
+          <div className="grid sm:grid-cols-2 gap-5">
+            {capabilities.map((item, i) => (
+              <div key={i} className="bg-secondary/80 border border-white/8 rounded-xl p-6">
+                <div className="w-10 h-10 rounded-lg bg-accent/10 flex items-center justify-center mb-3"><item.icon className="w-5 h-5 text-accent" /></div>
+                <h3 className="text-white font-semibold text-lg mb-2">{item.title}</h3>
+                <p className="text-white/50 text-sm leading-relaxed">{item.description}</p>
               </div>
             ))}
           </div>
-        </GlassCard>
-
-        {/* Support Plans */}
-        <div className="space-y-3">
-          <h3 className="text-white font-medium px-1">Support Plans</h3>
-          {supportPlans.map((plan) => (
-            <GlassCard key={plan.name} className="p-4">
-              <div className="flex items-center justify-between mb-3">
-                <h4 className="text-white font-semibold">{plan.name}</h4>
-                <span className="text-accent font-bold">{plan.price}</span>
-              </div>
-              <div className="space-y-2">
-                {plan.features.map((feature) => (
-                  <div key={feature} className="flex items-center gap-2">
-                    <Check className="w-4 h-4 text-green-400" />
-                    <span className="text-white/80 text-sm">{feature}</span>
-                  </div>
-                ))}
-              </div>
-            </GlassCard>
-          ))}
         </div>
+      </section>
 
-        {/* Features */}
-        <div className="grid grid-cols-3 gap-3">
-          <FeatureCard
-            icon={Phone}
-            title="Direct Line"
-            description="Talk to real technicians"
-            iconColor="text-blue-400"
-          />
-          <FeatureCard
-            icon={Calendar}
-            title="Scheduled"
-            description="Regular check-ups"
-            iconColor="text-green-400"
-          />
-          <FeatureCard
-            icon={Shield}
-            title="Protected"
-            description="Extended warranties"
-            iconColor="text-purple-400"
-          />
+      <section className="py-16 sm:py-24 px-4 sm:px-6">
+        <div className="max-w-4xl mx-auto">
+          <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">Why It Matters</p>
+          <h2 className="text-2xl sm:text-3xl font-bold text-white mb-10">Reliable support when you need it</h2>
+          <div className="grid sm:grid-cols-2 gap-5">
+            {[
+              { title: "We Answer the Phone", description: "When your system has an issue, you shouldn't have to wait days for a callback. We respond quickly and take action." },
+              { title: "Remote First", description: "Most issues can be diagnosed and resolved remotely — saving you time and money. We only send a tech when it's truly needed." },
+              { title: "Proactive, Not Reactive", description: "Regular check-ups catch small issues before they become big problems. Prevention is always cheaper than repair." },
+              { title: "Systems We Didn't Install", description: "Inherited a smart home system from a previous owner? We can take it over, audit it, and get it working properly." },
+            ].map((item, i) => (
+              <div key={i} className="flex gap-4 p-5 rounded-xl border border-white/5 hover:border-white/10 transition-colors">
+                <CheckCircle2 className="w-5 h-5 text-accent shrink-0 mt-0.5" />
+                <div><h3 className="text-white font-semibold mb-1">{item.title}</h3><p className="text-white/50 text-sm leading-relaxed">{item.description}</p></div>
+              </div>
+            ))}
+          </div>
         </div>
+      </section>
 
-        {/* CTA */}
-        <CTACard
-          title="Keep Your System Running"
-          description="Contact us to learn more about our maintenance plans and support services."
-          buttonText="Schedule Service"
-          buttonLink="/scheduling?service=maintenance"
-        />
-      </div>
-    </Control4ServiceLayout>
+      <section className="py-16 sm:py-24 px-4 sm:px-6 bg-secondary/30 border-y border-white/5">
+        <div className="max-w-3xl mx-auto">
+          <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">FAQ</p>
+          <h2 className="text-2xl sm:text-3xl font-bold text-white mb-10">Support Questions</h2>
+          <div className="space-y-2">
+            {faqs.map((faq, i) => (
+              <div key={i} className="border border-white/8 rounded-xl overflow-hidden">
+                <button onClick={() => setOpenFaq(openFaq === i ? null : i)} className="w-full flex items-center justify-between p-5 text-left hover:bg-white/[0.03] transition-colors" aria-expanded={openFaq === i}>
+                  <span className="text-white font-medium text-sm sm:text-base pr-4">{faq.q}</span>
+                  <ChevronDown className={`w-4 h-4 text-white/40 shrink-0 transition-transform duration-200 ${openFaq === i ? "rotate-180" : ""}`} />
+                </button>
+                {openFaq === i && <div className="px-5 pb-5 pt-0"><p className="text-white/50 text-sm leading-relaxed">{faq.a}</p></div>}
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="py-16 sm:py-20 px-4 sm:px-6">
+        <div className="max-w-3xl mx-auto text-center">
+          <h2 className="text-2xl sm:text-3xl font-bold text-white mb-4">Need help with your system?</h2>
+          <p className="text-white/50 text-base mb-8 max-w-xl mx-auto">Whether it's a quick fix or an ongoing maintenance plan, we're here to keep your smart home running.</p>
+          <div className="flex flex-col sm:flex-row gap-3 justify-center">
+            <Link to="/scheduling?service=maintenance" className="inline-flex items-center justify-center gap-2 bg-accent hover:bg-accent/90 text-white px-8 py-4 rounded-lg font-medium transition-colors text-base">Schedule Service <ArrowRight className="w-4 h-4" /></Link>
+            <a href="tel:+19705193013" className="inline-flex items-center justify-center gap-2 border border-white/20 hover:border-white/40 hover:bg-white/5 text-white px-8 py-4 rounded-lg font-medium transition-colors text-base"><Phone className="w-4 h-4" /> Call Now</a>
+          </div>
+        </div>
+      </section>
+
+      <Footer />
+    </div>
   );
 };
 

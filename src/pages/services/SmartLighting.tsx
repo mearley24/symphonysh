@@ -1,209 +1,124 @@
-import { Lightbulb, Clock, Eye, Palette } from "lucide-react";
-import { useState, useEffect } from "react";
-import Control4ServiceLayout, { GlassCard, StatsCard, FeatureCard, PricingItem, CTACard } from "../../components/Layout/Control4ServiceLayout";
-import { Slider } from "../../components/ui/slider";
-import { Switch } from "../../components/ui/switch";
-import { InteractiveLightingFloorPlan } from "../../components/smart-lighting/InteractiveLightingFloorPlan";
+import { Link } from "react-router-dom";
+import { ArrowRight, Phone, ArrowLeft, Lightbulb, Clock, Eye, Palette, CheckCircle2, ChevronDown } from "lucide-react";
+import { useState } from "react";
+import Header from "../../components/Header";
+import Footer from "../../components/Footer";
+import SEO from "../../components/SEO";
+
 const SmartLighting = () => {
-  const [brightness, setBrightness] = useState(75);
-  const [colorTemp, setColorTemp] = useState(3500);
-  const [selectedScene, setSelectedScene] = useState("relax");
-  const [selectedRoom, setSelectedRoom] = useState("living");
-  const [isAutoMode, setIsAutoMode] = useState(false);
+  const [openFaq, setOpenFaq] = useState<number | null>(null);
 
   const serviceSchema = {
     "@context": "https://schema.org",
     "@type": "Service",
     "name": "Smart Lighting Systems",
-    "provider": {
-      "@type": "LocalBusiness",
-      "name": "Symphony Smart Homes"
-    },
-    "description": "Intelligent lighting control for comfort, convenience, and energy savings.",
-    "areaServed": "Vail Valley, Colorado"
+    "provider": { "@type": "LocalBusiness", "name": "Symphony Smart Homes", "telephone": "+1-970-519-3013" },
+    "description": "Intelligent lighting control for comfort, convenience, and energy savings in Vail Valley homes.",
+    "areaServed": "Vail Valley, Colorado",
   };
 
-  const rooms = [
-    { id: "living", name: "Living Room", lights: 6, on: true },
-    { id: "kitchen", name: "Kitchen", lights: 4, on: true },
-    { id: "bedroom", name: "Bedroom", lights: 3, on: false },
-    { id: "office", name: "Office", lights: 2, on: true },
+  const capabilities = [
+    { icon: Lightbulb, title: "Dimming & Keypads", description: "Lutron and Control4 dimmers, keypads, and scene controllers that replace standard switches for elegant, intuitive control." },
+    { icon: Palette, title: "Scene Programming", description: "Create lighting scenes for any occasion — dinner, movie night, entertaining, bedtime — activated with a single button." },
+    { icon: Clock, title: "Automated Schedules", description: "Lights that adjust automatically based on time of day, sunrise/sunset, or occupancy. Set it and forget it." },
+    { icon: Eye, title: "Motion & Occupancy", description: "Hallways, bathrooms, and closets that light up when you walk in and turn off when you leave." },
   ];
 
-  const scenes = [
-    { id: "relax", name: "Relax", color: "bg-amber-400", brightness: 40, temp: 2700 },
-    { id: "focus", name: "Focus", color: "bg-blue-300", brightness: 90, temp: 5000 },
-    { id: "party", name: "Party", color: "bg-purple-500", brightness: 80, temp: 4000 },
-    { id: "sleep", name: "Sleep", color: "bg-orange-600", brightness: 10, temp: 2200 },
-    { id: "sunrise", name: "Sunrise", color: "bg-yellow-400", brightness: 60, temp: 3500 },
-    { id: "dinner", name: "Dinner", color: "bg-amber-500", brightness: 55, temp: 2800 },
+  const faqs = [
+    { q: "What's the difference between smart bulbs and a real lighting system?", a: "Smart bulbs rely on Wi-Fi and apps — they're fine for a lamp or two but don't scale well. A professional system like Lutron or Control4 uses dedicated dimmers and switches that work reliably regardless of Wi-Fi status." },
+    { q: "Can you retrofit my existing home?", a: "Yes. Lutron Caseta and RadioRA work wirelessly and can replace existing switches without new wiring. For new construction, we recommend hardwired systems for maximum reliability." },
+    { q: "How much does smart lighting cost?", a: "A single room with smart dimmers and a keypad might start around $1,200. Whole-home lighting for a new build typically ranges from $6,000 to $25,000+ depending on the number of circuits and features." },
+    { q: "Can I still use regular light switches?", a: "Yes — Lutron and Control4 keypads look and feel like premium switches. They work manually and through automation. Guests won't even know they're smart." },
   ];
-
-  const currentScene = scenes.find(s => s.id === selectedScene);
-
-  useEffect(() => {
-    if (currentScene) {
-      setBrightness(currentScene.brightness);
-      setColorTemp(currentScene.temp);
-    }
-  }, [selectedScene]);
 
   return (
-    <Control4ServiceLayout
-      title="Smart Lighting"
-      description="Intelligent lighting control for comfort, convenience, and energy savings in your Vail Valley home."
-      keywords="smart lighting, home automation, LED lighting, dimming control, Vail Valley"
-      serviceSchema={serviceSchema}
-      icon={Lightbulb}
-      iconGradient="from-yellow-500 to-amber-500"
-      subtitle="Intelligent illumination"
-    >
-      <div className="space-y-4">
-        {/* Stats Row */}
-        <div className="grid grid-cols-4 gap-3">
-          <StatsCard value="60%" label="Savings" />
-          <StatsCard value="Voice" label="Control" />
-          <StatsCard value="Auto" label="Scenes" />
-          <StatsCard value="∞" label="Colors" />
+    <div className="min-h-screen bg-primary text-primary-foreground">
+      <SEO title="Smart Lighting | Vail Valley" description="Professional smart lighting: Lutron, Control4 dimmers, keypads, scenes, and automation for Vail Valley homes." keywords="smart lighting, Lutron, dimmer, keypad, lighting control, Vail Valley" schema={serviceSchema} />
+      <Header />
+
+      <section className="pt-24 sm:pt-32 pb-16 sm:pb-20 px-4 sm:px-6">
+        <div className="max-w-4xl mx-auto">
+          <Link to="/services" className="inline-flex items-center gap-1.5 text-white/40 hover:text-white/70 text-sm mb-8 transition-colors"><ArrowLeft className="w-3.5 h-3.5" /> All Services</Link>
+          <div className="flex items-center gap-3 mb-4">
+            <div className="w-11 h-11 rounded-lg bg-accent/10 flex items-center justify-center"><Lightbulb className="w-5 h-5 text-accent" /></div>
+            <p className="text-accent font-medium text-sm tracking-wide uppercase">Smart Lighting</p>
+          </div>
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight mb-5 text-white">Lighting that sets the right mood — automatically.</h1>
+          <p className="text-white/60 text-base sm:text-lg leading-relaxed mb-8 max-w-2xl">We install professional lighting control systems that let you dim, schedule, and automate every light in your home. Keypads on the wall, scenes at a touch, and schedules that run themselves.</p>
+          <div className="flex flex-col sm:flex-row gap-3">
+            <Link to="/scheduling?service=smart-lighting" className="inline-flex items-center justify-center gap-2 bg-accent hover:bg-accent/90 text-white px-6 py-3.5 rounded-lg font-medium transition-colors text-base">Schedule a Consultation <ArrowRight className="w-4 h-4" /></Link>
+            <a href="tel:+19705193013" className="inline-flex items-center justify-center gap-2 border border-white/20 hover:border-white/40 hover:bg-white/5 text-white px-6 py-3.5 rounded-lg font-medium transition-colors text-base"><Phone className="w-4 h-4" /> Call Now</a>
+          </div>
         </div>
+      </section>
 
-        {/* Main Light Control */}
-        <GlassCard className="p-4">
-          <div className="flex items-center justify-between mb-3">
-            <h3 className="text-white font-medium">Light Control</h3>
-            <div className="flex items-center gap-2">
-              <span className="text-white/60 text-sm">Auto</span>
-              <Switch checked={isAutoMode} onCheckedChange={setIsAutoMode} />
-            </div>
-          </div>
-          
-          {/* Interactive Floor Plan */}
-          <div className="mb-4">
-            <InteractiveLightingFloorPlan
-              colorTemp={colorTemp}
-              selectedRoom={selectedRoom}
-              onRoomSelect={setSelectedRoom}
-            />
-          </div>
-
-          {/* Brightness */}
-          <div className="mb-4">
-            <div className="flex justify-between items-center mb-2">
-              <label className="text-sm text-white/80">Brightness</label>
-              <span className="text-white text-sm">{brightness}%</span>
-            </div>
-            <Slider
-              value={[brightness]}
-              onValueChange={(v) => setBrightness(v[0])}
-              max={100}
-              step={1}
-            />
-          </div>
-
-          {/* Color Temperature */}
-          <div>
-            <div className="flex justify-between items-center mb-2">
-              <label className="text-sm text-white/80">Color Temperature</label>
-              <span className="text-white text-sm">{colorTemp}K</span>
-            </div>
-            <Slider
-              value={[colorTemp]}
-              onValueChange={(v) => setColorTemp(v[0])}
-              min={2200}
-              max={6500}
-              step={100}
-            />
-            <div className="flex justify-between text-xs text-white/40 mt-1">
-              <span>Warm</span>
-              <span>Cool</span>
-            </div>
-          </div>
-        </GlassCard>
-
-        {/* Scene Selection */}
-        <GlassCard className="p-4">
-          <h3 className="text-white font-medium mb-3">Scenes</h3>
-          <div className="grid grid-cols-3 gap-2">
-            {scenes.map((scene) => (
-              <button
-                key={scene.id}
-                onClick={() => setSelectedScene(scene.id)}
-                className={`p-3 rounded-xl transition-all ${
-                  selectedScene === scene.id 
-                    ? "bg-accent/20 border border-accent/30" 
-                    : "bg-white/5 hover:bg-white/10"
-                }`}
-              >
-                <div className={`w-4 h-4 rounded-full ${scene.color} mx-auto mb-2`} />
-                <span className="text-white text-xs">{scene.name}</span>
-              </button>
+      <section className="py-16 sm:py-24 px-4 sm:px-6 bg-secondary/30 border-y border-white/5">
+        <div className="max-w-4xl mx-auto">
+          <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">What We Install</p>
+          <h2 className="text-2xl sm:text-3xl font-bold text-white mb-10">Lighting control solutions</h2>
+          <div className="grid sm:grid-cols-2 gap-5">
+            {capabilities.map((item, i) => (
+              <div key={i} className="bg-secondary/80 border border-white/8 rounded-xl p-6">
+                <div className="w-10 h-10 rounded-lg bg-accent/10 flex items-center justify-center mb-3"><item.icon className="w-5 h-5 text-accent" /></div>
+                <h3 className="text-white font-semibold text-lg mb-2">{item.title}</h3>
+                <p className="text-white/50 text-sm leading-relaxed">{item.description}</p>
+              </div>
             ))}
           </div>
-        </GlassCard>
+        </div>
+      </section>
 
-        {/* Room Selection */}
-        <GlassCard className="p-4">
-          <h3 className="text-white font-medium mb-3">Rooms</h3>
-          <div className="grid grid-cols-2 gap-2">
-            {rooms.map((room) => (
-              <button
-                key={room.id}
-                onClick={() => setSelectedRoom(room.id)}
-                className={`p-3 rounded-xl flex items-center justify-between transition-all ${
-                  selectedRoom === room.id 
-                    ? "bg-accent/20 border border-accent/30" 
-                    : "bg-white/5 hover:bg-white/10"
-                }`}
-              >
-                <div className="text-left">
-                  <p className="text-white text-sm">{room.name}</p>
-                  <p className="text-white/60 text-xs">{room.lights} lights</p>
-                </div>
-                <div className={`w-3 h-3 rounded-full ${room.on ? "bg-yellow-400" : "bg-white/20"}`} />
-              </button>
+      <section className="py-16 sm:py-24 px-4 sm:px-6">
+        <div className="max-w-4xl mx-auto">
+          <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">Benefits</p>
+          <h2 className="text-2xl sm:text-3xl font-bold text-white mb-10">Why smart lighting matters</h2>
+          <div className="grid sm:grid-cols-2 gap-5">
+            {[
+              { title: "Energy Savings", description: "Dimming lights to 75% cuts energy use significantly. Automated schedules ensure nothing stays on when it shouldn't." },
+              { title: "Better Living", description: "The right light at the right time improves sleep, productivity, and ambiance. Warm in the evening, bright in the morning." },
+              { title: "Home Security", description: "Vacation mode simulates occupancy by cycling lights on and off. Motion-triggered exterior lights deter unwanted visitors." },
+              { title: "Clean Aesthetics", description: "Lutron keypads are beautiful. No more walls cluttered with mismatched switches — just clean, coordinated control." },
+            ].map((item, i) => (
+              <div key={i} className="flex gap-4 p-5 rounded-xl border border-white/5 hover:border-white/10 transition-colors">
+                <CheckCircle2 className="w-5 h-5 text-accent shrink-0 mt-0.5" />
+                <div><h3 className="text-white font-semibold mb-1">{item.title}</h3><p className="text-white/50 text-sm leading-relaxed">{item.description}</p></div>
+              </div>
             ))}
           </div>
-        </GlassCard>
-
-        {/* Features */}
-        <div className="grid grid-cols-3 gap-3">
-          <FeatureCard
-            icon={Clock}
-            title="Schedules"
-            description="Automated routines"
-            iconColor="text-blue-400"
-          />
-          <FeatureCard
-            icon={Eye}
-            title="Motion"
-            description="Sensor activation"
-            iconColor="text-green-400"
-          />
-          <FeatureCard
-            icon={Palette}
-            title="Colors"
-            description="16M+ options"
-            iconColor="text-purple-400"
-          />
         </div>
+      </section>
 
-        {/* Pricing */}
-        <GlassCard className="p-4">
-          <h3 className="text-white font-medium mb-3">Lighting Packages</h3>
-          <PricingItem label="Single Room (8 lights)" price="$1,200+" />
-          <PricingItem label="Multi-Room (24 lights)" price="$3,200+" />
-          <PricingItem label="Whole Home" price="$6,500+" />
-        </GlassCard>
+      <section className="py-16 sm:py-24 px-4 sm:px-6 bg-secondary/30 border-y border-white/5">
+        <div className="max-w-3xl mx-auto">
+          <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">FAQ</p>
+          <h2 className="text-2xl sm:text-3xl font-bold text-white mb-10">Lighting Questions</h2>
+          <div className="space-y-2">
+            {faqs.map((faq, i) => (
+              <div key={i} className="border border-white/8 rounded-xl overflow-hidden">
+                <button onClick={() => setOpenFaq(openFaq === i ? null : i)} className="w-full flex items-center justify-between p-5 text-left hover:bg-white/[0.03] transition-colors" aria-expanded={openFaq === i}>
+                  <span className="text-white font-medium text-sm sm:text-base pr-4">{faq.q}</span>
+                  <ChevronDown className={`w-4 h-4 text-white/40 shrink-0 transition-transform duration-200 ${openFaq === i ? "rotate-180" : ""}`} />
+                </button>
+                {openFaq === i && <div className="px-5 pb-5 pt-0"><p className="text-white/50 text-sm leading-relaxed">{faq.a}</p></div>}
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
 
-        {/* CTA */}
-        <CTACard
-          title="Illuminate Your Life"
-          description="Experience lighting that adapts to your lifestyle."
-          buttonText="Schedule Demo"
-          buttonLink="/scheduling?service=smart-lighting"
-        />
-      </div>
-    </Control4ServiceLayout>
+      <section className="py-16 sm:py-20 px-4 sm:px-6">
+        <div className="max-w-3xl mx-auto text-center">
+          <h2 className="text-2xl sm:text-3xl font-bold text-white mb-4">Ready to upgrade your lighting?</h2>
+          <p className="text-white/50 text-base mb-8 max-w-xl mx-auto">Whether it's one room or every room, we'll help you find the right system for your home.</p>
+          <div className="flex flex-col sm:flex-row gap-3 justify-center">
+            <Link to="/scheduling?service=smart-lighting" className="inline-flex items-center justify-center gap-2 bg-accent hover:bg-accent/90 text-white px-8 py-4 rounded-lg font-medium transition-colors text-base">Schedule a Consultation <ArrowRight className="w-4 h-4" /></Link>
+            <a href="tel:+19705193013" className="inline-flex items-center justify-center gap-2 border border-white/20 hover:border-white/40 hover:bg-white/5 text-white px-8 py-4 rounded-lg font-medium transition-colors text-base"><Phone className="w-4 h-4" /> Call Now</a>
+          </div>
+        </div>
+      </section>
+
+      <Footer />
+    </div>
   );
 };
 

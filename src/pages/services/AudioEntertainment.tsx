@@ -1,181 +1,124 @@
-import { Volume2, Music, Tv, Headphones, Play, Pause, SkipBack, SkipForward, Plus, Minus } from "lucide-react";
+import { Link } from "react-router-dom";
+import { ArrowRight, Phone, ArrowLeft, Volume2, Music, Tv, Headphones, CheckCircle2, ChevronDown } from "lucide-react";
 import { useState } from "react";
-import Control4ServiceLayout, { GlassCard, StatsCard, FeatureCard, PricingItem, CTACard } from "../../components/Layout/Control4ServiceLayout";
-import { Slider } from "../../components/ui/slider";
+import Header from "../../components/Header";
+import Footer from "../../components/Footer";
+import SEO from "../../components/SEO";
 
 const AudioEntertainment = () => {
-  const [volume, setVolume] = useState(45);
-  const [isPlaying, setIsPlaying] = useState(true);
-  const [activeZone, setActiveZone] = useState("living");
+  const [openFaq, setOpenFaq] = useState<number | null>(null);
 
   const serviceSchema = {
     "@context": "https://schema.org",
     "@type": "Service",
-    "name": "Audio Entertainment Systems",
-    "provider": {
-      "@type": "LocalBusiness",
-      "name": "Symphony Smart Homes"
-    },
-    "description": "Premium multi-room audio and home theater systems.",
-    "areaServed": "Vail Valley, Colorado"
+    "name": "Audio & Entertainment Systems",
+    "provider": { "@type": "LocalBusiness", "name": "Symphony Smart Homes", "telephone": "+1-970-519-3013" },
+    "description": "Premium multi-room audio and home theater systems for Vail Valley homes.",
+    "areaServed": "Vail Valley, Colorado",
   };
 
-  const zones = [
-    { id: "living", name: "Living Room", playing: "Jazz Classics", volume: 65 },
-    { id: "kitchen", name: "Kitchen", playing: "Morning Mix", volume: 45 },
-    { id: "patio", name: "Patio", playing: "Chill Vibes", volume: 55 },
-    { id: "bedroom", name: "Bedroom", playing: "Sleep Sounds", volume: 20 },
+  const capabilities = [
+    { icon: Music, title: "Multi-Room Audio", description: "Stream music to any room — or every room — from Spotify, Apple Music, or your own library. Independent volume and source per zone." },
+    { icon: Tv, title: "Home Theater", description: "Dedicated cinema rooms with 4K projection, Dolby Atmos surround sound, acoustic treatment, and automated lighting and shades." },
+    { icon: Volume2, title: "Outdoor Audio", description: "Weather-rated speakers for patios, pools, and decks. Landscape speakers that blend into your yard." },
+    { icon: Headphones, title: "Streaming Integration", description: "Sonos, Apple AirPlay, Spotify Connect, and more — all controllable from your phone or Control4 interface." },
   ];
 
-  const sources = [
-    { name: "Spotify", icon: Music, color: "bg-green-500" },
-    { name: "Apple TV", icon: Tv, color: "bg-gray-700" },
-    { name: "Plex", icon: Play, color: "bg-yellow-600" },
-    { name: "AirPlay", icon: Headphones, color: "bg-blue-500" },
+  const faqs = [
+    { q: "What speakers do you recommend?", a: "It depends on the application. We frequently install Sonance for in-wall/in-ceiling, Sonos for flexible multi-room, and dedicated theater speakers from brands like Monitor Audio and JBL Synthesis for cinema rooms." },
+    { q: "Can I use my existing speakers?", a: "Often, yes. We'll evaluate what you have and determine if it makes sense to keep, supplement, or replace. We don't push unnecessary upgrades." },
+    { q: "How much does a home theater cost?", a: "A solid dedicated theater starts around $15,000 for a basic Atmos setup with projection. High-end rooms with acoustic treatment, 4K laser projection, and premium seating can range from $40,000 to $150,000+." },
+    { q: "Can you add speakers to an existing home?", a: "Yes. In-ceiling speakers are relatively easy to retrofit. We can also use wireless solutions like Sonos for rooms where running new wire isn't practical." },
   ];
 
   return (
-    <Control4ServiceLayout
-      title="Audio Entertainment"
-      description="Premium multi-room audio and home theater systems for Vail Valley homes."
-      keywords="multi-room audio, home theater, audio entertainment, streaming systems, Vail Valley"
-      serviceSchema={serviceSchema}
-      icon={Volume2}
-      iconGradient="from-purple-600 to-pink-600"
-      subtitle="Multi-room audio & theater"
-    >
-      <div className="space-y-4">
-        {/* Stats Row */}
-        <div className="grid grid-cols-4 gap-3">
-          <StatsCard value="16" label="Zones" />
-          <StatsCard value="7.2.4" label="Atmos" />
-          <StatsCard value="Hi-Fi" label="Quality" />
-          <StatsCard value="∞" label="Sources" />
+    <div className="min-h-screen bg-primary text-primary-foreground">
+      <SEO title="Audio & Home Theater | Vail Valley" description="Multi-room audio, home theaters, and outdoor speakers. Professional installation in Vail Valley and Eagle County." keywords="home theater, multi-room audio, Sonos, Dolby Atmos, Vail Valley" schema={serviceSchema} />
+      <Header />
+
+      <section className="pt-24 sm:pt-32 pb-16 sm:pb-20 px-4 sm:px-6">
+        <div className="max-w-4xl mx-auto">
+          <Link to="/services" className="inline-flex items-center gap-1.5 text-white/40 hover:text-white/70 text-sm mb-8 transition-colors"><ArrowLeft className="w-3.5 h-3.5" /> All Services</Link>
+          <div className="flex items-center gap-3 mb-4">
+            <div className="w-11 h-11 rounded-lg bg-accent/10 flex items-center justify-center"><Volume2 className="w-5 h-5 text-accent" /></div>
+            <p className="text-accent font-medium text-sm tracking-wide uppercase">Audio & Entertainment</p>
+          </div>
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight mb-5 text-white">Music in every room. Cinema in your home.</h1>
+          <p className="text-white/60 text-base sm:text-lg leading-relaxed mb-8 max-w-2xl">From whole-home audio distribution to dedicated Dolby Atmos theaters, we design and install systems that sound as good as they look — and are easy for everyone in the household to use.</p>
+          <div className="flex flex-col sm:flex-row gap-3">
+            <Link to="/scheduling?service=audio-entertainment" className="inline-flex items-center justify-center gap-2 bg-accent hover:bg-accent/90 text-white px-6 py-3.5 rounded-lg font-medium transition-colors text-base">Schedule a Consultation <ArrowRight className="w-4 h-4" /></Link>
+            <a href="tel:+19705193013" className="inline-flex items-center justify-center gap-2 border border-white/20 hover:border-white/40 hover:bg-white/5 text-white px-6 py-3.5 rounded-lg font-medium transition-colors text-base"><Phone className="w-4 h-4" /> Call Now</a>
+          </div>
         </div>
+      </section>
 
-        {/* Now Playing */}
-        <GlassCard className="p-4">
-          <div className="flex items-center gap-3 mb-4">
-            <div className="w-16 h-16 rounded-xl bg-gradient-to-br from-purple-600 to-pink-700 flex items-center justify-center">
-              <Music className="w-8 h-8 text-white" />
-            </div>
-            <div className="flex-1">
-              <p className="text-white font-medium">Jazz Classics</p>
-              <p className="text-white/60 text-sm">Living Room</p>
-            </div>
+      <section className="py-16 sm:py-24 px-4 sm:px-6 bg-secondary/30 border-y border-white/5">
+        <div className="max-w-4xl mx-auto">
+          <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">What We Install</p>
+          <h2 className="text-2xl sm:text-3xl font-bold text-white mb-10">Audio & theater solutions</h2>
+          <div className="grid sm:grid-cols-2 gap-5">
+            {capabilities.map((item, i) => (
+              <div key={i} className="bg-secondary/80 border border-white/8 rounded-xl p-6">
+                <div className="w-10 h-10 rounded-lg bg-accent/10 flex items-center justify-center mb-3"><item.icon className="w-5 h-5 text-accent" /></div>
+                <h3 className="text-white font-semibold text-lg mb-2">{item.title}</h3>
+                <p className="text-white/50 text-sm leading-relaxed">{item.description}</p>
+              </div>
+            ))}
           </div>
-          
-          {/* Volume Control */}
-          <div className="flex items-center gap-3 mb-4">
-            <Volume2 className="w-5 h-5 text-white/60" />
-            <Slider
-              value={[volume]}
-              onValueChange={(v) => setVolume(v[0])}
-              max={100}
-              step={1}
-              className="flex-1"
-            />
-            <span className="text-white/60 text-sm w-10 text-right">{volume}%</span>
-          </div>
-          
-          {/* Playback Controls */}
-          <div className="flex items-center justify-center gap-4">
-            <button className="p-2 text-white/60 hover:text-white transition-colors">
-              <SkipBack className="w-6 h-6" />
-            </button>
-            <button 
-              onClick={() => setIsPlaying(!isPlaying)}
-              className="p-4 bg-white/20 rounded-full text-white hover:bg-white/30 transition-colors"
-            >
-              {isPlaying ? <Pause className="w-6 h-6" /> : <Play className="w-6 h-6" />}
-            </button>
-            <button className="p-2 text-white/60 hover:text-white transition-colors">
-              <SkipForward className="w-6 h-6" />
-            </button>
-          </div>
-        </GlassCard>
+        </div>
+      </section>
 
-        {/* Zone Selection */}
-        <GlassCard className="p-4">
-          <h3 className="text-white font-medium mb-3">Audio Zones</h3>
+      <section className="py-16 sm:py-24 px-4 sm:px-6">
+        <div className="max-w-4xl mx-auto">
+          <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">The Difference</p>
+          <h2 className="text-2xl sm:text-3xl font-bold text-white mb-10">Professional audio done right</h2>
+          <div className="grid sm:grid-cols-2 gap-5">
+            {[
+              { title: "Designed for Your Space", description: "We account for room dimensions, materials, and furnishings to optimize speaker placement and acoustics." },
+              { title: "Clean Installation", description: "Speakers disappear into walls and ceilings. Wiring is concealed. Equipment is centralized in a ventilated closet or rack." },
+              { title: "Easy to Use", description: "Pick a room, pick a source, set the volume. That's it. No complicated menus or apps to navigate." },
+              { title: "Expandable", description: "Start with a few zones and add more later. Pre-wire now means easy upgrades down the road." },
+            ].map((item, i) => (
+              <div key={i} className="flex gap-4 p-5 rounded-xl border border-white/5 hover:border-white/10 transition-colors">
+                <CheckCircle2 className="w-5 h-5 text-accent shrink-0 mt-0.5" />
+                <div><h3 className="text-white font-semibold mb-1">{item.title}</h3><p className="text-white/50 text-sm leading-relaxed">{item.description}</p></div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="py-16 sm:py-24 px-4 sm:px-6 bg-secondary/30 border-y border-white/5">
+        <div className="max-w-3xl mx-auto">
+          <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">FAQ</p>
+          <h2 className="text-2xl sm:text-3xl font-bold text-white mb-10">Audio Questions</h2>
           <div className="space-y-2">
-            {zones.map((zone) => (
-              <button
-                key={zone.id}
-                onClick={() => setActiveZone(zone.id)}
-                className={`w-full p-3 rounded-xl flex items-center justify-between transition-colors ${
-                  activeZone === zone.id ? "bg-accent/20 border border-accent/30" : "bg-white/5 hover:bg-white/10"
-                }`}
-              >
-                <div className="flex items-center gap-3">
-                  <Volume2 className={`w-5 h-5 ${activeZone === zone.id ? "text-accent" : "text-white/60"}`} />
-                  <div className="text-left">
-                    <p className="text-white text-sm">{zone.name}</p>
-                    <p className="text-white/60 text-xs">{zone.playing}</p>
-                  </div>
-                </div>
-                <div className="flex items-center gap-2">
-                  <div className="w-16 h-1 bg-white/20 rounded-full overflow-hidden">
-                    <div className="h-full bg-accent" style={{ width: `${zone.volume}%` }} />
-                  </div>
-                  <span className="text-white/60 text-xs w-8">{zone.volume}%</span>
-                </div>
-              </button>
+            {faqs.map((faq, i) => (
+              <div key={i} className="border border-white/8 rounded-xl overflow-hidden">
+                <button onClick={() => setOpenFaq(openFaq === i ? null : i)} className="w-full flex items-center justify-between p-5 text-left hover:bg-white/[0.03] transition-colors" aria-expanded={openFaq === i}>
+                  <span className="text-white font-medium text-sm sm:text-base pr-4">{faq.q}</span>
+                  <ChevronDown className={`w-4 h-4 text-white/40 shrink-0 transition-transform duration-200 ${openFaq === i ? "rotate-180" : ""}`} />
+                </button>
+                {openFaq === i && <div className="px-5 pb-5 pt-0"><p className="text-white/50 text-sm leading-relaxed">{faq.a}</p></div>}
+              </div>
             ))}
           </div>
-        </GlassCard>
-
-        {/* Sources */}
-        <GlassCard className="p-4">
-          <h3 className="text-white font-medium mb-3">Sources</h3>
-          <div className="grid grid-cols-4 gap-2">
-            {sources.map((source) => (
-              <button
-                key={source.name}
-                className="p-3 bg-white/5 hover:bg-white/10 rounded-xl transition-colors text-center"
-              >
-                <div className={`w-10 h-10 ${source.color} rounded-lg flex items-center justify-center mx-auto mb-2`}>
-                  <source.icon className="w-5 h-5 text-white" />
-                </div>
-                <span className="text-white/80 text-xs">{source.name}</span>
-              </button>
-            ))}
-          </div>
-        </GlassCard>
-
-        {/* Features */}
-        <div className="grid grid-cols-2 gap-3">
-          <FeatureCard
-            icon={Music}
-            title="Multi-Room"
-            description="Synchronized audio throughout"
-            iconColor="text-purple-400"
-          />
-          <FeatureCard
-            icon={Tv}
-            title="Home Theater"
-            description="Dolby Atmos surround"
-            iconColor="text-blue-400"
-          />
         </div>
+      </section>
 
-        {/* Pricing */}
-        <GlassCard className="p-4">
-          <h3 className="text-white font-medium mb-3">Audio Packages</h3>
-          <PricingItem label="4-Zone System" price="$2,500+" />
-          <PricingItem label="8-Zone System" price="$4,800+" />
-          <PricingItem label="Home Theater 7.2.4" price="$15,000+" />
-        </GlassCard>
+      <section className="py-16 sm:py-20 px-4 sm:px-6">
+        <div className="max-w-3xl mx-auto text-center">
+          <h2 className="text-2xl sm:text-3xl font-bold text-white mb-4">Ready to upgrade your audio?</h2>
+          <p className="text-white/50 text-base mb-8 max-w-xl mx-auto">Whether it's a single room or a full-home system, we'll help you find the right solution for your space and budget.</p>
+          <div className="flex flex-col sm:flex-row gap-3 justify-center">
+            <Link to="/scheduling?service=audio-entertainment" className="inline-flex items-center justify-center gap-2 bg-accent hover:bg-accent/90 text-white px-8 py-4 rounded-lg font-medium transition-colors text-base">Schedule a Consultation <ArrowRight className="w-4 h-4" /></Link>
+            <a href="tel:+19705193013" className="inline-flex items-center justify-center gap-2 border border-white/20 hover:border-white/40 hover:bg-white/5 text-white px-8 py-4 rounded-lg font-medium transition-colors text-base"><Phone className="w-4 h-4" /> Call Now</a>
+          </div>
+        </div>
+      </section>
 
-        {/* CTA */}
-        <CTACard
-          title="Experience Premium Audio"
-          description="Fill every room with crystal-clear sound."
-          buttonText="Schedule Demo"
-          buttonLink="/scheduling?service=audio-entertainment"
-        />
-      </div>
-    </Control4ServiceLayout>
+      <Footer />
+    </div>
   );
 };
 
