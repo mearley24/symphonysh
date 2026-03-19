@@ -112,7 +112,7 @@ const About = () => {
       </section>
 
       <Footer />
-    </div>
+    </PageBackground>
   );
 };
 

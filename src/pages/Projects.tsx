@@ -96,7 +96,7 @@ const Projects = () => {
       </section>
 
       <Footer />
-    </div>
+    </PageBackground>
   );
 };
 

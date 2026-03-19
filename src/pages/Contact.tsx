@@ -168,7 +168,7 @@ const Contact = () => {
       </section>
 
       <Footer />
-    </div>
+    </PageBackground>
   );
 };
 

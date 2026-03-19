@@ -214,7 +214,7 @@ const Services = () => {
       </section>
 
       <Footer />
-    </div>
+    </PageBackground>
   );
 };
 

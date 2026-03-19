@@ -151,7 +151,7 @@ const Matterport = () => {
       </section>
 
       <Footer />
-    </div>
+    </PageBackground>
   );
 };
 
