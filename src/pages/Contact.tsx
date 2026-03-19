@@ -5,6 +5,8 @@ import { useToast } from "@/components/ui/use-toast";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import SEO from "../components/SEO";
+import PageBackground from "../components/PageBackground";
+import bgContact from "../assets/bg-contact.jpg";
 
 const Contact = () => {
   const [name, setName] = useState("");
