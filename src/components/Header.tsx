@@ -39,7 +39,7 @@ const Header = () => {
     <>
       <header
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-          scrolled ? "bg-primary/90 backdrop-blur-xl border-b border-white/[0.06]" : ""
+          scrolled ? "bg-black/40 backdrop-blur-xl border-b border-white/[0.06]" : ""
         }`}
       >
         <div className="max-w-6xl mx-auto px-4 sm:px-6 pt-5 pb-3">
