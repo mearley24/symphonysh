@@ -1,5 +1,6 @@
 
 import { Routes, Route } from "react-router-dom";
+import Walkthrough from "./pages/Walkthrough";
 import Scheduling from "./pages/scheduling";
 import NotFound from "./pages/NotFound";
 import { Toaster } from "@/components/ui/toaster";
