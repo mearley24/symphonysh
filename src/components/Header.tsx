@@ -38,16 +38,22 @@ const Header = () => {
   return (
     <>
       <header
-        className="fixed top-0 left-0 right-0 z-50 pointer-events-none"
+        className="fixed top-0 left-0 right-0 z-50 pointer-events-none transition-all duration-500"
       >
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 pt-5 pb-3">
-          {/* Centered logo */}
-          <div className="flex justify-center mb-3">
+        <div className={`max-w-6xl mx-auto px-4 sm:px-6 transition-all duration-500 ${
+          scrolled ? 'pt-2 pb-1' : 'pt-5 pb-3'
+        }`}>
+          {/* Logo - centered then shrinks to top-left */}
+          <div className={`flex mb-3 transition-all duration-500 ${
+            scrolled ? 'justify-start' : 'justify-center'
+          }`}>
             <Link to="/" className="shrink-0 pointer-events-auto">
               <img
                 src="/lovable-uploads/1d7a78ef-4d02-453d-aeea-81e50fb784b6.png"
                 alt="Symphony Smart Homes"
-                className="h-32 sm:h-40 w-auto"
+                className={`w-auto transition-all duration-500 ${
+                  scrolled ? 'h-14 sm:h-16' : 'h-32 sm:h-40'
+                }`}
                 style={{ backgroundColor: 'hsl(0 0% 7% / 0.85)', borderRadius: '8px' }}
               />
             </Link>
