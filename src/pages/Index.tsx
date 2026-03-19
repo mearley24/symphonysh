@@ -1,170 +1,343 @@
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { Phone, ArrowRight, Cable, Monitor, Wrench, ScanLine, CheckCircle2, ChevronDown, MapPin, Mail, Clock } from "lucide-react";
 import { useState } from "react";
-import { 
-  ArrowRight, Home, Volume2, Shield, Lightbulb, Thermometer, 
-  Wifi, Wrench, Sun, Grid3X3, Heart, Star, Settings, Play,
-  Phone, Calendar, MapPin, Tv
-} from "lucide-react";
+import Header from "../components/Header";
+import Footer from "../components/Footer";
 import SEO from "../components/SEO";
 
 const Index = () => {
-  const location = useLocation();
+  const [openFaq, setOpenFaq] = useState<number | null>(null);
 
-  const allServices = [
-    { icon: Home, title: "Automation", link: "/services/home-integration", gradient: "from-blue-600 to-purple-700", desc: "Control4 integration" },
-    { icon: Volume2, title: "Audio", link: "/services/audio-entertainment", gradient: "from-purple-600 to-pink-700", desc: "Multi-room & theater" },
-    { icon: Shield, title: "Security", link: "/services/security-systems", gradient: "from-red-500 to-pink-600", desc: "Cameras & access" },
-    { icon: Lightbulb, title: "Lighting", link: "/services/smart-lighting", gradient: "from-yellow-500 to-amber-600", desc: "Smart illumination" },
-    { icon: Thermometer, title: "Climate", link: "/services/climate-control", gradient: "from-blue-500 to-cyan-500", desc: "HVAC control" },
-    { icon: Wifi, title: "Networking", link: "/services/networking", gradient: "from-green-500 to-teal-500", desc: "Enterprise WiFi" },
-    { icon: Sun, title: "Shades", link: "/services/shades", gradient: "from-amber-500 to-orange-500", desc: "Window automation" },
-    { icon: Wrench, title: "Maintenance", link: "/services/maintenance", gradient: "from-orange-500 to-red-500", desc: "24/7 support" },
+  const services = [
+    {
+      icon: Cable,
+      title: "Pre-Wire & Structured Wiring",
+      description: "Future-proof your new build or renovation with clean, organized low-voltage wiring for audio, video, networking, and automation.",
+      link: "/services/networking",
+    },
+    {
+      icon: Monitor,
+      title: "Installation & Integration",
+      description: "Expert mounting, configuration, and programming of TVs, speakers, lighting, shades, and whole-home control systems.",
+      link: "/services/home-integration",
+    },
+    {
+      icon: Wrench,
+      title: "Maintenance & Troubleshooting",
+      description: "Keep your systems running smoothly. We diagnose issues, update firmware, and resolve problems — on-site or remotely.",
+      link: "/services/maintenance",
+    },
+    {
+      icon: ScanLine,
+      title: "Matterport 3D Scanning",
+      description: "Immersive 3D virtual tours for real estate listings, construction documentation, and property records.",
+      link: "/matterport",
+    },
   ];
 
-  const bottomNav = [
-    { icon: Home, label: "Home", path: "/" },
-    { icon: Grid3X3, label: "Services", path: "/services" },
-    { icon: Heart, label: "Projects", path: "/projects" },
-    { icon: Star, label: "About", path: "/about" },
-    { icon: Settings, label: "Contact", path: "/contact" },
+  const steps = [
+    { number: "01", title: "Consultation", description: "We discuss your goals, walk the property, and understand how you actually live in your home." },
+    { number: "02", title: "Design & Proposal", description: "You receive a clear scope of work with transparent pricing — no surprises." },
+    { number: "03", title: "Installation", description: "Our team handles wiring, mounting, and programming with minimal disruption to your schedule." },
+    { number: "04", title: "Training & Handoff", description: "We walk you through everything until you're comfortable, then provide ongoing support." },
   ];
 
-  const stats = [
-    { value: "500+", label: "Projects" },
-    { value: "15+", label: "Years" },
-    { value: "24/7", label: "Support" },
-    { value: "5★", label: "Rating" },
+  const differentiators = [
+    { title: "Local to Vail Valley", description: "We live and work here. We understand mountain construction, altitude challenges, and the expectations of homeowners in this market." },
+    { title: "One Point of Contact", description: "You work directly with us from start to finish — no subcontractors, no finger-pointing, no runaround." },
+    { title: "Built for the Long Term", description: "We design systems that are easy to maintain and upgrade. No proprietary lock-in, no orphaned technology." },
+    { title: "Responsive Support", description: "When something needs attention, we answer the phone. Remote diagnostics and on-site service when you need it." },
   ];
+
+  const faqs = [
+    { q: "How much does a typical smart home project cost?", a: "It depends on the scope. A single-room setup might start around $1,500, while a whole-home system for a new build can range from $15,000 to $80,000+. We provide detailed proposals after an initial consultation so you know exactly what to expect." },
+    { q: "Do you work with builders and general contractors?", a: "Yes. A significant portion of our work is pre-wire and rough-in during new construction. We coordinate directly with your GC, electrician, and architect to ensure everything is planned correctly from the start." },
+    { q: "Can you work on an existing home, or only new builds?", a: "Both. We retrofit existing homes regularly. Some projects require creative solutions for wire routing, but we've handled everything from ski condos to large estates." },
+    { q: "What brands do you work with?", a: "We're brand-agnostic and choose the best tool for the job. We frequently work with Control4, Sonos, Lutron, Sonance, Araknis, and others depending on your needs and budget." },
+    { q: "How long does a typical installation take?", a: "A straightforward TV mount or speaker install can be done in a few hours. Whole-home systems in new construction are phased across the build timeline — typically 3–6 months from pre-wire to final programming." },
+    { q: "Do you offer ongoing maintenance?", a: "Yes. We offer maintenance packages and are always available for one-off service calls. Many issues can be resolved remotely, saving you time and money." },
+    { q: "What areas do you serve?", a: "We serve the entire Vail Valley and Eagle County area — including Vail, Beaver Creek, Avon, Edwards, Eagle, Minturn, and surrounding communities." },
+  ];
+
+  const serviceSchema = {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "Symphony Smart Homes",
+    "description": "Professional smart home integration, pre-wire, installation, and maintenance serving Vail Valley and Eagle County, Colorado.",
+    "areaServed": "Vail Valley, Eagle County, Colorado",
+    "telephone": "+1-970-519-3013",
+    "url": "https://symphonysh.com",
+    "address": {
+      "@type": "PostalAddress",
+      "addressRegion": "CO",
+      "addressLocality": "Eagle County"
+    },
+    "sameAs": [],
+    "serviceType": ["Smart Home Installation", "Pre-Wire", "Home Automation", "Matterport 3D Scanning"]
+  };
 
   return (
-    <div className="h-screen bg-gradient-to-br from-slate-900 via-purple-950 to-slate-900 text-white overflow-hidden flex flex-col">
-      <SEO 
-        title="Symphony Smart Homes - Premium Home Automation in Vail Valley"
-        description="Transform your Vail Valley home with Control4 smart home automation. Expert installation of home theaters, lighting, security, and integrated smart home systems."
-        keywords="smart home automation, Control4, home theater, Vail Valley, Colorado, home integration, smart lighting, security systems"
+    <div className="min-h-screen bg-primary text-primary-foreground">
+      <SEO
+        title="Symphony Smart Homes | Smart Home Integration in Vail Valley"
+        description="Professional smart home pre-wire, installation, and maintenance in Vail Valley & Eagle County. Trusted local integrators for new builds and existing homes."
+        keywords="smart home installation, pre-wire, home automation, Vail Valley, Eagle County, Control4, TV mounting, home theater"
+        schema={serviceSchema}
       />
-      
-      {/* Status Bar */}
-      <div className="h-6 bg-black/30 flex items-center justify-between px-6 text-xs text-white/60 shrink-0">
-        <span>Symphony</span>
-        <span>●●●●● LTE</span>
-      </div>
 
-      {/* Main Dashboard Content */}
-      <div className="flex-1 overflow-hidden px-4 py-3 flex flex-col gap-3 pb-20">
-        
-        {/* Hero Row — Logo + text left, accent image right */}
-        <div className="flex items-center gap-4 bg-gradient-to-r from-purple-600/30 to-blue-600/30 backdrop-blur-md rounded-2xl border border-white/15 p-4 shrink-0">
-          <div className="flex-1 min-w-0">
-            <div className="flex items-center gap-3 mb-2">
-              <img 
-                src="/lovable-uploads/1d7a78ef-4d02-453d-aeea-81e50fb784b6.png" 
-                alt="Symphony Smart Homes" 
-                className="h-10 w-auto"
-              />
-              <div>
-                <h1 className="text-lg font-bold text-white leading-tight">Symphony Smart Homes</h1>
-                <p className="text-white/60 text-xs">Premium Control4 Automation</p>
+      <Header />
+
+      {/* Hero */}
+      <section className="relative pt-24 sm:pt-32 pb-16 sm:pb-24 px-4 sm:px-6">
+        <div className="max-w-5xl mx-auto">
+          <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
+            <div>
+              <p className="text-accent font-medium text-sm tracking-wide uppercase mb-3">Vail Valley's Smart Home Integrator</p>
+              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight mb-5 text-white">
+                Smart home systems that actually work — and keep working.
+              </h1>
+              <p className="text-white/60 text-base sm:text-lg leading-relaxed mb-8">
+                We design, install, and maintain reliable smart home technology for homeowners and builders across Eagle County. Pre-wire to programming, one team handles it all.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-3">
+                <a
+                  href="tel:+19705193013"
+                  className="inline-flex items-center justify-center gap-2 bg-accent hover:bg-accent/90 text-white px-6 py-3.5 rounded-lg font-medium transition-colors text-base"
+                >
+                  <Phone className="w-4 h-4" />
+                  (970) 519-3013
+                </a>
+                <Link
+                  to="/contact"
+                  className="inline-flex items-center justify-center gap-2 border border-white/20 hover:border-white/40 hover:bg-white/5 text-white px-6 py-3.5 rounded-lg font-medium transition-colors text-base"
+                >
+                  Request a Consultation
+                  <ArrowRight className="w-4 h-4" />
+                </Link>
               </div>
             </div>
-            <div className="flex items-center gap-1 text-white/50 text-xs mb-3">
-              <MapPin className="w-3 h-3" />
-              <span>Vail Valley, Colorado</span>
-            </div>
-            <div className="flex gap-2">
-              <Link 
-                to="/services/home-integration"
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white/15 hover:bg-white/25 rounded-lg text-xs font-medium transition-colors"
-              >
-                <Play className="w-3 h-3" /> Live Demo
-              </Link>
-              <Link 
-                to="/scheduling"
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-accent hover:bg-accent/90 rounded-lg text-xs font-medium transition-colors"
-              >
-                Schedule <ArrowRight className="w-3 h-3" />
-              </Link>
+            <div className="relative">
+              <div className="aspect-[4/3] rounded-2xl overflow-hidden border border-white/10">
+                <img
+                  src="/lovable-uploads/home theater/IMG_0979.JPG"
+                  alt="Home theater installation by Symphony Smart Homes in Vail Valley"
+                  className="w-full h-full object-cover"
+                  loading="eager"
+                />
+              </div>
+              <div className="absolute -bottom-4 -left-4 bg-secondary border border-white/10 rounded-xl p-3 hidden sm:block">
+                <p className="text-accent text-sm font-semibold">Serving Eagle County</p>
+                <p className="text-white/50 text-xs">Vail · Beaver Creek · Edwards · Avon</p>
+              </div>
             </div>
           </div>
-          {/* Small accent image */}
-          <div className="w-28 h-28 rounded-xl overflow-hidden shrink-0 border border-white/10">
-            <img 
-              src="/lovable-uploads/home theater/IMG_0979.JPG" 
-              alt="Home Theater Installation" 
-              className="w-full h-full object-cover"
-            />
+        </div>
+      </section>
+
+      {/* Trust Strip */}
+      <section className="border-y border-white/10 py-6 sm:py-8 px-4 sm:px-6 bg-secondary/50">
+        <div className="max-w-5xl mx-auto">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 text-center">
+            <div>
+              <p className="text-white font-semibold text-lg">Local</p>
+              <p className="text-white/50 text-sm">Vail Valley based</p>
+            </div>
+            <div>
+              <p className="text-white font-semibold text-lg">Licensed</p>
+              <p className="text-white/50 text-sm">& fully insured</p>
+            </div>
+            <div>
+              <p className="text-white font-semibold text-lg">Full-Service</p>
+              <p className="text-white/50 text-sm">Pre-wire to support</p>
+            </div>
+            <div>
+              <p className="text-white font-semibold text-lg">Responsive</p>
+              <p className="text-white/50 text-sm">We answer the phone</p>
+            </div>
           </div>
         </div>
+      </section>
 
-        {/* Stats Row */}
-        <div className="grid grid-cols-4 gap-2 shrink-0">
-          {stats.map((stat) => (
-            <div key={stat.label} className="bg-white/8 backdrop-blur-md rounded-xl border border-white/10 p-2 text-center">
-              <div className="text-base font-bold text-white">{stat.value}</div>
-              <div className="text-[10px] text-white/50">{stat.label}</div>
-            </div>
-          ))}
-        </div>
-
-        {/* Services Grid — 4x2 */}
-        <div className="flex-1 grid grid-cols-4 grid-rows-2 gap-2 min-h-0">
-          {allServices.map((service, index) => (
-            <Link key={index} to={service.link} className="min-h-0">
-              <div className={`bg-gradient-to-br ${service.gradient} rounded-xl p-3 h-full flex flex-col justify-between transition-all duration-200 hover:scale-[1.02] hover:shadow-lg`}>
-                <div className="w-9 h-9 bg-white/20 rounded-lg flex items-center justify-center mb-1.5">
-                  <service.icon className="w-4.5 h-4.5 text-white" />
+      {/* Services */}
+      <section className="py-16 sm:py-24 px-4 sm:px-6" id="services">
+        <div className="max-w-5xl mx-auto">
+          <div className="text-center mb-12">
+            <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">What We Do</p>
+            <h2 className="text-2xl sm:text-3xl font-bold text-white">Core Services</h2>
+          </div>
+          <div className="grid sm:grid-cols-2 gap-4">
+            {services.map((service, i) => (
+              <Link key={i} to={service.link} className="group">
+                <div className="bg-secondary/80 border border-white/8 rounded-xl p-6 h-full hover:border-accent/30 hover:bg-secondary transition-all duration-200">
+                  <div className="w-11 h-11 rounded-lg bg-accent/10 flex items-center justify-center mb-4 group-hover:bg-accent/20 transition-colors">
+                    <service.icon className="w-5 h-5 text-accent" />
+                  </div>
+                  <h3 className="text-white font-semibold text-lg mb-2">{service.title}</h3>
+                  <p className="text-white/50 text-sm leading-relaxed">{service.description}</p>
+                  <span className="inline-flex items-center gap-1 text-accent text-sm font-medium mt-4 group-hover:gap-2 transition-all">
+                    Learn more <ArrowRight className="w-3.5 h-3.5" />
+                  </span>
                 </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* How It Works */}
+      <section className="py-16 sm:py-24 px-4 sm:px-6 bg-secondary/30 border-y border-white/5">
+        <div className="max-w-5xl mx-auto">
+          <div className="text-center mb-12">
+            <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">Our Process</p>
+            <h2 className="text-2xl sm:text-3xl font-bold text-white">How It Works</h2>
+          </div>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {steps.map((step, i) => (
+              <div key={i} className="relative">
+                <span className="text-accent/20 text-5xl font-bold absolute -top-2 -left-1">{step.number}</span>
+                <div className="pt-10">
+                  <h3 className="text-white font-semibold text-base mb-2">{step.title}</h3>
+                  <p className="text-white/50 text-sm leading-relaxed">{step.description}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Why Symphony */}
+      <section className="py-16 sm:py-24 px-4 sm:px-6">
+        <div className="max-w-5xl mx-auto">
+          <div className="text-center mb-12">
+            <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">Why Us</p>
+            <h2 className="text-2xl sm:text-3xl font-bold text-white">Why Homeowners Choose Symphony</h2>
+          </div>
+          <div className="grid sm:grid-cols-2 gap-5">
+            {differentiators.map((item, i) => (
+              <div key={i} className="flex gap-4 p-5 rounded-xl border border-white/5 hover:border-white/10 transition-colors">
+                <CheckCircle2 className="w-5 h-5 text-accent shrink-0 mt-0.5" />
                 <div>
-                  <h3 className="text-white font-semibold text-sm leading-tight">{service.title}</h3>
-                  <p className="text-white/70 text-[10px] leading-tight mt-0.5">{service.desc}</p>
+                  <h3 className="text-white font-semibold mb-1">{item.title}</h3>
+                  <p className="text-white/50 text-sm leading-relaxed">{item.description}</p>
                 </div>
               </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ */}
+      <section className="py-16 sm:py-24 px-4 sm:px-6 bg-secondary/30 border-y border-white/5">
+        <div className="max-w-3xl mx-auto">
+          <div className="text-center mb-12">
+            <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">FAQ</p>
+            <h2 className="text-2xl sm:text-3xl font-bold text-white">Common Questions</h2>
+          </div>
+          <div className="space-y-2">
+            {faqs.map((faq, i) => (
+              <div key={i} className="border border-white/8 rounded-xl overflow-hidden">
+                <button
+                  onClick={() => setOpenFaq(openFaq === i ? null : i)}
+                  className="w-full flex items-center justify-between p-5 text-left hover:bg-white/3 transition-colors"
+                  aria-expanded={openFaq === i}
+                >
+                  <span className="text-white font-medium text-sm sm:text-base pr-4">{faq.q}</span>
+                  <ChevronDown className={`w-4 h-4 text-white/40 shrink-0 transition-transform duration-200 ${openFaq === i ? "rotate-180" : ""}`} />
+                </button>
+                {openFaq === i && (
+                  <div className="px-5 pb-5 pt-0">
+                    <p className="text-white/50 text-sm leading-relaxed">{faq.a}</p>
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Final CTA */}
+      <section className="py-16 sm:py-24 px-4 sm:px-6">
+        <div className="max-w-3xl mx-auto text-center">
+          <h2 className="text-2xl sm:text-3xl font-bold text-white mb-4">Ready to get started?</h2>
+          <p className="text-white/50 text-base mb-8 max-w-xl mx-auto">
+            Whether you're building new, renovating, or just need something fixed — give us a call or send a message. No pressure, no sales pitch.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-3 justify-center">
+            <a
+              href="tel:+19705193013"
+              className="inline-flex items-center justify-center gap-2 bg-accent hover:bg-accent/90 text-white px-8 py-4 rounded-lg font-medium transition-colors text-base"
+            >
+              <Phone className="w-4 h-4" />
+              (970) 519-3013
+            </a>
+            <Link
+              to="/contact"
+              className="inline-flex items-center justify-center gap-2 border border-white/20 hover:border-white/40 hover:bg-white/5 text-white px-8 py-4 rounded-lg font-medium transition-colors text-base"
+            >
+              <Mail className="w-4 h-4" />
+              Send a Message
             </Link>
-          ))}
+          </div>
+          <div className="flex items-center justify-center gap-2 mt-6 text-white/30 text-sm">
+            <MapPin className="w-3.5 h-3.5" />
+            <span>Serving Vail, Beaver Creek, Avon, Edwards, Eagle & surrounding areas</span>
+          </div>
         </div>
+      </section>
 
-        {/* Bottom Actions Row */}
-        <div className="grid grid-cols-3 gap-2 shrink-0">
-          <a href="tel:+19705193013" className="bg-white/8 backdrop-blur-md rounded-xl border border-white/10 p-3 text-center hover:bg-white/12 transition-colors">
-            <Phone className="w-5 h-5 text-green-400 mx-auto mb-1" />
-            <span className="text-white text-xs font-medium block">(970) 519-3013</span>
-            <span className="text-white/40 text-[10px]">Call Now</span>
-          </a>
-          <Link to="/scheduling" className="bg-accent/20 backdrop-blur-md rounded-xl border border-accent/30 p-3 text-center hover:bg-accent/30 transition-colors">
-            <Calendar className="w-5 h-5 text-accent mx-auto mb-1" />
-            <span className="text-white text-xs font-medium block">Schedule</span>
-            <span className="text-white/40 text-[10px]">Free Consult</span>
-          </Link>
-          <Link to="/projects" className="bg-white/8 backdrop-blur-md rounded-xl border border-white/10 p-3 text-center hover:bg-white/12 transition-colors">
-            <Tv className="w-5 h-5 text-purple-400 mx-auto mb-1" />
-            <span className="text-white text-xs font-medium block">Portfolio</span>
-            <span className="text-white/40 text-[10px]">View Work</span>
-          </Link>
+      {/* Footer */}
+      <footer className="border-t border-white/10 py-10 px-4 sm:px-6 bg-secondary/50">
+        <div className="max-w-5xl mx-auto">
+          <div className="grid sm:grid-cols-3 gap-8 mb-8">
+            <div>
+              <img
+                src="/lovable-uploads/1d7a78ef-4d02-453d-aeea-81e50fb784b6.png"
+                alt="Symphony Smart Homes"
+                className="h-10 w-auto mb-3"
+              />
+              <p className="text-white/40 text-sm leading-relaxed">
+                Professional smart home integration for Vail Valley and Eagle County.
+              </p>
+            </div>
+            <div>
+              <h4 className="text-white font-semibold text-sm mb-3">Services</h4>
+              <ul className="space-y-2">
+                <li><Link to="/services/networking" className="text-white/40 hover:text-white/70 text-sm transition-colors">Pre-Wire & Networking</Link></li>
+                <li><Link to="/services/home-integration" className="text-white/40 hover:text-white/70 text-sm transition-colors">Installation & Integration</Link></li>
+                <li><Link to="/services/maintenance" className="text-white/40 hover:text-white/70 text-sm transition-colors">Maintenance</Link></li>
+                <li><Link to="/matterport" className="text-white/40 hover:text-white/70 text-sm transition-colors">Matterport 3D Scanning</Link></li>
+              </ul>
+            </div>
+            <div>
+              <h4 className="text-white font-semibold text-sm mb-3">Contact</h4>
+              <ul className="space-y-2">
+                <li>
+                  <a href="tel:+19705193013" className="text-white/40 hover:text-white/70 text-sm transition-colors flex items-center gap-2">
+                    <Phone className="w-3.5 h-3.5" /> (970) 519-3013
+                  </a>
+                </li>
+                <li>
+                  <Link to="/contact" className="text-white/40 hover:text-white/70 text-sm transition-colors flex items-center gap-2">
+                    <Mail className="w-3.5 h-3.5" /> Contact Form
+                  </Link>
+                </li>
+                <li>
+                  <span className="text-white/40 text-sm flex items-center gap-2">
+                    <MapPin className="w-3.5 h-3.5" /> Eagle County, Colorado
+                  </span>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div className="border-t border-white/8 pt-6 flex flex-col sm:flex-row justify-between items-center gap-3">
+            <p className="text-white/30 text-xs">© {new Date().getFullYear()} Symphony Smart Homes. All rights reserved.</p>
+            <div className="flex gap-4">
+              <Link to="/privacy" className="text-white/30 hover:text-white/50 text-xs transition-colors">Privacy Policy</Link>
+              <Link to="/terms" className="text-white/30 hover:text-white/50 text-xs transition-colors">Terms</Link>
+            </div>
+          </div>
         </div>
-      </div>
-
-      {/* Bottom Navigation Dock */}
-      <div className="fixed bottom-0 left-0 right-0 bg-black/40 backdrop-blur-xl border-t border-white/10">
-        <div className="flex justify-around items-center py-3 px-4">
-          {bottomNav.map((item) => {
-            const isActive = location.pathname === item.path;
-            return (
-              <Link
-                key={item.label}
-                to={item.path}
-                className={`flex flex-col items-center gap-1 px-3 py-1 rounded-lg transition-all ${
-                  isActive 
-                    ? "text-white bg-white/10" 
-                    : "text-white/50 hover:text-white/80"
-                }`}
-              >
-                <item.icon className="w-5 h-5" />
-                <span className="text-[10px]">{item.label}</span>
-              </Link>
-            );
-          })}
-        </div>
-      </div>
+      </footer>
     </div>
   );
 };
