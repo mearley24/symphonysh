@@ -303,7 +303,7 @@ const Index = () => {
             <div>
               <h4 className="text-white font-semibold text-sm mb-3">Services</h4>
               <ul className="space-y-2">
-                <li><Link to="/walkthrough" className="text-white/40 hover:text-white/70 text-sm transition-colors">Pre-Wire & Networking</Link></li>
+                <li><Link to="/services/prewire" className="text-white/40 hover:text-white/70 text-sm transition-colors">Pre-Wire & Networking</Link></li>
                 <li><Link to="/install" className="text-white/40 hover:text-white/70 text-sm transition-colors">Installation & Integration</Link></li>
                 <li><Link to="/troubleshooting" className="text-white/40 hover:text-white/70 text-sm transition-colors">Maintenance</Link></li>
                 <li><Link to="/matterport" className="text-white/40 hover:text-white/70 text-sm transition-colors">Matterport 3D Scanning</Link></li>

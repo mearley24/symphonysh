@@ -102,7 +102,8 @@ function App() {
           <Route path="/networking" element={<Networking />} />
           <Route path="/services/security-systems" element={<SecuritySystems />} />
           <Route path="/services/shades" element={<Shades />} />
-          <Route path="/services/smart-lighting" element={<SmartLighting />} />
+           <Route path="/services/smart-lighting" element={<SmartLighting />} />
+           <Route path="/services/prewire" element={<PreWire />} />
           
           {/* Scheduling routes */}
           <Route path="/scheduling" element={<Scheduling />} />
