@@ -26,7 +26,7 @@ const benefits = [
 const faqs = [
   { q: "When should pre-wire happen during construction?", a: "Ideally during the rough-in phase, after framing is complete but before insulation and drywall. This gives us full access to wall cavities, ceiling joists, and conduit paths." },
   { q: "What types of cable do you install?", a: "We install Cat6/Cat6a for networking, 14/2 and 16/4 speaker wire for audio, RG6 coax for satellite/antenna, HDMI and fiber for video distribution, and low-voltage control wiring for keypads and sensors." },
-  { q: "Can you add wiring to an existing home?", a: "Yes. We pre-wire and retrofit with as little drywall damage as possible. We use existing pathways, attic and crawl space access, and sometimes surface-mount raceways to get cables where they need to go." },
+  { q: "Can you add wiring to an existing home?", a: "Yes. We pre-wire and retrofit with as little drywall damage as possible. We use existing pathways, attic and crawl space access, and conduit runs to get cables where they need to go. Surface-mount raceways are only used as a last resort or when specifically requested by the client." },
   { q: "Do you work with our builder or GC?", a: "Absolutely. We coordinate directly with your construction team. We review plans, attend walk-throughs, and schedule our work around the build timeline." },
   { q: "How much does pre-wiring cost?", a: "It depends on the size of the home and scope of the system. A typical new-build pre-wire ranges from $3,000 to $15,000+. We provide a detailed proposal after reviewing your plans." },
 ];
