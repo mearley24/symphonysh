@@ -112,7 +112,7 @@ const Index = () => {
               <span className="w-8 h-px bg-accent" />
               Design. Install. Maintain.
             </p>
-            <h1 className="animate-fade-in text-4xl sm:text-5xl lg:text-6xl font-bold leading-[1.1] mb-6 text-white [animation-delay:100ms]">
+            <h1 className="animate-fade-in text-5xl sm:text-6xl lg:text-7xl font-extrabold leading-[0.95] mb-6 text-white [animation-delay:100ms]">
               We build smart homes that just work.
             </h1>
             <p className="animate-fade-in text-white/60 text-lg sm:text-xl leading-relaxed mb-10 max-w-lg [animation-delay:200ms]">
