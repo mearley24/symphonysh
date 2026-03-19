@@ -13,19 +13,19 @@ const Index = () => {
       icon: Cable,
       title: "Pre-Wire & Structured Wiring",
       description: "Future-proof your new build or renovation with clean, organized low-voltage wiring for audio, video, networking, and automation.",
-      link: "/services/networking",
+      link: "/walkthrough",
     },
     {
       icon: Monitor,
       title: "Installation & Integration",
       description: "Expert mounting, configuration, and programming of TVs, speakers, lighting, shades, and whole-home control systems.",
-      link: "/services/home-integration",
+      link: "/install",
     },
     {
       icon: Wrench,
       title: "Maintenance & Troubleshooting",
       description: "Keep your systems running smoothly. We diagnose issues, update firmware, and resolve problems — on-site or remotely.",
-      link: "/services/maintenance",
+      link: "/troubleshooting",
     },
     {
       icon: ScanLine,
@@ -100,20 +100,20 @@ const Index = () => {
                 We design, install, and maintain reliable smart home technology for homeowners and builders across Eagle County. Pre-wire to programming, one team handles it all.
               </p>
               <div className="flex flex-col sm:flex-row gap-3">
-                <a
-                  href="tel:+19705193013"
+                <Link
+                  to="/walkthrough"
                   className="inline-flex items-center justify-center gap-2 bg-accent hover:bg-accent/90 text-white px-6 py-3.5 rounded-lg font-medium transition-colors text-base"
                 >
-                  <Phone className="w-4 h-4" />
-                  (970) 519-3013
-                </a>
-                <Link
-                  to="/contact"
-                  className="inline-flex items-center justify-center gap-2 border border-white/20 hover:border-white/40 hover:bg-white/5 text-white px-6 py-3.5 rounded-lg font-medium transition-colors text-base"
-                >
-                  Request a Consultation
+                  Schedule a Walkthrough
                   <ArrowRight className="w-4 h-4" />
                 </Link>
+                <a
+                  href="tel:+19705193013"
+                  className="inline-flex items-center justify-center gap-2 border border-white/20 hover:border-white/40 hover:bg-white/5 text-white px-6 py-3.5 rounded-lg font-medium transition-colors text-base"
+                >
+                  <Phone className="w-4 h-4" />
+                  Call Now
+                </a>
               </div>
             </div>
             <div className="relative">
@@ -263,20 +263,20 @@ const Index = () => {
             Whether you're building new, renovating, or just need something fixed — give us a call or send a message. No pressure, no sales pitch.
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
-            <a
-              href="tel:+19705193013"
+            <Link
+              to="/walkthrough"
               className="inline-flex items-center justify-center gap-2 bg-accent hover:bg-accent/90 text-white px-8 py-4 rounded-lg font-medium transition-colors text-base"
             >
-              <Phone className="w-4 h-4" />
-              (970) 519-3013
-            </a>
-            <Link
-              to="/contact"
+              Schedule a Walkthrough
+              <ArrowRight className="w-4 h-4" />
+            </Link>
+            <a
+              href="tel:+19705193013"
               className="inline-flex items-center justify-center gap-2 border border-white/20 hover:border-white/40 hover:bg-white/5 text-white px-8 py-4 rounded-lg font-medium transition-colors text-base"
             >
-              <Mail className="w-4 h-4" />
-              Send a Message
-            </Link>
+              <Phone className="w-4 h-4" />
+              Call Now
+            </a>
           </div>
           <div className="flex items-center justify-center gap-2 mt-6 text-white/30 text-sm">
             <MapPin className="w-3.5 h-3.5" />
@@ -302,9 +302,9 @@ const Index = () => {
             <div>
               <h4 className="text-white font-semibold text-sm mb-3">Services</h4>
               <ul className="space-y-2">
-                <li><Link to="/services/networking" className="text-white/40 hover:text-white/70 text-sm transition-colors">Pre-Wire & Networking</Link></li>
-                <li><Link to="/services/home-integration" className="text-white/40 hover:text-white/70 text-sm transition-colors">Installation & Integration</Link></li>
-                <li><Link to="/services/maintenance" className="text-white/40 hover:text-white/70 text-sm transition-colors">Maintenance</Link></li>
+                <li><Link to="/walkthrough" className="text-white/40 hover:text-white/70 text-sm transition-colors">Pre-Wire & Networking</Link></li>
+                <li><Link to="/install" className="text-white/40 hover:text-white/70 text-sm transition-colors">Installation & Integration</Link></li>
+                <li><Link to="/troubleshooting" className="text-white/40 hover:text-white/70 text-sm transition-colors">Maintenance</Link></li>
                 <li><Link to="/matterport" className="text-white/40 hover:text-white/70 text-sm transition-colors">Matterport 3D Scanning</Link></li>
               </ul>
             </div>
