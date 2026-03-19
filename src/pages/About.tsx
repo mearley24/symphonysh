@@ -37,26 +37,24 @@ const About = () => {
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight mb-5 text-white">
             The Vail Valley's trusted smart home team — from first wire to final walkthrough.
           </h1>
-          <p className="text-white/60 text-base sm:text-lg leading-relaxed mb-8 max-w-2xl">
-            Symphony Smart Homes is a local smart home integration company based in Eagle County, Colorado. We design, install, and support smart home technology for homeowners and builders across the Vail Valley.
+          <p className="text-white/60 text-base sm:text-lg leading-relaxed max-w-2xl">
+            We design, install, and maintain smart home systems for homeowners and builders across Eagle County. Pre-wire through programming, one team handles it all.
           </p>
         </div>
       </section>
 
-      {/* What We Believe */}
+      {/* How We Work */}
       <section className="py-16 sm:py-24 px-4 sm:px-6 bg-black/20 backdrop-blur-sm border-y border-white/5">
         <div className="max-w-4xl mx-auto">
           <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">How We Work</p>
-          <h2 className="text-2xl sm:text-3xl font-bold text-white mb-10">Built on a few simple principles</h2>
+          <h2 className="text-2xl sm:text-3xl font-bold text-white mb-10">A few things we don't compromise on</h2>
 
           <div className="grid sm:grid-cols-2 gap-5">
             {[
-              { title: "Do it right the first time", description: "We take the time to plan, label, test, and document every installation. Cutting corners creates problems that cost more to fix later." },
-              { title: "Keep it simple for the homeowner", description: "Technology should make your life easier, not more complicated. If you need a manual to turn on a light, something went wrong." },
-              { title: "Be straight about pricing", description: "We provide detailed proposals with clear line items. No hidden fees, no bait-and-switch, no surprises on the invoice." },
-              { title: "Answer the phone", description: "When you have an issue, you shouldn't have to leave a voicemail and wait three days. We respond quickly — and if we can fix it remotely, we do." },
-              { title: "Plan for the future", description: "We design systems that can grow with you. Adding speakers, cameras, or automation later shouldn't require ripping out walls." },
-              { title: "Stay local, stay accountable", description: "We live and work in the Vail Valley. We're not a franchise or a national chain — we're your neighbors, and our reputation depends on every job." },
+              { title: "Do it right the first time", description: "Every cable labeled, every system tested, every install documented. Shortcuts create callbacks." },
+              { title: "Keep it simple for you", description: "If you need a manual to turn on a light, something went wrong. Your system should feel effortless." },
+              { title: "Transparent pricing", description: "Detailed proposals with clear line items. No hidden fees, no surprises on the invoice." },
+              { title: "We answer the phone", description: "When something needs attention, you get a real person — not a voicemail. Remote fixes when possible, on-site when needed." },
             ].map((item, i) => (
               <div key={i} className="flex gap-4 p-5 rounded-xl border border-white/5 hover:border-white/10 transition-colors">
                 <CheckCircle2 className="w-5 h-5 text-accent shrink-0 mt-0.5" />
@@ -67,28 +65,10 @@ const About = () => {
               </div>
             ))}
           </div>
-        </div>
-      </section>
 
-      {/* What We Do */}
-      <section className="py-16 sm:py-24 px-4 sm:px-6">
-        <div className="max-w-4xl mx-auto">
-          <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">What We Do</p>
-          <h2 className="text-2xl sm:text-3xl font-bold text-white mb-5">The short version</h2>
-          <div className="text-white/50 text-base leading-relaxed space-y-4 max-w-2xl">
-            <p>
-              We handle smart home technology from start to finish: pre-wire and structured cabling during construction, installation and programming of AV, networking, lighting, shades, security, and automation systems, and ongoing maintenance after you move in.
-            </p>
-            <p>
-              We work with builders, general contractors, architects, and homeowners directly. Whether it's a single TV mount or a whole-home Control4 system, we bring the same level of care and attention.
-            </p>
-            <p>
-              Our service area covers Vail, Beaver Creek, Avon, Edwards, Eagle, Minturn, and the surrounding communities in Eagle County.
-            </p>
-          </div>
-          <div className="flex items-center gap-2 mt-6 text-white/30 text-sm">
+          <div className="flex items-center gap-2 mt-8 text-white/30 text-sm">
             <MapPin className="w-3.5 h-3.5" />
-            <span>Based in Eagle County, Colorado</span>
+            <span>Serving Vail, Beaver Creek, Avon, Edwards, Eagle & beyond</span>
           </div>
         </div>
       </section>
