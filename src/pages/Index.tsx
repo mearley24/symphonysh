@@ -298,7 +298,7 @@ const Index = () => {
             <div className="grid sm:grid-cols-3 gap-8 mb-8">
               <div>
                 <img
-                  src="/lovable-uploads/1d7a78ef-4d02-453d-aeea-81e50fb784b6.png"
+                  src="/lovable-uploads/symphony-logo-transparent.png"
                   alt="Symphony Smart Homes"
                   className="h-10 w-auto mb-3"
                 />
