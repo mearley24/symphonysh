@@ -1,156 +1,124 @@
-import { Thermometer, Sun, Cloud, Wind, BarChart, Minus, Plus, Fan } from "lucide-react";
+import { Link } from "react-router-dom";
+import { ArrowRight, Phone, ArrowLeft, Thermometer, Sun, Wind, BarChart, CheckCircle2, ChevronDown } from "lucide-react";
 import { useState } from "react";
-import Control4ServiceLayout, { GlassCard, StatsCard, FeatureCard, PricingItem, CTACard } from "../../components/Layout/Control4ServiceLayout";
-import { Slider } from "../../components/ui/slider";
+import Header from "../../components/Header";
+import Footer from "../../components/Footer";
+import SEO from "../../components/SEO";
 
 const ClimateControl = () => {
-  const [temperature, setTemperature] = useState(72);
-  const [setPoint, setSetPoint] = useState(70);
-  const [mode, setMode] = useState<"cool" | "heat" | "auto">("cool");
+  const [openFaq, setOpenFaq] = useState<number | null>(null);
 
   const serviceSchema = {
     "@context": "https://schema.org",
     "@type": "Service",
     "name": "Climate Control Systems",
-    "provider": {
-      "@type": "LocalBusiness",
-      "name": "Symphony Smart Homes"
-    },
-    "description": "Intelligent climate control for perfect comfort in every room.",
-    "areaServed": "Vail Valley, Colorado"
+    "provider": { "@type": "LocalBusiness", "name": "Symphony Smart Homes", "telephone": "+1-970-519-3013" },
+    "description": "Smart thermostat and HVAC integration for Vail Valley homes.",
+    "areaServed": "Vail Valley, Colorado",
   };
 
-  const roomTemps = [
-    { room: "Living Room", temp: 72 },
-    { room: "Kitchen", temp: 71 },
-    { room: "Master Bedroom", temp: 68 },
-    { room: "Office", temp: 70 },
+  const capabilities = [
+    { icon: Thermometer, title: "Smart Thermostats", description: "Intelligent thermostats that learn your schedule, respond to occupancy, and integrate with your automation system." },
+    { icon: Sun, title: "Zoned Climate Control", description: "Independent temperature control for different rooms and floors — no more fighting over the thermostat." },
+    { icon: Wind, title: "Ventilation & Air Quality", description: "Fresh air exchange systems and air quality monitoring to keep your indoor environment healthy." },
+    { icon: BarChart, title: "Energy Monitoring", description: "Track heating and cooling usage patterns. Understand where your energy goes and optimize for savings." },
+  ];
+
+  const faqs = [
+    { q: "What smart thermostats do you install?", a: "We work with several brands depending on the system. For Control4 homes, we integrate compatible thermostats directly. We also install standalone smart thermostats from brands like ecobee for simpler setups." },
+    { q: "Can you control climate by zone?", a: "Yes — if your HVAC system supports zoning. We can add zone controllers and smart dampers to existing forced-air systems, or integrate with radiant floor heating for precise room-by-room control." },
+    { q: "Does this actually save energy?", a: "Yes. Automated setback schedules, occupancy-based control, and integration with shades and lighting can reduce heating and cooling costs significantly — especially in mountain homes where the climate swings daily." },
+    { q: "Can I control it remotely?", a: "Absolutely. Adjust temperatures, check current readings, and set schedules from your phone or Control4 app — whether you're home or traveling." },
   ];
 
   return (
-    <Control4ServiceLayout
-      title="Climate Control"
-      description="Intelligent climate systems for perfect comfort in every room of your Vail Valley home."
-      keywords="smart climate, thermostat, HVAC control, home automation, Vail Valley"
-      serviceSchema={serviceSchema}
-      icon={Thermometer}
-      iconGradient="from-blue-500 to-cyan-500"
-      subtitle="Smart temperature management"
-    >
-      <div className="space-y-4">
-        {/* Stats Row */}
-        <div className="grid grid-cols-4 gap-3">
-          <StatsCard value="±0.5°" label="Precision" />
-          <StatsCard value="30%" label="Savings" />
-          <StatsCard value="16" label="Zones" />
-          <StatsCard value="24/7" label="Control" />
+    <div className="min-h-screen bg-primary text-primary-foreground">
+      <SEO title="Climate Control | Vail Valley" description="Smart thermostat and HVAC integration for Vail Valley homes. Zoned control, scheduling, and energy monitoring." keywords="smart thermostat, climate control, HVAC, zoned heating, Vail Valley" schema={serviceSchema} />
+      <Header />
+
+      <section className="pt-24 sm:pt-32 pb-16 sm:pb-20 px-4 sm:px-6">
+        <div className="max-w-4xl mx-auto">
+          <Link to="/services" className="inline-flex items-center gap-1.5 text-white/40 hover:text-white/70 text-sm mb-8 transition-colors"><ArrowLeft className="w-3.5 h-3.5" /> All Services</Link>
+          <div className="flex items-center gap-3 mb-4">
+            <div className="w-11 h-11 rounded-lg bg-accent/10 flex items-center justify-center"><Thermometer className="w-5 h-5 text-accent" /></div>
+            <p className="text-accent font-medium text-sm tracking-wide uppercase">Climate Control</p>
+          </div>
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight mb-5 text-white">Comfortable in every room. Efficient all year.</h1>
+          <p className="text-white/60 text-base sm:text-lg leading-relaxed mb-8 max-w-2xl">We integrate smart thermostats and HVAC controls into your home automation system for precise, room-by-room comfort — with automated schedules that save energy without sacrificing warmth.</p>
+          <div className="flex flex-col sm:flex-row gap-3">
+            <Link to="/scheduling?service=climate-control" className="inline-flex items-center justify-center gap-2 bg-accent hover:bg-accent/90 text-white px-6 py-3.5 rounded-lg font-medium transition-colors text-base">Schedule a Consultation <ArrowRight className="w-4 h-4" /></Link>
+            <a href="tel:+19705193013" className="inline-flex items-center justify-center gap-2 border border-white/20 hover:border-white/40 hover:bg-white/5 text-white px-6 py-3.5 rounded-lg font-medium transition-colors text-base"><Phone className="w-4 h-4" /> Call Now</a>
+          </div>
         </div>
+      </section>
 
-        {/* Main Climate Control */}
-        <GlassCard className="p-6">
-          <div className="flex items-center justify-between mb-4">
-            <h3 className="text-white font-medium">Climate Control</h3>
-            <Thermometer className="w-5 h-5 text-blue-400" />
+      <section className="py-16 sm:py-24 px-4 sm:px-6 bg-secondary/30 border-y border-white/5">
+        <div className="max-w-4xl mx-auto">
+          <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">What We Install</p>
+          <h2 className="text-2xl sm:text-3xl font-bold text-white mb-10">Climate solutions</h2>
+          <div className="grid sm:grid-cols-2 gap-5">
+            {capabilities.map((item, i) => (
+              <div key={i} className="bg-secondary/80 border border-white/8 rounded-xl p-6">
+                <div className="w-10 h-10 rounded-lg bg-accent/10 flex items-center justify-center mb-3"><item.icon className="w-5 h-5 text-accent" /></div>
+                <h3 className="text-white font-semibold text-lg mb-2">{item.title}</h3>
+                <p className="text-white/50 text-sm leading-relaxed">{item.description}</p>
+              </div>
+            ))}
           </div>
-          
-          <div className="text-center py-4">
-            <div className="text-6xl font-light text-white mb-2">{temperature}°</div>
-            <p className="text-white/60 text-sm">Current Temperature</p>
-          </div>
-          
-          <div className="flex items-center justify-center gap-4 mb-6">
-            <button 
-              onClick={() => setSetPoint(Math.max(60, setPoint - 1))}
-              className="w-12 h-12 rounded-full bg-blue-500/20 border border-blue-500/30 flex items-center justify-center text-blue-400 hover:bg-blue-500/30 transition-colors"
-            >
-              <Minus className="w-6 h-6" />
-            </button>
-            <div className="text-center">
-              <p className="text-white text-2xl font-medium">{setPoint}°</p>
-              <p className="text-white/60 text-xs">Set Point</p>
-            </div>
-            <button 
-              onClick={() => setSetPoint(Math.min(85, setPoint + 1))}
-              className="w-12 h-12 rounded-full bg-orange-500/20 border border-orange-500/30 flex items-center justify-center text-orange-400 hover:bg-orange-500/30 transition-colors"
-            >
-              <Plus className="w-6 h-6" />
-            </button>
-          </div>
-          
-          <div className="grid grid-cols-3 gap-2">
-            <button 
-              onClick={() => setMode("auto")}
-              className={`rounded-xl p-3 text-sm transition-colors ${mode === "auto" ? "bg-green-500/20 border border-green-500/30 text-green-400" : "bg-white/10 text-white hover:bg-white/20"}`}
-            >
-              <Fan className="w-5 h-5 mx-auto mb-1" />
-              Auto
-            </button>
-            <button 
-              onClick={() => setMode("cool")}
-              className={`rounded-xl p-3 text-sm transition-colors ${mode === "cool" ? "bg-blue-500/20 border border-blue-500/30 text-blue-400" : "bg-white/10 text-white hover:bg-white/20"}`}
-            >
-              <Thermometer className="w-5 h-5 mx-auto mb-1" />
-              Cool
-            </button>
-            <button 
-              onClick={() => setMode("heat")}
-              className={`rounded-xl p-3 text-sm transition-colors ${mode === "heat" ? "bg-orange-500/20 border border-orange-500/30 text-orange-400" : "bg-white/10 text-white hover:bg-white/20"}`}
-            >
-              <Thermometer className="w-5 h-5 mx-auto mb-1" />
-              Heat
-            </button>
-          </div>
-        </GlassCard>
-
-        {/* Room Temps Grid */}
-        <div className="grid grid-cols-2 gap-3">
-          {roomTemps.map((item) => (
-            <GlassCard key={item.room} className="p-4">
-              <p className="text-white/60 text-xs mb-1">{item.room}</p>
-              <p className="text-white text-2xl font-medium">{item.temp}°</p>
-            </GlassCard>
-          ))}
         </div>
+      </section>
 
-        {/* Features */}
-        <div className="grid grid-cols-3 gap-3">
-          <FeatureCard
-            icon={Sun}
-            title="Predictive"
-            description="Pre-conditions before you arrive"
-            iconColor="text-yellow-400"
-          />
-          <FeatureCard
-            icon={Wind}
-            title="Air Quality"
-            description="Fresh air ventilation control"
-            iconColor="text-cyan-400"
-          />
-          <FeatureCard
-            icon={BarChart}
-            title="Analytics"
-            description="Track energy usage patterns"
-            iconColor="text-green-400"
-          />
+      <section className="py-16 sm:py-24 px-4 sm:px-6">
+        <div className="max-w-4xl mx-auto">
+          <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">Benefits</p>
+          <h2 className="text-2xl sm:text-3xl font-bold text-white mb-10">Why smart climate control matters in the mountains</h2>
+          <div className="grid sm:grid-cols-2 gap-5">
+            {[
+              { title: "Mountain Temperature Swings", description: "Vail Valley can see 40°F temperature swings in a single day. Smart scheduling adapts to these changes automatically." },
+              { title: "Seasonal Homes", description: "Arriving to a cold house? Set your thermostat remotely before you get there. Pipe freeze protection monitors temperatures while you're away." },
+              { title: "Energy Efficiency", description: "Automated setbacks when you leave and pre-conditioning before you arrive mean you're only heating or cooling when it matters." },
+              { title: "Integrated Comfort", description: "Climate works with your shades and lighting — shades close to block afternoon sun, reducing cooling load automatically." },
+            ].map((item, i) => (
+              <div key={i} className="flex gap-4 p-5 rounded-xl border border-white/5 hover:border-white/10 transition-colors">
+                <CheckCircle2 className="w-5 h-5 text-accent shrink-0 mt-0.5" />
+                <div><h3 className="text-white font-semibold mb-1">{item.title}</h3><p className="text-white/50 text-sm leading-relaxed">{item.description}</p></div>
+              </div>
+            ))}
+          </div>
         </div>
+      </section>
 
-        {/* Pricing */}
-        <GlassCard className="p-4">
-          <h3 className="text-white font-medium mb-3">Climate Packages</h3>
-          <PricingItem label="Single Zone" price="$800+" />
-          <PricingItem label="Multi-Zone (4)" price="$2,400+" />
-          <PricingItem label="Whole Home" price="$4,500+" />
-        </GlassCard>
+      <section className="py-16 sm:py-24 px-4 sm:px-6 bg-secondary/30 border-y border-white/5">
+        <div className="max-w-3xl mx-auto">
+          <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">FAQ</p>
+          <h2 className="text-2xl sm:text-3xl font-bold text-white mb-10">Climate Questions</h2>
+          <div className="space-y-2">
+            {faqs.map((faq, i) => (
+              <div key={i} className="border border-white/8 rounded-xl overflow-hidden">
+                <button onClick={() => setOpenFaq(openFaq === i ? null : i)} className="w-full flex items-center justify-between p-5 text-left hover:bg-white/[0.03] transition-colors" aria-expanded={openFaq === i}>
+                  <span className="text-white font-medium text-sm sm:text-base pr-4">{faq.q}</span>
+                  <ChevronDown className={`w-4 h-4 text-white/40 shrink-0 transition-transform duration-200 ${openFaq === i ? "rotate-180" : ""}`} />
+                </button>
+                {openFaq === i && <div className="px-5 pb-5 pt-0"><p className="text-white/50 text-sm leading-relaxed">{faq.a}</p></div>}
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
 
-        {/* CTA */}
-        <CTACard
-          title="Perfect Comfort Awaits"
-          description="Experience intelligent climate control that adapts to your lifestyle."
-          buttonText="Schedule Consultation"
-          buttonLink="/scheduling?service=climate-control"
-        />
-      </div>
-    </Control4ServiceLayout>
+      <section className="py-16 sm:py-20 px-4 sm:px-6">
+        <div className="max-w-3xl mx-auto text-center">
+          <h2 className="text-2xl sm:text-3xl font-bold text-white mb-4">Ready for smarter comfort?</h2>
+          <p className="text-white/50 text-base mb-8 max-w-xl mx-auto">Let us evaluate your HVAC system and recommend the right smart climate solution for your home.</p>
+          <div className="flex flex-col sm:flex-row gap-3 justify-center">
+            <Link to="/scheduling?service=climate-control" className="inline-flex items-center justify-center gap-2 bg-accent hover:bg-accent/90 text-white px-8 py-4 rounded-lg font-medium transition-colors text-base">Schedule a Consultation <ArrowRight className="w-4 h-4" /></Link>
+            <a href="tel:+19705193013" className="inline-flex items-center justify-center gap-2 border border-white/20 hover:border-white/40 hover:bg-white/5 text-white px-8 py-4 rounded-lg font-medium transition-colors text-base"><Phone className="w-4 h-4" /> Call Now</a>
+          </div>
+        </div>
+      </section>
+
+      <Footer />
+    </div>
   );
 };
 
