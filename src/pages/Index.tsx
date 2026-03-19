@@ -4,6 +4,7 @@ import { useState } from "react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import SEO from "../components/SEO";
+import heroImage from "../assets/hero-smart-home.jpg";
 
 const Index = () => {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
