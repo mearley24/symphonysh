@@ -110,13 +110,13 @@ const Index = () => {
           <div className="max-w-2xl">
             <p className="animate-fade-in text-accent font-semibold text-sm tracking-widest uppercase mb-4 flex items-center gap-2">
               <span className="w-8 h-px bg-accent" />
-              Design. Install. Maintain.
+              Vail Valley Smart Home Integrator
             </p>
             <h1 className="animate-fade-in text-5xl sm:text-6xl lg:text-7xl font-extrabold leading-[0.95] mb-6 text-white [animation-delay:100ms]">
               We build smart homes that just work.
             </h1>
             <p className="animate-fade-in text-white/60 text-lg sm:text-xl leading-relaxed mb-10 max-w-lg [animation-delay:200ms]">
-              Pre-wire to programming. One team, every detail, no excuses. Serving Vail Valley and Eagle County.
+              One team from pre-wire to programming — reliable technology for homeowners and builders across Eagle County.
             </p>
             <div className="animate-fade-in flex flex-col sm:flex-row gap-3 [animation-delay:300ms]">
               <Link
