@@ -1,105 +1,100 @@
-
-import { ArrowLeft, Download, Smartphone, Wifi, Settings, Timer } from "lucide-react";
 import { Link } from "react-router-dom";
+import { ArrowRight, Phone, ArrowLeft, Smartphone, Wifi, Settings, CheckCircle2 } from "lucide-react";
 import Header from "../components/Header";
+import Footer from "../components/Footer";
 import SEO from "../components/SEO";
-
-const FeatureCard = ({ icon: Icon, title, description }: { icon: any; title: string; description: string }) => (
-  <div className="bg-white/5 backdrop-blur-sm p-6 rounded-lg">
-    <Icon className="w-6 h-6 text-accent mb-3" />
-    <h3 className="text-lg font-semibold text-white mb-2">{title}</h3>
-    <p className="text-gray-300">{description}</p>
-  </div>
-);
 
 const Ava = () => {
   return (
-    <div className="min-h-screen bg-primary">
-      <SEO 
+    <div className="min-h-screen bg-primary text-primary-foreground">
+      <SEO
         title="AVA Smart Remote | Symphony Smart Homes"
-        description="Experience the future of home control with AVA Smart Remote - simple, intuitive, and powerful remote control for your smart home."
-        keywords="smart remote, home automation remote, smart home control, AVA remote, Symphony Smart Homes"
+        description="Experience the future of home control with AVA Smart Remote — simple, intuitive, and powerful."
+        keywords="smart remote, AVA remote, home automation remote, Symphony Smart Homes"
       />
       <Header />
-      <section className="pt-32 pb-20 px-6">
-        <div className="max-w-6xl mx-auto">
-          <Link to="/" className="inline-flex items-center text-accent hover:text-accent/90 mb-8">
-            <ArrowLeft className="w-4 h-4 mr-2" />
-            Back to Home
+
+      {/* Hero */}
+      <section className="pt-24 sm:pt-32 pb-16 sm:pb-20 px-4 sm:px-6">
+        <div className="max-w-4xl mx-auto">
+          <Link to="/" className="inline-flex items-center gap-1.5 text-white/40 hover:text-white/70 text-sm mb-8 transition-colors">
+            <ArrowLeft className="w-3.5 h-3.5" /> Back to Home
           </Link>
 
-          <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">AVA Smart Remote</h1>
-          <p className="text-xl text-gray-300 mb-12 max-w-2xl">
-            The future of home control in your hands. Simple, intuitive, and powerful.
+          <p className="text-accent font-medium text-sm tracking-wide uppercase mb-3">AVA Smart Remote</p>
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight mb-5 text-white">
+            One remote that controls everything.
+          </h1>
+          <p className="text-white/60 text-base sm:text-lg leading-relaxed mb-8 max-w-2xl">
+            AVA is a premium smart remote designed for simplicity. It replaces the clutter of multiple remotes with a single, intuitive device that controls your TV, audio, lights, shades, and more.
           </p>
 
-          <div className="grid md:grid-cols-2 gap-12 mb-16">
-            <div>
-              <h2 className="text-2xl font-semibold text-white mb-4">Remote Control Excellence</h2>
-              <p className="text-gray-300 mb-6">
-                AVA Smart Remote brings unprecedented control and simplicity to your smart home experience. 
-                With its intuitive interface and powerful features, managing your home's technology has never been easier.
-              </p>
-              <div className="space-y-4">
-                <a 
-                  href="https://AVA.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 bg-accent hover:bg-accent/90 text-white px-4 py-2 rounded-md transition-colors"
-                >
-                  <Download className="w-4 h-4" />
-                  Visit AVA.com
-                </a>
-              </div>
-            </div>
-            <div className="bg-white/5 backdrop-blur-sm rounded-lg p-8">
-              <img 
-                src="/lovable-uploads/cb28d9d7-ffb1-4fee-ad38-79069db78c59.png"
-                alt="AVA Smart Remote"
-                className="rounded-lg w-full h-auto object-contain mb-6"
-              />
-            </div>
-          </div>
-
-          <h2 className="text-2xl font-semibold text-white mb-8 text-center">Key Features</h2>
-          <div className="grid md:grid-cols-3 gap-6 mb-16">
-            <FeatureCard
-              icon={Smartphone}
-              title="Intuitive Control"
-              description="Simple, user-friendly interface for controlling all your smart home devices."
-            />
-            <FeatureCard
-              icon={Wifi}
-              title="Wireless Freedom"
-              description="Seamless wireless connectivity for reliable control throughout your home."
-            />
-            <FeatureCard
-              icon={Settings}
-              title="Custom Programming"
-              description="Fully customizable to match your specific needs and preferences."
-            />
-          </div>
-
-          <div className="bg-white/5 backdrop-blur-sm p-8 rounded-lg text-center">
-            <h2 className="text-2xl font-semibold text-white mb-4">Ready to Experience AVA?</h2>
-            <p className="text-gray-300 mb-6">
-              Let us help you transform your home control experience with AVA Smart Remote.
-            </p>
-            <Link 
-              to="/scheduling?service=ava"
-              className="inline-flex items-center bg-accent hover:bg-accent/90 text-white px-6 py-3 rounded-md font-medium transition-colors"
-            >
-              Schedule a Demo
+          <div className="flex flex-col sm:flex-row gap-3">
+            <Link to="/scheduling?service=ava" className="inline-flex items-center justify-center gap-2 bg-accent hover:bg-accent/90 text-white px-6 py-3.5 rounded-lg font-medium transition-colors text-base">
+              Schedule a Demo <ArrowRight className="w-4 h-4" />
             </Link>
+            <a href="https://ava.com" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 border border-white/20 hover:border-white/40 hover:bg-white/5 text-white px-6 py-3.5 rounded-lg font-medium transition-colors text-base">
+              Visit AVA.com <ArrowRight className="w-4 h-4" />
+            </a>
           </div>
         </div>
       </section>
 
-      <footer className="py-12 px-6 text-center text-gray-400 bg-primary">
-        <p className="text-sm">
-          © 2024 Symphony Smart Homes. All rights reserved.
-        </p>
-      </footer>
+      {/* Product Image + Features */}
+      <section className="py-16 sm:py-24 px-4 sm:px-6 bg-secondary/30 border-y border-white/5">
+        <div className="max-w-4xl mx-auto">
+          <div className="grid md:grid-cols-2 gap-10 items-center">
+            <div className="bg-secondary/80 border border-white/8 rounded-xl p-8">
+              <img
+                src="/lovable-uploads/cb28d9d7-ffb1-4fee-ad38-79069db78c59.png"
+                alt="AVA Smart Remote"
+                className="w-full h-auto object-contain rounded-lg"
+              />
+            </div>
+            <div>
+              <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">Key Features</p>
+              <h2 className="text-2xl sm:text-3xl font-bold text-white mb-6">Why AVA</h2>
+              <div className="space-y-4">
+                {[
+                  { icon: Smartphone, title: "Intuitive Interface", description: "Clean, simple controls that anyone in the household can use — no learning curve." },
+                  { icon: Wifi, title: "Wireless Connectivity", description: "Connects to your smart home system via Wi-Fi for reliable, responsive control." },
+                  { icon: Settings, title: "Fully Customizable", description: "Programmed to match your specific setup — your rooms, your devices, your preferences." },
+                ].map((feature, i) => (
+                  <div key={i} className="flex gap-4">
+                    <div className="w-10 h-10 rounded-lg bg-accent/10 flex items-center justify-center shrink-0">
+                      <feature.icon className="w-5 h-5 text-accent" />
+                    </div>
+                    <div>
+                      <h3 className="text-white font-semibold mb-1">{feature.title}</h3>
+                      <p className="text-white/50 text-sm leading-relaxed">{feature.description}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* CTA */}
+      <section className="py-16 sm:py-20 px-4 sm:px-6">
+        <div className="max-w-3xl mx-auto text-center">
+          <h2 className="text-2xl sm:text-3xl font-bold text-white mb-4">Interested in AVA?</h2>
+          <p className="text-white/50 text-base mb-8 max-w-xl mx-auto">
+            We can set up a demo or include AVA as part of your smart home installation. Get in touch to learn more.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-3 justify-center">
+            <Link to="/scheduling?service=ava" className="inline-flex items-center justify-center gap-2 bg-accent hover:bg-accent/90 text-white px-8 py-4 rounded-lg font-medium transition-colors text-base">
+              Schedule a Demo <ArrowRight className="w-4 h-4" />
+            </Link>
+            <a href="tel:+19705193013" className="inline-flex items-center justify-center gap-2 border border-white/20 hover:border-white/40 hover:bg-white/5 text-white px-8 py-4 rounded-lg font-medium transition-colors text-base">
+              <Phone className="w-4 h-4" /> Call Now
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <Footer />
     </div>
   );
 };
