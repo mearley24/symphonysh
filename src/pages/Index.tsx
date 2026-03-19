@@ -19,7 +19,7 @@ const Index = () => {
       icon: Monitor,
       title: "Installation & Integration",
       description: "Expert mounting, configuration, and programming of TVs, speakers, lighting, shades, and whole-home control systems.",
-      link: "/services/home-integration",
+      link: "/install",
     },
     {
       icon: Wrench,
