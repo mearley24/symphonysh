@@ -3,6 +3,8 @@ import { ArrowRight, Phone, ArrowLeft, Monitor, Cable } from "lucide-react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import SEO from "../components/SEO";
+import PageBackground from "../components/PageBackground";
+import bgProjects from "../assets/bg-projects.jpg";
 
 const Projects = () => {
   const portfolioSections = [
