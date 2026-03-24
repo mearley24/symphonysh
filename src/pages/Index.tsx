@@ -52,13 +52,13 @@ const Index = () => {
   ];
 
   const faqs = [
-    { q: "How much does a typical smart home project cost?", a: "It depends on the scope. A single-room setup might start around $1,500, while a whole-home system for a new build can range from $15,000 to $80,000+. We provide detailed proposals after an initial consultation so you know exactly what to expect." },
-    { q: "Do you work with builders and general contractors?", a: "Yes. A significant portion of our work is pre-wire and rough-in during new construction. We coordinate directly with your GC, electrician, and architect to ensure everything is planned correctly from the start." },
-    { q: "Can you work on an existing home, or only new builds?", a: "Both. We retrofit existing homes regularly. Some projects require creative solutions for wire routing, but we've handled everything from ski condos to large estates." },
-    { q: "What brands do you work with?", a: "We're brand-agnostic and choose the best tool for the job. We frequently work with Control4, Sonos, Lutron, Sonance, Araknis, and others depending on your needs and budget." },
-    { q: "How long does a typical installation take?", a: "A straightforward TV mount or speaker install can be done in a few hours. Whole-home systems in new construction are phased across the build timeline — typically 3–6 months from pre-wire to final programming." },
-    { q: "Do you offer ongoing maintenance?", a: "Yes. We offer maintenance packages and are always available for one-off service calls. Many issues can be resolved remotely, saving you time and money." },
-    { q: "What areas do you serve?", a: "We serve the entire Vail Valley and Eagle County area — including Vail, Beaver Creek, Avon, Edwards, Eagle, Minturn, and surrounding communities." },
+    { q: "How much does a smart home project usually run?", a: "It really comes down to scope. A focused room or two might land around $1,500+, while a full new-build system often falls in the $15,000–$80,000+ range. After we walk the job and understand what you want, we'll put numbers in a proposal so you're not guessing." },
+    { q: "Do you work with builders and GCs?", a: "Yes — a lot of what we do is pre-wire and rough-in during construction. We'll line up with your GC, electrician, and architect so low-voltage isn't an afterthought." },
+    { q: "Can you work in an existing home, or only new construction?", a: "Both. Retrofits are common here. Sometimes we're fishing wire through attics and crawl spaces; other times it's cleaner. We've done everything from condos to large mountain homes." },
+    { q: "What brands do you install?", a: "We're not married to one logo. We pick what fits the house and how you'll use it. You'll see a lot of Control4, Sonos, Lutron, Sonance, Araknis, and others — whatever matches the job and budget." },
+    { q: "How long does an install take?", a: "Small jobs — a TV mount, a few speakers — can be a few hours. A whole-home job on a build is phased: pre-wire early, then trim-out and programming as the house comes together. Ballpark 3–6 months from rough-in to final handoff on a full system, depending on the build schedule." },
+    { q: "Do you offer ongoing support?", a: "Yes. We have maintenance options and we're available for one-off service when something acts up. Quite a bit we can sort out remotely before we roll a truck." },
+    { q: "Where do you work?", a: "Vail Valley and Eagle County — Vail, Beaver Creek, Avon, Edwards, Eagle, Minturn, and nearby. If you're close and not sure, ask." },
   ];
 
   const serviceSchema = localBusinessHomePageSchema();
