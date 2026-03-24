@@ -5,6 +5,7 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import SEO from "../components/SEO";
 import heroImage from "../assets/hero-smart-home.jpg";
+import { localBusinessHomePageSchema } from "../constants/businessSchema";
 
 const Index = () => {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
@@ -60,59 +61,7 @@ const Index = () => {
     { q: "What areas do you serve?", a: "We serve the entire Vail Valley and Eagle County area — including Vail, Beaver Creek, Avon, Edwards, Eagle, Minturn, and surrounding communities." },
   ];
 
-  const serviceSchema = {
-    "@context": "https://schema.org",
-    "@type": "LocalBusiness",
-    "@id": "https://symphonysh.com/#business",
-    "name": "Symphony Smart Homes",
-    "description": "Professional smart home integration, pre-wire, installation, and maintenance serving Vail Valley and Eagle County, Colorado. Certified Control4 dealer.",
-    "url": "https://symphonysh.com",
-    "telephone": "+1-970-519-3013",
-    "email": "info@symphonysh.com",
-    "areaServed": [
-      { "@type": "Place", "name": "Vail Valley, Colorado" },
-      { "@type": "Place", "name": "Eagle County, Colorado" },
-      { "@type": "Place", "name": "Vail, Colorado" },
-      { "@type": "Place", "name": "Beaver Creek, Colorado" },
-      { "@type": "Place", "name": "Edwards, Colorado" },
-      { "@type": "Place", "name": "Avon, Colorado" }
-    ],
-    "address": {
-      "@type": "PostalAddress",
-      "streetAddress": "45 Aspen Glen Ct",
-      "addressLocality": "Edwards",
-      "addressRegion": "CO",
-      "postalCode": "81632",
-      "addressCountry": "US"
-    },
-    "geo": {
-      "@type": "GeoCoordinates",
-      "latitude": 39.6403,
-      "longitude": -106.3742
-    },
-    "openingHoursSpecification": {
-      "@type": "OpeningHoursSpecification",
-      "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-      "opens": "08:00",
-      "closes": "17:00"
-    },
-    "serviceType": [
-      "Smart Home Integration",
-      "Home Automation",
-      "Control4 Installation",
-      "Pre-Wiring & Structured Cabling",
-      "AV Installation",
-      "Home Theater Installation",
-      "Smart Lighting",
-      "Motorized Shades",
-      "Home Networking",
-      "Security Camera Installation",
-      "Matterport 3D Scanning"
-    ],
-    "priceRange": "$$$$",
-    "image": "https://symphonysh.com/og-image.png",
-    "sameAs": []
-  };
+  const serviceSchema = localBusinessHomePageSchema();
 
   return (
     <div className="min-h-screen bg-primary text-primary-foreground relative">

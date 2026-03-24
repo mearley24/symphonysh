@@ -4,6 +4,7 @@ import { useState } from "react";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import SEO from "../../components/SEO";
+import { schemaProviderLocalBusiness } from "../../constants/businessSchema";
 
 import PageBackground from "../../components/PageBackground";
 import bgNetworking from "../../assets/bg-networking.jpg";
@@ -15,7 +16,7 @@ const Networking = () => {
     "@context": "https://schema.org",
     "@type": "Service",
     "name": "Home Networking",
-    "provider": { "@type": "LocalBusiness", "name": "Symphony Smart Homes", "telephone": "+1-970-519-3013" },
+    "provider": schemaProviderLocalBusiness,
     "description": "Enterprise-grade home networking for reliable smart home connectivity in Vail Valley.",
     "areaServed": "Vail Valley, Colorado",
   };

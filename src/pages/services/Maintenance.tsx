@@ -4,6 +4,7 @@ import { useState } from "react";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import SEO from "../../components/SEO";
+import { schemaProviderLocalBusiness } from "../../constants/businessSchema";
 
 import PageBackground from "../../components/PageBackground";
 import bgMaintenance from "../../assets/bg-maintenance.jpg";
@@ -15,7 +16,7 @@ const Maintenance = () => {
     "@context": "https://schema.org",
     "@type": "Service",
     "name": "Maintenance & Support",
-    "provider": { "@type": "LocalBusiness", "name": "Symphony Smart Homes", "telephone": "+1-970-519-3013" },
+    "provider": schemaProviderLocalBusiness,
     "description": "Professional maintenance and support for smart home systems in Vail Valley.",
     "areaServed": "Vail Valley, Colorado",
   };

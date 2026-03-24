@@ -4,6 +4,7 @@ import { useState } from "react";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import SEO from "../../components/SEO";
+import { schemaProviderLocalBusiness } from "../../constants/businessSchema";
 
 import PageBackground from "../../components/PageBackground";
 import bgClimate from "../../assets/bg-climate.jpg";
@@ -15,7 +16,7 @@ const ClimateControl = () => {
     "@context": "https://schema.org",
     "@type": "Service",
     "name": "Climate Control Systems",
-    "provider": { "@type": "LocalBusiness", "name": "Symphony Smart Homes", "telephone": "+1-970-519-3013" },
+    "provider": schemaProviderLocalBusiness,
     "description": "Smart thermostat and HVAC integration for Vail Valley homes.",
     "areaServed": "Vail Valley, Colorado",
   };

@@ -4,6 +4,7 @@ import { useState } from "react";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import SEO from "../../components/SEO";
+import { schemaProviderLocalBusiness } from "../../constants/businessSchema";
 
 import PageBackground from "../../components/PageBackground";
 import bgHomeIntegration from "../../assets/bg-home-integration.jpg";
@@ -15,7 +16,7 @@ const HomeIntegration = () => {
     "@context": "https://schema.org",
     "@type": "Service",
     "name": "Home Automation & Integration",
-    "provider": { "@type": "LocalBusiness", "name": "Symphony Smart Homes", "telephone": "+1-970-519-3013" },
+    "provider": schemaProviderLocalBusiness,
     "description": "Professional Control4 home automation and integration services for Vail Valley homes.",
     "areaServed": "Vail Valley, Colorado",
   };

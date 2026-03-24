@@ -4,6 +4,7 @@ import { useState } from "react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import SEO from "../components/SEO";
+import { schemaProviderLocalBusiness } from "../constants/businessSchema";
 
 import PageBackground from "../components/PageBackground";
 import bgWalkthrough from "../assets/bg-walkthrough.jpg";
@@ -80,12 +81,7 @@ const Walkthrough = () => {
     "@context": "https://schema.org",
     "@type": "Service",
     "name": "Structured Wiring & Pre-Wire Services",
-    "provider": {
-      "@type": "LocalBusiness",
-      "name": "Symphony Smart Homes",
-      "telephone": "+1-970-519-3013",
-      "areaServed": "Vail Valley, Eagle County, Colorado",
-    },
+    "provider": schemaProviderLocalBusiness,
     "description":
       "Future-proof structured wiring and pre-wire services for new builds and renovations in Vail Valley and Eagle County.",
   };

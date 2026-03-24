@@ -6,6 +6,7 @@ import Footer from "../components/Footer";
 import SEO from "../components/SEO";
 import PageBackground from "../components/PageBackground";
 import bgServices from "../assets/bg-services.jpg";
+import { schemaProviderLocalBusiness } from "../constants/businessSchema";
 
 const Services = () => {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
@@ -72,12 +73,7 @@ const Services = () => {
     "@context": "https://schema.org",
     "@type": "Service",
     "name": "Smart Home Services",
-    "provider": {
-      "@type": "LocalBusiness",
-      "name": "Symphony Smart Homes",
-      "telephone": "+1-970-519-3013",
-      "areaServed": "Vail Valley, Eagle County, Colorado",
-    },
+    "provider": schemaProviderLocalBusiness,
     "description": "Complete smart home integration services including automation, audio, security, lighting, and networking for Vail Valley homes.",
   };
 

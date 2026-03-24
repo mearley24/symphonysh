@@ -4,6 +4,7 @@ import { useState } from "react";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import SEO from "../../components/SEO";
+import { schemaProviderLocalBusiness } from "../../constants/businessSchema";
 
 import PageBackground from "../../components/PageBackground";
 import bgLighting from "../../assets/bg-lighting.jpg";
@@ -15,7 +16,7 @@ const SmartLighting = () => {
     "@context": "https://schema.org",
     "@type": "Service",
     "name": "Smart Lighting Systems",
-    "provider": { "@type": "LocalBusiness", "name": "Symphony Smart Homes", "telephone": "+1-970-519-3013" },
+    "provider": schemaProviderLocalBusiness,
     "description": "Intelligent lighting control for comfort, convenience, and energy savings in Vail Valley homes.",
     "areaServed": "Vail Valley, Colorado",
   };

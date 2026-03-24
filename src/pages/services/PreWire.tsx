@@ -3,6 +3,7 @@ import { Cable, ArrowLeft, ArrowRight, Phone, CheckCircle2, HelpCircle } from "l
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import SEO from "@/components/SEO";
+import { schemaProviderLocalBusiness } from "@/constants/businessSchema";
 
 import PageBackground from "@/components/PageBackground";
 import bgPrewire from "../../assets/bg-prewire.jpg";
@@ -35,11 +36,7 @@ const serviceSchema = {
   "@context": "https://schema.org",
   "@type": "Service",
   "name": "Pre-Wire & Structured Wiring",
-  "provider": {
-    "@type": "LocalBusiness",
-    "name": "Symphony Smart Homes",
-    "areaServed": "Vail Valley, Eagle County, Colorado",
-  },
+  "provider": schemaProviderLocalBusiness,
   "description": "Professional pre-wire and structured cabling for new construction and renovations in Vail Valley. Speaker wire, Cat6, HDMI, and control wiring installed during rough-in.",
   "serviceType": "Pre-Wire & Structured Wiring",
 };

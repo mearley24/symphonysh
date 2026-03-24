@@ -5,16 +5,10 @@ import Footer from "../components/Footer";
 import SEO from "../components/SEO";
 import PageBackground from "../components/PageBackground";
 import bgAbout from "../assets/bg-about.jpg";
+import { aboutPageLocalBusinessSchema } from "../constants/businessSchema";
 
 const About = () => {
-  const serviceSchema = {
-    "@context": "https://schema.org",
-    "@type": "LocalBusiness",
-    "name": "Symphony Smart Homes",
-    "description": "Professional smart home integration serving Vail Valley and Eagle County, Colorado.",
-    "areaServed": "Vail Valley, Eagle County, Colorado",
-    "telephone": "+1-970-519-3013",
-  };
+  const serviceSchema = aboutPageLocalBusinessSchema();
 
   return (
     <PageBackground image={bgAbout}>
