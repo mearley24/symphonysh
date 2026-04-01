@@ -37,8 +37,17 @@ export const BUSINESS_OPENING_HOURS = {
   closes: '17:00',
 };
 
-/** Append GBP / social URLs when you have them. */
+/**
+ * Official profiles for the same organization (Google Business, Facebook, Instagram, LinkedIn).
+ * We could not verify public social/GBP URLs from the web — add yours here when you have them
+ * (copy “Share” links from each profile). Wrong links hurt SEO trust.
+ */
 export const BUSINESS_SAME_AS: string[] = [];
+
+/** Google Maps search for the business address (helps discovery; not a substitute for GBP sameAs). */
+export const BUSINESS_HAS_MAP_URL =
+  'https://www.google.com/maps/search/?api=1&query=' +
+  encodeURIComponent('45 Aspen Glen Ct, Edwards, CO 81632, USA');
 
 export const BUSINESS_AREA_SERVED_PLACES = [
   { '@type': 'Place' as const, name: 'Vail Valley, Colorado' },
@@ -104,6 +113,7 @@ export function localBusinessHomePageSchema(): Record<string, unknown> {
     ],
     priceRange: '$$$$',
     image: `${BUSINESS_URL}/og-image.png`,
-    sameAs: BUSINESS_SAME_AS,
+    sameAs: BUSINESS_SAME_AS.length > 0 ? BUSINESS_SAME_AS : undefined,
+    hasMap: BUSINESS_HAS_MAP_URL,
   };
 }

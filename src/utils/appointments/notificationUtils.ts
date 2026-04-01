@@ -1,9 +1,7 @@
 
 import { supabase } from "../../integrations/supabase/client";
+import { ZAPIER_WEBHOOK_URL } from "../../constants/zapier";
 import { AppointmentNotificationPayload, getServiceName } from "./types";
-
-// Zapier webhook URL
-const ZAPIER_WEBHOOK_URL = "https://hooks.zapier.com/hooks/catch/22322669/2cwoj8b/";
 
 // Send notification about the appointment using Zapier
 export async function sendEmailNotification(appointment: any, serviceName: string): Promise<any> {

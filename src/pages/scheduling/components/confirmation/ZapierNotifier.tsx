@@ -1,8 +1,7 @@
-
 import { useEffect, useState } from "react";
-
-// Zapier webhook URL
-const ZAPIER_WEBHOOK_URL = "https://hooks.zapier.com/hooks/catch/22322669/2cwoj8b/";
+import { format } from "date-fns";
+import { getServiceName } from "@/utils/appointments/types";
+import { ZAPIER_WEBHOOK_URL } from "@/constants/zapier";
 
 interface ZapierNotifierProps {
   appointmentDetails: {
@@ -81,7 +80,3 @@ export function ZapierNotifier({ appointmentDetails }: ZapierNotifierProps) {
 
   return null; // This is a non-visual component
 }
-
-// Import these at the top of the file
-import { format } from "date-fns";
-import { getServiceName } from "@/utils/appointments/types";

@@ -1,11 +1,10 @@
+import { ZAPIER_WEBHOOK_URL } from "../../constants/zapier";
 
 /**
  * Test utility to verify Zapier webhook connectivity
  */
 export async function testZapierWebhook(): Promise<boolean> {
   try {
-    const ZAPIER_WEBHOOK_URL = "https://hooks.zapier.com/hooks/catch/22322669/2cwoj8b/";
-    
     console.log("Testing Zapier webhook connectivity...");
     
     const testPayload = {
@@ -43,8 +42,6 @@ export async function testZapierWebhook(): Promise<boolean> {
  */
 export async function sendSampleAppointment(): Promise<boolean> {
   try {
-    const ZAPIER_WEBHOOK_URL = "https://hooks.zapier.com/hooks/catch/22322669/2cwoj8b/";
-    
     console.log("Sending sample appointment data to Zapier...");
     
     const samplePayload = {
