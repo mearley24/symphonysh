@@ -38,7 +38,7 @@ const Testimonials = () => {
           <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">What Clients Say</p>
           <h2 className="text-2xl sm:text-3xl font-bold text-white">Trusted in the Valley</h2>
         </div>
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-5">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
           {testimonials.map((t, i) => (
             <article
               key={i}
