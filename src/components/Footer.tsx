@@ -15,7 +15,7 @@ const Footer = () => {
           </Link>
         </div>
         <p className="text-sm">
-          © 2024 Symphony Smart Homes. All rights reserved.
+          © {new Date().getFullYear()} Symphony Smart Homes. All rights reserved.
         </p>
       </div>
     </footer>

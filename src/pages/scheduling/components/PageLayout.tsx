@@ -32,7 +32,7 @@ export function PageLayout({
 
       <footer className="py-12 px-6 text-center text-gray-400 bg-black">
         <p className="text-sm">
-          © 2024 Symphony Smart Homes. All rights reserved.
+          © {new Date().getFullYear()} Symphony Smart Homes. All rights reserved.
         </p>
       </footer>
     </div>;

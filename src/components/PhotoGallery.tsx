@@ -82,6 +82,7 @@ const PhotoGallery: React.FC<PhotoGalleryProps> = ({
                         src={getFixedImagePath(photo)} 
                         alt={`${title} ${index + 1}`} 
                         className="w-full h-full object-cover transform transition-all duration-300 scale-95 group-hover:scale-110"
+                        loading="lazy"
                         onLoad={() => handleImageLoad(photo)}
                         onError={() => handleImageError(photo)}
                       />
@@ -110,6 +111,7 @@ const PhotoGallery: React.FC<PhotoGalleryProps> = ({
               src={getFixedImagePath(selectedImage)} 
               alt="Full size view" 
               className="max-w-full max-h-[90vh] object-contain"
+              loading="lazy"
               onClick={(e) => e.stopPropagation()}
               onError={(e) => {
                 console.error(`Failed to load full size image: ${selectedImage}`);

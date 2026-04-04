@@ -79,6 +79,7 @@ const SortablePhoto = ({
         <img
           src={getFixedImagePath(url)}
           alt={`Photo ${index + 1}`}
+          loading="lazy"
           onLoad={handleImageLoad}
           onError={handleImageError}
           className="w-full h-full object-cover"

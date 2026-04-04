@@ -73,6 +73,7 @@ const PhotoGalleryGrid: React.FC<PhotoGalleryGridProps> = ({
                   src={getFixedImagePath(photo)}
                   alt={`${galleryName} ${index + 1}`}
                   className="w-full h-full object-contain"
+                  loading="lazy"
                   onLoad={() => onImageLoad(photo)}
                   onError={() => onImageError(photo)}
                 />
@@ -120,6 +121,7 @@ const PhotoGalleryGrid: React.FC<PhotoGalleryGridProps> = ({
               src={getFixedImagePath(selectedImage)}
               alt="Full size view" 
               className="max-w-full max-h-[90vh] object-contain"
+              loading="lazy"
               onClick={(e) => e.stopPropagation()}
               onError={(e) => {
                 console.error(`Failed to load full size image: ${selectedImage}`);

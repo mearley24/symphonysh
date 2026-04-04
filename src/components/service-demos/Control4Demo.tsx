@@ -105,7 +105,7 @@ const MediaTile = ({
   <GlassCard className="p-2.5 sm:p-4 flex items-center gap-2 sm:gap-3">
     {image ? (
       <div className="w-9 h-9 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl bg-gradient-to-br from-gray-700 to-gray-800 flex items-center justify-center overflow-hidden flex-shrink-0">
-        <img src={image} alt={title} className="w-full h-full object-cover" />
+        <img src={image} alt={title} className="w-full h-full object-cover" loading="lazy" />
       </div>
     ) : Icon && (
       <div className={`w-9 h-9 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl flex items-center justify-center flex-shrink-0 ${iconBg || "bg-accent"}`}>
@@ -124,7 +124,7 @@ const CameraTile = ({ name, location, image }: { name: string; location: string;
   <GlassCard className="aspect-video relative overflow-hidden">
     <div className="absolute inset-0">
       {image ? (
-        <img src={image} alt={name} className="w-full h-full object-cover" />
+        <img src={image} alt={name} className="w-full h-full object-cover" loading="lazy" />
       ) : (
         <div className="w-full h-full bg-gradient-to-br from-gray-800 to-gray-900 flex items-center justify-center">
           <Camera className="w-6 h-6 sm:w-8 sm:h-8 text-white/30" />

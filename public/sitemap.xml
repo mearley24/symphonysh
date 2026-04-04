@@ -7,6 +7,8 @@
   <url><loc>https://symphonysh.com/projects</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://symphonysh.com/walkthrough</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://symphonysh.com/matterport</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://symphonysh.com/install</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://symphonysh.com/troubleshooting</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://symphonysh.com/scheduling</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://symphonysh.com/services/home-integration</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://symphonysh.com/services/audio-entertainment</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>

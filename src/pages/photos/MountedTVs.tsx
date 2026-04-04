@@ -122,6 +122,7 @@ const MountedTVs = () => {
                       src={getFixedImagePath(category.image)} 
                       alt={category.title} 
                       className="w-full h-full object-cover transform transition-all duration-300 scale-95 group-hover:scale-110"
+                      loading="lazy"
                       onLoad={() => handleImageLoad(category.image)}
                       onError={() => handleImageError(category.image)}
                     />

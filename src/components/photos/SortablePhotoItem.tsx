@@ -57,6 +57,7 @@ const SortablePhotoItem = ({
             src={photo}
             alt={`Photo ${index + 1}`}
             className="w-full h-full object-contain"
+            loading="lazy"
             onLoad={() => handleImageLoad(photo)}
             onError={() => handleImageError(photo)}
             onClick={() => !isEditMode && window.open(photo, '_blank')}

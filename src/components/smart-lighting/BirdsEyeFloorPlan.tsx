@@ -199,6 +199,7 @@ export const BirdsEyeFloorPlan = ({
             src={uploadedBlueprint} 
             alt="Uploaded Blueprint" 
             className="absolute inset-0 w-full h-full object-contain opacity-30 z-0"
+            loading="lazy"
           />
         )}
 

@@ -3,6 +3,7 @@ import { Phone, ArrowRight, Cable, Monitor, Wrench, ScanLine, CheckCircle2, Chev
 import { useState } from "react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+import Testimonials from "../components/Testimonials";
 import SEO from "../components/SEO";
 import heroImage from "../assets/hero-smart-home.jpg";
 import { localBusinessHomePageSchema } from "../constants/businessSchema";
@@ -107,7 +108,7 @@ const Index = () => {
               </p>
               <div className="animate-fade-in flex flex-col sm:flex-row gap-3 justify-center [animation-delay:300ms]">
                 <Link
-                  to="/scheduling"
+                  to="/walkthrough"
                   className="group inline-flex items-center justify-center gap-2 bg-accent hover:bg-accent/90 text-white px-7 py-4 rounded-lg font-medium transition-all text-base shadow-lg shadow-accent/20 hover:shadow-accent/30"
                 >
                   Schedule a Walkthrough
@@ -202,6 +203,8 @@ const Index = () => {
           </div>
         </section>
 
+        <Testimonials />
+
         {/* Why Symphony */}
         <section className="py-16 sm:py-24 px-4 sm:px-6">
           <div className="max-w-5xl mx-auto">
@@ -287,6 +290,7 @@ const Index = () => {
                   src="/lovable-uploads/symphony-logo-transparent.png"
                   alt="Symphony Smart Homes"
                   className="h-10 w-auto mb-3"
+                  loading="lazy"
                 />
                 <p className="text-white/40 text-sm leading-relaxed">
                   Professional smart home integration for the Vail Valley.

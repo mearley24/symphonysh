@@ -1,5 +1,5 @@
-
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
+import MobileClickToCall from "./components/MobileClickToCall";
 import Walkthrough from "./pages/Walkthrough";
 import Scheduling from "./pages/scheduling";
 import NotFound from "./pages/NotFound";
@@ -55,6 +55,7 @@ function App() {
     return (
       <>
         <Toaster />
+        <MobileClickToCall />
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/index" element={<Index />} />
@@ -66,6 +67,12 @@ function App() {
           <Route path="/terms" element={<Terms />} />
           <Route path="/ava" element={<Ava />} />
           <Route path="/matterport" element={<Matterport />} />
+
+          <Route path="/pre-wiring" element={<Navigate to="/services/prewire" replace />} />
+          <Route path="/installation" element={<Navigate to="/install" replace />} />
+          <Route path="/maintenance" element={<Navigate to="/troubleshooting" replace />} />
+          <Route path="/3d-tours" element={<Navigate to="/matterport" replace />} />
+          <Route path="/portfolio" element={<Navigate to="/projects" replace />} />
           
           {/* Photo gallery routes */}
           <Route path="/photos/home-theater" element={<HomeTheater />} />

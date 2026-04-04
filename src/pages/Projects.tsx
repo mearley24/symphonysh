@@ -10,19 +10,22 @@ const Projects = () => {
   const portfolioSections = [
     {
       title: "Home Theater",
-      description: "Dedicated media rooms and home cinema installations with premium audio and video equipment.",
+      description:
+        "From dedicated theater rooms with acoustic treatment to casual media spaces — designed for how you actually watch.",
       image: "/lovable-uploads/home theater/IMG_0979.JPG",
       link: "/photos/home-theater",
     },
     {
       title: "Mounted TVs",
-      description: "Clean TV installations with concealed wiring — over fireplaces, in bedrooms, media walls, and more.",
+      description:
+        "Clean, level installs with hidden wiring. Every mount rated for the TV, every cable managed.",
       image: "/lovable-uploads/mounted tvs/Home/IMG_0659.JPG",
       link: "/photos/mounted-tvs",
     },
     {
       title: "Wiring & Infrastructure",
-      description: "Structured cabling, network racks, and low-voltage rough-in work for new builds and renovations.",
+      description:
+        "The work behind the walls that makes everything else possible. Cat6, HDMI, speaker wire, conduit — done right the first time.",
       image: "/lovable-uploads/wiring/IMG_1138.JPG",
       link: "/photos/wiring",
     },

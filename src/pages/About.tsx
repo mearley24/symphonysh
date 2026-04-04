@@ -67,6 +67,25 @@ const About = () => {
         </div>
       </section>
 
+      {/* Meet the Founder */}
+      <section className="py-16 sm:py-24 px-4 sm:px-6">
+        <div className="max-w-4xl mx-auto">
+          <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">Leadership</p>
+          <h2 className="text-2xl sm:text-3xl font-bold text-white mb-8">Meet the Founder</h2>
+          <div className="space-y-5 text-white/65 text-base sm:text-lg leading-relaxed">
+            <p>
+              Matt Earley started Symphony Smart Homes after years in the AV integration industry,
+              driven by a simple frustration — clients deserved better. Better communication, better
+              craftsmanship, and systems that actually work after the installer leaves.
+            </p>
+            <p>
+              Based in Eagle County, Matt personally oversees every project from first walkthrough
+              to final programming. When you call Symphony, you talk to the person doing the work.
+            </p>
+          </div>
+        </div>
+      </section>
+
       {/* CTA */}
       <section className="py-16 sm:py-20 px-4 sm:px-6 bg-black/20 backdrop-blur-sm border-t border-white/5">
         <div className="max-w-3xl mx-auto text-center">

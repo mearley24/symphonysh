@@ -41,6 +41,7 @@ const GalleryTabButton: React.FC<GalleryTabButtonProps> = ({
               src={getFixedImagePath(previewImage)} 
               alt={`${title} Preview`} 
               className="w-full h-full object-cover"
+              loading="lazy"
               onLoad={handleImageLoad}
               onError={handleImageError}
             />

@@ -52,6 +52,7 @@ const Ava = () => {
                 src="/lovable-uploads/cb28d9d7-ffb1-4fee-ad38-79069db78c59.png"
                 alt="AVA Smart Remote"
                 className="w-full h-auto object-contain rounded-lg"
+                loading="lazy"
               />
             </div>
             <div>
