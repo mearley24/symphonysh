@@ -52,8 +52,8 @@ const Maintenance = () => {
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight mb-5 text-white">When something needs attention, we're here.</h1>
           <p className="text-white/60 text-base sm:text-lg leading-relaxed mb-8 max-w-2xl">Smart home systems need ongoing care — firmware updates, troubleshooting, and the occasional repair. We provide remote diagnostics and on-site service to keep everything running smoothly.</p>
           <div className="flex flex-col sm:flex-row gap-3">
-            <Link to="/scheduling?service=maintenance" className="inline-flex items-center justify-center gap-2 bg-accent hover:bg-accent/90 text-white px-6 py-3.5 rounded-lg font-medium transition-colors text-base">Schedule Service <ArrowRight className="w-4 h-4" /></Link>
-            <a href="tel:+19705193013" className="inline-flex items-center justify-center gap-2 border border-white/20 hover:border-white/40 hover:bg-white/5 text-white px-6 py-3.5 rounded-lg font-medium transition-colors text-base"><Phone className="w-4 h-4" /> Call Now</a>
+            <Link to="/scheduling?service=maintenance" className="inline-flex items-center justify-center gap-2 bg-accent hover:bg-accent/90 text-white px-7 py-4 rounded-lg font-medium transition-colors text-base">Schedule Service <ArrowRight className="w-4 h-4" /></Link>
+            <a href="tel:+19705193013" className="inline-flex items-center justify-center gap-2 border border-white/20 hover:border-white/40 hover:bg-white/5 text-white px-7 py-4 rounded-lg font-medium transition-colors text-base"><Phone className="w-4 h-4" /> Call Now</a>
           </div>
         </div>
       </section>
@@ -89,7 +89,7 @@ const Maintenance = () => {
               { title: "Proactive, Not Reactive", description: "Regular check-ups catch small issues before they become big problems. Prevention is always cheaper than repair." },
               { title: "Systems We Didn't Install", description: "Inherited a smart home system from a previous owner? We can take it over, audit it, and get it working properly." },
             ].map((item, i) => (
-              <div key={i} className="flex gap-4 p-5 rounded-xl border border-white/5 hover:border-white/10 transition-colors">
+              <div key={i} className="flex gap-4 p-5 rounded-xl border border-white/8 bg-black/40 backdrop-blur-sm hover:border-white/10 transition-colors">
                 <CheckCircle2 className="w-5 h-5 text-accent shrink-0 mt-0.5" />
                 <div><h3 className="text-white font-semibold mb-1">{item.title}</h3><p className="text-white/50 text-sm leading-relaxed">{item.description}</p></div>
               </div>
@@ -104,7 +104,7 @@ const Maintenance = () => {
           <h2 className="text-2xl sm:text-3xl font-bold text-white mb-10">Support Questions</h2>
           <div className="space-y-2">
             {faqs.map((faq, i) => (
-              <div key={i} className="border border-white/8 rounded-xl overflow-hidden">
+              <div key={i} className="border border-white/8 rounded-xl overflow-hidden bg-black/40 backdrop-blur-sm">
                 <button onClick={() => setOpenFaq(openFaq === i ? null : i)} className="w-full flex items-center justify-between p-5 text-left hover:bg-white/[0.03] transition-colors" aria-expanded={openFaq === i}>
                   <span className="text-white font-medium text-sm sm:text-base pr-4">{faq.q}</span>
                   <ChevronDown className={`w-4 h-4 text-white/40 shrink-0 transition-transform duration-200 ${openFaq === i ? "rotate-180" : ""}`} />
@@ -116,7 +116,7 @@ const Maintenance = () => {
         </div>
       </section>
 
-      <section className="py-16 sm:py-20 px-4 sm:px-6">
+      <section className="py-16 sm:py-24 px-4 sm:px-6">
         <div className="max-w-3xl mx-auto text-center">
           <h2 className="text-2xl sm:text-3xl font-bold text-white mb-4">Need help with your system?</h2>
           <p className="text-white/50 text-base mb-8 max-w-xl mx-auto">Whether it's a quick fix or an ongoing maintenance plan, we're here to keep your smart home running.</p>

@@ -121,7 +121,7 @@ const Projects = () => {
       </section>
 
       {/* CTA */}
-      <section className="py-16 sm:py-20 px-4 sm:px-6">
+      <section className="py-16 sm:py-24 px-4 sm:px-6">
         <div className="max-w-3xl mx-auto text-center">
           <h2 className="text-2xl sm:text-3xl font-bold text-white mb-4">
             Ready to start your project?

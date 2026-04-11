@@ -157,7 +157,7 @@ const Contact = () => {
       </section>
 
       {/* CTA */}
-      <section className="py-16 sm:py-20 px-4 sm:px-6">
+      <section className="py-16 sm:py-24 px-4 sm:px-6">
         <div className="max-w-3xl mx-auto text-center">
           <h2 className="text-2xl sm:text-3xl font-bold text-white mb-4">Prefer to schedule a time?</h2>
           <p className="text-white/50 text-base mb-8">Book a walkthrough or phone consultation at a time that works for you.</p>

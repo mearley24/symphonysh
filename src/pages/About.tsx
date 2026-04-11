@@ -50,7 +50,7 @@ const About = () => {
               { title: "Transparent pricing", description: "Detailed proposals with clear line items. No hidden fees, no surprises on the invoice." },
               { title: "We answer the phone", description: "When something needs attention, you get a real person — not a voicemail. Remote fixes when possible, on-site when needed." },
             ].map((item, i) => (
-              <div key={i} className="flex gap-4 p-5 rounded-xl border border-white/5 hover:border-white/10 transition-colors">
+              <div key={i} className="flex gap-4 p-5 rounded-xl border border-white/8 bg-black/40 backdrop-blur-sm hover:border-white/10 transition-colors">
                 <CheckCircle2 className="w-5 h-5 text-accent shrink-0 mt-0.5" />
                 <div>
                   <h3 className="text-white font-semibold mb-1">{item.title}</h3>
@@ -87,7 +87,7 @@ const About = () => {
       </section>
 
       {/* CTA */}
-      <section className="py-16 sm:py-20 px-4 sm:px-6 bg-black/20 backdrop-blur-sm border-t border-white/5">
+      <section className="py-16 sm:py-24 px-4 sm:px-6 bg-black/20 backdrop-blur-sm border-t border-white/5">
         <div className="max-w-3xl mx-auto text-center">
           <h2 className="text-2xl sm:text-3xl font-bold text-white mb-4">Want to work together?</h2>
           <p className="text-white/50 text-base mb-8 max-w-xl mx-auto">
