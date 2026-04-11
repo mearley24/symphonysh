@@ -89,7 +89,8 @@ const About = () => {
       {/* CTA */}
       <section className="py-16 sm:py-24 px-4 sm:px-6 bg-black/20 backdrop-blur-sm border-t border-white/5">
         <div className="max-w-3xl mx-auto text-center">
-          <h2 className="text-2xl sm:text-3xl font-bold text-white mb-4">Want to work together?</h2>
+          <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">Get Started</p>
+            <h2 className="text-2xl sm:text-3xl font-bold text-white mb-4">Want to work together?</h2>
           <p className="text-white/50 text-base mb-8 max-w-xl mx-auto">
             Whether you're building, renovating, or just need something fixed — give us a call or schedule a time to talk.
           </p>

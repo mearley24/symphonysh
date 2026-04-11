@@ -118,7 +118,8 @@ const Maintenance = () => {
 
       <section className="py-16 sm:py-24 px-4 sm:px-6">
         <div className="max-w-3xl mx-auto text-center">
-          <h2 className="text-2xl sm:text-3xl font-bold text-white mb-4">Need help with your system?</h2>
+          <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">Get Started</p>
+            <h2 className="text-2xl sm:text-3xl font-bold text-white mb-4">Need help with your system?</h2>
           <p className="text-white/50 text-base mb-8 max-w-xl mx-auto">Whether it's a quick fix or an ongoing maintenance plan, we're here to keep your smart home running.</p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <Link to="/scheduling?service=maintenance" className="inline-flex items-center justify-center gap-2 bg-accent hover:bg-accent/90 text-white px-8 py-4 rounded-lg font-medium transition-colors text-base">Schedule Service <ArrowRight className="w-4 h-4" /></Link>
