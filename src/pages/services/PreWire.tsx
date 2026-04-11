@@ -53,23 +53,26 @@ const PreWire = () => (
     <Header />
 
     {/* Hero */}
-    <section className="pt-28 pb-16 sm:pt-32 sm:pb-20">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6">
+    <section className="pt-36 sm:pt-44 pb-16 sm:pb-20 px-4 sm:px-6">
+      <div className="max-w-4xl mx-auto">
         <Link to="/services" className="inline-flex items-center gap-1.5 text-white/40 hover:text-white/70 text-sm mb-8 transition-colors">
           <ArrowLeft className="w-3.5 h-3.5" /> All Services
         </Link>
-        <div className="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center mb-6">
-          <Cable className="w-6 h-6 text-accent" />
+        <div className="flex items-center gap-3 mb-4">
+          <div className="w-11 h-11 rounded-lg bg-accent/10 flex items-center justify-center">
+            <Cable className="w-6 h-6 text-accent" />
+          </div>
+          <p className="text-accent font-medium text-sm tracking-wide uppercase">Pre-Wire & Structured Wiring</p>
         </div>
-        <h1 className="text-3xl sm:text-4xl font-bold text-white mb-4">Pre-Wire & Structured Wiring</h1>
-        <p className="text-white/50 text-base sm:text-lg leading-relaxed max-w-2xl mb-8">
+        <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight mb-5 text-white">Pre-Wire & Structured Wiring</h1>
+        <p className="text-white/60 text-base sm:text-lg leading-relaxed max-w-2xl mb-8">
           Future-proof your new build or renovation with clean, organized low-voltage wiring for audio, video, networking, and automation — installed by a team that understands the full system.
         </p>
         <div className="flex flex-col sm:flex-row gap-3">
-          <Link to="/scheduling?service=Pre-Wire" className="inline-flex items-center justify-center gap-2 bg-accent hover:bg-accent/90 text-white font-medium px-6 py-3 rounded-lg transition-colors">
+          <Link to="/scheduling?service=Pre-Wire" className="inline-flex items-center justify-center gap-2 bg-accent hover:bg-accent/90 text-white font-medium px-7 py-4 rounded-lg transition-colors text-base">
             Schedule a Consultation <ArrowRight className="w-4 h-4" />
           </Link>
-          <a href="tel:+19705193013" className="inline-flex items-center justify-center gap-2 border border-white/10 hover:border-white/20 text-white font-medium px-6 py-3 rounded-lg transition-colors">
+          <a href="tel:+19705193013" className="inline-flex items-center justify-center gap-2 border border-white/20 hover:border-white/40 hover:bg-white/5 text-white font-medium px-7 py-4 rounded-lg transition-colors text-base">
             <Phone className="w-4 h-4" /> (970) 519-3013
           </a>
         </div>
@@ -77,13 +80,13 @@ const PreWire = () => (
     </section>
 
     {/* Capabilities */}
-    <section className="py-16 border-t border-white/[0.06]">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6">
+    <section className="py-16 sm:py-24 border-y border-white/5 bg-black/20 backdrop-blur-sm px-4 sm:px-6">
+      <div className="max-w-4xl mx-auto">
         <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">What We Do</p>
         <h2 className="text-2xl sm:text-3xl font-bold text-white mb-10">Wiring Done Right the First Time</h2>
         <div className="grid sm:grid-cols-2 gap-4">
           {capabilities.map((c, i) => (
-            <div key={i} className="bg-black/40 backdrop-blur-sm border border-white/[0.08] rounded-xl p-6">
+            <div key={i} className="bg-black/40 backdrop-blur-sm border border-white/8 rounded-xl p-6">
               <h3 className="text-white font-semibold text-lg mb-2">{c.title}</h3>
               <p className="text-white/50 text-sm leading-relaxed">{c.desc}</p>
             </div>
@@ -93,13 +96,13 @@ const PreWire = () => (
     </section>
 
     {/* Benefits */}
-    <section className="py-16 bg-black/20 backdrop-blur-sm border-y border-white/[0.06]">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6">
+    <section className="py-16 sm:py-24 px-4 sm:px-6">
+      <div className="max-w-4xl mx-auto">
         <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">Why It Matters</p>
         <h2 className="text-2xl sm:text-3xl font-bold text-white mb-10">The Foundation of Every Great System</h2>
         <div className="grid sm:grid-cols-2 gap-3">
           {benefits.map((b, i) => (
-            <div key={i} className="flex items-start gap-3">
+            <div key={i} className="flex items-start gap-3 p-5 rounded-xl border border-white/8 bg-black/40 backdrop-blur-sm">
               <CheckCircle2 className="w-5 h-5 text-accent shrink-0 mt-0.5" />
               <p className="text-white/60 text-sm">{b}</p>
             </div>
@@ -109,14 +112,14 @@ const PreWire = () => (
     </section>
 
     {/* FAQ */}
-    <section className="py-16 border-b border-white/[0.06]">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6">
+    <section className="py-16 sm:py-24 bg-black/20 backdrop-blur-sm border-y border-white/5 px-4 sm:px-6">
+      <div className="max-w-4xl mx-auto">
         <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">Common Questions</p>
         <h2 className="text-2xl sm:text-3xl font-bold text-white mb-10">Pre-Wire FAQ</h2>
-        <div className="space-y-4">
+        <div className="space-y-2">
           {faqs.map((faq, i) => (
-            <details key={i} className="group bg-black/40 backdrop-blur-sm border border-white/[0.08] rounded-xl">
-              <summary className="flex items-center gap-3 cursor-pointer p-5 text-white font-medium text-sm list-none [&::-webkit-details-marker]:hidden">
+            <details key={i} className="group bg-black/40 backdrop-blur-sm border border-white/8 rounded-xl">
+              <summary className="flex items-center gap-3 cursor-pointer p-5 text-white font-medium text-sm sm:text-base list-none [&::-webkit-details-marker]:hidden">
                 <HelpCircle className="w-4 h-4 text-accent shrink-0" />
                 {faq.q}
               </summary>
@@ -130,17 +133,18 @@ const PreWire = () => (
     </section>
 
     {/* CTA */}
-    <section className="py-20">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 text-center">
+    <section className="py-16 sm:py-24 px-4 sm:px-6">
+      <div className="max-w-4xl mx-auto text-center">
+        <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">Get Started</p>
         <h2 className="text-2xl sm:text-3xl font-bold text-white mb-4">Planning a Build?</h2>
         <p className="text-white/50 text-base mb-8 max-w-lg mx-auto">
           Let's review your plans and make sure every wire is accounted for before drywall goes up.
         </p>
         <div className="flex flex-col sm:flex-row gap-3 justify-center">
-          <Link to="/scheduling?service=Pre-Wire" className="inline-flex items-center justify-center gap-2 bg-accent hover:bg-accent/90 text-white font-medium px-6 py-3 rounded-lg transition-colors">
+          <Link to="/scheduling?service=Pre-Wire" className="inline-flex items-center justify-center gap-2 bg-accent hover:bg-accent/90 text-white font-medium px-7 py-4 rounded-lg transition-colors text-base">
             Schedule a Walkthrough <ArrowRight className="w-4 h-4" />
           </Link>
-          <a href="tel:+19705193013" className="inline-flex items-center justify-center gap-2 border border-white/10 hover:border-white/20 text-white font-medium px-6 py-3 rounded-lg transition-colors">
+          <a href="tel:+19705193013" className="inline-flex items-center justify-center gap-2 border border-white/20 hover:border-white/40 hover:bg-white/5 text-white font-medium px-7 py-4 rounded-lg transition-colors text-base">
             <Phone className="w-4 h-4" /> Call Us
           </a>
         </div>

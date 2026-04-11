@@ -23,7 +23,7 @@ const Testimonials = () => {
             <Link
               key={project.slug}
               to={`/projects/${project.slug}`}
-              className="group relative flex flex-col rounded-xl border border-white/10 bg-black/45 backdrop-blur-sm overflow-hidden shadow-lg shadow-black/20 hover:border-accent/30 transition-all duration-200"
+              className="group relative flex flex-col rounded-xl border border-white/8 bg-black/40 backdrop-blur-sm overflow-hidden shadow-lg shadow-black/20 hover:border-accent/30 transition-all duration-200"
             >
               <div className="aspect-[16/10] relative overflow-hidden">
                 <img

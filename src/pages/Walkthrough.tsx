@@ -128,14 +128,14 @@ const Walkthrough = () => {
           <div className="flex flex-col sm:flex-row gap-3">
             <Link
               to="/scheduling?service=walkthrough"
-              className="inline-flex items-center justify-center gap-2 bg-accent hover:bg-accent/90 text-white px-6 py-3.5 rounded-lg font-medium transition-colors text-base"
+              className="inline-flex items-center justify-center gap-2 bg-accent hover:bg-accent/90 text-white px-7 py-4 rounded-lg font-medium transition-colors text-base"
             >
               Schedule a Walkthrough
               <ArrowRight className="w-4 h-4" />
             </Link>
             <a
               href="tel:+19705193013"
-              className="inline-flex items-center justify-center gap-2 border border-white/20 hover:border-white/40 hover:bg-white/5 text-white px-6 py-3.5 rounded-lg font-medium transition-colors text-base"
+              className="inline-flex items-center justify-center gap-2 border border-white/20 hover:border-white/40 hover:bg-white/5 text-white px-7 py-4 rounded-lg font-medium transition-colors text-base"
             >
               <Phone className="w-4 h-4" />
               Call Now
@@ -145,7 +145,7 @@ const Walkthrough = () => {
       </section>
 
       {/* What We Run */}
-      <section className="py-16 sm:py-20 px-4 sm:px-6 bg-black/20 backdrop-blur-sm border-y border-white/5">
+      <section className="py-16 sm:py-24 px-4 sm:px-6 bg-black/20 backdrop-blur-sm border-y border-white/5">
         <div className="max-w-4xl mx-auto">
           <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">
             What We Install
@@ -246,7 +246,7 @@ const Walkthrough = () => {
       </section>
 
       {/* Process */}
-      <section className="py-16 sm:py-20 px-4 sm:px-6 bg-black/20 backdrop-blur-sm border-y border-white/5">
+      <section className="py-16 sm:py-24 px-4 sm:px-6 bg-black/20 backdrop-blur-sm border-y border-white/5">
         <div className="max-w-4xl mx-auto">
           <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">
             Our Process
@@ -310,7 +310,7 @@ const Walkthrough = () => {
             {faqs.map((faq, i) => (
               <div
                 key={i}
-                className="border border-white/8 rounded-xl overflow-hidden"
+                className="border border-white/8 rounded-xl overflow-hidden bg-black/40 backdrop-blur-sm"
               >
                 <button
                   onClick={() => setOpenFaq(openFaq === i ? null : i)}
@@ -340,8 +340,9 @@ const Walkthrough = () => {
       </section>
 
       {/* Final CTA */}
-      <section className="py-16 sm:py-20 px-4 sm:px-6 bg-black/20 backdrop-blur-sm border-t border-white/5">
+      <section className="py-16 sm:py-24 px-4 sm:px-6 bg-black/20 backdrop-blur-sm border-t border-white/5">
         <div className="max-w-3xl mx-auto text-center">
+          <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">Get Started</p>
           <h2 className="text-2xl sm:text-3xl font-bold text-white mb-4">
             Let's plan your wiring.
           </h2>

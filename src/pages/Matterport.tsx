@@ -56,10 +56,10 @@ const Matterport = () => {
           </p>
 
           <div className="flex flex-col sm:flex-row gap-3">
-            <Link to="/scheduling?service=matterport-scan" className="inline-flex items-center justify-center gap-2 bg-accent hover:bg-accent/90 text-white px-6 py-3.5 rounded-lg font-medium transition-colors text-base">
+            <Link to="/scheduling?service=matterport-scan" className="inline-flex items-center justify-center gap-2 bg-accent hover:bg-accent/90 text-white px-7 py-4 rounded-lg font-medium transition-colors text-base">
               Schedule a Scan <ArrowRight className="w-4 h-4" />
             </Link>
-            <a href="tel:+19705193013" className="inline-flex items-center justify-center gap-2 border border-white/20 hover:border-white/40 hover:bg-white/5 text-white px-6 py-3.5 rounded-lg font-medium transition-colors text-base">
+            <a href="tel:+19705193013" className="inline-flex items-center justify-center gap-2 border border-white/20 hover:border-white/40 hover:bg-white/5 text-white px-7 py-4 rounded-lg font-medium transition-colors text-base">
               <Phone className="w-4 h-4" /> Call Now
             </a>
           </div>
@@ -117,7 +117,7 @@ const Matterport = () => {
           <h2 className="text-2xl sm:text-3xl font-bold text-white mb-10">Questions about Matterport</h2>
           <div className="space-y-2">
             {faqs.map((faq, i) => (
-              <div key={i} className="border border-white/8 rounded-xl overflow-hidden">
+              <div key={i} className="border border-white/8 rounded-xl overflow-hidden bg-black/40 backdrop-blur-sm">
                 <button onClick={() => setOpenFaq(openFaq === i ? null : i)} className="w-full flex items-center justify-between p-5 text-left hover:bg-white/[0.03] transition-colors" aria-expanded={openFaq === i}>
                   <span className="text-white font-medium text-sm sm:text-base pr-4">{faq.q}</span>
                   <ChevronDown className={`w-4 h-4 text-white/40 shrink-0 transition-transform duration-200 ${openFaq === i ? "rotate-180" : ""}`} />
@@ -134,9 +134,10 @@ const Matterport = () => {
       </section>
 
       {/* CTA */}
-      <section className="py-16 sm:py-20 px-4 sm:px-6">
+      <section className="py-16 sm:py-24 px-4 sm:px-6">
         <div className="max-w-3xl mx-auto text-center">
-          <h2 className="text-2xl sm:text-3xl font-bold text-white mb-4">Ready to scan your space?</h2>
+          <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">Get Started</p>
+            <h2 className="text-2xl sm:text-3xl font-bold text-white mb-4">Ready to scan your space?</h2>
           <p className="text-white/50 text-base mb-8 max-w-xl mx-auto">
             Contact us for pricing and availability. We serve the entire Vail Valley and Eagle County area.
           </p>

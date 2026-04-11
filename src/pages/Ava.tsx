@@ -33,10 +33,10 @@ const Ava = () => {
           </p>
 
           <div className="flex flex-col sm:flex-row gap-3">
-            <Link to="/scheduling?service=ava" className="inline-flex items-center justify-center gap-2 bg-accent hover:bg-accent/90 text-white px-6 py-3.5 rounded-lg font-medium transition-colors text-base">
+            <Link to="/scheduling?service=ava" className="inline-flex items-center justify-center gap-2 bg-accent hover:bg-accent/90 text-white px-7 py-4 rounded-lg font-medium transition-colors text-base">
               Schedule a Demo <ArrowRight className="w-4 h-4" />
             </Link>
-            <a href="https://ava.com" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 border border-white/20 hover:border-white/40 hover:bg-white/5 text-white px-6 py-3.5 rounded-lg font-medium transition-colors text-base">
+            <a href="https://ava.com" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 border border-white/20 hover:border-white/40 hover:bg-white/5 text-white px-7 py-4 rounded-lg font-medium transition-colors text-base">
               Visit AVA.com <ArrowRight className="w-4 h-4" />
             </a>
           </div>
@@ -81,9 +81,10 @@ const Ava = () => {
       </section>
 
       {/* CTA */}
-      <section className="py-16 sm:py-20 px-4 sm:px-6">
+      <section className="py-16 sm:py-24 px-4 sm:px-6">
         <div className="max-w-3xl mx-auto text-center">
-          <h2 className="text-2xl sm:text-3xl font-bold text-white mb-4">Interested in AVA?</h2>
+          <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">Get Started</p>
+            <h2 className="text-2xl sm:text-3xl font-bold text-white mb-4">Interested in AVA?</h2>
           <p className="text-white/50 text-base mb-8 max-w-xl mx-auto">
             We can set up a demo or include AVA as part of your smart home installation. Get in touch to learn more.
           </p>

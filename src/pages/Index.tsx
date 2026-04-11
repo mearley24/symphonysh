@@ -218,7 +218,7 @@ const Index = () => {
             </div>
             <div className="grid sm:grid-cols-2 gap-5">
               {differentiators.map((item, i) => (
-                <div key={i} className="flex gap-4 p-5 rounded-xl border border-white/5 hover:border-white/10 transition-colors bg-black/20 backdrop-blur-sm">
+                <div key={i} className="flex gap-4 p-5 rounded-xl border border-white/8 hover:border-white/10 transition-colors bg-black/40 backdrop-blur-sm">
                   <CheckCircle2 className="w-5 h-5 text-accent shrink-0 mt-0.5" />
                   <div>
                     <h3 className="text-white font-semibold mb-1">{item.title}</h3>
@@ -239,7 +239,7 @@ const Index = () => {
             </div>
             <div className="space-y-2">
               {faqs.map((faq, i) => (
-                <div key={i} className="border border-white/8 rounded-xl overflow-hidden bg-black/20 backdrop-blur-sm">
+                <div key={i} className="border border-white/8 rounded-xl overflow-hidden bg-black/40 backdrop-blur-sm">
                   <button
                     onClick={() => setOpenFaq(openFaq === i ? null : i)}
                     className="w-full flex items-center justify-between p-5 text-left hover:bg-white/5 transition-colors"
@@ -262,6 +262,7 @@ const Index = () => {
         {/* Final CTA */}
         <section className="py-16 sm:py-24 px-4 sm:px-6">
           <div className="max-w-3xl mx-auto text-center">
+            <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">Get Started</p>
             <h2 className="text-2xl sm:text-3xl font-bold text-white mb-4">Ready to get started?</h2>
             <p className="text-white/50 text-base mb-8 max-w-xl mx-auto">
               Whether you're building new, renovating, or just need something fixed — reach out. No pressure, no sales pitch.
@@ -269,14 +270,14 @@ const Index = () => {
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
               <Link
                 to="/scheduling"
-                className="inline-flex items-center justify-center gap-2 bg-accent hover:bg-accent/90 text-white px-8 py-4 rounded-lg font-medium transition-colors text-base"
+                className="inline-flex items-center justify-center gap-2 bg-accent hover:bg-accent/90 text-white px-7 py-4 rounded-lg font-medium transition-colors text-base"
               >
                 Schedule a Consultation
                 <ArrowRight className="w-4 h-4" />
               </Link>
               <a
                 href="tel:+19705193013"
-                className="inline-flex items-center justify-center gap-2 border border-white/20 hover:border-white/40 hover:bg-white/5 text-white px-8 py-4 rounded-lg font-medium transition-colors text-base"
+                className="inline-flex items-center justify-center gap-2 border border-white/20 hover:border-white/40 hover:bg-white/5 text-white px-7 py-4 rounded-lg font-medium transition-colors text-base"
               >
                 <Phone className="w-4 h-4" />
                 Call Now

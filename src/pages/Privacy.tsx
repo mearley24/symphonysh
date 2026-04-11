@@ -1,4 +1,6 @@
 import React from "react";
+import { Link } from "react-router-dom";
+import { ArrowLeft } from "lucide-react";
 import Header from "../components/Header";
 import SEO from "../components/SEO";
 import Footer from "../components/Footer";
@@ -15,17 +17,26 @@ const Privacy = () => {
         keywords="privacy policy, data protection, symphony smart homes, privacy"
       />
       <Header />
-      <section className="pt-48 md:pt-56 pb-20 px-6">
-        <div className="max-w-4xl mx-auto text-center mb-16">
-          <h1 className="text-4xl md:text-6xl font-bold uppercase tracking-tight text-white mb-4">Privacy Policy</h1>
-          <p className="text-lg text-gray-400">
+
+      {/* Hero */}
+      <section className="pt-36 sm:pt-44 pb-16 sm:pb-20 px-4 sm:px-6">
+        <div className="max-w-4xl mx-auto">
+          <Link to="/" className="inline-flex items-center gap-1.5 text-white/40 hover:text-white/70 text-sm mb-8 transition-colors">
+            <ArrowLeft className="w-3.5 h-3.5" /> Back to Home
+          </Link>
+          <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">Legal</p>
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight mb-5 text-white">Privacy Policy</h1>
+          <p className="text-white/60 text-base sm:text-lg leading-relaxed">
             Last updated: June 1, 2024
           </p>
         </div>
+      </section>
 
-        <div className="max-w-4xl mx-auto space-y-6">
-          <div className="bg-black/20 backdrop-blur-sm p-8 rounded-lg text-gray-300 space-y-8">
-            <section>
+      {/* Content */}
+      <section className="py-16 sm:py-24 px-4 sm:px-6 bg-black/20 backdrop-blur-sm border-y border-white/5">
+        <div className="max-w-4xl mx-auto">
+          <div className="bg-black/40 backdrop-blur-sm border border-white/8 rounded-xl p-6 sm:p-8 text-white/70 space-y-8">
+            <div>
               <h2 className="text-xl font-semibold text-white mb-3">1. Introduction</h2>
               <p>
                 Symphony Smart Homes ("we," "our," or "us") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website and use our services.
@@ -33,9 +44,9 @@ const Privacy = () => {
               <p className="mt-2">
                 We use your data to provide and improve our services. By using our services, you agree to the collection and use of information in accordance with this policy.
               </p>
-            </section>
+            </div>
 
-            <section>
+            <div>
               <h2 className="text-xl font-semibold text-white mb-3">2. Information We Collect</h2>
               <p>
                 <strong className="text-white">Personal Information:</strong> Name, email address, phone number, and address when you schedule appointments or contact us.
@@ -46,9 +57,9 @@ const Privacy = () => {
               <p className="mt-2">
                 <strong className="text-white">Device Information:</strong> We may collect information about your device, including IP address, browser type, and operating system.
               </p>
-            </section>
+            </div>
 
-            <section>
+            <div>
               <h2 className="text-xl font-semibold text-white mb-3">3. How We Use Your Information</h2>
               <ul className="list-disc pl-6 space-y-2">
                 <li>To provide and maintain our services</li>
@@ -59,9 +70,9 @@ const Privacy = () => {
                 <li>To monitor the usage of our services</li>
                 <li>To detect, prevent, and address technical issues</li>
               </ul>
-            </section>
+            </div>
 
-            <section>
+            <div>
               <h2 className="text-xl font-semibold text-white mb-3">4. Google Calendar Integration</h2>
               <p>
                 Our service integrates with Google Calendar to check for availability and schedule appointments. We request limited access to your Google Calendar data for the sole purpose of scheduling and managing appointments.
@@ -72,16 +83,16 @@ const Privacy = () => {
               <p className="mt-2">
                 You can revoke our access to your Google Calendar at any time through your Google Account settings.
               </p>
-            </section>
+            </div>
 
-            <section>
+            <div>
               <h2 className="text-xl font-semibold text-white mb-3">5. Data Security</h2>
               <p>
                 The security of your data is important to us, but no method of transmission over the Internet or electronic storage is 100% secure. While we strive to use commercially acceptable means to protect your personal information, we cannot guarantee its absolute security.
               </p>
-            </section>
+            </div>
 
-            <section>
+            <div>
               <h2 className="text-xl font-semibold text-white mb-3">6. Third-Party Services</h2>
               <p>
                 We may employ third-party companies and individuals to facilitate our service, provide the service on our behalf, perform service-related services, or assist us in analyzing how our service is used.
@@ -89,9 +100,9 @@ const Privacy = () => {
               <p className="mt-2">
                 These third parties have access to your personal information only to perform these tasks on our behalf and are obligated not to disclose or use it for any other purpose.
               </p>
-            </section>
+            </div>
 
-            <section>
+            <div>
               <h2 className="text-xl font-semibold text-white mb-3">7. Your Data Protection Rights</h2>
               <p>You have the following data protection rights:</p>
               <ul className="list-disc pl-6 space-y-2 mt-2">
@@ -102,9 +113,9 @@ const Privacy = () => {
                 <li>The right to data portability — the right to receive a copy of your personal data in a structured, machine-readable format</li>
                 <li>The right to withdraw consent at any time where we relied on your consent to process your personal information</li>
               </ul>
-            </section>
+            </div>
 
-            <section>
+            <div>
               <h2 className="text-xl font-semibold text-white mb-3">8. Changes to This Privacy Policy</h2>
               <p>
                 We may update our Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page and updating the "Last updated" date at the top of this page.
@@ -112,9 +123,9 @@ const Privacy = () => {
               <p className="mt-2">
                 You are advised to review this Privacy Policy periodically for any changes. Changes to this Privacy Policy are effective when they are posted on this page.
               </p>
-            </section>
+            </div>
 
-            <section>
+            <div>
               <h2 className="text-xl font-semibold text-white mb-3">9. Contact Us</h2>
               <p>If you have any questions about this Privacy Policy, please contact us:</p>
               <ul className="list-disc pl-6 space-y-2 mt-2">
@@ -122,7 +133,7 @@ const Privacy = () => {
                 <li>By phone: (970) 519-3013</li>
                 <li>By mail: 45 Aspen Glen Ct, Edwards, CO 81632</li>
               </ul>
-            </section>
+            </div>
           </div>
         </div>
       </section>
