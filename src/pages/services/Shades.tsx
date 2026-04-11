@@ -7,6 +7,8 @@ import SEO from "../../components/SEO";
 import { schemaProviderLocalBusiness } from "../../constants/businessSchema";
 
 import PageBackground from "../../components/PageBackground";
+import ServiceDemoSection from "../../components/ServiceDemoSection";
+import { ShadesDemo } from "../../components/service-demos/ShadesDemo";
 import bgShades from "../../assets/bg-shades.jpg";
 
 const Shades = () => {
@@ -71,6 +73,10 @@ const Shades = () => {
           </div>
         </div>
       </section>
+
+      <ServiceDemoSection title="Shade Controls" subtitle="Interactive Demo">
+        <ShadesDemo />
+      </ServiceDemoSection>
 
       <section className="py-16 sm:py-24 px-4 sm:px-6">
         <div className="max-w-4xl mx-auto">

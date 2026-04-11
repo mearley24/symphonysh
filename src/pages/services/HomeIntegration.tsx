@@ -7,6 +7,8 @@ import SEO from "../../components/SEO";
 import { schemaProviderLocalBusiness } from "../../constants/businessSchema";
 
 import PageBackground from "../../components/PageBackground";
+import ServiceDemoSection from "../../components/ServiceDemoSection";
+import { HomeAutomationDemo } from "../../components/service-demos/HomeAutomationDemo";
 import bgHomeIntegration from "../../assets/bg-home-integration.jpg";
 
 const HomeIntegration = () => {
@@ -73,6 +75,10 @@ const HomeIntegration = () => {
           </div>
         </div>
       </section>
+
+      <ServiceDemoSection title="See Automation in Action" subtitle="Interactive Demo">
+        <HomeAutomationDemo />
+      </ServiceDemoSection>
 
       <section className="py-16 sm:py-24 px-4 sm:px-6">
         <div className="max-w-4xl mx-auto">

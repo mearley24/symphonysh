@@ -4,6 +4,7 @@ import { useState } from "react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import Testimonials from "../components/Testimonials";
+import SocialProof from "../components/SocialProof";
 import SEO from "../components/SEO";
 import heroImage from "../assets/hero-smart-home.jpg";
 import { localBusinessHomePageSchema } from "../constants/businessSchema";
@@ -155,6 +156,9 @@ const Index = () => {
             </div>
           </div>
         </section>
+
+        {/* Social Proof / Credibility Stats */}
+        <SocialProof />
 
         {/* Services */}
         <section className="py-16 sm:py-24 px-4 sm:px-6" id="services">

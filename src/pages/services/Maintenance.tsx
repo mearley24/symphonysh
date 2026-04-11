@@ -7,6 +7,8 @@ import SEO from "../../components/SEO";
 import { schemaProviderLocalBusiness } from "../../constants/businessSchema";
 
 import PageBackground from "../../components/PageBackground";
+import ServiceDemoSection from "../../components/ServiceDemoSection";
+import { MaintenanceDemo } from "../../components/service-demos/MaintenanceDemo";
 import bgMaintenance from "../../assets/bg-maintenance.jpg";
 
 const Maintenance = () => {
@@ -71,6 +73,10 @@ const Maintenance = () => {
           </div>
         </div>
       </section>
+
+      <ServiceDemoSection title="System Health Monitor" subtitle="Interactive Demo">
+        <MaintenanceDemo />
+      </ServiceDemoSection>
 
       <section className="py-16 sm:py-24 px-4 sm:px-6">
         <div className="max-w-4xl mx-auto">

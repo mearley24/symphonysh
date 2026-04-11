@@ -7,6 +7,8 @@ import SEO from "../../components/SEO";
 import { schemaProviderLocalBusiness } from "../../constants/businessSchema";
 
 import PageBackground from "../../components/PageBackground";
+import ServiceDemoSection from "../../components/ServiceDemoSection";
+import { NetworkingDemo } from "../../components/service-demos/NetworkingDemo";
 import bgNetworking from "../../assets/bg-networking.jpg";
 
 const Networking = () => {
@@ -71,6 +73,10 @@ const Networking = () => {
           </div>
         </div>
       </section>
+
+      <ServiceDemoSection title="Network Dashboard" subtitle="Interactive Demo">
+        <NetworkingDemo />
+      </ServiceDemoSection>
 
       <section className="py-16 sm:py-24 px-4 sm:px-6">
         <div className="max-w-4xl mx-auto">

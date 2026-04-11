@@ -7,6 +7,8 @@ import SEO from "../../components/SEO";
 import { schemaProviderLocalBusiness } from "../../constants/businessSchema";
 
 import PageBackground from "../../components/PageBackground";
+import ServiceDemoSection from "../../components/ServiceDemoSection";
+import { ClimateControlDemo } from "../../components/service-demos/ClimateControlDemo";
 import bgClimate from "../../assets/bg-climate.jpg";
 
 const ClimateControl = () => {
@@ -71,6 +73,10 @@ const ClimateControl = () => {
           </div>
         </div>
       </section>
+
+      <ServiceDemoSection title="Smart Climate in Action" subtitle="Interactive Demo">
+        <ClimateControlDemo />
+      </ServiceDemoSection>
 
       <section className="py-16 sm:py-24 px-4 sm:px-6">
         <div className="max-w-4xl mx-auto">

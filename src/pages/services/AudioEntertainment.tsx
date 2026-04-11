@@ -7,6 +7,8 @@ import SEO from "../../components/SEO";
 import { schemaProviderLocalBusiness } from "../../constants/businessSchema";
 
 import PageBackground from "../../components/PageBackground";
+import ServiceDemoSection from "../../components/ServiceDemoSection";
+import { AudioEntertainmentDemo } from "../../components/service-demos/AudioEntertainmentDemo";
 import bgAudio from "../../assets/bg-audio.jpg";
 
 const AudioEntertainment = () => {
@@ -71,6 +73,10 @@ const AudioEntertainment = () => {
           </div>
         </div>
       </section>
+
+      <ServiceDemoSection title="Try It Yourself" subtitle="Interactive Demo">
+        <AudioEntertainmentDemo />
+      </ServiceDemoSection>
 
       <section className="py-16 sm:py-24 px-4 sm:px-6">
         <div className="max-w-4xl mx-auto">

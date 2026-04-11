@@ -7,6 +7,8 @@ import SEO from "../../components/SEO";
 import { schemaProviderLocalBusiness } from "../../constants/businessSchema";
 
 import PageBackground from "../../components/PageBackground";
+import ServiceDemoSection from "../../components/ServiceDemoSection";
+import { SecuritySystemDemo } from "../../components/service-demos/SecuritySystemDemo";
 import bgSecurity from "../../assets/bg-security.jpg";
 
 const SecuritySystems = () => {
@@ -71,6 +73,10 @@ const SecuritySystems = () => {
           </div>
         </div>
       </section>
+
+      <ServiceDemoSection title="Security Controls" subtitle="Interactive Demo">
+        <SecuritySystemDemo />
+      </ServiceDemoSection>
 
       <section className="py-16 sm:py-24 px-4 sm:px-6">
         <div className="max-w-4xl mx-auto">
