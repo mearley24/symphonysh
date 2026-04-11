@@ -20,7 +20,7 @@ const PageBackground = ({ image, children }: PageBackgroundProps) => {
         <div className="absolute inset-0 bg-gradient-to-b from-primary/60 via-primary/75 to-primary/90" />
       </div>
 
-      <div className="relative z-10">
+      <div className="relative z-10 animate-fade-in">
         {children}
       </div>
     </div>

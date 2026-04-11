@@ -37,6 +37,8 @@ import SingletreeFP from "./pages/photos/mounted-tvs/SingletreeFP";
 import WestVailBB from "./pages/photos/mounted-tvs/WestVailBB";
 import WoodMedia from "./pages/photos/mounted-tvs/WoodMedia";
 
+import ProjectDetail from "./pages/ProjectDetail";
+
 // Service pages
 import AudioEntertainment from "./pages/services/AudioEntertainment";
 import ClimateControl from "./pages/services/ClimateControl";
@@ -63,6 +65,7 @@ function App() {
           <Route path="/contact" element={<Contact />} />
           <Route path="/services" element={<Services />} />
           <Route path="/projects" element={<Projects />} />
+          <Route path="/projects/:slug" element={<ProjectDetail />} />
           <Route path="/privacy" element={<Privacy />} />
           <Route path="/terms" element={<Terms />} />
           <Route path="/ava" element={<Ava />} />

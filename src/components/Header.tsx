@@ -4,7 +4,7 @@ import { Phone, Menu as MenuIcon, X } from "lucide-react";
 
 const navLinks = [
   { label: "Services", path: "/services" },
-  { label: "Projects", path: "/projects" },
+  { label: "Our Work", path: "/projects" },
   { label: "About", path: "/about" },
   { label: "Contact", path: "/contact" },
 ];
