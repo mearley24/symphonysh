@@ -93,7 +93,7 @@ const Walkthrough = () => {
         description="Schedule a site walkthrough for your new build or renovation. Pre-wire consultation for smart home wiring in Vail Valley & Eagle County."
         keywords="site walkthrough, pre-wire consultation, new construction wiring, Vail Valley, Eagle County"
         schema={schema}
-        breadcrumbs={[{ name: "Home", url: "/" }, { name: "Walkthrough", url: "/walkthrough" }]}
+        breadcrumbs={[{ name: "Home", url: "/" }, { name: "Services", url: "/services" }, { name: "Pre-Wire", url: "/services/prewire" }, { name: "Packages", url: "/walkthrough" }]}
       />
 
       <Header />
@@ -102,11 +102,11 @@ const Walkthrough = () => {
       <section className="pt-36 sm:pt-44 pb-16 sm:pb-20 px-4 sm:px-6">
         <div className="max-w-4xl mx-auto">
           <Link
-            to="/"
+            to="/services/prewire"
             className="inline-flex items-center gap-1.5 text-white/40 hover:text-white/70 text-sm mb-8 transition-colors"
           >
             <ArrowLeft className="w-3.5 h-3.5" />
-            Back to Home
+            Back to Pre-Wire
           </Link>
 
           <div className="flex items-center gap-3 mb-4">

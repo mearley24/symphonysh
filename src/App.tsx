@@ -102,14 +102,14 @@ function App() {
           
           {/* Service routes */}
           <Route path="/walkthrough" element={<Walkthrough />} />
-          <Route path="/install" element={<HomeIntegration />} />
-          <Route path="/troubleshooting" element={<Maintenance />} />
+          <Route path="/install" element={<Navigate to="/services/home-integration" replace />} />
+          <Route path="/troubleshooting" element={<Navigate to="/services/maintenance" replace />} />
           <Route path="/services/audio-entertainment" element={<AudioEntertainment />} />
           <Route path="/services/climate-control" element={<ClimateControl />} />
           <Route path="/services/home-integration" element={<HomeIntegration />} />
           <Route path="/services/maintenance" element={<Maintenance />} />
           <Route path="/services/networking" element={<Networking />} />
-          <Route path="/networking" element={<Networking />} />
+          <Route path="/networking" element={<Navigate to="/services/networking" replace />} />
           <Route path="/services/security-systems" element={<SecuritySystems />} />
           <Route path="/services/shades" element={<Shades />} />
            <Route path="/services/smart-lighting" element={<SmartLighting />} />

@@ -198,18 +198,9 @@ export const TroyVoiceAssistant = ({ onCommand }: TroyVoiceAssistantProps) => {
 
       {!isEnabled && (
         <div className="text-center py-4">
-          <p className="text-gray-400 text-sm mb-3">
-            Enable Troy AI to control your smart lighting with voice commands.
+          <p className="text-gray-400 text-sm">
+            Enable Troy AI to control your smart lighting with voice commands. Say things like "Turn on the living room" or "Set bedroom to 50%."
           </p>
-          <div className="text-xs text-gray-500">
-            <p>Features coming soon:</p>
-            <ul className="mt-1 space-y-1">
-              <li>• Real-time voice recognition</li>
-              <li>• Natural language processing</li>
-              <li>• Custom voice commands</li>
-              <li>• Integration with ElevenLabs AI</li>
-            </ul>
-          </div>
         </div>
       )}
     </IPadCard>

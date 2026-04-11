@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ArrowRight, Phone, Volume2, Shield, Lightbulb, Thermometer, Wifi, Wrench, Sun, Home, CheckCircle2, ChevronDown, ArrowLeft } from "lucide-react";
+import { ArrowRight, Phone, Volume2, Shield, Lightbulb, Thermometer, Wifi, Wrench, Sun, Home, Cable, ScanLine, Smartphone, CheckCircle2, ChevronDown, ArrowLeft } from "lucide-react";
 import { useState } from "react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
@@ -59,6 +59,27 @@ const Services = () => {
       title: "Maintenance & Support",
       description: "Ongoing system maintenance, firmware updates, remote diagnostics, and on-site service when you need it.",
       link: "/services/maintenance",
+    },
+    {
+      icon: Cable,
+      title: "Pre-Wire & Structured Wiring",
+      description: "Structured cabling for new construction and retrofits — Cat6, speaker wire, HDMI, and control wiring installed clean from the start.",
+      link: "/services/prewire",
+    },
+  ];
+
+  const alsoAvailable = [
+    {
+      icon: ScanLine,
+      title: "Matterport 3D Scanning",
+      description: "Immersive 3D virtual tours for real estate listings, construction documentation, and property records.",
+      link: "/matterport",
+    },
+    {
+      icon: Smartphone,
+      title: "AVA Smart Remote",
+      description: "A premium universal remote that controls your entire smart home from a single, beautifully simple interface.",
+      link: "/ava",
     },
   ];
 
@@ -131,6 +152,32 @@ const Services = () => {
                   </div>
                   <h3 className="text-white font-semibold text-lg mb-2">{service.title}</h3>
                   <p className="text-white/50 text-sm leading-relaxed">{service.description}</p>
+                  <span className="inline-flex items-center gap-1 text-accent text-sm font-medium mt-4 group-hover:gap-2 transition-all">
+                    Learn more <ArrowRight className="w-3.5 h-3.5" />
+                  </span>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Also Available */}
+      <section className="py-10 sm:py-14 px-4 sm:px-6">
+        <div className="max-w-5xl mx-auto">
+          <div className="text-center mb-8">
+            <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">Also Available</p>
+            <h2 className="text-xl sm:text-2xl font-bold text-white">Additional Services</h2>
+          </div>
+          <div className="grid sm:grid-cols-2 gap-4 max-w-2xl mx-auto">
+            {alsoAvailable.map((item, i) => (
+              <Link key={i} to={item.link} className="group">
+                <div className="bg-black/40 backdrop-blur-sm border border-white/8 rounded-xl p-6 h-full hover:border-accent/30 hover:bg-black/50 transition-all duration-200">
+                  <div className="w-11 h-11 rounded-lg bg-accent/10 flex items-center justify-center mb-4 group-hover:bg-accent/20 transition-colors">
+                    <item.icon className="w-5 h-5 text-accent" />
+                  </div>
+                  <h3 className="text-white font-semibold text-lg mb-2">{item.title}</h3>
+                  <p className="text-white/50 text-sm leading-relaxed">{item.description}</p>
                   <span className="inline-flex items-center gap-1 text-accent text-sm font-medium mt-4 group-hover:gap-2 transition-all">
                     Learn more <ArrowRight className="w-3.5 h-3.5" />
                   </span>

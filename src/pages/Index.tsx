@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Phone, ArrowRight, Cable, Monitor, Wrench, ScanLine, CheckCircle2, ChevronDown, MapPin, Mail, Clock } from "lucide-react";
+import { Phone, ArrowRight, Cable, Home, Wrench, ScanLine, CheckCircle2, ChevronDown, MapPin } from "lucide-react";
 import { useState } from "react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
@@ -14,22 +14,22 @@ const Index = () => {
 
   const services = [
     {
+      icon: Home,
+      title: "Smart Home Integration",
+      description: "Full-home automation with Control4 — lighting, audio, climate, security, and shades all working together from one interface.",
+      link: "/services",
+    },
+    {
       icon: Cable,
-      title: "Pre-Wire & Structured Wiring",
+      title: "Pre-Wire & New Construction",
       description: "Future-proof your new build or renovation with clean, organized low-voltage wiring for audio, video, networking, and automation.",
       link: "/services/prewire",
     },
     {
-      icon: Monitor,
-      title: "Installation & Integration",
-      description: "Expert mounting, configuration, and programming of TVs, speakers, lighting, shades, and whole-home control systems.",
-      link: "/install",
-    },
-    {
       icon: Wrench,
-      title: "Maintenance & Troubleshooting",
+      title: "Maintenance & Support",
       description: "Keep your systems running smoothly. We diagnose issues, update firmware, and resolve problems — on-site or remotely.",
-      link: "/troubleshooting",
+      link: "/services/maintenance",
     },
     {
       icon: ScanLine,
@@ -109,10 +109,10 @@ const Index = () => {
               </p>
               <div className="animate-fade-in flex flex-col sm:flex-row gap-3 justify-center [animation-delay:300ms]">
                 <Link
-                  to="/walkthrough"
+                  to="/scheduling"
                   className="group inline-flex items-center justify-center gap-2 bg-accent hover:bg-accent/90 text-white px-7 py-4 rounded-lg font-medium transition-all text-base shadow-lg shadow-accent/20 hover:shadow-accent/30"
                 >
-                  Schedule a Walkthrough
+                  Schedule a Consultation
                   <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5" />
                 </Link>
                 <a
@@ -268,10 +268,10 @@ const Index = () => {
             </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
               <Link
-                to="/walkthrough"
+                to="/scheduling"
                 className="inline-flex items-center justify-center gap-2 bg-accent hover:bg-accent/90 text-white px-8 py-4 rounded-lg font-medium transition-colors text-base"
               >
-                Schedule a Walkthrough
+                Schedule a Consultation
                 <ArrowRight className="w-4 h-4" />
               </Link>
               <a
@@ -285,60 +285,7 @@ const Index = () => {
           </div>
         </section>
 
-        {/* Footer */}
-        <footer className="border-t border-white/10 py-10 px-4 sm:px-6 bg-black/40 backdrop-blur-sm">
-          <div className="max-w-5xl mx-auto">
-            <div className="grid sm:grid-cols-3 gap-8 mb-8">
-              <div>
-                <img
-                  src="/lovable-uploads/symphony-logo-transparent.png"
-                  alt="Symphony Smart Homes"
-                  className="h-10 w-auto mb-3"
-                  loading="lazy"
-                />
-                <p className="text-white/40 text-sm leading-relaxed">
-                  Professional smart home integration for the Vail Valley.
-                </p>
-              </div>
-              <div>
-                <h4 className="text-white font-semibold text-sm mb-3">Services</h4>
-                <ul className="space-y-2">
-                  <li><Link to="/services/prewire" className="text-white/40 hover:text-white/70 text-sm transition-colors">Pre-Wire & Networking</Link></li>
-                  <li><Link to="/install" className="text-white/40 hover:text-white/70 text-sm transition-colors">Installation & Integration</Link></li>
-                  <li><Link to="/troubleshooting" className="text-white/40 hover:text-white/70 text-sm transition-colors">Maintenance</Link></li>
-                  <li><Link to="/matterport" className="text-white/40 hover:text-white/70 text-sm transition-colors">Matterport 3D Scanning</Link></li>
-                </ul>
-              </div>
-              <div>
-                <h4 className="text-white font-semibold text-sm mb-3">Contact</h4>
-                <ul className="space-y-2">
-                  <li>
-                    <a href="tel:+19705193013" className="text-white/40 hover:text-white/70 text-sm transition-colors flex items-center gap-2">
-                      <Phone className="w-3.5 h-3.5" /> (970) 519-3013
-                    </a>
-                  </li>
-                  <li>
-                    <Link to="/contact" className="text-white/40 hover:text-white/70 text-sm transition-colors flex items-center gap-2">
-                      <Mail className="w-3.5 h-3.5" /> Contact Form
-                    </Link>
-                  </li>
-                  <li>
-                    <span className="text-white/40 text-sm flex items-center gap-2">
-                      <MapPin className="w-3.5 h-3.5" /> Eagle County, Colorado
-                    </span>
-                  </li>
-                </ul>
-              </div>
-            </div>
-            <div className="border-t border-white/8 pt-6 flex flex-col sm:flex-row justify-between items-center gap-3">
-              <p className="text-white/30 text-xs">© {new Date().getFullYear()} Symphony Smart Homes. All rights reserved.</p>
-              <div className="flex gap-4">
-                <Link to="/privacy" className="text-white/30 hover:text-white/50 text-xs transition-colors">Privacy Policy</Link>
-                <Link to="/terms" className="text-white/30 hover:text-white/50 text-xs transition-colors">Terms</Link>
-              </div>
-            </div>
-          </div>
-        </footer>
+        <Footer />
       </div>
     </div>
   );
