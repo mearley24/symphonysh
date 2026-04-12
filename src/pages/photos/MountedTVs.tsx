@@ -17,10 +17,8 @@ const MountedTVs = () => {
   
   useEffect(() => {
     const hostname = window.location.hostname;
-    const isDev = hostname.includes('lovable.dev') || 
-                 hostname.includes('localhost') || 
+    const isDev = hostname.includes('localhost') ||
                  hostname.includes('preview--');
-    console.log('Current hostname:', hostname, 'isDev:', isDev);
     setIsLovableDevEnvironment(isDev);
     
     const checkUrlForButtonVisibility = () => {

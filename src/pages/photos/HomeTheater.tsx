@@ -20,10 +20,8 @@ const HomeTheater = () => {
   useEffect(() => {
     const hostname = window.location.hostname;
     // More inclusive check for Lovable.dev environments, also checking for preview URLs
-    const isDev = hostname.includes('lovable.dev') || 
-                 hostname.includes('localhost') || 
+    const isDev = hostname.includes('localhost') ||
                  hostname.includes('preview--');
-    console.log('Current hostname:', hostname, 'isDev:', isDev);
     setIsLovableDevEnvironment(isDev);
     
     // Function to toggle button visibility via URL parameter
