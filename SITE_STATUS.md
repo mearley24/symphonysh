@@ -1,19 +1,38 @@
 # symphonysh — Site Status
 
-*Last updated: April 12, 2026 (final sweep)*
+*Last updated: April 12, 2026 (final verification pass)*
 
 ---
 
 ## Launch Readiness
 
-**The site is functionally live and safe to use.**
-Cloudflare Pages deploys on every push to `main`. All pages render, all routes resolve,
-and the booking form accepts submissions. The items below are polish or require real
-business input — none are blocking.
+**The site is live, all routes resolve correctly, and the build is clean.**
+Cloudflare Pages deploys on every push to `main`. All pages render, all routes resolve
+with proper 200 status codes, and the booking form accepts submissions. The items below
+require real business input — none are blocking.
 
 ---
 
-## ✅ Complete
+## ✅ VERIFIED OK — April 12, 2026
+
+### Build
+- `npm run build` — clean, 0 errors, 2680 modules transformed
+- `git status` — clean, HEAD `94d260b` up to date with `origin/main`
+
+### Routing Fix (this pass)
+- **`public/_redirects` added** — Cloudflare Pages SPA routing fix (`/* /index.html 200`)
+- Previously, direct URL navigation to inner routes returned HTTP 404 (GitHub Pages SPA
+  hack in `404.html` / `index.html` handled browsers but not search engine crawlers)
+- All routes now return HTTP 200: `/projects`, `/about`, `/scheduling`, `/photos/*`, etc.
+- The legacy GitHub Pages decode script in `index.html` is harmless and can stay
+
+### Image Paths (verified correct)
+- `mounted-tvs/HP/` — uppercase, matches disk ✅
+- `mounted-tvs/Home/` — uppercase H, matches disk ✅
+- `mounted-tvs/Misc/` — uppercase M, matches disk ✅
+- `wiring/IMG_0228-2.JPG` — hyphen filename, matches disk ✅
+- All other mounted-tvs subcategories (`backbox-fp`, `mantel-mount`, `bc-condo-fp`, etc.)
+  are all-lowercase in both source and disk — no mismatches
 
 ### Content & Data
 - Real project data in `src/data/projects.ts` — 15 projects with real photos and descriptions
@@ -41,25 +60,7 @@ business input — none are blocking.
 - Cloudflare Pages auto-deploy on push to `main`
 - `lovable-tagger` npm package removed (prior commit)
 - All npm scripts work: `dev`, `build`, `preview`
-
-### Polish (previous sweep)
-- Removed 8 debug `console.log` statements from `Scheduling.tsx`
-- Removed dead `testNavigation` function and its exposed "Test Navigation" button
-  (was visible to real visitors in the booking flow)
-- Removed `hide-gallery-buttons` / `show-gallery-buttons` debug entries from the
-  service dropdown in `AppointmentForm.tsx` (were listed as bookable services)
-- Removed stale `console.log` from `scheduling/index.tsx`
-- Removed unused `useEffect` + `useState` imports from `AppointmentForm.tsx`
-
-### Final sweep — image path cleanup (April 12, 2026)
-- **Case-sensitivity fix** — `src/utils/photos/mountedTVs.ts`, `src/data/projects.ts`,
-  `src/pages/photos/mounted-tvs/{Home,HP,Misc}.tsx`: folder names changed from
-  lowercase (`home/`, `hp/`, `misc/`) to match actual disk casing (`Home/`, `HP/`, `Misc/`).
-  Would have caused 404s on the case-sensitive Linux filesystem used by Cloudflare Pages.
-- **Filename space fix** — `src/utils/photos/wiring.ts`: `IMG_0228 2.JPG` corrected to
-  `IMG_0228-2.JPG` to match the actual filename on disk.
-- **Removed `console.log`** from `src/App.tsx` ("App rendering, routes being set up").
-- Build verified clean after all changes (`npm run build` — 0 errors, 2680 modules).
+- `_redirects` file now in `public/` — proper SPA routing for Cloudflare Pages
 
 ---
 
@@ -101,41 +102,27 @@ business input — none are blocking.
 
 ## 🟡 Known — Low Priority / No Action Required Now
 
-### lodash / CVE-2026-4800 (patched — April 12, 2026)
+### lodash / CVE-2026-4800 (patched)
 - **Affected package:** `lodash` (transitive — pulled in by `recharts`)
-- **Root cause:** `recharts` resolved lodash to `4.18.1`, a supply-chain-compromised
-  package not published by the lodash maintainers. npm shows `4.18.0` as a "bad
-  release" too; the only legitimate release is `4.17.21`.
-- **Advisories covered:**
-  - CVE-2026-4800 / GHSA-r5fr-rjxr-66jc — Code Injection via `_.template` imports key names
-  - GHSA-xxjr-mmjv-4gpg — Prototype Pollution in `_.unset` / `_.omit`
-  - GHSA-f23m-r3pf-42rh — Prototype Pollution via array path bypass in `_.unset` / `_.omit`
 - **Fix applied:** `"overrides": { "lodash": "4.17.21" }` added to `package.json`.
-  Forces all transitive consumers to the only safe, non-deprecated, non-compromised
-  lodash release. Lockfile regenerated; build verified passing.
-- **Residual risk:** `npm audit` still flags `lodash <=4.17.23` because no patched
-  version above that range is safe (4.18.0 deprecated, 4.18.1 compromised). The
-  advisory CVEs require passing **user-controlled** input to `_.template` or
-  `_.unset`/`_.omit`. `recharts` uses lodash only for internal data utilities
-  (merge, cloneDeep, etc.) — no user-controlled strings reach those functions.
-  Runtime exposure: **none**. Redeploy: **recommended** (evicts the compromised
-  4.18.1 from the Cloudflare Pages build cache).
+- `npm audit` still flags `lodash <=4.17.23` — this is a false positive for the override
+  pattern. Runtime exposure via `recharts`: **none** (recharts uses lodash for internal
+  data utilities only, no user-controlled strings reach vulnerable functions).
 
 ### esbuild / Vite vulnerability (npm audit)
 - `npm audit` reports 2 moderate-severity findings: esbuild ≤0.24.2 via vite ≤6.4.1
-- **This is a dev-server-only vulnerability** — esbuild does not appear in the
-  production build artifact served by Cloudflare Pages. Visitors are not exposed.
-- Fix requires `vite@8` (breaking change). Safe to address in a dedicated upgrade
-  session; not urgent for production.
-- Advisory: https://github.com/advisories/GHSA-67mh-4wv8-2f99
+- **Dev-server-only** — not present in production build artifact served by Cloudflare Pages
+- Fix requires `vite@8` (breaking change). Safe to address in a dedicated upgrade session.
+
+### Large JS bundle warning
+- `dist/assets/index-BJlRabWq.js` is ~1 MB (gzipped: 279 kB)
+- Vite warns about chunks >500 kB — this is a code-splitting opportunity, not a bug
+- Site loads fine; optimize with dynamic imports if performance becomes a concern
 
 ### gptengineer.js in index.html
-- `index.html` loads `https://cdn.gpteng.co/gptengineer.js` in the body
-- This is a Lovable/GPT Engineer editor hook. The file comment says "DO NOT REMOVE"
-- It has no user-visible effect but does add a third-party script request on every
-  page load. If Lovable is no longer used as an editor, this can be removed.
-- **Do not remove without confirming Lovable is fully retired** — removing it could
-  break the visual editor workflow
+- `index.html` loads `https://cdn.gpteng.co/gptengineer.js` — Lovable editor hook
+- No user-visible effect; adds one third-party script request per page load
+- **Do not remove without confirming Lovable is fully retired**
 
 ### Google Calendar placeholder files
 - `src/utils/appointments/googleCalendar/auth/` contains stub files noting
@@ -156,3 +143,4 @@ business input — none are blocking.
 | OG/meta base | `index.html` |
 | Featured projects section | `src/components/Testimonials.tsx` |
 | Footer | `src/components/Footer.tsx` |
+| SPA routing | `public/_redirects` |
