@@ -73,20 +73,21 @@ const Header = () => {
           </div>
         </div>
 
-        {/* Menu button — centered below hero content when not scrolled */}
-        {!scrolled && (
-          <div className="fixed left-0 right-0 bottom-[140px] sm:bottom-[160px] flex justify-center pointer-events-none z-50">
-            <button
-              onClick={() => setMenuOpen(!menuOpen)}
-              className="pointer-events-auto inline-flex items-center gap-2 text-white/40 hover:text-white text-sm tracking-widest uppercase transition-colors"
-              aria-label="Toggle menu"
-            >
-              {menuOpen ? <X className="w-5 h-5" /> : <MenuIcon className="w-5 h-5" />}
-              <span>Menu</span>
-            </button>
-          </div>
-        )}
       </header>
+
+      {/* Menu button — below hero content when not scrolled */}
+      {!scrolled && (
+        <div className="fixed left-0 right-0 top-[460px] sm:top-[520px] flex justify-center pointer-events-none z-50">
+          <button
+            onClick={() => setMenuOpen(!menuOpen)}
+            className="pointer-events-auto inline-flex items-center gap-2 text-white/40 hover:text-white text-sm tracking-widest uppercase transition-colors"
+            aria-label="Toggle menu"
+          >
+            {menuOpen ? <X className="w-5 h-5" /> : <MenuIcon className="w-5 h-5" />}
+            <span>Menu</span>
+          </button>
+        </div>
+      )}
 
       {/* Full-screen overlay menu */}
       {/* Backdrop */}
