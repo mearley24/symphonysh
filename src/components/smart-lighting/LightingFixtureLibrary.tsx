@@ -14,8 +14,6 @@ interface LightingFixture {
   colorTemp: string;
   dimmable: boolean;
   price: number;
-  image: string;
-  model3d?: string;
   features: string[];
 }
 
@@ -129,7 +127,6 @@ export const LightingFixtureLibrary = ({ onFixtureSelect, selectedFixtures }: Li
       colorTemp: '2200K-6500K',
       dimmable: true,
       price: 49.99,
-      image: '/api/placeholder/200/200',
       features: ['Color Changing', 'Smart Control', 'Energy Star']
     },
     {
@@ -142,7 +139,6 @@ export const LightingFixtureLibrary = ({ onFixtureSelect, selectedFixtures }: Li
       colorTemp: '2500K-9000K',
       dimmable: true,
       price: 89.99,
-      image: '/api/placeholder/200/200',
       features: ['WiFi Built-in', '16M Colors', 'Voice Control']
     },
     {
@@ -155,7 +151,6 @@ export const LightingFixtureLibrary = ({ onFixtureSelect, selectedFixtures }: Li
       colorTemp: '3000K',
       dimmable: true,
       price: 129.99,
-      image: '/api/placeholder/200/200',
       features: ['Tunable White', 'Motion Sensor', 'Weather Resistant']
     },
     {
@@ -168,7 +163,6 @@ export const LightingFixtureLibrary = ({ onFixtureSelect, selectedFixtures }: Li
       colorTemp: 'N/A',
       dimmable: false,
       price: 79.99,
-      image: '/api/placeholder/200/200',
       features: ['6 Button Control', 'Wireless', 'Programmable Scenes']
     },
     {
@@ -181,7 +175,6 @@ export const LightingFixtureLibrary = ({ onFixtureSelect, selectedFixtures }: Li
       colorTemp: '2700K-6500K',
       dimmable: true,
       price: 34.99,
-      image: '/api/placeholder/200/200',
       features: ['Cuttable', 'Adhesive Backing', 'Music Sync']
     },
     {
@@ -194,7 +187,6 @@ export const LightingFixtureLibrary = ({ onFixtureSelect, selectedFixtures }: Li
       colorTemp: '1200K-6500K',
       dimmable: true,
       price: 299.99,
-      image: '/api/placeholder/200/200',
       features: ['Modular Design', 'Touch Sensitive', 'App Control']
     }
   ];
