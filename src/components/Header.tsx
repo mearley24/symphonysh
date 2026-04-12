@@ -38,7 +38,9 @@ const Header = () => {
   return (
     <>
       <header
-        className="fixed top-0 left-0 right-0 pointer-events-none z-50 transition-all duration-500"
+        className={`fixed top-0 left-0 right-0 pointer-events-none z-50 transition-all duration-300 ease-out ${
+          scrolled ? "bg-black/80 backdrop-blur-lg" : ""
+        }`}
       >
         <div className={`max-w-6xl mx-auto px-4 sm:px-6 transition-all duration-500 ${
           scrolled ? 'pt-2 pb-1' : 'pt-5 pb-3'
@@ -96,13 +98,16 @@ const Header = () => {
                 key={link.path}
                 to={link.path}
                 onClick={() => setMenuOpen(false)}
-                className={`block text-4xl sm:text-5xl font-bold py-2 transition-colors ${
-                  isActive(link.path)
-                    ? "text-white"
-                    : "text-white/50 hover:text-white"
-                }`}
+                className="group relative block text-4xl sm:text-5xl font-bold py-2 transition-colors"
               >
-                {link.label}
+                <span className={isActive(link.path) ? "text-white" : "text-white/50 group-hover:text-white transition-colors"}>
+                  {link.label}
+                </span>
+                <span
+                  className={`absolute left-1/2 -translate-x-1/2 -bottom-0.5 h-0.5 rounded-full bg-accent transition-all duration-200 ease-out ${
+                    isActive(link.path) ? "w-12" : "w-0 group-hover:w-8"
+                  }`}
+                />
               </Link>
             ))}
           </div>
