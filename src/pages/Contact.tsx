@@ -1,4 +1,9 @@
 import { Link } from "react-router-dom";
+import {
+  BUSINESS_NAME, BUSINESS_URL, BUSINESS_EMAIL, BUSINESS_PHONE_E164,
+  BUSINESS_ADDRESS, BUSINESS_GEO, BUSINESS_OPENING_HOURS,
+  BUSINESS_AREA_SERVED_PLACES, BUSINESS_HAS_MAP_URL, BUSINESS_SAME_AS,
+} from "../constants/businessSchema";
 import { useState } from "react";
 import { Phone, Mail, MapPin, Clock, Send, ArrowLeft, ArrowRight } from "lucide-react";
 import { useToast } from "@/components/ui/use-toast";
@@ -48,6 +53,21 @@ const Contact = () => {
         description="Get in touch with Symphony Smart Homes. Call, email, or send us a message. Serving Vail Valley and Eagle County, Colorado."
         keywords="contact, smart home, Vail Valley, Eagle County, phone, email"
         breadcrumbs={[{ name: "Home", url: "/" }, { name: "Contact", url: "/contact" }]}
+        schema={{
+          "@context": "https://schema.org",
+          "@type": "LocalBusiness",
+          name: BUSINESS_NAME,
+          description: "Contact Symphony Smart Homes for smart home installation, maintenance, and consultation in Vail Valley and Eagle County, Colorado.",
+          url: BUSINESS_URL,
+          telephone: BUSINESS_PHONE_E164,
+          email: BUSINESS_EMAIL,
+          address: BUSINESS_ADDRESS,
+          geo: BUSINESS_GEO,
+          openingHoursSpecification: BUSINESS_OPENING_HOURS,
+          areaServed: BUSINESS_AREA_SERVED_PLACES,
+          hasMap: BUSINESS_HAS_MAP_URL,
+          ...(BUSINESS_SAME_AS.length > 0 ? { sameAs: BUSINESS_SAME_AS } : {}),
+        }}
       />
       <Header />
 
