@@ -59,6 +59,7 @@ function App() {
       <>
         <Toaster />
         <MobileClickToCall />
+        <PageTransition>
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/index" element={<Index />} />
@@ -123,6 +124,7 @@ function App() {
           {/* 404 route should be the last one */}
           <Route path="*" element={<NotFound />} />
         </Routes>
+        </PageTransition>
       </>
     );
   } catch (error) {
