@@ -100,10 +100,10 @@ const Contact = () => {
               <div>
                 <h3 className="text-white font-semibold mb-4">Get in Touch</h3>
                 <div className="space-y-4">
-                  <a href="tel:+19705193013" className="flex items-start gap-3 text-white/60 hover:text-white transition-colors">
+                  <a href="tel:+19705193013" className="flex items-start gap-3 text-white/60 hover:text-white transition-colors cursor-pointer">
                     <Phone className="w-5 h-5 text-accent shrink-0 mt-0.5" />
                     <div>
-                      <p className="text-white font-medium">(970) 519-3013</p>
+                      <p className="text-white font-medium group-hover:text-white">(970) 519-3013</p>
                       <p className="text-sm">Call or text</p>
                     </div>
                   </a>
@@ -131,8 +131,7 @@ const Contact = () => {
                 <div className="space-y-2 text-sm">
                   <div className="flex justify-between text-white/60"><span>Mon – Fri</span><span className="text-white">8am – 6pm</span></div>
                   <div className="flex justify-between text-white/60"><span>Saturday</span><span className="text-white">9am – 4pm</span></div>
-                  <div className="flex justify-between text-white/60"><span>Sunday</span><span>Closed</span></div>
-                  <div className="flex justify-between text-white/60"><span>Emergency</span><span className="text-accent">24/7</span></div>
+                  <div className="flex justify-between text-white/60"><span>Sunday</span><span className="text-white/40">Emergency calls only</span></div>
                 </div>
               </div>
             </div>
@@ -145,7 +144,7 @@ const Contact = () => {
                     <label className="text-white/60 text-sm mb-1.5 block">Name</label>
                     <input
                       type="text" value={name} onChange={(e) => setName(e.target.value)} required
-                      className="w-full px-4 py-3 rounded-lg bg-white/5 border border-white/10 text-white placeholder-white/30 focus:outline-none focus:border-accent/50 text-sm"
+                      className="w-full px-4 py-3 rounded-lg bg-white/5 border border-white/10 text-white placeholder-white/30 focus:outline-none focus:border-accent/50 focus:ring-1 focus:ring-accent/20 text-sm transition-all"
                       placeholder="Your name"
                     />
                   </div>
@@ -153,7 +152,7 @@ const Contact = () => {
                     <label className="text-white/60 text-sm mb-1.5 block">Email</label>
                     <input
                       type="email" value={email} onChange={(e) => setEmail(e.target.value)} required
-                      className="w-full px-4 py-3 rounded-lg bg-white/5 border border-white/10 text-white placeholder-white/30 focus:outline-none focus:border-accent/50 text-sm"
+                      className="w-full px-4 py-3 rounded-lg bg-white/5 border border-white/10 text-white placeholder-white/30 focus:outline-none focus:border-accent/50 focus:ring-1 focus:ring-accent/20 text-sm transition-all"
                       placeholder="your@email.com"
                     />
                   </div>
@@ -161,7 +160,7 @@ const Contact = () => {
                     <label className="text-white/60 text-sm mb-1.5 block">Message</label>
                     <textarea
                       value={message} onChange={(e) => setMessage(e.target.value)} required rows={4}
-                      className="w-full px-4 py-3 rounded-lg bg-white/5 border border-white/10 text-white placeholder-white/30 focus:outline-none focus:border-accent/50 text-sm resize-none"
+                      className="w-full px-4 py-3 rounded-lg bg-white/5 border border-white/10 text-white placeholder-white/30 focus:outline-none focus:border-accent/50 focus:ring-1 focus:ring-accent/20 text-sm resize-none transition-all"
                       placeholder="Tell us about your project or question"
                     />
                   </div>
@@ -172,6 +171,7 @@ const Contact = () => {
                     <Send className="w-4 h-4" />
                     {isSubmitting ? "Sending..." : "Send Message"}
                   </button>
+                  <p className="text-white/30 text-xs text-center mt-3">We typically respond within a few hours during business hours.</p>
                 </form>
               </div>
             </div>
