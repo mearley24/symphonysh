@@ -4,12 +4,12 @@ import PhotoGallery from '../../../components/PhotoGallery';
 
 const BackboxFP = () => {
   const photos = [
-    "/lovable-uploads/mounted tvs/Backbox FP/IMG_0024.JPG",
-    "/lovable-uploads/mounted tvs/Backbox FP/IMG_0025.JPG",
-    "/lovable-uploads/mounted tvs/Backbox FP/IMG_0026.JPG",
-    "/lovable-uploads/mounted tvs/Backbox FP/IMG_0027.JPG",
-    "/lovable-uploads/mounted tvs/Backbox FP/IMG_0028.JPG",
-    "/lovable-uploads/mounted tvs/Backbox FP/IMG_0029.JPG",
+    "/lovable-uploads/mounted-tvs/backbox-fp/IMG_0024.JPG",
+    "/lovable-uploads/mounted-tvs/backbox-fp/IMG_0025.JPG",
+    "/lovable-uploads/mounted-tvs/backbox-fp/IMG_0026.JPG",
+    "/lovable-uploads/mounted-tvs/backbox-fp/IMG_0027.JPG",
+    "/lovable-uploads/mounted-tvs/backbox-fp/IMG_0028.JPG",
+    "/lovable-uploads/mounted-tvs/backbox-fp/IMG_0029.JPG",
   ];
 
   return (
