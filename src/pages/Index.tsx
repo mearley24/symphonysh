@@ -127,8 +127,8 @@ const Index = () => {
             </div>
           </section>
 
-          {/* CTA + Location — just above trust strip */}
-          <div className="animate-fade-in flex flex-col items-center gap-3 px-4 sm:px-6 pb-6 [animation-delay:300ms]">
+          {/* CTA + Location — directly above trust strip */}
+          <div className="animate-fade-in mt-auto flex flex-col items-center gap-3 px-4 sm:px-6 pb-4 [animation-delay:300ms]">
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
               <Link
                 to="/scheduling"
@@ -145,7 +145,7 @@ const Index = () => {
                 (970) 519-3013
               </a>
             </div>
-            <div className="inline-flex items-center gap-2 mt-2 text-white/40 text-sm">
+            <div className="inline-flex items-center gap-2 mt-1 text-white/40 text-sm">
               <MapPin className="w-3.5 h-3.5 text-accent" />
               <span>Vail · Beaver Creek · Edwards · Avon · Eagle</span>
             </div>
