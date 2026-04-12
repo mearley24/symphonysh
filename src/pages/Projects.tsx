@@ -22,6 +22,7 @@ const Projects = () => {
         title="Our Work | Smart Home Projects in Vail Valley"
         description="Browse our portfolio of smart home installations: home theaters, TV mounting, and structured wiring across Vail Valley and Eagle County."
         keywords="smart home portfolio, home theater, TV mounting, wiring, Vail Valley"
+        breadcrumbs={[{ name: "Home", url: "/" }, { name: "Our Work", url: "/projects" }]}
       />
       <Header />
 

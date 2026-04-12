@@ -53,6 +53,7 @@ const ProjectDetail = () => {
         title={`${project.name} | Symphony Smart Homes`}
         description={project.scope}
         keywords={`${project.name}, smart home installation, ${project.location}, ${categoryLabels.join(", ")}`}
+        breadcrumbs={[{ name: "Home", url: "/" }, { name: "Our Work", url: "/projects" }, { name: project.name, url: `/projects/${project.slug}` }]}
       />
       <Header />
 
