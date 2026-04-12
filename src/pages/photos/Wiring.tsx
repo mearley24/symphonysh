@@ -1,6 +1,7 @@
 
 import React, { useState, useEffect } from 'react';
 import Header from '../../components/Header';
+import SEO from '../../components/SEO';
 import { Link } from 'react-router-dom';
 import { ArrowLeft, Blinds } from 'lucide-react';
 import { wiringPhotos } from '../../utils/photos';
@@ -17,24 +18,21 @@ const Wiring = () => {
   const [loadedImages, setLoadedImages] = useState<Record<string, boolean>>({});
   const [isLovableDevEnvironment, setIsLovableDevEnvironment] = useState(false);
   const [isEditMode, setIsEditMode] = useState(false);
-  const [showButtons, setShowButtons] = useState(false); // Changed default to false
+  const [showButtons, setShowButtons] = useState(false);
   const [photos, setPhotos] = useState({
     general: wiringPhotos.general,
     rackWiring: wiringPhotos.rackWiring,
     shadeWiring: wiringPhotos.shadeWiring
   });
   
-  // Check if we're in the Lovable.dev preview environment
   useEffect(() => {
     const hostname = window.location.hostname;
-    // More inclusive check for Lovable.dev environments, also checking for preview URLs
     const isDev = hostname.includes('lovable.dev') || 
                  hostname.includes('localhost') || 
                  hostname.includes('preview--');
     console.log('Current hostname:', hostname, 'isDev:', isDev);
     setIsLovableDevEnvironment(isDev);
     
-    // Function to toggle button visibility via URL parameter
     const checkUrlForButtonVisibility = () => {
       const urlParams = new URLSearchParams(window.location.search);
       const hideButtons = urlParams.get('hideButtons');
@@ -45,10 +43,8 @@ const Wiring = () => {
       }
     };
     
-    // Check URL parameters on initial load
     checkUrlForButtonVisibility();
     
-    // Listen for URL changes (for SPA navigation)
     const handleUrlChange = () => {
       checkUrlForButtonVisibility();
     };
@@ -60,12 +56,10 @@ const Wiring = () => {
     };
   }, []);
   
-  // Function to toggle button visibility programmatically
   const toggleButtonVisibility = (visible: boolean) => {
     setShowButtons(visible);
   };
   
-  // Expose the toggle function to the window object for external access
   useEffect(() => {
     (window as any).toggleGalleryButtons = toggleButtonVisibility;
     
@@ -84,7 +78,6 @@ const Wiring = () => {
     setLoadedImages(prev => ({ ...prev, [image]: false }));
   };
 
-  // Preview images for each gallery
   const previewImages = {
     general: photos.general[0],
     rackWiring: photos.rackWiring[0],
@@ -100,6 +93,16 @@ const Wiring = () => {
 
   return (
     <PageBackground image={bgPrewire}>
+      <SEO
+        title="Structured Wiring & Rack Photos | Vail Valley"
+        description="See our structured wiring, rack installations, and shade wiring work across Vail Valley homes. Clean cable management and professional low-voltage wiring."
+        keywords="structured wiring, rack wiring, shade wiring, low voltage, cable management, Vail Valley"
+        breadcrumbs={[
+          { name: "Home", url: "/" },
+          { name: "Our Work", url: "/projects" },
+          { name: "Wiring", url: "/photos/wiring" },
+        ]}
+      />
       <Header />
       <section className="pt-32 pb-20 px-6">
         <div className="max-w-6xl mx-auto">
@@ -119,7 +122,6 @@ const Wiring = () => {
           
           <h1 className="text-4xl font-bold text-white mb-8">Wiring</h1>
           
-          {/* Gallery selection tabs */}
           <div className="flex mb-8 border-b border-gray-700 overflow-x-auto">
             <GalleryTabButton 
               isActive={selectedGallery === 'general'}
@@ -144,7 +146,6 @@ const Wiring = () => {
             />
           </div>
           
-          {/* Render the selected gallery */}
           <EditablePhotoGallery
             selectedGallery={selectedGallery}
             photos={photos}

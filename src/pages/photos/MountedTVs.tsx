@@ -1,7 +1,7 @@
-
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Header from '../../components/Header';
+import SEO from '../../components/SEO';
 import { ArrowLeft, ImageOff } from 'lucide-react';
 import { mountedTVsCategories, getFixedImagePath } from '../../utils/photoUtils';
 import GalleryControlButtons from '../../components/photos/GalleryControlButtons';
@@ -13,19 +13,16 @@ const MountedTVs = () => {
   const [loadedImages, setLoadedImages] = useState<Record<string, boolean>>({});
   const [isEditMode, setIsEditMode] = useState(false);
   const [isLovableDevEnvironment, setIsLovableDevEnvironment] = useState(false);
-  const [showButtons, setShowButtons] = useState(false); // Buttons hidden by default
+  const [showButtons, setShowButtons] = useState(false);
   
-  // Check if we're in the Lovable.dev preview environment
   useEffect(() => {
     const hostname = window.location.hostname;
-    // More inclusive check for Lovable.dev environments, also checking for preview URLs
     const isDev = hostname.includes('lovable.dev') || 
                  hostname.includes('localhost') || 
                  hostname.includes('preview--');
     console.log('Current hostname:', hostname, 'isDev:', isDev);
     setIsLovableDevEnvironment(isDev);
     
-    // Function to toggle button visibility via URL parameter
     const checkUrlForButtonVisibility = () => {
       const urlParams = new URLSearchParams(window.location.search);
       const hideButtons = urlParams.get('hideButtons');
@@ -36,10 +33,8 @@ const MountedTVs = () => {
       }
     };
     
-    // Check URL parameters on initial load
     checkUrlForButtonVisibility();
     
-    // Listen for URL changes (for SPA navigation)
     const handleUrlChange = () => {
       checkUrlForButtonVisibility();
     };
@@ -51,12 +46,10 @@ const MountedTVs = () => {
     };
   }, []);
   
-  // Function to toggle button visibility programmatically
   const toggleButtonVisibility = (visible: boolean) => {
     setShowButtons(visible);
   };
   
-  // Expose the toggle function to the window object for external access
   useEffect(() => {
     (window as any).toggleMountedTVButtons = toggleButtonVisibility;
     
@@ -78,13 +71,22 @@ const MountedTVs = () => {
   const toggleEditMode = () => {
     setIsEditMode(!isEditMode);
     if (isEditMode) {
-      // Would save changes here if we had editing functionality
       console.log("Photo order would be saved here");
     }
   };
 
   return (
     <PageBackground image={bgProjects}>
+      <SEO
+        title="Mounted TV Installations | Vail Valley Photo Gallery"
+        description="Browse our portfolio of professional TV mounting installations across Vail Valley — fireplace mounts, backbox installs, and concealed wiring solutions."
+        keywords="TV mounting, mounted TV, fireplace TV, backbox install, concealed wiring, Vail Valley"
+        breadcrumbs={[
+          { name: "Home", url: "/" },
+          { name: "Our Work", url: "/projects" },
+          { name: "Mounted TVs", url: "/photos/mounted-tvs" },
+        ]}
+      />
       <Header />
       <section className="pt-32 pb-20 px-6">
         <div className="max-w-6xl mx-auto">
