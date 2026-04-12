@@ -14,8 +14,6 @@ interface LightingFixture {
   colorTemp: string;
   dimmable: boolean;
   price: number;
-  image: string;
-  model3d?: string;
   features: string[];
 }
 
