@@ -79,6 +79,14 @@ const PhotoGallery: React.FC<PhotoGalleryProps> = ({
 
   return (
     <div className="min-h-screen bg-primary">
+      {seoTitle && (
+        <SEO
+          title={seoTitle}
+          description={seoDescription}
+          keywords={seoKeywords}
+          breadcrumbs={breadcrumbs}
+        />
+      )}
       <Header />
       <section className="pt-32 pb-20 px-6">
         <div className="max-w-6xl mx-auto">
