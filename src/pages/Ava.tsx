@@ -25,10 +25,10 @@ const Ava = () => {
           </Link>
 
           <p className="text-accent font-medium text-sm tracking-wide uppercase mb-3">AVA Smart Remote</p>
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight mb-5 text-white">
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight mb-5 text-white hero-text-shadow">
             One remote that controls everything.
           </h1>
-          <p className="text-white/60 text-base sm:text-lg leading-relaxed mb-8 max-w-2xl">
+          <p className="text-white/60 text-base sm:text-lg leading-relaxed mb-8 max-w-2xl hero-subtext-shadow">
             AVA is a premium smart remote designed for simplicity. It replaces the clutter of multiple remotes with a single, intuitive device that controls your TV, audio, lights, shades, and more.
           </p>
 
@@ -42,6 +42,8 @@ const Ava = () => {
           </div>
         </div>
       </section>
+
+      <div className="hero-divider w-full" />
 
       {/* Product Image + Features */}
       <section className="py-16 sm:py-24 px-4 sm:px-6 bg-black/20 backdrop-blur-sm border-y border-white/5">

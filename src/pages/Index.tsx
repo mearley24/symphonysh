@@ -96,15 +96,15 @@ const Index = () => {
 
           <div className="relative max-w-5xl mx-auto px-4 sm:px-6 pt-16 sm:pt-24 pb-20 sm:pb-32">
             <div className="max-w-2xl mx-auto text-center">
-              <p className="animate-fade-in text-accent font-semibold text-sm tracking-widest uppercase mb-4 inline-flex items-center gap-2">
+              <p className="animate-hero-eyebrow text-accent font-semibold text-sm tracking-widest uppercase mb-4 inline-flex items-center gap-2">
                 <span className="w-8 h-px bg-accent" />
                 Vail Valley Smart Home Integrator
                 <span className="w-8 h-px bg-accent" />
               </p>
-              <h1 className="animate-fade-in text-5xl sm:text-6xl lg:text-7xl font-extrabold leading-[0.95] mb-6 text-white [animation-delay:100ms]">
+              <h1 className="animate-fade-in text-5xl sm:text-6xl lg:text-7xl font-extrabold leading-[0.95] mb-6 text-white hero-text-shadow [animation-delay:100ms]">
                 We build smart homes that just work.
               </h1>
-              <p className="animate-fade-in text-white/60 text-lg sm:text-xl leading-relaxed mb-10 max-w-lg mx-auto [animation-delay:200ms]">
+              <p className="animate-fade-in text-white/60 text-lg sm:text-xl leading-relaxed mb-10 max-w-lg mx-auto hero-subtext-shadow [animation-delay:200ms]">
                 One team from pre-wire to programming — reliable technology for homeowners and builders across Eagle County.
               </p>
               <div className="animate-fade-in flex flex-col sm:flex-row gap-3 justify-center [animation-delay:300ms]">
@@ -132,6 +132,9 @@ const Index = () => {
             </div>
           </div>
         </section>
+
+        {/* Hero-to-content divider */}
+        <div className="hero-divider w-full" />
 
         {/* Trust Strip */}
         <section className="border-y border-white/10 py-6 sm:py-8 px-4 sm:px-6 bg-black/30 backdrop-blur-sm">

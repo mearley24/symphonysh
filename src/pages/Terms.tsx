@@ -25,12 +25,15 @@ const Terms = () => {
             <ArrowLeft className="w-3.5 h-3.5" /> Back to Home
           </Link>
           <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">Legal</p>
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight mb-5 text-white">Terms of Service</h1>
-          <p className="text-white/60 text-base sm:text-lg leading-relaxed">
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight mb-5 text-white hero-text-shadow">Terms of Service</h1>
+          <p className="text-white/60 text-base sm:text-lg leading-relaxed hero-subtext-shadow">
             Last updated: June 1, 2024
           </p>
         </div>
       </section>
+
+      {/* Hero-to-content divider */}
+      <div className="hero-divider w-full" />
 
       {/* Content */}
       <section className="py-16 sm:py-24 px-4 sm:px-6 bg-black/20 backdrop-blur-sm border-y border-white/5">

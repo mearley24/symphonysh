@@ -28,14 +28,17 @@ const About = () => {
           </Link>
 
           <p className="text-accent font-medium text-sm tracking-wide uppercase mb-3">About Us</p>
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight mb-5 text-white">
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight mb-5 text-white hero-text-shadow">
             The Vail Valley's trusted smart home team — from first wire to final walkthrough.
           </h1>
-          <p className="text-white/60 text-base sm:text-lg leading-relaxed max-w-2xl">
+          <p className="text-white/60 text-base sm:text-lg leading-relaxed max-w-2xl hero-subtext-shadow">
             We design, install, and maintain smart home systems for homeowners and builders across Eagle County. Pre-wire through programming, one team handles it all.
           </p>
         </div>
       </section>
+
+      {/* Hero-to-content divider */}
+      <div className="hero-divider w-full" />
 
       {/* How We Work */}
       <section className="py-16 sm:py-24 px-4 sm:px-6 bg-black/20 backdrop-blur-sm border-y border-white/5">

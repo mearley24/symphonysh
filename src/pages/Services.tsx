@@ -118,10 +118,10 @@ const Services = () => {
           </Link>
 
           <p className="text-accent font-medium text-sm tracking-wide uppercase mb-3">Our Services</p>
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight mb-5 text-white">
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight mb-5 text-white hero-text-shadow">
             Everything your smart home needs — designed, installed, and supported.
           </h1>
-          <p className="text-white/60 text-base sm:text-lg leading-relaxed mb-8 max-w-2xl">
+          <p className="text-white/60 text-base sm:text-lg leading-relaxed mb-8 max-w-2xl hero-subtext-shadow">
             From structured wiring to full-home automation, we handle every layer of smart home technology. One team, one point of contact, start to finish.
           </p>
 
@@ -135,6 +135,9 @@ const Services = () => {
           </div>
         </div>
       </section>
+
+      {/* Hero-to-content divider */}
+      <div className="hero-divider w-full" />
 
       {/* Services Grid */}
       <section className="py-16 sm:py-24 px-4 sm:px-6 bg-black/20 backdrop-blur-sm border-y border-white/5">

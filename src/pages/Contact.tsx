@@ -58,14 +58,17 @@ const Contact = () => {
           </Link>
 
           <p className="text-accent font-medium text-sm tracking-wide uppercase mb-3">Contact</p>
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight mb-5 text-white">
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight mb-5 text-white hero-text-shadow">
             Let's talk about your project.
           </h1>
-          <p className="text-white/60 text-base sm:text-lg leading-relaxed max-w-2xl">
+          <p className="text-white/60 text-base sm:text-lg leading-relaxed max-w-2xl hero-subtext-shadow">
             Give us a call, send a message, or schedule a walkthrough. No pressure — we're happy to answer questions and help you figure out what makes sense.
           </p>
         </div>
       </section>
+
+      {/* Hero-to-content divider */}
+      <div className="hero-divider w-full" />
 
       {/* Contact Info + Form */}
       <section className="py-16 sm:py-24 px-4 sm:px-6 bg-black/20 backdrop-blur-sm border-y border-white/5">
