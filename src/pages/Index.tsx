@@ -176,7 +176,7 @@ const Index = () => {
           </section>
         </div>
 
-        <SocialProof />
+        
 
         {/* Services */}
         <section className="py-16 sm:py-24 px-4 sm:px-6" id="services">
