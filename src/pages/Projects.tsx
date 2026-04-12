@@ -108,7 +108,7 @@ const Projects = () => {
               <button
                 key={cat.slug}
                 onClick={() => handleFilterChange(cat.slug)}
-                className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 ${
+                className={`px-4 py-2 min-h-[44px] rounded-lg text-sm font-medium transition-all duration-300 ${
                   activeFilter === cat.slug
                     ? "bg-accent text-white shadow-md shadow-accent/20"
                     : "bg-white/5 text-white/60 hover:bg-white/10 hover:text-white border border-white/8"
