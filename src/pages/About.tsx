@@ -6,12 +6,15 @@ import SEO from "../components/SEO";
 import PageBackground from "../components/PageBackground";
 import bgAbout from "../assets/bg-about.jpg";
 import { aboutPageLocalBusinessSchema } from "../constants/businessSchema";
+import { useScrollReveal } from "../hooks/useScrollReveal";
 
 const About = () => {
   const serviceSchema = aboutPageLocalBusinessSchema();
+  const revealRef = useScrollReveal();
 
   return (
     <PageBackground image={bgAbout}>
+      <div ref={revealRef}>
       <SEO
         title="About Symphony Smart Homes | Vail Valley"
         description="Local smart home integrators serving Vail Valley and Eagle County. We design, install, and maintain reliable smart home technology."
@@ -21,13 +24,12 @@ const About = () => {
       />
       <Header />
 
-      {/* Hero */}
+      {/* Hero — no reveal */}
       <section className="pt-36 sm:pt-44 pb-16 sm:pb-20 px-4 sm:px-6">
         <div className="max-w-4xl mx-auto">
           <Link to="/" className="inline-flex items-center gap-1.5 text-white/40 hover:text-white/70 text-sm mb-8 transition-colors">
             <ArrowLeft className="w-3.5 h-3.5" /> Back to Home
           </Link>
-
           <p className="text-accent font-medium text-sm tracking-wide uppercase mb-3">About Us</p>
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight mb-5 text-white hero-text-shadow">
             The Vail Valley's trusted smart home team — from first wire to final walkthrough.
@@ -38,16 +40,17 @@ const About = () => {
         </div>
       </section>
 
-      {/* Hero-to-content divider */}
       <div className="hero-divider w-full" />
 
       {/* How We Work */}
       <section className="py-16 sm:py-24 px-4 sm:px-6 bg-black/20 backdrop-blur-sm border-y border-white/5">
         <div className="max-w-4xl mx-auto">
-          <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">How We Work</p>
-          <h2 className="text-2xl sm:text-3xl font-bold text-white mb-10">A few things we don't compromise on</h2>
+          <div data-reveal>
+            <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">How We Work</p>
+            <h2 className="text-2xl sm:text-3xl font-bold text-white mb-10">A few things we don't compromise on</h2>
+          </div>
 
-          <div className="grid sm:grid-cols-2 gap-5">
+          <div data-reveal-children className="grid sm:grid-cols-2 gap-5">
             {[
               { title: "Do it right the first time", description: "Every cable labeled, every system tested, every install documented. Shortcuts create callbacks." },
               { title: "Keep it simple for you", description: "If you need a manual to turn on a light, something went wrong. Your system should feel effortless." },
@@ -72,7 +75,7 @@ const About = () => {
       </section>
 
       {/* Meet the Founder */}
-      <section className="py-16 sm:py-24 px-4 sm:px-6">
+      <section data-reveal className="py-16 sm:py-24 px-4 sm:px-6">
         <div className="max-w-4xl mx-auto">
           <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">Leadership</p>
           <h2 className="text-2xl sm:text-3xl font-bold text-white mb-8">Meet the Founder</h2>
@@ -91,7 +94,7 @@ const About = () => {
       </section>
 
       {/* CTA */}
-      <section className="py-16 sm:py-24 px-4 sm:px-6 bg-black/20 backdrop-blur-sm border-t border-white/5">
+      <section data-reveal className="py-16 sm:py-24 px-4 sm:px-6 bg-black/20 backdrop-blur-sm border-t border-white/5">
         <div className="max-w-3xl mx-auto text-center">
           <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">Get Started</p>
             <h2 className="text-2xl sm:text-3xl font-bold text-white mb-4">Want to work together?</h2>
@@ -110,6 +113,7 @@ const About = () => {
       </section>
 
       <Footer />
+      </div>
     </PageBackground>
   );
 };

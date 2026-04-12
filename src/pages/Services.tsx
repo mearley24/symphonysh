@@ -7,80 +7,27 @@ import SEO from "../components/SEO";
 import PageBackground from "../components/PageBackground";
 import bgServices from "../assets/bg-services.jpg";
 import { schemaProviderLocalBusiness } from "../constants/businessSchema";
+import { useScrollReveal } from "../hooks/useScrollReveal";
 
 const Services = () => {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
+  const revealRef = useScrollReveal();
 
   const services = [
-    {
-      icon: Home,
-      title: "Home Automation & Control",
-      description: "Unified smart home control through Control4 — lighting, climate, audio, security, and shades managed from one interface.",
-      link: "/services/home-integration",
-    },
-    {
-      icon: Volume2,
-      title: "Audio & Home Theater",
-      description: "Multi-room audio distribution, dedicated home theaters with Dolby Atmos, and outdoor speaker systems.",
-      link: "/services/audio-entertainment",
-    },
-    {
-      icon: Shield,
-      title: "Security & Surveillance",
-      description: "IP camera systems, smart locks, video doorbells, and integrated alarm monitoring for complete peace of mind.",
-      link: "/services/security-systems",
-    },
-    {
-      icon: Lightbulb,
-      title: "Smart Lighting",
-      description: "Lutron and Control4 lighting control — keypads, dimmers, scenes, and automated schedules for every room.",
-      link: "/services/smart-lighting",
-    },
-    {
-      icon: Thermometer,
-      title: "Climate Control",
-      description: "Smart thermostat integration with zoned HVAC control, floor heating, and automated comfort scheduling.",
-      link: "/services/climate-control",
-    },
-    {
-      icon: Wifi,
-      title: "Home Networking",
-      description: "Enterprise-grade Wi-Fi, structured cabling, managed switches, and network racks for reliable connectivity.",
-      link: "/services/networking",
-    },
-    {
-      icon: Sun,
-      title: "Motorized Shades",
-      description: "Automated window treatments that respond to sunlight, schedules, and scenes — integrated with your smart home.",
-      link: "/services/shades",
-    },
-    {
-      icon: Wrench,
-      title: "Maintenance & Support",
-      description: "Ongoing system maintenance, firmware updates, remote diagnostics, and on-site service when you need it.",
-      link: "/services/maintenance",
-    },
-    {
-      icon: Cable,
-      title: "Pre-Wire & Structured Wiring",
-      description: "Structured cabling for new construction and retrofits — Cat6, speaker wire, HDMI, and control wiring installed clean from the start.",
-      link: "/services/prewire",
-    },
+    { icon: Home, title: "Home Automation & Control", description: "Unified smart home control through Control4 — lighting, climate, audio, security, and shades managed from one interface.", link: "/services/home-integration" },
+    { icon: Volume2, title: "Audio & Home Theater", description: "Multi-room audio distribution, dedicated home theaters with Dolby Atmos, and outdoor speaker systems.", link: "/services/audio-entertainment" },
+    { icon: Shield, title: "Security & Surveillance", description: "IP camera systems, smart locks, video doorbells, and integrated alarm monitoring for complete peace of mind.", link: "/services/security-systems" },
+    { icon: Lightbulb, title: "Smart Lighting", description: "Lutron and Control4 lighting control — keypads, dimmers, scenes, and automated schedules for every room.", link: "/services/smart-lighting" },
+    { icon: Thermometer, title: "Climate Control", description: "Smart thermostat integration with zoned HVAC control, floor heating, and automated comfort scheduling.", link: "/services/climate-control" },
+    { icon: Wifi, title: "Home Networking", description: "Enterprise-grade Wi-Fi, structured cabling, managed switches, and network racks for reliable connectivity.", link: "/services/networking" },
+    { icon: Sun, title: "Motorized Shades", description: "Automated window treatments that respond to sunlight, schedules, and scenes — integrated with your smart home.", link: "/services/shades" },
+    { icon: Wrench, title: "Maintenance & Support", description: "Ongoing system maintenance, firmware updates, remote diagnostics, and on-site service when you need it.", link: "/services/maintenance" },
+    { icon: Cable, title: "Pre-Wire & Structured Wiring", description: "Structured cabling for new construction and retrofits — Cat6, speaker wire, HDMI, and control wiring installed clean from the start.", link: "/services/prewire" },
   ];
 
   const alsoAvailable = [
-    {
-      icon: ScanLine,
-      title: "Matterport 3D Scanning",
-      description: "Immersive 3D virtual tours for real estate listings, construction documentation, and property records.",
-      link: "/matterport",
-    },
-    {
-      icon: Smartphone,
-      title: "AVA Smart Remote",
-      description: "A premium universal remote that controls your entire smart home from a single, beautifully simple interface.",
-      link: "/ava",
-    },
+    { icon: ScanLine, title: "Matterport 3D Scanning", description: "Immersive 3D virtual tours for real estate listings, construction documentation, and property records.", link: "/matterport" },
+    { icon: Smartphone, title: "AVA Smart Remote", description: "A premium universal remote that controls your entire smart home from a single, beautifully simple interface.", link: "/ava" },
   ];
 
   const faqs = [
@@ -100,6 +47,7 @@ const Services = () => {
 
   return (
     <PageBackground image={bgServices}>
+      <div ref={revealRef}>
       <SEO
         title="Smart Home Services | Vail Valley, CO"
         description="Full-service smart home integration: automation, audio, lighting, security, networking, and more. Serving Vail Valley & Eagle County."
@@ -109,14 +57,12 @@ const Services = () => {
       />
       <Header />
 
-      {/* Hero */}
+      {/* Hero — no reveal */}
       <section className="pt-36 sm:pt-44 pb-16 sm:pb-20 px-4 sm:px-6">
         <div className="max-w-4xl mx-auto">
           <Link to="/" className="inline-flex items-center gap-1.5 text-white/40 hover:text-white/70 text-sm mb-8 transition-colors">
-            <ArrowLeft className="w-3.5 h-3.5" />
-            Back to Home
+            <ArrowLeft className="w-3.5 h-3.5" /> Back to Home
           </Link>
-
           <p className="text-accent font-medium text-sm tracking-wide uppercase mb-3">Our Services</p>
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight mb-5 text-white hero-text-shadow">
             Everything your smart home needs — designed, installed, and supported.
@@ -124,7 +70,6 @@ const Services = () => {
           <p className="text-white/60 text-base sm:text-lg leading-relaxed mb-8 max-w-2xl hero-subtext-shadow">
             From structured wiring to full-home automation, we handle every layer of smart home technology. One team, one point of contact, start to finish.
           </p>
-
           <div className="flex flex-col sm:flex-row gap-3">
             <Link to="/scheduling" className="inline-flex items-center justify-center gap-2 bg-accent hover:bg-accent/90 text-white px-7 py-4 rounded-lg font-medium transition-colors text-base">
               Schedule a Consultation <ArrowRight className="w-4 h-4" />
@@ -136,17 +81,16 @@ const Services = () => {
         </div>
       </section>
 
-      {/* Hero-to-content divider */}
       <div className="hero-divider w-full" />
 
       {/* Services Grid */}
       <section className="py-16 sm:py-24 px-4 sm:px-6 bg-black/20 backdrop-blur-sm border-y border-white/5">
         <div className="max-w-5xl mx-auto">
-          <div className="text-center mb-12">
+          <div data-reveal className="text-center mb-12">
             <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">What We Do</p>
             <h2 className="text-2xl sm:text-3xl font-bold text-white">Smart Home Services</h2>
           </div>
-          <div className="grid sm:grid-cols-2 gap-4">
+          <div data-reveal-children className="grid sm:grid-cols-2 gap-4">
             {services.map((service, i) => (
               <Link key={i} to={service.link} className="group">
                 <div className="bg-black/40 backdrop-blur-sm border border-white/8 rounded-xl p-6 h-full hover:border-accent/30 hover:bg-black/50 transition-all duration-200">
@@ -168,11 +112,11 @@ const Services = () => {
       {/* Also Available */}
       <section className="py-16 sm:py-24 px-4 sm:px-6">
         <div className="max-w-5xl mx-auto">
-          <div className="text-center mb-8">
+          <div data-reveal className="text-center mb-8">
             <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">Also Available</p>
             <h2 className="text-xl sm:text-2xl font-bold text-white">Additional Services</h2>
           </div>
-          <div className="grid sm:grid-cols-2 gap-4 max-w-2xl mx-auto">
+          <div data-reveal-children className="grid sm:grid-cols-2 gap-4 max-w-2xl mx-auto">
             {alsoAvailable.map((item, i) => (
               <Link key={i} to={item.link} className="group">
                 <div className="bg-black/40 backdrop-blur-sm border border-white/8 rounded-xl p-6 h-full hover:border-accent/30 hover:bg-black/50 transition-all duration-200">
@@ -194,11 +138,11 @@ const Services = () => {
       {/* Why Integrated */}
       <section className="py-16 sm:py-24 px-4 sm:px-6">
         <div className="max-w-4xl mx-auto">
-          <div className="text-center mb-12">
+          <div data-reveal className="text-center mb-12">
             <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">The Advantage</p>
             <h2 className="text-2xl sm:text-3xl font-bold text-white">Why an integrated system matters</h2>
           </div>
-          <div className="grid sm:grid-cols-2 gap-5">
+          <div data-reveal-children className="grid sm:grid-cols-2 gap-5">
             {[
               { title: "One App, One Interface", description: "Control everything — lights, music, locks, cameras, shades, thermostats — from a single touchscreen, phone, or remote." },
               { title: "Systems That Talk to Each Other", description: "When you leave the house, the lights turn off, the thermostat adjusts, the doors lock, and the cameras arm — automatically." },
@@ -220,11 +164,11 @@ const Services = () => {
       {/* FAQ */}
       <section className="py-16 sm:py-24 px-4 sm:px-6 bg-black/20 backdrop-blur-sm border-y border-white/5">
         <div className="max-w-3xl mx-auto">
-          <div className="text-center mb-12">
+          <div data-reveal className="text-center mb-12">
             <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">FAQ</p>
             <h2 className="text-2xl sm:text-3xl font-bold text-white">Common Questions</h2>
           </div>
-          <div className="space-y-2">
+          <div data-reveal-children className="space-y-2">
             {faqs.map((faq, i) => (
               <div key={i} className="border border-white/8 rounded-xl overflow-hidden bg-black/40 backdrop-blur-sm">
                 <button onClick={() => setOpenFaq(openFaq === i ? null : i)} className="w-full flex items-center justify-between p-5 text-left hover:bg-white/[0.03] transition-colors" aria-expanded={openFaq === i}>
@@ -243,7 +187,7 @@ const Services = () => {
       </section>
 
       {/* Final CTA */}
-      <section className="py-16 sm:py-24 px-4 sm:px-6">
+      <section data-reveal className="py-16 sm:py-24 px-4 sm:px-6">
         <div className="max-w-3xl mx-auto text-center">
           <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">Get Started</p>
             <h2 className="text-2xl sm:text-3xl font-bold text-white mb-4">Not sure where to start?</h2>
@@ -262,6 +206,7 @@ const Services = () => {
       </section>
 
       <Footer />
+      </div>
     </PageBackground>
   );
 };

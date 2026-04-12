@@ -12,6 +12,7 @@ import Footer from "../components/Footer";
 import SEO from "../components/SEO";
 import PageBackground from "../components/PageBackground";
 import bgContact from "../assets/bg-contact.jpg";
+import { useScrollReveal } from "../hooks/useScrollReveal";
 
 const Contact = () => {
   const [name, setName] = useState("");
@@ -19,6 +20,7 @@ const Contact = () => {
   const [message, setMessage] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
+  const revealRef = useScrollReveal();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -48,6 +50,7 @@ const Contact = () => {
 
   return (
     <PageBackground image={bgContact}>
+      <div ref={revealRef}>
       <SEO
         title="Contact Us | Symphony Smart Homes"
         description="Get in touch with Symphony Smart Homes. Call, email, or send us a message. Serving Vail Valley and Eagle County, Colorado."
@@ -71,13 +74,12 @@ const Contact = () => {
       />
       <Header />
 
-      {/* Hero */}
+      {/* Hero — no reveal */}
       <section className="pt-36 sm:pt-44 pb-16 sm:pb-20 px-4 sm:px-6">
         <div className="max-w-4xl mx-auto">
           <Link to="/" className="inline-flex items-center gap-1.5 text-white/40 hover:text-white/70 text-sm mb-8 transition-colors">
             <ArrowLeft className="w-3.5 h-3.5" /> Back to Home
           </Link>
-
           <p className="text-accent font-medium text-sm tracking-wide uppercase mb-3">Contact</p>
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight mb-5 text-white hero-text-shadow">
             Let's talk about your project.
@@ -88,14 +90,12 @@ const Contact = () => {
         </div>
       </section>
 
-      {/* Hero-to-content divider */}
       <div className="hero-divider w-full" />
 
       {/* Contact Info + Form */}
-      <section className="py-16 sm:py-24 px-4 sm:px-6 bg-black/20 backdrop-blur-sm border-y border-white/5">
+      <section data-reveal className="py-16 sm:py-24 px-4 sm:px-6 bg-black/20 backdrop-blur-sm border-y border-white/5">
         <div className="max-w-4xl mx-auto">
           <div className="grid md:grid-cols-5 gap-10">
-            {/* Info Column */}
             <div className="md:col-span-2 space-y-6">
               <div>
                 <h3 className="text-white font-semibold mb-4">Get in Touch</h3>
@@ -137,7 +137,6 @@ const Contact = () => {
               </div>
             </div>
 
-            {/* Form Column */}
             <div className="md:col-span-3">
               <div className="bg-black/40 backdrop-blur-sm border border-white/8 rounded-xl p-6">
                 <h3 className="text-white font-semibold mb-5">Send a Message</h3>
@@ -181,7 +180,7 @@ const Contact = () => {
       </section>
 
       {/* CTA */}
-      <section className="py-16 sm:py-24 px-4 sm:px-6">
+      <section data-reveal className="py-16 sm:py-24 px-4 sm:px-6">
         <div className="max-w-3xl mx-auto text-center">
           <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">Schedule</p>
             <h2 className="text-2xl sm:text-3xl font-bold text-white mb-4">Prefer to schedule a time?</h2>
@@ -193,6 +192,7 @@ const Contact = () => {
       </section>
 
       <Footer />
+      </div>
     </PageBackground>
   );
 };

@@ -7,12 +7,14 @@ import SEO from "../components/SEO";
 import PageBackground from "../components/PageBackground";
 import bgProjects from "../assets/bg-projects.jpg";
 import { projects, projectCategories } from "../data/projects";
+import { useScrollReveal } from "../hooks/useScrollReveal";
 
 const Projects = () => {
   const [activeFilter, setActiveFilter] = useState("all");
   const [displayedProjects, setDisplayedProjects] = useState(projects);
   const [animatingOut, setAnimatingOut] = useState(false);
   const cardRefs = useRef<(HTMLAnchorElement | null)[]>([]);
+  const revealRef = useScrollReveal();
 
   const filtered =
     activeFilter === "all"
@@ -24,7 +26,6 @@ const Projects = () => {
       if (slug === activeFilter) return;
       setAnimatingOut(true);
 
-      // After exit animation, swap data and animate in
       setTimeout(() => {
         setActiveFilter(slug);
         const next =
@@ -38,7 +39,6 @@ const Projects = () => {
     [activeFilter],
   );
 
-  // IntersectionObserver for card fade-in on scroll
   const [visibleCards, setVisibleCards] = useState<Set<number>>(new Set());
   useEffect(() => {
     setVisibleCards(new Set());
@@ -56,7 +56,6 @@ const Projects = () => {
       },
       { rootMargin: "60px" },
     );
-    // Small delay so refs are populated after render
     requestAnimationFrame(() => {
       cardRefs.current.forEach((el) => {
         if (el) observer.observe(el);
@@ -67,6 +66,7 @@ const Projects = () => {
 
   return (
     <PageBackground image={bgProjects}>
+      <div ref={revealRef}>
       <SEO
         title="Our Work | Smart Home Projects in Vail Valley"
         description="Browse our portfolio of smart home installations: home theaters, TV mounting, and structured wiring across Vail Valley and Eagle County."
@@ -75,7 +75,7 @@ const Projects = () => {
       />
       <Header />
 
-      {/* Hero */}
+      {/* Hero — no reveal */}
       <section className="pt-36 sm:pt-44 pb-16 sm:pb-20 px-4 sm:px-6">
         <div className="max-w-4xl mx-auto">
           <Link
@@ -96,14 +96,13 @@ const Projects = () => {
         </div>
       </section>
 
-      {/* Hero-to-content divider */}
       <div className="hero-divider w-full" />
 
       {/* Filter + Project Cards */}
       <section className="py-8 sm:py-12 px-4 sm:px-6 bg-black/20 backdrop-blur-sm border-y border-white/5">
         <div className="max-w-5xl mx-auto">
           {/* Filter pills */}
-          <div className="flex flex-wrap gap-2 mb-8">
+          <div data-reveal className="flex flex-wrap gap-2 mb-8">
             {projectCategories.map((cat) => (
               <button
                 key={cat.slug}
@@ -148,7 +147,6 @@ const Projects = () => {
                     loading="lazy"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent transition-colors duration-300 group-hover:from-black/50 group-hover:via-black/10" />
-                  {/* Category tags */}
                   <div className="absolute top-3 left-3 flex flex-wrap gap-1.5">
                     {project.categories.map((cat) => {
                       const found = projectCategories.find((c) => c.slug === cat);
@@ -186,7 +184,7 @@ const Projects = () => {
       </section>
 
       {/* CTA */}
-      <section className="py-16 sm:py-24 px-4 sm:px-6">
+      <section data-reveal className="py-16 sm:py-24 px-4 sm:px-6">
         <div className="max-w-3xl mx-auto text-center">
           <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">Get Started</p>
           <h2 className="text-2xl sm:text-3xl font-bold text-white mb-4">
@@ -214,6 +212,7 @@ const Projects = () => {
       </section>
 
       <Footer />
+      </div>
     </PageBackground>
   );
 };
