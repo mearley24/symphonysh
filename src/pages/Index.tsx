@@ -152,7 +152,7 @@ const Index = () => {
           </div>
 
           {/* Trust Strip — pinned to bottom of window */}
-          <section data-reveal className="mt-auto border-y border-white/10 py-6 sm:py-8 px-4 sm:px-6 bg-black/30 backdrop-blur-sm">
+          <section data-reveal className="border-y border-white/10 py-6 sm:py-8 px-4 sm:px-6 bg-black/30 backdrop-blur-sm">
             <div className="max-w-5xl mx-auto">
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 text-center">
                 <div>
