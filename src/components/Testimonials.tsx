@@ -13,12 +13,12 @@ const Testimonials = () => {
   return (
     <section className="py-16 sm:py-24 px-4 sm:px-6 bg-black/15 backdrop-blur-sm border-y border-white/5">
       <div className="max-w-5xl mx-auto">
-        <div className="text-center mb-12">
+        <div data-reveal className="text-center mb-12">
           <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">Recent Work</p>
           <h2 className="text-2xl sm:text-3xl font-bold text-white">Featured Projects</h2>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+        <div data-reveal-children className="grid grid-cols-1 md:grid-cols-3 gap-5">
           {featured.map((project) => (
             <Link
               key={project.slug}
