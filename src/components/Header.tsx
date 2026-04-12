@@ -63,7 +63,7 @@ const Header = () => {
             {scrolled && (
               <button
                 onClick={() => setMenuOpen(!menuOpen)}
-                className="pointer-events-auto inline-flex items-center gap-2 text-white/40 hover:text-white text-sm tracking-widest uppercase transition-colors"
+                className="pointer-events-auto inline-flex items-center gap-2 text-white/40 hover:text-white text-sm tracking-widest uppercase transition-colors px-[2px]"
                 aria-label="Toggle menu"
               >
                 {menuOpen ? <X className="w-5 h-5" /> : <MenuIcon className="w-5 h-5" />}
@@ -80,7 +80,7 @@ const Header = () => {
         <div className="fixed left-0 right-0 top-[460px] sm:top-[520px] flex justify-center pointer-events-none z-50">
           <button
             onClick={() => setMenuOpen(!menuOpen)}
-            className="pointer-events-auto inline-flex items-center gap-2 text-white/40 hover:text-white text-sm tracking-widest uppercase transition-colors"
+            className="pointer-events-auto inline-flex items-center gap-2 text-white/40 hover:text-white text-sm tracking-widest uppercase transition-colors px-[2px]"
             aria-label="Toggle menu"
           >
             {menuOpen ? <X className="w-5 h-5" /> : <MenuIcon className="w-5 h-5" />}
