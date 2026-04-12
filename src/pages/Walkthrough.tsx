@@ -144,6 +144,8 @@ const Walkthrough = () => {
         </div>
       </section>
 
+      <div className="hero-divider w-full" />
+
       {/* What We Run */}
       <section className="py-16 sm:py-24 px-4 sm:px-6 bg-black/20 backdrop-blur-sm border-y border-white/5">
         <div className="max-w-4xl mx-auto">

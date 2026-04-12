@@ -79,6 +79,8 @@ const PreWire = () => (
       </div>
     </section>
 
+    <div className="hero-divider w-full" />
+
     {/* Capabilities */}
     <section className="py-16 sm:py-24 border-y border-white/5 bg-black/20 backdrop-blur-sm px-4 sm:px-6">
       <div className="max-w-4xl mx-auto">
