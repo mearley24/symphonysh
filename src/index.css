@@ -110,6 +110,37 @@
   }
 }
 
+/* Hero text shadow for readability over background images */
+.hero-text-shadow {
+  text-shadow: 0 2px 40px rgba(0, 0, 0, 0.5);
+}
+
+.hero-subtext-shadow {
+  text-shadow: 0 1px 20px rgba(0, 0, 0, 0.4);
+}
+
+/* Hero-to-content gradient divider */
+.hero-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.1) 50%, transparent 100%);
+}
+
+/* Homepage eyebrow entrance animation */
+@keyframes hero-eyebrow-enter {
+  0% {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-hero-eyebrow {
+  animation: hero-eyebrow-enter 0.6s ease-out both;
+}
+
 /* Fix for mobile white background */
 #root, html, body {
   background-color: #000000;

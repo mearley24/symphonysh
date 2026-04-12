@@ -36,15 +36,18 @@ const Projects = () => {
           </Link>
 
           <p className="text-accent font-medium text-sm tracking-wide uppercase mb-3">Our Work</p>
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight mb-5 text-white">
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight mb-5 text-white hero-text-shadow">
             Real projects. Real homes. Vail Valley.
           </h1>
-          <p className="text-white/60 text-base sm:text-lg leading-relaxed max-w-2xl">
+          <p className="text-white/60 text-base sm:text-lg leading-relaxed max-w-2xl hero-subtext-shadow">
             Browse photos from recent installations across Eagle County — home theaters, TV mounts,
             and structured wiring for new construction and renovations.
           </p>
         </div>
       </section>
+
+      {/* Hero-to-content divider */}
+      <div className="hero-divider w-full" />
 
       {/* Filter + Project Cards */}
       <section className="py-8 sm:py-12 px-4 sm:px-6 bg-black/20 backdrop-blur-sm border-y border-white/5">
