@@ -2,9 +2,9 @@ import { useEffect, useRef } from "react";
 
 /**
  * Attaches an IntersectionObserver to the container ref.
- * Elements with `data-reveal` fade up when 15% visible.
- * Elements with `data-reveal-children` get their children staggered.
- * Once revealed, elements stay visible (observer unobserves them).
+ * Elements with `data-reveal` fade up when entering viewport.
+ * Elements with `data-reveal-children` get their direct children staggered.
+ * Once revealed, elements stay visible.
  */
 export function useScrollReveal() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -13,21 +13,23 @@ export function useScrollReveal() {
     const container = containerRef.current;
     if (!container) return;
 
-    // Collect all targets first, before modifying classes
-    const revealEls = container.querySelectorAll("[data-reveal]");
-    const staggerEls = container.querySelectorAll("[data-reveal-children]");
+    const targets: Element[] = [];
 
-    const allTargets = new Set<Element>();
+    // data-reveal elements
+    container.querySelectorAll("[data-reveal]").forEach((el) => {
+      targets.push(el);
+    });
 
-    revealEls.forEach((el) => allTargets.add(el));
-    staggerEls.forEach((parent) => {
+    // data-reveal-children → each child becomes a target
+    container.querySelectorAll("[data-reveal-children]").forEach((parent) => {
       Array.from(parent.children).forEach((child, i) => {
         (child as HTMLElement).style.setProperty("--stagger-index", String(i));
-        allTargets.add(child);
+        child.classList.add("fade-up-stagger");
+        targets.push(child);
       });
     });
 
-    // Create observer before adding hidden classes
+    // Apply hidden state and observe
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -38,67 +40,28 @@ export function useScrollReveal() {
           }
         });
       },
-      { threshold: 0.15, rootMargin: "0px 0px -50px 0px" },
+      { threshold: 0.1 },
     );
 
-    // Apply hidden classes and start observing in one rAF
-    requestAnimationFrame(() => {
-      allTargets.forEach((el) => {
-        // Check if element is already well above the viewport (user scrolled past it)
+    // Use a small timeout to let the browser paint the initial state,
+    // then check each element's position
+    const timer = setTimeout(() => {
+      targets.forEach((el) => {
         const rect = el.getBoundingClientRect();
-        const isAboveViewport = rect.bottom < 0;
-        const isInViewport = rect.top < window.innerHeight && rect.bottom > 0;
-
-        if (isAboveViewport) {
-          // Already scrolled past — show immediately without animation
+        // If element is already above or mostly in the viewport on load, show it immediately
+        if (rect.top < window.innerHeight * 0.85) {
           el.classList.add("fade-up-visible");
-        } else if (isInViewport) {
-          // Currently visible — show with animation
-          el.classList.add("fade-up-hidden");
-          if (staggerEls.length > 0) {
-            // Check if this is a stagger child
-            const parent = el.parentElement;
-            if (parent?.hasAttribute("data-reveal-children")) {
-              el.classList.add("fade-up-stagger");
-            }
-          }
-          // Trigger after a frame so the transition plays
-          requestAnimationFrame(() => {
-            el.classList.remove("fade-up-hidden");
-            el.classList.add("fade-up-visible");
-          });
-        } else {
-          // Below viewport — hide and observe
-          el.classList.add("fade-up-hidden");
-          if (staggerEls.length > 0) {
-            const parent = el.parentElement;
-            if (parent?.hasAttribute("data-reveal-children")) {
-              el.classList.add("fade-up-stagger");
-            }
-          }
-          observer.observe(el);
-        }
-      });
-
-      // Also observe data-reveal elements
-      revealEls.forEach((el) => {
-        const rect = el.getBoundingClientRect();
-        if (rect.bottom < 0) {
-          el.classList.add("fade-up-visible");
-        } else if (rect.top < window.innerHeight && rect.bottom > 0) {
-          el.classList.add("fade-up-hidden");
-          requestAnimationFrame(() => {
-            el.classList.remove("fade-up-hidden");
-            el.classList.add("fade-up-visible");
-          });
         } else {
           el.classList.add("fade-up-hidden");
           observer.observe(el);
         }
       });
-    });
+    }, 50);
 
-    return () => observer.disconnect();
+    return () => {
+      clearTimeout(timer);
+      observer.disconnect();
+    };
   }, []);
 
   return containerRef;
