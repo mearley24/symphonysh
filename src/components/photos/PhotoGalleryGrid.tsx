@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { ImageOff, X, ChevronLeft, ChevronRight } from 'lucide-react';
 import { getFixedImagePath } from '../../utils/photos/types';
 
@@ -19,6 +19,33 @@ const PhotoGalleryGrid: React.FC<PhotoGalleryGridProps> = ({
   onImageError
 }) => {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const [visibleImages, setVisibleImages] = useState<Set<number>>(new Set());
+  const containerRefs = useRef<(HTMLDivElement | null)[]>([]);
+
+  // IntersectionObserver for fade-in
+  useEffect(() => {
+    setVisibleImages(new Set());
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const idx = containerRefs.current.indexOf(entry.target as HTMLDivElement);
+            if (idx !== -1) {
+              setVisibleImages((prev) => new Set(prev).add(idx));
+              observer.unobserve(entry.target);
+            }
+          }
+        });
+      },
+      { rootMargin: "80px" },
+    );
+    requestAnimationFrame(() => {
+      containerRefs.current.forEach((el) => {
+        if (el) observer.observe(el);
+      });
+    });
+    return () => observer.disconnect();
+  }, [photos]);
 
   const handlePrevImage = (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -55,8 +82,12 @@ const PhotoGalleryGrid: React.FC<PhotoGalleryGridProps> = ({
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {photos.map((photo, index) => (
           <div 
-            key={index} 
-            className="aspect-video rounded-lg overflow-hidden bg-gray-800 cursor-pointer hover:opacity-90 transition relative"
+            key={index}
+            ref={(el) => { containerRefs.current[index] = el; }}
+            className={`aspect-video rounded-lg overflow-hidden bg-gray-800 cursor-pointer group relative transition-all duration-300 ${
+              visibleImages.has(index) ? "opacity-100 translate-y-0" : "opacity-0 translate-y-3"
+            }`}
+            style={{ transitionDelay: `${(index % 6) * 50}ms` }}
             onClick={() => loadedImages[photo] && setSelectedImage(photo)}
           >
             {loadedImages[photo] === false ? (
@@ -72,7 +103,7 @@ const PhotoGalleryGrid: React.FC<PhotoGalleryGridProps> = ({
                 <img 
                   src={getFixedImagePath(photo)}
                   alt={`${galleryName} ${index + 1}`}
-                  className="w-full h-full object-contain"
+                  className="w-full h-full object-contain transition-all duration-300 ease-out group-hover:scale-[1.02] group-hover:brightness-110"
                   loading="lazy"
                   onLoad={() => onImageLoad(photo)}
                   onError={() => onImageError(photo)}

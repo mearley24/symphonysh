@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import Header from './Header';
 import { Link } from 'react-router-dom';
 import { ArrowLeft, X, ImageOff } from 'lucide-react';
@@ -21,6 +21,8 @@ const PhotoGallery: React.FC<PhotoGalleryProps> = ({
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const [loadedImages, setLoadedImages] = useState<Record<string, boolean>>({});
   const [processedPhotos, setProcessedPhotos] = useState<string[]>([]);
+  const [visibleImages, setVisibleImages] = useState<Set<number>>(new Set());
+  const imgContainerRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   useEffect(() => {
     const processed = photos.map(photo => {
@@ -29,21 +31,42 @@ const PhotoGallery: React.FC<PhotoGalleryProps> = ({
       }
       return photo;
     });
-    
     setProcessedPhotos(processed);
   }, [photos]);
 
-  const handleImageLoad = (photo: string) => {
-    console.log(`Image loaded successfully: ${photo}`);
-    setLoadedImages(prev => ({ ...prev, [photo]: true }));
-  };
+  // IntersectionObserver for fade-in on scroll
+  useEffect(() => {
+    setVisibleImages(new Set());
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const idx = imgContainerRefs.current.indexOf(entry.target as HTMLDivElement);
+            if (idx !== -1) {
+              setVisibleImages((prev) => new Set(prev).add(idx));
+              observer.unobserve(entry.target);
+            }
+          }
+        });
+      },
+      { rootMargin: "80px" },
+    );
+    requestAnimationFrame(() => {
+      imgContainerRefs.current.forEach((el) => {
+        if (el) observer.observe(el);
+      });
+    });
+    return () => observer.disconnect();
+  }, [processedPhotos]);
 
-  const handleImageError = (photo: string) => {
+  const handleImageLoad = useCallback((photo: string) => {
+    setLoadedImages(prev => ({ ...prev, [photo]: true }));
+  }, []);
+
+  const handleImageError = useCallback((photo: string) => {
     console.error(`Failed to load image: ${photo}`);
     setLoadedImages(prev => ({ ...prev, [photo]: false }));
-  };
-
-  const filteredPhotos = processedPhotos.filter(photo => loadedImages[photo] !== false);
+  }, []);
 
   return (
     <div className="min-h-screen bg-primary">
@@ -64,8 +87,12 @@ const PhotoGallery: React.FC<PhotoGalleryProps> = ({
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {processedPhotos.map((photo, index) => (
                 <div 
-                  key={index} 
-                  className="aspect-video rounded-lg overflow-hidden cursor-pointer group bg-secondary/20 relative"
+                  key={index}
+                  ref={(el) => { imgContainerRefs.current[index] = el; }}
+                  className={`aspect-video rounded-lg overflow-hidden cursor-pointer group bg-secondary/20 relative transition-all duration-300 ${
+                    visibleImages.has(index) ? "opacity-100 translate-y-0" : "opacity-0 translate-y-3"
+                  }`}
+                  style={{ transitionDelay: `${(index % 6) * 50}ms` }}
                   onClick={() => loadedImages[photo] && setSelectedImage(photo)}
                 >
                   {loadedImages[photo] === false ? (
@@ -81,7 +108,7 @@ const PhotoGallery: React.FC<PhotoGalleryProps> = ({
                       <img 
                         src={getFixedImagePath(photo)} 
                         alt={`${title} ${index + 1}`} 
-                        className="w-full h-full object-cover transform transition-all duration-300 scale-95 group-hover:scale-110"
+                        className="w-full h-full object-cover transition-all duration-300 ease-out group-hover:scale-[1.02] group-hover:brightness-110"
                         loading="lazy"
                         onLoad={() => handleImageLoad(photo)}
                         onError={() => handleImageError(photo)}

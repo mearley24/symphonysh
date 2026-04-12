@@ -115,7 +115,7 @@ const ProjectDetail = () => {
               {project.photos.map((photo, i) => (
                 <div
                   key={i}
-                  className="aspect-[4/3] rounded-lg overflow-hidden bg-black/30 border border-white/5"
+                  className="aspect-[4/3] rounded-lg overflow-hidden bg-black/30 border border-white/5 group"
                 >
                   <img
                     ref={(el) => {
@@ -123,7 +123,7 @@ const ProjectDetail = () => {
                     }}
                     src={photo}
                     alt={`${project.name} — photo ${i + 1}`}
-                    className={`w-full h-full object-cover transition-opacity duration-500 ${
+                    className={`w-full h-full object-cover transition-all duration-300 ease-out group-hover:scale-[1.02] group-hover:brightness-110 ${
                       visibleImages.has(i) ? "opacity-100" : "opacity-0"
                     }`}
                     loading="lazy"

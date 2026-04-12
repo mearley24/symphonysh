@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
 import { Link } from "react-router-dom";
 import { ArrowRight, Phone, ArrowLeft, MapPin } from "lucide-react";
 import Header from "../components/Header";
@@ -10,11 +10,60 @@ import { projects, projectCategories } from "../data/projects";
 
 const Projects = () => {
   const [activeFilter, setActiveFilter] = useState("all");
+  const [displayedProjects, setDisplayedProjects] = useState(projects);
+  const [animatingOut, setAnimatingOut] = useState(false);
+  const cardRefs = useRef<(HTMLAnchorElement | null)[]>([]);
 
   const filtered =
     activeFilter === "all"
       ? projects
       : projects.filter((p) => p.categories.includes(activeFilter));
+
+  const handleFilterChange = useCallback(
+    (slug: string) => {
+      if (slug === activeFilter) return;
+      setAnimatingOut(true);
+
+      // After exit animation, swap data and animate in
+      setTimeout(() => {
+        setActiveFilter(slug);
+        const next =
+          slug === "all"
+            ? projects
+            : projects.filter((p) => p.categories.includes(slug));
+        setDisplayedProjects(next);
+        setAnimatingOut(false);
+      }, 200);
+    },
+    [activeFilter],
+  );
+
+  // IntersectionObserver for card fade-in on scroll
+  const [visibleCards, setVisibleCards] = useState<Set<number>>(new Set());
+  useEffect(() => {
+    setVisibleCards(new Set());
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const idx = cardRefs.current.indexOf(entry.target as HTMLAnchorElement);
+            if (idx !== -1) {
+              setVisibleCards((prev) => new Set(prev).add(idx));
+              observer.unobserve(entry.target);
+            }
+          }
+        });
+      },
+      { rootMargin: "60px" },
+    );
+    // Small delay so refs are populated after render
+    requestAnimationFrame(() => {
+      cardRefs.current.forEach((el) => {
+        if (el) observer.observe(el);
+      });
+    });
+    return () => observer.disconnect();
+  }, [displayedProjects]);
 
   return (
     <PageBackground image={bgProjects}>
@@ -58,10 +107,10 @@ const Projects = () => {
             {projectCategories.map((cat) => (
               <button
                 key={cat.slug}
-                onClick={() => setActiveFilter(cat.slug)}
-                className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
+                onClick={() => handleFilterChange(cat.slug)}
+                className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 ${
                   activeFilter === cat.slug
-                    ? "bg-accent text-white"
+                    ? "bg-accent text-white shadow-md shadow-accent/20"
                     : "bg-white/5 text-white/60 hover:bg-white/10 hover:text-white border border-white/8"
                 }`}
               >
@@ -70,23 +119,35 @@ const Projects = () => {
             ))}
           </div>
 
-          {/* Project cards — re-keyed on filter change to trigger fade-in animation */}
-          <div key={activeFilter} className="grid sm:grid-cols-2 gap-6 animate-fade-in">
-            {filtered.map((project, i) => (
+          {/* Project cards */}
+          <div className="grid sm:grid-cols-2 gap-6">
+            {displayedProjects.map((project, i) => (
               <Link
                 key={project.slug}
+                ref={(el) => { cardRefs.current[i] = el; }}
                 to={`/projects/${project.slug}`}
-                className="group block bg-black/40 backdrop-blur-sm border border-white/8 rounded-xl overflow-hidden hover:border-accent/30 transition-all duration-200"
-                style={{ animationDelay: `${i * 80}ms` }}
+                className={`group block bg-black/40 backdrop-blur-sm border rounded-xl overflow-hidden transition-all duration-300
+                  border-white/8 hover:border-accent/20
+                  hover:shadow-xl hover:shadow-black/30
+                  ${animatingOut
+                    ? "opacity-0 scale-95"
+                    : visibleCards.has(i)
+                      ? "opacity-100 scale-100"
+                      : "opacity-0 scale-95"
+                  }`}
+                style={{
+                  transitionDelay: animatingOut ? "0ms" : `${i * 50}ms`,
+                  transitionDuration: animatingOut ? "200ms" : "300ms",
+                }}
               >
                 <div className="aspect-[16/9] relative overflow-hidden">
                   <img
                     src={project.heroPhoto}
                     alt={project.name}
-                    className="w-full h-full object-cover scale-100 group-hover:scale-105 transition-transform duration-300"
+                    className="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-105"
                     loading="lazy"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent transition-colors duration-300 group-hover:from-black/50 group-hover:via-black/10" />
                   {/* Category tags */}
                   <div className="absolute top-3 left-3 flex flex-wrap gap-1.5">
                     {project.categories.map((cat) => {
@@ -115,7 +176,7 @@ const Projects = () => {
               </Link>
             ))}
 
-            {filtered.length === 0 && (
+            {displayedProjects.length === 0 && (
               <div className="col-span-2 text-center py-12 text-white/40 text-sm">
                 No projects in this category yet.
               </div>
