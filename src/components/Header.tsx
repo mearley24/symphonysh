@@ -51,7 +51,7 @@ const Header = () => {
             {/* Logo */}
             <Link to="/" className="shrink-0 pointer-events-auto relative z-10">
               <img
-                src="/lovable-uploads/symphony-logo-transparent.png"
+                src="/lovable-uploads/symphony-logo-transparent.webp"
                 alt="Symphony Smart Homes"
                 className={`w-auto transition-all duration-500 ${
                   scrolled ? 'h-14 sm:h-16' : 'h-32 sm:h-40'
