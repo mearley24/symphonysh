@@ -77,7 +77,7 @@ const Header = () => {
 
       {/* Menu button — below hero content when not scrolled */}
       {!scrolled && (
-        <div className="fixed left-0 right-0 top-[400px] sm:top-[460px] flex justify-center pointer-events-none z-50">
+        <div className="fixed left-0 right-0 top-[430px] sm:top-[490px] flex justify-center pointer-events-none z-50">
           <button
             onClick={() => setMenuOpen(!menuOpen)}
             className="pointer-events-auto inline-flex items-center gap-2 text-white/40 hover:text-white text-sm tracking-widest uppercase transition-colors px-[2px]"
