@@ -1,19 +1,49 @@
-import { Phone } from "lucide-react";
+import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import { Phone, Calendar } from "lucide-react";
 
 const TEL = "tel:+19705193013";
 
 /**
- * Floating call button for small screens only (header phone is primary on desktop).
+ * Sticky bottom CTA bar for mobile (<768px).
+ * Appears after user scrolls past 400px (roughly past hero).
+ * Slides up with a 300ms animation.
  */
 const MobileClickToCall = () => {
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => setVisible(window.scrollY > 400);
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll(); // check on mount
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
-    <a
-      href={TEL}
-      className="md:hidden fixed bottom-5 right-5 z-[60] flex h-14 w-14 items-center justify-center rounded-full bg-accent text-white shadow-lg shadow-accent/30 ring-2 ring-black/20 transition hover:bg-accent/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
-      aria-label="Call Symphony Smart Homes"
+    <div
+      className={`md:hidden fixed bottom-0 left-0 right-0 z-[60] transition-transform duration-300 ease-out ${
+        visible ? "translate-y-0" : "translate-y-full"
+      }`}
+      style={{ paddingBottom: "env(safe-area-inset-bottom)" }}
     >
-      <Phone className="h-6 w-6" strokeWidth={2} />
-    </a>
+      <div className="bg-black/80 backdrop-blur-lg border-t border-white/10 px-4 py-3 flex gap-3">
+        <Link
+          to="/scheduling"
+          className="flex-1 inline-flex items-center justify-center gap-2 bg-accent hover:bg-accent/90 text-white font-medium text-sm rounded-lg min-h-[44px] transition-colors"
+        >
+          <Calendar className="w-4 h-4" />
+          Schedule
+        </Link>
+        <a
+          href={TEL}
+          className="flex-1 inline-flex items-center justify-center gap-2 border border-white/20 hover:border-white/40 hover:bg-white/5 text-white font-medium text-sm rounded-lg min-h-[44px] transition-colors"
+          aria-label="Call Symphony Smart Homes"
+        >
+          <Phone className="w-4 h-4" />
+          Call
+        </a>
+      </div>
+    </div>
   );
 };
 
