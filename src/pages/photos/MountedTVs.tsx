@@ -132,7 +132,7 @@ const MountedTVs = () => {
                 </div>
                 <div className="p-4">
                   <h3 className="text-lg font-semibold text-white">{category.title}</h3>
-                  <p className="text-xs text-gray-300">{category.photos.length} photos</p>
+                  <p className="text-xs text-gray-300">{category.photos.length} {category.photos.length === 1 ? 'photo' : 'photos'}</p>
                 </div>
               </Link>
             ))}
