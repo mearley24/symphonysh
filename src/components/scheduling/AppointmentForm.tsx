@@ -1,5 +1,4 @@
 
-import { useState, useEffect } from "react";
 import {
   Select,
   SelectContent,
@@ -34,8 +33,6 @@ const SERVICES = [
   { id: "maintenance", name: "Troubleshooting & Maintenance" },
   { id: "matterport-scan", name: "Matterport Scan" },
   { id: "ava", name: "AVA Smart Remote" },
-  { id: "hide-gallery-buttons", name: "Hide Gallery Buttons" },
-  { id: "show-gallery-buttons", name: "Show Gallery Buttons" },
 ];
 
 export function AppointmentForm({
@@ -46,28 +43,6 @@ export function AppointmentForm({
   message, setMessage,
   service, setService
 }: AppointmentFormProps) {
-  // Add effect to handle special service selections
-  useEffect(() => {
-    // Check if the global function exists
-    if (service === "hide-gallery-buttons" && window.toggleGalleryButtons) {
-      // Hide the gallery buttons
-      window.toggleGalleryButtons(false);
-      
-      // Reset the service selection after a short delay
-      setTimeout(() => {
-        setService("");
-      }, 300);
-    } else if (service === "show-gallery-buttons" && window.toggleGalleryButtons) {
-      // Show the gallery buttons
-      window.toggleGalleryButtons(true);
-      
-      // Reset the service selection after a short delay
-      setTimeout(() => {
-        setService("");
-      }, 300);
-    }
-  }, [service, setService]);
-
   return (
     <div className="space-y-4">
       <div>
@@ -159,13 +134,6 @@ export function AppointmentForm({
       </div>
     </div>
   );
-}
-
-// Add the toggleGalleryButtons to the window interface
-declare global {
-  interface Window {
-    toggleGalleryButtons?: (visible: boolean) => void;
-  }
 }
 
 // Export the SERVICES array for use in other components
