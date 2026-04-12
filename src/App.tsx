@@ -1,5 +1,6 @@
 import { Routes, Route, Navigate } from "react-router-dom";
 import MobileClickToCall from "./components/MobileClickToCall";
+import PageTransition from "./components/PageTransition";
 import Walkthrough from "./pages/Walkthrough";
 import Scheduling from "./pages/scheduling";
 import NotFound from "./pages/NotFound";
