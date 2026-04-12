@@ -48,18 +48,34 @@ const Header = () => {
           <div className={`flex items-center transition-all duration-500 ${
             scrolled ? 'justify-between' : 'flex-col items-center'
           }`}>
-            {/* Logo - splits left */}
+            {/* Logo */}
             <Link to="/" className="shrink-0 pointer-events-auto relative z-10">
               <img
                 src="/lovable-uploads/symphony-logo-transparent.png"
                 alt="Symphony Smart Homes"
                 className={`w-auto transition-all duration-500 ${
-                  scrolled ? 'h-14 sm:h-16' : 'h-32 sm:h-40 mb-3'
+                  scrolled ? 'h-14 sm:h-16' : 'h-32 sm:h-40'
                 }`}
               />
             </Link>
 
-            {/* Menu - splits right */}
+            {/* Menu button — inline when scrolled */}
+            {scrolled && (
+              <button
+                onClick={() => setMenuOpen(!menuOpen)}
+                className="pointer-events-auto inline-flex items-center gap-2 text-white/40 hover:text-white text-sm tracking-widest uppercase transition-colors"
+                aria-label="Toggle menu"
+              >
+                {menuOpen ? <X className="w-5 h-5" /> : <MenuIcon className="w-5 h-5" />}
+                <span>Menu</span>
+              </button>
+            )}
+          </div>
+        </div>
+
+        {/* Menu button — centered below hero content when not scrolled */}
+        {!scrolled && (
+          <div className="fixed left-0 right-0 bottom-[140px] sm:bottom-[160px] flex justify-center pointer-events-none z-50">
             <button
               onClick={() => setMenuOpen(!menuOpen)}
               className="pointer-events-auto inline-flex items-center gap-2 text-white/40 hover:text-white text-sm tracking-widest uppercase transition-colors"
@@ -69,7 +85,7 @@ const Header = () => {
               <span>Menu</span>
             </button>
           </div>
-        </div>
+        )}
       </header>
 
       {/* Full-screen overlay menu */}
