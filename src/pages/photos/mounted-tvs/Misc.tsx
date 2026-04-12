@@ -36,6 +36,15 @@ const Misc = () => {
       photos={photos} 
       backLink="/photos/mounted-tvs" 
       backText="Back to Mounted TVs"
+      seoTitle="TV Mounting Gallery | Vail Valley Installations"
+      seoDescription="Browse a variety of TV mounting installations across Vail Valley — bedrooms, living rooms, outdoor spaces, and more."
+      seoKeywords="TV mounting, TV installation gallery, residential AV, Vail Valley"
+      breadcrumbs={[
+        { name: "Home", url: "/" },
+        { name: "Our Work", url: "/projects" },
+        { name: "Mounted TVs", url: "/photos/mounted-tvs" },
+        { name: "Misc Installations", url: "/photos/mounted-tvs/misc" },
+      ]}
     />
   );
 };

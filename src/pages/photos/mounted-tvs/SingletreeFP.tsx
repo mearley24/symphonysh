@@ -16,6 +16,15 @@ const SingletreeFP = () => {
       photos={photos} 
       backLink="/photos/mounted-tvs" 
       backText="Back to Mounted TVs"
+      seoTitle="Singletree Fireplace TV Mount | Vail Valley"
+      seoDescription="Fireplace TV installation in Singletree — clean stone-surround mount with concealed wiring."
+      seoKeywords="Singletree TV mount, fireplace installation, stone surround, Vail Valley"
+      breadcrumbs={[
+        { name: "Home", url: "/" },
+        { name: "Our Work", url: "/projects" },
+        { name: "Mounted TVs", url: "/photos/mounted-tvs" },
+        { name: "Singletree Fireplace", url: "/photos/mounted-tvs/singletree-fp" },
+      ]}
     />
   );
 };

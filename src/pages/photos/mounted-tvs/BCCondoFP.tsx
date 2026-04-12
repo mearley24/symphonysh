@@ -19,6 +19,15 @@ const BCCondoFP = () => {
       photos={photos} 
       backLink="/photos/mounted-tvs" 
       backText="Back to Mounted TVs"
+      seoTitle="Beaver Creek Condo Fireplace TV Mount | Vail Valley"
+      seoDescription="Fireplace TV installation in a Beaver Creek ski condo — concealed wiring, clean mount, no visible cables."
+      seoKeywords="Beaver Creek TV mount, fireplace TV, concealed wiring, ski condo, Vail Valley"
+      breadcrumbs={[
+        { name: "Home", url: "/" },
+        { name: "Our Work", url: "/projects" },
+        { name: "Mounted TVs", url: "/photos/mounted-tvs" },
+        { name: "BC Condo Fireplace", url: "/photos/mounted-tvs/bc-condo-fp" },
+      ]}
     />
   );
 };

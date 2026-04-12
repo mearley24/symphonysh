@@ -18,6 +18,15 @@ const BackboxFP = () => {
       photos={photos} 
       backLink="/photos/mounted-tvs" 
       backText="Back to Mounted TVs"
+      seoTitle="Backbox Fireplace TV Installation | Vail Valley"
+      seoDescription="Professional backbox fireplace TV mounting with clean cable management in Vail Valley."
+      seoKeywords="backbox TV mount, fireplace installation, cable management, Vail Valley"
+      breadcrumbs={[
+        { name: "Home", url: "/" },
+        { name: "Our Work", url: "/projects" },
+        { name: "Mounted TVs", url: "/photos/mounted-tvs" },
+        { name: "Backbox Fireplace", url: "/photos/mounted-tvs/backbox-fp" },
+      ]}
     />
   );
 };

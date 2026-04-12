@@ -1,6 +1,7 @@
 
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import Header from './Header';
+import SEO from './SEO';
 import { Link } from 'react-router-dom';
 import { ArrowLeft, X, ImageOff } from 'lucide-react';
 import { getFixedImagePath } from '../utils/photos';
@@ -10,13 +11,21 @@ interface PhotoGalleryProps {
   photos: string[];
   backLink?: string;
   backText?: string;
+  seoTitle?: string;
+  seoDescription?: string;
+  seoKeywords?: string;
+  breadcrumbs?: Array<{ name: string; url: string }>;
 }
 
 const PhotoGallery: React.FC<PhotoGalleryProps> = ({ 
   title, 
   photos, 
   backLink = "/projects", 
-  backText = "Back to Projects" 
+  backText = "Back to Projects",
+  seoTitle,
+  seoDescription,
+  seoKeywords,
+  breadcrumbs,
 }) => {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const [loadedImages, setLoadedImages] = useState<Record<string, boolean>>({});
@@ -70,6 +79,14 @@ const PhotoGallery: React.FC<PhotoGalleryProps> = ({
 
   return (
     <div className="min-h-screen bg-primary">
+      {seoTitle && (
+        <SEO
+          title={seoTitle}
+          description={seoDescription}
+          keywords={seoKeywords}
+          breadcrumbs={breadcrumbs}
+        />
+      )}
       <Header />
       <section className="pt-32 pb-20 px-6">
         <div className="max-w-6xl mx-auto">
