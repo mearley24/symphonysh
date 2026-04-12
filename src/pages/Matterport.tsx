@@ -48,10 +48,10 @@ const Matterport = () => {
             <p className="text-accent font-medium text-sm tracking-wide uppercase">Matterport 3D Scanning</p>
           </div>
 
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight mb-5 text-white">
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight mb-5 text-white hero-text-shadow">
             Turn any space into an interactive 3D experience.
           </h1>
-          <p className="text-white/60 text-base sm:text-lg leading-relaxed mb-8 max-w-2xl">
+          <p className="text-white/60 text-base sm:text-lg leading-relaxed mb-8 max-w-2xl hero-subtext-shadow">
             We capture immersive 3D virtual tours for real estate listings, construction documentation, and property records using professional Matterport technology.
           </p>
 

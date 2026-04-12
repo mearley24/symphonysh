@@ -64,8 +64,8 @@ const PreWire = () => (
           </div>
           <p className="text-accent font-medium text-sm tracking-wide uppercase">Pre-Wire & Structured Wiring</p>
         </div>
-        <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight mb-5 text-white">Pre-Wire & Structured Wiring</h1>
-        <p className="text-white/60 text-base sm:text-lg leading-relaxed max-w-2xl mb-8">
+        <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight mb-5 text-white hero-text-shadow">Pre-Wire & Structured Wiring</h1>
+        <p className="text-white/60 text-base sm:text-lg leading-relaxed max-w-2xl mb-8 hero-subtext-shadow">
           Future-proof your new build or renovation with clean, organized low-voltage wiring for audio, video, networking, and automation — installed by a team that understands the full system.
         </p>
         <div className="flex flex-col sm:flex-row gap-3">

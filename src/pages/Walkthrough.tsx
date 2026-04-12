@@ -118,10 +118,10 @@ const Walkthrough = () => {
             </p>
           </div>
 
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight mb-5 text-white">
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight mb-5 text-white hero-text-shadow">
             The infrastructure behind every reliable smart home.
           </h1>
-          <p className="text-white/60 text-base sm:text-lg leading-relaxed mb-8 max-w-2xl">
+          <p className="text-white/60 text-base sm:text-lg leading-relaxed mb-8 max-w-2xl hero-subtext-shadow">
             Clean, organized low-voltage wiring is the foundation of every system we build. Whether you're breaking ground on a new home or renovating an existing one, getting the wiring right means everything else — audio, video, networking, security, automation — works the way it should.
           </p>
 
