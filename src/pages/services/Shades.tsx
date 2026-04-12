@@ -37,9 +37,23 @@ const Shades = () => {
     { q: "How long do the batteries last?", a: "Battery-powered shades typically last 1–2 years between charges or battery replacements, depending on usage frequency. Hardwired shades don't have this limitation." },
   ];
 
+
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": faqs.map((faq) => ({
+      "@type": "Question",
+      "name": faq.q,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": faq.a,
+      },
+    })),
+  };
+
   return (
     <PageBackground image={bgShades}>
-      <SEO title="Motorized Shades & Blinds | Vail Valley, CO" description="Automated motorized shades for Vail Valley homes. Lutron, QMotion, and Hunter Douglas. Integrated with Control4 home automation." keywords="motorized shades Vail Valley, automated blinds Eagle County, Lutron shades, window treatments" schema={serviceSchema} breadcrumbs={[{ name: "Home", url: "/" }, { name: "Services", url: "/services" }, { name: "Shades", url: "/services/shades" }]} />
+      <SEO title="Motorized Shades & Blinds | Vail Valley, CO" description="Automated motorized shades for Vail Valley homes. Lutron, QMotion, and Hunter Douglas. Integrated with Control4 home automation." keywords="motorized shades Vail Valley, automated blinds Eagle County, Lutron shades, window treatments" schema={[serviceSchema, faqSchema]} breadcrumbs={[{ name: "Home", url: "/" }, { name: "Services", url: "/services" }, { name: "Shades", url: "/services/shades" }]} />
       <Header />
 
       <section className="pt-36 sm:pt-44 pb-16 sm:pb-20 px-4 sm:px-6">

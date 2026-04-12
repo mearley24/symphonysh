@@ -39,9 +39,23 @@ const HomeIntegration = () => {
     { q: "How much does a Control4 system cost?", a: "It depends on the scope. A single-room setup might start around $3,000–$5,000, while a whole-home system for a large property can range from $20,000 to $100,000+. We provide detailed proposals after a consultation." },
   ];
 
+
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": faqs.map((faq) => ({
+      "@type": "Question",
+      "name": faq.q,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": faq.a,
+      },
+    })),
+  };
+
   return (
     <PageBackground image={bgHomeIntegration}>
-      <SEO title="Control4 Home Automation Installer | Vail Valley" description="Certified Control4 dealer in Eagle County. Whole-home automation — lighting, audio, climate, security, and shades. Book a consultation." keywords="Control4 installer Eagle County, home automation Vail Valley, smart home integrator" schema={serviceSchema} breadcrumbs={[{ name: "Home", url: "/" }, { name: "Services", url: "/services" }, { name: "Home Automation", url: "/services/home-integration" }]} />
+      <SEO title="Control4 Home Automation Installer | Vail Valley" description="Certified Control4 dealer in Eagle County. Whole-home automation — lighting, audio, climate, security, and shades. Book a consultation." keywords="Control4 installer Eagle County, home automation Vail Valley, smart home integrator" schema={[serviceSchema, faqSchema]} breadcrumbs={[{ name: "Home", url: "/" }, { name: "Services", url: "/services" }, { name: "Home Automation", url: "/services/home-integration" }]} />
       <Header />
 
       <section className="pt-36 sm:pt-44 pb-16 sm:pb-20 px-4 sm:px-6">

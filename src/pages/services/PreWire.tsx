@@ -32,6 +32,19 @@ const faqs = [
   { q: "How much does pre-wiring cost?", a: "It depends on the size of the home and scope of the system. A typical new-build pre-wire ranges from $3,000 to $15,000+. We provide a detailed proposal after reviewing your plans." },
 ];
 
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": faqs.map((faq) => ({
+    "@type": "Question",
+    "name": faq.q,
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": faq.a,
+    },
+  })),
+};
 const serviceSchema = {
   "@context": "https://schema.org",
   "@type": "Service",
@@ -47,7 +60,7 @@ const PreWire = () => (
       title="Pre-Wire & Structured Cabling | Vail Valley"
       description="Pre-wiring for new construction and retrofits in Eagle County. Cat6, speaker wire, HDMI, and low-voltage cabling done right the first time."
       keywords="pre-wiring new construction, structured cabling Vail Valley, low voltage wiring Eagle County"
-      schema={serviceSchema}
+      schema={[serviceSchema, faqSchema]}
       breadcrumbs={[{ name: "Home", url: "/" }, { name: "Services", url: "/services" }, { name: "Pre-Wire", url: "/services/prewire" }]}
     />
     <Header />
