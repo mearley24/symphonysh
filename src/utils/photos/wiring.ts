@@ -30,6 +30,6 @@ export const wiringPhotos = {
   ],
   shadeWiring: [
     "/lovable-uploads/wiring/IMG_0080.JPG",
-    "/lovable-uploads/wiring/IMG_0228 2.JPG"
+    "/lovable-uploads/wiring/IMG_0228-2.JPG"
   ]
 };

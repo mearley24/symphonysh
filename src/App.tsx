@@ -53,8 +53,6 @@ import PreWire from "./pages/services/PreWire";
 
 function App() {
   try {
-    console.log("App rendering, routes being set up");
-    
     return (
       <>
         <Toaster />

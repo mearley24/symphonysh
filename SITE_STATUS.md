@@ -1,6 +1,6 @@
 # symphonysh — Site Status
 
-*Last updated: April 12, 2026*
+*Last updated: April 12, 2026 (final sweep)*
 
 ---
 
@@ -42,7 +42,7 @@ business input — none are blocking.
 - `lovable-tagger` npm package removed (prior commit)
 - All npm scripts work: `dev`, `build`, `preview`
 
-### Polish (this sweep)
+### Polish (previous sweep)
 - Removed 8 debug `console.log` statements from `Scheduling.tsx`
 - Removed dead `testNavigation` function and its exposed "Test Navigation" button
   (was visible to real visitors in the booking flow)
@@ -50,6 +50,16 @@ business input — none are blocking.
   service dropdown in `AppointmentForm.tsx` (were listed as bookable services)
 - Removed stale `console.log` from `scheduling/index.tsx`
 - Removed unused `useEffect` + `useState` imports from `AppointmentForm.tsx`
+
+### Final sweep — image path cleanup (April 12, 2026)
+- **Case-sensitivity fix** — `src/utils/photos/mountedTVs.ts`, `src/data/projects.ts`,
+  `src/pages/photos/mounted-tvs/{Home,HP,Misc}.tsx`: folder names changed from
+  lowercase (`home/`, `hp/`, `misc/`) to match actual disk casing (`Home/`, `HP/`, `Misc/`).
+  Would have caused 404s on the case-sensitive Linux filesystem used by Cloudflare Pages.
+- **Filename space fix** — `src/utils/photos/wiring.ts`: `IMG_0228 2.JPG` corrected to
+  `IMG_0228-2.JPG` to match the actual filename on disk.
+- **Removed `console.log`** from `src/App.tsx` ("App rendering, routes being set up").
+- Build verified clean after all changes (`npm run build` — 0 errors, 2680 modules).
 
 ---
 
@@ -126,10 +136,6 @@ business input — none are blocking.
   page load. If Lovable is no longer used as an editor, this can be removed.
 - **Do not remove without confirming Lovable is fully retired** — removing it could
   break the visual editor workflow
-
-### `src/App.tsx` console.log
-- `console.log("App rendering, routes being set up")` remains in App.tsx
-- Low-visibility in practice; clean up in next code pass
 
 ### Google Calendar placeholder files
 - `src/utils/appointments/googleCalendar/auth/` contains stub files noting
