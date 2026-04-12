@@ -21,7 +21,11 @@ const PhotoGallery: React.FC<PhotoGalleryProps> = ({
   title, 
   photos, 
   backLink = "/projects", 
-  backText = "Back to Projects" 
+  backText = "Back to Projects",
+  seoTitle,
+  seoDescription,
+  seoKeywords,
+  breadcrumbs,
 }) => {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const [loadedImages, setLoadedImages] = useState<Record<string, boolean>>({});
