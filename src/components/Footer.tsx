@@ -10,7 +10,7 @@ const Footer = () => {
           {/* Col 1: Logo + tagline + phone */}
           <div>
             <img
-              src="/lovable-uploads/symphony-logo-transparent.png"
+              src="/lovable-uploads/symphony-logo-transparent.webp"
               alt="Symphony Smart Homes"
               className="h-10 w-auto mb-3"
               loading="lazy"
