@@ -1,6 +1,7 @@
 
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import Header from './Header';
+import SEO from './SEO';
 import { Link } from 'react-router-dom';
 import { ArrowLeft, X, ImageOff } from 'lucide-react';
 import { getFixedImagePath } from '../utils/photos';
@@ -10,6 +11,10 @@ interface PhotoGalleryProps {
   photos: string[];
   backLink?: string;
   backText?: string;
+  seoTitle?: string;
+  seoDescription?: string;
+  seoKeywords?: string;
+  breadcrumbs?: Array<{ name: string; url: string }>;
 }
 
 const PhotoGallery: React.FC<PhotoGalleryProps> = ({ 
