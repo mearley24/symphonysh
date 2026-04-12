@@ -104,12 +104,13 @@ const Index = () => {
       <div className="relative z-10" ref={revealRef}>
         <Header />
 
-        {/* Hero + Trust Strip — fills one viewport, trust strip at bottom edge */}
+        {/* Hero + Trust Strip pinned to window top/bottom */}
         <div className="relative min-h-screen flex flex-col">
-          <section className="relative flex-1 flex items-center justify-center overflow-hidden">
+          {/* Hero — pinned to top of window */}
+          <section className="relative pt-24 sm:pt-28 overflow-hidden">
             <div className="absolute top-1/2 right-[15%] -translate-y-1/2 w-[500px] h-[500px] bg-accent/[0.04] rounded-full blur-[120px] animate-[pulse_6s_ease-in-out_infinite]" />
 
-            <div className="relative max-w-5xl mx-auto px-4 sm:px-6 py-20 sm:py-24">
+            <div className="relative max-w-5xl mx-auto px-4 sm:px-6 pt-16 sm:pt-24 pb-20 sm:pb-32">
               <div className="max-w-2xl mx-auto text-center">
                 <p className="animate-hero-eyebrow text-accent font-semibold text-sm tracking-widest uppercase mb-4 inline-flex items-center gap-2">
                   <span className="w-8 h-px bg-accent" />
@@ -147,9 +148,8 @@ const Index = () => {
             </div>
           </section>
 
-          {/* Trust Strip — pinned to bottom of viewport, aligned with window sill */}
-          <div className="hero-divider w-full" />
-          <section data-reveal className="border-y border-white/10 py-6 sm:py-8 px-4 sm:px-6 bg-black/30 backdrop-blur-sm">
+          {/* Trust Strip — pinned to bottom of window */}
+          <section data-reveal className="mt-auto border-y border-white/10 py-6 sm:py-8 px-4 sm:px-6 bg-black/30 backdrop-blur-sm">
             <div className="max-w-5xl mx-auto">
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 text-center">
                 <div>
@@ -173,7 +173,7 @@ const Index = () => {
           </section>
         </div>
 
-        
+        <SocialProof />
 
         {/* Services */}
         <section className="py-16 sm:py-24 px-4 sm:px-6" id="services">
