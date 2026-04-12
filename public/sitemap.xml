@@ -20,8 +20,26 @@
   <url><loc>https://symphonysh.com/services/maintenance</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://symphonysh.com/services/prewire</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://symphonysh.com/photos/home-theater</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://symphonysh.com/photos/home-theater/featured</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://symphonysh.com/photos/home-theater/ev-theater</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://symphonysh.com/photos/home-theater/cordillera-media-room</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://symphonysh.com/photos/mounted-tvs</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://symphonysh.com/photos/mounted-tvs/bc-condo-fp</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://symphonysh.com/photos/mounted-tvs/backbox-fp</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://symphonysh.com/photos/mounted-tvs/fp-frame</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://symphonysh.com/photos/mounted-tvs/frame-sonos</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://symphonysh.com/photos/mounted-tvs/hp</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://symphonysh.com/photos/mounted-tvs/home</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://symphonysh.com/photos/mounted-tvs/mantel-mount</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://symphonysh.com/photos/mounted-tvs/misc</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://symphonysh.com/photos/mounted-tvs/singletree-fp</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://symphonysh.com/photos/mounted-tvs/west-vail-bb</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://symphonysh.com/photos/mounted-tvs/wood-media</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://symphonysh.com/photos/wiring</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://symphonysh.com/projects/eagle-vail-theater</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://symphonysh.com/projects/beaver-creek-condo</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://symphonysh.com/projects/cordillera-media-room</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://symphonysh.com/projects/west-vail-install</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://symphonysh.com/privacy</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
   <url><loc>https://symphonysh.com/terms</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
 </urlset>
