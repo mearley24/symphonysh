@@ -37,9 +37,23 @@ const Maintenance = () => {
     { q: "Can you fix systems you didn't install?", a: "Usually, yes. We'll assess the system, diagnose the issue, and let you know what's needed. If the system was installed by another integrator, we may recommend a system audit first." },
   ];
 
+
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": faqs.map((faq) => ({
+      "@type": "Question",
+      "name": faq.q,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": faq.a,
+      },
+    })),
+  };
+
   return (
     <PageBackground image={bgMaintenance}>
-      <SEO title="Smart Home Repair & Support | Vail Valley" description="Smart home troubleshooting, maintenance, and system support. Remote diagnostics and on-site service in Vail Valley & Eagle County." keywords="smart home repair, system support, troubleshooting, maintenance, Vail Valley" schema={serviceSchema} breadcrumbs={[{ name: "Home", url: "/" }, { name: "Services", url: "/services" }, { name: "Maintenance", url: "/services/maintenance" }]} />
+      <SEO title="Smart Home Repair & Support | Vail Valley" description="Smart home troubleshooting, maintenance, and system support. Remote diagnostics and on-site service in Vail Valley & Eagle County." keywords="smart home repair, system support, troubleshooting, maintenance, Vail Valley" schema={[serviceSchema, faqSchema]} breadcrumbs={[{ name: "Home", url: "/" }, { name: "Services", url: "/services" }, { name: "Maintenance", url: "/services/maintenance" }]} />
       <Header />
 
       <section className="pt-36 sm:pt-44 pb-16 sm:pb-20 px-4 sm:px-6">

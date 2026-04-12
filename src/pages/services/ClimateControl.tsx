@@ -37,9 +37,23 @@ const ClimateControl = () => {
     { q: "Can I control it remotely?", a: "Absolutely. Adjust temperatures, check current readings, and set schedules from your phone or Control4 app — whether you're home or traveling." },
   ];
 
+
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": faqs.map((faq) => ({
+      "@type": "Question",
+      "name": faq.q,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": faq.a,
+      },
+    })),
+  };
+
   return (
     <PageBackground image={bgClimate}>
-      <SEO title="Smart Climate Control | Vail Valley, CO" description="Smart thermostat and HVAC integration for Vail Valley mountain homes. Zoned heating, cooling schedules, and energy monitoring." keywords="smart thermostat Vail Valley, climate control Eagle County, HVAC integration, zoned heating" schema={serviceSchema} breadcrumbs={[{ name: "Home", url: "/" }, { name: "Services", url: "/services" }, { name: "Climate Control", url: "/services/climate-control" }]} />
+      <SEO title="Smart Climate Control | Vail Valley, CO" description="Smart thermostat and HVAC integration for Vail Valley mountain homes. Zoned heating, cooling schedules, and energy monitoring." keywords="smart thermostat Vail Valley, climate control Eagle County, HVAC integration, zoned heating" schema={[serviceSchema, faqSchema]} breadcrumbs={[{ name: "Home", url: "/" }, { name: "Services", url: "/services" }, { name: "Climate Control", url: "/services/climate-control" }]} />
       <Header />
 
       <section className="pt-36 sm:pt-44 pb-16 sm:pb-20 px-4 sm:px-6">

@@ -37,9 +37,23 @@ const SmartLighting = () => {
     { q: "Can I still use regular light switches?", a: "Yes — Lutron and Control4 keypads look and feel like premium switches. They work manually and through automation. Guests won't even know they're smart." },
   ];
 
+
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": faqs.map((faq) => ({
+      "@type": "Question",
+      "name": faq.q,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": faq.a,
+      },
+    })),
+  };
+
   return (
     <PageBackground image={bgLighting}>
-      <SEO title="Smart Lighting & Lutron Control | Vail Valley" description="Lutron and Control4 smart lighting for Vail Valley homes. Keypads, dimmers, scenes, and automated schedules. Expert installation." keywords="smart lighting Vail Valley, Lutron installer Eagle County, lighting control, keypads" schema={serviceSchema} breadcrumbs={[{ name: "Home", url: "/" }, { name: "Services", url: "/services" }, { name: "Smart Lighting", url: "/services/smart-lighting" }]} />
+      <SEO title="Smart Lighting & Lutron Control | Vail Valley" description="Lutron and Control4 smart lighting for Vail Valley homes. Keypads, dimmers, scenes, and automated schedules. Expert installation." keywords="smart lighting Vail Valley, Lutron installer Eagle County, lighting control, keypads" schema={[serviceSchema, faqSchema]} breadcrumbs={[{ name: "Home", url: "/" }, { name: "Services", url: "/services" }, { name: "Smart Lighting", url: "/services/smart-lighting" }]} />
       <Header />
 
       <section className="pt-36 sm:pt-44 pb-16 sm:pb-20 px-4 sm:px-6">

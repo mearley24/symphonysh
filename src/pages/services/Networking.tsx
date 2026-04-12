@@ -37,9 +37,23 @@ const Networking = () => {
     { q: "How much does a proper network cost?", a: "A basic network for a 2,500 sq ft home starts around $1,200. Whole-home networking for a larger property with full rack, managed switches, and multiple APs typically ranges from $2,500 to $6,000+." },
   ];
 
+
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": faqs.map((faq) => ({
+      "@type": "Question",
+      "name": faq.q,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": faq.a,
+      },
+    })),
+  };
+
   return (
     <PageBackground image={bgNetworking}>
-      <SEO title="Home Networking & Wi-Fi | Vail Valley, CO" description="Enterprise-grade home networking for Vail Valley homes. Structured cabling, managed Wi-Fi, and network racks. Reliable connectivity guaranteed." keywords="home networking Vail Valley, wifi installation Eagle County, structured cabling, network rack" schema={serviceSchema} breadcrumbs={[{ name: "Home", url: "/" }, { name: "Services", url: "/services" }, { name: "Networking", url: "/services/networking" }]} />
+      <SEO title="Home Networking & Wi-Fi | Vail Valley, CO" description="Enterprise-grade home networking for Vail Valley homes. Structured cabling, managed Wi-Fi, and network racks. Reliable connectivity guaranteed." keywords="home networking Vail Valley, wifi installation Eagle County, structured cabling, network rack" schema={[serviceSchema, faqSchema]} breadcrumbs={[{ name: "Home", url: "/" }, { name: "Services", url: "/services" }, { name: "Networking", url: "/services/networking" }]} />
       <Header />
 
       <section className="pt-36 sm:pt-44 pb-16 sm:pb-20 px-4 sm:px-6">
