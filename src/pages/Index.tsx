@@ -8,9 +8,11 @@ import SocialProof from "../components/SocialProof";
 import SEO from "../components/SEO";
 import heroImage from "../assets/hero-smart-home.jpg";
 import { localBusinessHomePageSchema } from "../constants/businessSchema";
+import { useScrollReveal } from "../hooks/useScrollReveal";
 
 const Index = () => {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
+  const revealRef = useScrollReveal();
 
   const services = [
     {
@@ -99,12 +101,11 @@ const Index = () => {
         <div className="absolute inset-0 bg-gradient-to-b from-primary/60 via-primary/75 to-primary/90" />
       </div>
 
-      <div className="relative z-10">
+      <div className="relative z-10" ref={revealRef}>
         <Header />
 
-        {/* Hero */}
+        {/* Hero — NO reveal animation */}
         <section className="relative pt-48 sm:pt-56 overflow-hidden">
-          {/* Subtle animated glow */}
           <div className="absolute top-1/2 right-[15%] -translate-y-1/2 w-[500px] h-[500px] bg-accent/[0.04] rounded-full blur-[120px] animate-[pulse_6s_ease-in-out_infinite]" />
 
           <div className="relative max-w-5xl mx-auto px-4 sm:px-6 pt-16 sm:pt-24 pb-20 sm:pb-32">
@@ -137,7 +138,6 @@ const Index = () => {
                 </a>
               </div>
 
-              {/* Location badge — below CTAs */}
               <div className="animate-fade-in inline-flex items-center gap-2 mt-8 text-white/40 text-sm [animation-delay:500ms]">
                 <MapPin className="w-3.5 h-3.5 text-accent" />
                 <span>Vail · Beaver Creek · Edwards · Avon · Eagle</span>
@@ -146,11 +146,10 @@ const Index = () => {
           </div>
         </section>
 
-        {/* Hero-to-content divider */}
         <div className="hero-divider w-full" />
 
         {/* Trust Strip */}
-        <section className="border-y border-white/10 py-6 sm:py-8 px-4 sm:px-6 bg-black/30 backdrop-blur-sm">
+        <section data-reveal className="border-y border-white/10 py-6 sm:py-8 px-4 sm:px-6 bg-black/30 backdrop-blur-sm">
           <div className="max-w-5xl mx-auto">
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 text-center">
               <div>
@@ -173,17 +172,16 @@ const Index = () => {
           </div>
         </section>
 
-        {/* Social Proof / Credibility Stats */}
         <SocialProof />
 
         {/* Services */}
         <section className="py-16 sm:py-24 px-4 sm:px-6" id="services">
           <div className="max-w-5xl mx-auto">
-            <div className="text-center mb-12">
+            <div data-reveal className="text-center mb-12">
               <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">What We Do</p>
               <h2 className="text-2xl sm:text-3xl font-bold text-white">Core Services</h2>
             </div>
-            <div className="grid sm:grid-cols-2 gap-4">
+            <div data-reveal-children className="grid sm:grid-cols-2 gap-4">
               {services.map((service, i) => (
                 <Link key={i} to={service.link} className="group">
                   <div className="bg-black/40 backdrop-blur-sm border border-white/8 rounded-xl p-6 h-full hover:border-accent/30 hover:bg-black/50 transition-all duration-200">
@@ -205,11 +203,11 @@ const Index = () => {
         {/* How It Works */}
         <section className="py-16 sm:py-24 px-4 sm:px-6 bg-black/20 backdrop-blur-sm border-y border-white/5">
           <div className="max-w-5xl mx-auto">
-            <div className="text-center mb-12">
+            <div data-reveal className="text-center mb-12">
               <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">Our Process</p>
               <h2 className="text-2xl sm:text-3xl font-bold text-white">How It Works</h2>
             </div>
-            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div data-reveal-children className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
               {steps.map((step, i) => (
                 <div key={i} className="relative">
                   <span className="text-accent/20 text-5xl font-bold absolute -top-2 -left-1">{step.number}</span>
@@ -228,11 +226,11 @@ const Index = () => {
         {/* Why Symphony */}
         <section className="py-16 sm:py-24 px-4 sm:px-6">
           <div className="max-w-5xl mx-auto">
-            <div className="text-center mb-12">
+            <div data-reveal className="text-center mb-12">
               <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">Why Us</p>
               <h2 className="text-2xl sm:text-3xl font-bold text-white">Why Homeowners Choose Symphony</h2>
             </div>
-            <div className="grid sm:grid-cols-2 gap-5">
+            <div data-reveal-children className="grid sm:grid-cols-2 gap-5">
               {differentiators.map((item, i) => (
                 <div key={i} className="flex gap-4 p-5 rounded-xl border border-white/8 hover:border-white/10 transition-colors bg-black/40 backdrop-blur-sm">
                   <CheckCircle2 className="w-5 h-5 text-accent shrink-0 mt-0.5" />
@@ -249,11 +247,11 @@ const Index = () => {
         {/* FAQ */}
         <section className="py-16 sm:py-24 px-4 sm:px-6 bg-black/20 backdrop-blur-sm border-y border-white/5">
           <div className="max-w-3xl mx-auto">
-            <div className="text-center mb-12">
+            <div data-reveal className="text-center mb-12">
               <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">FAQ</p>
               <h2 className="text-2xl sm:text-3xl font-bold text-white">Common Questions</h2>
             </div>
-            <div className="space-y-2">
+            <div data-reveal-children className="space-y-2">
               {faqs.map((faq, i) => (
                 <div key={i} className="border border-white/8 rounded-xl overflow-hidden bg-black/40 backdrop-blur-sm">
                   <button
@@ -276,7 +274,7 @@ const Index = () => {
         </section>
 
         {/* Final CTA */}
-        <section className="py-16 sm:py-24 px-4 sm:px-6">
+        <section data-reveal className="py-16 sm:py-24 px-4 sm:px-6">
           <div className="max-w-3xl mx-auto text-center">
             <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">Get Started</p>
             <h2 className="text-2xl sm:text-3xl font-bold text-white mb-4">Ready to get started?</h2>

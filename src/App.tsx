@@ -1,5 +1,6 @@
 import { Routes, Route, Navigate } from "react-router-dom";
 import MobileClickToCall from "./components/MobileClickToCall";
+import PageTransition from "./components/PageTransition";
 import Walkthrough from "./pages/Walkthrough";
 import Scheduling from "./pages/scheduling";
 import NotFound from "./pages/NotFound";
@@ -58,6 +59,7 @@ function App() {
       <>
         <Toaster />
         <MobileClickToCall />
+        <PageTransition>
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/index" element={<Index />} />
@@ -122,6 +124,7 @@ function App() {
           {/* 404 route should be the last one */}
           <Route path="*" element={<NotFound />} />
         </Routes>
+        </PageTransition>
       </>
     );
   } catch (error) {
