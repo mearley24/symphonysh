@@ -17,6 +17,7 @@ const About = () => {
         description="Local smart home integrators serving Vail Valley and Eagle County. We design, install, and maintain reliable smart home technology."
         keywords="about symphony smart homes, smart home installer, Vail Valley, Eagle County"
         schema={serviceSchema}
+        breadcrumbs={[{ name: "Home", url: "/" }, { name: "About", url: "/about" }]}
       />
       <Header />
 
