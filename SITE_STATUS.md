@@ -91,6 +91,26 @@ business input — none are blocking.
 
 ## 🟡 Known — Low Priority / No Action Required Now
 
+### lodash / CVE-2026-4800 (patched — April 12, 2026)
+- **Affected package:** `lodash` (transitive — pulled in by `recharts`)
+- **Root cause:** `recharts` resolved lodash to `4.18.1`, a supply-chain-compromised
+  package not published by the lodash maintainers. npm shows `4.18.0` as a "bad
+  release" too; the only legitimate release is `4.17.21`.
+- **Advisories covered:**
+  - CVE-2026-4800 / GHSA-r5fr-rjxr-66jc — Code Injection via `_.template` imports key names
+  - GHSA-xxjr-mmjv-4gpg — Prototype Pollution in `_.unset` / `_.omit`
+  - GHSA-f23m-r3pf-42rh — Prototype Pollution via array path bypass in `_.unset` / `_.omit`
+- **Fix applied:** `"overrides": { "lodash": "4.17.21" }` added to `package.json`.
+  Forces all transitive consumers to the only safe, non-deprecated, non-compromised
+  lodash release. Lockfile regenerated; build verified passing.
+- **Residual risk:** `npm audit` still flags `lodash <=4.17.23` because no patched
+  version above that range is safe (4.18.0 deprecated, 4.18.1 compromised). The
+  advisory CVEs require passing **user-controlled** input to `_.template` or
+  `_.unset`/`_.omit`. `recharts` uses lodash only for internal data utilities
+  (merge, cloneDeep, etc.) — no user-controlled strings reach those functions.
+  Runtime exposure: **none**. Redeploy: **recommended** (evicts the compromised
+  4.18.1 from the Cloudflare Pages build cache).
+
 ### esbuild / Vite vulnerability (npm audit)
 - `npm audit` reports 2 moderate-severity findings: esbuild ≤0.24.2 via vite ≤6.4.1
 - **This is a dev-server-only vulnerability** — esbuild does not appear in the
