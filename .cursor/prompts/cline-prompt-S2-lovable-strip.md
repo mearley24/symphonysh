@@ -71,7 +71,16 @@ to:
 Missing Supabase environment variables. Set VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY in your .env file.
 ```
 
-## 5. Verify build
+## 5. Fix remaining vulnerabilities
+
+After removing lovable-tagger and regenerating the lockfile, run:
+```zsh
+npm audit fix
+```
+
+This should resolve the remaining vulnerabilities (rollup, picomatch, minimatch, nanoid, yaml, cross-spawn, etc.). Do NOT use `--force` — only safe fixes.
+
+## 6. Verify build
 
 After all changes:
 ```zsh
@@ -80,11 +89,11 @@ npm run build
 
 The build MUST succeed with zero errors. If it fails, fix the issue before committing.
 
-## 6. Commit and push
+## 7. Commit and push
 
 ```zsh
 git add -A
-git commit -m "chore: strip lovable-tagger, clean stale config"
+git commit -m "chore: strip lovable-tagger, fix vulns, clean stale config"
 git push origin main
 ```
 
