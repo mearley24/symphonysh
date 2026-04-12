@@ -14,6 +14,15 @@ const FrameSonos = () => {
       photos={photos} 
       backLink="/photos/mounted-tvs" 
       backText="Back to Mounted TVs"
+      seoTitle="Samsung Frame TV & Sonos Installation | Vail Valley"
+      seoDescription="Samsung Frame TV paired with Sonos soundbar — premium audio-visual installation in Vail Valley."
+      seoKeywords="Samsung Frame TV, Sonos, soundbar, TV installation, Vail Valley"
+      breadcrumbs={[
+        { name: "Home", url: "/" },
+        { name: "Our Work", url: "/projects" },
+        { name: "Mounted TVs", url: "/photos/mounted-tvs" },
+        { name: "Frame & Sonos", url: "/photos/mounted-tvs/frame-sonos" },
+      ]}
     />
   );
 };

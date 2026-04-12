@@ -23,6 +23,15 @@ const Home = () => {
       photos={photos} 
       backLink="/photos/mounted-tvs" 
       backText="Back to Mounted TVs"
+      seoTitle="Home TV Installations | Vail Valley"
+      seoDescription="Residential TV mounting and home entertainment installations across Vail Valley — clean mounts, concealed wiring, and premium setups."
+      seoKeywords="home TV installation, residential TV mount, entertainment setup, Vail Valley"
+      breadcrumbs={[
+        { name: "Home", url: "/" },
+        { name: "Our Work", url: "/projects" },
+        { name: "Mounted TVs", url: "/photos/mounted-tvs" },
+        { name: "Home Installations", url: "/photos/mounted-tvs/home" },
+      ]}
     />
   );
 };
