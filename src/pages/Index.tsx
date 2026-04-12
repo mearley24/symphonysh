@@ -123,30 +123,33 @@ const Index = () => {
                 <p className="animate-fade-in text-white/60 text-lg sm:text-xl leading-relaxed mb-10 max-w-lg mx-auto hero-subtext-shadow [animation-delay:200ms]">
                   One team from pre-wire to programming — reliable technology for homeowners and builders across Eagle County.
                 </p>
-                <div className="animate-fade-in flex flex-col sm:flex-row gap-3 justify-center [animation-delay:300ms]">
-                  <Link
-                    to="/scheduling"
-                    className="group inline-flex items-center justify-center gap-2 bg-accent hover:bg-accent/90 text-white px-7 py-4 rounded-lg font-medium transition-all text-base shadow-lg shadow-accent/20 hover:shadow-accent/30"
-                  >
-                    Schedule a Consultation
-                    <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5" />
-                  </Link>
-                  <a
-                    href="tel:+19705193013"
-                    className="inline-flex items-center justify-center gap-2 border border-white/20 hover:border-white/40 hover:bg-white/5 text-white px-7 py-4 rounded-lg font-medium transition-all text-base backdrop-blur-sm"
-                  >
-                    <Phone className="w-4 h-4" />
-                    (970) 519-3013
-                  </a>
-                </div>
-
-                <div className="animate-fade-in inline-flex items-center gap-2 mt-8 text-white/40 text-sm [animation-delay:500ms]">
-                  <MapPin className="w-3.5 h-3.5 text-accent" />
-                  <span>Vail · Beaver Creek · Edwards · Avon · Eagle</span>
-                </div>
               </div>
             </div>
           </section>
+
+          {/* CTA + Location — just above trust strip */}
+          <div className="animate-fade-in flex flex-col items-center gap-3 px-4 sm:px-6 pb-6 [animation-delay:300ms]">
+            <div className="flex flex-col sm:flex-row gap-3 justify-center">
+              <Link
+                to="/scheduling"
+                className="group inline-flex items-center justify-center gap-2 bg-accent hover:bg-accent/90 text-white px-7 py-4 rounded-lg font-medium transition-all text-base shadow-lg shadow-accent/20 hover:shadow-accent/30"
+              >
+                Schedule a Consultation
+                <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5" />
+              </Link>
+              <a
+                href="tel:+19705193013"
+                className="inline-flex items-center justify-center gap-2 border border-white/20 hover:border-white/40 hover:bg-white/5 text-white px-7 py-4 rounded-lg font-medium transition-all text-base backdrop-blur-sm"
+              >
+                <Phone className="w-4 h-4" />
+                (970) 519-3013
+              </a>
+            </div>
+            <div className="inline-flex items-center gap-2 mt-2 text-white/40 text-sm">
+              <MapPin className="w-3.5 h-3.5 text-accent" />
+              <span>Vail · Beaver Creek · Edwards · Avon · Eagle</span>
+            </div>
+          </div>
 
           {/* Trust Strip — pinned to bottom of window */}
           <section data-reveal className="mt-auto border-y border-white/10 py-6 sm:py-8 px-4 sm:px-6 bg-black/30 backdrop-blur-sm">
