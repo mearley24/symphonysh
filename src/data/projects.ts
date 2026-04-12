@@ -79,10 +79,10 @@ export const projects: Project[] = [
     scope: "TV mounting and structured wiring.",
     description:
       "Multiple TV installations with clean cable management and structured wiring behind the walls.",
-    heroPhoto: "/lovable-uploads/mounted tvs/West Vail BB/IMG_0134.JPG",
+    heroPhoto: "/lovable-uploads/mounted tvs/West Vail BB/IMG_1718.JPG",
     photos: [
-      "/lovable-uploads/mounted tvs/West Vail BB/IMG_0134.JPG",
-      "/lovable-uploads/mounted tvs/West Vail BB/IMG_0135.JPG",
+      "/lovable-uploads/mounted tvs/West Vail BB/IMG_1717.JPG",
+      "/lovable-uploads/mounted tvs/West Vail BB/IMG_1718.JPG",
     ],
     systemsInstalled: [],
     testimonial: null,
