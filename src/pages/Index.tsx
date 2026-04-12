@@ -107,7 +107,7 @@ const Index = () => {
         {/* Hero + Trust Strip pinned to window top/bottom */}
         <div className="relative min-h-screen flex flex-col">
           {/* Hero — pinned to top of window */}
-          <section className="relative pt-24 sm:pt-32 overflow-hidden">
+          <section className="relative pt-36 sm:pt-44 overflow-hidden">
             <div className="absolute top-1/2 right-[15%] -translate-y-1/2 w-[500px] h-[500px] bg-accent/[0.04] rounded-full blur-[120px] animate-[pulse_6s_ease-in-out_infinite]" />
 
             <div className="relative max-w-5xl mx-auto px-4 sm:px-6 pt-0 sm:pt-2 pb-12 sm:pb-20">
