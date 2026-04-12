@@ -65,6 +65,19 @@ const Index = () => {
 
   const serviceSchema = localBusinessHomePageSchema();
 
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": faqs.map((faq) => ({
+      "@type": "Question",
+      "name": faq.q,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": faq.a,
+      },
+    })),
+  };
+
   return (
     <div className="min-h-screen bg-primary text-primary-foreground relative">
       <SEO
