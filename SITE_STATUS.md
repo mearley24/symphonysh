@@ -1,6 +1,51 @@
 # symphonysh — Site Status
 
-*Last updated: April 12, 2026 (final verification pass)*
+*Last updated: April 13, 2026 (Cloudflare Pages deployment verification)*
+
+---
+
+## ✅ DEPLOYMENT VERIFIED — April 13, 2026
+
+### Local Build
+- `npm run build` — clean, 0 errors, 2680 modules transformed, built in 3.21s
+- Output directory: `dist/` (Vite default, `base: "/"` in vite.config.ts — correct for CF Pages root)
+- Build command confirmed: `vite build`
+
+### Asset Parity
+- `public/lovable-uploads/` — **128 files**
+- `dist/lovable-uploads/` — **128 files**
+- `diff` between public and dist: **0 differences** — exact match
+
+### `_redirects` (SPA routing)
+- `public/_redirects`: `/* /index.html 200` ✅
+- `dist/_redirects`: `/* /index.html 200` ✅ (copied by Vite from public/)
+
+### Git / Push State
+- `git status`: clean working tree, no uncommitted changes
+- HEAD: `bd8a44e` — "Fix SPA routing: add Cloudflare Pages _redirects, update SITE_STATUS"
+- Branch: `main`, up to date with `origin/main` — **latest fix is already pushed**
+
+### Cloudflare Pages Config
+- No `wrangler.toml` or `pages.toml` in repo root — CF Pages settings live in the dashboard
+- Expected dashboard config: **Build command:** `npm run build` · **Output directory:** `dist`
+- `base: "/"` in vite.config.ts — no asset-prefix mismatch
+
+### Live Site Verification (sampled 6 URLs, all HTTP 200 after www redirect)
+| URL | Status |
+|-----|--------|
+| `https://symphonysh.com/` | 200 ✅ |
+| `/lovable-uploads/1d7a78ef-…png` | 200 ✅ |
+| `/lovable-uploads/mounted-tvs/HP/IMG_0179.JPG` | 200 ✅ |
+| `/lovable-uploads/mounted-tvs/Home/IMG_0659.JPG` | 200 ✅ |
+| `/lovable-uploads/wiring/IMG_0228-2.JPG` | 200 ✅ |
+| `/lovable-uploads/home-theater/IMG_0509.JPG` | 200 ✅ |
+
+> Note: `symphonysh.com` → `www.symphonysh.com` 301 redirect is normal Cloudflare behaviour (www canonical set in CF dashboard).
+
+### Verdict
+**Site is healthy. No stale deploy, no output-directory mismatch, no asset base-path issue.**
+Images that previously 404'd are now loading. The fix (image-path casing + `_redirects`) was
+committed in `94d260b` / `bd8a44e` and Cloudflare Pages auto-deployed on push to `main`.
 
 ---
 
