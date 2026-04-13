@@ -8,7 +8,11 @@ import { projects } from "../data/projects";
  * When real testimonials are collected, add a separate section above or below.
  */
 const Testimonials = () => {
-  const featured = projects.slice(0, 3);
+  // Curated selection: lead with visually strongest projects
+  const featuredSlugs = ["eagle-vail-theater", "backbox-fireplace", "beaver-creek-condo"];
+  const featured = featuredSlugs
+    .map(slug => projects.find(p => p.slug === slug))
+    .filter(Boolean) as typeof projects;
 
   return (
     <section className="py-16 sm:py-24 px-4 sm:px-6 bg-black/15 backdrop-blur-sm border-y border-white/5">
@@ -23,7 +27,7 @@ const Testimonials = () => {
             <Link
               key={project.slug}
               to={`/projects/${project.slug}`}
-              className="group relative flex flex-col rounded-xl border border-white/8 bg-black/40 backdrop-blur-sm overflow-hidden shadow-lg shadow-black/20 hover:border-accent/30 transition-all duration-200"
+              className="group relative flex flex-col rounded-xl border border-white/8 bg-black/40 backdrop-blur-sm overflow-hidden shadow-lg shadow-black/20 hover:border-accent/20 hover:shadow-xl hover:shadow-black/30 hover:-translate-y-1 transition-all duration-300"
             >
               <div className="aspect-[16/10] relative overflow-hidden">
                 <img
@@ -48,10 +52,10 @@ const Testimonials = () => {
           ))}
         </div>
 
-        <div className="text-center mt-8">
+        <div className="text-center mt-10">
           <Link
             to="/projects"
-            className="inline-flex items-center gap-2 text-white/50 hover:text-white text-sm transition-colors"
+            className="inline-flex items-center gap-2 text-accent hover:text-accent/80 text-sm font-medium transition-colors"
           >
             View all projects <ArrowRight className="w-3.5 h-3.5" />
           </Link>

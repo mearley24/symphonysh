@@ -125,9 +125,9 @@ const Projects = () => {
                 key={project.slug}
                 ref={(el) => { cardRefs.current[i] = el; }}
                 to={`/projects/${project.slug}`}
-                className={`group block bg-black/40 backdrop-blur-sm border rounded-xl overflow-hidden transition-all duration-300
+                className={`group block bg-black/40 backdrop-blur-sm border rounded-xl overflow-hidden transition-all
                   border-white/8 hover:border-accent/20
-                  hover:shadow-xl hover:shadow-black/30
+                  hover:shadow-xl hover:shadow-black/30 hover:-translate-y-1
                   ${animatingOut
                     ? "opacity-0 scale-95"
                     : visibleCards.has(i)

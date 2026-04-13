@@ -132,7 +132,7 @@ const Index = () => {
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
               <Link
                 to="/scheduling"
-                className="group inline-flex items-center justify-center gap-2 bg-accent hover:bg-accent/90 text-white px-7 py-4 rounded-lg font-medium transition-all text-base shadow-lg shadow-accent/20 hover:shadow-accent/30"
+                className="group inline-flex items-center justify-center gap-2 bg-accent hover:bg-accent/90 text-white px-7 py-4 rounded-lg font-medium transition-all text-base shadow-lg shadow-accent/20 hover:shadow-xl hover:shadow-accent/30 hover:-translate-y-0.5"
               >
                 Schedule a Consultation
                 <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5" />

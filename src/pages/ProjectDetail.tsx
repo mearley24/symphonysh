@@ -111,11 +111,11 @@ const ProjectDetail = () => {
             <p className="text-accent font-medium text-xs uppercase tracking-widest mb-4">
               Project Photos
             </p>
-            <div className="grid grid-cols-2 gap-3">
+            <div className="grid grid-cols-2 gap-3 sm:gap-4">
               {project.photos.map((photo, i) => (
                 <div
                   key={i}
-                  className="aspect-[4/3] rounded-lg overflow-hidden bg-black/30 border border-white/5 group"
+                  className="aspect-[4/3] rounded-lg overflow-hidden bg-black/30 border border-white/5 group cursor-pointer hover:border-accent/20 transition-all duration-300"
                 >
                   <img
                     ref={(el) => {

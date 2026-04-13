@@ -17,6 +17,17 @@ require real business input — none are blocking.
 - **`dbUtils.ts`**: Removed `address` field from Supabase `.insert()` call — column doesn't exist in DB schema. Address value is now appended to `message` field so no user data is lost.
 - TypeScript build is clean (`npx tsc --noEmit` passes with 0 errors).
 
+### Visual & UX Polish (April 13)
+- **Featured Projects curation**: Swapped homepage featured projects to show strongest visuals — Eagle-Vail Theater, Backbox Fireplace Mount, Beaver Creek Ski Condo (replaced Cordillera ceiling-speaker shot)
+- **Photo order**: Eagle-Vail Theater photos reordered — finished room shots lead, rough-in/progress shots follow
+- **Typography**: Added explicit `h3` font-family (Inter) and tighter letter-spacing to differentiate from Barlow Condensed headings
+- **Card hover states**: Consistent `-translate-y-1` lift + `shadow-xl` on featured project cards, project grid cards, and photo gallery items
+- **Hero CTA**: Added subtle `-translate-y-0.5` lift on hover for the primary "Schedule a Consultation" button
+- **Hero divider**: Added warm accent tint to the gradient divider between hero and content
+- **"View all projects" link**: Changed from white/50 to accent color for better visibility
+- **Photo grid spacing**: Increased gap on project detail photo grid at sm+ breakpoint
+- **Section divider utility**: Added `.section-divider` CSS class for future use
+
 
 ### Build
 - `npm run build` — clean, 0 errors, 2680 modules transformed
