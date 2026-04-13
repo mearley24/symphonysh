@@ -131,9 +131,9 @@ function App() {
       <div className="p-8 text-center">
         <h1 className="text-2xl font-bold mb-4">Application Error</h1>
         <p>We're sorry, but something went wrong.</p>
-        <button 
-          onClick={() => window.location.href = '/'} 
-          className="mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+        <button
+          onClick={() => window.location.href = '/'}
+          className="mt-4 px-6 py-3 bg-accent text-white rounded-lg font-medium hover:bg-accent/90 transition-colors"
         >
           Go to Home Page
         </button>

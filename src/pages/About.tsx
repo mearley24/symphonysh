@@ -97,7 +97,7 @@ const About = () => {
       <section data-reveal className="py-16 sm:py-24 px-4 sm:px-6 bg-black/20 backdrop-blur-sm border-t border-white/5">
         <div className="max-w-3xl mx-auto text-center">
           <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">Get Started</p>
-            <h2 className="text-2xl sm:text-3xl font-bold text-white mb-4">Ready to talk about your project?</h2>
+          <h2 className="text-2xl sm:text-3xl font-bold text-white mb-4">Ready to talk about your project?</h2>
           <p className="text-white/50 text-base mb-8 max-w-xl mx-auto">
             Whether you're building, renovating, or just need something fixed — reach out. No pressure, no sales pitch.
           </p>

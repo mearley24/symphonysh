@@ -1,145 +1,99 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Header from '../../components/Header';
+import Footer from '../../components/Footer';
 import { ArrowLeft, ImageOff } from 'lucide-react';
 import { homeTheaterCategories, getFixedImagePath } from '../../utils/photos';
-import GalleryControlButtons from '../../components/photos/GalleryControlButtons';
 import SEO from '../../components/SEO';
-
-import PageBackground from "../../components/PageBackground";
-import bgProjects from "../../assets/bg-projects.jpg";
+import PageBackground from '../../components/PageBackground';
+import bgProjects from '../../assets/bg-projects.jpg';
 
 const HomeTheater = () => {
   const [loadedImages, setLoadedImages] = useState<Record<string, boolean>>({});
-  const [isEditMode, setIsEditMode] = useState(false);
-  const [isLovableDevEnvironment, setIsLovableDevEnvironment] = useState(false);
-  const [showButtons, setShowButtons] = useState(false); // Buttons hidden by default
-  
-  // Check if we're in the Lovable.dev preview environment
-  useEffect(() => {
-    const hostname = window.location.hostname;
-    // More inclusive check for Lovable.dev environments, also checking for preview URLs
-    const isDev = hostname.includes('localhost') ||
-                 hostname.includes('preview--');
-    setIsLovableDevEnvironment(isDev);
-    
-    // Function to toggle button visibility via URL parameter
-    const checkUrlForButtonVisibility = () => {
-      const urlParams = new URLSearchParams(window.location.search);
-      const hideButtons = urlParams.get('hideButtons');
-      if (hideButtons === 'true') {
-        setShowButtons(false);
-      } else if (hideButtons === 'false') {
-        setShowButtons(true);
-      }
-    };
-    
-    // Check URL parameters on initial load
-    checkUrlForButtonVisibility();
-    
-    // Listen for URL changes (for SPA navigation)
-    const handleUrlChange = () => {
-      checkUrlForButtonVisibility();
-    };
-    
-    window.addEventListener('popstate', handleUrlChange);
-    
-    return () => {
-      window.removeEventListener('popstate', handleUrlChange);
-    };
-  }, []);
-  
-  // Function to toggle button visibility programmatically
-  const toggleButtonVisibility = (visible: boolean) => {
-    setShowButtons(visible);
-  };
-  
-  // Expose the toggle function to the window object for external access
-  useEffect(() => {
-    (window as any).toggleHomeTheaterButtons = toggleButtonVisibility;
-    
-    return () => {
-      delete (window as any).toggleHomeTheaterButtons;
-    };
-  }, []);
 
   const handleImageLoad = (image: string) => {
-    console.log(`Successfully loaded image: ${image}`);
     setLoadedImages(prev => ({ ...prev, [image]: true }));
   };
 
   const handleImageError = (image: string) => {
-    console.error(`Failed to load image: ${image}`);
     setLoadedImages(prev => ({ ...prev, [image]: false }));
-  };
-  
-  const toggleEditMode = () => {
-    setIsEditMode(!isEditMode);
-    if (isEditMode) {
-      console.log("Photo order would be saved here");
-    }
   };
 
   return (
     <PageBackground image={bgProjects}>
-      <SEO 
+      <SEO
         title="Custom Home Theater Installations in Vail Valley"
         description="Browse our portfolio of custom home theater installations. We design and install premium home cinema systems throughout Vail Valley, Colorado."
         keywords="home theater installation, custom home cinema, surround sound, projector installation, media room design, Vail Valley, Colorado"
+        breadcrumbs={[
+          { name: "Home", url: "/" },
+          { name: "Our Work", url: "/projects" },
+          { name: "Home Theater", url: "/photos/home-theater" },
+        ]}
       />
       <Header />
-      <section className="pt-32 pb-20 px-6">
-        <div className="max-w-6xl mx-auto">
-          <div className="flex justify-between items-center mb-8">
-            <Link to="/projects" className="inline-flex items-center text-gray-300 hover:text-white">
-              <ArrowLeft className="w-4 h-4 mr-2" />
-              Back to Projects
-            </Link>
-            
-            <GalleryControlButtons 
-              isEditMode={isEditMode} 
-              toggleEditMode={toggleEditMode} 
-              isLovableDevEnvironment={isLovableDevEnvironment}
-              showButtons={showButtons}
-            />
-          </div>
-          
-          <h1 className="text-4xl font-bold text-white mb-8">Home Theater</h1>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+      <section className="pt-36 sm:pt-44 pb-10 px-4 sm:px-6">
+        <div className="max-w-5xl mx-auto">
+          <Link
+            to="/projects"
+            className="inline-flex items-center gap-1.5 text-white/40 hover:text-white/70 text-sm mb-8 transition-colors"
+          >
+            <ArrowLeft className="w-3.5 h-3.5" /> Back to Projects
+          </Link>
+          <p className="text-accent font-medium text-sm tracking-wide uppercase mb-3">Photo Gallery</p>
+          <h1 className="text-3xl sm:text-4xl font-bold leading-tight mb-3 text-white hero-text-shadow">
+            Home Theater
+          </h1>
+          <p className="text-white/60 text-base leading-relaxed hero-subtext-shadow">
+            Dedicated theaters, media rooms, and cinema-grade AV installations across the Vail Valley.
+          </p>
+        </div>
+      </section>
+
+      <div className="hero-divider w-full" />
+
+      <section className="py-8 sm:py-12 px-4 sm:px-6 pb-20">
+        <div className="max-w-5xl mx-auto">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
             {homeTheaterCategories.map((category, index) => (
-              <Link 
+              <Link
                 key={index}
                 to={category.path}
-                className="bg-secondary/50 rounded-lg overflow-hidden group hover:bg-black/40 backdrop-blur-sm transition-all duration-300 relative"
+                className="group bg-black/40 backdrop-blur-sm border border-white/8 rounded-xl overflow-hidden hover:border-accent/30 hover:bg-black/50 transition-all duration-200"
               >
-                <div className="aspect-video overflow-hidden bg-black/20 backdrop-blur-sm relative">
+                <div className="aspect-video overflow-hidden bg-black/20 relative">
                   {loadedImages[category.image] === false ? (
-                    <div className="w-full h-full flex flex-col items-center justify-center text-gray-400 p-4">
-                      <ImageOff className="w-12 h-12 mb-2" />
+                    <div className="w-full h-full flex flex-col items-center justify-center text-white/30 p-4">
+                      <ImageOff className="w-10 h-10 mb-2" />
                       <p className="text-sm text-center">{category.title}</p>
                     </div>
                   ) : (
-                    <img 
-                      src={getFixedImagePath(category.image)} 
-                      alt={category.title} 
-                      className="w-full h-full object-cover transition-all duration-300 ease-out group-hover:scale-[1.02] group-hover:brightness-110"
+                    <img
+                      src={getFixedImagePath(category.image)}
+                      alt={`${category.title} — home theater installation in Vail Valley`}
+                      className="w-full h-full object-cover transition-transform duration-300 ease-out group-hover:scale-[1.03]"
                       loading="lazy"
                       onLoad={() => handleImageLoad(category.image)}
                       onError={() => handleImageError(category.image)}
                     />
                   )}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
                 </div>
                 <div className="p-4">
-                  <h3 className="text-lg font-semibold text-white">{category.title}</h3>
-                  <p className="text-xs text-gray-300">{category.photos.length} {category.photos.length === 1 ? 'photo' : 'photos'}</p>
+                  <h3 className="text-white font-semibold text-base mb-0.5">{category.title}</h3>
+                  <p className="text-white/40 text-xs">
+                    {category.photos.length} {category.photos.length === 1 ? 'photo' : 'photos'}
+                  </p>
                 </div>
               </Link>
             ))}
           </div>
         </div>
       </section>
+
+      <Footer />
     </PageBackground>
   );
 };

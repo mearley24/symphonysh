@@ -56,17 +56,6 @@ export function SchedulingForm({
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     
-    console.log("Form Data:", {
-      date,
-      selectedTime,
-      name,
-      email,
-      phone,
-      address,
-      service,
-      message
-    });
-
     // Validate form fields
     if (!validateForm({ date, selectedTime, name, email, phone, address, service })) {
       return;
@@ -89,11 +78,9 @@ export function SchedulingForm({
     try {
       // Store to session storage as backup
       sessionStorage.setItem('appointmentDetails', JSON.stringify(appointmentDetails));
-      console.log("Stored appointment details in session storage");
-      
+
       // Submit appointment
-      const result = await submitAppointment(appointmentDetails);
-      console.log("Appointment submission result:", result);
+      await submitAppointment(appointmentDetails);
       
       // Show success toast
       toast({

@@ -35,6 +35,11 @@ const SERVICES = [
   { id: "ava", name: "AVA Smart Remote" },
 ];
 
+const inputClass =
+  "w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white placeholder-white/30 focus:outline-none focus:border-accent/50 focus:ring-1 focus:ring-accent/20 text-sm transition-all";
+
+const labelClass = "block text-sm font-medium text-white/60 mb-1.5";
+
 export function AppointmentForm({
   name, setName,
   email, setEmail,
@@ -46,17 +51,21 @@ export function AppointmentForm({
   return (
     <div className="space-y-4">
       <div>
-        <label htmlFor="service" className="block text-sm font-medium text-gray-300 mb-1">
+        <label htmlFor="service" className={labelClass}>
           Service *
         </label>
         <Select value={service} onValueChange={setService}>
-          <SelectTrigger className="w-full bg-accent hover:bg-accent/90 text-white border-none">
+          <SelectTrigger className="w-full bg-white/5 border border-white/10 text-white rounded-lg px-4 py-3 h-auto text-sm focus:ring-1 focus:ring-accent/20 focus:border-accent/50 transition-all">
             <SelectValue placeholder="Select a service" />
           </SelectTrigger>
           <SelectContent className="bg-[rgb(0,9,24)] border-white/10">
-            {SERVICES.map((service) => (
-              <SelectItem key={service.id} value={service.id} className="text-white hover:bg-accent/20 focus:bg-accent/20">
-                {service.name}
+            {SERVICES.map((svc) => (
+              <SelectItem
+                key={svc.id}
+                value={svc.id}
+                className="text-white hover:bg-accent/20 focus:bg-accent/20"
+              >
+                {svc.name}
               </SelectItem>
             ))}
           </SelectContent>
@@ -64,7 +73,7 @@ export function AppointmentForm({
       </div>
 
       <div>
-        <label htmlFor="name" className="block text-sm font-medium text-gray-300 mb-1">
+        <label htmlFor="name" className={labelClass}>
           Name *
         </label>
         <input
@@ -72,13 +81,13 @@ export function AppointmentForm({
           id="name"
           value={name}
           onChange={(e) => setName(e.target.value)}
-          className="w-full bg-white/5 border border-white/10 rounded-md px-4 py-2 text-white placeholder-gray-400"
+          className={inputClass}
           placeholder="Your full name"
         />
       </div>
 
       <div>
-        <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-1">
+        <label htmlFor="email" className={labelClass}>
           Email *
         </label>
         <input
@@ -86,13 +95,13 @@ export function AppointmentForm({
           id="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          className="w-full bg-white/5 border border-white/10 rounded-md px-4 py-2 text-white placeholder-gray-400"
+          className={inputClass}
           placeholder="your@email.com"
         />
       </div>
 
       <div>
-        <label htmlFor="phone" className="block text-sm font-medium text-gray-300 mb-1">
+        <label htmlFor="phone" className={labelClass}>
           Phone *
         </label>
         <input
@@ -100,36 +109,36 @@ export function AppointmentForm({
           id="phone"
           value={phone}
           onChange={(e) => setPhone(e.target.value)}
-          className="w-full bg-white/5 border border-white/10 rounded-md px-4 py-2 text-white placeholder-gray-400"
-          placeholder="(123) 456-7890"
+          className={inputClass}
+          placeholder="(970) 555-1234"
         />
       </div>
 
       <div>
-        <label htmlFor="address" className="block text-sm font-medium text-gray-300 mb-1">
-          Address *
+        <label htmlFor="address" className={labelClass}>
+          Property Address *
         </label>
         <input
           type="text"
           id="address"
           value={address}
           onChange={(e) => setAddress(e.target.value)}
-          className="w-full bg-white/5 border border-white/10 rounded-md px-4 py-2 text-white placeholder-gray-400"
-          placeholder="Your address"
+          className={inputClass}
+          placeholder="Street address or general area"
         />
       </div>
 
       <div>
-        <label htmlFor="message" className="block text-sm font-medium text-gray-300 mb-1">
-          Message (Optional)
+        <label htmlFor="message" className={labelClass}>
+          Tell us about your project <span className="text-white/30">(optional)</span>
         </label>
         <textarea
           id="message"
           value={message}
           onChange={(e) => setMessage(e.target.value)}
           rows={4}
-          className="w-full bg-white/5 border border-white/10 rounded-md px-4 py-2 text-white placeholder-gray-400"
-          placeholder="Tell us about your project..."
+          className={`${inputClass} resize-none`}
+          placeholder="What are you looking to do? New build, retrofit, specific room…"
         />
       </div>
     </div>

@@ -6,8 +6,6 @@ import { AppointmentDetails } from "./confirmation/AppointmentDetails";
 import { ZapierNotifier } from "./confirmation/ZapierNotifier";
 
 export function ConfirmationPage() {
-  console.log("Confirmation page rendered");
-  
   // Get appointment details using our custom hook
   const appointmentDetails = useAppointmentData();
   

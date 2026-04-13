@@ -46,7 +46,7 @@ export function FormLayout({
   onSubmit
 }: FormLayoutProps) {
   return (
-    <form onSubmit={onSubmit} className="space-y-8 bg-black" noValidate>
+    <form onSubmit={onSubmit} className="space-y-8" noValidate>
       <div className="grid md:grid-cols-2 gap-8">
         <div className="space-y-4">
           <div className="w-full">

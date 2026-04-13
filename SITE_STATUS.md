@@ -1,5 +1,58 @@
 # symphonysh — Site Status
 
+---
+
+## ✅ Final Polish Pass — April 13, 2026
+
+### Build
+- `npm run build` — clean, 0 errors, 2680 modules transformed (unchanged module count)
+- All TypeScript compiles without error
+
+### What Changed in This Pass
+
+#### Scheduling / Booking Flow
+- **`PageLayout.tsx`** — Completely overhauled: replaced bare black page with full `PageBackground` (matching other pages), added proper hero section with breadcrumb back-nav, eyebrow label, H1 heading, and sub-text. Real `Footer` component used instead of the minimal inline footer.
+- **`AppointmentForm.tsx`** — Service selector trigger changed from `bg-accent` (gold trigger was visually confusing) to match the rest of the form inputs (`bg-white/5 border border-white/10`). All labels changed from `text-gray-300` → `text-white/60` for consistency. Inputs unified to `rounded-lg`. Phone placeholder updated to show local format. Address label clarified to "Property Address". Message label improved with optional indicator.
+- **`SubmitButton.tsx`** — Replaced shadcn white `Button` with the site-standard accent gold CTA button style (matching all other primary CTAs site-wide). Adds `ArrowRight` icon for visual consistency.
+- **`FormLayout.tsx`** — Removed stray `bg-black` class from the `<form>` element.
+- **`SchedulingForm.tsx`** — Removed development `console.log` statements (form data, session storage, submission result).
+- **`ConfirmationPage.tsx`** — Removed development `console.log("Confirmation page rendered")`.
+
+#### Photo Galleries
+- **`HomeTheater.tsx`** — Major cleanup:
+  - Removed all `console.log` calls from image load/error handlers
+  - Removed `(window as any).toggleHomeTheaterButtons` pollution of the global window object
+  - Removed dead Lovable dev-environment detection logic and URL-parameter button-visibility listener
+  - Standardized all styling to match site design system (`bg-black/40 backdrop-blur-sm border border-white/8 rounded-xl`, `text-white/40`, etc.)
+  - Added proper hero section with back-nav, eyebrow, H1, and description
+  - Added `hero-divider` between header and grid
+  - Added real `Footer` component
+  - Improved alt text to be descriptive: `"${title} — home theater installation in Vail Valley"`
+  - Added breadcrumbs to SEO component
+
+#### Typography & CSS
+- **`index.css`** — Fixed `--rdp-accent-color: hsl(202, 159, 92)` → `rgba(202, 159, 92, 1)` (was invalid CSS hsl() call; now correct rgba matching the brand gold)
+- **`index.css`** — Added `.animate-fade-in { animation-fill-mode: both; }` to prevent hero elements flashing visible before their entrance animation fires (was most visible on delayed `[animation-delay:100ms]` elements)
+
+#### Code Quality
+- **`Index.tsx`** — Removed unused `SocialProof` import (component was imported but never rendered)
+- **`App.tsx`** — Error fallback button changed from `bg-blue-500` (off-brand) to `bg-accent` with standard border-radius and hover state
+- **`Services.tsx`, `Contact.tsx`, `About.tsx`** — Fixed source indentation: CTA section `h2` elements had one extra indent level vs sibling `p` elements
+
+### Remaining Content-Only TODOs (unchanged, require Matt)
+- **Testimonials** — All `testimonial` fields in `projects.ts` are still `null`. Add real client quotes when available (see schema in `Testimonials.tsx`)
+- **`BUSINESS_SAME_AS`** — Still an empty array. Add Google Business Profile, Instagram, Facebook, Houzz URLs once confirmed live
+- **Business address in schema** — Confirm `45 Aspen Glen Ct, Edwards CO 81632` is intentionally public-facing before verifying GBP
+
+### Ideas for a Future Pass (not implemented — low urgency)
+- **Hero menu button positioning** (`top-[430px]`) is hardcoded; could break if hero content height changes. A relative-positioned approach would be more resilient.
+- **JS bundle (~1 MB)** — Pre-existing; consider dynamic imports for photo gallery pages and service demo components in a dedicated perf pass.
+- **`SocialProof` component** — Currently unused on any page. Could be a nice addition to the Services or About page once real stats exist.
+- **`/photos/*` discovery** — These gallery routes are reachable via project cards but not surfaced in primary navigation. A "Browse All Photos" link in the footer or Projects page would help.
+- **Google Calendar stub files** — `src/utils/appointments/googleCalendar/auth/` contains placeholder files that can be deleted in a cleanup pass (no live functionality).
+
+---
+
 *Last updated: April 13, 2026 (Cloudflare Pages deployment verification)*
 
 ---

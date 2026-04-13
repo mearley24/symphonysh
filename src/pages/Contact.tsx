@@ -183,7 +183,7 @@ const Contact = () => {
       <section data-reveal className="py-16 sm:py-24 px-4 sm:px-6">
         <div className="max-w-3xl mx-auto text-center">
           <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">Schedule</p>
-            <h2 className="text-2xl sm:text-3xl font-bold text-white mb-4">Prefer to schedule a time?</h2>
+          <h2 className="text-2xl sm:text-3xl font-bold text-white mb-4">Prefer to schedule a time?</h2>
           <p className="text-white/50 text-base mb-8">Book a walkthrough or phone consultation at a time that works for you.</p>
           <Link to="/scheduling" className="inline-flex items-center justify-center gap-2 bg-accent hover:bg-accent/90 text-white px-8 py-4 rounded-lg font-medium transition-colors text-base">
             Schedule a Consultation <ArrowRight className="w-4 h-4" />
