@@ -13,24 +13,22 @@ export async function saveAppointmentToDatabase(appointmentData: AppointmentData
 
   console.log("Saving appointment to database...");
   
-  const formattedAppointment: FormattedAppointment = {
+  const dbRecord = {
     date: format(date, 'yyyy-MM-dd'),
     time: selectedTime,
     name: name.trim(),
     email: email.trim(),
     phone: phone.trim(),
-    address: address.trim(),
-    message: message.trim(),
+    message: [address.trim(), message.trim()].filter(Boolean).join(' — '),
     service,
     status: 'pending'
   };
   
   try {
     console.log("Inserting appointment directly with Supabase client");
-    // Insert directly using Supabase client instead of calling the Edge Function
     const { data, error } = await supabase
       .from('appointments')
-      .insert([formattedAppointment])
+      .insert([dbRecord])
       .select();
       
     if (error) {
