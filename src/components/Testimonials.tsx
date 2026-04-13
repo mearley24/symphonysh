@@ -8,7 +8,11 @@ import { projects } from "../data/projects";
  * When real testimonials are collected, add a separate section above or below.
  */
 const Testimonials = () => {
-  const featured = projects.slice(0, 3);
+  // Curated selection: lead with visually strongest projects
+  const featuredSlugs = ["eagle-vail-theater", "backbox-fireplace", "beaver-creek-condo"];
+  const featured = featuredSlugs
+    .map(slug => projects.find(p => p.slug === slug))
+    .filter(Boolean) as typeof projects;
 
   return (
     <section className="py-16 sm:py-24 px-4 sm:px-6 bg-black/15 backdrop-blur-sm border-y border-white/5">

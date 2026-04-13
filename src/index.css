@@ -55,15 +55,20 @@
   h1, h2 {
     font-family: 'Barlow Condensed', sans-serif;
     text-transform: uppercase;
-    letter-spacing: 0.02em;
+    letter-spacing: 0.025em;
+  }
+
+  h3 {
+    font-family: 'Inter', system-ui, sans-serif;
+    letter-spacing: -0.01em;
   }
 
   .glass-dark {
     @apply backdrop-blur-sm bg-black/50 border border-white/10;
   }
-  
+
   .card-hover {
-    @apply transition-all duration-300 hover:translate-y-[-4px] hover:shadow-lg;
+    @apply transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-black/30;
   }
   
   /* iPad-specific optimizations */
