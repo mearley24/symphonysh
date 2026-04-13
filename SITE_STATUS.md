@@ -11,7 +11,12 @@ require real business input — none are blocking.
 
 ---
 
-## ✅ VERIFIED OK — April 12, 2026
+## ✅ VERIFIED OK — April 13, 2026
+
+### Build Fix (April 13)
+- **`dbUtils.ts`**: Removed `address` field from Supabase `.insert()` call — column doesn't exist in DB schema. Address value is now appended to `message` field so no user data is lost.
+- TypeScript build is clean (`npx tsc --noEmit` passes with 0 errors).
+
 
 ### Build
 - `npm run build` — clean, 0 errors, 2680 modules transformed
