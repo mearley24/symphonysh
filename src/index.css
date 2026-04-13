@@ -127,7 +127,13 @@
 /* Hero-to-content gradient divider */
 .hero-divider {
   height: 1px;
-  background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.1) 50%, transparent 100%);
+  background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.08) 30%, rgba(202, 159, 92, 0.15) 50%, rgba(255, 255, 255, 0.08) 70%, transparent 100%);
+}
+
+/* Section divider — subtle horizontal rule between content blocks */
+.section-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.06) 50%, transparent 100%);
 }
 
 /* Homepage eyebrow entrance animation */
