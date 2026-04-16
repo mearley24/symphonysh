@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Phone, MapPin } from "lucide-react";
+import { Phone, MapPin, Globe, Camera } from "lucide-react";
 
 const Footer = () => {
   return (
@@ -46,6 +46,11 @@ const Footer = () => {
                 </Link>
               </li>
               <li>
+                <Link to="/blog" className="text-white/40 hover:text-white/70 text-sm transition-colors">
+                  Blog
+                </Link>
+              </li>
+              <li>
                 <Link to="/about" className="text-white/40 hover:text-white/70 text-sm transition-colors">
                   About
                 </Link>
@@ -77,11 +82,29 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="border-t border-white/8 pt-6 flex flex-col sm:flex-row justify-between items-center gap-3">
+        <div className="border-t border-white/8 pt-6 flex flex-col sm:flex-row justify-between items-center gap-4">
           <p className="text-white/30 text-xs">
             © {new Date().getFullYear()} Symphony Smart Homes. All rights reserved.
           </p>
-          <div className="flex gap-4">
+
+          {/* Social links */}
+          <div className="flex items-center gap-4">
+            <a
+              href="https://www.instagram.com/symphonysmarthomes"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 text-white/25 hover:text-white/50 text-xs transition-colors"
+            >
+              <Camera className="w-3.5 h-3.5" /> Instagram
+            </a>
+            <a
+              href="https://g.page/symphonysmarthomes"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 text-white/25 hover:text-white/50 text-xs transition-colors"
+            >
+              <Globe className="w-3.5 h-3.5" /> Google
+            </a>
             <Link to="/privacy" className="text-white/30 hover:text-white/50 text-xs transition-colors">
               Privacy Policy
             </Link>

@@ -4,6 +4,7 @@ import { useState } from "react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import Testimonials from "../components/Testimonials";
+import ClientTestimonials from "../components/ClientTestimonials";
 import SEO from "../components/SEO";
 import heroImage from "../assets/hero-smart-home.jpg";
 import { localBusinessHomePageSchema } from "../constants/businessSchema";
@@ -92,8 +93,7 @@ const Index = () => {
       <div className="fixed inset-0 z-0">
         <img
           src={heroImage}
-          alt=""
-          aria-hidden="true"
+          alt="Smart home automation control panel in a modern Vail Valley residence"
           className="w-full h-full object-cover"
           loading="eager"
         />
@@ -107,7 +107,10 @@ const Index = () => {
         <div className="relative min-h-screen flex flex-col">
           {/* Hero — pinned to top of window */}
           <section className="relative pt-36 sm:pt-44 overflow-hidden">
+            {/* Right blob */}
             <div className="absolute top-1/2 right-[15%] -translate-y-1/2 w-[500px] h-[500px] bg-accent/[0.04] rounded-full blur-[120px] animate-[pulse_6s_ease-in-out_infinite]" />
+            {/* Left blob — second layer with delay */}
+            <div className="absolute top-1/2 left-[10%] -translate-y-1/2 w-[400px] h-[400px] bg-accent/[0.03] rounded-full blur-[100px] animate-[pulse_8s_ease-in-out_2s_infinite]" />
 
             <div className="relative max-w-5xl mx-auto px-4 sm:px-6 pt-0 sm:pt-2 pb-12 sm:pb-20">
               <div className="max-w-2xl mx-auto text-center">
@@ -150,13 +153,18 @@ const Index = () => {
             </div>
           </div>
 
+          {/* Scroll indicator */}
+          <div className="hidden sm:flex justify-center py-3">
+            <ChevronDown className="w-5 h-5 text-white animate-bounce opacity-40" />
+          </div>
+
           {/* Trust Strip — pinned to bottom of window */}
           <section data-reveal className="border-y border-white/10 py-6 sm:py-8 px-4 sm:px-6 bg-black/30 backdrop-blur-sm">
             <div className="max-w-5xl mx-auto">
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 text-center">
                 <div>
-                  <p className="text-white font-semibold text-lg">Local</p>
-                  <p className="text-white/50 text-sm">Based in the valley</p>
+                  <p className="text-white font-semibold text-lg">10+ Years</p>
+                  <p className="text-white/50 text-sm">In the valley</p>
                 </div>
                 <div>
                   <p className="text-white font-semibold text-lg">Licensed</p>
@@ -167,15 +175,13 @@ const Index = () => {
                   <p className="text-white/50 text-sm">Wire to support</p>
                 </div>
                 <div>
-                  <p className="text-white font-semibold text-lg">Responsive</p>
+                  <p className="text-white font-semibold text-lg">Same-Day Response</p>
                   <p className="text-white/50 text-sm">We answer the phone</p>
                 </div>
               </div>
             </div>
           </section>
         </div>
-
-        
 
         {/* Services */}
         <section className="py-16 sm:py-24 px-4 sm:px-6" id="services">
@@ -187,7 +193,7 @@ const Index = () => {
             <div data-reveal-children className="grid sm:grid-cols-2 gap-4">
               {services.map((service, i) => (
                 <Link key={i} to={service.link} className="group">
-                  <div className="bg-black/40 backdrop-blur-sm border border-white/8 rounded-xl p-6 h-full hover:border-accent/30 hover:bg-black/50 transition-all duration-200">
+                  <div className="bg-black/40 backdrop-blur-sm border border-white/8 rounded-xl p-6 h-full hover:border-accent/30 hover:bg-gradient-to-br hover:from-accent/5 hover:to-transparent transition-all duration-200">
                     <div className="w-11 h-11 rounded-lg bg-accent/10 flex items-center justify-center mb-4 group-hover:bg-accent/20 transition-colors">
                       <service.icon className="w-5 h-5 text-accent" />
                     </div>
@@ -224,6 +230,10 @@ const Index = () => {
           </div>
         </section>
 
+        {/* Client Testimonials */}
+        <ClientTestimonials />
+
+        {/* Featured Projects */}
         <Testimonials />
 
         {/* Why Symphony */}
@@ -247,8 +257,43 @@ const Index = () => {
           </div>
         </section>
 
-        {/* FAQ */}
+        {/* Meet the Team */}
         <section className="py-16 sm:py-24 px-4 sm:px-6 bg-black/20 backdrop-blur-sm border-y border-white/5">
+          <div className="max-w-5xl mx-auto">
+            <div data-reveal className="grid sm:grid-cols-2 gap-10 items-center">
+              {/* Left: text */}
+              <div>
+                <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">The Team</p>
+                <h2 className="text-2xl sm:text-3xl font-bold text-white mb-4">One Integrator. Every Project.</h2>
+                <p className="text-white/50 text-base leading-relaxed mb-6">
+                  Symphony is Matt Earley — one technician who oversees every project from first wire to final walkthrough. No subcontractors, no runaround. When you call, you talk to the person doing the work.
+                </p>
+                <Link
+                  to="/about"
+                  className="inline-flex items-center gap-1.5 text-accent hover:text-accent/80 text-sm font-medium transition-colors"
+                >
+                  Learn more about us <ArrowRight className="w-3.5 h-3.5" />
+                </Link>
+              </div>
+              {/* Right: stats */}
+              <div className="grid grid-cols-3 gap-4">
+                {[
+                  { value: "100+", label: "Projects Completed" },
+                  { value: "10+", label: "Years in the Valley" },
+                  { value: "Same Day", label: "Response Time" },
+                ].map((stat, i) => (
+                  <div key={i} className="bg-black/40 border border-white/8 rounded-xl p-4 text-center">
+                    <p className="text-white font-bold text-2xl mb-1">{stat.value}</p>
+                    <p className="text-white/40 text-xs leading-snug">{stat.label}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* FAQ */}
+        <section className="py-16 sm:py-24 px-4 sm:px-6">
           <div className="max-w-3xl mx-auto">
             <div data-reveal className="text-center mb-12">
               <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">FAQ</p>
@@ -263,13 +308,13 @@ const Index = () => {
                     aria-expanded={openFaq === i}
                   >
                     <span className="text-white font-medium text-sm sm:text-base pr-4">{faq.q}</span>
-                    <ChevronDown className={`w-4 h-4 text-white/40 shrink-0 transition-transform duration-200 ${openFaq === i ? "rotate-180" : ""}`} />
+                    <ChevronDown className={`w-4 h-4 text-white/40 shrink-0 transition-transform duration-300 ${openFaq === i ? "rotate-180" : ""}`} />
                   </button>
-                  {openFaq === i && (
+                  <div className={`overflow-hidden transition-all duration-300 ease-in-out ${openFaq === i ? "max-h-96 opacity-100" : "max-h-0 opacity-0"}`}>
                     <div className="px-5 pb-5 pt-0">
                       <p className="text-white/50 text-sm leading-relaxed">{faq.a}</p>
                     </div>
-                  )}
+                  </div>
                 </div>
               ))}
             </div>

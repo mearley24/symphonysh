@@ -15,6 +15,8 @@ import Privacy from "./pages/Privacy";
 import Terms from "./pages/Terms";
 import Ava from "./pages/Ava";
 import Matterport from "./pages/Matterport";
+import Blog from "./pages/Blog";
+import BlogPost from "./pages/BlogPost";
 
 // Photo gallery pages
 import HomeTheater from "./pages/photos/HomeTheater";
@@ -70,6 +72,10 @@ function App() {
           <Route path="/terms" element={<Terms />} />
           <Route path="/ava" element={<Ava />} />
           <Route path="/matterport" element={<Matterport />} />
+
+          {/* Blog */}
+          <Route path="/blog" element={<Blog />} />
+          <Route path="/blog/:slug" element={<BlogPost />} />
 
           <Route path="/pre-wiring" element={<Navigate to="/services/prewire" replace />} />
           <Route path="/installation" element={<Navigate to="/install" replace />} />

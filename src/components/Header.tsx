@@ -1,10 +1,11 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Phone, Menu as MenuIcon, X } from "lucide-react";
+import { Phone, Menu as MenuIcon, X, Globe, Camera } from "lucide-react";
 
 const navLinks = [
   { label: "Services", path: "/services" },
   { label: "Our Work", path: "/projects" },
+  { label: "Blog", path: "/blog" },
   { label: "About", path: "/about" },
   { label: "Contact", path: "/contact" },
 ];
@@ -43,10 +44,10 @@ const Header = () => {
         }`}
       >
         <div className={`max-w-6xl mx-auto px-4 sm:px-6 transition-all duration-500 ${
-          scrolled ? 'pt-2 pb-1' : 'pt-5 pb-3'
+          scrolled ? "pt-2 pb-1" : "pt-5 pb-3"
         }`}>
           <div className={`flex items-center transition-all duration-500 ${
-            scrolled ? 'justify-between' : 'flex-col items-center'
+            scrolled ? "justify-between" : "flex-col items-center"
           }`}>
             {/* Logo */}
             <Link to="/" className="shrink-0 pointer-events-auto relative z-10">
@@ -54,33 +55,40 @@ const Header = () => {
                 src="/lovable-uploads/symphony-logo-transparent.webp"
                 alt="Symphony Smart Homes"
                 className={`w-auto transition-all duration-500 ${
-                  scrolled ? 'h-14 sm:h-16' : 'h-32 sm:h-40'
+                  scrolled ? "h-14 sm:h-16" : "h-32 sm:h-40"
                 }`}
               />
             </Link>
 
-            {/* Menu button — inline when scrolled */}
+            {/* Scrolled: Schedule CTA + Menu button */}
             {scrolled && (
-              <button
-                onClick={() => setMenuOpen(!menuOpen)}
-                className="pointer-events-auto inline-flex items-center gap-2 text-white/40 hover:text-white text-sm tracking-widest uppercase transition-colors px-[2px]"
-                aria-label="Toggle menu"
-              >
-                {menuOpen ? <X className="w-5 h-5" /> : <MenuIcon className="w-5 h-5" />}
-                <span>Menu</span>
-              </button>
+              <div className="flex items-center gap-3 pointer-events-auto">
+                <Link
+                  to="/scheduling"
+                  className="hidden sm:inline-flex items-center justify-center bg-accent hover:bg-accent/90 text-white text-sm font-medium px-4 py-2 rounded-lg transition-colors"
+                >
+                  Schedule
+                </Link>
+                <button
+                  onClick={() => setMenuOpen(!menuOpen)}
+                  className="inline-flex items-center gap-2 text-white/40 hover:text-white text-sm tracking-widest uppercase transition-colors px-[2px]"
+                  aria-label="Toggle menu"
+                >
+                  {menuOpen ? <X className="w-5 h-5" /> : <MenuIcon className="w-5 h-5" />}
+                  <span>Menu</span>
+                </button>
+              </div>
             )}
           </div>
         </div>
-
       </header>
 
-      {/* Menu button — below hero content when not scrolled */}
+      {/* Menu button — top-right corner when not scrolled */}
       {!scrolled && (
-        <div className="fixed left-0 right-0 top-[430px] sm:top-[490px] flex justify-center pointer-events-none z-50">
+        <div className="fixed top-4 right-4 z-50">
           <button
             onClick={() => setMenuOpen(!menuOpen)}
-            className="pointer-events-auto inline-flex items-center gap-2 text-white/40 hover:text-white text-sm tracking-widest uppercase transition-colors px-[2px]"
+            className="inline-flex items-center gap-2 bg-white/5 backdrop-blur-sm border border-white/10 rounded-full px-4 py-2 text-white/60 hover:text-white text-sm tracking-widest uppercase transition-colors"
             aria-label="Toggle menu"
           >
             {menuOpen ? <X className="w-5 h-5" /> : <MenuIcon className="w-5 h-5" />}
@@ -106,7 +114,7 @@ const Header = () => {
         }`}
       >
         <div className="absolute inset-0 bg-primary/98 backdrop-blur-2xl" />
-        
+
         <nav className="relative z-10 flex flex-col items-center justify-center min-h-screen px-6 py-20">
           {/* Main nav links */}
           <div className="space-y-2 text-center mb-10">
@@ -162,6 +170,28 @@ const Header = () => {
             >
               <Phone className="w-5 h-5" />
               (970) 519-3013
+            </a>
+          </div>
+
+          {/* Social links */}
+          <div className="flex items-center gap-6 mt-8 pt-6 border-t border-white/10">
+            <a
+              href="https://www.instagram.com/symphonysmarthomes"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 text-white/30 hover:text-white/60 text-sm transition-colors"
+            >
+              <Camera className="w-4 h-4" />
+              Instagram
+            </a>
+            <a
+              href="https://g.page/symphonysmarthomes"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 text-white/30 hover:text-white/60 text-sm transition-colors"
+            >
+              <Globe className="w-4 h-4" />
+              Google
             </a>
           </div>
         </nav>
