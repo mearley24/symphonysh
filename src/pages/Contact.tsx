@@ -5,6 +5,7 @@ import {
   BUSINESS_AREA_SERVED_PLACES, BUSINESS_HAS_MAP_URL, BUSINESS_SAME_AS,
 } from "../constants/businessSchema";
 import { useState } from "react";
+import { trackPhoneClick } from "../utils/tracking";
 import { Phone, Mail, MapPin, Clock, Send, ArrowLeft, ArrowRight } from "lucide-react";
 import { useToast } from "@/components/ui/use-toast";
 import Header from "../components/Header";
@@ -100,7 +101,7 @@ const Contact = () => {
               <div>
                 <h3 className="text-white font-semibold mb-4">Get in Touch</h3>
                 <div className="space-y-4">
-                  <a href="tel:+19705193013" className="flex items-start gap-3 text-white/60 hover:text-white transition-colors cursor-pointer">
+                  <a href="tel:+19705193013" onClick={trackPhoneClick} className="flex items-start gap-3 text-white/60 hover:text-white transition-colors cursor-pointer">
                     <Phone className="w-5 h-5 text-accent shrink-0 mt-0.5" />
                     <div>
                       <p className="text-white font-medium group-hover:text-white">(970) 519-3013</p>

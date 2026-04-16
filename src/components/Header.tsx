@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Phone, Menu as MenuIcon, X, Globe, Camera } from "lucide-react";
+import { trackPhoneClick } from "../utils/tracking";
 
 const navLinks = [
   { label: "Services", path: "/services" },
@@ -166,6 +167,7 @@ const Header = () => {
             </Link>
             <a
               href="tel:+19705193013"
+              onClick={trackPhoneClick}
               className="inline-flex items-center gap-2.5 text-white/50 hover:text-white/80 text-lg transition-colors"
             >
               <Phone className="w-5 h-5" />

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { format } from "date-fns";
 import { getServiceName } from "@/utils/appointments/types";
 import { ZAPIER_WEBHOOK_URL } from "@/constants/zapier";
+import { trackScheduleSubmit } from "@/utils/tracking";
 
 interface ZapierNotifierProps {
   appointmentDetails: {
@@ -71,6 +72,7 @@ export function ZapierNotifier({ appointmentDetails }: ZapierNotifierProps) {
         }).then(() => {
           console.log("Zapier webhook triggered with payload:", payload);
           setNotificationSent(true);
+          trackScheduleSubmit();
         });
       } catch (error) {
         console.error("Error triggering Zapier webhook:", error);

@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { ArrowRight, Phone, ArrowLeft, CheckCircle2, MapPin } from "lucide-react";
+import { trackPhoneClick } from "../utils/tracking";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import SEO from "../components/SEO";
@@ -105,7 +106,7 @@ const About = () => {
             <Link to="/scheduling" className="inline-flex items-center justify-center gap-2 bg-accent hover:bg-accent/90 text-white px-8 py-4 rounded-lg font-medium transition-colors text-base">
               Schedule a Consultation <ArrowRight className="w-4 h-4" />
             </Link>
-            <a href="tel:+19705193013" className="inline-flex items-center justify-center gap-2 border border-white/20 hover:border-white/40 hover:bg-white/5 text-white px-8 py-4 rounded-lg font-medium transition-colors text-base">
+            <a href="tel:+19705193013" onClick={trackPhoneClick} className="inline-flex items-center justify-center gap-2 border border-white/20 hover:border-white/40 hover:bg-white/5 text-white px-8 py-4 rounded-lg font-medium transition-colors text-base">
               <Phone className="w-4 h-4" /> Call Now
             </a>
           </div>

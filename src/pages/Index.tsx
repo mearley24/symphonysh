@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { Phone, ArrowRight, Cable, Home, Wrench, ScanLine, CheckCircle2, ChevronDown, MapPin } from "lucide-react";
 import { useState } from "react";
+import { trackPhoneClick } from "../utils/tracking";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import Testimonials from "../components/Testimonials";
@@ -141,6 +142,7 @@ const Index = () => {
               </Link>
               <a
                 href="tel:+19705193013"
+                onClick={trackPhoneClick}
                 className="inline-flex items-center justify-center gap-2 border border-white/20 hover:border-white/40 hover:bg-white/5 text-white px-7 py-4 rounded-lg font-medium transition-all text-base backdrop-blur-sm"
               >
                 <Phone className="w-4 h-4" />
@@ -339,6 +341,7 @@ const Index = () => {
               </Link>
               <a
                 href="tel:+19705193013"
+                onClick={trackPhoneClick}
                 className="inline-flex items-center justify-center gap-2 border border-white/20 hover:border-white/40 hover:bg-white/5 text-white px-7 py-4 rounded-lg font-medium transition-colors text-base"
               >
                 <Phone className="w-4 h-4" />

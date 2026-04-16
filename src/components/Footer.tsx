@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Phone, MapPin, Globe, Camera } from "lucide-react";
+import { trackPhoneClick } from "../utils/tracking";
 
 const Footer = () => {
   return (
@@ -20,6 +21,7 @@ const Footer = () => {
             </p>
             <a
               href="tel:+19705193013"
+              onClick={trackPhoneClick}
               className="inline-flex items-center gap-2 text-white/50 hover:text-white text-sm transition-colors"
             >
               <Phone className="w-3.5 h-3.5" /> (970) 519-3013

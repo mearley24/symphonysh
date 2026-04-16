@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Phone, Calendar } from "lucide-react";
+import { trackPhoneClick } from "../utils/tracking";
 
 const TEL = "tel:+19705193013";
 
@@ -36,6 +37,7 @@ const MobileClickToCall = () => {
         </Link>
         <a
           href={TEL}
+          onClick={trackPhoneClick}
           className="flex-1 inline-flex items-center justify-center gap-2 border border-white/20 hover:border-white/40 hover:bg-white/5 text-white font-medium text-sm rounded-lg min-h-[44px] transition-colors"
           aria-label="Call Symphony Smart Homes"
         >

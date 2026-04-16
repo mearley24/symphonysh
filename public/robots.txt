@@ -2,3 +2,6 @@ User-agent: *
 Allow: /
 
 Sitemap: https://symphonysh.com/sitemap.xml
+
+# After verifying in Google Search Console, submit the sitemap:
+# Go to: https://search.google.com/search-console > Sitemaps > Add "https://symphonysh.com/sitemap.xml"
