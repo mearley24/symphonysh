@@ -2,14 +2,6 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://symphonysh.com/</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>
   <url><loc>https://symphonysh.com/services</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
-  <url><loc>https://symphonysh.com/about</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://symphonysh.com/contact</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://symphonysh.com/projects</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://symphonysh.com/walkthrough</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://symphonysh.com/matterport</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://symphonysh.com/install</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://symphonysh.com/troubleshooting</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://symphonysh.com/scheduling</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://symphonysh.com/services/home-integration</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://symphonysh.com/services/audio-entertainment</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://symphonysh.com/services/smart-lighting</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
@@ -19,27 +11,16 @@
   <url><loc>https://symphonysh.com/services/security-systems</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://symphonysh.com/services/maintenance</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://symphonysh.com/services/prewire</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://symphonysh.com/photos/home-theater</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://symphonysh.com/photos/home-theater/featured</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
-  <url><loc>https://symphonysh.com/photos/home-theater/ev-theater</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
-  <url><loc>https://symphonysh.com/photos/home-theater/cordillera-media-room</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
-  <url><loc>https://symphonysh.com/photos/mounted-tvs</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://symphonysh.com/photos/mounted-tvs/bc-condo-fp</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
-  <url><loc>https://symphonysh.com/photos/mounted-tvs/backbox-fp</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
-  <url><loc>https://symphonysh.com/photos/mounted-tvs/fp-frame</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
-  <url><loc>https://symphonysh.com/photos/mounted-tvs/frame-sonos</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
-  <url><loc>https://symphonysh.com/photos/mounted-tvs/hp</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
-  <url><loc>https://symphonysh.com/photos/mounted-tvs/home</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
-  <url><loc>https://symphonysh.com/photos/mounted-tvs/mantel-mount</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
-  <url><loc>https://symphonysh.com/photos/mounted-tvs/misc</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
-  <url><loc>https://symphonysh.com/photos/mounted-tvs/singletree-fp</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
-  <url><loc>https://symphonysh.com/photos/mounted-tvs/west-vail-bb</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
-  <url><loc>https://symphonysh.com/photos/mounted-tvs/wood-media</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
-  <url><loc>https://symphonysh.com/photos/wiring</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://symphonysh.com/projects/eagle-vail-theater</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://symphonysh.com/projects/beaver-creek-condo</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://symphonysh.com/projects/cordillera-media-room</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://symphonysh.com/projects/west-vail-install</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://symphonysh.com/privacy</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
-  <url><loc>https://symphonysh.com/terms</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
+  <url><loc>https://symphonysh.com/projects</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://symphonysh.com/about</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://symphonysh.com/contact</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://symphonysh.com/scheduling</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://symphonysh.com/matterport</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://symphonysh.com/blog</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <!-- City pages -->
+  <url><loc>https://symphonysh.com/vail</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://symphonysh.com/beaver-creek</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://symphonysh.com/edwards</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://symphonysh.com/avon</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://symphonysh.com/eagle</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
 </urlset>

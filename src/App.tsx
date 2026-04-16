@@ -17,6 +17,7 @@ import Ava from "./pages/Ava";
 import Matterport from "./pages/Matterport";
 import Blog from "./pages/Blog";
 import BlogPost from "./pages/BlogPost";
+import CityPage from "./pages/CityPage";
 
 // Photo gallery pages
 import HomeTheater from "./pages/photos/HomeTheater";
@@ -125,6 +126,13 @@ function App() {
           <Route path="/scheduling" element={<Scheduling />} />
           <Route path="/scheduling/confirmation" element={<ConfirmationPage />} />
           
+          {/* City landing pages */}
+          <Route path="/vail" element={<CityPage />} />
+          <Route path="/beaver-creek" element={<CityPage />} />
+          <Route path="/edwards" element={<CityPage />} />
+          <Route path="/avon" element={<CityPage />} />
+          <Route path="/eagle" element={<CityPage />} />
+
           {/* 404 route should be the last one */}
           <Route path="*" element={<NotFound />} />
         </Routes>

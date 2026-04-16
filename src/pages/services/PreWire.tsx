@@ -147,6 +147,28 @@ const PreWire = () => (
       </div>
     </section>
 
+    {/* Related Services */}
+    <section className="py-16 sm:py-24 px-4 sm:px-6 bg-black/20 backdrop-blur-sm border-y border-white/5">
+      <div className="max-w-4xl mx-auto">
+        <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">Explore More</p>
+        <h2 className="text-2xl sm:text-3xl font-bold text-white mb-8">Related Services</h2>
+        <div className="grid sm:grid-cols-2 gap-5">
+          {[
+            { title: "Home Networking", description: "Pre-wire your network infrastructure at the same time — clean, organized Cat6 to every room.", path: "/services/networking" },
+            { title: "Audio & Entertainment", description: "Pre-wire your audio system while the walls are open — speaker wire, HDMI, and AV cabling done right.", path: "/services/audio-entertainment" },
+          ].map((s, i) => (
+            <Link key={i} to={s.path} className="group flex items-start justify-between gap-4 p-5 rounded-xl border border-white/8 bg-black/40 backdrop-blur-sm hover:border-accent/30 transition-colors">
+              <div>
+                <h3 className="text-white font-semibold mb-1 group-hover:text-accent transition-colors">{s.title}</h3>
+                <p className="text-white/50 text-sm leading-relaxed">{s.description}</p>
+              </div>
+              <ArrowRight className="w-4 h-4 text-white/20 group-hover:text-accent shrink-0 mt-1 transition-colors" />
+            </Link>
+          ))}
+        </div>
+      </div>
+    </section>
+
     {/* CTA */}
     <section className="py-16 sm:py-24 px-4 sm:px-6">
       <div className="max-w-4xl mx-auto text-center">

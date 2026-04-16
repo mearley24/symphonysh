@@ -1,6 +1,4 @@
 User-agent: *
 Allow: /
-Disallow: /scheduling/confirmation
-Disallow: /photos/wiring-manager
 
 Sitemap: https://symphonysh.com/sitemap.xml

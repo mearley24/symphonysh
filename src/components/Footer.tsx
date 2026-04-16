@@ -72,10 +72,19 @@ const Footer = () => {
           <div>
             <h4 className="text-white font-semibold text-sm mb-3">Service Areas</h4>
             <ul className="space-y-2">
-              {["Vail", "Beaver Creek", "Edwards", "Avon", "Eagle", "Minturn"].map((area) => (
-                <li key={area} className="flex items-center gap-1.5 text-white/40 text-sm">
-                  <MapPin className="w-3 h-3 text-accent/60" />
-                  {area}
+              {[
+                { name: "Vail", path: "/vail" },
+                { name: "Beaver Creek", path: "/beaver-creek" },
+                { name: "Edwards", path: "/edwards" },
+                { name: "Avon", path: "/avon" },
+                { name: "Eagle", path: "/eagle" },
+                { name: "Minturn", path: "/contact" },
+              ].map((area) => (
+                <li key={area.name}>
+                  <Link to={area.path} className="flex items-center gap-1.5 text-white/40 hover:text-white/70 text-sm transition-colors">
+                    <MapPin className="w-3 h-3 text-accent/60" />
+                    {area.name}
+                  </Link>
                 </li>
               ))}
             </ul>

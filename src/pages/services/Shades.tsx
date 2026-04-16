@@ -132,6 +132,27 @@ const Shades = () => {
         </div>
       </section>
 
+      <section className="py-16 sm:py-24 px-4 sm:px-6 bg-black/20 backdrop-blur-sm border-y border-white/5">
+        <div className="max-w-4xl mx-auto">
+          <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">Explore More</p>
+          <h2 className="text-2xl sm:text-3xl font-bold text-white mb-8">Related Services</h2>
+          <div className="grid sm:grid-cols-2 gap-5">
+            {[
+              { title: "Smart Lighting", description: "Lighting and shades that work together for perfect ambiance, privacy, and energy savings.", path: "/services/smart-lighting" },
+              { title: "Home Automation", description: "Shades integrated into your whole-home Control4 scenes — one tap sets everything right.", path: "/services/home-integration" },
+            ].map((s, i) => (
+              <Link key={i} to={s.path} className="group flex items-start justify-between gap-4 p-5 rounded-xl border border-white/8 bg-black/40 backdrop-blur-sm hover:border-accent/30 transition-colors">
+                <div>
+                  <h3 className="text-white font-semibold mb-1 group-hover:text-accent transition-colors">{s.title}</h3>
+                  <p className="text-white/50 text-sm leading-relaxed">{s.description}</p>
+                </div>
+                <ArrowRight className="w-4 h-4 text-white/20 group-hover:text-accent shrink-0 mt-1 transition-colors" />
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <section className="py-16 sm:py-24 px-4 sm:px-6">
         <div className="max-w-3xl mx-auto text-center">
           <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">Get Started</p>
