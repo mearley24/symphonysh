@@ -1,69 +1,113 @@
-# Welcome to your Lovable project
+# Symphony Smart Homes — Website
 
-## Project info
+Public marketing website for **Symphony Smart Homes**, a residential smart
+home integrator serving the Vail Valley and Eagle County, Colorado.
 
-**URL**: https://lovable.dev/projects/3878c065-e9da-4a6e-bfdb-371ba3159d6e
+- **Live site:** <https://symphonysh.com>
+- **Phone:** (970) 519-3013
+- **Service area:** Vail · Beaver Creek · Edwards · Avon · Eagle · Minturn
+- **Owner / sole developer:** Matt Earley
 
-## How can I edit this code?
+This repo is **revenue infrastructure** — treat pushes to `main` the way you'd
+treat deploys to a production storefront. Cloudflare Pages auto-deploys on
+every push.
 
-There are several ways of editing your application.
+---
 
-**Use Lovable**
+## Tech stack
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/3878c065-e9da-4a6e-bfdb-371ba3159d6e) and start prompting.
+| Layer | Technology |
+|---|---|
+| Framework | React 18 + TypeScript |
+| Build | Vite (SWC) |
+| Styling | Tailwind CSS + shadcn/ui primitives |
+| Fonts | Inter (body), Barlow Condensed (display) |
+| Hosting | Cloudflare Pages (auto-deploy on push to `main`) |
+| Backend helpers | Supabase Edge Function for contact email, Zapier webhook for scheduling |
 
-Changes made via Lovable will be committed automatically to this repo.
+See `CLAUDE.md` for the full design system and coding standards.
 
-**Use your preferred IDE**
+---
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+## Local development
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
-
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
+```bash
+npm install
+npm run dev        # http://localhost:5173
+npm run build      # Production build → ./dist
+npm run preview    # Serve the production build locally
 ```
 
-**Edit a file directly in GitHub**
+**Before pushing:** run `npm run build`. If it fails locally, Cloudflare
+Pages will fail too.
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+---
 
-**Use GitHub Codespaces**
+## Content integrity rules (hard)
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+- **No fabricated testimonials.** Real client quotes only, added to
+  `src/data/testimonials.ts`. The homepage `ClientTestimonials` component
+  auto-falls-back to a premium "What Working With Symphony Looks Like" proof
+  block when the array is empty — so the homepage stays strong without
+  inventing quotes.
+- **No stock / rendered / AI project images.** Every photo in
+  `src/data/projects.ts` points to a real install under
+  `public/lovable-uploads/`.
+- **No "coming soon" sections.** Hide unfinished content; don't publish
+  placeholders.
+- **No guessed `sameAs` URLs** in `src/constants/businessSchema.ts`. Wrong
+  profile links hurt search trust — empty is better than wrong.
 
-## What technologies are used for this project?
+---
 
-This project is built with .
+## Analytics & conversion tracking
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+`gtag.js` (GA4 + Google Ads) is loaded **lazily at runtime** via
+`src/utils/tracking.ts` and only when real IDs are present as Vite env vars in
+the Cloudflare Pages project. If those vars are unset, nothing is requested
+— no pageview 404s to `googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID`.
 
-## How can I deploy this project?
+See `GOOGLE_SETUP.md` for the full wire-up (GA4, Ads conversions, Search
+Console verification, `sameAs`).
 
-Simply open [Lovable](https://lovable.dev/projects/3878c065-e9da-4a6e-bfdb-371ba3159d6e) and click on Share -> Publish.
+---
 
-## I want to use a custom domain - is that possible?
+## Important files
 
-We don't support custom domains (yet). If you want to deploy your project under your own domain then we recommend using Netlify. Visit our docs for more details: [Custom domains](https://docs.lovable.dev/tips-tricks/custom-domain/)
+| Path | Purpose |
+|---|---|
+| `src/pages/Index.tsx` | Homepage |
+| `src/pages/Services.tsx` + `src/pages/services/*` | Services hub + 9 service pages |
+| `src/pages/Projects.tsx` + `src/pages/ProjectDetail.tsx` | Previous-work portfolio |
+| `src/pages/scheduling/` | Consultation booking flow |
+| `src/pages/Contact.tsx` | Contact page (form + "what happens next") |
+| `src/data/projects.ts` | Ordered portfolio — first 3 entries feature on homepage |
+| `src/data/testimonials.ts` | Real client quotes (empty until collected) |
+| `src/constants/businessSchema.ts` | LocalBusiness NAP + `sameAs` for JSON-LD |
+| `src/components/Header.tsx` / `Footer.tsx` | Shared nav + footer |
+| `src/components/SEO.tsx` | Per-page title / description / breadcrumbs |
+| `public/_redirects` | Cloudflare Pages SPA routing (`/* /index.html 200`) |
+| `public/sitemap.xml` | Indexed pages |
+| `SITE_STATUS.md` | Current launch-readiness snapshot + owner-input TODOs |
+
+---
+
+## Deploy / release
+
+- Push to `main`. Cloudflare Pages builds `vite build` and serves `dist/`.
+- Status after a pass is tracked in `SITE_STATUS.md`.
+- For non-trivial changes, run a quick visual pass against:
+  - Homepage
+  - `/projects`
+  - `/services`
+  - `/scheduling` → submit a test → `/scheduling/confirmation`
+  - Mobile viewport (375px) for hero, nav, sticky call bar.
+
+---
+
+## Commit conventions
+
+- Imperative mood, ≤72-char subject.
+- Git config on this machine: `Matt Earley <earleystream@gmail.com>`.
+- Push direct to `main` — no PRs, no branch protection; Matt is the sole
+  developer. If someone else ever contributes, revisit this.

@@ -1,57 +1,76 @@
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Symphony Smart Homes | Smart Home Integration | Vail Valley, CO</title>
-    <meta name="description" content="Professional smart home integration in Vail Valley & Eagle County. Pre-wire, installation, Control4, and AV systems. Call (970) 519-3013." />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#0a0a0a" />
+
+    <title>Smart Home Integration in Vail Valley | Symphony Smart Homes</title>
+    <meta name="description" content="Vail Valley's one-person smart home integrator. Pre-wire, Control4, audio, lighting, shades, and service in Vail, Beaver Creek, Edwards, Avon & Eagle. Call (970) 519-3013." />
     <meta name="author" content="Symphony Smart Homes" />
-    <meta name="robots" content="index, follow" />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+
     <link rel="canonical" href="https://symphonysh.com/" />
-    <meta property="og:title" content="Symphony Smart Homes | Smart Home Integration | Vail Valley, CO" />
-    <meta property="og:description" content="Professional smart home integration in Vail Valley & Eagle County. Pre-wire, installation, Control4, and AV systems." />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Smart Home Integration in Vail Valley | Symphony Smart Homes" />
+    <meta property="og:description" content="Vail Valley's one-person smart home integrator. Pre-wire, Control4, audio, lighting, shades, and service." />
     <meta property="og:image" content="https://symphonysh.com/og-image.png" />
+    <meta property="og:image:alt" content="Symphony Smart Homes — smart home integration in Vail Valley, Colorado" />
     <meta property="og:url" content="https://symphonysh.com/" />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Symphony Smart Homes" />
+    <meta property="og:locale" content="en_US" />
+
+    <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Symphony Smart Homes | Smart Home Integration | Vail Valley, CO" />
-    <meta name="twitter:description" content="Professional smart home integration in Vail Valley & Eagle County." />
+    <meta name="twitter:title" content="Smart Home Integration in Vail Valley | Symphony Smart Homes" />
+    <meta name="twitter:description" content="Vail Valley's one-person smart home integrator. Pre-wire, Control4, audio, lighting, shades, and service." />
     <meta name="twitter:image" content="https://symphonysh.com/og-image.png" />
+
+    <!-- Local / Geo hints -->
     <meta name="geo.region" content="US-CO" />
     <meta name="geo.placename" content="Vail Valley, Eagle County" />
-    <!-- Google Search Console Verification -->
-    <!-- SETUP: Replace VERIFICATION_CODE with your code from Search Console > Settings > Ownership verification > HTML tag -->
-    <meta name="google-site-verification" content="VERIFICATION_CODE" />
-    <!-- Google Analytics 4 + Google Ads Tracking -->
-    <!-- SETUP: Replace GA_MEASUREMENT_ID with your GA4 ID (G-XXXXXXXXXX) -->
-    <!-- SETUP: Replace ADS_CONVERSION_ID with your Google Ads ID (AW-XXXXXXXXXX) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'GA_MEASUREMENT_ID');
-      gtag('config', 'ADS_CONVERSION_ID');
-    </script>
-    <!-- Single Page App redirect script -->
+    <meta name="geo.position" content="39.6403;-106.3742" />
+    <meta name="ICBM" content="39.6403, -106.3742" />
+
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+
+    <!--
+      Analytics + Ads
+      ---------------
+      Google Tag (gtag.js) is loaded at runtime by /src/utils/tracking.ts
+      only when a real GA4/Ads ID is present in the environment. See
+      SITE_STATUS.md for how to wire in the real IDs. We intentionally do
+      NOT hard-code placeholder IDs like GA_MEASUREMENT_ID here — those
+      trigger a real 404 request to googletagmanager.com on every pageview
+      and degrade Core Web Vitals and trust.
+    -->
+
+    <!-- Google Search Console verification (replace when Matt claims the property) -->
+    <!-- <meta name="google-site-verification" content="YOUR_VERIFICATION_CODE_HERE" /> -->
+
+    <!-- Legacy SPA redirect for deep links (harmless; GitHub Pages relic) -->
     <script type="text/javascript">
-      // This script checks if a redirect is needed
-      (function(l) {
-        if (l.search[1] === '/' ) {
-          var decoded = l.search.slice(1).split('&').map(function(s) { 
-            return s.replace(/~and~/g, '&')
-          }).join('?');
-          window.history.replaceState(null, null,
-              l.pathname.slice(0, -1) + decoded + l.hash
-          );
+      (function (l) {
+        if (l.search[1] === '/') {
+          var decoded = l.search
+            .slice(1)
+            .split('&')
+            .map(function (s) {
+              return s.replace(/~and~/g, '&');
+            })
+            .join('?');
+          window.history.replaceState(null, null, l.pathname.slice(0, -1) + decoded + l.hash);
         }
-      }(window.location))
+      })(window.location);
     </script>
-    <!-- Global error handler -->
+
+    <!-- Silent onerror — prevents noisy runtime overlays on production -->
     <script type="text/javascript">
-      window.onerror = function() { return false; };
+      window.onerror = function () {
+        return false;
+      };
     </script>
   </head>
 

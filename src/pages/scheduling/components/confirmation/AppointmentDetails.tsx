@@ -18,8 +18,7 @@ export function AppointmentDetails({ appointmentDetails }: AppointmentDetailsPro
         month: "long",
         day: "numeric",
       });
-    } catch (error) {
-      console.error("Error formatting date:", error);
+    } catch {
       return "Invalid date";
     }
   };

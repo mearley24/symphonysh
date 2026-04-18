@@ -123,8 +123,8 @@ const Index = () => {
                 <h1 className="animate-fade-in text-5xl sm:text-6xl lg:text-7xl font-extrabold leading-[0.95] mb-6 text-white hero-text-shadow [animation-delay:100ms]">
                   We build smart homes that just work.
                 </h1>
-                <p className="animate-fade-in text-white/60 text-lg sm:text-xl leading-relaxed mb-10 max-w-lg mx-auto hero-subtext-shadow [animation-delay:200ms]">
-                  One team from pre-wire to programming — reliable technology for homeowners and builders across Eagle County.
+                <p className="animate-fade-in text-white/65 text-lg sm:text-xl leading-relaxed mb-10 max-w-xl mx-auto hero-subtext-shadow [animation-delay:200ms]">
+                  A one-person integrator with a trusted Eagle County crew. Pre-wire through programming — designed, installed, and supported by the same person you call.
                 </p>
               </div>
             </div>

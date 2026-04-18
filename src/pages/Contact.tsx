@@ -6,7 +6,10 @@ import {
 } from "../constants/businessSchema";
 import { useState } from "react";
 import { trackPhoneClick } from "../utils/tracking";
-import { Phone, Mail, MapPin, Clock, Send, ArrowLeft, ArrowRight } from "lucide-react";
+import {
+  Phone, Mail, MapPin, Clock, Send, ArrowLeft, ArrowRight,
+  MessageSquare, Calendar, ShieldCheck,
+} from "lucide-react";
 import { useToast } from "@/components/ui/use-toast";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
@@ -37,13 +40,20 @@ const Contact = () => {
 
       if (!response.ok) throw new Error("Failed to send message");
 
-      toast({ title: "Message Sent!", description: "We'll get back to you as soon as possible." });
+      toast({
+        title: "Message sent",
+        description: "We'll get back to you shortly. For anything urgent, call (970) 519-3013.",
+      });
       setName("");
       setEmail("");
       setMessage("");
-    } catch (error) {
-      console.error('Error sending message:', error);
-      toast({ title: "Error", description: "There was a problem sending your message. Please try again.", variant: "destructive" });
+    } catch {
+      toast({
+        title: "We couldn't send your message",
+        description:
+          "Please try again, or reach us directly at info@symphonysh.com or (970) 519-3013.",
+        variant: "destructive",
+      });
     } finally {
       setIsSubmitting(false);
     }
@@ -180,15 +190,67 @@ const Contact = () => {
         </div>
       </section>
 
-      {/* CTA */}
+      {/* What happens next — reduces hesitation before reaching out */}
       <section data-reveal className="py-16 sm:py-24 px-4 sm:px-6">
-        <div className="max-w-3xl mx-auto text-center">
-          <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">Schedule</p>
-          <h2 className="text-2xl sm:text-3xl font-bold text-white mb-4">Prefer to schedule a time?</h2>
-          <p className="text-white/50 text-base mb-8">Book a walkthrough or phone consultation at a time that works for you.</p>
-          <Link to="/scheduling" className="inline-flex items-center justify-center gap-2 bg-accent hover:bg-accent/90 text-white px-8 py-4 rounded-lg font-medium transition-colors text-base">
-            Schedule a Consultation <ArrowRight className="w-4 h-4" />
-          </Link>
+        <div className="max-w-4xl mx-auto">
+          <div className="text-center mb-12">
+            <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">
+              What Happens Next
+            </p>
+            <h2 className="text-2xl sm:text-3xl font-bold text-white mb-3">
+              No sales pitch — just a real conversation.
+            </h2>
+            <p className="text-white/50 text-sm sm:text-base max-w-2xl mx-auto">
+              You reach a real person, not a call center. Here's what the first few days usually
+              look like.
+            </p>
+          </div>
+
+          <div className="grid sm:grid-cols-3 gap-5">
+            {[
+              {
+                icon: MessageSquare,
+                title: "1. A quick reply",
+                description:
+                  "Matt reads every message. During business hours you'll usually hear back within a few hours.",
+              },
+              {
+                icon: Calendar,
+                title: "2. A walkthrough",
+                description:
+                  "Short phone call first, then a walkthrough of the property if it makes sense for your project.",
+              },
+              {
+                icon: ShieldCheck,
+                title: "3. A clear proposal",
+                description:
+                  "Itemized scope and pricing — nothing hidden, no pressure to decide on the spot.",
+              },
+            ].map((step, i) => (
+              <div
+                key={i}
+                className="rounded-xl border border-white/8 bg-black/40 backdrop-blur-sm p-5"
+              >
+                <div className="w-10 h-10 rounded-lg bg-accent/10 flex items-center justify-center mb-4">
+                  <step.icon className="w-5 h-5 text-accent" />
+                </div>
+                <h3 className="text-white font-semibold mb-1">{step.title}</h3>
+                <p className="text-white/55 text-sm leading-relaxed">{step.description}</p>
+              </div>
+            ))}
+          </div>
+
+          <div className="mt-10 text-center">
+            <p className="text-white/40 text-sm mb-4">
+              Prefer to lock in a time right now?
+            </p>
+            <Link
+              to="/scheduling"
+              className="inline-flex items-center justify-center gap-2 bg-accent hover:bg-accent/90 text-white px-7 py-4 rounded-lg font-medium transition-colors text-base"
+            >
+              Schedule a Consultation <ArrowRight className="w-4 h-4" />
+            </Link>
+          </div>
         </div>
       </section>
 

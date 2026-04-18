@@ -1,3 +1,16 @@
+/**
+ * Real project portfolio for Symphony Smart Homes.
+ *
+ * Ordering rule: strongest / most visually saleable projects first. The
+ * homepage "Featured Projects" component reads the first three entries and
+ * the /projects page respects this order for the default filter. Put the
+ * work you want Vail Valley homeowners and builders to see first at the top.
+ *
+ * Do not add speculative or stock projects — every entry must reference real
+ * photos under public/lovable-uploads/. If a project has only one or two
+ * weak photos, deprioritise it (don't fabricate).
+ */
+
 export interface Project {
   slug: string;
   name: string;
@@ -8,6 +21,7 @@ export interface Project {
   photos: string[];
   heroPhoto: string;
   systemsInstalled?: string[];
+  /** Real client quote or null. Never invent. */
   testimonial?: {
     quote: string;
     author: string;
@@ -16,13 +30,16 @@ export interface Project {
 }
 
 export const projects: Project[] = [
+  // ---- Lead projects (strongest on the homepage) --------------------------
   {
     slug: "eagle-vail-theater",
     name: "Eagle-Vail Home Theater",
     location: "Eagle-Vail, CO",
     categories: ["theater", "whole-home"],
-    scope: "Dedicated home theater build — acoustic treatment, projection, surround sound, Control4.",
-    description: "A dedicated theater room carved from an existing basement. Acoustic panels, a short-throw projector, 7.1 surround sound, and full Control4 integration for a one-button cinema experience. Lighting scenes dim automatically when you press Play.",
+    scope:
+      "Dedicated home theater build — acoustic treatment, projection, surround sound, Control4.",
+    description:
+      "A dedicated theater room carved from an existing basement. Acoustic panels, a short-throw projector, 7.1 surround sound, and full Control4 integration for a one-button cinema experience. Lighting scenes dim automatically when you press Play.",
     heroPhoto: "/lovable-uploads/home-theater/IMG_0979.JPG",
     photos: [
       "/lovable-uploads/home-theater/IMG_0920.JPG",
@@ -33,133 +50,24 @@ export const projects: Project[] = [
       "/lovable-uploads/home-theater/IMG_0981.JPG",
       "/lovable-uploads/home-theater/IMG_0982.JPG",
     ],
-    systemsInstalled: ["Surround Sound (7.1)", "Short-Throw Projection", "Acoustic Treatment", "Control4 Automation", "Lighting Scenes"],
-    testimonial: null,
-  },
-  {
-    slug: "cordillera-media-room",
-    name: "Cordillera Media Room",
-    location: "Cordillera, CO",
-    categories: ["theater"],
-    scope: "Media room with architectural speakers and automation.",
-    description: "A media room built for everyday use in a mountain residence. Clean sight lines, in-ceiling architectural speakers, and Control4 automation that disappears into the room. One keypad press switches between movie mode, music mode, and game mode.",
-    heroPhoto: "/lovable-uploads/home-theater/IMG_0958.JPG",
-    photos: ["/lovable-uploads/home-theater/IMG_0958.JPG"],
-    systemsInstalled: ["Architectural Speakers", "Control4 Automation", "Scene Control"],
-    testimonial: null,
-  },
-  {
-    slug: "beaver-creek-condo",
-    name: "Beaver Creek Ski Condo",
-    location: "Beaver Creek, CO",
-    categories: ["tv-mounting"],
-    scope: "Fireplace TV mount with fully concealed wiring in a ski condo.",
-    description: "A clean fireplace TV installation in a Beaver Creek ski condo. All wiring concealed behind the wall — no visible cables, no exposed conduit, no wall plates. Before-and-after photos tell the story.",
-    heroPhoto: "/lovable-uploads/mounted-tvs/bc-condo-fp/IMG_0677.JPG",
-    photos: [
-      "/lovable-uploads/mounted-tvs/bc-condo-fp/70551934893__F08E6641-B90D-4FE9-96CB-B6043C9EFBB7.jpg",
-      "/lovable-uploads/mounted-tvs/bc-condo-fp/70682259838__CA09AB38-91D5-434E-9D12-D8D3BEC77650.JPG",
-      "/lovable-uploads/mounted-tvs/bc-condo-fp/70682261617__B029C99B-C48B-4344-B91B-06B9B4921F7C.JPG",
-      "/lovable-uploads/mounted-tvs/bc-condo-fp/IMG_0610.JPG",
-      "/lovable-uploads/mounted-tvs/bc-condo-fp/IMG_0677.JPG",
-      "/lovable-uploads/mounted-tvs/bc-condo-fp/IMG_0678.JPG",
-      "/lovable-uploads/mounted-tvs/bc-condo-fp/IMG_0679.JPG",
+    systemsInstalled: [
+      "Surround Sound (7.1)",
+      "Short-Throw Projection",
+      "Acoustic Treatment",
+      "Control4 Automation",
+      "Lighting Scenes",
     ],
-    systemsInstalled: ["TV Mounting", "Concealed Wiring", "Cable Management"],
-    testimonial: null,
-  },
-  {
-    slug: "west-vail-residence",
-    name: "West Vail Residence",
-    location: "West Vail, CO",
-    categories: ["tv-mounting"],
-    scope: "Multiple TV installations with structured wiring.",
-    description: "Multiple TV installations across a West Vail home with clean cable management and structured wiring behind every wall. Backbox pre-install for future-proof mounting.",
-    heroPhoto: "/lovable-uploads/mounted-tvs/west-vail-bb/IMG_1718.JPG",
-    photos: [
-      "/lovable-uploads/mounted-tvs/west-vail-bb/IMG_1717.JPG",
-      "/lovable-uploads/mounted-tvs/west-vail-bb/IMG_1718.JPG",
-    ],
-    systemsInstalled: ["TV Mounting", "Backbox Install", "Structured Wiring"],
-    testimonial: null,
-  },
-  {
-    slug: "backbox-fireplace",
-    name: "Backbox Fireplace Mount",
-    location: "Eagle County, CO",
-    categories: ["tv-mounting"],
-    scope: "Pre-construction backbox install for a flush fireplace TV mount.",
-    description: "A pre-construction backbox installation above a fireplace — the TV sits perfectly flush against stone with zero gap. All power, HDMI, and network cabling routed through the backbox before drywall went up. This is how it's supposed to be done.",
-    heroPhoto: "/lovable-uploads/mounted-tvs/backbox-fp/IMG_0027.JPG",
-    photos: [
-      "/lovable-uploads/mounted-tvs/backbox-fp/IMG_0024.JPG",
-      "/lovable-uploads/mounted-tvs/backbox-fp/IMG_0025.JPG",
-      "/lovable-uploads/mounted-tvs/backbox-fp/IMG_0026.JPG",
-      "/lovable-uploads/mounted-tvs/backbox-fp/IMG_0027.JPG",
-      "/lovable-uploads/mounted-tvs/backbox-fp/IMG_0028.JPG",
-      "/lovable-uploads/mounted-tvs/backbox-fp/IMG_0029.JPG",
-    ],
-    systemsInstalled: ["Backbox Pre-Install", "Flush TV Mount", "In-Wall Wiring"],
-    testimonial: null,
-  },
-  {
-    slug: "fireplace-frame-tv",
-    name: "Fireplace Frame TV",
-    location: "Vail Valley, CO",
-    categories: ["frame-tv", "tv-mounting"],
-    scope: "Samsung Frame TV over fireplace — art mode integration.",
-    description: "A Samsung Frame TV mounted above a fireplace mantel. When the TV is off, it displays curated artwork that blends into the room. One-Connect box hidden in a nearby closet with a single thin cable running to the display. No visible tech.",
-    heroPhoto: "/lovable-uploads/mounted-tvs/fp-frame/IMG_2191.JPG",
-    photos: [
-      "/lovable-uploads/mounted-tvs/fp-frame/IMG_2189.JPG",
-      "/lovable-uploads/mounted-tvs/fp-frame/IMG_2190.JPG",
-      "/lovable-uploads/mounted-tvs/fp-frame/IMG_2191.JPG",
-    ],
-    systemsInstalled: ["Samsung Frame TV", "Art Mode", "One-Connect Box", "Concealed Wiring"],
-    testimonial: null,
-  },
-  {
-    slug: "frame-sonos-combo",
-    name: "Frame TV + Sonos",
-    location: "Edwards, CO",
-    categories: ["frame-tv", "tv-mounting"],
-    scope: "Samsung Frame TV paired with Sonos soundbar — clean wall mount.",
-    description: "Samsung Frame TV paired with a Sonos soundbar for a clean, minimal wall-mounted entertainment setup. Both devices mounted flush with concealed wiring. ARC handles audio handoff automatically.",
-    heroPhoto: "/lovable-uploads/mounted-tvs/frame-sonos/IMG_0030.JPG",
-    photos: [
-      "/lovable-uploads/mounted-tvs/frame-sonos/IMG_0022.JPG",
-      "/lovable-uploads/mounted-tvs/frame-sonos/IMG_0023.JPG",
-      "/lovable-uploads/mounted-tvs/frame-sonos/IMG_0030.JPG",
-    ],
-    systemsInstalled: ["Samsung Frame TV", "Sonos Soundbar", "eARC Audio", "Concealed Wiring"],
-    testimonial: null,
-  },
-  {
-    slug: "hp-multi-room",
-    name: "Highland Park Installation",
-    location: "Eagle County, CO",
-    categories: ["tv-mounting", "whole-home"],
-    scope: "Multi-room TV installation with centralized wiring.",
-    description: "A multi-room installation covering living spaces and bedrooms. Every TV fed from a centralized wiring closet with clean cable management. Consistent mounting height and trim throughout.",
-    heroPhoto: "/lovable-uploads/mounted-tvs/HP/IMG_0182.JPG",
-    photos: [
-      "/lovable-uploads/mounted-tvs/HP/IMG_0179.JPG",
-      "/lovable-uploads/mounted-tvs/HP/IMG_0180.JPG",
-      "/lovable-uploads/mounted-tvs/HP/IMG_0181.JPG",
-      "/lovable-uploads/mounted-tvs/HP/IMG_0182.JPG",
-      "/lovable-uploads/mounted-tvs/HP/IMG_0959.JPG",
-      "/lovable-uploads/mounted-tvs/HP/IMG_0993.JPG",
-    ],
-    systemsInstalled: ["Multi-Room TV", "Centralized Wiring", "Cable Management"],
     testimonial: null,
   },
   {
     slug: "full-home-install",
-    name: "Full Home AV Install",
+    name: "Full-Home AV Install",
     location: "Vail Valley, CO",
     categories: ["whole-home", "tv-mounting"],
-    scope: "11-point residential install — every room wired and mounted.",
-    description: "A comprehensive residential AV installation with TVs in every major room. From the great room to the guest bedrooms, each display was mounted to the same standard — concealed wiring, proper blocking behind drywall, and clean low-voltage plates.",
+    scope:
+      "Eleven displays, centralized rack, consistent mounting standard throughout the home.",
+    description:
+      "A comprehensive residential AV installation with TVs in every major room. From the great room to the guest bedrooms, each display was mounted to the same standard — concealed wiring, proper blocking behind drywall, and clean low-voltage plates. One rack feeds the entire house.",
     heroPhoto: "/lovable-uploads/mounted-tvs/Home/IMG_0665.JPG",
     photos: [
       "/lovable-uploads/mounted-tvs/Home/71355776563__D3C0B111-3E4E-4B32-A4BB-7B60F151C39A.JPG",
@@ -174,68 +82,46 @@ export const projects: Project[] = [
       "/lovable-uploads/mounted-tvs/Home/IMG_0668.JPG",
       "/lovable-uploads/mounted-tvs/Home/IMG_0669.JPG",
     ],
-    systemsInstalled: ["Multi-Room TV (11 displays)", "Concealed Wiring", "Drywall Blocking", "Low-Voltage Plates"],
-    testimonial: null,
-  },
-  {
-    slug: "mantel-mount-install",
-    name: "MantelMount Pull-Down",
-    location: "Avon, CO",
-    categories: ["mantel-mount", "tv-mounting"],
-    scope: "MantelMount pull-down bracket for a high fireplace TV.",
-    description: "A MantelMount pull-down bracket that lets the homeowner lower the TV from above the fireplace to eye level for comfortable viewing. When pushed back up, the TV sits flush above the mantel. Heat shield installed to protect the display.",
-    heroPhoto: "/lovable-uploads/mounted-tvs/mantel-mount/IMG_1090.JPG",
-    photos: [
-      "/lovable-uploads/mounted-tvs/mantel-mount/70311390744__4AD111C8-188E-494E-84A7-03CB45F8EB0E.JPG",
-      "/lovable-uploads/mounted-tvs/mantel-mount/IMG_1090.JPG",
-      "/lovable-uploads/mounted-tvs/mantel-mount/IMG_1091.JPG",
-      "/lovable-uploads/mounted-tvs/mantel-mount/IMG_1092.JPG",
-      "/lovable-uploads/mounted-tvs/mantel-mount/IMG_1093.JPG",
-      "/lovable-uploads/mounted-tvs/mantel-mount/IMG_1519.JPG",
+    systemsInstalled: [
+      "Multi-Room TV (11 displays)",
+      "Concealed Wiring",
+      "Drywall Blocking",
+      "Low-Voltage Plates",
     ],
-    systemsInstalled: ["MantelMount MM540", "Heat Shield", "Concealed Wiring"],
     testimonial: null,
   },
   {
-    slug: "singletree-fireplace",
-    name: "Singletree Fireplace Mount",
-    location: "Singletree, CO",
-    categories: ["tv-mounting"],
-    scope: "Fireplace TV mount in Singletree — stone surround, concealed wiring.",
-    description: "TV mounted above a stone fireplace surround in a Singletree home. In-wall conduit was run behind stone to keep everything clean. Before-and-after shots show the process from rough-in to finished product.",
-    heroPhoto: "/lovable-uploads/mounted-tvs/singletree-fp/IMG_1185.JPG",
-    photos: [
-      "/lovable-uploads/mounted-tvs/singletree-fp/71933685675__F16DF3ED-FB5F-4C31-9CC8-BD0646AB5261.JPG",
-      "/lovable-uploads/mounted-tvs/singletree-fp/71934395331__485C1403-1DFC-4709-B065-646D9517109C.JPG",
-      "/lovable-uploads/mounted-tvs/singletree-fp/71934400537__62DC73D0-4A52-4166-8D67-EA8E25C0E2EB.JPG",
-      "/lovable-uploads/mounted-tvs/singletree-fp/IMG_1185.JPG",
-    ],
-    systemsInstalled: ["TV Mounting", "Stone Conduit Run", "Concealed Wiring"],
-    testimonial: null,
-  },
-  {
-    slug: "wood-media-wall",
-    name: "Wood Media Wall",
+    slug: "backbox-fireplace",
+    name: "Backbox Fireplace Mount",
     location: "Eagle County, CO",
     categories: ["tv-mounting"],
-    scope: "Custom wood media wall with built-in cable management.",
-    description: "A TV installation on a custom wood accent wall with built-in cable management channels. The media wall was designed to hide all components while keeping a warm, modern aesthetic.",
-    heroPhoto: "/lovable-uploads/mounted-tvs/wood-media/IMG_0510.JPG",
+    scope:
+      "Pre-construction backbox install for a flush fireplace TV mount — zero visible cable, zero gap.",
+    description:
+      "A pre-construction backbox installation above a fireplace — the TV sits perfectly flush against stone with zero gap. All power, HDMI, and network cabling routed through the backbox before drywall went up. This is how it's supposed to be done.",
+    heroPhoto: "/lovable-uploads/mounted-tvs/backbox-fp/IMG_0027.JPG",
     photos: [
-      "/lovable-uploads/mounted-tvs/wood-media/IMG_0340.JPG",
-      "/lovable-uploads/mounted-tvs/wood-media/IMG_0510.JPG",
-      "/lovable-uploads/mounted-tvs/wood-media/IMG_0511.JPG",
+      "/lovable-uploads/mounted-tvs/backbox-fp/IMG_0024.JPG",
+      "/lovable-uploads/mounted-tvs/backbox-fp/IMG_0025.JPG",
+      "/lovable-uploads/mounted-tvs/backbox-fp/IMG_0026.JPG",
+      "/lovable-uploads/mounted-tvs/backbox-fp/IMG_0027.JPG",
+      "/lovable-uploads/mounted-tvs/backbox-fp/IMG_0028.JPG",
+      "/lovable-uploads/mounted-tvs/backbox-fp/IMG_0029.JPG",
     ],
-    systemsInstalled: ["TV Mounting", "Wood Accent Wall", "Built-In Cable Management"],
+    systemsInstalled: ["Backbox Pre-Install", "Flush TV Mount", "In-Wall Wiring"],
     testimonial: null,
   },
+
+  // ---- Strong secondary proof --------------------------------------------
   {
     slug: "structured-wiring-showcase",
     name: "Structured Wiring — Behind the Scenes",
     location: "Vail Valley, CO",
     categories: ["wiring", "networking"],
-    scope: "Rack wiring, cable management, and structured cabling across multiple jobs.",
-    description: "A showcase of structured wiring and rack builds across multiple projects. Clean cable runs, labeled terminations, proper rack organization, and cable management that makes future service visits simple. This is the work that happens behind the walls.",
+    scope:
+      "Rack builds, labeled cable runs, and structured cabling across multiple Vail Valley jobs.",
+    description:
+      "A showcase of structured wiring and rack builds across multiple projects. Clean cable runs, labeled terminations, proper rack organization, and cable management that makes future service visits simple. This is the work that happens behind the walls — and the reason your system stays serviceable for years.",
     heroPhoto: "/lovable-uploads/wiring/IMG_1138.JPG",
     photos: [
       "/lovable-uploads/wiring/IMG_1138.JPG",
@@ -255,16 +141,188 @@ export const projects: Project[] = [
       "/lovable-uploads/wiring/IMG_1733.JPG",
       "/lovable-uploads/wiring/IMG_1161.JPG",
     ],
-    systemsInstalled: ["Cat6 Structured Cabling", "Rack Builds", "Cable Labeling", "Patch Panel Termination"],
+    systemsInstalled: [
+      "Cat6 Structured Cabling",
+      "Rack Builds",
+      "Cable Labeling",
+      "Patch Panel Termination",
+    ],
+    testimonial: null,
+  },
+  {
+    slug: "fireplace-frame-tv",
+    name: "Samsung Frame Over Fireplace",
+    location: "Vail Valley, CO",
+    categories: ["frame-tv", "tv-mounting"],
+    scope: "Samsung Frame TV mounted over a fireplace mantel — art mode, zero visible tech.",
+    description:
+      "A Samsung Frame TV mounted above a fireplace mantel. When the TV is off, it displays curated artwork that blends into the room. One-Connect box hidden in a nearby closet with a single thin cable running to the display.",
+    heroPhoto: "/lovable-uploads/mounted-tvs/fp-frame/IMG_2191.JPG",
+    photos: [
+      "/lovable-uploads/mounted-tvs/fp-frame/IMG_2189.JPG",
+      "/lovable-uploads/mounted-tvs/fp-frame/IMG_2190.JPG",
+      "/lovable-uploads/mounted-tvs/fp-frame/IMG_2191.JPG",
+    ],
+    systemsInstalled: [
+      "Samsung Frame TV",
+      "Art Mode",
+      "One-Connect Box",
+      "Concealed Wiring",
+    ],
+    testimonial: null,
+  },
+  {
+    slug: "beaver-creek-condo",
+    name: "Beaver Creek Ski Condo",
+    location: "Beaver Creek, CO",
+    categories: ["tv-mounting"],
+    scope: "Fireplace TV mount with fully concealed wiring in a ski condo.",
+    description:
+      "A clean fireplace TV installation in a Beaver Creek ski condo. All wiring concealed behind the wall — no visible cables, no exposed conduit, no wall plates. Before-and-after photos tell the story.",
+    heroPhoto: "/lovable-uploads/mounted-tvs/bc-condo-fp/IMG_0677.JPG",
+    photos: [
+      "/lovable-uploads/mounted-tvs/bc-condo-fp/70551934893__F08E6641-B90D-4FE9-96CB-B6043C9EFBB7.jpg",
+      "/lovable-uploads/mounted-tvs/bc-condo-fp/70682259838__CA09AB38-91D5-434E-9D12-D8D3BEC77650.JPG",
+      "/lovable-uploads/mounted-tvs/bc-condo-fp/70682261617__B029C99B-C48B-4344-B91B-06B9B4921F7C.JPG",
+      "/lovable-uploads/mounted-tvs/bc-condo-fp/IMG_0610.JPG",
+      "/lovable-uploads/mounted-tvs/bc-condo-fp/IMG_0677.JPG",
+      "/lovable-uploads/mounted-tvs/bc-condo-fp/IMG_0678.JPG",
+      "/lovable-uploads/mounted-tvs/bc-condo-fp/IMG_0679.JPG",
+    ],
+    systemsInstalled: ["TV Mounting", "Concealed Wiring", "Cable Management"],
+    testimonial: null,
+  },
+  {
+    slug: "mantel-mount-install",
+    name: "MantelMount Pull-Down",
+    location: "Avon, CO",
+    categories: ["mantel-mount", "tv-mounting"],
+    scope: "MantelMount pull-down bracket for a high fireplace TV — eye-level viewing on demand.",
+    description:
+      "A MantelMount pull-down bracket that lets the homeowner lower the TV from above the fireplace to eye level for comfortable viewing. When pushed back up, the TV sits flush above the mantel. Heat shield installed to protect the display.",
+    heroPhoto: "/lovable-uploads/mounted-tvs/mantel-mount/IMG_1090.JPG",
+    photos: [
+      "/lovable-uploads/mounted-tvs/mantel-mount/70311390744__4AD111C8-188E-494E-84A7-03CB45F8EB0E.JPG",
+      "/lovable-uploads/mounted-tvs/mantel-mount/IMG_1090.JPG",
+      "/lovable-uploads/mounted-tvs/mantel-mount/IMG_1091.JPG",
+      "/lovable-uploads/mounted-tvs/mantel-mount/IMG_1092.JPG",
+      "/lovable-uploads/mounted-tvs/mantel-mount/IMG_1093.JPG",
+      "/lovable-uploads/mounted-tvs/mantel-mount/IMG_1519.JPG",
+    ],
+    systemsInstalled: ["MantelMount MM540", "Heat Shield", "Concealed Wiring"],
+    testimonial: null,
+  },
+  {
+    slug: "hp-multi-room",
+    name: "Highland Park Multi-Room",
+    location: "Eagle County, CO",
+    categories: ["tv-mounting", "whole-home"],
+    scope: "Multi-room TV installation with centralized wiring and consistent trim.",
+    description:
+      "A multi-room installation covering living spaces and bedrooms. Every TV fed from a centralized wiring closet with clean cable management. Consistent mounting height and trim throughout.",
+    heroPhoto: "/lovable-uploads/mounted-tvs/HP/IMG_0182.JPG",
+    photos: [
+      "/lovable-uploads/mounted-tvs/HP/IMG_0179.JPG",
+      "/lovable-uploads/mounted-tvs/HP/IMG_0180.JPG",
+      "/lovable-uploads/mounted-tvs/HP/IMG_0181.JPG",
+      "/lovable-uploads/mounted-tvs/HP/IMG_0182.JPG",
+      "/lovable-uploads/mounted-tvs/HP/IMG_0959.JPG",
+      "/lovable-uploads/mounted-tvs/HP/IMG_0993.JPG",
+    ],
+    systemsInstalled: ["Multi-Room TV", "Centralized Wiring", "Cable Management"],
+    testimonial: null,
+  },
+
+  // ---- Supporting work ----------------------------------------------------
+  {
+    slug: "frame-sonos-combo",
+    name: "Frame TV + Sonos",
+    location: "Edwards, CO",
+    categories: ["frame-tv", "tv-mounting"],
+    scope: "Samsung Frame TV paired with a Sonos soundbar — clean wall mount.",
+    description:
+      "Samsung Frame TV paired with a Sonos soundbar for a clean, minimal wall-mounted entertainment setup. Both devices mounted flush with concealed wiring. ARC handles audio handoff automatically.",
+    heroPhoto: "/lovable-uploads/mounted-tvs/frame-sonos/IMG_0030.JPG",
+    photos: [
+      "/lovable-uploads/mounted-tvs/frame-sonos/IMG_0022.JPG",
+      "/lovable-uploads/mounted-tvs/frame-sonos/IMG_0023.JPG",
+      "/lovable-uploads/mounted-tvs/frame-sonos/IMG_0030.JPG",
+    ],
+    systemsInstalled: ["Samsung Frame TV", "Sonos Soundbar", "eARC Audio", "Concealed Wiring"],
+    testimonial: null,
+  },
+  {
+    slug: "wood-media-wall",
+    name: "Custom Wood Media Wall",
+    location: "Eagle County, CO",
+    categories: ["tv-mounting"],
+    scope: "Custom wood media wall with built-in cable management.",
+    description:
+      "A TV installation on a custom wood accent wall with built-in cable management channels. The media wall was designed to hide all components while keeping a warm, modern aesthetic.",
+    heroPhoto: "/lovable-uploads/mounted-tvs/wood-media/IMG_0510.JPG",
+    photos: [
+      "/lovable-uploads/mounted-tvs/wood-media/IMG_0340.JPG",
+      "/lovable-uploads/mounted-tvs/wood-media/IMG_0510.JPG",
+      "/lovable-uploads/mounted-tvs/wood-media/IMG_0511.JPG",
+    ],
+    systemsInstalled: ["TV Mounting", "Wood Accent Wall", "Built-In Cable Management"],
+    testimonial: null,
+  },
+  {
+    slug: "singletree-fireplace",
+    name: "Singletree Fireplace Mount",
+    location: "Singletree, CO",
+    categories: ["tv-mounting"],
+    scope: "Fireplace TV mount in Singletree — stone surround, concealed wiring.",
+    description:
+      "TV mounted above a stone fireplace surround in a Singletree home. In-wall conduit was run behind stone to keep everything clean. Before-and-after shots show the process from rough-in to finished product.",
+    heroPhoto: "/lovable-uploads/mounted-tvs/singletree-fp/IMG_1185.JPG",
+    photos: [
+      "/lovable-uploads/mounted-tvs/singletree-fp/71933685675__F16DF3ED-FB5F-4C31-9CC8-BD0646AB5261.JPG",
+      "/lovable-uploads/mounted-tvs/singletree-fp/71934395331__485C1403-1DFC-4709-B065-646D9517109C.JPG",
+      "/lovable-uploads/mounted-tvs/singletree-fp/71934400537__62DC73D0-4A52-4166-8D67-EA8E25C0E2EB.JPG",
+      "/lovable-uploads/mounted-tvs/singletree-fp/IMG_1185.JPG",
+    ],
+    systemsInstalled: ["TV Mounting", "Stone Conduit Run", "Concealed Wiring"],
+    testimonial: null,
+  },
+  {
+    slug: "west-vail-residence",
+    name: "West Vail Residence",
+    location: "West Vail, CO",
+    categories: ["tv-mounting"],
+    scope: "Multiple TV installations with structured wiring and backbox pre-install.",
+    description:
+      "Multiple TV installations across a West Vail home with clean cable management and structured wiring behind every wall. Backbox pre-install for future-proof mounting.",
+    heroPhoto: "/lovable-uploads/mounted-tvs/west-vail-bb/IMG_1718.JPG",
+    photos: [
+      "/lovable-uploads/mounted-tvs/west-vail-bb/IMG_1717.JPG",
+      "/lovable-uploads/mounted-tvs/west-vail-bb/IMG_1718.JPG",
+    ],
+    systemsInstalled: ["TV Mounting", "Backbox Install", "Structured Wiring"],
+    testimonial: null,
+  },
+  {
+    slug: "cordillera-media-room",
+    name: "Cordillera Media Room",
+    location: "Cordillera, CO",
+    categories: ["theater"],
+    scope: "Media room with architectural speakers and automation.",
+    description:
+      "A media room built for everyday use in a mountain residence. Clean sight lines, in-ceiling architectural speakers, and Control4 automation that disappears into the room. One keypad press switches between movie mode, music mode, and game mode.",
+    heroPhoto: "/lovable-uploads/home-theater/IMG_0958.JPG",
+    photos: ["/lovable-uploads/home-theater/IMG_0958.JPG"],
+    systemsInstalled: ["Architectural Speakers", "Control4 Automation", "Scene Control"],
     testimonial: null,
   },
   {
     slug: "featured-theater-install",
-    name: "Featured Theater Install",
+    name: "Theater-Style Install",
     location: "Vail Valley, CO",
     categories: ["theater"],
     scope: "Clean theater-style installation with in-wall speakers.",
-    description: "A theater-grade AV installation with in-wall speakers and a projector setup designed for a dedicated viewing room. Equipment hidden from sight, control via a single remote.",
+    description:
+      "A theater-grade AV installation with in-wall speakers and a projector setup designed for a dedicated viewing room. Equipment hidden from sight, control via a single remote.",
     heroPhoto: "/lovable-uploads/home-theater/IMG_0509.JPG",
     photos: [
       "/lovable-uploads/home-theater/IMG_0509.JPG",
@@ -279,7 +337,8 @@ export const projects: Project[] = [
     location: "Eagle County, CO",
     categories: ["tv-mounting", "whole-home"],
     scope: "A collection of TV mounting and AV installations across the Vail Valley.",
-    description: "A collection of installations across Eagle County — living rooms, bedrooms, outdoor patios, and commercial spaces. Every job gets the same attention to detail: concealed wiring, proper mounting hardware, and clean finishing.",
+    description:
+      "A collection of installations across Eagle County — living rooms, bedrooms, outdoor patios, and commercial spaces. Every job gets the same attention to detail: concealed wiring, proper mounting hardware, and clean finishing.",
     heroPhoto: "/lovable-uploads/mounted-tvs/Misc/IMG_0224.JPG",
     photos: [
       "/lovable-uploads/mounted-tvs/Misc/IMG_0224.JPG",

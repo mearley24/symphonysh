@@ -14,8 +14,15 @@ const Testimonials = () => {
     <section className="py-16 sm:py-24 px-4 sm:px-6 bg-black/15 backdrop-blur-sm border-y border-white/5">
       <div className="max-w-5xl mx-auto">
         <div data-reveal className="text-center mb-12">
-          <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">Recent Work</p>
-          <h2 className="text-2xl sm:text-3xl font-bold text-white">Featured Projects</h2>
+          <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">
+            Recent Work
+          </p>
+          <h2 className="text-2xl sm:text-3xl font-bold text-white">
+            Real installs from real Vail Valley homes
+          </h2>
+          <p className="text-white/50 text-sm sm:text-base max-w-2xl mx-auto mt-3">
+            Every photo is a project we delivered. No stock imagery, no rendered mockups.
+          </p>
         </div>
 
         <div data-reveal-children className="grid grid-cols-1 md:grid-cols-3 gap-5">

@@ -1,26 +1,29 @@
-
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import { BrowserRouter } from 'react-router-dom';
+import { HelmetProvider } from 'react-helmet-async';
 import App from './App';
 import './index.css';
-import { HelmetProvider } from 'react-helmet-async';
-import { BrowserRouter } from 'react-router-dom';
+import { initAnalytics } from './utils/tracking';
 
-// Error boundary for unhandled errors
-const handleError = (error: Error) => {
-  console.error("Root level error caught:", error);
-};
+// Initialize GA4 / Google Ads only when real IDs are configured via Vite env
+// vars. See src/utils/tracking.ts — this is a no-op until Matt wires in the
+// real measurement IDs in Cloudflare Pages, so we never make 404'd requests
+// to a literal "GA_MEASUREMENT_ID" string.
+initAnalytics();
 
-// Set up global error handler
-window.addEventListener('error', (event) => {
-  console.error("Global error event:", event.error);
-});
+// Quiet production-only handlers. During development we still want console
+// errors surfaced by React/Vite; in production we just prevent runtime
+// overlays from white-screening the site.
+if (import.meta.env.PROD) {
+  window.addEventListener('error', (event) => {
+    event.preventDefault();
+  });
+  window.addEventListener('unhandledrejection', (event) => {
+    event.preventDefault();
+  });
+}
 
-window.addEventListener('unhandledrejection', (event) => {
-  console.error("Unhandled Promise rejection:", event.reason);
-});
-
-// Wrap the render in a try-catch to prevent complete failure
 try {
   ReactDOM.createRoot(document.getElementById('root')!).render(
     <React.StrictMode>
@@ -29,19 +32,23 @@ try {
           <App />
         </HelmetProvider>
       </BrowserRouter>
-    </React.StrictMode>
+    </React.StrictMode>,
   );
 } catch (error) {
-  console.error("Failed to render application:", error);
-  // Render a minimal fallback UI
+  // Last-resort fallback — if React itself can't boot, show a clean message
+  // rather than a blank page. Deliberately no console.error in production.
   const rootElement = document.getElementById('root');
   if (rootElement) {
     rootElement.innerHTML = `
-      <div style="padding: 20px; text-align: center;">
-        <h1>Application Error</h1>
-        <p>We're sorry, but the application failed to load.</p>
-        <p>Please try refreshing the page.</p>
+      <div style="padding:40px;text-align:center;font-family:system-ui,sans-serif;color:#fff;background:#0a0a0a;min-height:100vh;">
+        <h1 style="color:#ca9f5c;">Symphony Smart Homes</h1>
+        <p>We're having a temporary issue loading the site.</p>
+        <p>Please refresh the page, or call us at <a href="tel:+19705193013" style="color:#ca9f5c;">(970) 519-3013</a>.</p>
       </div>
     `;
+  }
+  if (import.meta.env.DEV) {
+    // eslint-disable-next-line no-console
+    console.error('Failed to render application:', error);
   }
 }
