@@ -40,10 +40,10 @@ const LutronRadioRA3 = () => {
   };
 
   const stats = [
-    { label: "Wireless", value: "Clear Connect RF control" },
+    { label: "Wireless", value: "Clear Connect RF — not Wi-Fi" },
+    { label: "Scale", value: "Up to 400 devices with paired processors" },
     { label: "Retrofit Ready", value: "No wall-opening just to add control" },
-    { label: "One Room to Whole Home", value: "Expandable as the house grows" },
-    { label: "App · Voice · Keypad", value: "Scenes for everyday moments" },
+    { label: "Native Integration", value: "Lumaris light & automated shades" },
   ];
 
   const systemCards = [
@@ -269,8 +269,8 @@ const LutronRadioRA3 = () => {
         schema={[serviceSchema, faqSchema]}
         breadcrumbs={[
           { name: "Home", url: "/" },
-          { name: "Services", url: "/services" },
-          { name: "Lutron RadioRA3", url: "/services/lutron-radiora3" },
+          { name: "Platforms", url: "/platforms" },
+          { name: "Lutron RadioRA3", url: "/platforms/lutron-radiora3" },
         ]}
       />
       <Header />
@@ -279,10 +279,10 @@ const LutronRadioRA3 = () => {
       <section className="pt-36 sm:pt-44 pb-16 sm:pb-20 px-4 sm:px-6">
         <div className="max-w-4xl mx-auto">
           <Link
-            to="/services"
+            to="/platforms"
             className="inline-flex items-center gap-1.5 text-white/40 hover:text-white/70 text-sm mb-8 transition-colors"
           >
-            <ArrowLeft className="w-3.5 h-3.5" /> All Services
+            <ArrowLeft className="w-3.5 h-3.5" /> All Platforms
           </Link>
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight mb-5 text-white hero-text-shadow">
             RadioRA3, made simple.
@@ -586,6 +586,101 @@ const LutronRadioRA3 = () => {
         </div>
       </section>
 
+      {/* Lumaris + intelligent lighting */}
+      <section className="py-16 sm:py-24 px-4 sm:px-6">
+        <div className="max-w-4xl mx-auto">
+          <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">
+            Lumaris & Intelligent Lighting
+          </p>
+          <h2 className="text-2xl sm:text-3xl font-bold text-white mb-5">
+            The fixtures RadioRA3 was designed around.
+          </h2>
+          <p className="text-white/60 text-base leading-relaxed mb-8 max-w-3xl">
+            RadioRA3 integrates natively with Lutron's Lumaris intelligent lighting — tunable white from 1800K to 4000K, dimming down to 0.1% where the fixture supports it, and warm-on-dim behavior that makes a room feel like firelight at night and daylight at breakfast. Same keypads, same app, no extra bridge.
+          </p>
+          <div className="grid sm:grid-cols-2 gap-5">
+            {[
+              {
+                title: "Tunable white 1800K–4000K",
+                description:
+                  "Cool in the morning, warm in the evening. Scenes and schedules shift color temperature automatically so the house feels right at every hour.",
+              },
+              {
+                title: "Dimming to 0.1%",
+                description:
+                  "Midnight trip to the kitchen without flooding the room. Lumaris fixtures hold clean dim levels far lower than standard LED drivers.",
+              },
+              {
+                title: "SUNNATA light bar controls",
+                description:
+                  "Sunnata dimmers and keypads include a light bar that fades to show current level — elegant on the wall, and obvious to guests.",
+              },
+              {
+                title: "Schedules & sunrise / sunset",
+                description:
+                  "RadioRA3 knows the astronomic clock for Eagle County. Exterior lights rise at dusk, pathway lights fade late, and mornings arrive on schedule.",
+              },
+            ].map((item, i) => (
+              <div
+                key={i}
+                className="flex gap-4 p-5 rounded-xl border border-white/8 bg-black/40 backdrop-blur-sm"
+              >
+                <Sparkles className="w-5 h-5 text-accent shrink-0 mt-0.5" />
+                <div>
+                  <h3 className="text-white font-semibold mb-1">{item.title}</h3>
+                  <p className="text-white/50 text-sm leading-relaxed">
+                    {item.description}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* RadioRA3 vs HomeWorks teaser */}
+      <section className="py-16 sm:py-24 px-4 sm:px-6 bg-black/20 backdrop-blur-sm border-y border-white/5">
+        <div className="max-w-4xl mx-auto">
+          <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">
+            RadioRA3 vs HomeWorks
+          </p>
+          <h2 className="text-2xl sm:text-3xl font-bold text-white mb-5">
+            Two Lutron platforms. Which one is right?
+          </h2>
+          <p className="text-white/60 text-base leading-relaxed mb-8 max-w-3xl">
+            RadioRA3 is the right choice for most homes — wireless, retrofit-friendly, scalable to 400 devices. HomeWorks is Lutron's flagship platform for architectural homes, centralized panels, 10,000-zone designs, and Ketra or Palladiom shades.
+          </p>
+          <div className="grid sm:grid-cols-2 gap-5">
+            <div className="bg-black/40 backdrop-blur-sm border border-accent/30 rounded-xl p-6">
+              <p className="text-accent text-xs font-semibold uppercase tracking-wide mb-2">
+                You are here
+              </p>
+              <h3 className="text-white font-semibold text-lg mb-2">RadioRA3</h3>
+              <p className="text-white/55 text-sm leading-relaxed mb-4">
+                Wireless retrofits, scalable smart lighting, up to 400 devices, one room to whole home. Clear Connect RF, no Wi-Fi dependency.
+              </p>
+            </div>
+            <Link
+              to="/platforms/lutron-homeworks"
+              className="group bg-black/40 backdrop-blur-sm border border-white/8 rounded-xl p-6 hover:border-accent/30 transition-colors"
+            >
+              <p className="text-white/40 text-xs font-semibold uppercase tracking-wide mb-2">
+                Flagship platform
+              </p>
+              <h3 className="text-white font-semibold text-lg mb-2 group-hover:text-accent transition-colors">
+                HomeWorks
+              </h3>
+              <p className="text-white/55 text-sm leading-relaxed mb-4">
+                Architectural homes, centralized panels, up to 10,000 zones, native Ketra / Lumaris / Palladiom, QS wired backbone options.
+              </p>
+              <span className="inline-flex items-center gap-1 text-accent text-sm font-medium group-hover:gap-2 transition-all">
+                Explore HomeWorks <ArrowRight className="w-3.5 h-3.5" />
+              </span>
+            </Link>
+          </div>
+        </div>
+      </section>
+
       {/* Related */}
       <section className="py-16 sm:py-24 px-4 sm:px-6">
         <div className="max-w-4xl mx-auto">
@@ -598,16 +693,16 @@ const LutronRadioRA3 = () => {
           <div className="grid sm:grid-cols-2 gap-5">
             {[
               {
-                title: "Smart Lighting",
+                title: "Lutron HomeWorks",
                 description:
-                  "The broader category — dimmers, keypads, scenes, and schedules across platforms.",
-                path: "/services/smart-lighting",
+                  "Lutron's flagship platform for architectural homes, Ketra and Lumaris, and luxury whole-home lighting.",
+                path: "/platforms/lutron-homeworks",
               },
               {
                 title: "Control4 Automation",
                 description:
                   "When lighting, audio, climate, and shades should all live behind one interface.",
-                path: "/services/control4",
+                path: "/platforms/control4",
               },
               {
                 title: "Motorized Shades",

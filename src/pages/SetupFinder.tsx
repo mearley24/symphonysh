@@ -32,6 +32,7 @@ type RoomScope =
 type WallStatus = "open" | "finished" | "mixed";
 type ExistingSystem =
   | "control4"
+  | "homeworks"
   | "lutron"
   | "sonos"
   | "ava"
@@ -87,6 +88,7 @@ function buildRecommendation(a: Answers): Recommendation {
   const existingService = a.projectType === "existing-service";
 
   const hasControl4 = a.existing.includes("control4");
+  const hasHomeWorks = a.existing.includes("homeworks");
   const hasLutron = a.existing.includes("lutron");
   const hasSonos = a.existing.includes("sonos");
   const hasAva = a.existing.includes("ava");
@@ -132,11 +134,13 @@ function buildRecommendation(a: Answers): Recommendation {
       pieces: [
         { label: "Pre-Wire & Structured Wiring", path: "/services/prewire" },
         { label: "Home Networking", path: "/services/networking" },
-        ...(wantsLighting
-          ? [{ label: "Lutron RadioRA3", path: "/services/lutron-radiora3" }]
+        ...(wantsLighting && (wholeHome || a.priority === "luxury-finish")
+          ? [{ label: "Lutron HomeWorks", path: "/platforms/lutron-homeworks" }]
+          : wantsLighting
+          ? [{ label: "Lutron RadioRA3", path: "/platforms/lutron-radiora3" }]
           : []),
         ...(wantsTheater || wholeHome
-          ? [{ label: "Control4 automation", path: "/services/control4" }]
+          ? [{ label: "Control4 automation", path: "/platforms/control4" }]
           : []),
         ...(wantsShades
           ? [{ label: "Motorized shades", path: "/services/shades" }]
@@ -145,6 +149,50 @@ function buildRecommendation(a: Answers): Recommendation {
       notes: [
         "We want to be on site before insulation.",
         "Final system choices (Control4 vs AVA, RadioRA3 scope, shade brand) can be decided closer to trim.",
+      ],
+    };
+  }
+
+  // Lutron HomeWorks-first for luxury / architectural / very large scope
+  const homeWorksFit =
+    hasHomeWorks ||
+    (wholeHome &&
+      (newBuild || a.projectType === "remodel") &&
+      (a.priority === "luxury-finish" || a.priority === "builder-ready")) ||
+    (a.rooms === "multiple-properties" &&
+      a.priority === "luxury-finish") ||
+    (wantsLighting &&
+      wantsShades &&
+      wholeHome &&
+      (newBuild || a.projectType === "remodel") &&
+      open);
+
+  if (homeWorksFit) {
+    return {
+      title: "Lutron HomeWorks + Control4 + Shades",
+      summary:
+        "A flagship lighting platform for architectural and luxury homes. HomeWorks handles the lighting and shade hardware — hand-crafted keypads, Ketra and Lumaris, centralized panels, up to 10,000 zones — and Control4 ties the rest of the house (audio, climate, security) into one interface.",
+      pieces: [
+        { label: "Lutron HomeWorks", path: "/platforms/lutron-homeworks" },
+        { label: "Control4 automation", path: "/platforms/control4" },
+        ...(wantsShades
+          ? [{ label: "Motorized shades (Palladiom / Sivoia)", path: "/services/shades" }]
+          : []),
+        ...(wantsMusic || hasSonos
+          ? [{ label: "Whole-home audio", path: "/services/audio-entertainment" }]
+          : []),
+        { label: "Home Networking", path: "/services/networking" },
+        ...(wantsSecurity
+          ? [{ label: "Security & cameras", path: "/services/security-systems" }]
+          : []),
+        ...(newBuild || open
+          ? [{ label: "Pre-Wire & Structured Wiring", path: "/services/prewire" }]
+          : []),
+      ],
+      notes: [
+        "Designed in coordination with the architect and lighting designer.",
+        "Phased delivery is normal — primary wing first, guest wing and exterior later.",
+        "Includes native Ketra, Lumaris, and Palladiom support out of the box.",
       ],
     };
   }
@@ -163,8 +211,8 @@ function buildRecommendation(a: Answers): Recommendation {
       summary:
         "A coordinated system where lighting, shades, audio, climate, and security all live behind one interface. Lutron RadioRA3 runs the lighting and shade hardware; Control4 ties everything together with scenes, keypads, and a single app.",
       pieces: [
-        { label: "Control4 automation", path: "/services/control4" },
-        { label: "Lutron RadioRA3", path: "/services/lutron-radiora3" },
+        { label: "Control4 automation", path: "/platforms/control4" },
+        { label: "Lutron RadioRA3", path: "/platforms/lutron-radiora3" },
         ...(wantsShades
           ? [{ label: "Motorized shades", path: "/services/shades" }]
           : []),
@@ -199,14 +247,14 @@ function buildRecommendation(a: Answers): Recommendation {
         "A simple, family-friendly setup focused on TV and audio. AVA gives you one physical remote that the whole household can actually use; Sonos handles the music in a way guests understand" +
         (hasControl4 ? "; your existing Control4 stays in place for anything more advanced." : "."),
       pieces: [
-        { label: "AVA remote", path: "/services/ava" },
+        { label: "AVA remote", path: "/platforms/ava" },
         { label: "Sonos / whole-home audio", path: "/services/audio-entertainment" },
         ...(wantsTheater
           ? [{ label: "Media room / theater", path: "/services/audio-entertainment" }]
           : []),
         { label: "Home Networking", path: "/services/networking" },
         ...(hasControl4
-          ? [{ label: "Control4 (keep existing)", path: "/services/control4" }]
+          ? [{ label: "Control4 (keep existing)", path: "/platforms/control4" }]
           : []),
       ],
       notes: [
@@ -229,7 +277,7 @@ function buildRecommendation(a: Answers): Recommendation {
       summary:
         "A lighting-first retrofit. RadioRA3 replaces the dimmers and keypads so the house actually dims cleanly and has scenes on the wall. Sonos handles music. A proper network underneath keeps everything responsive.",
       pieces: [
-        { label: "Lutron RadioRA3", path: "/services/lutron-radiora3" },
+        { label: "Lutron RadioRA3", path: "/platforms/lutron-radiora3" },
         ...(wantsShades
           ? [{ label: "Motorized shades", path: "/services/shades" }]
           : []),
@@ -446,7 +494,8 @@ const SetupFinder = () => {
               {(
                 [
                   ["control4", "Control4"],
-                  ["lutron", "Lutron"],
+                  ["homeworks", "Lutron HomeWorks"],
+                  ["lutron", "Lutron RadioRA3 / other Lutron"],
                   ["sonos", "Sonos"],
                   ["ava", "AVA"],
                   ["other", "Other"],

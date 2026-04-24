@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ArrowRight, Phone, Volume2, Shield, Lightbulb, Thermometer, Wifi, Wrench, Sun, Home, Cable, ScanLine, Smartphone, CheckCircle2, ChevronDown, ArrowLeft, Radio, Compass } from "lucide-react";
+import { ArrowRight, Phone, Volume2, Shield, Lightbulb, Thermometer, Wifi, Wrench, Sun, Home, Cable, ScanLine, CheckCircle2, ChevronDown, ArrowLeft, Compass } from "lucide-react";
 import { useState } from "react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
@@ -25,11 +25,7 @@ const Services = () => {
     { icon: Cable, title: "Pre-Wire & Structured Wiring", description: "Structured cabling for new construction and retrofits — Cat6, speaker wire, HDMI, and control wiring installed clean from the start.", link: "/services/prewire" },
   ];
 
-  const platforms = [
-    { icon: Home, title: "Control4", description: "Whole-home automation that ties lighting, audio, climate, security, and shades into one interface.", link: "/services/control4" },
-    { icon: Radio, title: "Lutron RadioRA3", description: "Professional wireless lighting and shade control — keypads, dimmers, and scenes tuned for how your home actually lives.", link: "/services/lutron-radiora3" },
-    { icon: Smartphone, title: "AVA Smart Remote", description: "One family-friendly remote for TVs, theaters, and whole-home audio — the opposite of a coffee-table remote pile.", link: "/services/ava" },
-  ];
+  // Platforms now live on their own tab. We keep a short cross-link on the Services page.
 
   const alsoAvailable = [
     { icon: ScanLine, title: "Matterport 3D Scanning", description: "Immersive 3D virtual tours for real estate listings, construction documentation, and property records.", link: "/matterport" },
@@ -115,28 +111,29 @@ const Services = () => {
         </div>
       </section>
 
-      {/* Platforms we install */}
+      {/* Platforms cross-link (now a dedicated tab) */}
       <section className="py-16 sm:py-24 px-4 sm:px-6">
-        <div className="max-w-5xl mx-auto">
-          <div data-reveal className="text-center mb-12">
+        <div className="max-w-4xl mx-auto">
+          <div data-reveal className="text-center mb-8">
             <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">Platforms</p>
-            <h2 className="text-2xl sm:text-3xl font-bold text-white">The systems we install and service</h2>
+            <h2 className="text-2xl sm:text-3xl font-bold text-white mb-3">The systems that power the services above</h2>
+            <p className="text-white/55 text-base leading-relaxed max-w-2xl mx-auto">
+              Lighting, audio, shades, climate, and security all run on real platforms underneath — Lutron HomeWorks, Lutron RadioRA3, Control4, and AVA. Each one fits a different kind of home.
+            </p>
           </div>
-          <div data-reveal-children className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {platforms.map((p, i) => (
-              <Link key={i} to={p.link} className="group">
-                <div className="bg-black/40 backdrop-blur-sm border border-white/8 rounded-xl p-6 h-full hover:border-accent/30 hover:bg-black/50 transition-all duration-200">
-                  <div className="w-11 h-11 rounded-lg bg-accent/10 flex items-center justify-center mb-4 group-hover:bg-accent/20 transition-colors">
-                    <p.icon className="w-5 h-5 text-accent" />
-                  </div>
-                  <h3 className="text-white font-semibold text-lg mb-2">{p.title}</h3>
-                  <p className="text-white/50 text-sm leading-relaxed">{p.description}</p>
-                  <span className="inline-flex items-center gap-1 text-accent text-sm font-medium mt-4 group-hover:gap-2 transition-all">
-                    Learn more <ArrowRight className="w-3.5 h-3.5" />
-                  </span>
-                </div>
-              </Link>
-            ))}
+          <div data-reveal className="flex flex-col sm:flex-row gap-3 justify-center items-center">
+            <Link
+              to="/platforms"
+              className="inline-flex items-center justify-center gap-2 bg-accent hover:bg-accent/90 text-white px-7 py-4 rounded-lg font-medium transition-colors text-base"
+            >
+              Explore Platforms <ArrowRight className="w-4 h-4" />
+            </Link>
+            <Link
+              to="/setup-finder"
+              className="inline-flex items-center justify-center gap-2 border border-white/20 hover:border-white/40 hover:bg-white/5 text-white px-7 py-4 rounded-lg font-medium transition-colors text-base"
+            >
+              <Compass className="w-4 h-4" /> Open the Setup Finder
+            </Link>
           </div>
         </div>
       </section>

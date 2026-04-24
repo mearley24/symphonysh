@@ -154,8 +154,8 @@ const AvaService = () => {
         schema={[serviceSchema, faqSchema]}
         breadcrumbs={[
           { name: "Home", url: "/" },
-          { name: "Services", url: "/services" },
-          { name: "AVA", url: "/services/ava" },
+          { name: "Platforms", url: "/platforms" },
+          { name: "AVA", url: "/platforms/ava" },
         ]}
       />
       <Header />
@@ -164,10 +164,10 @@ const AvaService = () => {
       <section className="pt-36 sm:pt-44 pb-16 sm:pb-20 px-4 sm:px-6">
         <div className="max-w-4xl mx-auto">
           <Link
-            to="/services"
+            to="/platforms"
             className="inline-flex items-center gap-1.5 text-white/40 hover:text-white/70 text-sm mb-8 transition-colors"
           >
-            <ArrowLeft className="w-3.5 h-3.5" /> All Services
+            <ArrowLeft className="w-3.5 h-3.5" /> All Platforms
           </Link>
           <p className="text-accent font-medium text-sm tracking-wide uppercase mb-3">
             AVA
@@ -258,8 +258,72 @@ const AvaService = () => {
         </div>
       </section>
 
-      {/* When AVA vs Control4 vs Sonos */}
+      {/* AVA hardware & OS */}
       <section className="py-16 sm:py-24 px-4 sm:px-6 bg-black/20 backdrop-blur-sm border-y border-white/5">
+        <div className="max-w-5xl mx-auto">
+          <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">
+            AVA Hardware & OS
+          </p>
+          <h2 className="text-2xl sm:text-3xl font-bold text-white mb-5">
+            Two remotes, one operating system, one clean design language.
+          </h2>
+          <p className="text-white/60 text-base leading-relaxed mb-10 max-w-3xl">
+            AVA runs on Swiss-designed, single-piece aluminum remotes. The Cinema Remote has a built-in processor and runs AVA OS directly — no separate box required in many rooms. The Home Remote covers rooms without a TV.
+          </p>
+          <div className="grid md:grid-cols-2 gap-5">
+            {[
+              {
+                icon: Tv,
+                title: "Cinema Remote",
+                description:
+                  "For TV rooms, media rooms, and theaters. Runs AVA OS directly with a built-in processor. IP control for 10,000+ devices and IR for 60,000+ — almost any TV, receiver, streamer, or projector.",
+              },
+              {
+                icon: Home,
+                title: "Home Remote",
+                description:
+                  "For rooms without a TV — kitchens, primary bedrooms, outdoor living. Controls lighting scenes, audio zones, and shades through the same AVA OS interface.",
+              },
+              {
+                icon: Sparkles,
+                title: "AVA OS",
+                description:
+                  "The operating system that makes complex systems feel simple and connected. Consistent, clean, and family-friendly — the same experience on every AVA remote in the house.",
+              },
+              {
+                icon: Users,
+                title: "AVA Flows",
+                description:
+                  "Simple automation without writing code. Link a button press to a sequence of actions — shades down, lights dim, TV on, receiver to the right input — using AVA's visual flow builder.",
+              },
+            ].map((item, i) => (
+              <div
+                key={i}
+                className="bg-black/40 backdrop-blur-sm border border-white/8 rounded-xl p-6"
+              >
+                <div className="w-10 h-10 rounded-lg bg-accent/10 flex items-center justify-center mb-3">
+                  <item.icon className="w-5 h-5 text-accent" />
+                </div>
+                <h3 className="text-white font-semibold text-lg mb-2">
+                  {item.title}
+                </h3>
+                <p className="text-white/50 text-sm leading-relaxed">
+                  {item.description}
+                </p>
+              </div>
+            ))}
+          </div>
+          <div className="mt-8 p-5 rounded-xl border border-white/8 bg-black/40 backdrop-blur-sm">
+            <p className="text-white/55 text-sm leading-relaxed">
+              <span className="text-white font-semibold">IP and IR, covered.</span>{" "}
+              AVA talks to most modern gear over IP — 10,000+ supported devices — and still reaches older TVs, receivers, and cable boxes over IR with support for 60,000+ devices. In practice, almost anything in the rack or on the wall is controllable.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* When AVA vs Control4 vs Sonos */}
+      <section className="py-16 sm:py-24 px-4 sm:px-6">
         <div className="max-w-5xl mx-auto">
           <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">
             Right Fit
@@ -292,7 +356,7 @@ const AvaService = () => {
       </section>
 
       {/* FAQ */}
-      <section className="py-16 sm:py-24 px-4 sm:px-6">
+      <section className="py-16 sm:py-24 px-4 sm:px-6 bg-black/20 backdrop-blur-sm border-y border-white/5">
         <div className="max-w-3xl mx-auto">
           <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">
             FAQ
@@ -334,7 +398,7 @@ const AvaService = () => {
       </section>
 
       {/* Final CTA */}
-      <section className="py-16 sm:py-24 px-4 sm:px-6 bg-black/20 backdrop-blur-sm border-y border-white/5">
+      <section className="py-16 sm:py-24 px-4 sm:px-6">
         <div className="max-w-3xl mx-auto text-center">
           <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">
             Get Started
@@ -363,7 +427,7 @@ const AvaService = () => {
       </section>
 
       {/* Related */}
-      <section className="py-16 sm:py-24 px-4 sm:px-6">
+      <section className="py-16 sm:py-24 px-4 sm:px-6 bg-black/20 backdrop-blur-sm border-y border-white/5">
         <div className="max-w-4xl mx-auto">
           <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">
             Related
@@ -377,7 +441,7 @@ const AvaService = () => {
                 title: "Control4",
                 description:
                   "When the whole house — lights, shades, climate, and security — should live behind one interface.",
-                path: "/services/control4",
+                path: "/platforms/control4",
               },
               {
                 title: "Audio & Home Theater",
@@ -389,7 +453,7 @@ const AvaService = () => {
                 title: "Lutron RadioRA3",
                 description:
                   "Lighting and shades that can be folded into AVA or Control4 scenes.",
-                path: "/services/lutron-radiora3",
+                path: "/platforms/lutron-radiora3",
               },
               {
                 title: "Not sure what you need?",
