@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ArrowRight, Phone, Volume2, Shield, Lightbulb, Thermometer, Wifi, Wrench, Sun, Home, Cable, ScanLine, Smartphone, CheckCircle2, ChevronDown, ArrowLeft } from "lucide-react";
+import { ArrowRight, Phone, Volume2, Shield, Lightbulb, Thermometer, Wifi, Wrench, Sun, Home, Cable, ScanLine, Smartphone, CheckCircle2, ChevronDown, ArrowLeft, Radio, Compass } from "lucide-react";
 import { useState } from "react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
@@ -25,9 +25,15 @@ const Services = () => {
     { icon: Cable, title: "Pre-Wire & Structured Wiring", description: "Structured cabling for new construction and retrofits — Cat6, speaker wire, HDMI, and control wiring installed clean from the start.", link: "/services/prewire" },
   ];
 
+  const platforms = [
+    { icon: Home, title: "Control4", description: "Whole-home automation that ties lighting, audio, climate, security, and shades into one interface.", link: "/services/control4" },
+    { icon: Radio, title: "Lutron RadioRA3", description: "Professional wireless lighting and shade control — keypads, dimmers, and scenes tuned for how your home actually lives.", link: "/services/lutron-radiora3" },
+    { icon: Smartphone, title: "AVA Smart Remote", description: "One family-friendly remote for TVs, theaters, and whole-home audio — the opposite of a coffee-table remote pile.", link: "/services/ava" },
+  ];
+
   const alsoAvailable = [
     { icon: ScanLine, title: "Matterport 3D Scanning", description: "Immersive 3D virtual tours for real estate listings, construction documentation, and property records.", link: "/matterport" },
-    { icon: Smartphone, title: "AVA Smart Remote", description: "A premium universal remote that controls your entire smart home from a single, beautifully simple interface.", link: "/ava" },
+    { icon: Compass, title: "Setup Finder", description: "Not sure whether you need RadioRA3, Control4, AVA, Sonos, or just a better network? Answer a few questions and we will suggest a starting point.", link: "/setup-finder" },
   ];
 
   const faqs = [
@@ -109,8 +115,34 @@ const Services = () => {
         </div>
       </section>
 
-      {/* Also Available */}
+      {/* Platforms we install */}
       <section className="py-16 sm:py-24 px-4 sm:px-6">
+        <div className="max-w-5xl mx-auto">
+          <div data-reveal className="text-center mb-12">
+            <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">Platforms</p>
+            <h2 className="text-2xl sm:text-3xl font-bold text-white">The systems we install and service</h2>
+          </div>
+          <div data-reveal-children className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {platforms.map((p, i) => (
+              <Link key={i} to={p.link} className="group">
+                <div className="bg-black/40 backdrop-blur-sm border border-white/8 rounded-xl p-6 h-full hover:border-accent/30 hover:bg-black/50 transition-all duration-200">
+                  <div className="w-11 h-11 rounded-lg bg-accent/10 flex items-center justify-center mb-4 group-hover:bg-accent/20 transition-colors">
+                    <p.icon className="w-5 h-5 text-accent" />
+                  </div>
+                  <h3 className="text-white font-semibold text-lg mb-2">{p.title}</h3>
+                  <p className="text-white/50 text-sm leading-relaxed">{p.description}</p>
+                  <span className="inline-flex items-center gap-1 text-accent text-sm font-medium mt-4 group-hover:gap-2 transition-all">
+                    Learn more <ArrowRight className="w-3.5 h-3.5" />
+                  </span>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Also Available */}
+      <section className="py-16 sm:py-24 px-4 sm:px-6 bg-black/20 backdrop-blur-sm border-y border-white/5">
         <div className="max-w-5xl mx-auto">
           <div data-reveal className="text-center mb-8">
             <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">Also Available</p>

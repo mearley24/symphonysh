@@ -11,6 +11,10 @@
   <url><loc>https://symphonysh.com/services/security-systems</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://symphonysh.com/services/maintenance</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://symphonysh.com/services/prewire</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://symphonysh.com/services/lutron-radiora3</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://symphonysh.com/services/control4</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://symphonysh.com/services/ava</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://symphonysh.com/setup-finder</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://symphonysh.com/projects</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
   <url><loc>https://symphonysh.com/about</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://symphonysh.com/contact</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
