@@ -6,6 +6,7 @@ import { trackPhoneClick } from "../utils/tracking";
 const navLinks = [
   { label: "Services", path: "/services" },
   { label: "Platforms", path: "/platforms" },
+  { label: "Setup Finder", path: "/setup-finder" },
   { label: "Our Work", path: "/projects" },
   { label: "Blog", path: "/blog" },
   { label: "About", path: "/about" },
@@ -126,13 +127,13 @@ const Header = () => {
 
         <nav className="relative z-10 flex flex-col items-center justify-center min-h-screen px-6 py-20">
           {/* Main nav links */}
-          <div className="space-y-2 text-center mb-10">
+          <div className="space-y-1 text-center mb-10">
             {navLinks.map((link) => (
               <Link
                 key={link.path}
                 to={link.path}
                 onClick={() => setMenuOpen(false)}
-                className="group relative block text-4xl sm:text-5xl font-bold py-2 transition-colors"
+                className="group relative block text-3xl sm:text-4xl font-bold py-1.5 transition-colors"
               >
                 <span className={isActive(link.path) ? "text-white" : "text-white/50 group-hover:text-white transition-colors"}>
                   {link.label}
@@ -146,40 +147,60 @@ const Header = () => {
             ))}
           </div>
 
-          {/* Service sub-links */}
-          <div className="flex flex-wrap justify-center gap-x-5 gap-y-2 max-w-lg mb-6">
-            {serviceLinks.map((s) => (
-              <Link
-                key={s.path}
-                to={s.path}
-                onClick={() => setMenuOpen(false)}
-                className={`text-sm transition-colors ${
-                  isActive(s.path)
-                    ? "text-accent"
-                    : "text-white/40 hover:text-white/70"
-                }`}
-              >
-                {s.label}
-              </Link>
-            ))}
-          </div>
+          {/* Sub-link groups: Services + Platforms, clearly labeled */}
+          <div className="grid sm:grid-cols-2 gap-x-12 gap-y-6 max-w-2xl w-full mb-12">
+            {/* Services group */}
+            <div className="text-center sm:text-left">
+              <p className="text-accent text-[11px] tracking-widest uppercase mb-3">Services</p>
+              <div className="flex flex-col gap-1.5">
+                {serviceLinks.map((s) => (
+                  <Link
+                    key={s.path}
+                    to={s.path}
+                    onClick={() => setMenuOpen(false)}
+                    className={`text-sm transition-colors ${
+                      isActive(s.path)
+                        ? "text-accent"
+                        : "text-white/40 hover:text-white/70"
+                    }`}
+                  >
+                    {s.label}
+                  </Link>
+                ))}
+              </div>
+            </div>
 
-          {/* Platform sub-links */}
-          <div className="flex flex-wrap justify-center gap-x-5 gap-y-2 max-w-lg mb-14">
-            {platformLinks.map((p) => (
-              <Link
-                key={p.path}
-                to={p.path}
-                onClick={() => setMenuOpen(false)}
-                className={`text-sm transition-colors ${
-                  isActive(p.path)
-                    ? "text-accent"
-                    : "text-white/40 hover:text-white/70"
-                }`}
-              >
-                {p.label}
-              </Link>
-            ))}
+            {/* Platforms group */}
+            <div className="text-center sm:text-left">
+              <p className="text-accent text-[11px] tracking-widest uppercase mb-3">Platforms</p>
+              <div className="flex flex-col gap-1.5">
+                {platformLinks.map((p) => (
+                  <Link
+                    key={p.path}
+                    to={p.path}
+                    onClick={() => setMenuOpen(false)}
+                    className={`text-sm transition-colors ${
+                      isActive(p.path)
+                        ? "text-accent"
+                        : "text-white/40 hover:text-white/70"
+                    }`}
+                  >
+                    {p.label}
+                  </Link>
+                ))}
+                <Link
+                  to="/setup-finder"
+                  onClick={() => setMenuOpen(false)}
+                  className={`text-sm transition-colors mt-2 ${
+                    isActive("/setup-finder")
+                      ? "text-accent"
+                      : "text-white/55 hover:text-white/80"
+                  }`}
+                >
+                  Not sure which one? → Setup Finder
+                </Link>
+              </div>
+            </div>
           </div>
 
           {/* CTA + phone */}

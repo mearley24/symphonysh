@@ -76,7 +76,7 @@ function App() {
           <Route path="/projects/:slug" element={<ProjectDetail />} />
           <Route path="/privacy" element={<Privacy />} />
           <Route path="/terms" element={<Terms />} />
-          <Route path="/ava" element={<Navigate to="/services/ava" replace />} />
+          <Route path="/ava" element={<Navigate to="/platforms/ava" replace />} />
           <Route path="/matterport" element={<Matterport />} />
           <Route path="/setup-finder" element={<SetupFinder />} />
 
