@@ -13,8 +13,8 @@ import Services from "./pages/Services";
 import Projects from "./pages/Projects";
 import Privacy from "./pages/Privacy";
 import Terms from "./pages/Terms";
-import Ava from "./pages/Ava";
 import Matterport from "./pages/Matterport";
+import SetupFinder from "./pages/SetupFinder";
 import Blog from "./pages/Blog";
 import BlogPost from "./pages/BlogPost";
 import CityPage from "./pages/CityPage";
@@ -53,6 +53,9 @@ import SecuritySystems from "./pages/services/SecuritySystems";
 import Shades from "./pages/services/Shades";
 import SmartLighting from "./pages/services/SmartLighting";
 import PreWire from "./pages/services/PreWire";
+import LutronRadioRA3 from "./pages/services/LutronRadioRA3";
+import Control4 from "./pages/services/Control4";
+import AvaService from "./pages/services/AvaService";
 
 function App() {
   try {
@@ -71,8 +74,9 @@ function App() {
           <Route path="/projects/:slug" element={<ProjectDetail />} />
           <Route path="/privacy" element={<Privacy />} />
           <Route path="/terms" element={<Terms />} />
-          <Route path="/ava" element={<Ava />} />
+          <Route path="/ava" element={<Navigate to="/services/ava" replace />} />
           <Route path="/matterport" element={<Matterport />} />
+          <Route path="/setup-finder" element={<SetupFinder />} />
 
           {/* Blog */}
           <Route path="/blog" element={<Blog />} />
@@ -121,6 +125,9 @@ function App() {
           <Route path="/services/shades" element={<Shades />} />
            <Route path="/services/smart-lighting" element={<SmartLighting />} />
            <Route path="/services/prewire" element={<PreWire />} />
+           <Route path="/services/lutron-radiora3" element={<LutronRadioRA3 />} />
+           <Route path="/services/control4" element={<Control4 />} />
+           <Route path="/services/ava" element={<AvaService />} />
           
           {/* Scheduling routes */}
           <Route path="/scheduling" element={<Scheduling />} />

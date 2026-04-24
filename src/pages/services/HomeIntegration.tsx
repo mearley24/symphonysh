@@ -140,9 +140,12 @@ const HomeIntegration = () => {
           <h2 className="text-2xl sm:text-3xl font-bold text-white mb-8">Related Services</h2>
           <div className="grid sm:grid-cols-3 gap-5">
             {[
+              { title: "Control4", description: "Dedicated deep-dive on Control4 — new builds, fixes to inherited systems, and homeowner training.", path: "/services/control4" },
+              { title: "Lutron RadioRA3", description: "The lighting layer we most often pair with Control4 for larger Vail Valley homes.", path: "/services/lutron-radiora3" },
+              { title: "AVA Smart Remote", description: "When a single remote for TV and audio is enough on its own.", path: "/services/ava" },
               { title: "Audio & Entertainment", description: "Multi-room audio and home theater controlled from your Control4 system.", path: "/services/audio-entertainment" },
               { title: "Smart Lighting", description: "Keypads and automated scenes that integrate seamlessly with Control4.", path: "/services/smart-lighting" },
-              { title: "Motorized Shades", description: "Window treatments that respond to your automation scenes and schedules.", path: "/services/shades" },
+              { title: "Not sure what you need?", description: "Answer a few questions and get a starting recommendation.", path: "/setup-finder" },
             ].map((s, i) => (
               <Link key={i} to={s.path} className="group flex items-start justify-between gap-4 p-5 rounded-xl border border-white/8 bg-black/40 backdrop-blur-sm hover:border-accent/30 transition-colors">
                 <div>
