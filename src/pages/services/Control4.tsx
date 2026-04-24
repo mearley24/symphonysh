@@ -182,8 +182,8 @@ const Control4 = () => {
         schema={[serviceSchema, faqSchema]}
         breadcrumbs={[
           { name: "Home", url: "/" },
-          { name: "Services", url: "/services" },
-          { name: "Control4", url: "/services/control4" },
+          { name: "Platforms", url: "/platforms" },
+          { name: "Control4", url: "/platforms/control4" },
         ]}
       />
       <Header />
@@ -192,10 +192,10 @@ const Control4 = () => {
       <section className="pt-36 sm:pt-44 pb-16 sm:pb-20 px-4 sm:px-6">
         <div className="max-w-4xl mx-auto">
           <Link
-            to="/services"
+            to="/platforms"
             className="inline-flex items-center gap-1.5 text-white/40 hover:text-white/70 text-sm mb-8 transition-colors"
           >
-            <ArrowLeft className="w-3.5 h-3.5" /> All Services
+            <ArrowLeft className="w-3.5 h-3.5" /> All Platforms
           </Link>
           <p className="text-accent font-medium text-sm tracking-wide uppercase mb-3">
             Control4
@@ -316,8 +316,129 @@ const Control4 = () => {
         </div>
       </section>
 
-      {/* FAQ */}
+      {/* Control surfaces */}
       <section className="py-16 sm:py-24 px-4 sm:px-6">
+        <div className="max-w-4xl mx-auto">
+          <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">
+            Control Surfaces
+          </p>
+          <h2 className="text-2xl sm:text-3xl font-bold text-white mb-5">
+            The same system, on every surface of the house.
+          </h2>
+          <p className="text-white/60 text-base leading-relaxed mb-8 max-w-3xl">
+            Control4 lives on phones, dedicated touchscreens, wall keypads, and handheld remotes — so guests, kids, housekeepers, and the homeowner all have an interface that fits how they actually use the room.
+          </p>
+          <div className="grid sm:grid-cols-2 gap-5">
+            {[
+              { title: "Phones & tablets", description: "The Control4 app on iOS and Android, with remote access from anywhere." },
+              { title: "Dedicated touchscreens", description: "In-wall and tabletop touchscreens for kitchens, primary bedrooms, and entry halls." },
+              { title: "Wall keypads", description: "Engraved keypads for scenes and common functions — the interface for anyone who does not want to pull out a phone." },
+              { title: "Handheld remotes", description: "Neeo-style handhelds for media rooms and theaters, designed for the way people actually watch TV." },
+            ].map((item, i) => (
+              <div
+                key={i}
+                className="flex gap-4 p-5 rounded-xl border border-white/8 bg-black/40 backdrop-blur-sm"
+              >
+                <CheckCircle2 className="w-5 h-5 text-accent shrink-0 mt-0.5" />
+                <div>
+                  <h3 className="text-white font-semibold mb-1">{item.title}</h3>
+                  <p className="text-white/50 text-sm leading-relaxed">
+                    {item.description}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Common integrations */}
+      <section className="py-16 sm:py-24 px-4 sm:px-6 bg-black/20 backdrop-blur-sm border-y border-white/5">
+        <div className="max-w-4xl mx-auto">
+          <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">
+            Common Integrations
+          </p>
+          <h2 className="text-2xl sm:text-3xl font-bold text-white mb-5">
+            Plays well with the rest of the house.
+          </h2>
+          <p className="text-white/60 text-base leading-relaxed mb-8 max-w-3xl">
+            Control4 is compatible with 25,000+ third-party devices. Most of the brands already in the house are supported natively, so the existing gear keeps working instead of going in the bin.
+          </p>
+          <div className="flex flex-wrap gap-2">
+            {[
+              "Lutron HomeWorks",
+              "Lutron RadioRA3",
+              "Sonos",
+              "Denon",
+              "Marantz",
+              "Sony",
+              "Samsung TVs",
+              "LG TVs",
+              "Apple TV",
+              "Roku",
+              "Nest thermostats",
+              "Honeywell",
+              "Ecobee",
+              "Ring",
+              "Ubiquiti / Araknis",
+              "Luxul networking",
+              "Somfy shades",
+              "Hunter Douglas",
+              "Kevo / August locks",
+              "Yale locks",
+              "Alexa",
+              "Google Assistant",
+              "Siri shortcuts",
+            ].map((brand) => (
+              <span
+                key={brand}
+                className="px-3 py-1.5 rounded-full border border-white/10 bg-black/40 backdrop-blur-sm text-white/70 text-xs sm:text-sm"
+              >
+                {brand}
+              </span>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Customer scenarios */}
+      <section className="py-16 sm:py-24 px-4 sm:px-6">
+        <div className="max-w-4xl mx-auto">
+          <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">
+            Customer Scenarios
+          </p>
+          <h2 className="text-2xl sm:text-3xl font-bold text-white mb-10">
+            What the day looks like.
+          </h2>
+          <div className="space-y-4">
+            {[
+              { step: "01", title: "Morning", description: "Primary bedroom keypad lights come up gently, bathroom floor heat is already on, kitchen music starts at low volume, shades rise with the sun." },
+              { step: "02", title: "Leaving the house", description: "One tap on the kitchen keypad turns off lights, drops the thermostat setback, closes blinds in bright rooms, arms the alarm, and locks the doors." },
+              { step: "03", title: "Guests arrive", description: "Welcome scene at the front door brings up entry, great room, and kitchen, fires up background music, and sets the right climate for the room." },
+              { step: "04", title: "Movie Night", description: "One button on the theater remote dims the room, lowers the shades, drops the projector screen, powers the projector, and selects the right input." },
+              { step: "05", title: "Goodnight", description: "Primary suite keypad shuts down the rest of the house — lights off, locks set, alarm armed, shades closed, primary bedroom lights fade to sleep." },
+            ].map((item, i) => (
+              <div
+                key={i}
+                className="flex gap-5 p-5 rounded-xl border border-white/8 bg-black/40 backdrop-blur-sm"
+              >
+                <span className="text-accent font-semibold text-sm shrink-0 w-8">
+                  {item.step}
+                </span>
+                <div>
+                  <h3 className="text-white font-semibold mb-1">{item.title}</h3>
+                  <p className="text-white/50 text-sm leading-relaxed">
+                    {item.description}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ */}
+      <section className="py-16 sm:py-24 px-4 sm:px-6 bg-black/20 backdrop-blur-sm border-y border-white/5">
         <div className="max-w-3xl mx-auto">
           <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">
             FAQ
@@ -359,7 +480,7 @@ const Control4 = () => {
       </section>
 
       {/* Final CTA */}
-      <section className="py-16 sm:py-24 px-4 sm:px-6 bg-black/20 backdrop-blur-sm border-y border-white/5">
+      <section className="py-16 sm:py-24 px-4 sm:px-6">
         <div className="max-w-3xl mx-auto text-center">
           <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">
             Get Started
@@ -388,7 +509,7 @@ const Control4 = () => {
       </section>
 
       {/* Related */}
-      <section className="py-16 sm:py-24 px-4 sm:px-6">
+      <section className="py-16 sm:py-24 px-4 sm:px-6 bg-black/20 backdrop-blur-sm border-y border-white/5">
         <div className="max-w-4xl mx-auto">
           <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">
             Related
@@ -399,16 +520,22 @@ const Control4 = () => {
           <div className="grid sm:grid-cols-2 gap-5">
             {[
               {
+                title: "Lutron HomeWorks",
+                description:
+                  "For architectural and luxury homes, Control4 often sits on top of HomeWorks.",
+                path: "/platforms/lutron-homeworks",
+              },
+              {
                 title: "Lutron RadioRA3",
                 description:
-                  "The lighting layer we most often pair with Control4 for larger homes.",
-                path: "/services/lutron-radiora3",
+                  "The lighting layer we most often pair with Control4 in retrofits and scalable homes.",
+                path: "/platforms/lutron-radiora3",
               },
               {
                 title: "AVA Smart Remote",
                 description:
                   "When a single remote for TV, audio, and basic control is enough on its own.",
-                path: "/services/ava",
+                path: "/platforms/ava",
               },
               {
                 title: "Home Networking",

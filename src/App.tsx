@@ -15,6 +15,7 @@ import Privacy from "./pages/Privacy";
 import Terms from "./pages/Terms";
 import Matterport from "./pages/Matterport";
 import SetupFinder from "./pages/SetupFinder";
+import Platforms from "./pages/Platforms";
 import Blog from "./pages/Blog";
 import BlogPost from "./pages/BlogPost";
 import CityPage from "./pages/CityPage";
@@ -54,6 +55,7 @@ import Shades from "./pages/services/Shades";
 import SmartLighting from "./pages/services/SmartLighting";
 import PreWire from "./pages/services/PreWire";
 import LutronRadioRA3 from "./pages/services/LutronRadioRA3";
+import LutronHomeWorks from "./pages/services/LutronHomeWorks";
 import Control4 from "./pages/services/Control4";
 import AvaService from "./pages/services/AvaService";
 
@@ -126,8 +128,16 @@ function App() {
            <Route path="/services/smart-lighting" element={<SmartLighting />} />
            <Route path="/services/prewire" element={<PreWire />} />
            <Route path="/services/lutron-radiora3" element={<LutronRadioRA3 />} />
+           <Route path="/services/lutron-homeworks" element={<LutronHomeWorks />} />
            <Route path="/services/control4" element={<Control4 />} />
            <Route path="/services/ava" element={<AvaService />} />
+
+          {/* Platforms hub + platform pages */}
+          <Route path="/platforms" element={<Platforms />} />
+          <Route path="/platforms/lutron-homeworks" element={<LutronHomeWorks />} />
+          <Route path="/platforms/lutron-radiora3" element={<LutronRadioRA3 />} />
+          <Route path="/platforms/control4" element={<Control4 />} />
+          <Route path="/platforms/ava" element={<AvaService />} />
           
           {/* Scheduling routes */}
           <Route path="/scheduling" element={<Scheduling />} />

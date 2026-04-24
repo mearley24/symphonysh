@@ -5,6 +5,7 @@ import { trackPhoneClick } from "../utils/tracking";
 
 const navLinks = [
   { label: "Services", path: "/services" },
+  { label: "Platforms", path: "/platforms" },
   { label: "Our Work", path: "/projects" },
   { label: "Blog", path: "/blog" },
   { label: "About", path: "/about" },
@@ -20,6 +21,13 @@ const serviceLinks = [
   { label: "Climate Control", path: "/services/climate-control" },
   { label: "Security", path: "/services/security-systems" },
   { label: "Maintenance", path: "/services/maintenance" },
+];
+
+const platformLinks = [
+  { label: "Lutron HomeWorks", path: "/platforms/lutron-homeworks" },
+  { label: "Lutron RadioRA3", path: "/platforms/lutron-radiora3" },
+  { label: "Control4", path: "/platforms/control4" },
+  { label: "AVA", path: "/platforms/ava" },
 ];
 
 const Header = () => {
@@ -139,7 +147,7 @@ const Header = () => {
           </div>
 
           {/* Service sub-links */}
-          <div className="flex flex-wrap justify-center gap-x-5 gap-y-2 max-w-lg mb-14">
+          <div className="flex flex-wrap justify-center gap-x-5 gap-y-2 max-w-lg mb-6">
             {serviceLinks.map((s) => (
               <Link
                 key={s.path}
@@ -152,6 +160,24 @@ const Header = () => {
                 }`}
               >
                 {s.label}
+              </Link>
+            ))}
+          </div>
+
+          {/* Platform sub-links */}
+          <div className="flex flex-wrap justify-center gap-x-5 gap-y-2 max-w-lg mb-14">
+            {platformLinks.map((p) => (
+              <Link
+                key={p.path}
+                to={p.path}
+                onClick={() => setMenuOpen(false)}
+                className={`text-sm transition-colors ${
+                  isActive(p.path)
+                    ? "text-accent"
+                    : "text-white/40 hover:text-white/70"
+                }`}
+              >
+                {p.label}
               </Link>
             ))}
           </div>
