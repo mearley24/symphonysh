@@ -51,7 +51,7 @@ const Index = () => {
 
   const differentiators = [
     { title: "Local to Vail Valley", description: "We live and work here. We understand mountain construction, altitude challenges, and the expectations of homeowners in this market." },
-    { title: "One Point of Contact", description: "You work directly with us from start to finish — no subcontractors, no finger-pointing, no runaround." },
+    { title: "One Accountable Team", description: "You work directly with the same team from start to finish — clear ownership, no finger-pointing, no runaround." },
     { title: "Built for the Long Term", description: "We design systems that are easy to maintain and upgrade. No proprietary lock-in, no orphaned technology." },
     { title: "Responsive Support", description: "When something needs attention, we answer the phone. Remote diagnostics and on-site service when you need it." },
   ];
@@ -124,7 +124,7 @@ const Index = () => {
                   We build smart homes that just work.
                 </h1>
                 <p className="animate-fade-in text-white/65 text-lg sm:text-xl leading-relaxed mb-10 max-w-xl mx-auto hero-subtext-shadow [animation-delay:200ms]">
-                  A one-person integrator with a trusted Eagle County crew. Pre-wire through programming — designed, installed, and supported by the same person you call.
+                  A local Eagle County smart-home team with trusted trade partners. Pre-wire through programming — designed, installed, and supported by the same accountable team from first walkthrough to final training.
                 </p>
               </div>
             </div>
@@ -266,9 +266,9 @@ const Index = () => {
               {/* Left: text */}
               <div>
                 <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">The Team</p>
-                <h2 className="text-2xl sm:text-3xl font-bold text-white mb-4">One Integrator. Every Project.</h2>
+                <h2 className="text-2xl sm:text-3xl font-bold text-white mb-4">One Accountable Team. Every Project.</h2>
                 <p className="text-white/50 text-base leading-relaxed mb-6">
-                  Symphony is Matt Earley — one technician who oversees every project from first wire to final walkthrough. No subcontractors, no runaround. When you call, you talk to the person doing the work.
+                  Symphony is a local Eagle County integration team, led by founder Matt Earley. We keep every project organized from first wire to final walkthrough — clear ownership from planning through support.
                 </p>
                 <Link
                   to="/about"

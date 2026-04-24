@@ -23,7 +23,7 @@ export function ConfirmationPage() {
     {
       title: "We review your request",
       description:
-        "Matt personally reads every inquiry. If your project needs clarification, he'll reach out by phone or email — usually the same day during business hours.",
+        "Our team reads every inquiry. If your project needs clarification, we'll reach out by phone or email — usually the same day during business hours.",
     },
     {
       title: "A quick conversation",

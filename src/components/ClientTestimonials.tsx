@@ -70,9 +70,9 @@ const ClientTestimonials = () => {
     },
     {
       icon: MessageSquare,
-      title: "One person on your job",
+      title: "One accountable team on your job",
       description:
-        "Matt Earley runs every project personally. You get the same phone number from first walkthrough through final training — not a rotating crew.",
+        "Our team keeps every project organized from first walkthrough through final training. Same accountable crew, same phone number — clear ownership all the way through.",
     },
     {
       icon: Wrench,

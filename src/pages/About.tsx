@@ -33,10 +33,10 @@ const About = () => {
           </Link>
           <p className="text-accent font-medium text-sm tracking-wide uppercase mb-3">About</p>
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight mb-5 text-white hero-text-shadow">
-            One technician. Every project. From first wire to final walkthrough.
+            One accountable team. Every project. From first wire to final walkthrough.
           </h1>
           <p className="text-white/60 text-base sm:text-lg leading-relaxed max-w-2xl hero-subtext-shadow">
-            Symphony is Matt Earley — one integrator who oversees every project personally, with trusted crew members brought in for larger installs. Pre-wire through programming, you always know who's doing the work.
+            Symphony is a local Eagle County integration team, led by founder Matt Earley and backed by trusted trade partners for larger builds. Pre-wire through programming, you always know who's on your project and who owns the outcome.
           </p>
         </div>
       </section>
@@ -78,17 +78,18 @@ const About = () => {
       {/* Who's Behind Symphony */}
       <section data-reveal className="py-16 sm:py-24 px-4 sm:px-6">
         <div className="max-w-4xl mx-auto">
-          <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">The Person Behind the Work</p>
+          <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">The Team Behind the Work</p>
           <h2 className="text-2xl sm:text-3xl font-bold text-white mb-8">Who's Behind Symphony</h2>
           <div className="space-y-5 text-white/65 text-base sm:text-lg leading-relaxed">
             <p>
-              Matt Earley started Symphony Smart Homes after years in the AV integration industry.
+              Founder Matt Earley started Symphony Smart Homes after years in the AV integration industry.
               The frustration was simple — clients deserved better communication, cleaner work, and
               systems that actually work after the installer leaves.
             </p>
             <p>
-              Based in Eagle County, Matt personally oversees every project from first walkthrough
-              to final programming. When you call Symphony, you talk to the person doing the work.
+              Based in Eagle County, our team keeps every project organized from first walkthrough
+              through final training, with trusted local trade partners brought in where their craft fits.
+              When you call Symphony, you reach the same accountable team that's doing the work.
             </p>
           </div>
         </div>
