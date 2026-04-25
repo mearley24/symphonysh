@@ -44,9 +44,9 @@ const LutronRadioRA3 = () => {
 
   const stats = [
     { label: "Wireless", value: "Clear Connect RF — not Wi-Fi" },
-    { label: "Scale", value: "Up to 400 devices with paired processors" },
-    { label: "Retrofit Ready", value: "No wall-opening just to add control" },
-    { label: "Native Integration", value: "Lumaris light & automated shades" },
+    { label: "Powerfully Scalable", value: "Scales up to 400 devices with paired processors" },
+    { label: "Wirelessly Retrofittable", value: "No opening walls, no rewiring" },
+    { label: "Native Integration", value: "Lumaris lighting, automated shading, wireless keypads — no third-party bridges" },
   ];
 
   // What RadioRA3 offers — moved up to right after the hero per the
@@ -56,51 +56,51 @@ const LutronRadioRA3 = () => {
   const whatYouGet = [
     {
       icon: Lightbulb,
-      title: "Smart dimmers & switches",
+      title: "Intelligent Lighting",
       description:
-        "Lutron Sunnata and Maestro dimmers and switches that dim cleanly to 1%, match the load, and replace what is on your wall today without rewiring the room.",
+        "Sunnata and Maestro dimmers and switches matched to the load — LED, low-voltage, halogen — for clean, flicker-free dimming on every fixture in the room.",
     },
     {
       icon: Sliders,
-      title: "SUNNATA keypads",
+      title: "Sunnata keypads",
       description:
-        "Engraved Sunnata keypads with a soft light bar that fades to show level. Scenes for the room sit on the wall — no app required.",
+        "Available in over 20 colors with gloss and satin finishes, engraved per room. Sunnata touch dimmers use a swipe-to-dim light bar. Scenes live on the wall — no app required.",
     },
     {
       icon: Sparkles,
-      title: "Scenes for real life",
+      title: "Scenes at the press of a button",
       description:
-        "Morning, Cook, Dinner, Movie, Goodnight — one button takes the whole room to the right level. No fiddling with ten dimmers or three apps.",
+        "Goodmorning, Goodbye/Away, Welcome, Movie/Relax, Goodnight — one button takes the whole room to the right level. No fiddling with ten dimmers or three apps.",
     },
     {
       icon: Smartphone,
-      title: "App & voice control",
+      title: "Lutron app & voice",
       description:
-        "The Lutron app on iPhone and Android, plus Alexa, Google, and Siri shortcuts. Works inside the house and from the road, not just on home Wi-Fi.",
+        "The Lutron app on iPhone and Android, plus Alexa, Google, and Siri. Works inside the house and from the road — not tied to home Wi-Fi.",
     },
     {
       icon: Sun,
       title: "Schedules, sunrise & sunset",
       description:
-        "RadioRA3 knows the astronomic clock for Eagle County. Exterior lights rise at dusk, pathway lights fade late, and mornings arrive on schedule.",
+        "Astronomic timeclock built in. Exterior lights rise at dusk, pathway lights fade late, mornings arrive on schedule. Vacation Mode keeps the house looking lived-in while you are away.",
     },
     {
       icon: Layers,
-      title: "Automated shades",
+      title: "Automated shading",
       description:
-        "Sivoia, Triathlon, and Palladiom shades on the same keypads as the lights. Sun-tracking, scenes, and schedules all in one program.",
+        "Triathlon wire-free roller shades and Sivoia QS — on the same keypads as the lights, with sun-tracking, scenes, and schedules all in one program.",
     },
     {
       icon: Sparkles,
-      title: "Lumaris tunable light",
+      title: "Lumaris light",
       description:
-        "Native support for Lumaris — tunable white from 1800K to 4000K, dimming to 0.1%, warm-on-dim that makes a room feel like firelight at night and daylight at breakfast.",
+        "Native integration with Lumaris downlights and Lumaris RGB tunable white tape light. Tunable white and warm dim from one light source — soft, warm tones at night, crisp daylight in the morning. No third-party bridges.",
     },
     {
       icon: Radio,
-      title: "Retrofit-friendly wireless",
+      title: "Wirelessly retrofittable",
       description:
-        "Clear Connect RF instead of Wi-Fi. Keypads, dimmers, and shades drop in without opening walls and keep responding even when the internet goes down.",
+        "Clear Connect RF, independent of Wi-Fi. Keypads, dimmers, and shades drop into a finished home without opening walls, pulling new wire, or changing the power infrastructure.",
     },
   ];
 
@@ -108,22 +108,22 @@ const LutronRadioRA3 = () => {
     {
       title: "Finished homes that want real lighting control",
       description:
-        "RadioRA3 was built for retrofits. Add scenes, keypads, shades, and app control without tearing into drywall or rewiring rooms that already work.",
+        "RadioRA3 is wirelessly retrofittable — built to add intelligent lighting, keypads, and shades without opening walls, pulling new wire, or changing the power infrastructure.",
     },
     {
-      title: "Multi-wing Vail Valley homes",
+      title: "One room today, the whole house later",
       description:
-        "Main house, guest quarters, caretaker units, garage and outdoor lighting — all coordinated on one program with paired processors.",
+        "Upgrade home lighting one room at a time or all at once. RadioRA3 scales up to 400 devices with paired processors — main house, guest quarters, caretaker, exterior.",
     },
     {
       title: "Older Lutron systems that have grown messy",
       description:
-        "HomeWorks QS Illumination, RadioRA Classic, RA2, or Caseta that has outgrown itself. We assess what is worth keeping and migrate the rest to RadioRA3.",
+        "HomeWorks QS Illumination, RadioRA Classic, RA2, or Caseta that has outgrown itself. We retain what is worth keeping and migrate the rest to RadioRA3.",
     },
     {
-      title: "Homes that want to start small and grow",
+      title: "Whole-home control with no third-party bridges",
       description:
-        "One room today, the whole house later. New keypads, dimmers, and shades drop in over time without redoing what already works.",
+        "Native integration with Lumaris, Triathlon, Pico, and Sunnata — the suite is designed together. No flaky bridges, no second app to learn.",
     },
   ];
 
@@ -133,7 +133,7 @@ const LutronRadioRA3 = () => {
     "Sunnata Keypads",
     "Maestro Dimmers",
     "Maestro Switches",
-    "Pico Wireless Remotes",
+    "Pico Paddle Remotes",
     "Tabletop Keypads",
     "RadioRA3 Processor",
     "Repeaters",
@@ -145,40 +145,42 @@ const LutronRadioRA3 = () => {
     "Wall Sensors",
     "Receptacles",
     "Wallplates",
-    "Shades",
-    "Lumaris Light",
+    "Triathlon Shades",
+    "Sivoia QS Shades",
+    "Lumaris Downlights",
+    "Lumaris Tape Light",
   ];
 
   const everydayScenes = [
     {
       step: "01",
-      title: "Morning",
+      title: "Goodmorning",
       description:
-        "Bathroom comes up gently, kitchen lights warm to a friendly level, exterior pathway lights fade as the sun rises over the valley. No tapping, no app.",
+        "Bathroom warms up gently, kitchen lights come to a friendly level, pathway and exterior fade as the sun rises over the valley. Sunrise/sunset on the astronomic clock — no tapping, no app.",
     },
     {
       step: "02",
-      title: "Cook",
+      title: "Goodbye/Away",
       description:
-        "One button on the kitchen keypad — under-cabinet on, island down a notch, dining at a soft glow, music optional. The room is set before the burner is lit.",
+        "One tap on the way out the door. The house goes dark, Vacation Mode keeps the exterior on a lived-in pattern, and the Lutron app shows the state of every room from anywhere.",
     },
     {
       step: "03",
-      title: "Movie",
+      title: "Welcome",
       description:
-        "Great-room scene drops the cans, holds the wall sconces low, brings the shades down, and leaves a step-light on for the kitchen run.",
+        "Front-door keypad brings the entry, great room, and kitchen to the right level — guests walk into a house that already feels lived-in, not a dark foyer fumbling for switches.",
     },
     {
       step: "04",
-      title: "Goodnight",
+      title: "Movie/Relax",
       description:
-        "Primary suite keypad shuts the house down — interior lights off, exterior on a low security level, shades closed, primary bedroom fades to sleep.",
+        "Great-room scene drops the cans, holds the wall sconces low, brings Triathlon shades down, and leaves a step-light on for the kitchen run.",
     },
     {
       step: "05",
-      title: "Away",
+      title: "Goodnight",
       description:
-        "One tap on the way out the door. House goes dark, exterior keeps a vacation pattern, and the Lutron app shows the state of every room from anywhere.",
+        "Primary suite keypad shuts the house down — interior lights off, exterior on a low security level, shades closed, primary bedroom fades to sleep.",
     },
   ];
 
@@ -187,7 +189,7 @@ const LutronRadioRA3 = () => {
       icon: Hammer,
       title: "Walk the house with you",
       description:
-        "We see how each room is actually lived in — where the family enters, where they cook, where they wind down — before recommending keypads or scenes.",
+        "We see how each room is actually lived in — entry points, cooking, wind-down — before recommending Sunnata keypads, Pico Paddle remotes, or Lumaris fixtures.",
     },
     {
       icon: Sliders,
@@ -199,25 +201,25 @@ const LutronRadioRA3 = () => {
       icon: Layers,
       title: "Engrave the keypads to the room",
       description:
-        "Button labels the family actually uses. Scenes tuned to how the room is lived in, not a demo program leftover from day one.",
+        "Designer Sunnata keypads in the colors and finishes the room calls for, with engraving the family actually reads — Goodmorning, Welcome, Movie, Goodnight.",
     },
     {
       icon: Network,
-      title: "Network & remote app access",
+      title: "Cloud-powered programming",
       description:
-        "Static IP, proper port forwarding where needed, and Lutron app access that works from the road. Documented so the next service call does not start from scratch.",
+        "Cloud-connected, PC-programmable RadioRA3. Schedules, scenes, sunrise/sunset, and Vacation Mode tuned in software, then refined after the family lives with it.",
     },
     {
       icon: Wrench,
       title: "Service the system you already own",
       description:
-        "Inherited an RA3 system from another installer? We read the program, document it, fix what is broken, and clean it up so the wall makes sense again.",
+        "Inherited an RA3 system? We read the program, document it, fix what is broken, and clean it up so the wall makes sense again.",
     },
     {
       icon: AlertTriangle,
       title: "Troubleshooting without the runaround",
       description:
-        "If the original installer is gone or unresponsive, we come in, identify the device on the wall, and get the system working again — usually on the first visit.",
+        "If the original installer is gone or unresponsive, we identify the device on the wall and get the system working again — usually on the first visit.",
     },
   ];
 
@@ -313,7 +315,7 @@ const LutronRadioRA3 = () => {
     <PageBackground image={bgLighting}>
       <SEO
         title="Lutron RadioRA3 Installation & Programming in Vail Valley"
-        description="RadioRA3 installation, programming, troubleshooting, and upgrade support for Vail Valley homes. Symphony Smart Homes helps with lighting scenes, keypads, shades, processors, dimmers, and support."
+        description="Lutron RadioRA3 design, installation, and programming for Vail Valley homes — a professionally installed suite of wireless controls, intelligent lighting, and window treatments. Wirelessly retrofittable; scales up to 400 devices with paired processors. Native integration with Lumaris and Triathlon."
         keywords="RadioRA3 Vail Valley, Lutron RadioRA3 installer, RadioRA3 programming, Lutron keypads, RadioRA3 processor, Lutron dimmers Eagle County"
         schema={[serviceSchema, faqSchema]}
         breadcrumbs={[
@@ -337,10 +339,10 @@ const LutronRadioRA3 = () => {
             Lutron RadioRA3
           </p>
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight mb-5 text-white hero-text-shadow">
-            RadioRA3, made simple.
+            Intelligent lighting that simplifies home control.
           </h1>
           <p className="text-white/60 text-base sm:text-lg leading-relaxed mb-8 max-w-2xl hero-subtext-shadow">
-            Smart lighting, shades, keypads, app control, and voice control — professionally installed and tuned for the way your Vail Valley home actually lives.
+            A professionally installed suite of wireless controls, intelligent lighting, and window treatments designed to simplify home control — programmed and tuned for the way your Vail Valley home actually lives.
           </p>
           <div className="flex flex-col sm:flex-row gap-3">
             <a
@@ -388,10 +390,10 @@ const LutronRadioRA3 = () => {
             What RadioRA3 Offers
           </p>
           <h2 className="text-2xl sm:text-3xl font-bold text-white mb-5">
-            Everything you can put on the wall, on a schedule, or in your pocket.
+            Wireless controls, intelligent lighting, automated shading.
           </h2>
           <p className="text-white/60 text-base leading-relaxed mb-10 max-w-3xl">
-            RadioRA3 is a professionally installed wireless control system for lighting, shades, keypads, schedules, scenes, and whole-home comfort. Symphony makes the system feel less like technology and more like the house working the way it should.
+            RadioRA3 is Lutron's professionally installed wireless control system — designed to scale to residential retrofits and grow one room at a time. Symphony designs the program, matches dimmers to fixtures, engraves the keypads, and tunes the scenes so the house simply works the way it should.
           </p>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
             {whatYouGet.map((item, i) => (
@@ -539,7 +541,7 @@ const LutronRadioRA3 = () => {
             Two Lutron platforms. Which one is right?
           </h2>
           <p className="text-white/60 text-base leading-relaxed mb-8 max-w-3xl">
-            RadioRA3 is the right choice for most homes — wireless, retrofit-friendly, scalable to 400 devices. HomeWorks is Lutron's flagship platform for architectural homes, centralized panels, 10,000-zone designs, and Ketra or Palladiom shades.
+            RadioRA3 is the right choice for most homes — wirelessly retrofittable, scaling up to 400 devices with paired processors, native integration with Lumaris, Triathlon, and Pico. HomeWorks is Lutron's flagship for the world's most uncompromising lighting and home automation projects — centralized low-voltage QS wiring or Clear Connect expansive wireless coverage supporting up to 10,000 zones, Ketra, and Palladiom.
           </p>
           <div className="grid sm:grid-cols-2 gap-5 mb-6">
             <div className="bg-black/40 backdrop-blur-sm border border-accent/30 rounded-xl p-6">
@@ -548,7 +550,7 @@ const LutronRadioRA3 = () => {
               </p>
               <h3 className="text-white font-semibold text-lg mb-2">RadioRA3</h3>
               <p className="text-white/55 text-sm leading-relaxed">
-                Wireless retrofits, scalable smart lighting, up to 400 devices, one room to whole home. Clear Connect RF, no Wi-Fi dependency.
+                Wirelessly retrofittable; scales up to 400 devices with paired processors, one room to whole home. Clear Connect RF — not Wi-Fi. Native integration with Lumaris, automated shading, and wireless keypads.
               </p>
             </div>
             <Link
@@ -562,7 +564,7 @@ const LutronRadioRA3 = () => {
                 HomeWorks
               </h3>
               <p className="text-white/55 text-sm leading-relaxed mb-4">
-                Architectural homes, centralized panels, up to 10,000 zones, native Ketra / Lumaris / Palladiom, QS wired backbone options.
+                Lutron's flagship for uncompromising projects. Centralized low-voltage QS wiring or Clear Connect expansive wireless coverage supporting up to 10,000 zones. Native Ketra, Lumaris, Palladiom — hand-crafted keypads.
               </p>
               <span className="inline-flex items-center gap-1 text-accent text-sm font-medium group-hover:gap-2 transition-all">
                 Explore HomeWorks <ArrowRight className="w-3.5 h-3.5" />
@@ -682,7 +684,7 @@ const LutronRadioRA3 = () => {
               {
                 title: "Lutron HomeWorks",
                 description:
-                  "Lutron's flagship platform for architectural homes, Ketra and Lumaris, and luxury whole-home lighting.",
+                  "Lutron's flagship for the world's most uncompromising lighting and home automation projects.",
                 path: "/platforms/lutron-homeworks",
               },
               {
@@ -694,7 +696,7 @@ const LutronRadioRA3 = () => {
               {
                 title: "Motorized Shades",
                 description:
-                  "Lutron shades that wake up with the sun and tuck in at sunset — tied to the same keypads.",
+                  "Triathlon wire-free roller shades and Sivoia QS — sun-tracking, on the same keypads as the lights.",
                 path: "/services/shades",
               },
               {
