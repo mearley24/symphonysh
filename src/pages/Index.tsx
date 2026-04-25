@@ -23,41 +23,41 @@ const Index = () => {
   ];
 
   const platforms = [
-    { icon: Layers, title: "Lutron HomeWorks", desc: "The flagship Lutron line for architectural homes — Ketra, Lumaris, Palladiom, hand-crafted keypads.", link: "/platforms/lutron-homeworks", cta: "Explore HomeWorks" },
-    { icon: Home, title: "Lutron RadioRA3", desc: "Wireless lighting and shades that retrofit cleanly — Sunnata keypads, Lumaris, Triathlon Select.", link: "/platforms/lutron-radiora3", cta: "See what RadioRA3 offers" },
-    { icon: Wrench, title: "Control4", desc: "One app and one set of keypads across lighting, audio, climate, security, and shades.", link: "/platforms/control4", cta: "Open the Control4 page" },
-    { icon: Cable, title: "AVA", desc: "A single physical remote the whole household can use — TV, theater, music — built around AVA OS.", link: "/platforms/ava", cta: "Meet the AVA remote" },
+    { icon: Wrench, title: "Control4", desc: "Our default for whole-home lighting, scenes, audio, climate, and shades — one app, one set of keypads.", link: "/platforms/control4", cta: "Open the Control4 page" },
+    { icon: Layers, title: "Lutron HomeWorks", desc: "Architectural lighting option — Ketra, Lumaris, Palladiom, hand-crafted keypads. For luxury new builds.", link: "/platforms/lutron-homeworks", cta: "Explore HomeWorks" },
+    { icon: Home, title: "Lutron RadioRA3", desc: "Wireless lighting and shades for clean retrofits — Sunnata keypads, Lumaris, Triathlon Select.", link: "/platforms/lutron-radiora3", cta: "See RadioRA3" },
+    { icon: Cable, title: "AVA", desc: "One simple remote for TV, theater, and music. Great in media rooms or for a remote-first household.", link: "/platforms/ava", cta: "Meet the AVA remote" },
   ];
 
   const services = [
-    { icon: Home, title: "Whole-Home Integration", description: "Lighting, audio, climate, security, and shades on one keypad and one app — usually Control4 sitting on a Lutron lighting layer.", link: "/services/home-integration" },
-    { icon: Cable, title: "Pre-Wire & New Construction", description: "Clean low-voltage rough-in for network, audio, shades, and automation — planned with your GC, electrician, and architect.", link: "/services/prewire" },
-    { icon: Wrench, title: "Service & Maintenance", description: "Keep things running quietly in the background. Remote diagnostics, firmware, on-site fixes, and second-home check-ins.", link: "/services/maintenance" },
-    { icon: ScanLine, title: "Matterport 3D Scanning", description: "Immersive 3D tours for listings, construction documentation, and property records.", link: "/matterport" },
+    { icon: Home, title: "Whole-Home Integration", description: "Control4 lighting, scenes, audio, climate, and shades on one app — Lutron lighting when the home calls for it.", link: "/services/home-integration" },
+    { icon: Cable, title: "Pre-Wire & New Construction", description: "Low-voltage rough-in planned with your GC, electrician, and architect.", link: "/services/prewire" },
+    { icon: Wrench, title: "Service & Maintenance", description: "Remote diagnostics, firmware, on-site fixes, and second-home check-ins.", link: "/services/maintenance" },
+    { icon: ScanLine, title: "Matterport 3D Scanning", description: "Immersive 3D tours for listings, construction docs, and records.", link: "/matterport" },
   ];
 
   const steps = [
-    { number: "01", title: "Walkthrough", description: "We walk the property, talk through how you actually live, and listen to what the house should do for you." },
-    { number: "02", title: "Design & Proposal", description: "A clear scope with transparent line items — what each platform does, what it costs, and what to defer." },
-    { number: "03", title: "Build", description: "Wiring, mounting, and programming done quietly, on schedule, with the rest of the trades in mind." },
-    { number: "04", title: "Handoff & Support", description: "We walk you through scenes and routines until they feel like home — then stay reachable when something needs attention." },
+    { number: "01", title: "Walkthrough", description: "We walk the property and listen to how you actually live." },
+    { number: "02", title: "Design & Proposal", description: "Clear scope, transparent line items, real numbers." },
+    { number: "03", title: "Build", description: "Wiring, mounting, and programming on schedule with the rest of the trades." },
+    { number: "04", title: "Handoff & Support", description: "Scenes tuned until they feel like home — then we stay reachable." },
   ];
 
   const differentiators = [
-    { title: "Mountain homes, not suburbs", description: "Built for Eagle County altitude, weather, and the way these homes are actually lived in — full-time, second home, or rental." },
-    { title: "One accountable team", description: "Same people from first walkthrough to final training. Clear ownership, nobody to chase, nothing falling through the cracks." },
-    { title: "Quiet reliability", description: "Documented systems on real platforms — Lutron, Control4, AVA. No proprietary lock-in, no orphaned gear." },
-    { title: "We answer the phone", description: "Remote fixes when possible, on-site when needed. Especially for second homes that should just be ready when you arrive." },
+    { title: "Mountain homes, not suburbs", description: "Built for Eagle County weather and how these homes are actually lived in." },
+    { title: "One accountable team", description: "Same faces from walkthrough through year five." },
+    { title: "Quiet reliability", description: "Real platforms — Control4, Lutron, AVA. No proprietary lock-in." },
+    { title: "We answer the phone", description: "Remote fixes when possible, on-site when needed." },
   ];
 
   const faqs = [
-    { q: "How much does a project usually run?", a: "It really comes down to scope. A focused room or two might land around $1,500+, while a full new-build system often falls in the $15,000–$80,000+ range. After we walk the property and understand what you want the house to do, you'll see real numbers in a proposal — no guessing." },
-    { q: "Which platforms do you work in most?", a: "Lutron HomeWorks and RadioRA3 for lighting, scenes, and shades. Control4 when many subsystems should live behind one interface. AVA when the family mostly wants TV, theater, and music to feel effortless. We pair them where it makes sense and stay brand-honest about which one fits your home." },
-    { q: "Can you take over a system another company set up?", a: "Yes. Inherited Control4, RadioRA3, HomeWorks, and AVA systems are some of our most common service calls. We read what's there, document it, and clean up the program until the house makes sense again." },
-    { q: "Second home or rental — does that change anything?", a: "It changes how we design routines and remote support. We build in away modes, arrival and departure scenes, and remote diagnostics so a quick text from the road can warm the house up before you land." },
-    { q: "Do you work with builders, architects, and designers?", a: "All the time. Most of our larger projects start at the framing stage with the GC, electrician, lighting designer, and architect. Low-voltage planned early is dramatically cheaper than chasing it later." },
-    { q: "How long does a project take?", a: "Small rooms — a TV mount, a few speakers — can be a few hours. A whole-home build is phased: pre-wire at framing, trim-out and programming as the house comes together. Roughly 3–6 months from rough-in to final handoff on a full system, depending on the build schedule." },
-    { q: "Where do you work?", a: "Vail Valley and Eagle County — Vail, Beaver Creek, Avon, Edwards, Eagle, Minturn, and nearby. If you're close and not sure, ask." },
+    { q: "How much does a project usually run?", a: "It depends on scope. A focused room or two might land around $1,500+. A full new-build system often falls in the $15,000–$80,000+ range. You'll see real numbers in a proposal — no guessing." },
+    { q: "Which platforms do you work in most?", a: "Control4 is our default for whole-home lighting, scenes, audio, climate, and shades. Lutron HomeWorks and RadioRA3 are strong choices when the home calls for Lutron-grade lighting or retrofit. AVA is great as a single household remote in media rooms. They run independently and we mix only when it helps." },
+    { q: "Can you take over a system another company set up?", a: "Yes. Inherited Control4, RadioRA3, HomeWorks, and AVA systems are some of our most common service calls." },
+    { q: "Second home or rental — does that change anything?", a: "It changes how we design routines and remote support. Away modes, arrival scenes, and remote diagnostics so the house is ready when you land." },
+    { q: "Do you work with builders, architects, and designers?", a: "All the time. Larger projects usually start at framing with the GC, electrician, and architect." },
+    { q: "How long does a project take?", a: "Small rooms can be a few hours. A whole-home build runs roughly 3–6 months from rough-in to final handoff, depending on the build schedule." },
+    { q: "Where do you work?", a: "Vail Valley and Eagle County — Vail, Beaver Creek, Avon, Edwards, Eagle, Minturn, and nearby." },
   ];
 
   const serviceSchema = localBusinessHomePageSchema();
@@ -115,10 +115,10 @@ const Index = () => {
                   <span className="w-8 h-px bg-accent" />
                 </p>
                 <h1 className="animate-fade-in text-5xl sm:text-6xl lg:text-7xl font-extrabold leading-[0.95] mb-6 text-white hero-text-shadow [animation-delay:100ms]">
-                  Homes that quietly take care of you.
+                  We make smart homes that just work.
                 </h1>
                 <p className="animate-fade-in text-white/65 text-lg sm:text-xl leading-relaxed mb-10 max-w-xl mx-auto hero-subtext-shadow [animation-delay:200ms]">
-                  Lutron lighting, Control4 scenes, and AVA media — tuned to how you actually live. Mornings that ease open. Evenings that settle on their own. A second home that's ready before you arrive.
+                  Control4 lighting and scenes for the whole home — Lutron when the home calls for it, AVA when you want one simple remote. Tuned to how you actually live.
                 </p>
               </div>
             </div>
@@ -186,7 +186,7 @@ const Index = () => {
               <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">A Day at Home</p>
               <h2 className="text-2xl sm:text-3xl font-bold text-white">Four moments your home should already know.</h2>
               <p className="text-white/55 text-base sm:text-lg leading-relaxed mt-4 max-w-2xl mx-auto">
-                Scenes are the soul of a Symphony home — quiet, named routines built into Lutron keypads, the Control4 app, or an AVA remote. You stop thinking about the system and start living in the room.
+                Named scenes on a Control4 keypad, a Lutron keypad, or an AVA remote. You stop thinking about the system and start living in the room.
               </p>
             </div>
             <div data-reveal-children className="grid sm:grid-cols-2 gap-4">
@@ -210,7 +210,7 @@ const Index = () => {
               <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">Platforms</p>
               <h2 className="text-2xl sm:text-3xl font-bold text-white">The systems your home actually runs on.</h2>
               <p className="text-white/55 text-base leading-relaxed mt-4 max-w-2xl mx-auto">
-                Four platforms cover almost every Vail Valley home. The right pick depends on the house — architectural new build, finished retrofit, family-friendly media, or all of the above on one keypad.
+                Control4 is our default for whole-home lighting and control. Lutron and AVA are independent options we add when the home calls for them — standalone or mixed when it makes sense.
               </p>
             </div>
             <div data-reveal-children className="grid sm:grid-cols-2 gap-4">
@@ -249,7 +249,7 @@ const Index = () => {
             <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">Not sure where to start?</p>
             <h2 className="text-2xl sm:text-3xl font-bold text-white mb-4">Walk through the options in three minutes.</h2>
             <p className="text-white/55 text-base mb-8 max-w-2xl mx-auto">
-              Six quick questions about the house and how you live in it. We'll suggest a starting point — HomeWorks, RadioRA3, Control4, AVA, or just a stronger network first — with no pressure to commit.
+              Six questions about the house. We'll point to a starting point — Control4, HomeWorks, RadioRA3, AVA, or a stronger network first — no pressure to commit.
             </p>
             <Link
               to="/setup-finder"
@@ -354,7 +354,7 @@ const Index = () => {
                 <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">The Team</p>
                 <h2 className="text-2xl sm:text-3xl font-bold text-white mb-4">Same faces from first walkthrough through year five.</h2>
                 <p className="text-white/50 text-base leading-relaxed mb-6">
-                  Symphony is a local Eagle County team, led by founder Matt Earley with trusted trade partners on bigger builds. The same people who plan the system are the ones who tune it months later when the routines need a small adjustment.
+                  A local Eagle County team led by founder Matt Earley. The people who plan the system are the ones who tune it months later.
                 </p>
                 <Link
                   to="/about"
@@ -415,7 +415,7 @@ const Index = () => {
             <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">When You're Ready</p>
             <h2 className="text-2xl sm:text-3xl font-bold text-white mb-4">Tell us about the home.</h2>
             <p className="text-white/55 text-base mb-8 max-w-xl mx-auto">
-              New build, finished retrofit, or an inherited system that needs attention — share the property and how you live there. We'll point you to the platform that actually fits.
+              New build, retrofit, or an inherited system — share the property and how you live there. We'll point to the platform that fits.
             </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
               <Link

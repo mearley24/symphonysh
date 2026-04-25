@@ -24,17 +24,18 @@ const SmartLighting = () => {
   };
 
   const capabilities = [
-    { icon: Lightbulb, title: "Sunnata & Hand-crafted Keypads", description: "Lutron Sunnata for RadioRA3 and hand-crafted Alisse, Architectural, or Signature keypads for HomeWorks — clean walls, premium feel, scenes labeled for how you live." },
-    { icon: Palette, title: "Named Scenes", description: "Goodmorning, Welcome, Movie, Goodnight, Away — one-touch scenes built into the keypad and the app, in the order they actually run." },
-    { icon: Clock, title: "Astronomic Schedules", description: "Lights that follow sunrise and sunset on their own — gentle in the morning, warm at dinner, soft path lights overnight without anyone touching anything." },
-    { icon: Eye, title: "Lumaris LED & Motion", description: "Native Lumaris tunable-white LED for warm-dim ambiance, plus motion in hallways, baths, and closets so the right room lights itself when you walk in." },
+    { icon: Lightbulb, title: "Keypads on the wall", description: "Control4 keypads as the default. Lutron Sunnata or hand-crafted HomeWorks keypads when the home calls for Lutron-grade lighting." },
+    { icon: Palette, title: "Named Scenes", description: "Goodmorning, Welcome, Movie, Goodnight, Away — one-touch scenes labeled in plain English." },
+    { icon: Clock, title: "Astronomic Schedules", description: "Lights that follow sunrise and sunset on their own — gentle mornings, warm dinners, soft path lights overnight." },
+    { icon: Eye, title: "Tunable-white LED & Motion", description: "Tunable-white LED for warm-dim ambiance plus motion in hallways, baths, and closets." },
   ];
 
   const faqs = [
-    { q: "What's the difference between smart bulbs and a real lighting system?", a: "Smart bulbs ride on Wi-Fi and apps — fine for a lamp, frustrating across a whole house. Lutron HomeWorks and RadioRA3 use dedicated dimmers, keypads, and a Clear Connect mesh that stays solid even if the internet is acting up." },
-    { q: "Can you retrofit a finished home?", a: "Yes. RadioRA3 is built for it — Sunnata keypads and dimmers go in where the existing switches are, no opened walls. HomeWorks fits new builds and deep remodels where the design calls for hand-crafted keypads and a coordinated wired backbone." },
-    { q: "What does smart lighting cost?", a: "A single room with smart dimmers and a keypad usually starts around $1,200. Whole-home RadioRA3 or HomeWorks projects typically range from $6,000 to $25,000+ depending on circuit count, fixtures, and how custom the keypads are." },
-    { q: "Will guests know it's a smart system?", a: "Probably not. The keypads look and feel like premium switches, scenes are labeled in plain English, and you can still hit a single button to turn a room on or off without any app." },
+    { q: "What's the difference between smart bulbs and a real lighting system?", a: "Smart bulbs ride on Wi-Fi — fine for a lamp, frustrating across a house. Control4 and Lutron use dedicated dimmers and keypads on a system that stays solid even if the internet is acting up." },
+    { q: "Which lighting platform do you usually start with?", a: "Control4 is our default for whole-home lighting and scenes. Lutron RadioRA3 is the right call for finished-home retrofits or when the home wants the Lutron keypad and dimming feel. HomeWorks fits luxury new builds with Ketra, Lumaris, and Palladiom." },
+    { q: "Can you retrofit a finished home?", a: "Yes. Control4 dimmers and keypads or Lutron RadioRA3 Sunnata keypads both retrofit cleanly into existing switch boxes — no opened walls." },
+    { q: "What does smart lighting cost?", a: "A single room with smart dimmers and a keypad usually starts around $1,200. Whole-home projects range from $6,000 to $25,000+ depending on circuit count and how custom the keypads are." },
+    { q: "Will guests know it's a smart system?", a: "Probably not. Keypads look and feel like premium switches, scenes are labeled in plain English, and a single button still turns the room on or off without an app." },
   ];
 
 
@@ -64,7 +65,7 @@ const SmartLighting = () => {
             <p className="text-accent font-medium text-sm tracking-wide uppercase">Smart Lighting</p>
           </div>
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight mb-5 text-white hero-text-shadow">Lighting that quietly sets the room.</h1>
-          <p className="text-white/60 text-base sm:text-lg leading-relaxed mb-8 max-w-2xl hero-subtext-shadow">Lutron HomeWorks and RadioRA3 keypads on the wall, named scenes for the way you actually live, and lighting that warms in the morning and softens at night without anyone reaching for a phone.</p>
+          <p className="text-white/60 text-base sm:text-lg leading-relaxed mb-8 max-w-2xl hero-subtext-shadow">Control4 lighting and scenes by default — Lutron RadioRA3 or HomeWorks when the home calls for it. Named scenes, warm mornings, soft amber overnight, no phone in hand.</p>
           <div className="flex flex-col sm:flex-row gap-3">
             <Link to="/scheduling?service=smart-lighting" className="inline-flex items-center justify-center gap-2 bg-accent hover:bg-accent/90 text-white px-7 py-4 rounded-lg font-medium transition-colors text-base">Schedule a Walkthrough <ArrowRight className="w-4 h-4" /></Link>
             <a href="tel:+19705193013" className="inline-flex items-center justify-center gap-2 border border-white/20 hover:border-white/40 hover:bg-white/5 text-white px-7 py-4 rounded-lg font-medium transition-colors text-base"><Phone className="w-4 h-4" /> (970) 519-3013</a>
@@ -138,9 +139,9 @@ const SmartLighting = () => {
           <h2 className="text-2xl sm:text-3xl font-bold text-white mb-8">Related Services</h2>
           <div className="grid sm:grid-cols-2 gap-5">
             {[
-              { title: "Lutron RadioRA3", description: "Our most-installed lighting platform — deeper dive into keypads, dimmers, and scene programming.", path: "/platforms/lutron-radiora3" },
-              { title: "Motorized Shades", description: "Lighting and shades that work together for perfect ambiance, privacy, and energy savings.", path: "/services/shades" },
-              { title: "Control4", description: "When lighting, audio, climate, and shades should all live behind one interface.", path: "/platforms/control4" },
+              { title: "Control4", description: "Our default for whole-home lighting and control — keypads, scenes, and one app.", path: "/platforms/control4" },
+              { title: "Lutron RadioRA3", description: "Lutron lighting option for finished-home retrofits.", path: "/platforms/lutron-radiora3" },
+              { title: "Motorized Shades", description: "Lighting and shades that work together for ambiance, privacy, and energy savings.", path: "/services/shades" },
               { title: "Not sure what you need?", description: "Answer a few questions and we will suggest a starting point for your home.", path: "/setup-finder" },
             ].map((s, i) => (
               <Link key={i} to={s.path} className="group flex items-start justify-between gap-4 p-5 rounded-xl border border-white/8 bg-black/40 backdrop-blur-sm hover:border-accent/30 transition-colors">
@@ -159,7 +160,7 @@ const SmartLighting = () => {
         <div className="max-w-3xl mx-auto text-center">
           <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">Get Started</p>
             <h2 className="text-2xl sm:text-3xl font-bold text-white mb-4">Start with one room or rethink the whole house.</h2>
-          <p className="text-white/55 text-base mb-8 max-w-xl mx-auto">RadioRA3 retrofits cleanly into finished homes; HomeWorks is the right line when the design calls for hand-crafted keypads and Ketra. We'll help you tell which fits.</p>
+          <p className="text-white/55 text-base mb-8 max-w-xl mx-auto">Control4 lighting is our default. RadioRA3 retrofits cleanly into finished homes; HomeWorks fits luxury new builds with Ketra and Palladiom. We'll help you tell which fits.</p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <Link to="/scheduling?service=smart-lighting" className="inline-flex items-center justify-center gap-2 bg-accent hover:bg-accent/90 text-white px-8 py-4 rounded-lg font-medium transition-colors text-base">Schedule a Walkthrough <ArrowRight className="w-4 h-4" /></Link>
             <a href="tel:+19705193013" className="inline-flex items-center justify-center gap-2 border border-white/20 hover:border-white/40 hover:bg-white/5 text-white px-8 py-4 rounded-lg font-medium transition-colors text-base"><Phone className="w-4 h-4" /> (970) 519-3013</a>

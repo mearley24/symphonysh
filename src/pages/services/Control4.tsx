@@ -270,10 +270,10 @@ const Control4 = () => {
             Control4
           </p>
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight mb-5 text-white hero-text-shadow">
-            Your personalized smart home, one interface.
+            Whole-home lighting and control, one interface.
           </h1>
           <p className="text-white/60 text-base sm:text-lg leading-relaxed mb-8 max-w-2xl hero-subtext-shadow">
-            Control4 brings lighting, entertainment, security, and comfort onto one private, secure, personalized platform — controlled from the Control4 App, dedicated touchscreens, on-wall keypads, or a smart remote.
+            Our default for whole-home projects. Lighting, scenes, audio, climate, security, and shades behind one app, one keypad family, and a smart remote.
           </p>
           <div className="flex flex-col sm:flex-row gap-3">
             <a

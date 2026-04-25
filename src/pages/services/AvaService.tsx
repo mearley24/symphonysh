@@ -112,9 +112,9 @@ const AvaService = () => {
         "Harmony, Logitech, and other legacy universals with broken databases and flaky IR are one of the main reasons homeowners call us about AVA.",
     },
     {
-      title: "Pairs with Lutron and Control4",
+      title: "Standalone or alongside Control4",
       description:
-        "AVA handles the TV, audio, and the rooms beyond the screen. Lutron handles the lighting load. Control4 ties the wider house together when needed. Clean systems, one beautifully simple keypad.",
+        "AVA runs independently — no Control4 or Lutron required. When the rest of the home runs on Control4, AVA pairs cleanly in the media room.",
     },
   ];
 
@@ -307,10 +307,10 @@ const AvaService = () => {
             AVA
           </p>
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight mb-5 text-white hero-text-shadow">
-            One keypad. Every device. Beautifully simple.
+            One simple remote. The room just works.
           </h1>
           <p className="text-white/60 text-base sm:text-lg leading-relaxed mb-8 max-w-2xl hero-subtext-shadow">
-            AVA OS makes complex systems feel simple and connected. Cinema Remote runs AVA OS on a built-in octa-core processor for TV rooms; Home Remote takes the same experience to spaces beyond the screen. AVA Flows handles the automation — no coding.
+            A room-first option for TV, theater, and music. Cinema Remote runs AVA OS on a built-in processor; Home Remote covers rooms without a TV. Stands alone or pairs with Control4 in the rest of the house.
           </p>
           <div className="flex flex-col sm:flex-row gap-3">
             <a

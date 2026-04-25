@@ -36,7 +36,7 @@ const About = () => {
             Same faces, same number, same house — from rough-in to year five.
           </h1>
           <p className="text-white/60 text-base sm:text-lg leading-relaxed max-w-2xl hero-subtext-shadow">
-            Symphony is a local Eagle County team led by founder Matt Earley, with trusted trade partners for larger builds. The same people who walk the property are the ones who tune the routines two years later when the family wants the morning scene to start ten minutes earlier.
+            A local Eagle County team led by founder Matt Earley. The people who walk the property are the same ones who tune the routines two years later.
           </p>
         </div>
       </section>
@@ -53,10 +53,10 @@ const About = () => {
 
           <div data-reveal-children className="grid sm:grid-cols-2 gap-5">
             {[
-              { title: "Do it right the first time", description: "Every cable labeled, every system tested, every program documented. Shortcuts create callbacks — and that's the worst version of this work." },
-              { title: "Keep it quiet for you", description: "If the house needs an instruction manual to turn on a light, something went wrong. Scenes on the wall, named after how you actually live." },
-              { title: "Transparent pricing", description: "Detailed proposals with clear line items. What each platform costs, what it includes, and what to defer until later." },
-              { title: "A real person picks up", description: "When something needs attention, you reach the same team that knows your house. Remote fixes when possible, on-site when needed — especially for second homes." },
+              { title: "Do it right the first time", description: "Every cable labeled, every system tested, every program documented." },
+              { title: "Keep it quiet for you", description: "If the house needs a manual to turn on a light, something went wrong. Scenes on the wall, named in plain English." },
+              { title: "Transparent pricing", description: "Detailed proposals with clear line items — what each platform costs and what to defer." },
+              { title: "A real person picks up", description: "Reach the same team that knows your house. Remote fixes when possible, on-site when needed." },
             ].map((item, i) => (
               <div key={i} className="flex gap-4 p-5 rounded-xl border border-white/8 bg-black/40 backdrop-blur-sm hover:border-accent/20 transition-all duration-200">
                 <CheckCircle2 className="w-5 h-5 text-accent shrink-0 mt-0.5" />
@@ -82,10 +82,10 @@ const About = () => {
           <h2 className="text-2xl sm:text-3xl font-bold text-white mb-8">Who's Behind Symphony</h2>
           <div className="space-y-5 text-white/65 text-base sm:text-lg leading-relaxed">
             <p>
-              Founder Matt Earley started Symphony after years in the AV integration industry. The frustration was simple — clients deserved cleaner work, better communication, and systems that still felt good after the trades had gone.
+              Founder Matt Earley started Symphony after years in AV integration. Clients deserved cleaner work, better communication, and systems that still felt good after the trades had gone.
             </p>
             <p>
-              Based in Eagle County, the team works the same homes year after year — full-time residences, second homes, family compounds — and brings in trusted local trade partners where their craft fits. When you call Symphony, you reach the same people who know your house.
+              Based in Eagle County, the team works the same homes year after year — full-time residences, second homes, family compounds. Trusted trade partners brought in where their craft fits.
             </p>
           </div>
         </div>
@@ -97,7 +97,7 @@ const About = () => {
           <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">When You're Ready</p>
           <h2 className="text-2xl sm:text-3xl font-bold text-white mb-4">Walk us through the home.</h2>
           <p className="text-white/55 text-base mb-8 max-w-xl mx-auto">
-            New build, finished retrofit, or an inherited system that needs attention — share what's there and how you live in it. No pressure, no sales pitch.
+            New build, retrofit, or an inherited system — share what's there. No pressure, no sales pitch.
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <Link to="/scheduling" className="inline-flex items-center justify-center gap-2 bg-accent hover:bg-accent/90 text-white px-8 py-4 rounded-lg font-medium transition-colors text-base">
