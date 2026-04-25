@@ -127,23 +127,23 @@ const Control4 = () => {
         { label: "Scenes", hint: "Welcome, Movie, Goodnight — engraved on a keypad" },
         { label: "Favorites", hint: "Personal home-screen layouts per user" },
         { label: "Schedules", hint: "Time, sunrise/sunset, and conditional schedules" },
-        { label: "Alerts & notifications", hint: "Push and in-app alerts for the events that matter" },
+        { label: "Alerts", hint: "Push and in-app notifications for the events that matter" },
       ],
     },
     {
-      title: "Connected categories",
+      title: "What it ties together",
       description:
-        "The subsystems Control4 ties together — driver-supported and confirmed against the gear actually in the house.",
+        "Subsystems Control4 connects under one interface — driver-supported and confirmed against the gear actually in the house.",
       items: [
         { label: "Lighting", href: "/services/smart-lighting", hint: "Lutron HomeWorks, RadioRA3, and Control4 lighting" },
-        { label: "Whole-home audio", href: "/services/audio-entertainment", hint: "Sonos, Denon, and dedicated distributed audio" },
+        { label: "Audio", href: "/services/audio-entertainment", hint: "Sonos, Denon, and dedicated distributed audio" },
         { label: "Climate & HVAC", href: "/services/climate-control", hint: "Thermostats, mini-splits, and zoned HVAC" },
         { label: "Security", href: "/services/security-systems", hint: "Cameras, doorbells, and intrusion" },
-        { label: "Motorized shades", href: "/services/shades", hint: "Lutron, Hunter Douglas, and Lutron Triathlon" },
+        { label: "Shades", href: "/services/shades", hint: "Lutron, Hunter Douglas, and Lutron Triathlon motorized shades" },
         { label: "Locks, gates & garage", hint: "Smart locks and gate/garage drivers where verified" },
         { label: "TVs & projectors", hint: "IP- and IR-controlled displays" },
-        { label: "Streaming media players", hint: "Apple TV, Roku, and built-in media services" },
-        { label: "Networking gear", href: "/services/networking", hint: "Routers, switches, access points — the foundation under it all" },
+        { label: "Streaming players", hint: "Apple TV, Roku, and built-in media services" },
+        { label: "Networking", href: "/services/networking", hint: "Routers, switches, access points — the foundation under it all" },
       ],
     },
     {
@@ -384,17 +384,17 @@ const Control4 = () => {
         </div>
       </section>
 
-      {/* 5b. Product Family Tree */}
+      {/* 5b. The Control4 lineup */}
       <section className="py-16 sm:py-24 px-4 sm:px-6" id="product-family-tree">
         <div className="max-w-4xl mx-auto">
           <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">
-            Product Family Tree
+            Your Options
           </p>
           <h2 className="text-2xl sm:text-3xl font-bold text-white mb-5">
-            How the Control4 line fits together.
+            Explore what Control4 can include.
           </h2>
-          <p className="text-white/60 text-base leading-relaxed mb-8 max-w-3xl">
-            Organized by family — control surfaces, experiences, connected categories, the lighting layer underneath, and the wider ecosystem. Linked tags open Control4's official product page or an internal service page; the rest are part of the same Control4 program.
+          <p className="text-white/80 text-base sm:text-lg leading-relaxed mb-8 max-w-3xl">
+            Grouped by what each piece does — control surfaces, day-to-day experiences, the categories Control4 ties together, the lighting layer underneath, and the wider ecosystem. Linked items open Control4's official product pages or an internal service page where available.
           </p>
           <ProductFamilyTree groups={productFamilies} />
         </div>

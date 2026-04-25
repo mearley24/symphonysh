@@ -130,10 +130,10 @@ const LutronRadioRA3 = () => {
       description:
         "The RadioRA3 processor and the Clear Connect mesh that ties the system together — programmable from the cloud, with backward compatibility for older Lutron devices.",
       items: [
-        { label: "RadioRA3 All-in-One Processor", href: "https://www.lutron.com/en-US/products/pages/wholehomesystems/radiora3/overview.aspx", external: true, hint: "Up to 100 Type X devices per processor, 200 per system" },
+        { label: "All-in-One Processor", href: "https://www.lutron.com/en-US/products/pages/wholehomesystems/radiora3/overview.aspx", external: true, hint: "Up to 100 Type X devices per processor, 200 per system" },
         { label: "Clear Connect Type X (CCX)", hint: "Lutron's residential wireless mesh for RadioRA3" },
-        { label: "Clear Connect Type A compatibility", hint: "Most RadioRA2 and RA2 Select devices stay supported" },
-        { label: "Lutron app & cloud programming", href: "https://www.lutron.com/en-US/Products/Pages/Apps/LutronApp/Overview.aspx", external: true, hint: "iOS & Android, programmed via Lutron's cloud designer" },
+        { label: "Type A compatibility", hint: "Most RadioRA2 and RA2 Select devices stay supported" },
+        { label: "Lutron app & cloud", href: "https://www.lutron.com/en-US/Products/Pages/Apps/LutronApp/Overview.aspx", external: true, hint: "iOS & Android, programmed via Lutron's cloud designer" },
       ],
     },
     {
@@ -141,12 +141,12 @@ const LutronRadioRA3 = () => {
       description:
         "Sunnata RF dimmers, switches, fan control, and engraved keypads — and Pico remotes for tabletop or pedestal use.",
       items: [
-        { label: "Sunnata RF Keypads", href: "https://www.lutron.com/en-US/Products/Pages/SingleRoomControls/SunnataKeypads/Overview.aspx", external: true, hint: "Engraved scene keypads in 20+ colors and finishes" },
-        { label: "Sunnata RF Touch Dimmer (PRO LED+)", href: "https://www.lutron.com/en-US/Products/Pages/SingleRoomControls/SunnataDimmersAndSwitches/Overview.aspx", external: true, hint: "Flicker-free LED dimming with PRO LED+ technology" },
-        { label: "Sunnata RF Companion Dimmer", hint: "Multi-location dimming companion" },
-        { label: "Sunnata RF Switch", hint: "Touch switch for non-dim loads" },
-        { label: "Sunnata RF Companion Switch", hint: "Multi-location switch companion" },
-        { label: "Sunnata RF Touch Fan Control", hint: "4-speed quiet fan control" },
+        { label: "Sunnata Keypads", href: "https://www.lutron.com/en-US/Products/Pages/SingleRoomControls/SunnataKeypads/Overview.aspx", external: true, hint: "Engraved scene keypads in 20+ colors and finishes" },
+        { label: "Touch Dimmer (PRO LED+)", href: "https://www.lutron.com/en-US/Products/Pages/SingleRoomControls/SunnataDimmersAndSwitches/Overview.aspx", external: true, hint: "Flicker-free LED dimming with PRO LED+ technology" },
+        { label: "Companion Dimmer", hint: "Multi-location dimming companion" },
+        { label: "Touch Switch", hint: "Touch switch for non-dim loads" },
+        { label: "Companion Switch", hint: "Multi-location switch companion" },
+        { label: "Touch Fan Control", hint: "4-speed quiet fan control" },
         { label: "Pico Remotes", href: "https://www.lutron.com/en-US/Products/Pages/Components/PicoWirelessControl/Overview.aspx", external: true, hint: "Tabletop or wall-mount paddle remotes" },
       ],
     },
@@ -156,9 +156,9 @@ const LutronRadioRA3 = () => {
         "Lumaris fixtures and tape light — natively integrated, no third-party bridge between the can and the keypad.",
       items: [
         { label: "Lumaris Downlights (3\" & 4\")", href: "https://www.lutron.com/en-US/Products/Pages/StandAloneControls/Lumaris/Overview.aspx", external: true, hint: "Tunable white 1,800K–4,000K, dim to 0.1%, 90+ CRI" },
-        { label: "Lumaris Tunable White Tape Light", href: "https://www.lutron.com/en-US/Products/Pages/StandAloneControls/Lumaris/Overview.aspx", external: true, hint: "Linear tunable-white tape for coves and toe-kicks" },
-        { label: "Lumaris RGB + Tunable White Tape", href: "https://www.lutron.com/en-US/Products/Pages/StandAloneControls/Lumaris/Overview.aspx", external: true, hint: "RGB + tunable white in a single tape" },
-        { label: "Lutron LED Tape Extrusions", hint: "Aluminum extrusions for Lumaris and other LED tape" },
+        { label: "Tunable White Tape", href: "https://www.lutron.com/en-US/Products/Pages/StandAloneControls/Lumaris/Overview.aspx", external: true, hint: "Linear tunable-white Lumaris tape for coves and toe-kicks" },
+        { label: "RGB + Tunable Tape", href: "https://www.lutron.com/en-US/Products/Pages/StandAloneControls/Lumaris/Overview.aspx", external: true, hint: "RGB + tunable white in a single Lumaris tape" },
+        { label: "LED Tape Extrusions", hint: "Aluminum extrusions for Lumaris and other LED tape" },
         { label: "Outdoor Plug-in Switch", hint: "Outdoor-rated plug-in switch for landscape and holiday loads" },
       ],
     },
@@ -167,9 +167,9 @@ const LutronRadioRA3 = () => {
       description:
         "Wire-free Triathlon Select for fast retrofits, full-line Triathlon, and wired Sivoia QS for centralized projects.",
       items: [
-        { label: "Triathlon Select Roller Shades", href: "https://www.lutron.com/en-US/Products/Pages/ShadingSystems/Triathlon/Overview.aspx", external: true, hint: "Wire-free, fixed sizes, ~2 yr battery life on D-cells" },
-        { label: "Triathlon Roller Shades", href: "https://www.lutron.com/en-US/Products/Pages/ShadingSystems/Triathlon/Overview.aspx", external: true, hint: "Full-line battery or hardwired Triathlon" },
-        { label: "Sivoia QS Shades", hint: "Wired QS shading system, compatible with RadioRA3 via integration" },
+        { label: "Triathlon Select", href: "https://www.lutron.com/en-US/Products/Pages/ShadingSystems/Triathlon/Overview.aspx", external: true, hint: "Wire-free, fixed sizes, ~2 yr battery life on D-cells" },
+        { label: "Triathlon", href: "https://www.lutron.com/en-US/Products/Pages/ShadingSystems/Triathlon/Overview.aspx", external: true, hint: "Full-line battery or hardwired Triathlon" },
+        { label: "Sivoia QS", hint: "Wired QS shading system, compatible with RadioRA3 via integration" },
       ],
     },
     {
@@ -179,8 +179,8 @@ const LutronRadioRA3 = () => {
       items: [
         { label: "Astronomic timeclock", hint: "Sunrise/sunset scheduling built into RadioRA3" },
         { label: "Vacation Mode", hint: "Lived-in pattern while the family is away" },
-        { label: "Ceiling & Wall Sensors", hint: "Occupancy and vacancy sensors" },
-        { label: "Wallplates & Receptacles", hint: "Designer wallplates and matching receptacles" },
+        { label: "Ceiling & wall sensors", hint: "Occupancy and vacancy sensors" },
+        { label: "Wallplates & receptacles", hint: "Designer wallplates and matching receptacles" },
       ],
     },
     {
@@ -498,17 +498,17 @@ const LutronRadioRA3 = () => {
         </div>
       </section>
 
-      {/* 5. Product family tree */}
+      {/* 5. The RadioRA3 lineup */}
       <section className="py-16 sm:py-24 px-4 sm:px-6" id="product-family-tree">
         <div className="max-w-4xl mx-auto">
           <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">
-            Product Family Tree
+            The Lineup
           </p>
           <h2 className="text-2xl sm:text-3xl font-bold text-white mb-5">
-            Tell us what part you see.
+            Explore what RadioRA3 can include.
           </h2>
-          <p className="text-white/60 text-base leading-relaxed mb-8 max-w-2xl">
-            Organized by family — backbone, wall controls, lighting, shades, scenes, and integrations. Linked tags open Lutron's official product page; the rest are part of the same single RadioRA3 program.
+          <p className="text-white/80 text-base sm:text-lg leading-relaxed mb-8 max-w-2xl">
+            Grouped by what each piece does — backbone, wall controls, lighting, shades, scenes, and integrations. Linked items open Lutron's official product pages where available; not every piece needs a link.
           </p>
           <ProductFamilyTree groups={productFamilies} />
         </div>
