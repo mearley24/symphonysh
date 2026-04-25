@@ -119,7 +119,7 @@ const Control4 = () => {
     {
       title: "Over 25,000 compatible devices",
       description:
-        "Control4 works with more than 25,000 third-party devices — Lutron, Sonos, Denon, Sony, Samsung, LG, Nest, Ecobee, Ring, and most of the gear already in the house.",
+        "Control4 is compatible with an ecosystem of over 25,000 third-party devices from the world's leading brands — your integrator can usually bring most of the gear already in the house into one platform.",
     },
     {
       title: "Personalized to how the house lives",
@@ -177,7 +177,7 @@ const Control4 = () => {
     <PageBackground image={bgHomeIntegration}>
       <SEO
         title="Control4 Installation & Service in Vail Valley"
-        description="Control4 design, installation, programming, and personalization for Vail Valley homes. Lighting, entertainment, security, and comfort on one platform — Control4 App, touchscreens, on-wall keypads, and smart remote. Over 25,000 compatible devices."
+        description="Control4 design, installation, programming, and personalization for Vail Valley homes. Lighting, entertainment, security, and comfort on one platform — Control4 App, touchscreens, on-wall keypads, and smart remote. Compatible with an ecosystem of over 25,000 third-party devices."
         keywords="Control4 Vail Valley, Control4 dealer Eagle County, Control4 installer, Control4 programming, Control4 service"
         schema={[serviceSchema, faqSchema]}
         breadcrumbs={[
@@ -299,11 +299,11 @@ const Control4 = () => {
             The Control4 App, plus every surface in the house.
           </h2>
           <p className="text-white/60 text-base leading-relaxed mb-8 max-w-3xl">
-            Same personalized system on smartphones, dedicated touchscreens, on-wall keypads, and the Control4 smart remote — with widgets, favorites, and home-screen layouts tailored to the family. Apple Control Center, CarPlay, Widgets, and Siri shortcuts come along for the ride.
+            Same personalized system on smartphones, dedicated touchscreens, on-wall keypads, and the Control4 smart remote — with favorites and home-screen layouts tailored to the family. Compatible with Amazon Alexa, Google Assistant, and Apple HomeKit (including CarPlay and Siri).
           </p>
           <div className="grid sm:grid-cols-2 gap-5 mb-10">
             {[
-              { title: "Control4 App on phone & tablet", description: "Quick access on iOS and Android — with Apple Control Center, CarPlay, Widgets, and Siri shortcuts for the actions used every day." },
+              { title: "Control4 App on phone & tablet", description: "Quick access on iOS and Android — with Apple HomeKit, CarPlay, and Siri integration for the actions used every day." },
               { title: "Dedicated touchscreens", description: "In-wall and tabletop touchscreens for kitchens, primary bedrooms, and entry halls — the same personalized home screen, fixed in place." },
               { title: "On-wall keypads", description: "Engraved keypads for scenes, routines, and favorites — the interface for guests, kids, and anyone who does not want to pull out a phone." },
               { title: "Control4 smart remote", description: "A handheld designed for media rooms and theaters — entertainment sessions, lightning-fast source switching, and one-button TV on." },
@@ -326,33 +326,24 @@ const Control4 = () => {
             Plays Well With
           </p>
           <p className="text-white/55 text-sm leading-relaxed mb-5 max-w-3xl">
-            Compatible with over 25,000 third-party devices — most of the brands already in the house are supported, so the integrator can bring them all into one platform.
+            Compatible with an ecosystem of over 25,000 third-party devices from the world's leading brands. Below are categories Symphony commonly ties into a Control4 system — your integrator confirms specific drivers and supported models for the gear you actually have.
           </p>
           <div className="flex flex-wrap gap-2">
             {[
               "Lutron HomeWorks",
               "Lutron RadioRA3",
-              "Sonos",
-              "Denon",
-              "Marantz",
-              "Sony",
-              "Samsung TVs",
-              "LG TVs",
-              "Apple TV",
-              "Roku",
-              "Nest thermostats",
-              "Honeywell",
-              "Ecobee",
-              "Ring",
-              "Ubiquiti / Araknis",
-              "Luxul networking",
-              "Somfy shades",
-              "Hunter Douglas",
-              "Kevo / August locks",
-              "Yale locks",
+              "Audio receivers",
+              "Whole-home audio",
+              "Streaming media players",
+              "TVs & projectors",
+              "Thermostats & HVAC",
+              "Cameras & doorbells",
+              "Smart locks",
+              "Motorized shades",
+              "Networking gear",
               "Alexa",
               "Google Assistant",
-              "Siri shortcuts",
+              "Apple HomeKit, CarPlay & Siri",
             ].map((brand) => (
               <span
                 key={brand}

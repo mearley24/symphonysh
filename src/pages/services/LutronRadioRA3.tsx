@@ -43,10 +43,10 @@ const LutronRadioRA3 = () => {
   };
 
   const stats = [
-    { label: "Wireless", value: "Clear Connect RF — independent of Wi-Fi" },
-    { label: "Powerfully Scalable", value: "Up to 400 devices, paired processors" },
+    { label: "Wireless", value: "Clear Connect RF — not Wi-Fi" },
+    { label: "Powerfully Scalable", value: "Scales up to 400 devices with paired processors" },
     { label: "Wirelessly Retrofittable", value: "No opening walls, no rewiring" },
-    { label: "Native Integration", value: "Lumaris light, Triathlon shades, Pico" },
+    { label: "Native Integration", value: "Lumaris lighting, automated shading, wireless keypads — no third-party bridges" },
   ];
 
   // What RadioRA3 offers — moved up to right after the hero per the
@@ -64,7 +64,7 @@ const LutronRadioRA3 = () => {
       icon: Sliders,
       title: "Sunnata keypads",
       description:
-        "Designer keypads in 20+ colors and gloss or satin finishes, engraved per room. A soft light bar fades to show level. Scenes live on the wall — no app required.",
+        "Available in over 20 colors with gloss and satin finishes, engraved per room. Sunnata touch dimmers use a swipe-to-dim light bar. Scenes live on the wall — no app required.",
     },
     {
       icon: Sparkles,
@@ -94,7 +94,7 @@ const LutronRadioRA3 = () => {
       icon: Sparkles,
       title: "Lumaris light",
       description:
-        "Native integration with Lumaris downlights and Lumaris RGB + tunable white tape light. Warm-on-dim that feels like firelight at night and daylight at breakfast — no third-party bridges.",
+        "Native integration with Lumaris downlights and Lumaris RGB tunable white tape light. Tunable white and warm dim from one light source — soft, warm tones at night, crisp daylight in the morning. No third-party bridges.",
     },
     {
       icon: Radio,
@@ -113,7 +113,7 @@ const LutronRadioRA3 = () => {
     {
       title: "One room today, the whole house later",
       description:
-        "Upgrade one room at a time or all at once. RadioRA3 scales to residential retrofits up to 400 devices with paired processors — main house, guest quarters, caretaker, exterior.",
+        "Upgrade home lighting one room at a time or all at once. RadioRA3 scales up to 400 devices with paired processors — main house, guest quarters, caretaker, exterior.",
     },
     {
       title: "Older Lutron systems that have grown messy",
@@ -315,7 +315,7 @@ const LutronRadioRA3 = () => {
     <PageBackground image={bgLighting}>
       <SEO
         title="Lutron RadioRA3 Installation & Programming in Vail Valley"
-        description="Lutron RadioRA3 design, installation, and programming for Vail Valley homes — a professionally installed suite of wireless controls, intelligent lighting, and automated shading. Wirelessly retrofittable, powerfully scalable, native integration with Lumaris and Triathlon."
+        description="Lutron RadioRA3 design, installation, and programming for Vail Valley homes — a professionally installed suite of wireless controls, intelligent lighting, and window treatments. Wirelessly retrofittable; scales up to 400 devices with paired processors. Native integration with Lumaris and Triathlon."
         keywords="RadioRA3 Vail Valley, Lutron RadioRA3 installer, RadioRA3 programming, Lutron keypads, RadioRA3 processor, Lutron dimmers Eagle County"
         schema={[serviceSchema, faqSchema]}
         breadcrumbs={[
@@ -342,7 +342,7 @@ const LutronRadioRA3 = () => {
             Intelligent lighting that simplifies home control.
           </h1>
           <p className="text-white/60 text-base sm:text-lg leading-relaxed mb-8 max-w-2xl hero-subtext-shadow">
-            A professionally installed suite of wireless controls, intelligent lighting, and automated shades — designed, programmed, and tuned for the way your Vail Valley home actually lives.
+            A professionally installed suite of wireless controls, intelligent lighting, and window treatments designed to simplify home control — programmed and tuned for the way your Vail Valley home actually lives.
           </p>
           <div className="flex flex-col sm:flex-row gap-3">
             <a
@@ -541,7 +541,7 @@ const LutronRadioRA3 = () => {
             Two Lutron platforms. Which one is right?
           </h2>
           <p className="text-white/60 text-base leading-relaxed mb-8 max-w-3xl">
-            RadioRA3 is the right choice for most homes — wirelessly retrofittable, powerfully scalable to 400 devices, native integration with Lumaris, Triathlon, and Pico. HomeWorks is Lutron's flagship for the world's most uncompromising lighting projects — centralized panels, up to 10,000 zones, Ketra and Palladiom shades.
+            RadioRA3 is the right choice for most homes — wirelessly retrofittable, scaling up to 400 devices with paired processors, native integration with Lumaris, Triathlon, and Pico. HomeWorks is Lutron's flagship for the world's most uncompromising lighting and home automation projects — centralized low-voltage QS wiring or Clear Connect expansive wireless coverage supporting up to 10,000 zones, Ketra, and Palladiom.
           </p>
           <div className="grid sm:grid-cols-2 gap-5 mb-6">
             <div className="bg-black/40 backdrop-blur-sm border border-accent/30 rounded-xl p-6">
@@ -550,7 +550,7 @@ const LutronRadioRA3 = () => {
               </p>
               <h3 className="text-white font-semibold text-lg mb-2">RadioRA3</h3>
               <p className="text-white/55 text-sm leading-relaxed">
-                Wirelessly retrofittable, powerfully scalable to 400 devices, one room to whole home. Clear Connect RF, independent of Wi-Fi. Native integration with Lumaris and Triathlon.
+                Wirelessly retrofittable; scales up to 400 devices with paired processors, one room to whole home. Clear Connect RF — not Wi-Fi. Native integration with Lumaris, automated shading, and wireless keypads.
               </p>
             </div>
             <Link
@@ -564,7 +564,7 @@ const LutronRadioRA3 = () => {
                 HomeWorks
               </h3>
               <p className="text-white/55 text-sm leading-relaxed mb-4">
-                Lutron's flagship for uncompromising projects. Centralized panels, up to 10,000 zones, native Ketra / Lumaris / Palladiom, QS wired or wireless. Hand-crafted keypads.
+                Lutron's flagship for uncompromising projects. Centralized low-voltage QS wiring or Clear Connect expansive wireless coverage supporting up to 10,000 zones. Native Ketra, Lumaris, Palladiom — hand-crafted keypads.
               </p>
               <span className="inline-flex items-center gap-1 text-accent text-sm font-medium group-hover:gap-2 transition-all">
                 Explore HomeWorks <ArrowRight className="w-3.5 h-3.5" />

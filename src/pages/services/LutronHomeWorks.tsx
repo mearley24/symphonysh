@@ -38,9 +38,9 @@ const LutronHomeWorks = () => {
   };
 
   const stats = [
-    { label: "Coverage", value: "Expansive wireless beyond 50,000 sq ft" },
-    { label: "Zones", value: "Up to 10,000 lighting zones" },
-    { label: "Backbone", value: "QS centralized wiring or Clear Connect" },
+    { label: "Built For", value: "The world's most uncompromising projects" },
+    { label: "Wireless", value: "Clear Connect RF — expansive coverage, not Wi-Fi" },
+    { label: "Backbone", value: "QS centralized low-voltage wiring or Clear Connect" },
     { label: "Catalog", value: "Ketra, Lumaris, Rania, Palladiom — native" },
   ];
 
@@ -61,7 +61,7 @@ const LutronHomeWorks = () => {
       icon: Sun,
       title: "Ketra & Lumaris light",
       description:
-        "Natural-feeling white from 1800K to 4000K, dimming to 0.1%, smooth seamless transitions. Ketra full-spectrum, Lumaris downlights, Rania lamps, Aviena — sized and scheduled to follow the day.",
+        "Lumaris delivers a broad spectrum of tunable white from 1800K to 4000K with flicker-free dimming down to 0.1%. Ketra full-spectrum light, Rania lamps, and Aviena keypads — Lutron's native catalog, sized and scheduled to follow the day.",
     },
     {
       icon: Cpu,
@@ -125,7 +125,7 @@ const LutronHomeWorks = () => {
     {
       title: "Natural-feeling light, all day",
       description:
-        "Ketra full-spectrum and Lumaris tunable white shift with the day — 1800K to 4000K, dimming to 0.1%, smooth seamless transitions. The house never feels like fluorescent office light at 10pm.",
+        "Lumaris tunable white shifts across the 1800K–4000K spectrum with flicker-free dimming down to 0.1% — smooth, seamless transitions. Ketra full-spectrum follows the day. The house never feels like fluorescent office light at 10pm.",
     },
     {
       title: "One button press, the whole wing",
@@ -202,14 +202,14 @@ const LutronHomeWorks = () => {
     {
       title: "RadioRA3",
       description:
-        "A professionally installed suite of wireless controls, intelligent lighting, and automated shading. Wirelessly retrofittable, powerfully scalable to 400 devices. Native integration with Lumaris and Triathlon — no third-party bridges.",
+        "A professionally installed suite of wireless controls, intelligent lighting, and window treatments. Wirelessly retrofittable; scales up to 400 devices with paired processors. Native integration with Lumaris and Triathlon — no third-party bridges.",
       link: "/platforms/lutron-radiora3",
       linkLabel: "RadioRA3 details",
     },
     {
       title: "HomeWorks",
       description:
-        "Lutron's flagship for the world's most uncompromising projects. Centralized low-voltage wiring or expansive wireless coverage, up to 10,000 zones, native Ketra / Lumaris / Rania / Palladiom, hand-crafted keypads.",
+        "Lutron's flagship for the world's most uncompromising projects. Centralized low-voltage QS wiring or Clear Connect expansive wireless coverage supporting up to 10,000 zones. Native Ketra, Lumaris, Rania, Palladiom, and hand-crafted keypads.",
       link: "/platforms/lutron-homeworks",
       linkLabel: "HomeWorks details",
     },
@@ -218,7 +218,7 @@ const LutronHomeWorks = () => {
   const faqs = [
     {
       q: "How is HomeWorks different from RadioRA3?",
-      a: "RadioRA3 is Lutron's professionally installed wireless suite of controls, intelligent lighting, and automated shading — wirelessly retrofittable, powerfully scalable to 400 devices, and the right answer for most finished homes. HomeWorks is Lutron's flagship, designed for the world's most uncompromising lighting and home automation projects: centralized low-voltage wiring, expansive wireless coverage, up to 10,000 zones, the full Lutron catalog, and hand-crafted keypads.",
+      a: "RadioRA3 is Lutron's professionally installed wireless suite of controls, intelligent lighting, and window treatments — wirelessly retrofittable, scaling up to 400 devices with paired processors, and the right answer for most finished homes. HomeWorks is Lutron's flagship, designed for the world's most uncompromising lighting and home automation projects: centralized low-voltage QS wiring or Clear Connect expansive wireless coverage supporting up to 10,000 zones, the full Lutron catalog, and hand-crafted keypads.",
     },
     {
       q: "Do I have to do the whole house at once?",
@@ -628,7 +628,7 @@ const LutronHomeWorks = () => {
               {
                 title: "Lutron RadioRA3",
                 description:
-                  "Lutron's professionally installed wireless suite — wirelessly retrofittable, powerfully scalable, native integration with Lumaris and Triathlon.",
+                  "Lutron's professionally installed wireless suite — wirelessly retrofittable, scales up to 400 devices with paired processors, native integration with Lumaris and Triathlon.",
                 path: "/platforms/lutron-radiora3",
               },
               {
