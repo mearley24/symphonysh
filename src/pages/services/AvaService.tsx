@@ -118,57 +118,55 @@ const AvaService = () => {
     },
   ];
 
+  const productFamilyRoot = {
+    label: "AVA OS",
+    sublabel: "AVA's home operating system",
+    href: "https://www.ava.com/ava-os",
+    external: true,
+    hint: "AVA's operating system — the brain behind every remote and keypad",
+  };
+
   const productFamilies: ProductFamilyGroup[] = [
     {
-      title: "Core platform",
+      title: "Hardware",
       description:
-        "AVA's brain — the operating system, the cloud-flow engine, and the built-in processor that lives inside Cinema Remote.",
+        "Single-piece aluminum, 3D Glass, mechanical click — and a built-in octa-core processor inside Cinema Remote, so there's less hardware in the closet.",
       items: [
-        { label: "AVA OS", href: "https://avahq.com/", external: true, hint: "AVA's home operating system" },
-        { label: "Flows", hint: "AVA's automation logic — multi-step flows tied to events" },
-        { label: "Nano Brain", hint: "Compact built-in processor option" },
-        { label: "Built-in processor", hint: "Cinema Remote includes its own octa-core processor — less hardware in the closet" },
+        { label: "Cinema Remote", href: "https://www.ava.com/cinema-remote", external: true, hint: "Flagship remote for media rooms and theaters, with built-in processor" },
+        { label: "Home Remote", href: "https://www.ava.com/home-remote", external: true, hint: "Whole-home remote for rooms beyond the screen" },
+        { label: "Nano Brain", hint: "Compact processor option for installs without a Cinema Remote" },
       ],
     },
     {
-      title: "Remotes",
+      title: "Control engine",
+      href: "https://support.ava.com/hc/en-us/articles/17380276206877--Device-Control-and-AVA-OS",
+      external: true,
       description:
-        "Single-piece aluminum, 3D Glass, and a mechanical click — built to last.",
+        "The logic AVA OS runs underneath — flows, dynamic keypads, and direct device control.",
       items: [
-        { label: "Cinema Remote", href: "https://avahq.com/products/cinema-remote", external: true, hint: "Flagship remote for media rooms and theaters" },
-        { label: "Home Remote", href: "https://avahq.com/products/home-remote", external: true, hint: "Whole-home remote for rooms beyond the screen" },
-      ],
-    },
-    {
-      title: "Control surfaces",
-      description:
-        "Keypads, app, and direct IP control — plus Kiosk Mode for shared touch surfaces.",
-      items: [
+        { label: "AVA Flows", hint: "Multi-step automation logic tied to events" },
         { label: "Dynamic Keypad", hint: "AVA's on-wall scene keypad" },
-        { label: "AVA App", href: "https://avahq.com/", external: true, hint: "iOS and Android control" },
-        { label: "Kiosk Mode", hint: "Locked-down touch surface for shared spaces" },
         { label: "IP control", hint: "Network control of receivers, displays, and streamers" },
-        { label: "IR control", hint: "Legacy IR control where IP isn't available" },
+        { label: "IR / CEC", hint: "Legacy IR and HDMI-CEC control where IP isn't available" },
       ],
     },
     {
-      title: "Hardware feel",
+      title: "Interfaces",
       description:
-        "What the remote looks and feels like in the hand.",
+        "The places the family touches AVA day to day — handheld, on the wall, on the phone, or shared kiosk.",
       items: [
-        { label: "Single-piece aluminum", hint: "Machined chassis, no seams" },
-        { label: "3D Glass", hint: "Curved cover glass over the display" },
-        { label: "Mechanical click", hint: "Tactile button feedback" },
+        { label: "AVA App", href: "https://www.ava.com/ava-os", external: true, hint: "iOS and Android control" },
+        { label: "Kiosk Mode", hint: "Locked-down touch surface for shared spaces" },
       ],
     },
     {
-      title: "Room types",
+      title: "Rooms",
       description:
         "Where AVA shows up in the home — built around the screen first, then the rooms beyond it.",
       items: [
-        { label: "TV & cinema spaces", hint: "Theaters, media rooms, primary TVs" },
+        { label: "TV & cinema rooms", hint: "Theaters, media rooms, primary TVs" },
         { label: "Music, lighting, climate", hint: "Whole-home control beyond the screen" },
-        { label: "Multi-room", hint: "Flows that span rooms and zones" },
+        { label: "Multi-room flows", hint: "Flows that span rooms and zones" },
       ],
     },
     {
@@ -179,12 +177,10 @@ const AvaService = () => {
         { label: "Sonos", href: "/services/audio-entertainment", hint: "Whole-home audio control" },
         { label: "Control4", href: "/platforms/control4", hint: "Sits alongside or under a Control4 program" },
         { label: "Lutron", href: "/platforms/lutron-homeworks", hint: "Lighting and shades control" },
-        { label: "Apple TV", hint: "IP and IR control of Apple TV" },
-        { label: "Roku", hint: "IP and IR control of Roku" },
+        { label: "Apple TV / Roku", hint: "IP and IR control of streaming players" },
         { label: "AV receivers", hint: "Denon, Marantz, Yamaha, and others" },
-        { label: "Projectors", hint: "Sony, JVC, Epson, and others" },
+        { label: "Projectors & TVs", hint: "Sony, JVC, Epson, LG, Samsung, and others" },
         { label: "Soundbars", hint: "Sonos, Sennheiser, Samsung, and others" },
-        { label: "TVs", hint: "Sony, LG, Samsung, and others" },
       ],
     },
   ];
@@ -408,10 +404,10 @@ const AvaService = () => {
           <h2 className="text-2xl sm:text-3xl font-bold text-white mb-5">
             Explore what AVA can include.
           </h2>
-          <p className="text-white/80 text-base sm:text-lg leading-relaxed mb-8 max-w-2xl">
-            Grouped by what each piece does — core platform, remotes, control surfaces, hardware feel, room types, and integrations. Linked items open AVA's official product pages where available; not every piece needs a link.
+          <p className="text-white/80 text-base sm:text-lg leading-relaxed mb-10 max-w-2xl">
+            AVA OS sits at the top — every branch below it runs on the same operating system. Linked items open AVA's official product pages where available; not every piece needs a link.
           </p>
-          <ProductFamilyTree groups={productFamilies} />
+          <ProductFamilyTree root={productFamilyRoot} groups={productFamilies} />
         </div>
       </section>
 
