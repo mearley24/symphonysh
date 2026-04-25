@@ -14,7 +14,6 @@ import {
   AlertTriangle,
   Network,
   Sliders,
-  Hammer,
   Wrench,
   Sun,
   Lightbulb,
@@ -38,69 +37,64 @@ const LutronRadioRA3 = () => {
     "name": "Lutron RadioRA3 Installation & Programming",
     "provider": schemaProviderLocalBusiness,
     "description":
-      "RadioRA3 installation, programming, troubleshooting, and upgrade support for Vail Valley homes. Lighting scenes, keypads, shades, processors, and dimmers.",
+      "Lutron RadioRA3 — Clear Connect Type X (CCX) wireless mesh, Lumaris LED downlights and tape light, Triathlon Select smart shades, and Sunnata RF keypads — designed and programmed for Vail Valley homes.",
     "areaServed": "Vail Valley, Colorado",
   };
 
   const stats = [
-    { label: "Wireless", value: "Clear Connect RF — not Wi-Fi" },
-    { label: "Powerfully Scalable", value: "Scales up to 400 devices with paired processors" },
-    { label: "Wirelessly Retrofittable", value: "No opening walls, no rewiring" },
-    { label: "Native Integration", value: "Lumaris lighting, automated shading, wireless keypads — no third-party bridges" },
+    { label: "Platform", value: "Clear Connect Type X (CCX) — wireless mesh, independent of Wi-Fi" },
+    { label: "Lighting", value: "Lumaris LED downlights, tape light, and tunable white" },
+    { label: "Shades", value: "Triathlon Select wire-free roller shades — clean exposed roll" },
+    { label: "Scale", value: "Up to 100 Type X devices per processor, 200 per system" },
   ];
 
-  // What RadioRA3 offers — moved up to right after the hero per the
-  // page-flow spec. Covers: smart dimmers/switches, SUNNATA keypads,
-  // scenes, app control, schedules/sun, automated shades, Lumaris /
-  // tunable lighting, retrofit-friendly wireless control.
-  const whatYouGet = [
+  // The three product-line pillars of RadioRA3, per the page-flow spec.
+  const pillars = [
+    {
+      icon: Radio,
+      title: "Clear Connect Type X (CCX)",
+      description:
+        "RadioRA3 runs on Lutron's Clear Connect Type X wireless mesh — communicating independently of home Wi-Fi. Up to 100 Type X devices per processor and 200 per system, with backwards compatibility for most existing RadioRA2 / RA2 Select Type A devices.",
+    },
     {
       icon: Lightbulb,
-      title: "Intelligent Lighting",
+      title: "Lumaris LED lighting",
       description:
-        "Sunnata and Maestro dimmers and switches matched to the load — LED, low-voltage, halogen — for clean, flicker-free dimming on every fixture in the room.",
-    },
-    {
-      icon: Sliders,
-      title: "Sunnata keypads",
-      description:
-        "Available in over 20 colors with gloss and satin finishes, engraved per room. Sunnata touch dimmers use a swipe-to-dim light bar. Scenes live on the wall — no app required.",
-    },
-    {
-      icon: Sparkles,
-      title: "Scenes at the press of a button",
-      description:
-        "Goodmorning, Goodbye/Away, Welcome, Movie/Relax, Goodnight — one button takes the whole room to the right level. No fiddling with ten dimmers or three apps.",
-    },
-    {
-      icon: Smartphone,
-      title: "Lutron app & voice",
-      description:
-        "The Lutron app on iPhone and Android, plus Alexa, Google, and Siri. Works inside the house and from the road — not tied to home Wi-Fi.",
+        "Native integration with Lumaris — downlights in 3\" and 4\" apertures (canless remodeler available), and Lumaris tape light (tunable white plus RGB + tunable white) purpose-built for RadioRA3 and HomeWorks. Tunable white from 1,800K to 4,000K, flicker-free dimming to 0.1%, 90+ CRI.",
     },
     {
       icon: Sun,
-      title: "Schedules, sunrise & sunset",
+      title: "Triathlon Select smart shades",
       description:
-        "Astronomic timeclock built in. Exterior lights rise at dusk, pathway lights fade late, mornings arrive on schedule. Vacation Mode keeps the house looking lived-in while you are away.",
+        "A simplified smart-shade path that pairs cleanly with RadioRA3. Wire-free, battery-powered roller shades with a clean exposed roll, fixed standard sizes for fast quoting, ~15-minute installation, and roughly two-year average battery life on D-cells. Also compatible with HomeWorks and Caséta.",
     },
+  ];
+
+  // Other RadioRA3 capabilities, presented as the rest of the line.
+  const moreCapabilities = [
     {
-      icon: Layers,
-      title: "Automated shading",
+      icon: Sliders,
+      title: "Sunnata RF keypads, dimmers & switches",
       description:
-        "Triathlon wire-free roller shades and Sivoia QS — on the same keypads as the lights, with sun-tracking, scenes, and schedules all in one program.",
+        "Sunnata RF Touch Dimmer with PRO LED+ Technology, Sunnata RF Switch, Sunnata RF 4-Speed Quiet Fan Control, and Sunnata RF keypads — available in 20+ colors with gloss and satin finishes, engraved per room.",
     },
     {
       icon: Sparkles,
-      title: "Lumaris light",
+      title: "Scenes on the wall",
       description:
-        "Native integration with Lumaris downlights and Lumaris RGB tunable white tape light. Tunable white and warm dim from one light source — soft, warm tones at night, crisp daylight in the morning. No third-party bridges.",
+        "Goodmorning, Goodbye/Away, Welcome, Movie/Relax, Goodnight — one engraved button on a Sunnata keypad takes the whole room to the right level, no app required.",
     },
     {
-      icon: Radio,
-      title: "Wirelessly retrofittable",
+      icon: Smartphone,
+      title: "Lutron app, schedules & voice",
       description:
-        "Clear Connect RF, independent of Wi-Fi. Keypads, dimmers, and shades drop into a finished home without opening walls, pulling new wire, or changing the power infrastructure.",
+        "The Lutron app on iPhone and Android, astronomic timeclock for sunrise/sunset, and voice through Alexa, Google, and Siri. Works inside the house and from the road.",
+    },
+    {
+      icon: Layers,
+      title: "Outdoor & accessories",
+      description:
+        "Outdoor Plug-in Switch for landscape and holiday loads, Lutron LED Tape Extrusions, Pico remotes, ceiling and wall sensors — every piece is part of the same RadioRA3 program.",
     },
   ];
 
@@ -108,47 +102,44 @@ const LutronRadioRA3 = () => {
     {
       title: "Finished homes that want real lighting control",
       description:
-        "RadioRA3 is wirelessly retrofittable — built to add intelligent lighting, keypads, and shades without opening walls, pulling new wire, or changing the power infrastructure.",
+        "Built on Clear Connect RF and starts as small as one room — keypads, dimmers, and shades drop in without opening walls or changing the power infrastructure.",
     },
     {
       title: "One room today, the whole house later",
       description:
-        "Upgrade home lighting one room at a time or all at once. RadioRA3 scales up to 400 devices with paired processors — main house, guest quarters, caretaker, exterior.",
+        "Up to 100 Type X devices per processor, 200 per system. Add the kitchen this year, the primary suite next, the exterior after — all on the same program.",
+    },
+    {
+      title: "Lumaris from the start",
+      description:
+        "Native integration with Lumaris downlights and tape light. No third-party bridges between the can and the keypad — tunable white and RGB live in the same scene.",
     },
     {
       title: "Older Lutron systems that have grown messy",
       description:
-        "HomeWorks QS Illumination, RadioRA Classic, RA2, or Caseta that has outgrown itself. We retain what is worth keeping and migrate the rest to RadioRA3.",
-    },
-    {
-      title: "Whole-home control with no third-party bridges",
-      description:
-        "Native integration with Lumaris, Triathlon, Pico, and Sunnata — the suite is designed together. No flaky bridges, no second app to learn.",
+        "Most existing RadioRA2 and RA2 Select (Clear Connect Type A) devices stay supported alongside new Type X devices on a RadioRA3 processor — keep what works, modernize the rest.",
     },
   ];
 
   const componentPills = [
-    "Sunnata Dimmers",
-    "Sunnata Switches",
-    "Sunnata Keypads",
-    "Maestro Dimmers",
-    "Maestro Switches",
-    "Pico Paddle Remotes",
-    "Tabletop Keypads",
-    "RadioRA3 Processor",
-    "Repeaters",
-    "Power Modules",
-    "RF Relay Module",
-    "CCO Module",
-    "Visor Control",
-    "Ceiling Sensors",
-    "Wall Sensors",
-    "Receptacles",
-    "Wallplates",
-    "Triathlon Shades",
+    "RadioRA3 All-in-One Processor",
+    "Sunnata RF Keypads",
+    "Sunnata RF Touch Dimmer",
+    "Sunnata RF Companion Dimmer",
+    "Sunnata RF Switch",
+    "Sunnata RF Companion Switch",
+    "Sunnata RF Touch Fan Control",
+    "Pico Remotes",
+    "Outdoor Plug-in Switch",
+    "Lumaris Downlights (3\" & 4\")",
+    "Lumaris Tunable White Tape Light",
+    "Lumaris RGB + Tunable White Tape Light",
+    "Lutron LED Tape Extrusions",
+    "Triathlon Select Roller Shades",
+    "Triathlon Roller Shades",
     "Sivoia QS Shades",
-    "Lumaris Downlights",
-    "Lumaris Tape Light",
+    "Ceiling & Wall Sensors",
+    "Wallplates & Receptacles",
   ];
 
   const everydayScenes = [
@@ -186,40 +177,28 @@ const LutronRadioRA3 = () => {
 
   const symphonyProcess = [
     {
-      icon: Hammer,
-      title: "Walk the house with you",
-      description:
-        "We see how each room is actually lived in — entry points, cooking, wind-down — before recommending Sunnata keypads, Pico Paddle remotes, or Lumaris fixtures.",
-    },
-    {
       icon: Sliders,
-      title: "Match dimmers to fixtures",
+      title: "Dimmers matched to fixtures",
       description:
-        "Every LED, low-voltage strip, and tape light gets the right Lutron dimmer behind it. No flicker, no buzz, no drop-out at the bottom of the dim curve.",
+        "Every LED, low-voltage strip, and Lumaris tape extrusion gets the Sunnata RF model that drives it cleanly — flicker-free dimming all the way down to 0.1% on Lumaris.",
     },
     {
       icon: Layers,
-      title: "Engrave the keypads to the room",
+      title: "Engraved keypads",
       description:
-        "Designer Sunnata keypads in the colors and finishes the room calls for, with engraving the family actually reads — Goodmorning, Welcome, Movie, Goodnight.",
+        "Sunnata RF keypads chosen in the room's color and finish, engraved with the scenes the family actually uses — Goodmorning, Welcome, Movie, Goodnight.",
     },
     {
       icon: Network,
-      title: "Cloud-powered programming",
+      title: "Cloud-connected programming",
       description:
-        "Cloud-connected, PC-programmable RadioRA3. Schedules, scenes, sunrise/sunset, and Vacation Mode tuned in software, then refined after the family lives with it.",
+        "RadioRA3 is cloud-connected and PC-programmable. Schedules, scenes, sunrise/sunset, and Vacation Mode get tuned in software, then refined after the family lives with it.",
     },
     {
       icon: Wrench,
-      title: "Service the system you already own",
+      title: "Service & migrate older Lutron systems",
       description:
-        "Inherited an RA3 system? We read the program, document it, fix what is broken, and clean it up so the wall makes sense again.",
-    },
-    {
-      icon: AlertTriangle,
-      title: "Troubleshooting without the runaround",
-      description:
-        "If the original installer is gone or unresponsive, we identify the device on the wall and get the system working again — usually on the first visit.",
+        "RadioRA2, RA2 Select, RadioRA Classic, or HomeWorks QS Illumination that has grown tired — we migrate to RadioRA3 while keeping compatible Type A devices in place.",
     },
   ];
 
@@ -314,9 +293,9 @@ const LutronRadioRA3 = () => {
   return (
     <PageBackground image={bgLighting}>
       <SEO
-        title="Lutron RadioRA3 Installation & Programming in Vail Valley"
-        description="Lutron RadioRA3 design, installation, and programming for Vail Valley homes — a professionally installed suite of wireless controls, intelligent lighting, and window treatments. Wirelessly retrofittable; scales up to 400 devices with paired processors. Native integration with Lumaris and Triathlon."
-        keywords="RadioRA3 Vail Valley, Lutron RadioRA3 installer, RadioRA3 programming, Lutron keypads, RadioRA3 processor, Lutron dimmers Eagle County"
+        title="Lutron RadioRA3 — Clear Connect Type X, Lumaris & Triathlon Select"
+        description="Lutron RadioRA3 in the Vail Valley — Clear Connect Type X (CCX) wireless mesh independent of Wi-Fi, Lumaris LED downlights and tape light, Triathlon Select smart shades, and Sunnata RF keypads. Native integration, no third-party bridges."
+        keywords="RadioRA3 Vail Valley, Clear Connect Type X, CCX, Lumaris LED, Triathlon Select shades, Sunnata RF keypads, Lutron wireless lighting Eagle County"
         schema={[serviceSchema, faqSchema]}
         breadcrumbs={[
           { name: "Home", url: "/" },
@@ -339,10 +318,10 @@ const LutronRadioRA3 = () => {
             Lutron RadioRA3
           </p>
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight mb-5 text-white hero-text-shadow">
-            Intelligent lighting that simplifies home control.
+            Lutron's wireless line for the way homes actually live.
           </h1>
           <p className="text-white/60 text-base sm:text-lg leading-relaxed mb-8 max-w-2xl hero-subtext-shadow">
-            A professionally installed suite of wireless controls, intelligent lighting, and window treatments designed to simplify home control — programmed and tuned for the way your Vail Valley home actually lives.
+            RadioRA3 is built on Clear Connect Type X (CCX) — Lutron's wireless mesh that runs independent of Wi-Fi — and natively drives Lumaris LED lighting (downlights and tape) and Triathlon Select smart shades from Sunnata RF keypads.
           </p>
           <div className="flex flex-col sm:flex-row gap-3">
             <a
@@ -383,20 +362,41 @@ const LutronRadioRA3 = () => {
         </div>
       </section>
 
-      {/* 3. What RadioRA3 Offers — moved up from bottom of page */}
+      {/* 3. The RadioRA3 Line — three product pillars */}
       <section className="py-16 sm:py-24 px-4 sm:px-6">
         <div className="max-w-5xl mx-auto">
           <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">
-            What RadioRA3 Offers
+            The RadioRA3 Line
           </p>
           <h2 className="text-2xl sm:text-3xl font-bold text-white mb-5">
-            Wireless controls, intelligent lighting, automated shading.
+            One platform, one keypad, three product families.
           </h2>
           <p className="text-white/60 text-base leading-relaxed mb-10 max-w-3xl">
-            RadioRA3 is Lutron's professionally installed wireless control system — designed to scale to residential retrofits and grow one room at a time. Symphony designs the program, matches dimmers to fixtures, engraves the keypads, and tunes the scenes so the house simply works the way it should.
+            RadioRA3 is Lutron's residential wireless platform. The line pairs the Clear Connect Type X (CCX) wireless mesh with Lumaris LED lighting and Triathlon Select smart shades — all natively integrated, all programmed and tuned together so a single Sunnata RF keypad runs the whole room.
+          </p>
+          <div className="grid sm:grid-cols-1 lg:grid-cols-3 gap-5 mb-10">
+            {pillars.map((item, i) => (
+              <div
+                key={i}
+                className="bg-black/40 backdrop-blur-sm border border-accent/30 rounded-xl p-6"
+              >
+                <div className="w-10 h-10 rounded-lg bg-accent/10 flex items-center justify-center mb-3">
+                  <item.icon className="w-5 h-5 text-accent" />
+                </div>
+                <h3 className="text-white font-semibold text-base mb-2">
+                  {item.title}
+                </h3>
+                <p className="text-white/55 text-sm leading-relaxed">
+                  {item.description}
+                </p>
+              </div>
+            ))}
+          </div>
+          <p className="text-accent font-medium text-sm tracking-wide uppercase mb-3">
+            Plus the rest of the line
           </p>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
-            {whatYouGet.map((item, i) => (
+            {moreCapabilities.map((item, i) => (
               <div
                 key={i}
                 className="bg-black/40 backdrop-blur-sm border border-white/8 rounded-xl p-6"
@@ -454,7 +454,7 @@ const LutronRadioRA3 = () => {
             Tell us what part you see.
           </h2>
           <p className="text-white/60 text-base leading-relaxed mb-8 max-w-2xl">
-            Not sure what the thing on your wall is called? Snap a photo and mention whichever of these looks closest. We will take it from there.
+            The Clear Connect Type X catalog that ends up on the wall, in the can, and on the window. Mix and match within a single RadioRA3 program.
           </p>
           <div className="flex flex-wrap gap-2">
             {componentPills.map((pill) => (
@@ -505,10 +505,10 @@ const LutronRadioRA3 = () => {
       <section className="py-16 sm:py-24 px-4 sm:px-6">
         <div className="max-w-5xl mx-auto">
           <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">
-            How Symphony Sets It Up
+            Designed for Your Home
           </p>
           <h2 className="text-2xl sm:text-3xl font-bold text-white mb-10">
-            What our team handles, end to end.
+            How a RadioRA3 system actually fits your house.
           </h2>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
             {symphonyProcess.map((item, i) => (
@@ -541,7 +541,7 @@ const LutronRadioRA3 = () => {
             Two Lutron platforms. Which one is right?
           </h2>
           <p className="text-white/60 text-base leading-relaxed mb-8 max-w-3xl">
-            RadioRA3 is the right choice for most homes — wirelessly retrofittable, scaling up to 400 devices with paired processors, native integration with Lumaris, Triathlon, and Pico. HomeWorks is Lutron's flagship for the world's most uncompromising lighting and home automation projects — centralized low-voltage QS wiring or Clear Connect expansive wireless coverage supporting up to 10,000 zones, Ketra, and Palladiom.
+            RadioRA3 is built around the Clear Connect Type X wireless mesh, with Lumaris LED lighting and Triathlon Select shades. It scales from one room to a whole home with paired processors. HomeWorks is Lutron's flagship — full design freedom, the entire native catalog (Ketra, Lumaris, Rania, Palladiom), hand-crafted keypads, and a wired QS or Clear Connect wireless backbone that can expand to large architectural projects.
           </p>
           <div className="grid sm:grid-cols-2 gap-5 mb-6">
             <div className="bg-black/40 backdrop-blur-sm border border-accent/30 rounded-xl p-6">
@@ -550,7 +550,7 @@ const LutronRadioRA3 = () => {
               </p>
               <h3 className="text-white font-semibold text-lg mb-2">RadioRA3</h3>
               <p className="text-white/55 text-sm leading-relaxed">
-                Wirelessly retrofittable; scales up to 400 devices with paired processors, one room to whole home. Clear Connect RF — not Wi-Fi. Native integration with Lumaris, automated shading, and wireless keypads.
+                Clear Connect Type X wireless mesh. Lumaris LED lighting. Triathlon Select shades. Up to 100 Type X devices per processor, 200 per system. Native, no third-party bridges.
               </p>
             </div>
             <Link
@@ -564,7 +564,7 @@ const LutronRadioRA3 = () => {
                 HomeWorks
               </h3>
               <p className="text-white/55 text-sm leading-relaxed mb-4">
-                Lutron's flagship for uncompromising projects. Centralized low-voltage QS wiring or Clear Connect expansive wireless coverage supporting up to 10,000 zones. Native Ketra, Lumaris, Palladiom — hand-crafted keypads.
+                Lutron's flagship lighting & home-automation line. Full native catalog — Ketra, Lumaris, Rania, Palladiom, Aviena — with hand-crafted keypads and a wired QS or Clear Connect wireless backbone.
               </p>
               <span className="inline-flex items-center gap-1 text-accent text-sm font-medium group-hover:gap-2 transition-all">
                 Explore HomeWorks <ArrowRight className="w-3.5 h-3.5" />
@@ -629,10 +629,10 @@ const LutronRadioRA3 = () => {
             Get Started
           </p>
           <h2 className="text-2xl sm:text-3xl font-bold text-white mb-4">
-            Tell us what the house is doing.
+            See RadioRA3 in your own house.
           </h2>
           <p className="text-white/60 text-base mb-8 max-w-2xl mx-auto">
-            Send the property location, what is not working, and a few photos of the keypad, dimmer, processor, rack, or room. We will help turn "the lights are acting weird" into a clear next step.
+            Tell us the rooms you'd like on RadioRA3 — kitchen, primary, great room, exterior — plus any existing Lutron gear or Lumaris/Triathlon interest. We'll plan the dimmers, keypads, lighting, and shades around it.
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center items-center">
             <a
@@ -684,19 +684,19 @@ const LutronRadioRA3 = () => {
               {
                 title: "Lutron HomeWorks",
                 description:
-                  "Lutron's flagship for the world's most uncompromising lighting and home automation projects.",
+                  "Lutron's flagship line — full native catalog, hand-crafted keypads, wired QS or Clear Connect wireless.",
                 path: "/platforms/lutron-homeworks",
               },
               {
                 title: "Control4 Automation",
                 description:
-                  "When lighting, audio, climate, and shades should all live behind one interface.",
+                  "When lighting, audio, climate, security, and shades should all live behind one interface.",
                 path: "/platforms/control4",
               },
               {
-                title: "Motorized Shades",
+                title: "Triathlon Select Shades",
                 description:
-                  "Triathlon wire-free roller shades and Sivoia QS — sun-tracking, on the same keypads as the lights.",
+                  "Wire-free, battery-powered roller shades with a clean exposed roll — paired natively with RadioRA3.",
                 path: "/services/shades",
               },
               {
