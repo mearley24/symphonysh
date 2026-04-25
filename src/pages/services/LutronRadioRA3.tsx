@@ -7,7 +7,6 @@ import {
   Layers,
   Sparkles,
   Home,
-  CheckCircle2,
   ChevronDown,
   FileText,
   ExternalLink,
@@ -17,6 +16,10 @@ import {
   Sliders,
   Hammer,
   Wrench,
+  Sun,
+  Lightbulb,
+  CheckCircle2,
+  Smartphone,
 } from "lucide-react";
 import { useState } from "react";
 import Header from "../../components/Header";
@@ -46,129 +49,175 @@ const LutronRadioRA3 = () => {
     { label: "Native Integration", value: "Lumaris light & automated shades" },
   ];
 
-  const systemCards = [
+  // What RadioRA3 offers — moved up to right after the hero per the
+  // page-flow spec. Covers: smart dimmers/switches, SUNNATA keypads,
+  // scenes, app control, schedules/sun, automated shades, Lumaris /
+  // tunable lighting, retrofit-friendly wireless control.
+  const whatYouGet = [
     {
-      icon: Radio,
-      title: "Reliable wireless control",
+      icon: Lightbulb,
+      title: "Smart dimmers & switches",
       description:
-        "RadioRA3 uses Lutron's Clear Connect RF instead of leaning on Wi-Fi. Keypads, dimmers, and shades keep responding even when the internet goes down.",
+        "Lutron Sunnata and Maestro dimmers and switches that dim cleanly to 1%, match the load, and replace what is on your wall today without rewiring the room.",
     },
     {
-      icon: Layers,
-      title: "Start small, expand naturally",
+      icon: Sliders,
+      title: "SUNNATA keypads",
       description:
-        "One room today, the whole house later. We design the system so new keypads, dimmers, and shades drop in without rewiring what already works.",
+        "Engraved Sunnata keypads with a soft light bar that fades to show level. Scenes for the room sit on the wall — no app required.",
     },
     {
       icon: Sparkles,
       title: "Scenes for real life",
       description:
-        "Morning, Cook, Dinner, Movie, Goodnight — one press brings the whole room to the right level. No fiddling with ten dimmers.",
+        "Morning, Cook, Dinner, Movie, Goodnight — one button takes the whole room to the right level. No fiddling with ten dimmers or three apps.",
     },
     {
-      icon: Home,
-      title: "Built for larger homes",
+      icon: Smartphone,
+      title: "App & voice control",
       description:
-        "Multi-wing Vail Valley homes, guest quarters, caretaker units, and outdoor lighting all run on one coordinated RadioRA3 system.",
-    },
-  ];
-
-  const whereWeHelp = [
-    {
-      icon: Wrench,
-      title: "Older Lutron systems",
-      description:
-        "HomeWorks, RadioRA Classic, RA2, or Caseta that has grown messy. We assess what is worth keeping and what should move to RadioRA3.",
+        "The Lutron app on iPhone and Android, plus Alexa, Google, and Siri shortcuts. Works inside the house and from the road, not just on home Wi-Fi.",
     },
     {
-      icon: Sliders,
-      title: "LEDs that dim cleanly",
+      icon: Sun,
+      title: "Schedules, sunrise & sunset",
       description:
-        "Flicker, buzz, and drop-outs are usually a dimmer-load mismatch. We pair the right Lutron dimmer with the fixture so it actually dims to 1%.",
+        "RadioRA3 knows the astronomic clock for Eagle County. Exterior lights rise at dusk, pathway lights fade late, and mornings arrive on schedule.",
     },
     {
       icon: Layers,
-      title: "Clean installation",
+      title: "Automated shades",
       description:
-        "Matching Lutron wallplates, proper keypad engraving, and processors tucked into the rack instead of zip-tied to a shelf.",
-    },
-    {
-      icon: Network,
-      title: "Network and app access",
-      description:
-        "Static IP, proper port forwarding where needed, and Lutron app access that actually works from the road — not just on the home Wi-Fi.",
+        "Sivoia, Triathlon, and Palladiom shades on the same keypads as the lights. Sun-tracking, scenes, and schedules all in one program.",
     },
     {
       icon: Sparkles,
-      title: "Programming that makes sense",
+      title: "Lumaris tunable light",
       description:
-        "Button labels the family actually uses. Scenes tuned to how the room is lived in, not a demo program leftover from day one.",
+        "Native support for Lumaris — tunable white from 1800K to 4000K, dimming to 0.1%, warm-on-dim that makes a room feel like firelight at night and daylight at breakfast.",
     },
     {
-      icon: Hammer,
-      title: "System design before drywall",
+      icon: Radio,
+      title: "Retrofit-friendly wireless",
       description:
-        "For new builds we walk the plans with the architect and builder, mark keypad locations, and size the processor so nothing is bolted on later.",
+        "Clear Connect RF instead of Wi-Fi. Keypads, dimmers, and shades drop in without opening walls and keep responding even when the internet goes down.",
+    },
+  ];
+
+  const bestFit = [
+    {
+      title: "Finished homes that want real lighting control",
+      description:
+        "RadioRA3 was built for retrofits. Add scenes, keypads, shades, and app control without tearing into drywall or rewiring rooms that already work.",
     },
     {
-      icon: AlertTriangle,
-      title: "Troubleshooting without the runaround",
+      title: "Multi-wing Vail Valley homes",
       description:
-        "If the original installer is gone or unresponsive, we come in, read the existing program, and get the system working again.",
+        "Main house, guest quarters, caretaker units, garage and outdoor lighting — all coordinated on one program with paired processors.",
+    },
+    {
+      title: "Older Lutron systems that have grown messy",
+      description:
+        "HomeWorks QS Illumination, RadioRA Classic, RA2, or Caseta that has outgrown itself. We assess what is worth keeping and migrate the rest to RadioRA3.",
+    },
+    {
+      title: "Homes that want to start small and grow",
+      description:
+        "One room today, the whole house later. New keypads, dimmers, and shades drop in over time without redoing what already works.",
     },
   ];
 
   const componentPills = [
-    "Dimmers",
     "Sunnata Dimmers",
-    "Maestro Dimmers",
-    "Plug-In Dimmer",
-    "Switches",
     "Sunnata Switches",
-    "Maestro Switches",
-    "RF Relay Module",
-    "Keypads",
     "Sunnata Keypads",
-    "seeTouch Keypads",
-    "Table Top Keypads",
-    "Pico Wireless",
+    "Maestro Dimmers",
+    "Maestro Switches",
+    "Pico Wireless Remotes",
+    "Tabletop Keypads",
     "RadioRA3 Processor",
     "Repeaters",
     "Power Modules",
+    "RF Relay Module",
     "CCO Module",
     "Visor Control",
     "Ceiling Sensors",
     "Wall Sensors",
     "Receptacles",
-    "Network Port",
     "Wallplates",
     "Shades",
+    "Lumaris Light",
   ];
 
-  const commonWork = [
+  const everydayScenes = [
     {
       step: "01",
-      title: "The scenes feel off",
+      title: "Morning",
       description:
-        "Buttons do the wrong thing, scenes are too bright or too dim, and nobody can remember what any of them are supposed to do. We re-walk the house and re-tune the program room by room.",
+        "Bathroom comes up gently, kitchen lights warm to a friendly level, exterior pathway lights fade as the sun rises over the valley. No tapping, no app.",
     },
     {
       step: "02",
-      title: "The lights do not dim well",
+      title: "Cook",
       description:
-        "A handful of fixtures flicker, buzz, or snap off near the bottom. Almost always a dimmer-to-load mismatch. We swap to the right Lutron dimmer and set proper low-end trim.",
+        "One button on the kitchen keypad — under-cabinet on, island down a notch, dining at a soft glow, music optional. The room is set before the burner is lit.",
     },
     {
       step: "03",
-      title: "The controls are confusing",
+      title: "Movie",
       description:
-        "Five-button keypads with cryptic engraving. We simplify the button layout, relabel, and cut unused buttons so the wall makes sense at a glance.",
+        "Great-room scene drops the cans, holds the wall sconces low, brings the shades down, and leaves a step-light on for the kitchen run.",
     },
     {
       step: "04",
-      title: "The system grew messy",
+      title: "Goodnight",
       description:
-        "New shades, new dimmers, and a handful of Pico remotes taped up over the years. We consolidate the program, clean up the rack, and document what is actually installed.",
+        "Primary suite keypad shuts the house down — interior lights off, exterior on a low security level, shades closed, primary bedroom fades to sleep.",
+    },
+    {
+      step: "05",
+      title: "Away",
+      description:
+        "One tap on the way out the door. House goes dark, exterior keeps a vacation pattern, and the Lutron app shows the state of every room from anywhere.",
+    },
+  ];
+
+  const symphonyProcess = [
+    {
+      icon: Hammer,
+      title: "Walk the house with you",
+      description:
+        "We see how each room is actually lived in — where the family enters, where they cook, where they wind down — before recommending keypads or scenes.",
+    },
+    {
+      icon: Sliders,
+      title: "Match dimmers to fixtures",
+      description:
+        "Every LED, low-voltage strip, and tape light gets the right Lutron dimmer behind it. No flicker, no buzz, no drop-out at the bottom of the dim curve.",
+    },
+    {
+      icon: Layers,
+      title: "Engrave the keypads to the room",
+      description:
+        "Button labels the family actually uses. Scenes tuned to how the room is lived in, not a demo program leftover from day one.",
+    },
+    {
+      icon: Network,
+      title: "Network & remote app access",
+      description:
+        "Static IP, proper port forwarding where needed, and Lutron app access that works from the road. Documented so the next service call does not start from scratch.",
+    },
+    {
+      icon: Wrench,
+      title: "Service the system you already own",
+      description:
+        "Inherited an RA3 system from another installer? We read the program, document it, fix what is broken, and clean it up so the wall makes sense again.",
+    },
+    {
+      icon: AlertTriangle,
+      title: "Troubleshooting without the runaround",
+      description:
+        "If the original installer is gone or unresponsive, we come in, identify the device on the wall, and get the system working again — usually on the first visit.",
     },
   ];
 
@@ -275,7 +324,7 @@ const LutronRadioRA3 = () => {
       />
       <Header />
 
-      {/* Hero — no eyebrow per spec */}
+      {/* 1. Hero */}
       <section className="pt-36 sm:pt-44 pb-16 sm:pb-20 px-4 sm:px-6">
         <div className="max-w-4xl mx-auto">
           <Link
@@ -284,6 +333,9 @@ const LutronRadioRA3 = () => {
           >
             <ArrowLeft className="w-3.5 h-3.5" /> All Platforms
           </Link>
+          <p className="text-accent font-medium text-sm tracking-wide uppercase mb-3">
+            Lutron RadioRA3
+          </p>
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight mb-5 text-white hero-text-shadow">
             RadioRA3, made simple.
           </h1>
@@ -312,7 +364,7 @@ const LutronRadioRA3 = () => {
 
       <div className="hero-divider w-full" />
 
-      {/* Stats strip */}
+      {/* 2. Stats strip */}
       <section className="py-10 sm:py-14 px-4 sm:px-6 bg-black/20 backdrop-blur-sm border-y border-white/5">
         <div className="max-w-5xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
           {stats.map((s, i) => (
@@ -329,20 +381,20 @@ const LutronRadioRA3 = () => {
         </div>
       </section>
 
-      {/* RadioRA3 System */}
+      {/* 3. What RadioRA3 Offers — moved up from bottom of page */}
       <section className="py-16 sm:py-24 px-4 sm:px-6">
-        <div className="max-w-4xl mx-auto">
+        <div className="max-w-5xl mx-auto">
           <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">
-            RadioRA3 System
+            What RadioRA3 Offers
           </p>
           <h2 className="text-2xl sm:text-3xl font-bold text-white mb-5">
-            Control that feels built into the home.
+            Everything you can put on the wall, on a schedule, or in your pocket.
           </h2>
           <p className="text-white/60 text-base leading-relaxed mb-10 max-w-3xl">
             RadioRA3 is a professionally installed wireless control system for lighting, shades, keypads, schedules, scenes, and whole-home comfort. Symphony makes the system feel less like technology and more like the house working the way it should.
           </p>
-          <div className="grid sm:grid-cols-2 gap-5">
-            {systemCards.map((item, i) => (
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+            {whatYouGet.map((item, i) => (
               <div
                 key={i}
                 className="bg-black/40 backdrop-blur-sm border border-white/8 rounded-xl p-6"
@@ -350,7 +402,7 @@ const LutronRadioRA3 = () => {
                 <div className="w-10 h-10 rounded-lg bg-accent/10 flex items-center justify-center mb-3">
                   <item.icon className="w-5 h-5 text-accent" />
                 </div>
-                <h3 className="text-white font-semibold text-lg mb-2">
+                <h3 className="text-white font-semibold text-base mb-2">
                   {item.title}
                 </h3>
                 <p className="text-white/50 text-sm leading-relaxed">
@@ -362,41 +414,39 @@ const LutronRadioRA3 = () => {
         </div>
       </section>
 
-      {/* Where We Help */}
+      {/* 4. Best Fit */}
       <section className="py-16 sm:py-24 px-4 sm:px-6 bg-black/20 backdrop-blur-sm border-y border-white/5">
-        <div className="max-w-5xl mx-auto">
+        <div className="max-w-4xl mx-auto">
           <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">
-            Where We Help
+            Best Fit
           </p>
           <h2 className="text-2xl sm:text-3xl font-bold text-white mb-10">
-            The RA3 issues homeowners actually call about.
+            Where RadioRA3 is the right answer.
           </h2>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-            {whereWeHelp.map((item, i) => (
+          <div className="grid sm:grid-cols-2 gap-5">
+            {bestFit.map((item, i) => (
               <div
                 key={i}
-                className="bg-black/40 backdrop-blur-sm border border-white/8 rounded-xl p-6"
+                className="flex gap-4 p-5 rounded-xl border border-white/8 bg-black/40 backdrop-blur-sm"
               >
-                <div className="w-10 h-10 rounded-lg bg-accent/10 flex items-center justify-center mb-3">
-                  <item.icon className="w-5 h-5 text-accent" />
+                <CheckCircle2 className="w-5 h-5 text-accent shrink-0 mt-0.5" />
+                <div>
+                  <h3 className="text-white font-semibold mb-1">{item.title}</h3>
+                  <p className="text-white/50 text-sm leading-relaxed">
+                    {item.description}
+                  </p>
                 </div>
-                <h3 className="text-white font-semibold text-lg mb-2">
-                  {item.title}
-                </h3>
-                <p className="text-white/50 text-sm leading-relaxed">
-                  {item.description}
-                </p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* RA3 Components */}
+      {/* 5. System Components */}
       <section className="py-16 sm:py-24 px-4 sm:px-6">
         <div className="max-w-4xl mx-auto">
           <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">
-            RA3 Components
+            System Components
           </p>
           <h2 className="text-2xl sm:text-3xl font-bold text-white mb-5">
             Tell us what part you see.
@@ -417,17 +467,17 @@ const LutronRadioRA3 = () => {
         </div>
       </section>
 
-      {/* Common RA3 Work */}
+      {/* 6. Everyday Scenes */}
       <section className="py-16 sm:py-24 px-4 sm:px-6 bg-black/20 backdrop-blur-sm border-y border-white/5">
         <div className="max-w-4xl mx-auto">
           <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">
-            Common RA3 Work
+            Everyday Scenes
           </p>
           <h2 className="text-2xl sm:text-3xl font-bold text-white mb-10">
-            What usually needs fixing.
+            What the day actually looks like.
           </h2>
           <div className="space-y-4">
-            {commonWork.map((item, i) => (
+            {everydayScenes.map((item, i) => (
               <div
                 key={i}
                 className="flex gap-5 p-5 rounded-xl border border-white/8 bg-black/40 backdrop-blur-sm"
@@ -449,73 +499,86 @@ const LutronRadioRA3 = () => {
         </div>
       </section>
 
-      {/* Official Resources */}
+      {/* 7. How Symphony designs and programs it */}
       <section className="py-16 sm:py-24 px-4 sm:px-6">
-        <div className="max-w-4xl mx-auto">
+        <div className="max-w-5xl mx-auto">
           <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">
-            Official Resources
+            How Symphony Sets It Up
           </p>
           <h2 className="text-2xl sm:text-3xl font-bold text-white mb-10">
-            When the manual matters, we point to the real one.
+            What our team handles, end to end.
           </h2>
-          <div className="grid sm:grid-cols-3 gap-5">
-            {officialResources.map((r, i) => (
-              <a
-                key={i}
-                href={r.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group flex flex-col bg-black/40 backdrop-blur-sm border border-white/8 rounded-xl p-6 hover:border-accent/30 transition-colors"
-              >
-                <div className="w-10 h-10 rounded-lg bg-accent/10 flex items-center justify-center mb-3">
-                  <FileText className="w-5 h-5 text-accent" />
-                </div>
-                <h3 className="text-white font-semibold text-lg mb-2">
-                  {r.title}
-                </h3>
-                <p className="text-white/50 text-sm leading-relaxed mb-4">
-                  {r.description}
-                </p>
-                <span className="inline-flex items-center gap-1 text-accent text-sm font-medium mt-auto group-hover:gap-2 transition-all">
-                  Open on Lutron.com <ExternalLink className="w-3.5 h-3.5" />
-                </span>
-              </a>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Before We Come Out */}
-      <section className="py-16 sm:py-24 px-4 sm:px-6 bg-black/20 backdrop-blur-sm border-y border-white/5">
-        <div className="max-w-4xl mx-auto">
-          <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">
-            Before We Come Out
-          </p>
-          <h2 className="text-2xl sm:text-3xl font-bold text-white mb-10">
-            Send the details that save a trip.
-          </h2>
-          <div className="grid sm:grid-cols-2 gap-5">
-            {beforeWeCome.map((item, i) => (
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+            {symphonyProcess.map((item, i) => (
               <div
                 key={i}
-                className="flex gap-4 p-5 rounded-xl border border-white/8 bg-black/40 backdrop-blur-sm"
+                className="bg-black/40 backdrop-blur-sm border border-white/8 rounded-xl p-6"
               >
-                <div className="w-10 h-10 rounded-lg bg-accent/10 flex items-center justify-center shrink-0">
+                <div className="w-10 h-10 rounded-lg bg-accent/10 flex items-center justify-center mb-3">
                   <item.icon className="w-5 h-5 text-accent" />
                 </div>
-                <div>
-                  <h3 className="text-white font-semibold mb-1">{item.title}</h3>
-                  <p className="text-white/50 text-sm leading-relaxed">
-                    {item.description}
-                  </p>
-                </div>
+                <h3 className="text-white font-semibold text-lg mb-2">
+                  {item.title}
+                </h3>
+                <p className="text-white/50 text-sm leading-relaxed">
+                  {item.description}
+                </p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* FAQ */}
+      {/* 8. Compare / Choose — RadioRA3 vs HomeWorks + Setup Finder */}
+      <section className="py-16 sm:py-24 px-4 sm:px-6 bg-black/20 backdrop-blur-sm border-y border-white/5">
+        <div className="max-w-4xl mx-auto">
+          <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">
+            RadioRA3 vs HomeWorks
+          </p>
+          <h2 className="text-2xl sm:text-3xl font-bold text-white mb-5">
+            Two Lutron platforms. Which one is right?
+          </h2>
+          <p className="text-white/60 text-base leading-relaxed mb-8 max-w-3xl">
+            RadioRA3 is the right choice for most homes — wireless, retrofit-friendly, scalable to 400 devices. HomeWorks is Lutron's flagship platform for architectural homes, centralized panels, 10,000-zone designs, and Ketra or Palladiom shades.
+          </p>
+          <div className="grid sm:grid-cols-2 gap-5 mb-6">
+            <div className="bg-black/40 backdrop-blur-sm border border-accent/30 rounded-xl p-6">
+              <p className="text-accent text-xs font-semibold uppercase tracking-wide mb-2">
+                You are here
+              </p>
+              <h3 className="text-white font-semibold text-lg mb-2">RadioRA3</h3>
+              <p className="text-white/55 text-sm leading-relaxed">
+                Wireless retrofits, scalable smart lighting, up to 400 devices, one room to whole home. Clear Connect RF, no Wi-Fi dependency.
+              </p>
+            </div>
+            <Link
+              to="/platforms/lutron-homeworks"
+              className="group bg-black/40 backdrop-blur-sm border border-white/8 rounded-xl p-6 hover:border-accent/30 transition-colors"
+            >
+              <p className="text-white/40 text-xs font-semibold uppercase tracking-wide mb-2">
+                Flagship platform
+              </p>
+              <h3 className="text-white font-semibold text-lg mb-2 group-hover:text-accent transition-colors">
+                HomeWorks
+              </h3>
+              <p className="text-white/55 text-sm leading-relaxed mb-4">
+                Architectural homes, centralized panels, up to 10,000 zones, native Ketra / Lumaris / Palladiom, QS wired backbone options.
+              </p>
+              <span className="inline-flex items-center gap-1 text-accent text-sm font-medium group-hover:gap-2 transition-all">
+                Explore HomeWorks <ArrowRight className="w-3.5 h-3.5" />
+              </span>
+            </Link>
+          </div>
+          <Link
+            to="/setup-finder"
+            className="inline-flex items-center gap-2 text-accent text-sm font-medium hover:gap-3 transition-all"
+          >
+            Not sure which one? Try the Setup Finder <ArrowRight className="w-4 h-4" />
+          </Link>
+        </div>
+      </section>
+
+      {/* 9. FAQ */}
       <section className="py-16 sm:py-24 px-4 sm:px-6">
         <div className="max-w-3xl mx-auto">
           <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">
@@ -557,7 +620,7 @@ const LutronRadioRA3 = () => {
         </div>
       </section>
 
-      {/* Final CTA — centered on mobile and desktop */}
+      {/* 10. Final CTA */}
       <section className="py-16 sm:py-24 px-4 sm:px-6 bg-black/20 backdrop-blur-sm border-y border-white/5">
         <div className="max-w-3xl mx-auto text-center">
           <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">
@@ -583,100 +646,24 @@ const LutronRadioRA3 = () => {
               <Phone className="w-4 h-4" /> (970) 519-3013
             </a>
           </div>
-        </div>
-      </section>
-
-      {/* Lumaris + intelligent lighting */}
-      <section className="py-16 sm:py-24 px-4 sm:px-6">
-        <div className="max-w-4xl mx-auto">
-          <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">
-            Lumaris & Intelligent Lighting
+          <p className="text-white/40 text-xs mt-6">
+            Helpful before we come out: device photos, room and symptom, install context, recent changes.
           </p>
-          <h2 className="text-2xl sm:text-3xl font-bold text-white mb-5">
-            The fixtures RadioRA3 was designed around.
-          </h2>
-          <p className="text-white/60 text-base leading-relaxed mb-8 max-w-3xl">
-            RadioRA3 integrates natively with Lutron's Lumaris intelligent lighting — tunable white from 1800K to 4000K, dimming down to 0.1% where the fixture supports it, and warm-on-dim behavior that makes a room feel like firelight at night and daylight at breakfast. Same keypads, same app, no extra bridge.
-          </p>
-          <div className="grid sm:grid-cols-2 gap-5">
-            {[
-              {
-                title: "Tunable white 1800K–4000K",
-                description:
-                  "Cool in the morning, warm in the evening. Scenes and schedules shift color temperature automatically so the house feels right at every hour.",
-              },
-              {
-                title: "Dimming to 0.1%",
-                description:
-                  "Midnight trip to the kitchen without flooding the room. Lumaris fixtures hold clean dim levels far lower than standard LED drivers.",
-              },
-              {
-                title: "SUNNATA light bar controls",
-                description:
-                  "Sunnata dimmers and keypads include a light bar that fades to show current level — elegant on the wall, and obvious to guests.",
-              },
-              {
-                title: "Schedules & sunrise / sunset",
-                description:
-                  "RadioRA3 knows the astronomic clock for Eagle County. Exterior lights rise at dusk, pathway lights fade late, and mornings arrive on schedule.",
-              },
-            ].map((item, i) => (
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3 mt-8 text-left">
+            {beforeWeCome.map((item, i) => (
               <div
                 key={i}
-                className="flex gap-4 p-5 rounded-xl border border-white/8 bg-black/40 backdrop-blur-sm"
+                className="flex gap-3 p-4 rounded-lg border border-white/8 bg-black/40 backdrop-blur-sm"
               >
-                <Sparkles className="w-5 h-5 text-accent shrink-0 mt-0.5" />
+                <item.icon className="w-4 h-4 text-accent shrink-0 mt-0.5" />
                 <div>
-                  <h3 className="text-white font-semibold mb-1">{item.title}</h3>
-                  <p className="text-white/50 text-sm leading-relaxed">
+                  <h3 className="text-white font-medium text-sm mb-0.5">{item.title}</h3>
+                  <p className="text-white/45 text-xs leading-relaxed">
                     {item.description}
                   </p>
                 </div>
               </div>
             ))}
-          </div>
-        </div>
-      </section>
-
-      {/* RadioRA3 vs HomeWorks teaser */}
-      <section className="py-16 sm:py-24 px-4 sm:px-6 bg-black/20 backdrop-blur-sm border-y border-white/5">
-        <div className="max-w-4xl mx-auto">
-          <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">
-            RadioRA3 vs HomeWorks
-          </p>
-          <h2 className="text-2xl sm:text-3xl font-bold text-white mb-5">
-            Two Lutron platforms. Which one is right?
-          </h2>
-          <p className="text-white/60 text-base leading-relaxed mb-8 max-w-3xl">
-            RadioRA3 is the right choice for most homes — wireless, retrofit-friendly, scalable to 400 devices. HomeWorks is Lutron's flagship platform for architectural homes, centralized panels, 10,000-zone designs, and Ketra or Palladiom shades.
-          </p>
-          <div className="grid sm:grid-cols-2 gap-5">
-            <div className="bg-black/40 backdrop-blur-sm border border-accent/30 rounded-xl p-6">
-              <p className="text-accent text-xs font-semibold uppercase tracking-wide mb-2">
-                You are here
-              </p>
-              <h3 className="text-white font-semibold text-lg mb-2">RadioRA3</h3>
-              <p className="text-white/55 text-sm leading-relaxed mb-4">
-                Wireless retrofits, scalable smart lighting, up to 400 devices, one room to whole home. Clear Connect RF, no Wi-Fi dependency.
-              </p>
-            </div>
-            <Link
-              to="/platforms/lutron-homeworks"
-              className="group bg-black/40 backdrop-blur-sm border border-white/8 rounded-xl p-6 hover:border-accent/30 transition-colors"
-            >
-              <p className="text-white/40 text-xs font-semibold uppercase tracking-wide mb-2">
-                Flagship platform
-              </p>
-              <h3 className="text-white font-semibold text-lg mb-2 group-hover:text-accent transition-colors">
-                HomeWorks
-              </h3>
-              <p className="text-white/55 text-sm leading-relaxed mb-4">
-                Architectural homes, centralized panels, up to 10,000 zones, native Ketra / Lumaris / Palladiom, QS wired backbone options.
-              </p>
-              <span className="inline-flex items-center gap-1 text-accent text-sm font-medium group-hover:gap-2 transition-all">
-                Explore HomeWorks <ArrowRight className="w-3.5 h-3.5" />
-              </span>
-            </Link>
           </div>
         </div>
       </section>
@@ -737,11 +724,47 @@ const LutronRadioRA3 = () => {
         </div>
       </section>
 
+      {/* Official Resources */}
+      <section className="py-12 sm:py-16 px-4 sm:px-6 bg-black/20 backdrop-blur-sm border-y border-white/5">
+        <div className="max-w-4xl mx-auto">
+          <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">
+            Manufacturer Resources
+          </p>
+          <h2 className="text-xl sm:text-2xl font-bold text-white mb-8">
+            Going deeper on RadioRA3.
+          </h2>
+          <div className="grid sm:grid-cols-3 gap-5">
+            {officialResources.map((r, i) => (
+              <a
+                key={i}
+                href={r.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group flex flex-col bg-black/40 backdrop-blur-sm border border-white/8 rounded-xl p-5 hover:border-accent/30 transition-colors"
+              >
+                <div className="w-9 h-9 rounded-lg bg-accent/10 flex items-center justify-center mb-3">
+                  <FileText className="w-4 h-4 text-accent" />
+                </div>
+                <h3 className="text-white font-semibold text-sm mb-1.5">
+                  {r.title}
+                </h3>
+                <p className="text-white/45 text-xs leading-relaxed mb-3">
+                  {r.description}
+                </p>
+                <span className="inline-flex items-center gap-1 text-accent text-xs font-medium mt-auto group-hover:gap-2 transition-all">
+                  Open on Lutron.com <ExternalLink className="w-3 h-3" />
+                </span>
+              </a>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Trademark note */}
-      <section className="px-4 sm:px-6 pb-10">
+      <section className="px-4 sm:px-6 py-10">
         <div className="max-w-4xl mx-auto">
           <p className="text-white/35 text-xs leading-relaxed">
-            Lutron, RadioRA3, Clear Connect, HomeWorks, Sunnata, Ketra, and related trade dress and logos are trademarks or registered trademarks of Lutron Electronics Co., Inc. in the U.S. and/or other countries. Symphony Smart Homes is an independent smart-home integration company.
+            Lutron, RadioRA3, Clear Connect, HomeWorks, Sunnata, Lumaris, Ketra, and related trade dress and logos are trademarks or registered trademarks of Lutron Electronics Co., Inc. in the U.S. and/or other countries. Symphony Smart Homes is an independent smart-home integration company.
           </p>
         </div>
       </section>

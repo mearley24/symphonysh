@@ -320,11 +320,11 @@ const LutronHomeWorks = () => {
         </div>
       </section>
 
-      {/* What it is */}
+      {/* 3. What HomeWorks offers — kept right after stats */}
       <section className="py-16 sm:py-24 px-4 sm:px-6">
         <div className="max-w-4xl mx-auto">
           <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">
-            What HomeWorks Is
+            What HomeWorks Offers
           </p>
           <h2 className="text-2xl sm:text-3xl font-bold text-white mb-5">
             Built for uncompromising lighting and automation.
@@ -381,11 +381,64 @@ const LutronHomeWorks = () => {
         </div>
       </section>
 
-      {/* What Symphony does */}
+      {/* 5. System pieces / Capabilities */}
+      <section className="py-16 sm:py-24 px-4 sm:px-6">
+        <div className="max-w-4xl mx-auto">
+          <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">
+            System Pieces
+          </p>
+          <h2 className="text-2xl sm:text-3xl font-bold text-white mb-5">
+            What HomeWorks covers natively.
+          </h2>
+          <p className="text-white/60 text-base leading-relaxed mb-8 max-w-2xl">
+            HomeWorks is designed around Lutron's full catalog — processors, panels, fixtures, shades, keypads, sensors, and cloud tools — with native integration into the rest of your smart-home stack.
+          </p>
+          <div className="flex flex-wrap gap-2">
+            {capabilities.map((pill) => (
+              <span
+                key={pill}
+                className="px-3 py-1.5 rounded-full border border-white/10 bg-black/40 backdrop-blur-sm text-white/70 text-xs sm:text-sm"
+              >
+                {pill}
+              </span>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* 6. Everyday Scenes — what the family notices */}
+      <section className="py-16 sm:py-24 px-4 sm:px-6 bg-black/20 backdrop-blur-sm border-y border-white/5">
+        <div className="max-w-4xl mx-auto">
+          <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">
+            Everyday Scenes
+          </p>
+          <h2 className="text-2xl sm:text-3xl font-bold text-white mb-10">
+            What the family actually notices.
+          </h2>
+          <div className="grid sm:grid-cols-2 gap-5">
+            {experience.map((item, i) => (
+              <div
+                key={i}
+                className="flex gap-4 p-5 rounded-xl border border-white/8 bg-black/40 backdrop-blur-sm"
+              >
+                <Sparkles className="w-5 h-5 text-accent shrink-0 mt-0.5" />
+                <div>
+                  <h3 className="text-white font-semibold mb-1">{item.title}</h3>
+                  <p className="text-white/50 text-sm leading-relaxed">
+                    {item.description}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* 7. How Symphony designs and programs it */}
       <section className="py-16 sm:py-24 px-4 sm:px-6">
         <div className="max-w-5xl mx-auto">
           <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">
-            What Symphony Does
+            How Symphony Sets It Up
           </p>
           <h2 className="text-2xl sm:text-3xl font-bold text-white mb-10">
             From design meeting to living in the house.
@@ -408,94 +461,34 @@ const LutronHomeWorks = () => {
               </div>
             ))}
           </div>
-        </div>
-      </section>
-
-      {/* Client experience */}
-      <section className="py-16 sm:py-24 px-4 sm:px-6 bg-black/20 backdrop-blur-sm border-y border-white/5">
-        <div className="max-w-4xl mx-auto">
-          <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">
-            What It Feels Like
-          </p>
-          <h2 className="text-2xl sm:text-3xl font-bold text-white mb-10">
-            What the family notices.
-          </h2>
-          <div className="grid sm:grid-cols-2 gap-5">
-            {experience.map((item, i) => (
-              <div
-                key={i}
-                className="flex gap-4 p-5 rounded-xl border border-white/8 bg-black/40 backdrop-blur-sm"
-              >
-                <Sparkles className="w-5 h-5 text-accent shrink-0 mt-0.5" />
-                <div>
-                  <h3 className="text-white font-semibold mb-1">{item.title}</h3>
-                  <p className="text-white/50 text-sm leading-relaxed">
-                    {item.description}
-                  </p>
+          <div className="mt-10">
+            <p className="text-accent font-medium text-sm tracking-wide uppercase mb-3">
+              Common HomeWorks Projects
+            </p>
+            <div className="space-y-4">
+              {commonProjects.map((item, i) => (
+                <div
+                  key={i}
+                  className="flex gap-5 p-5 rounded-xl border border-white/8 bg-black/40 backdrop-blur-sm"
+                >
+                  <span className="text-accent font-semibold text-sm shrink-0 w-8">
+                    {item.step}
+                  </span>
+                  <div>
+                    <h3 className="text-white font-semibold mb-1">{item.title}</h3>
+                    <p className="text-white/50 text-sm leading-relaxed">
+                      {item.description}
+                    </p>
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Capabilities */}
-      <section className="py-16 sm:py-24 px-4 sm:px-6">
-        <div className="max-w-4xl mx-auto">
-          <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">
-            Key Capabilities
-          </p>
-          <h2 className="text-2xl sm:text-3xl font-bold text-white mb-5">
-            What HomeWorks covers natively.
-          </h2>
-          <p className="text-white/60 text-base leading-relaxed mb-8 max-w-2xl">
-            HomeWorks is designed around Lutron's full catalog — fixtures, shades, keypads, sensors, and cloud tools — with native integration into the rest of your smart-home stack.
-          </p>
-          <div className="flex flex-wrap gap-2">
-            {capabilities.map((pill) => (
-              <span
-                key={pill}
-                className="px-3 py-1.5 rounded-full border border-white/10 bg-black/40 backdrop-blur-sm text-white/70 text-xs sm:text-sm"
-              >
-                {pill}
-              </span>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Common projects */}
+      {/* 8. Compare / Choose — HomeWorks vs RadioRA3 + Setup Finder */}
       <section className="py-16 sm:py-24 px-4 sm:px-6 bg-black/20 backdrop-blur-sm border-y border-white/5">
-        <div className="max-w-4xl mx-auto">
-          <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">
-            Common Projects
-          </p>
-          <h2 className="text-2xl sm:text-3xl font-bold text-white mb-10">
-            What HomeWorks work usually looks like.
-          </h2>
-          <div className="space-y-4">
-            {commonProjects.map((item, i) => (
-              <div
-                key={i}
-                className="flex gap-5 p-5 rounded-xl border border-white/8 bg-black/40 backdrop-blur-sm"
-              >
-                <span className="text-accent font-semibold text-sm shrink-0 w-8">
-                  {item.step}
-                </span>
-                <div>
-                  <h3 className="text-white font-semibold mb-1">{item.title}</h3>
-                  <p className="text-white/50 text-sm leading-relaxed">
-                    {item.description}
-                  </p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* HomeWorks vs RadioRA3 */}
-      <section className="py-16 sm:py-24 px-4 sm:px-6">
         <div className="max-w-4xl mx-auto">
           <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">
             HomeWorks vs RadioRA3
@@ -506,25 +499,43 @@ const LutronHomeWorks = () => {
           <p className="text-white/60 text-base leading-relaxed mb-10 max-w-3xl">
             Both are Lutron. Both are excellent. RadioRA3 is the right tool for wireless retrofits and scalable smart lighting. HomeWorks is the right tool for architectural homes, luxury whole-home lighting, and projects that need centralized panels and native Ketra/Lumaris/Palladiom.
           </p>
-          <div className="grid sm:grid-cols-2 gap-5">
-            {compareToRA3.map((c, i) => (
-              <div
-                key={i}
-                className="bg-black/40 backdrop-blur-sm border border-white/8 rounded-xl p-6"
-              >
-                <h3 className="text-white font-semibold text-lg mb-2">{c.title}</h3>
-                <p className="text-white/55 text-sm leading-relaxed mb-4">
-                  {c.description}
-                </p>
-                <Link
-                  to={c.link}
-                  className="inline-flex items-center gap-1 text-accent text-sm font-medium hover:gap-2 transition-all"
+          <div className="grid sm:grid-cols-2 gap-5 mb-6">
+            {compareToRA3.map((c, i) => {
+              const isHere = c.link === "/platforms/lutron-homeworks";
+              return (
+                <div
+                  key={i}
+                  className={`bg-black/40 backdrop-blur-sm border rounded-xl p-6 ${
+                    isHere ? "border-accent/30" : "border-white/8"
+                  }`}
                 >
-                  {c.linkLabel} <ArrowRight className="w-3.5 h-3.5" />
-                </Link>
-              </div>
-            ))}
+                  {isHere && (
+                    <p className="text-accent text-xs font-semibold uppercase tracking-wide mb-2">
+                      You are here
+                    </p>
+                  )}
+                  <h3 className="text-white font-semibold text-lg mb-2">{c.title}</h3>
+                  <p className="text-white/55 text-sm leading-relaxed mb-4">
+                    {c.description}
+                  </p>
+                  {!isHere && (
+                    <Link
+                      to={c.link}
+                      className="inline-flex items-center gap-1 text-accent text-sm font-medium hover:gap-2 transition-all"
+                    >
+                      {c.linkLabel} <ArrowRight className="w-3.5 h-3.5" />
+                    </Link>
+                  )}
+                </div>
+              );
+            })}
           </div>
+          <Link
+            to="/setup-finder"
+            className="inline-flex items-center gap-2 text-accent text-sm font-medium hover:gap-3 transition-all"
+          >
+            Not sure which one? Try the Setup Finder <ArrowRight className="w-4 h-4" />
+          </Link>
         </div>
       </section>
 
