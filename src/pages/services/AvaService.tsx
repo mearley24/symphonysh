@@ -91,7 +91,7 @@ const AvaService = () => {
       icon: Volume2,
       title: "Built to last",
       description:
-        "Single-piece machined aluminum, 3D Glass, magnetic charging dock — designed to live on the coffee table and feel premium every time it's picked up.",
+        "Single-piece machined aluminum, 3D Glass, and a mechanical click — designed to live on the coffee table and feel premium every time it's picked up.",
     },
   ];
 
@@ -133,7 +133,7 @@ const AvaService = () => {
     {
       title: "Remotes",
       description:
-        "Single-piece aluminum, 3D Glass, and a mechanical click — built to last, charged on a magnetic dock.",
+        "Single-piece aluminum, 3D Glass, and a mechanical click — built to last.",
       items: [
         { label: "AVA Cinema Remote", href: "https://avahq.com/products/cinema-remote", external: true, hint: "Flagship remote for media rooms and theaters" },
         { label: "AVA Home Remote", href: "https://avahq.com/products/home-remote", external: true, hint: "Whole-home remote for rooms beyond the screen" },
@@ -159,7 +159,6 @@ const AvaService = () => {
         { label: "Single-piece aluminum", hint: "Machined chassis, no seams" },
         { label: "3D Glass", hint: "Curved cover glass over the display" },
         { label: "Mechanical click", hint: "Tactile button feedback" },
-        { label: "Magnetic charging dock", hint: "Drop-in charging on the table or nightstand" },
       ],
     },
     {
