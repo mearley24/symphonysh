@@ -125,9 +125,9 @@ const AvaService = () => {
         "AVA's brain — the operating system, the cloud-flow engine, and the built-in processor that lives inside Cinema Remote.",
       items: [
         { label: "AVA OS", href: "https://avahq.com/", external: true, hint: "AVA's home operating system" },
-        { label: "AVA Flows", hint: "AVA's automation logic — multi-step flows tied to events" },
+        { label: "Flows", hint: "AVA's automation logic — multi-step flows tied to events" },
         { label: "Nano Brain", hint: "Compact built-in processor option" },
-        { label: "Built-in octa-core processor", hint: "Cinema Remote includes its own processor — less hardware in the closet" },
+        { label: "Built-in processor", hint: "Cinema Remote includes its own octa-core processor — less hardware in the closet" },
       ],
     },
     {
@@ -135,8 +135,8 @@ const AvaService = () => {
       description:
         "Single-piece aluminum, 3D Glass, and a mechanical click — built to last.",
       items: [
-        { label: "AVA Cinema Remote", href: "https://avahq.com/products/cinema-remote", external: true, hint: "Flagship remote for media rooms and theaters" },
-        { label: "AVA Home Remote", href: "https://avahq.com/products/home-remote", external: true, hint: "Whole-home remote for rooms beyond the screen" },
+        { label: "Cinema Remote", href: "https://avahq.com/products/cinema-remote", external: true, hint: "Flagship remote for media rooms and theaters" },
+        { label: "Home Remote", href: "https://avahq.com/products/home-remote", external: true, hint: "Whole-home remote for rooms beyond the screen" },
       ],
     },
     {
@@ -147,7 +147,7 @@ const AvaService = () => {
         { label: "Dynamic Keypad", hint: "AVA's on-wall scene keypad" },
         { label: "AVA App", href: "https://avahq.com/", external: true, hint: "iOS and Android control" },
         { label: "Kiosk Mode", hint: "Locked-down touch surface for shared spaces" },
-        { label: "IP-direct control", hint: "Network control of receivers, displays, and streamers" },
+        { label: "IP control", hint: "Network control of receivers, displays, and streamers" },
         { label: "IR control", hint: "Legacy IR control where IP isn't available" },
       ],
     },
@@ -399,17 +399,17 @@ const AvaService = () => {
         </div>
       </section>
 
-      {/* 4. Product family tree */}
+      {/* 4. The AVA lineup */}
       <section className="py-16 sm:py-24 px-4 sm:px-6 bg-black/20 backdrop-blur-sm border-y border-white/5" id="product-family-tree">
         <div className="max-w-4xl mx-auto">
           <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">
-            Product Family Tree
+            The Lineup
           </p>
           <h2 className="text-2xl sm:text-3xl font-bold text-white mb-5">
-            What ends up in the room.
+            Explore what AVA can include.
           </h2>
-          <p className="text-white/60 text-base leading-relaxed mb-8 max-w-2xl">
-            Organized by family — core platform, remotes, control surfaces, hardware feel, room types, and integrations. Linked tags open AVA's official product page.
+          <p className="text-white/80 text-base sm:text-lg leading-relaxed mb-8 max-w-2xl">
+            Grouped by what each piece does — core platform, remotes, control surfaces, hardware feel, room types, and integrations. Linked items open AVA's official product pages where available; not every piece needs a link.
           </p>
           <ProductFamilyTree groups={productFamilies} />
         </div>

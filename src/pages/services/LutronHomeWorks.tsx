@@ -153,10 +153,10 @@ const LutronHomeWorks = () => {
       description:
         "The processor, the wiring, and the RF that the rest of the catalog runs on — one Lutron program over either or both backbones.",
       items: [
-        { label: "HomeWorks processors & panels", hint: "Centralized HomeWorks processors and dimming/switching panels" },
-        { label: "QS centralized low-voltage wiring", hint: "Lutron QS link for wired architectural projects" },
+        { label: "Processors & panels", href: "https://www.lutron.com/en-US/Products/Pages/WholeHomeSystems/HomeWorks/Overview.aspx", external: true, hint: "Centralized HomeWorks processors and dimming/switching panels" },
+        { label: "QS wired backbone", hint: "Lutron QS link for wired architectural projects" },
         { label: "Clear Connect RF", hint: "Lutron's residential-grade wireless mesh" },
-        { label: "Lutron Connect cloud tools", href: "https://www.lutron.com/en-US/Pages/Lutron-Connect.aspx", external: true, hint: "Lutron's cloud programming and remote-management tools" },
+        { label: "Lutron Connect", href: "https://www.lutron.com/en-US/Pages/Lutron-Connect.aspx", external: true, hint: "Lutron's cloud programming and remote-management tools" },
       ],
     },
     {
@@ -176,9 +176,9 @@ const LutronHomeWorks = () => {
       items: [
         { label: "Ketra D2", href: "https://www.ketra.com/", external: true, hint: "Full-spectrum, color-tunable downlight by Ketra" },
         { label: "Ketra Lightbar Slim", href: "https://www.ketra.com/", external: true, hint: "Linear full-spectrum lightbar" },
-        { label: "Lumaris downlights", href: "https://www.lutron.com/en-US/Products/Pages/StandAloneControls/Lumaris/Overview.aspx", external: true, hint: "Tunable white downlights, 1,800K–4,000K, 90+ CRI" },
-        { label: "Rania A20 lamp", hint: "A20 LED lamp tuned for HomeWorks" },
-        { label: "Rania PAR lamps", hint: "PAR-form LED lamps for accent lighting" },
+        { label: "Lumaris", href: "https://www.lutron.com/en-US/Products/Pages/StandAloneControls/Lumaris/Overview.aspx", external: true, hint: "Tunable white downlights, 1,800K–4,000K, 90+ CRI" },
+        { label: "Rania A20", hint: "A20 LED lamp tuned for HomeWorks" },
+        { label: "Rania PAR", hint: "PAR-form LED lamps for accent lighting" },
         { label: "Rania D2", hint: "Color-tuning Rania fixture" },
         { label: "Aviena", hint: "Linear architectural fixtures" },
       ],
@@ -188,9 +188,9 @@ const LutronHomeWorks = () => {
       description:
         "Drawn natively into the same scenes as the lighting — pockets and brackets coordinated with the architecture.",
       items: [
-        { label: "Palladiom shades", href: "https://www.lutron.com/en-US/Products/Pages/ShadingSystems/Palladiom/Overview.aspx", external: true, hint: "Premium architectural roller shades" },
-        { label: "Triathlon shades", hint: "Battery-powered or wired Triathlon shades" },
-        { label: "Sivoia QS shades", hint: "Wired Sivoia QS shading system" },
+        { label: "Palladiom", href: "https://www.lutron.com/en-US/Products/Pages/ShadingSystems/Palladiom/Overview.aspx", external: true, hint: "Premium architectural roller shades" },
+        { label: "Triathlon", hint: "Battery-powered or wired Triathlon shades" },
+        { label: "Sivoia QS", hint: "Wired Sivoia QS shading system" },
       ],
     },
     {
@@ -198,7 +198,7 @@ const LutronHomeWorks = () => {
       description:
         "The pieces that make the program quiet — the house responds to occupancy, daylight, and time without anyone reaching for an app.",
       items: [
-        { label: "Occupancy & vacancy sensors", hint: "Ceiling and wall-mount Lutron sensors" },
+        { label: "Occupancy & vacancy", hint: "Ceiling and wall-mount Lutron sensors" },
         { label: "Daylight sensors", hint: "Photosensors for daylight harvesting" },
         { label: "Astronomic timeclock", hint: "Sunrise/sunset scheduling built into HomeWorks" },
       ],
@@ -430,17 +430,17 @@ const LutronHomeWorks = () => {
         </div>
       </section>
 
-      {/* 5. System pieces / Product family tree */}
+      {/* 5. The HomeWorks lineup */}
       <section className="py-16 sm:py-24 px-4 sm:px-6" id="product-family-tree">
         <div className="max-w-4xl mx-auto">
           <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">
-            Product Family Tree
+            The Lineup
           </p>
           <h2 className="text-2xl sm:text-3xl font-bold text-white mb-5">
-            What HomeWorks covers natively.
+            Explore what HomeWorks can include.
           </h2>
-          <p className="text-white/60 text-base leading-relaxed mb-8 max-w-2xl">
-            Organized by family — backbone, wall controls, lighting, shades, sensors, and integrations. Linked tags open Lutron's official product or platform page; the rest are part of the same single HomeWorks program.
+          <p className="text-white/80 text-base sm:text-lg leading-relaxed mb-8 max-w-2xl">
+            Grouped by what each piece does — backbone, wall controls, lighting, shades, sensors, and integrations. Linked items open Lutron's official product or platform pages where available; not every piece needs a link.
           </p>
           <ProductFamilyTree groups={productFamilies} />
         </div>
