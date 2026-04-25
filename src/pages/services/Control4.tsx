@@ -106,16 +106,26 @@ const Control4 = () => {
     },
   ];
 
+  const productFamilyRoot = {
+    label: "Control4 Controller",
+    sublabel: "The smart-home experience",
+    href: "https://www.control4.com/the-smart-home-experience",
+    external: true,
+    hint: "Control4's whole-home automation platform",
+  };
+
   const productFamilies: ProductFamilyGroup[] = [
     {
       title: "Control surfaces",
+      href: "https://www.control4.com/solutions/products/",
+      external: true,
       description:
         "Same personalized system, picked up wherever the family is — phone, touchscreen, wall, or remote.",
       items: [
         { label: "Control4 App", href: "https://www.control4.com/solutions/products/apps/", external: true, hint: "iOS and Android app, the same on every device" },
-        { label: "Touchscreens", href: "https://www.control4.com/solutions/products/touch-screens/", external: true, hint: "In-wall and tabletop touchscreens" },
-        { label: "On-wall keypads", href: "https://www.control4.com/solutions/products/keypads/", external: true, hint: "Engraved scene keypads for guests, kids, and anyone without a phone" },
-        { label: "Smart Remote", href: "https://www.control4.com/solutions/products/remotes/", external: true, hint: "Handheld remote for media rooms and theaters" },
+        { label: "Touchscreens", href: "https://www.control4.com/solutions/products/touchscreens", external: true, hint: "In-wall and tabletop touchscreens" },
+        { label: "Keypads", href: "https://www.control4.com/solutions/products/keypads/", external: true, hint: "Engraved scene keypads for guests, kids, and anyone without a phone" },
+        { label: "Controllers & remotes", href: "https://www.control4.com/solutions/products/controllers", external: true, hint: "Handheld smart remote and controllers for media rooms and theaters" },
       ],
     },
     {
@@ -131,25 +141,23 @@ const Control4 = () => {
       ],
     },
     {
-      title: "What it ties together",
+      title: "Connected categories",
       description:
-        "Subsystems Control4 connects under one interface — driver-supported and confirmed against the gear actually in the house.",
+        "Subsystems Control4 ties together under one interface — driver-supported and confirmed against the gear actually in the house.",
       items: [
         { label: "Lighting", href: "/services/smart-lighting", hint: "Lutron HomeWorks, RadioRA3, and Control4 lighting" },
-        { label: "Audio", href: "/services/audio-entertainment", hint: "Sonos, Denon, and dedicated distributed audio" },
-        { label: "Climate & HVAC", href: "/services/climate-control", hint: "Thermostats, mini-splits, and zoned HVAC" },
+        { label: "Audio & entertainment", href: "/services/audio-entertainment", hint: "Sonos, Denon, distributed audio, TVs, and projectors" },
+        { label: "Climate", href: "/services/climate-control", hint: "Thermostats, mini-splits, and zoned HVAC" },
         { label: "Security", href: "/services/security-systems", hint: "Cameras, doorbells, and intrusion" },
         { label: "Shades", href: "/services/shades", hint: "Lutron, Hunter Douglas, and Lutron Triathlon motorized shades" },
-        { label: "Locks, gates & garage", hint: "Smart locks and gate/garage drivers where verified" },
-        { label: "TVs & projectors", hint: "IP- and IR-controlled displays" },
-        { label: "Streaming players", hint: "Apple TV, Roku, and built-in media services" },
+        { label: "Locks & garage", hint: "Smart locks and gate/garage drivers where verified" },
         { label: "Networking", href: "/services/networking", hint: "Routers, switches, access points — the foundation under it all" },
       ],
     },
     {
-      title: "Platform layer",
+      title: "Lighting layer",
       description:
-        "What sits underneath — Control4 rides on top of the lighting layer and the wider voice/smart-home ecosystem.",
+        "What Control4 rides on top of — the lighting platforms it integrates with most often.",
       items: [
         { label: "Lutron HomeWorks", href: "/platforms/lutron-homeworks", hint: "Often the lighting layer underneath Control4" },
         { label: "Lutron RadioRA3", href: "/platforms/lutron-radiora3", hint: "Residential wireless lighting" },
@@ -158,10 +166,12 @@ const Control4 = () => {
     },
     {
       title: "Ecosystem",
+      href: "https://www.control4.com/solutions/catalog",
+      external: true,
       description:
         "Voice and the wider ecosystem that Control4 cooperates with.",
       items: [
-        { label: "25,000+ compatible devices", href: "https://www.control4.com/solutions/products/", external: true, hint: "Driver-supported third-party devices" },
+        { label: "25,000+ compatible devices", href: "https://www.control4.com/solutions/catalog", external: true, hint: "Driver-supported third-party devices" },
         { label: "Alexa", hint: "Amazon Alexa voice control" },
         { label: "Google Assistant", hint: "Google Assistant voice control" },
         { label: "Apple HomeKit, CarPlay & Siri", hint: "Apple ecosystem integrations" },
@@ -393,10 +403,10 @@ const Control4 = () => {
           <h2 className="text-2xl sm:text-3xl font-bold text-white mb-5">
             Explore what Control4 can include.
           </h2>
-          <p className="text-white/80 text-base sm:text-lg leading-relaxed mb-8 max-w-3xl">
-            Grouped by what each piece does — control surfaces, day-to-day experiences, the categories Control4 ties together, the lighting layer underneath, and the wider ecosystem. Linked items open Control4's official product pages or an internal service page where available.
+          <p className="text-white/80 text-base sm:text-lg leading-relaxed mb-10 max-w-3xl">
+            The Control4 controller sits at the top — every branch below it runs on the same program. Linked items open Control4's official product pages or an internal service page where available.
           </p>
-          <ProductFamilyTree groups={productFamilies} />
+          <ProductFamilyTree root={productFamilyRoot} groups={productFamilies} />
         </div>
       </section>
 

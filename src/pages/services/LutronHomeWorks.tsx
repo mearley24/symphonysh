@@ -147,49 +147,45 @@ const LutronHomeWorks = () => {
     },
   ];
 
+  const productFamilyRoot = {
+    label: "HomeWorks Processor & Backbone",
+    sublabel: "QS wired link + Clear Connect RF",
+    href: "https://www.lutron.com/en-US/Products/Pages/WholeHomeSystems/HomeWorks/Overview.aspx",
+    external: true,
+    hint: "Centralized HomeWorks processors and dimming/switching panels — one Lutron program over either or both backbones",
+  };
+
   const productFamilies: ProductFamilyGroup[] = [
     {
-      title: "System backbone",
-      description:
-        "The processor, the wiring, and the RF that the rest of the catalog runs on — one Lutron program over either or both backbones.",
-      items: [
-        { label: "Processors & panels", href: "https://www.lutron.com/en-US/Products/Pages/WholeHomeSystems/HomeWorks/Overview.aspx", external: true, hint: "Centralized HomeWorks processors and dimming/switching panels" },
-        { label: "QS wired backbone", hint: "Lutron QS link for wired architectural projects" },
-        { label: "Clear Connect RF", hint: "Lutron's residential-grade wireless mesh" },
-        { label: "Lutron Connect", href: "https://www.lutron.com/en-US/Pages/Lutron-Connect.aspx", external: true, hint: "Lutron's cloud programming and remote-management tools" },
-      ],
-    },
-    {
-      title: "Wall controls",
+      title: "Architectural wall controls",
       description:
         "Hand-crafted keypads and Sunnata controls for the rooms where the family lives — engraved per scene, finished per room.",
       items: [
         { label: "Palladiom keypads", href: "https://www.lutron.com/en-US/Products/Pages/WholeHomeSystems/HomeWorks/Overview.aspx", external: true, hint: "Designer metal keypads in a wide range of finishes" },
-        { label: "Alisse keypads", hint: "Glass keypads with edge-lit engraving" },
+        { label: "Alisse keypads", href: "https://www.lutron.com/en-US/Products/Pages/Components/AlisseKeypad/Overview.aspx", external: true, hint: "Glass keypads with edge-lit engraving" },
         { label: "Sunnata dimmers & switches", href: "https://www.lutron.com/en-US/Products/Pages/SingleRoomControls/SunnataDimmersAndSwitches/Overview.aspx", external: true, hint: "PRO LED+ dimming and switching for difficult LED loads" },
       ],
     },
     {
-      title: "Lighting",
+      title: "Intelligent lighting",
       description:
-        "Lutron's native fixture catalog — full-spectrum and tunable white, downlights to lamps, all driven by HomeWorks without third-party bridges.",
+        "Lutron's native fixture catalog — full-spectrum and tunable white, downlights to lamps, all driven by HomeWorks without third-party bridges. Ketra, Rania, Lumaris, and Aviena live on the same program.",
       items: [
-        { label: "Ketra D2", href: "https://www.ketra.com/", external: true, hint: "Full-spectrum, color-tunable downlight by Ketra" },
-        { label: "Ketra Lightbar Slim", href: "https://www.ketra.com/", external: true, hint: "Linear full-spectrum lightbar" },
-        { label: "Lumaris", href: "https://www.lutron.com/en-US/Products/Pages/StandAloneControls/Lumaris/Overview.aspx", external: true, hint: "Tunable white downlights, 1,800K–4,000K, 90+ CRI" },
-        { label: "Rania A20", hint: "A20 LED lamp tuned for HomeWorks" },
-        { label: "Rania PAR", hint: "PAR-form LED lamps for accent lighting" },
-        { label: "Rania D2", hint: "Color-tuning Rania fixture" },
-        { label: "Aviena", hint: "Linear architectural fixtures" },
+        { label: "Ketra", href: "https://www.lutron.com/us/en/lighting/ketra", external: true, hint: "Full-spectrum, color-tunable downlights and lightbars" },
+        { label: "Rania", href: "https://www.lutron.com/us/en/lighting/rania", external: true, hint: "Architectural Rania downlights and lamps for HomeWorks" },
+        { label: "Lumaris", href: "https://www.lutron.com/us/en/lighting/downlights/lumaris-downlight?sku=cd6-wh-tw", external: true, hint: "Tunable white downlights and tape, 1,800K–4,000K, 90+ CRI" },
+        { label: "Aviena", hint: "Linear architectural fixtures for HomeWorks" },
       ],
     },
     {
-      title: "Shades",
+      title: "Window treatments",
+      href: "https://luxury.lutron.com/us/en/shades/palladiom-exposed-roller-shades",
+      external: true,
       description:
         "Drawn natively into the same scenes as the lighting — pockets and brackets coordinated with the architecture.",
       items: [
-        { label: "Palladiom", href: "https://www.lutron.com/en-US/Products/Pages/ShadingSystems/Palladiom/Overview.aspx", external: true, hint: "Premium architectural roller shades" },
-        { label: "Triathlon", hint: "Battery-powered or wired Triathlon shades" },
+        { label: "Palladiom shades", href: "https://luxury.lutron.com/us/en/shades/palladiom-exposed-roller-shades", external: true, hint: "Premium architectural exposed-roller shades" },
+        { label: "Triathlon", href: "https://www.lutron.com/en-US/Products/Pages/ShadingSystems/Triathlon/Overview.aspx", external: true, hint: "Battery-powered or wired Triathlon shades" },
         { label: "Sivoia QS", hint: "Wired Sivoia QS shading system" },
       ],
     },
@@ -201,6 +197,7 @@ const LutronHomeWorks = () => {
         { label: "Occupancy & vacancy", hint: "Ceiling and wall-mount Lutron sensors" },
         { label: "Daylight sensors", hint: "Photosensors for daylight harvesting" },
         { label: "Astronomic timeclock", hint: "Sunrise/sunset scheduling built into HomeWorks" },
+        { label: "Lutron Connect", href: "https://www.lutron.com/en-US/Pages/Lutron-Connect.aspx", external: true, hint: "Lutron's cloud programming and remote-management tools" },
       ],
     },
     {
@@ -439,10 +436,10 @@ const LutronHomeWorks = () => {
           <h2 className="text-2xl sm:text-3xl font-bold text-white mb-5">
             Explore what HomeWorks can include.
           </h2>
-          <p className="text-white/80 text-base sm:text-lg leading-relaxed mb-8 max-w-2xl">
-            Grouped by what each piece does — backbone, wall controls, lighting, shades, sensors, and integrations. Linked items open Lutron's official product or platform pages where available; not every piece needs a link.
+          <p className="text-white/80 text-base sm:text-lg leading-relaxed mb-10 max-w-2xl">
+            The processor and backbone sit at the top — every branch below it runs on the same Lutron program. Linked items open Lutron's official product or platform pages where available; not every piece needs a link.
           </p>
-          <ProductFamilyTree groups={productFamilies} />
+          <ProductFamilyTree root={productFamilyRoot} groups={productFamilies} />
         </div>
       </section>
 
