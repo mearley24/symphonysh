@@ -138,7 +138,7 @@ const Walkthrough = () => {
               className="inline-flex items-center justify-center gap-2 border border-white/20 hover:border-white/40 hover:bg-white/5 text-white px-7 py-4 rounded-lg font-medium transition-colors text-base"
             >
               <Phone className="w-4 h-4" />
-              Call Now
+              (970) 519-3013
             </a>
           </div>
         </div>
@@ -150,10 +150,10 @@ const Walkthrough = () => {
       <section className="py-16 sm:py-24 px-4 sm:px-6 bg-black/20 backdrop-blur-sm border-y border-white/5">
         <div className="max-w-4xl mx-auto">
           <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">
-            What We Install
+            The Wiring Plan
           </p>
           <h2 className="text-2xl sm:text-3xl font-bold text-white mb-10">
-            Every wire has a purpose
+            Every wire has a purpose, every wall has a label.
           </h2>
 
           <div className="grid sm:grid-cols-2 gap-5">
@@ -272,7 +272,7 @@ const Walkthrough = () => {
               {
                 n: "03",
                 title: "Rough-In",
-                desc: "We install all low-voltage wiring before drywall, coordinating with your GC and electrician.",
+                desc: "Low-voltage wiring pulled and labeled before drywall, coordinated with your GC and electrician on site.",
               },
               {
                 n: "04",
@@ -364,7 +364,7 @@ const Walkthrough = () => {
               className="inline-flex items-center justify-center gap-2 border border-white/20 hover:border-white/40 hover:bg-white/5 text-white px-8 py-4 rounded-lg font-medium transition-colors text-base"
             >
               <Phone className="w-4 h-4" />
-              Call Now
+              (970) 519-3013
             </a>
           </div>
         </div>

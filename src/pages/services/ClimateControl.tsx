@@ -63,11 +63,11 @@ const ClimateControl = () => {
             <div className="w-11 h-11 rounded-lg bg-accent/10 flex items-center justify-center"><Thermometer className="w-5 h-5 text-accent" /></div>
             <p className="text-accent font-medium text-sm tracking-wide uppercase">Climate Control</p>
           </div>
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight mb-5 text-white hero-text-shadow">Comfortable in every room. Efficient all year.</h1>
-          <p className="text-white/60 text-base sm:text-lg leading-relaxed mb-8 max-w-2xl hero-subtext-shadow">We integrate smart thermostats and HVAC controls into your home automation system for precise, room-by-room comfort — with automated schedules that save energy without sacrificing warmth.</p>
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight mb-5 text-white hero-text-shadow">Warm before you arrive. Quiet when the house is empty.</h1>
+          <p className="text-white/60 text-base sm:text-lg leading-relaxed mb-8 max-w-2xl hero-subtext-shadow">Smart thermostats, zoned HVAC, and floor heating folded into the same scenes that run the lights and shades. Away mode quietly backs off; a text from the airport brings the house up to temperature before your bag's even off the carousel.</p>
           <div className="flex flex-col sm:flex-row gap-3">
-            <Link to="/scheduling?service=climate-control" className="inline-flex items-center justify-center gap-2 bg-accent hover:bg-accent/90 text-white px-7 py-4 rounded-lg font-medium transition-colors text-base">Schedule a Consultation <ArrowRight className="w-4 h-4" /></Link>
-            <a href="tel:+19705193013" className="inline-flex items-center justify-center gap-2 border border-white/20 hover:border-white/40 hover:bg-white/5 text-white px-7 py-4 rounded-lg font-medium transition-colors text-base"><Phone className="w-4 h-4" /> Call Now</a>
+            <Link to="/scheduling?service=climate-control" className="inline-flex items-center justify-center gap-2 bg-accent hover:bg-accent/90 text-white px-7 py-4 rounded-lg font-medium transition-colors text-base">Schedule a Walkthrough <ArrowRight className="w-4 h-4" /></Link>
+            <a href="tel:+19705193013" className="inline-flex items-center justify-center gap-2 border border-white/20 hover:border-white/40 hover:bg-white/5 text-white px-7 py-4 rounded-lg font-medium transition-colors text-base"><Phone className="w-4 h-4" /> (970) 519-3013</a>
           </div>
         </div>
       </section>
@@ -76,8 +76,8 @@ const ClimateControl = () => {
 
       <section className="py-16 sm:py-24 px-4 sm:px-6 bg-black/20 backdrop-blur-sm border-y border-white/5">
         <div className="max-w-4xl mx-auto">
-          <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">What We Install</p>
-          <h2 className="text-2xl sm:text-3xl font-bold text-white mb-10">Climate solutions</h2>
+          <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">The Climate Layer</p>
+          <h2 className="text-2xl sm:text-3xl font-bold text-white mb-10">Zoned comfort that moves with the household.</h2>
           <div className="grid sm:grid-cols-2 gap-5">
             {capabilities.map((item, i) => (
               <div key={i} className="bg-black/40 backdrop-blur-sm border border-white/8 rounded-xl p-6">
@@ -155,12 +155,12 @@ const ClimateControl = () => {
 
       <section className="py-16 sm:py-24 px-4 sm:px-6">
         <div className="max-w-3xl mx-auto text-center">
-          <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">Get Started</p>
-            <h2 className="text-2xl sm:text-3xl font-bold text-white mb-4">Ready for smarter comfort?</h2>
-          <p className="text-white/50 text-base mb-8 max-w-xl mx-auto">Let us evaluate your HVAC system and recommend the right smart climate solution for your home.</p>
+          <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">When You're Ready</p>
+            <h2 className="text-2xl sm:text-3xl font-bold text-white mb-4">A walkthrough of how the house actually feels.</h2>
+          <p className="text-white/55 text-base mb-8 max-w-xl mx-auto">We'll talk through hot rooms, cold rooms, second-home arrival routines, and how climate should fold into the rest of the system.</p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
-            <Link to="/scheduling?service=climate-control" className="inline-flex items-center justify-center gap-2 bg-accent hover:bg-accent/90 text-white px-8 py-4 rounded-lg font-medium transition-colors text-base">Schedule a Consultation <ArrowRight className="w-4 h-4" /></Link>
-            <a href="tel:+19705193013" className="inline-flex items-center justify-center gap-2 border border-white/20 hover:border-white/40 hover:bg-white/5 text-white px-8 py-4 rounded-lg font-medium transition-colors text-base"><Phone className="w-4 h-4" /> Call Now</a>
+            <Link to="/scheduling?service=climate-control" className="inline-flex items-center justify-center gap-2 bg-accent hover:bg-accent/90 text-white px-8 py-4 rounded-lg font-medium transition-colors text-base">Schedule a Walkthrough <ArrowRight className="w-4 h-4" /></Link>
+            <a href="tel:+19705193013" className="inline-flex items-center justify-center gap-2 border border-white/20 hover:border-white/40 hover:bg-white/5 text-white px-8 py-4 rounded-lg font-medium transition-colors text-base"><Phone className="w-4 h-4" /> (970) 519-3013</a>
           </div>
         </div>
       </section>

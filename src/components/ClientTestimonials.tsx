@@ -127,7 +127,7 @@ const ClientTestimonials = () => {
             to="/scheduling"
             className="inline-flex items-center justify-center gap-2 bg-accent hover:bg-accent/90 text-white px-6 py-3 rounded-lg font-medium transition-colors text-sm"
           >
-            Schedule a Consultation <ArrowRight className="w-4 h-4" />
+            Schedule a Walkthrough <ArrowRight className="w-4 h-4" />
           </Link>
           <a
             href="tel:+19705193013"

@@ -171,7 +171,7 @@ function buildRecommendation(a: Answers): Recommendation {
     return {
       title: "Lutron HomeWorks + Control4 + Shades",
       summary:
-        "A flagship lighting platform for architectural and luxury homes. HomeWorks handles the lighting and shade hardware — hand-crafted keypads, Ketra and Lumaris, centralized panels, up to 10,000 zones — and Control4 ties the rest of the house (audio, climate, security) into one interface.",
+        "Lutron's flagship line for architectural homes. HomeWorks handles lighting and shade hardware — hand-crafted keypads, Ketra and Lumaris fixtures, Palladiom shades, a single coordinated program — and Control4 ties the rest of the house (audio, climate, security) into one app.",
       pieces: [
         { label: "Lutron HomeWorks", path: "/platforms/lutron-homeworks" },
         { label: "Control4 automation", path: "/platforms/control4" },
@@ -273,9 +273,9 @@ function buildRecommendation(a: Answers): Recommendation {
 
   if (lightingFirst) {
     return {
-      title: "RadioRA3 + Sonos + strong network",
+      title: "RadioRA3 + Sonos + a strong network",
       summary:
-        "A lighting-first retrofit. RadioRA3 replaces the dimmers and keypads so the house actually dims cleanly and has scenes on the wall. Sonos handles music. A proper network underneath keeps everything responsive.",
+        "A lighting-first retrofit. RadioRA3 brings Sunnata keypads and Lumaris dimming so the house actually dims cleanly and has named scenes on the wall. Sonos handles the music. A proper network underneath keeps everything responsive.",
       pieces: [
         { label: "Lutron RadioRA3", path: "/platforms/lutron-radiora3" },
         ...(wantsShades
@@ -352,9 +352,9 @@ const SetupFinder = () => {
   return (
     <PageBackground image={bgHomeIntegration}>
       <SEO
-        title="Smart Home Setup Finder for Vail Valley"
-        description="Not sure whether you need RadioRA3, Control4, AVA, Sonos, or just a better network? Answer a few questions and get a starting recommendation from Symphony Smart Homes."
-        keywords="smart home recommendation, Control4 vs Lutron, AVA vs Control4, Vail Valley smart home"
+        title="Find the Right Setup | Symphony Smart Homes"
+        description="HomeWorks, RadioRA3, Control4, AVA, or just a better network? Six quick questions about your Vail Valley home and we suggest a starting point — no pressure to commit."
+        keywords="smart home recommendation, HomeWorks vs RadioRA3, Control4 vs Lutron, AVA vs Control4, Vail Valley smart home"
         breadcrumbs={[
           { name: "Home", url: "/" },
           { name: "Setup Finder", url: "/setup-finder" },
@@ -375,13 +375,13 @@ const SetupFinder = () => {
             Setup Finder
           </p>
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight mb-5 text-white hero-text-shadow">
-            Not sure what you actually need?
+            Walk through the options in three minutes.
           </h1>
           <p className="text-white/60 text-base sm:text-lg leading-relaxed mb-4 max-w-2xl hero-subtext-shadow">
-            Answer a few quick questions about the house and what you want it to do. We will suggest a starting point — RadioRA3, Control4, AVA, Sonos, networking first, or a pre-wire plan.
+            Six quick questions about the house and how you live in it. We'll suggest a starting point — Lutron HomeWorks, RadioRA3, Control4, AVA, Sonos, or a pre-wire plan if the walls are still open.
           </p>
           <p className="text-white/40 text-sm italic">
-            This is a starting recommendation, not a final design.
+            A starting point, not a final design — the real plan comes from walking the house.
           </p>
         </div>
       </section>

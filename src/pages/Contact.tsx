@@ -248,7 +248,7 @@ const Contact = () => {
               to="/scheduling"
               className="inline-flex items-center justify-center gap-2 bg-accent hover:bg-accent/90 text-white px-7 py-4 rounded-lg font-medium transition-colors text-base"
             >
-              Schedule a Consultation <ArrowRight className="w-4 h-4" />
+              Schedule a Walkthrough <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
         </div>

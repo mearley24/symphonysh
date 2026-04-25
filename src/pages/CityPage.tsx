@@ -120,14 +120,14 @@ const CityPage = () => {
               to="/scheduling"
               className="inline-flex items-center justify-center gap-2 bg-accent hover:bg-accent/90 text-white px-7 py-4 rounded-lg font-medium transition-colors text-base"
             >
-              Schedule a Consultation <ArrowRight className="w-4 h-4" />
+              Schedule a Walkthrough <ArrowRight className="w-4 h-4" />
             </Link>
             <a
               href="tel:+19705193013"
               onClick={trackPhoneClick}
               className="inline-flex items-center justify-center gap-2 border border-white/20 hover:border-white/40 hover:bg-white/5 text-white px-7 py-4 rounded-lg font-medium transition-colors text-base"
             >
-              <Phone className="w-4 h-4" /> Call Now
+              <Phone className="w-4 h-4" /> (970) 519-3013
             </a>
           </div>
         </div>
@@ -157,7 +157,7 @@ const CityPage = () => {
       {/* Common projects */}
       <section className="py-16 sm:py-24 px-4 sm:px-6">
         <div className="max-w-4xl mx-auto">
-          <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">What We Do Here</p>
+          <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">In the Neighborhood</p>
           <h2 className="text-2xl sm:text-3xl font-bold text-white mb-10">
             Common projects in {cityData.city}
           </h2>
@@ -203,7 +203,7 @@ const CityPage = () => {
         <div className="max-w-4xl mx-auto">
           <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">Services</p>
           <h2 className="text-2xl sm:text-3xl font-bold text-white mb-10">
-            What we install in {cityData.city}
+            How {cityData.city} homes use Symphony
           </h2>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {services.map((service, i) => (
@@ -218,7 +218,7 @@ const CityPage = () => {
                 <h3 className="text-white font-semibold mb-2">{service.title}</h3>
                 <p className="text-white/50 text-sm leading-relaxed">{service.description}</p>
                 <p className="text-accent text-sm mt-3 flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
-                  Learn more <ArrowRight className="w-3.5 h-3.5" />
+                  See what's included <ArrowRight className="w-3.5 h-3.5" />
                 </p>
               </Link>
             ))}
@@ -229,26 +229,26 @@ const CityPage = () => {
       {/* CTA */}
       <section className="py-16 sm:py-24 px-4 sm:px-6 bg-black/20 backdrop-blur-sm border-y border-white/5">
         <div className="max-w-3xl mx-auto text-center">
-          <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">Get Started</p>
+          <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">When You're Ready</p>
           <h2 className="text-2xl sm:text-3xl font-bold text-white mb-4">
-            Ready to talk about your {cityData.city} project?
+            Tell us about the {cityData.city} home.
           </h2>
-          <p className="text-white/50 text-base mb-8 max-w-xl mx-auto">
-            We're local to the Vail Valley. Call us, schedule a consultation, or stop by to talk about what you're planning.
+          <p className="text-white/55 text-base mb-8 max-w-xl mx-auto">
+            We work this side of the valley every week. Send the property and how you live in it — we'll suggest the line that fits and walk through the rest.
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <Link
               to="/scheduling"
               className="inline-flex items-center justify-center gap-2 bg-accent hover:bg-accent/90 text-white px-8 py-4 rounded-lg font-medium transition-colors text-base"
             >
-              Schedule a Consultation <ArrowRight className="w-4 h-4" />
+              Schedule a Walkthrough <ArrowRight className="w-4 h-4" />
             </Link>
             <a
               href="tel:+19705193013"
               onClick={trackPhoneClick}
               className="inline-flex items-center justify-center gap-2 border border-white/20 hover:border-white/40 hover:bg-white/5 text-white px-8 py-4 rounded-lg font-medium transition-colors text-base"
             >
-              <Phone className="w-4 h-4" /> Call Now
+              <Phone className="w-4 h-4" /> (970) 519-3013
             </a>
           </div>
         </div>

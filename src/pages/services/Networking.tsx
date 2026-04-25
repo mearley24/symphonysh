@@ -63,11 +63,11 @@ const Networking = () => {
             <div className="w-11 h-11 rounded-lg bg-accent/10 flex items-center justify-center"><Wifi className="w-5 h-5 text-accent" /></div>
             <p className="text-accent font-medium text-sm tracking-wide uppercase">Home Networking</p>
           </div>
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight mb-5 text-white hero-text-shadow">The network is the foundation. We build it right.</h1>
-          <p className="text-white/60 text-base sm:text-lg leading-relaxed mb-8 max-w-2xl hero-subtext-shadow">Every smart device in your home depends on a reliable network. We install enterprise-grade Wi-Fi, structured cabling, and managed switching that keeps everything connected — even with 50+ devices online.</p>
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight mb-5 text-white hero-text-shadow">The quiet layer underneath everything else.</h1>
+          <p className="text-white/60 text-base sm:text-lg leading-relaxed mb-8 max-w-2xl hero-subtext-shadow">Enterprise-grade Wi-Fi, structured cabling, and managed switching tuned for fifty-plus connected devices. The fix for the most common complaint we hear: "the Wi-Fi is fine, but the system keeps dropping."</p>
           <div className="flex flex-col sm:flex-row gap-3">
-            <Link to="/scheduling?service=networking" className="inline-flex items-center justify-center gap-2 bg-accent hover:bg-accent/90 text-white px-7 py-4 rounded-lg font-medium transition-colors text-base">Schedule an Assessment <ArrowRight className="w-4 h-4" /></Link>
-            <a href="tel:+19705193013" className="inline-flex items-center justify-center gap-2 border border-white/20 hover:border-white/40 hover:bg-white/5 text-white px-7 py-4 rounded-lg font-medium transition-colors text-base"><Phone className="w-4 h-4" /> Call Now</a>
+            <Link to="/scheduling?service=networking" className="inline-flex items-center justify-center gap-2 bg-accent hover:bg-accent/90 text-white px-7 py-4 rounded-lg font-medium transition-colors text-base">Schedule a Walkthrough <ArrowRight className="w-4 h-4" /></Link>
+            <a href="tel:+19705193013" className="inline-flex items-center justify-center gap-2 border border-white/20 hover:border-white/40 hover:bg-white/5 text-white px-7 py-4 rounded-lg font-medium transition-colors text-base"><Phone className="w-4 h-4" /> (970) 519-3013</a>
           </div>
         </div>
       </section>
@@ -76,8 +76,8 @@ const Networking = () => {
 
       <section className="py-16 sm:py-24 px-4 sm:px-6 bg-black/20 backdrop-blur-sm border-y border-white/5">
         <div className="max-w-4xl mx-auto">
-          <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">What We Install</p>
-          <h2 className="text-2xl sm:text-3xl font-bold text-white mb-10">Network infrastructure</h2>
+          <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">The Network Layer</p>
+          <h2 className="text-2xl sm:text-3xl font-bold text-white mb-10">Fast, quiet, invisible — until it isn't.</h2>
           <div className="grid sm:grid-cols-2 gap-5">
             {capabilities.map((item, i) => (
               <div key={i} className="bg-black/40 backdrop-blur-sm border border-white/8 rounded-xl p-6">
@@ -155,12 +155,12 @@ const Networking = () => {
 
       <section className="py-16 sm:py-24 px-4 sm:px-6">
         <div className="max-w-3xl mx-auto text-center">
-          <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">Get Started</p>
-            <h2 className="text-2xl sm:text-3xl font-bold text-white mb-4">Ready for bulletproof connectivity?</h2>
-          <p className="text-white/50 text-base mb-8 max-w-xl mx-auto">Let us assess your home and design a network that handles everything you throw at it.</p>
+          <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">When You're Ready</p>
+            <h2 className="text-2xl sm:text-3xl font-bold text-white mb-4">Start with the layer that quietly fixes everything else.</h2>
+          <p className="text-white/55 text-base mb-8 max-w-xl mx-auto">A network walkthrough takes an hour. We map what's there, listen to what keeps dropping, and design the underlying layer the rest of the smart home rides on.</p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
-            <Link to="/scheduling?service=networking" className="inline-flex items-center justify-center gap-2 bg-accent hover:bg-accent/90 text-white px-8 py-4 rounded-lg font-medium transition-colors text-base">Schedule an Assessment <ArrowRight className="w-4 h-4" /></Link>
-            <a href="tel:+19705193013" className="inline-flex items-center justify-center gap-2 border border-white/20 hover:border-white/40 hover:bg-white/5 text-white px-8 py-4 rounded-lg font-medium transition-colors text-base"><Phone className="w-4 h-4" /> Call Now</a>
+            <Link to="/scheduling?service=networking" className="inline-flex items-center justify-center gap-2 bg-accent hover:bg-accent/90 text-white px-8 py-4 rounded-lg font-medium transition-colors text-base">Schedule a Walkthrough <ArrowRight className="w-4 h-4" /></Link>
+            <a href="tel:+19705193013" className="inline-flex items-center justify-center gap-2 border border-white/20 hover:border-white/40 hover:bg-white/5 text-white px-8 py-4 rounded-lg font-medium transition-colors text-base"><Phone className="w-4 h-4" /> (970) 519-3013</a>
           </div>
         </div>
       </section>

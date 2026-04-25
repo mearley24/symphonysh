@@ -65,11 +65,11 @@ const HomeIntegration = () => {
             <div className="w-11 h-11 rounded-lg bg-accent/10 flex items-center justify-center"><Home className="w-5 h-5 text-accent" /></div>
             <p className="text-accent font-medium text-sm tracking-wide uppercase">Home Automation</p>
           </div>
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight mb-5 text-white hero-text-shadow">One system to control your entire home.</h1>
-          <p className="text-white/60 text-base sm:text-lg leading-relaxed mb-8 max-w-2xl hero-subtext-shadow">We design and install Control4 automation systems that bring lighting, climate, audio, security, and shades together into a single, intuitive interface. One app, one remote, one experience.</p>
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight mb-5 text-white hero-text-shadow">One keypad. One app. The whole home in agreement.</h1>
+          <p className="text-white/60 text-base sm:text-lg leading-relaxed mb-8 max-w-2xl hero-subtext-shadow">Control4 ties lighting, climate, audio, security, and shades into a single experience — usually sitting on top of a Lutron lighting layer. Named scenes for the way you live, X4 Routines that handle the repetitive parts.</p>
           <div className="flex flex-col sm:flex-row gap-3">
-            <Link to="/scheduling?service=home-integration" className="inline-flex items-center justify-center gap-2 bg-accent hover:bg-accent/90 text-white px-7 py-4 rounded-lg font-medium transition-colors text-base">Schedule a Consultation <ArrowRight className="w-4 h-4" /></Link>
-            <a href="tel:+19705193013" className="inline-flex items-center justify-center gap-2 border border-white/20 hover:border-white/40 hover:bg-white/5 text-white px-7 py-4 rounded-lg font-medium transition-colors text-base"><Phone className="w-4 h-4" /> Call Now</a>
+            <Link to="/scheduling?service=home-integration" className="inline-flex items-center justify-center gap-2 bg-accent hover:bg-accent/90 text-white px-7 py-4 rounded-lg font-medium transition-colors text-base">Schedule a Walkthrough <ArrowRight className="w-4 h-4" /></Link>
+            <a href="tel:+19705193013" className="inline-flex items-center justify-center gap-2 border border-white/20 hover:border-white/40 hover:bg-white/5 text-white px-7 py-4 rounded-lg font-medium transition-colors text-base"><Phone className="w-4 h-4" /> (970) 519-3013</a>
           </div>
         </div>
       </section>
@@ -161,12 +161,12 @@ const HomeIntegration = () => {
 
       <section className="py-16 sm:py-24 px-4 sm:px-6">
         <div className="max-w-3xl mx-auto text-center">
-          <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">Get Started</p>
-            <h2 className="text-2xl sm:text-3xl font-bold text-white mb-4">Let's design your system.</h2>
-          <p className="text-white/50 text-base mb-8 max-w-xl mx-auto">Tell us about your home and how you want it to work. We'll put together a plan that fits your goals and budget.</p>
+          <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">When You're Ready</p>
+            <h2 className="text-2xl sm:text-3xl font-bold text-white mb-4">Tell us how the house should feel.</h2>
+          <p className="text-white/55 text-base mb-8 max-w-xl mx-auto">Walk us through the home and the routines you wish were automatic. We'll map a Control4 plan around the lighting, audio, climate, and security you already have or want.</p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
-            <Link to="/scheduling?service=home-integration" className="inline-flex items-center justify-center gap-2 bg-accent hover:bg-accent/90 text-white px-8 py-4 rounded-lg font-medium transition-colors text-base">Schedule a Consultation <ArrowRight className="w-4 h-4" /></Link>
-            <a href="tel:+19705193013" className="inline-flex items-center justify-center gap-2 border border-white/20 hover:border-white/40 hover:bg-white/5 text-white px-8 py-4 rounded-lg font-medium transition-colors text-base"><Phone className="w-4 h-4" /> Call Now</a>
+            <Link to="/scheduling?service=home-integration" className="inline-flex items-center justify-center gap-2 bg-accent hover:bg-accent/90 text-white px-8 py-4 rounded-lg font-medium transition-colors text-base">Schedule a Walkthrough <ArrowRight className="w-4 h-4" /></Link>
+            <a href="tel:+19705193013" className="inline-flex items-center justify-center gap-2 border border-white/20 hover:border-white/40 hover:bg-white/5 text-white px-8 py-4 rounded-lg font-medium transition-colors text-base"><Phone className="w-4 h-4" /> (970) 519-3013</a>
           </div>
         </div>
       </section>

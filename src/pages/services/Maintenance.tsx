@@ -63,11 +63,11 @@ const Maintenance = () => {
             <div className="w-11 h-11 rounded-lg bg-accent/10 flex items-center justify-center"><Wrench className="w-5 h-5 text-accent" /></div>
             <p className="text-accent font-medium text-sm tracking-wide uppercase">Maintenance & Support</p>
           </div>
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight mb-5 text-white hero-text-shadow">When something needs attention, we're here.</h1>
-          <p className="text-white/60 text-base sm:text-lg leading-relaxed mb-8 max-w-2xl hero-subtext-shadow">Smart home systems need ongoing care — firmware updates, troubleshooting, and the occasional repair. We provide remote diagnostics and on-site service to keep everything running smoothly.</p>
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight mb-5 text-white hero-text-shadow">A real person, the same number, year after year.</h1>
+          <p className="text-white/60 text-base sm:text-lg leading-relaxed mb-8 max-w-2xl hero-subtext-shadow">Quiet ongoing care for the systems already in your home — firmware, remote diagnostics, second-home check-ins, and an on-site visit when something needs hands. Inherited Control4, RadioRA3, HomeWorks, or AVA included.</p>
           <div className="flex flex-col sm:flex-row gap-3">
             <Link to="/scheduling?service=maintenance" className="inline-flex items-center justify-center gap-2 bg-accent hover:bg-accent/90 text-white px-7 py-4 rounded-lg font-medium transition-colors text-base">Schedule Service <ArrowRight className="w-4 h-4" /></Link>
-            <a href="tel:+19705193013" className="inline-flex items-center justify-center gap-2 border border-white/20 hover:border-white/40 hover:bg-white/5 text-white px-7 py-4 rounded-lg font-medium transition-colors text-base"><Phone className="w-4 h-4" /> Call Now</a>
+            <a href="tel:+19705193013" className="inline-flex items-center justify-center gap-2 border border-white/20 hover:border-white/40 hover:bg-white/5 text-white px-7 py-4 rounded-lg font-medium transition-colors text-base"><Phone className="w-4 h-4" /> (970) 519-3013</a>
           </div>
         </div>
       </section>
@@ -76,8 +76,8 @@ const Maintenance = () => {
 
       <section className="py-16 sm:py-24 px-4 sm:px-6 bg-black/20 backdrop-blur-sm border-y border-white/5">
         <div className="max-w-4xl mx-auto">
-          <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">What We Offer</p>
-          <h2 className="text-2xl sm:text-3xl font-bold text-white mb-10">Support services</h2>
+          <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">Quiet Ongoing Care</p>
+          <h2 className="text-2xl sm:text-3xl font-bold text-white mb-10">Routine maintenance, second-home check-ins, real fixes.</h2>
           <div className="grid sm:grid-cols-2 gap-5">
             {capabilities.map((item, i) => (
               <div key={i} className="bg-black/40 backdrop-blur-sm border border-white/8 rounded-xl p-6">
@@ -138,8 +138,8 @@ const Maintenance = () => {
           <h2 className="text-2xl sm:text-3xl font-bold text-white mb-8">Related Services</h2>
           <div className="grid sm:grid-cols-2 gap-5">
             {[
-              { title: "Home Automation", description: "We support every system we install — full Control4 programming, updates, and troubleshooting.", path: "/services/home-integration" },
-              { title: "Home Networking", description: "We keep your network infrastructure running as reliably as your AV systems.", path: "/services/networking" },
+              { title: "Whole-Home Integration", description: "Control4 programming, scenes, and routines that age well — even on systems we didn't originally set up.", path: "/services/home-integration" },
+              { title: "Networking", description: "The layer underneath that keeps cameras, streaming, and Sonos quietly online.", path: "/services/networking" },
             ].map((s, i) => (
               <Link key={i} to={s.path} className="group flex items-start justify-between gap-4 p-5 rounded-xl border border-white/8 bg-black/40 backdrop-blur-sm hover:border-accent/30 transition-colors">
                 <div>
@@ -155,12 +155,12 @@ const Maintenance = () => {
 
       <section className="py-16 sm:py-24 px-4 sm:px-6">
         <div className="max-w-3xl mx-auto text-center">
-          <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">Get Started</p>
-            <h2 className="text-2xl sm:text-3xl font-bold text-white mb-4">Need help with your system?</h2>
-          <p className="text-white/50 text-base mb-8 max-w-xl mx-auto">Whether it's a quick fix or an ongoing maintenance plan, we're here to keep your smart home running.</p>
+          <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">When You're Ready</p>
+            <h2 className="text-2xl sm:text-3xl font-bold text-white mb-4">A quick fix, a maintenance plan, or a system to inherit.</h2>
+          <p className="text-white/55 text-base mb-8 max-w-xl mx-auto">Tell us what's acting up or what's quietly aging. Plenty of issues we'll sort remotely before rolling a truck.</p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <Link to="/scheduling?service=maintenance" className="inline-flex items-center justify-center gap-2 bg-accent hover:bg-accent/90 text-white px-8 py-4 rounded-lg font-medium transition-colors text-base">Schedule Service <ArrowRight className="w-4 h-4" /></Link>
-            <a href="tel:+19705193013" className="inline-flex items-center justify-center gap-2 border border-white/20 hover:border-white/40 hover:bg-white/5 text-white px-8 py-4 rounded-lg font-medium transition-colors text-base"><Phone className="w-4 h-4" /> Call Now</a>
+            <a href="tel:+19705193013" className="inline-flex items-center justify-center gap-2 border border-white/20 hover:border-white/40 hover:bg-white/5 text-white px-8 py-4 rounded-lg font-medium transition-colors text-base"><Phone className="w-4 h-4" /> (970) 519-3013</a>
           </div>
         </div>
       </section>

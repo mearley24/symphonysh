@@ -8,8 +8,8 @@ const stats = [
   },
   {
     icon: Layers,
-    value: "Full-Service",
-    label: "Pre-wire through programming",
+    value: "Lutron · Control4 · AVA",
+    label: "Real platforms, no lock-in",
   },
   {
     icon: Home,
