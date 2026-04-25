@@ -9,7 +9,6 @@ import {
   Thermometer,
   Shield,
   Sun,
-  Wrench,
   Hammer,
   GraduationCap,
   Map,
@@ -43,70 +42,64 @@ const Control4 = () => {
       icon: Lightbulb,
       title: "Lighting",
       description:
-        "Keypads, dimmers, and scenes throughout the house. Pairs natively with Lutron RadioRA3 or HomeWorks underneath for the actual lighting load.",
+        "Keypads, dimmers, and lighting scenes across the whole house — Control4 sits on top of Lutron RadioRA3 or HomeWorks for the actual lighting load.",
     },
     {
       icon: Volume2,
       title: "Entertainment",
       description:
-        "Whole-home audio, media rooms, and theaters under one interface. Multi-room music, lightning-fast source switching, and an entertainment session anyone can start.",
+        "Whole-home audio, media rooms, and theaters under one interface. Multi-room music, lightning-fast source switching, and entertainment sessions anyone can start.",
     },
     {
       icon: Thermometer,
       title: "Comfort",
       description:
-        "Thermostats, zoned HVAC, and floor heat that cooperate with scenes. Goodnight cools the bedroom before the shades close — comfort handled, not babysat.",
+        "Thermostats, zoned HVAC, and floor heat folded into the same scenes — Goodnight cools the bedroom before the shades close.",
     },
     {
       icon: Shield,
       title: "Security",
       description:
-        "Cameras, smart locks, alarms, and access control under one app. Push notifications when it matters, remote access from anywhere, the house secure every step of the way.",
+        "Cameras, smart locks, alarms, and access control inside the Control4 App. Push notifications when it matters; remote access designed to be private and secure.",
     },
     {
       icon: Sun,
       title: "Shades",
       description:
-        "Motorized shades on schedules, tied to sun position and folded into lighting scenes — the room never goes too bright or too dark on its own.",
+        "Motorized shades on schedules, tied to sun position, and drawn into lighting scenes so the room never goes too bright or too dark on its own.",
     },
     {
       icon: Home,
-      title: "Scenes & routines",
+      title: "Scenes & X4 Routines",
       description:
-        "Goodmorning, Goodbye/Away, Welcome, Movie/Relax, Goodnight — one tap, voice command, or schedule coordinates lights, music, shades, climate, and locks.",
+        "Goodmorning, Goodbye/Away, Welcome, Movie/Relax, Goodnight — one tap, voice command, or scheduled X4 Routine coordinates lights, music, shades, climate, and locks.",
     },
   ];
 
   const services = [
     {
-      icon: Hammer,
-      title: "New build & pre-wire planning",
-      description:
-        "We sit with the architect and builder early. Rack location, keypad layout, speaker pre-wire, TV backboxes, and network drops — all planned on the prints before drywall goes up.",
-    },
-    {
-      icon: Wrench,
-      title: "Personalize the system to your life",
-      description:
-        "Every Control4 system is personalized by an integrator. We tailor scenes, routines, automations, widgets, favorites, and the home-screen layout to how the family uses the house.",
-    },
-    {
       icon: Sparkles,
+      title: "Tailored to the family",
+      description:
+        "Every Control4 system is personalized by an integrator. Scenes, X4 Routines, widgets, favorites, and the home-screen layout are tuned to how the family actually uses the house.",
+    },
+    {
+      icon: Hammer,
       title: "Service & expand existing systems",
       description:
-        "Inherited a system, original dealer went quiet, or want to add a room or audio zone? We document what is installed, fix what is broken, and grow it on top of what already works.",
+        "Inherited a system, original dealer gone quiet, or want to add a room or audio zone? Control4 keeps growing on top of what is already there — drivers, zones, scenes, surfaces.",
     },
     {
       icon: GraduationCap,
       title: "Homeowner training & cheat sheet",
       description:
-        "Walk-through at the end with the family. We show how the Control4 App, touchscreens, keypads, and smart remote work — and leave a one-page cheat sheet on the counter.",
+        "A short walk-through with the family at the end. The Control4 App, touchscreens, on-wall keypads, and smart remote — plus a one-page cheat sheet on the counter.",
     },
     {
       icon: Map,
       title: "Vail Valley service",
       description:
-        "Local service across Vail, Beaver Creek, Edwards, Avon, and Eagle. We will come to the property, not just diagnose over the phone.",
+        "Local Control4 dealer support across Vail, Beaver Creek, Edwards, Avon, and Eagle — on-site and remote.",
     },
   ];
 
@@ -204,7 +197,7 @@ const Control4 = () => {
             Your personalized smart home, one interface.
           </h1>
           <p className="text-white/60 text-base sm:text-lg leading-relaxed mb-8 max-w-2xl hero-subtext-shadow">
-            Control4 brings lighting, entertainment, security, and comfort into one platform — private, secure, personalized, and tailored to how your Vail Valley home actually lives. One app instead of ten.
+            Control4 brings lighting, entertainment, security, and comfort onto one private, secure, personalized platform — controlled from the Control4 App, dedicated touchscreens, on-wall keypads, or a smart remote.
           </p>
           <div className="flex flex-col sm:flex-row gap-3">
             <a
@@ -232,13 +225,13 @@ const Control4 = () => {
       <section className="py-16 sm:py-24 px-4 sm:px-6 bg-black/20 backdrop-blur-sm border-y border-white/5">
         <div className="max-w-5xl mx-auto">
           <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">
-            What Control4 Brings Together
+            The Control4 Line
           </p>
           <h2 className="text-2xl sm:text-3xl font-bold text-white mb-5">
             One platform for lighting, entertainment, security, and comfort.
           </h2>
           <p className="text-white/60 text-base leading-relaxed mb-10 max-w-3xl">
-            Control4 brings the devices in the house — lighting, audio, video, climate, security, locks, shades, and network gear — into one personalized platform. Controlled from the Control4 App on your smartphone, dedicated touchscreens, on-wall keypads, or a smart remote.
+            Control4 is a personalized smart-home platform. It pulls the devices in the house — lighting, audio, video, climate, locks, shades, cameras — into one program controlled from the Control4 App, dedicated touchscreens, on-wall keypads, or a smart remote.
           </p>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
             {pillars.map((item, i) => (
@@ -326,7 +319,7 @@ const Control4 = () => {
             Plays Well With
           </p>
           <p className="text-white/55 text-sm leading-relaxed mb-5 max-w-3xl">
-            Compatible with an ecosystem of over 25,000 third-party devices from the world's leading brands. Below are categories Symphony commonly ties into a Control4 system — your integrator confirms specific drivers and supported models for the gear you actually have.
+            Compatible with an ecosystem of over 25,000 third-party devices from the world's leading brands. Common categories that drop into a Control4 program — drivers and supported models confirmed against the gear actually in the house.
           </p>
           <div className="flex flex-wrap gap-2">
             {[
@@ -396,10 +389,10 @@ const Control4 = () => {
       <section className="py-16 sm:py-24 px-4 sm:px-6 bg-black/20 backdrop-blur-sm border-y border-white/5">
         <div className="max-w-5xl mx-auto">
           <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">
-            How Symphony Sets It Up
+            Personalized for Your Home
           </p>
           <h2 className="text-2xl sm:text-3xl font-bold text-white mb-10">
-            From blank walls to a working system.
+            How a Control4 system fits your house.
           </h2>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
             {services.map((item, i) => (
@@ -432,7 +425,7 @@ const Control4 = () => {
             Control4, RadioRA3, HomeWorks, or AVA?
           </h2>
           <p className="text-white/60 text-base leading-relaxed mb-8 max-w-3xl">
-            Control4 is the whole-home automation layer. Lutron sits underneath for lighting and shades. AVA is the simpler choice when the house is mostly about media and TV. We install all of them and will tell you what fits.
+            Control4 is the whole-home automation layer. Lutron sits underneath it for lighting and shades. AVA is the simpler choice when the house is mostly about media and TV.
           </p>
           <div className="grid sm:grid-cols-2 gap-5 mb-6">
             <div className="bg-black/40 backdrop-blur-sm border border-accent/30 rounded-xl p-6">

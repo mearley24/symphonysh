@@ -34,61 +34,61 @@ const AvaService = () => {
     "name": "AVA Cinema Remote, Home Remote & AVA OS",
     "provider": schemaProviderLocalBusiness,
     "description":
-      "AVA Cinema Remote, Home Remote, and AVA OS installed and tuned for Vail Valley homes. One keypad for every device — IP control directly from the remote, no external processor required. AVA Flows is the simplest way to bring your home to life, with automation without coding.",
+      "AVA Cinema Remote and Home Remote, both running AVA OS, with AVA Flows for automation without coding. Cinema Remote includes a built-in octa-core processor for IP control directly from the remote — no external processor required. Installed and tuned for Vail Valley homes.",
     "areaServed": "Vail Valley, Colorado",
   };
 
-  // What AVA offers — moved up to right after the hero. Covers
-  // Cinema Remote, Home Remote, AVA OS, Flows, and IP/IR control,
-  // per the page-flow spec.
+  // The AVA product line — Cinema Remote, Home Remote, AVA OS, Flows,
+  // and the hardware/UX details that come with them. No unverified
+  // device-count claims on this page.
   const whatYouGet = [
     {
       icon: Tv,
       title: "Cinema Remote",
       description:
-        "The only remote you'll ever need. Made for TV rooms, media rooms, and theaters — single-piece aluminum, 3D Glass Dynamic Keypad, built-in octa-core processor running AVA OS. No external processor required.",
+        "The only remote you'll ever need for TV rooms, media rooms, and theaters. Single-piece machined aluminum, 3D Glass Dynamic Keypad, and a built-in octa-core processor running AVA OS — IP control directly from the remote, no external processor required.",
     },
     {
       icon: Home,
       title: "Home Remote",
       description:
-        "For spaces beyond the screen — rooms without a TV. Intuitive control for lighting, audio, and everything else, sharing the same AVA OS as Cinema Remote.",
+        "For spaces beyond the screen — rooms without a TV. Intuitive control for lighting, audio, climate, and everything in-between, sharing the same AVA OS experience as Cinema Remote.",
     },
     {
       icon: Sparkles,
       title: "AVA OS",
       description:
-        "A revolutionary home operating system that makes complex systems feel simple and connected. The engine behind Nano Brain and Cinema Remote — improves over time, the same on every AVA remote in the house.",
+        "The home operating system that makes complex systems feel simple and connected. AVA OS runs on the remote itself and stays consistent across every AVA remote in the house.",
     },
     {
       icon: Users,
       title: "AVA Flows",
       description:
-        "The simplest way to bring your home to life — automation without coding. Drag a button press into a sequence: shades down, lights dim, projector on, receiver to the right input.",
-    },
-    {
-      icon: Wifi,
-      title: "IP control for over 10,000 devices",
-      description:
-        "AVA talks to most modern gear over IP directly from the remote — faster, more reliable, two-way feedback, and no rack-mounted middleman to fail.",
-    },
-    {
-      icon: Volume2,
-      title: "IR control for over 60,000 devices",
-      description:
-        "Older TVs, receivers, projectors, and cable boxes still work. Cinema Remote includes built-in IR emitters so almost anything in the rack or on the wall stays controllable.",
+        "Automation without coding. Drag a button press into a sequence — shades down, lights dim, projector on, receiver to the right input — and the room lands on the moment in one tap.",
     },
     {
       icon: Film,
       title: "Dynamic Keypad",
       description:
-        "Icons shift intuitively to match the moment — TV controls when watching, lighting when not, audio when needed. Touch it, feel the mechanical click, see it, hear it.",
+        "Adapts to the moment. TV controls when watching, lighting when not, audio when needed. Touch it, feel the mechanical click, see it, hear it.",
+    },
+    {
+      icon: Wifi,
+      title: "IP control, no extra processor",
+      description:
+        "Cinema Remote talks to modern gear over IP directly from the keypad — two-way feedback, no rack-mounted middleman to fail. Older gear stays controllable through built-in IR.",
     },
     {
       icon: Music,
-      title: "Multi-room music & audio",
+      title: "Lights, music, climate, everything in-between",
       description:
-        "Pairs cleanly with Sonos and Control4 audio. Start music in the kitchen, move it to the deck, drop the volume in the bedroom — instant control, one keypad.",
+        "AVA controls lights, music, climate, and everything in-between — Sonos, Control4 audio, Lutron lighting and shades all line up behind a single keypad in the room.",
+    },
+    {
+      icon: Volume2,
+      title: "Built to last",
+      description:
+        "Single-piece machined aluminum, 3D Glass, magnetic charging dock — designed to live on the coffee table and feel premium every time it's picked up.",
     },
   ];
 
@@ -168,28 +168,28 @@ const AvaService = () => {
 
   const symphonyProcess = [
     {
-      icon: Hammer,
-      title: "Installed by pros",
-      description:
-        "AVA is installed by pros — that is by design. We start in the actual room with the TV wall, the rack, and the seating, and shape the Dynamic Keypad around how you watch, not a generic template.",
-    },
-    {
       icon: Wrench,
-      title: "Pair to existing gear",
+      title: "Pairs to existing gear",
       description:
-        "TV, receiver, Apple TV, soundbar, Sonos, projector — AVA pairs to what is already there over IP and IR. No rip and replace unless something is genuinely broken.",
+        "TV, receiver, Apple TV, soundbar, Sonos, projector — Cinema Remote pairs to what is already there over IP first, falling back to built-in IR for older gear.",
     },
     {
       icon: Sparkles,
-      title: "Build the Flows that matter",
+      title: "Flows tuned to the room",
       description:
-        "Movie, Game Day, Goodnight, Music — each AVA Flow tuned to your gear, your room, and your habits. Beautifully simple, refined after the family lives with it.",
+        "Movie, Game Day, Music, Goodnight — each AVA Flow shaped around your gear, your seating, and the habits the room actually has. Refined after the family lives with it.",
     },
     {
       icon: GraduationCap,
       title: "4-minute hand-off",
       description:
-        "Training takes 4 minutes, not four days. We walk through the keypad with the family, leave a one-page cheat sheet, and let the system improve as the room gets used.",
+        "Training takes 4 minutes, not four days. The Dynamic Keypad adapts to what's happening, the icons shift intuitively, and the system improves as the room gets used.",
+    },
+    {
+      icon: Hammer,
+      title: "AVA is installed by pros",
+      description:
+        "AVA is installed by pros — that's by design. The keypad layout is tuned to the actual TV wall, rack, and seating, not a generic template.",
     },
   ];
 
@@ -237,8 +237,8 @@ const AvaService = () => {
     <PageBackground image={bgAudio}>
       <SEO
         title="AVA Cinema Remote, Home Remote & AVA OS in Vail Valley"
-        description="AVA Cinema Remote and Home Remote installed and tuned for Vail Valley homes. AVA OS makes complex systems feel simple and connected — IP control directly from the remote, no external processor required. AVA Flows is the simplest way to bring your home to life, with automation without coding."
-        keywords="AVA remote Vail Valley, smart remote installer, universal remote, media room control, whole home audio"
+        description="The AVA line — Cinema Remote and Home Remote, both running AVA OS, with AVA Flows for automation without coding. Cinema Remote includes a built-in octa-core processor and Dynamic Keypad — IP control directly from the remote, no external processor required."
+        keywords="AVA remote Vail Valley, AVA Cinema Remote, AVA Home Remote, AVA OS, AVA Flows, smart remote installer"
         schema={[serviceSchema, faqSchema]}
         breadcrumbs={[
           { name: "Home", url: "/" },
@@ -264,7 +264,7 @@ const AvaService = () => {
             One keypad. Every device. Beautifully simple.
           </h1>
           <p className="text-white/60 text-base sm:text-lg leading-relaxed mb-8 max-w-2xl hero-subtext-shadow">
-            AVA OS makes complex systems feel simple and connected. Cinema Remote for TV rooms, Home Remote for everywhere else — installed by Symphony, tuned for Vail Valley homes, designed so guests, kids, and property managers actually pick it up and use it.
+            AVA OS makes complex systems feel simple and connected. Cinema Remote runs AVA OS on a built-in octa-core processor for TV rooms; Home Remote takes the same experience to spaces beyond the screen. AVA Flows handles the automation — no coding.
           </p>
           <div className="flex flex-col sm:flex-row gap-3">
             <a
@@ -288,17 +288,17 @@ const AvaService = () => {
 
       <div className="hero-divider w-full" />
 
-      {/* 2. What AVA Offers — moved up from middle of page */}
+      {/* 2. The AVA Line — product family overview */}
       <section className="py-16 sm:py-24 px-4 sm:px-6 bg-black/20 backdrop-blur-sm border-y border-white/5">
         <div className="max-w-5xl mx-auto">
           <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">
-            What AVA Offers
+            The AVA Line
           </p>
           <h2 className="text-2xl sm:text-3xl font-bold text-white mb-5">
-            Cinema Remote, Home Remote, AVA OS, and Flows.
+            Cinema Remote, Home Remote, AVA OS, AVA Flows.
           </h2>
           <p className="text-white/60 text-base leading-relaxed mb-10 max-w-3xl">
-            Cinema Remote is crafted from a single piece of aluminum, with a 3D Glass Dynamic Keypad and mechanical click. Its built-in octa-core processor runs AVA OS directly — IP control directly from the Cinema Remote, no external processor required. Home Remote takes the same AVA OS experience to spaces beyond the screen. AVA Flows is the simplest way to bring your home to life, with automation without coding.
+            Cinema Remote is crafted from a single piece of machined aluminum, with a 3D Glass Dynamic Keypad and a built-in octa-core processor running AVA OS — IP control directly from the remote, no external processor required. Home Remote brings the same AVA OS experience to rooms beyond the screen. AVA Flows is the automation layer that runs the room.
           </p>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
             {whatYouGet.map((item, i) => (
@@ -408,10 +408,10 @@ const AvaService = () => {
       <section className="py-16 sm:py-24 px-4 sm:px-6 bg-black/20 backdrop-blur-sm border-y border-white/5">
         <div className="max-w-5xl mx-auto">
           <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">
-            How Symphony Sets It Up
+            Tuned for Your Room
           </p>
           <h2 className="text-2xl sm:text-3xl font-bold text-white mb-10">
-            Tuned to your gear, your room, your family.
+            How AVA fits your gear, your room, your family.
           </h2>
           <div className="grid sm:grid-cols-2 gap-5">
             {symphonyProcess.map((item, i) => (
@@ -444,7 +444,7 @@ const AvaService = () => {
             Three honest options.
           </h2>
           <p className="text-white/60 text-base leading-relaxed mb-8 max-w-3xl">
-            We install all three. The right choice depends on how much of the house you actually want automated, and how often other people need to use it.
+            The right choice depends on how much of the house actually needs to be automated, and how often other people need to use it.
           </p>
           <div className="grid sm:grid-cols-3 gap-5 mb-6">
             <div className="bg-black/40 backdrop-blur-sm border border-accent/30 rounded-xl p-6">
