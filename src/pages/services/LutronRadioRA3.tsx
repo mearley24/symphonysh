@@ -24,6 +24,9 @@ import { useState } from "react";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import SEO from "../../components/SEO";
+import ProductFamilyTree, {
+  type ProductFamilyGroup,
+} from "../../components/ProductFamilyTree";
 import { schemaProviderLocalBusiness } from "../../constants/businessSchema";
 import PageBackground from "../../components/PageBackground";
 import bgLighting from "../../assets/bg-lighting.jpg";
@@ -121,25 +124,76 @@ const LutronRadioRA3 = () => {
     },
   ];
 
-  const componentPills = [
-    "RadioRA3 All-in-One Processor",
-    "Sunnata RF Keypads",
-    "Sunnata RF Touch Dimmer",
-    "Sunnata RF Companion Dimmer",
-    "Sunnata RF Switch",
-    "Sunnata RF Companion Switch",
-    "Sunnata RF Touch Fan Control",
-    "Pico Remotes",
-    "Outdoor Plug-in Switch",
-    "Lumaris Downlights (3\" & 4\")",
-    "Lumaris Tunable White Tape Light",
-    "Lumaris RGB + Tunable White Tape Light",
-    "Lutron LED Tape Extrusions",
-    "Triathlon Select Roller Shades",
-    "Triathlon Roller Shades",
-    "Sivoia QS Shades",
-    "Ceiling & Wall Sensors",
-    "Wallplates & Receptacles",
+  const productFamilies: ProductFamilyGroup[] = [
+    {
+      title: "Platform & backbone",
+      description:
+        "The RadioRA3 processor and the Clear Connect mesh that ties the system together — programmable from the cloud, with backward compatibility for older Lutron devices.",
+      items: [
+        { label: "RadioRA3 All-in-One Processor", href: "https://www.lutron.com/en-US/products/pages/wholehomesystems/radiora3/overview.aspx", external: true, hint: "Up to 100 Type X devices per processor, 200 per system" },
+        { label: "Clear Connect Type X (CCX)", hint: "Lutron's residential wireless mesh for RadioRA3" },
+        { label: "Clear Connect Type A compatibility", hint: "Most RadioRA2 and RA2 Select devices stay supported" },
+        { label: "Lutron app & cloud programming", href: "https://www.lutron.com/en-US/Products/Pages/Apps/LutronApp/Overview.aspx", external: true, hint: "iOS & Android, programmed via Lutron's cloud designer" },
+      ],
+    },
+    {
+      title: "Wall controls",
+      description:
+        "Sunnata RF dimmers, switches, fan control, and engraved keypads — and Pico remotes for tabletop or pedestal use.",
+      items: [
+        { label: "Sunnata RF Keypads", href: "https://www.lutron.com/en-US/Products/Pages/SingleRoomControls/SunnataKeypads/Overview.aspx", external: true, hint: "Engraved scene keypads in 20+ colors and finishes" },
+        { label: "Sunnata RF Touch Dimmer (PRO LED+)", href: "https://www.lutron.com/en-US/Products/Pages/SingleRoomControls/SunnataDimmersAndSwitches/Overview.aspx", external: true, hint: "Flicker-free LED dimming with PRO LED+ technology" },
+        { label: "Sunnata RF Companion Dimmer", hint: "Multi-location dimming companion" },
+        { label: "Sunnata RF Switch", hint: "Touch switch for non-dim loads" },
+        { label: "Sunnata RF Companion Switch", hint: "Multi-location switch companion" },
+        { label: "Sunnata RF Touch Fan Control", hint: "4-speed quiet fan control" },
+        { label: "Pico Remotes", href: "https://www.lutron.com/en-US/Products/Pages/Components/PicoWirelessControl/Overview.aspx", external: true, hint: "Tabletop or wall-mount paddle remotes" },
+      ],
+    },
+    {
+      title: "Lighting",
+      description:
+        "Lumaris fixtures and tape light — natively integrated, no third-party bridge between the can and the keypad.",
+      items: [
+        { label: "Lumaris Downlights (3\" & 4\")", href: "https://www.lutron.com/en-US/Products/Pages/StandAloneControls/Lumaris/Overview.aspx", external: true, hint: "Tunable white 1,800K–4,000K, dim to 0.1%, 90+ CRI" },
+        { label: "Lumaris Tunable White Tape Light", href: "https://www.lutron.com/en-US/Products/Pages/StandAloneControls/Lumaris/Overview.aspx", external: true, hint: "Linear tunable-white tape for coves and toe-kicks" },
+        { label: "Lumaris RGB + Tunable White Tape", href: "https://www.lutron.com/en-US/Products/Pages/StandAloneControls/Lumaris/Overview.aspx", external: true, hint: "RGB + tunable white in a single tape" },
+        { label: "Lutron LED Tape Extrusions", hint: "Aluminum extrusions for Lumaris and other LED tape" },
+        { label: "Outdoor Plug-in Switch", hint: "Outdoor-rated plug-in switch for landscape and holiday loads" },
+      ],
+    },
+    {
+      title: "Shades",
+      description:
+        "Wire-free Triathlon Select for fast retrofits, full-line Triathlon, and wired Sivoia QS for centralized projects.",
+      items: [
+        { label: "Triathlon Select Roller Shades", href: "https://www.lutron.com/en-US/Products/Pages/ShadingSystems/Triathlon/Overview.aspx", external: true, hint: "Wire-free, fixed sizes, ~2 yr battery life on D-cells" },
+        { label: "Triathlon Roller Shades", href: "https://www.lutron.com/en-US/Products/Pages/ShadingSystems/Triathlon/Overview.aspx", external: true, hint: "Full-line battery or hardwired Triathlon" },
+        { label: "Sivoia QS Shades", hint: "Wired QS shading system, compatible with RadioRA3 via integration" },
+      ],
+    },
+    {
+      title: "Scenes, sensors & schedules",
+      description:
+        "The pieces that make the program quiet — sunrise/sunset, occupancy, vacation patterns.",
+      items: [
+        { label: "Astronomic timeclock", hint: "Sunrise/sunset scheduling built into RadioRA3" },
+        { label: "Vacation Mode", hint: "Lived-in pattern while the family is away" },
+        { label: "Ceiling & Wall Sensors", hint: "Occupancy and vacancy sensors" },
+        { label: "Wallplates & Receptacles", hint: "Designer wallplates and matching receptacles" },
+      ],
+    },
+    {
+      title: "Voice & integrations",
+      description:
+        "Voice and the rest of the smart-home stack — handled through Lutron's app and supported integrations.",
+      items: [
+        { label: "Alexa", hint: "Amazon Alexa voice control" },
+        { label: "Google Assistant", hint: "Google Assistant voice control" },
+        { label: "Apple Siri", hint: "Voice control through HomeKit" },
+        { label: "Control4", href: "/platforms/control4", hint: "RadioRA3 integrates cleanly under Control4" },
+      ],
+    },
   ];
 
   const everydayScenes = [
@@ -444,28 +498,19 @@ const LutronRadioRA3 = () => {
         </div>
       </section>
 
-      {/* 5. System Components */}
-      <section className="py-16 sm:py-24 px-4 sm:px-6">
+      {/* 5. Product family tree */}
+      <section className="py-16 sm:py-24 px-4 sm:px-6" id="product-family-tree">
         <div className="max-w-4xl mx-auto">
           <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">
-            System Components
+            Product Family Tree
           </p>
           <h2 className="text-2xl sm:text-3xl font-bold text-white mb-5">
             Tell us what part you see.
           </h2>
           <p className="text-white/60 text-base leading-relaxed mb-8 max-w-2xl">
-            The Clear Connect Type X catalog that ends up on the wall, in the can, and on the window. Mix and match within a single RadioRA3 program.
+            Organized by family — backbone, wall controls, lighting, shades, scenes, and integrations. Linked tags open Lutron's official product page; the rest are part of the same single RadioRA3 program.
           </p>
-          <div className="flex flex-wrap gap-2">
-            {componentPills.map((pill) => (
-              <span
-                key={pill}
-                className="px-3 py-1.5 rounded-full border border-white/10 bg-black/40 backdrop-blur-sm text-white/70 text-xs sm:text-sm"
-              >
-                {pill}
-              </span>
-            ))}
-          </div>
+          <ProductFamilyTree groups={productFamilies} />
         </div>
       </section>
 

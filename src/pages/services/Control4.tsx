@@ -20,6 +20,9 @@ import { useState } from "react";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import SEO from "../../components/SEO";
+import ProductFamilyTree, {
+  type ProductFamilyGroup,
+} from "../../components/ProductFamilyTree";
 import { schemaProviderLocalBusiness } from "../../constants/businessSchema";
 import PageBackground from "../../components/PageBackground";
 import bgHomeIntegration from "../../assets/bg-home-integration.jpg";
@@ -315,37 +318,69 @@ const Control4 = () => {
               </div>
             ))}
           </div>
-          <p className="text-accent font-medium text-sm tracking-wide uppercase mb-3">
+          <p className="text-accent font-medium text-sm tracking-wide uppercase mb-3" id="product-family-tree">
             Plays Well With
           </p>
           <p className="text-white/55 text-sm leading-relaxed mb-5 max-w-3xl">
-            Compatible with an ecosystem of over 25,000 third-party devices from the world's leading brands. Common categories that drop into a Control4 program — drivers and supported models confirmed against the gear actually in the house.
+            Compatible with an ecosystem of over 25,000 third-party devices from the world's leading brands. Organized by family — interface, experiences, connected categories, and ecosystem.
           </p>
-          <div className="flex flex-wrap gap-2">
-            {[
-              "Lutron HomeWorks",
-              "Lutron RadioRA3",
-              "Audio receivers",
-              "Whole-home audio",
-              "Streaming media players",
-              "TVs & projectors",
-              "Thermostats & HVAC",
-              "Cameras & doorbells",
-              "Smart locks",
-              "Motorized shades",
-              "Networking gear",
-              "Alexa",
-              "Google Assistant",
-              "Apple HomeKit, CarPlay & Siri",
-            ].map((brand) => (
-              <span
-                key={brand}
-                className="px-3 py-1.5 rounded-full border border-white/10 bg-black/40 backdrop-blur-sm text-white/70 text-xs sm:text-sm"
-              >
-                {brand}
-              </span>
-            ))}
-          </div>
+          <ProductFamilyTree
+            groups={[
+              {
+                title: "Control surfaces",
+                description:
+                  "Same personalized system, picked up wherever the family is — phone, touchscreen, wall, or remote.",
+                items: [
+                  { label: "Control4 App", href: "https://www.control4.com/solutions/products/apps/", external: true, hint: "iOS and Android app, the same on every device" },
+                  { label: "Touchscreens", href: "https://www.control4.com/solutions/products/touch-screens/", external: true, hint: "In-wall and tabletop touchscreens" },
+                  { label: "On-wall keypads", href: "https://www.control4.com/solutions/products/keypads/", external: true, hint: "Engraved scene keypads for guests, kids, and anyone without a phone" },
+                  { label: "Smart Remote", href: "https://www.control4.com/solutions/products/remotes/", external: true, hint: "Handheld remote for media rooms and theaters" },
+                ],
+              },
+              {
+                title: "Experiences",
+                description:
+                  "What the system actually does — the routines, scenes, and alerts the family lives with day to day.",
+                items: [
+                  { label: "X4 Routines", hint: "Multi-step routines that chain lighting, AV, climate, and shades" },
+                  { label: "Scenes", hint: "Welcome, Movie, Goodnight — engraved on a keypad" },
+                  { label: "Favorites", hint: "Personal home-screen layouts per user" },
+                  { label: "Schedules", hint: "Time, sunrise/sunset, and conditional schedules" },
+                  { label: "Alerts & notifications", hint: "Push and in-app alerts for the events that matter" },
+                ],
+              },
+              {
+                title: "Connected categories",
+                description:
+                  "The subsystems Control4 ties together — driver-supported and confirmed against the gear actually in the house.",
+                items: [
+                  { label: "Lighting", href: "/services/smart-lighting", hint: "Lutron HomeWorks, RadioRA3, and Control4 lighting" },
+                  { label: "Whole-home audio", href: "/services/audio-entertainment", hint: "Sonos, Denon, and dedicated distributed audio" },
+                  { label: "Climate & HVAC", href: "/services/climate-control", hint: "Thermostats, mini-splits, and zoned HVAC" },
+                  { label: "Security", href: "/services/security-systems", hint: "Cameras, doorbells, and intrusion" },
+                  { label: "Motorized shades", href: "/services/shades", hint: "Lutron, Hunter Douglas, and Lutron Triathlon" },
+                  { label: "Locks, gates & garage", hint: "Smart locks and gate/garage drivers where verified" },
+                  { label: "TVs & projectors", hint: "IP- and IR-controlled displays" },
+                  { label: "Streaming media players", hint: "Apple TV, Roku, and built-in media services" },
+                  { label: "Networking gear", href: "/services/networking", hint: "Routers, switches, access points — the foundation under it all" },
+                ],
+              },
+              {
+                title: "Ecosystem",
+                description:
+                  "Voice and the wider ecosystem that Control4 cooperates with.",
+                items: [
+                  { label: "25,000+ compatible devices", href: "https://www.control4.com/solutions/products/", external: true, hint: "Driver-supported third-party devices" },
+                  { label: "Lutron HomeWorks", href: "/platforms/lutron-homeworks", hint: "Often the lighting layer underneath Control4" },
+                  { label: "Lutron RadioRA3", href: "/platforms/lutron-radiora3", hint: "Residential wireless lighting" },
+                  { label: "AVA", href: "/platforms/ava", hint: "Cinema and entertainment focus" },
+                  { label: "Alexa", hint: "Amazon Alexa voice control" },
+                  { label: "Google Assistant", hint: "Google Assistant voice control" },
+                  { label: "Apple HomeKit, CarPlay & Siri", hint: "Apple ecosystem integrations" },
+                ],
+              },
+            ]}
+          />
         </div>
       </section>
 
