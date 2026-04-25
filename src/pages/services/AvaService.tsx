@@ -31,10 +31,10 @@ const AvaService = () => {
   const serviceSchema = {
     "@context": "https://schema.org",
     "@type": "Service",
-    "name": "AVA Smart Remote & Media Control",
+    "name": "AVA Cinema Remote, Home Remote & AVA OS",
     "provider": schemaProviderLocalBusiness,
     "description":
-      "AVA premium remote and audio/video control for Vail Valley homes. Replace cluttered remotes with one simple, family-friendly interface for TVs, audio, and media rooms.",
+      "AVA Cinema Remote, Home Remote, and AVA OS installed and tuned for Vail Valley homes. One keypad for every device — IP control directly from the remote, no external processor required, automation made beautifully simple.",
     "areaServed": "Vail Valley, Colorado",
   };
 
@@ -46,72 +46,72 @@ const AvaService = () => {
       icon: Tv,
       title: "Cinema Remote",
       description:
-        "For TV rooms, media rooms, and theaters. Single-piece aluminum, runs AVA OS directly with a built-in processor — often no extra rack hardware needed.",
+        "The only remote you'll ever need. Made for TV rooms, media rooms, and theaters — single-piece aluminum, 3D Glass Dynamic Keypad, built-in octa-core processor running AVA OS. No external processor required.",
     },
     {
       icon: Home,
       title: "Home Remote",
       description:
-        "For rooms without a TV — kitchens, primary bedrooms, outdoor living. Controls lighting scenes, audio zones, and shades through the same AVA OS.",
+        "For spaces beyond the screen — rooms without a TV. Intuitive control for lighting, audio, and everything else, sharing the same AVA OS as Cinema Remote.",
     },
     {
       icon: Sparkles,
       title: "AVA OS",
       description:
-        "The operating system that makes complex systems feel simple. Same consistent, family-friendly experience on every AVA remote in the house.",
+        "A revolutionary home operating system that makes complex systems feel simple and connected. The engine behind Nano Brain and Cinema Remote — improves over time, the same on every AVA remote in the house.",
     },
     {
       icon: Users,
       title: "AVA Flows",
       description:
-        "Visual automation without writing code. Link a button press to a sequence — shades down, lights dim, TV on, receiver to the right input.",
+        "Automation made beautifully simple — no coding, no hassle. Drag a button press into a sequence: shades down, lights dim, projector on, receiver to the right input.",
     },
     {
       icon: Wifi,
-      title: "IP control for 10,000+ devices",
+      title: "IP control over 10,000 devices",
       description:
-        "AVA talks to most modern gear over IP — TVs, receivers, streamers, projectors, audio platforms. Faster, more reliable, and with two-way feedback.",
+        "AVA talks to most modern gear over IP directly from the remote — faster, more reliable, two-way feedback, and no rack-mounted middleman to fail.",
     },
     {
       icon: Volume2,
-      title: "IR control for 60,000+ devices",
+      title: "IR where it still belongs",
       description:
-        "Older TVs, receivers, and cable boxes still work. Almost anything in the rack or on the wall is controllable, even legacy gear.",
+        "Older TVs, receivers, projectors, and cable boxes still work. Almost anything in the rack or on the wall is controllable — even the legacy gear in the basement.",
     },
     {
       icon: Film,
-      title: "Movie Night, one button",
+      title: "Dynamic Keypad",
       description:
-        "Lowers the shades, dims the lights, fires up the projector or TV, selects the right input, sets receiver volume — every time, the same way.",
+        "Icons shift intuitively to match the moment — TV controls when watching, lighting when not, audio when needed. Touch it, feel the mechanical click, see it, hear it.",
     },
     {
       icon: Music,
-      title: "Whole-home audio integration",
+      title: "Multi-room music & audio",
       description:
-        "Pairs cleanly with Sonos and Control4 audio. Start music in the kitchen, move it to the deck, drop the volume in the bedroom — without three apps.",
+        "Pairs cleanly with Sonos and Control4 audio. Start music in the kitchen, move it to the deck, drop the volume in the bedroom — instant control, one keypad.",
     },
   ];
 
   const bestFit = [
     {
-      title: "Media-forward homes",
+      title: "Made for more than the TV",
       description:
-        "One or two TVs, a media room or theater, whole-home audio. AVA gives you simple, physical control without committing to a full Control4 system.",
+        "Cinema Remote is dynamic — it adapts to every moment. Seamless control over lights, music, climate, and everything in-between. One-room or multi-room, the same remote scales with the house.",
     },
     {
-      title: "Houses where guests need to use the system",
+      title: "Houses where everyone needs to pick it up",
       description:
-        "If the owner is the only person in the house who can turn the TV on, the system has failed. AVA is designed to be handed to anyone.",
+        "Sit back and relax — training takes 4 minutes, not four days. AVA is designed so guests, kids, and property managers can walk in and use the room without a tutorial.",
     },
     {
       title: "Replacing aging universal remotes",
       description:
-        "Harmony, Logitech, and other legacy universal remotes with broken databases and flaky IR are one of the main reasons homeowners call us about AVA.",
+        "Harmony, Logitech, and other legacy universals with broken databases and flaky IR are one of the main reasons homeowners call us about AVA.",
     },
     {
-      title: "Smaller footprints alongside Lutron",
+      title: "Pairs with Lutron and Control4",
       description:
-        "Lutron RadioRA3 handles the lighting and shades, AVA handles the TV and audio. Two clean systems instead of one large one.",
+        "AVA handles the TV, audio, and the rooms beyond the screen. Lutron handles the lighting load. Control4 ties the wider house together when needed. Clean systems, one beautifully simple keypad.",
     },
   ];
 
@@ -120,9 +120,15 @@ const AvaService = () => {
     "AVA Home Remote",
     "AVA OS",
     "AVA Flows",
-    "Charging cradle",
+    "Nano Brain",
+    "Dynamic Keypad",
+    "3D Glass",
+    "Single-piece aluminum",
+    "Magnetic charging dock",
+    "Kiosk Mode",
+    "AVA App",
     "IP control",
-    "IR blasters",
+    "IR control",
     "Sonos integration",
     "Control4 integration",
     "Lutron integration",
@@ -137,61 +143,61 @@ const AvaService = () => {
   const everydayScenarios = [
     {
       step: "01",
-      title: "Movie Night",
+      title: "Movie",
       description:
-        "One button on the Cinema Remote — shades down, lights dim, projector on, receiver to the right input, Apple TV ready. The room is set before the popcorn is.",
+        "Cinema Remote — one tap. Shades down, lights dim, projector on, receiver to the right input, Apple TV ready. Icons shift intuitively to the watch experience.",
     },
     {
       step: "02",
       title: "Game day",
       description:
-        "Living room scene: TV on, cable to the right channel, surround sound up, kitchen audio synced for the half-time crowd. Hand the remote to whoever is closest.",
+        "Living-room flow: TV on, the right channel, surround up, kitchen audio synced for the half-time crowd. Hand the keypad to whoever is closest — they will figure it out.",
     },
     {
       step: "03",
-      title: "Dinner",
+      title: "Beyond the screen",
       description:
-        "Home Remote in the kitchen drops the dining lights, raises the great room a notch, starts a Sonos playlist on the deck and inside. No phones.",
+        "Home Remote in the kitchen drops the dining lights, raises the great room a notch, starts a Sonos playlist inside and on the deck. The same AVA experience, no TV needed.",
     },
     {
       step: "04",
       title: "Goodnight",
       description:
-        "Last button of the night turns off the TV stack, mutes the receiver properly, and tells the lighting system the family is done. Even the kids can run it.",
+        "Last tap of the night powers down the TV stack cleanly, settles the receiver, and tells the lighting system the family is done. Sit back and relax.",
     },
   ];
 
   const symphonyProcess = [
     {
       icon: Hammer,
-      title: "Walk the room with you",
+      title: "Installed by pros",
       description:
-        "We start in the actual room — TV wall, gear rack, seating. The remote layout is built around how you watch, not a generic template.",
+        "AVA is installed by pros — that is by design. We start in the actual room with the TV wall, the rack, and the seating, and shape the Dynamic Keypad around how you watch, not a generic template.",
     },
     {
       icon: Wrench,
-      title: "Pair AVA to existing gear",
+      title: "Pair to existing gear",
       description:
-        "Existing TV, receiver, Apple TV, soundbar, Sonos, or projector — we pair AVA to what is already there. No rip and replace unless something is actually broken.",
+        "TV, receiver, Apple TV, soundbar, Sonos, projector — AVA pairs to what is already there over IP and IR. No rip and replace unless something is genuinely broken.",
     },
     {
       icon: Sparkles,
-      title: "Build the scenes that matter",
+      title: "Build the Flows that matter",
       description:
-        "Movie Night, Game Day, Goodnight, Music — each scene tuned to your gear, your room, and your habits. Refined after the family lives with it for a week or two.",
+        "Movie, Game Day, Goodnight, Music — each AVA Flow tuned to your gear, your room, and your habits. Beautifully simple, refined after the family lives with it.",
     },
     {
       icon: GraduationCap,
-      title: "Hand it off properly",
+      title: "4-minute hand-off",
       description:
-        "Walk-through with the family. We show the spouse, the kids, and the houseguests how the remote works, and leave a one-page cheat sheet on the counter.",
+        "Training takes 4 minutes, not four days. We walk through the keypad with the family, leave a one-page cheat sheet, and let the system improve as the room gets used.",
     },
   ];
 
   const faqs = [
     {
       q: "Is AVA a replacement for Control4?",
-      a: "Not exactly. AVA is a premium remote and media control experience — it is excellent for TV, audio, and media rooms. Control4 is a full-home automation system that also handles lighting, climate, shades, and security. In larger homes we often run both.",
+      a: "Not exactly. AVA is the only remote you'll ever need for the room — Cinema Remote runs AVA OS with a built-in octa-core processor and controls TVs, audio, lighting, climate, and everything in-between directly over IP. Control4 is a wider personalized smart-home platform with on-wall keypads, touchscreens, and an app for the whole house. In larger homes we often install both — AVA in the rooms, Control4 across the house.",
     },
     {
       q: "Does AVA work with Sonos?",
@@ -199,11 +205,11 @@ const AvaService = () => {
     },
     {
       q: "Can AVA run a theater or media room?",
-      a: "Yes. One-button Movie Night scenes — shades down, lights dim, projector or TV on, receiver to the right input, Apple TV ready — are one of the things AVA does best.",
+      a: "Yes. Cinema Remote was made for it. One-tap Movie Flows — shades down, lights dim, projector or TV on, receiver to the right input, Apple TV ready — are exactly what AVA OS and the Dynamic Keypad were designed for.",
     },
     {
       q: "Will my family actually be able to use it?",
-      a: "That is the point. The remote is designed so that anyone who can use a TV remote can use AVA. We set it up specifically around how your rooms are used, not around a demo program.",
+      a: "That is the point. AVA's training takes 4 minutes, not four days. Icons shift intuitively to match the moment, the keypad has a real mechanical click, and Symphony tunes the layout around how your rooms are actually used. Sit back and relax.",
     },
     {
       q: "Can I still use the Sonos and TV apps?",
@@ -231,8 +237,8 @@ const AvaService = () => {
   return (
     <PageBackground image={bgAudio}>
       <SEO
-        title="AVA Smart Remote & Media Control in Vail Valley"
-        description="AVA premium remote and audio/video control for Vail Valley homes. Replace messy remotes with one simple, family-friendly interface for TVs, whole-home audio, and media rooms."
+        title="AVA Cinema Remote, Home Remote & AVA OS in Vail Valley"
+        description="AVA Cinema Remote and Home Remote installed and tuned for Vail Valley homes. AVA OS makes complex systems feel simple and connected — IP control directly from the remote, no external processor required, automation made beautifully simple."
         keywords="AVA remote Vail Valley, smart remote installer, universal remote, media room control, whole home audio"
         schema={[serviceSchema, faqSchema]}
         breadcrumbs={[
@@ -256,10 +262,10 @@ const AvaService = () => {
             AVA
           </p>
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight mb-5 text-white hero-text-shadow">
-            One remote the whole family can use.
+            One keypad. Every device. Beautifully simple.
           </h1>
           <p className="text-white/60 text-base sm:text-lg leading-relaxed mb-8 max-w-2xl hero-subtext-shadow">
-            A premium remote and media control experience for TVs, audio, theaters, and whole-home sound — set up so guests, kids, and property managers can actually use it.
+            AVA OS makes complex systems feel simple and connected. Cinema Remote for TV rooms, Home Remote for everywhere else — installed by Symphony, tuned for Vail Valley homes, designed so guests, kids, and property managers actually pick it up and use it.
           </p>
           <div className="flex flex-col sm:flex-row gap-3">
             <a
@@ -290,10 +296,10 @@ const AvaService = () => {
             What AVA Offers
           </p>
           <h2 className="text-2xl sm:text-3xl font-bold text-white mb-5">
-            Cinema Remote, Home Remote, AVA OS, and Flows — one clean design.
+            Cinema Remote, Home Remote, AVA OS, and Flows.
           </h2>
           <p className="text-white/60 text-base leading-relaxed mb-10 max-w-3xl">
-            AVA runs on Swiss-designed, single-piece aluminum remotes. Cinema Remote handles TV rooms with a built-in processor. Home Remote covers rooms without a TV. AVA OS keeps the experience consistent across the house. AVA Flows builds the scenes.
+            Swiss industrial design, single-piece aluminum, 3D Glass, mechanical click. Cinema Remote runs AVA OS directly with a built-in octa-core processor — IP control directly from the remote, no external processor required. Home Remote takes the same experience to spaces beyond the screen. AVA Flows builds the automation, beautifully simple.
           </p>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
             {whatYouGet.map((item, i) => (
@@ -354,7 +360,7 @@ const AvaService = () => {
             What ends up in the room.
           </h2>
           <p className="text-white/60 text-base leading-relaxed mb-8 max-w-2xl">
-            A short, clean rack and one or two remotes per room — that is usually all the gear you see.
+            A short, clean rack and one or two AVA remotes per room — single-piece aluminum, magnetic charging dock, built to last. Built-in processor on Cinema Remote means less hardware in the closet.
           </p>
           <div className="flex flex-wrap gap-2">
             {componentPills.map((pill) => (
@@ -446,7 +452,7 @@ const AvaService = () => {
               <p className="text-accent text-xs font-semibold uppercase tracking-wide mb-2">You are here</p>
               <h3 className="text-white font-semibold text-lg mb-2">AVA</h3>
               <p className="text-white/55 text-sm leading-relaxed">
-                Premium remote and media control. Right when the house is mostly TV, theater, and audio without committing to a full automation system.
+                One keypad, every device. AVA OS makes complex systems feel simple and connected — Cinema Remote for TV rooms, Home Remote for everywhere else. Automation made beautifully simple.
               </p>
             </div>
             <Link
@@ -528,10 +534,10 @@ const AvaService = () => {
             Get Started
           </p>
           <h2 className="text-2xl sm:text-3xl font-bold text-white mb-4">
-            Want to see it in your own room?
+            Touch it, feel it, see it in your own room.
           </h2>
           <p className="text-white/60 text-base mb-8 max-w-2xl mx-auto">
-            Send a couple of photos of the TV wall, a list of the gear (TV, receiver, streamer, soundbar, Sonos) and we will tell you what the AVA setup actually looks like for your house.
+            Send a couple of photos of the TV wall and a list of the gear — TV, receiver, streamer, soundbar, Sonos, projector — and we will tell you exactly what Cinema Remote, Home Remote, and AVA OS look like in your house.
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center items-center">
             <a
@@ -564,7 +570,7 @@ const AvaService = () => {
               {
                 title: "Control4",
                 description:
-                  "When the whole house — lights, shades, climate, and security — should live behind one interface.",
+                  "Personalized smart home platform — lighting, entertainment, security, and comfort across 25,000+ compatible devices.",
                 path: "/platforms/control4",
               },
               {

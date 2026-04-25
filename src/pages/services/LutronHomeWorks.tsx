@@ -38,59 +38,59 @@ const LutronHomeWorks = () => {
   };
 
   const stats = [
-    { label: "Scale", value: "Built for 50,000+ sq ft estates" },
+    { label: "Coverage", value: "Expansive wireless beyond 50,000 sq ft" },
     { label: "Zones", value: "Up to 10,000 lighting zones" },
-    { label: "Backbone", value: "QS wired, Clear Connect wireless, or both" },
-    { label: "Catalog", value: "Native Ketra, Lumaris, Palladiom shades" },
+    { label: "Backbone", value: "QS centralized wiring or Clear Connect" },
+    { label: "Catalog", value: "Ketra, Lumaris, Rania, Palladiom — native" },
   ];
 
   const whatItIs = [
     {
       icon: Layers,
-      title: "Lutron's flagship platform",
+      title: "Industry leader, native integration",
       description:
-        "HomeWorks is Lutron's top-of-the-line system — built for estates, architectural homes, and deep remodels where design freedom and reliability are non-negotiable.",
+        "HomeWorks works with more smart home devices than any other whole-home lighting control brand — and integrates the full Lutron catalog of lighting, window treatments, and hand-crafted keypads natively, with no third-party bridges.",
     },
     {
       icon: Palette,
-      title: "Keypads as architectural hardware",
+      title: "Hand-crafted keypads",
       description:
-        "Hand-crafted keypads in the full Lutron line — Palladiom, seeTouch, and Alisse — in finishes and engravings chosen to match the room, not stamped out of a catalog.",
+        "Palladiom and Alisse keypads — engraved, finished, and laid out as bespoke as the space. Designer hardware for the wall, not a plastic panel.",
     },
     {
       icon: Sun,
-      title: "Ketra and Lumaris light",
+      title: "Ketra & Lumaris light",
       description:
-        "Tunable white and full-spectrum color fixtures that follow the sun, warm on dim, and make every room feel correct at every time of day.",
+        "Natural-feeling white from 1800K to 4000K, dimming to 0.1%, smooth seamless transitions. Ketra full-spectrum, Lumaris downlights, Rania lamps, Aviena — sized and scheduled to follow the day.",
     },
     {
       icon: Cpu,
-      title: "Wired, wireless, or both",
+      title: "Wired or wireless, retrofit or new",
       description:
-        "QS wired options for difficult architecture, Clear Connect RF where wireless is cleaner, and seamless integration between the two. Centralized panels where they make sense.",
+        "Centralized low-voltage QS wiring for difficult architecture, expansive Clear Connect wireless coverage, or a mix of both. A cloud-connected toolbox that adapts to the project, not the other way around.",
     },
   ];
 
   const bestFit = [
     {
-      title: "Large architectural homes",
+      title: "Design freedom, end to end",
       description:
-        "Ski-in mountain homes, contemporary glass-and-steel builds, and legacy estates. When the lighting design is part of the architecture, HomeWorks is the platform that keeps up.",
+        "Ski-in mountain homes, contemporary glass-and-steel builds, legacy estates. When the lighting and shading design are part of the architecture, HomeWorks is built to push boundaries with the architect and lighting designer.",
     },
     {
-      title: "New construction & deep remodels",
+      title: "Retrofit or new construction",
       description:
-        "On the prints from day one. Centralized panels, conduit runs, keypad locations, fixture schedules, and shade pockets all coordinated with the architect and electrician.",
+        "On the prints from day one, or threaded into a finished home. Centralized panels, conduit, keypad locations, fixture schedules, and shade pockets coordinated as far in advance as the project allows.",
     },
     {
-      title: "Thousands of loads and zones",
+      title: "Bespoke experiences",
       description:
-        "Exterior lighting, interior lighting, landscape, outbuildings, and caretaker units — all coordinated scenes. HomeWorks is sized for homes that outgrow smaller systems.",
+        "Atmosphere for every moment — choreographed comfort across lighting, automated window treatments, sound, A/V, security, and voice. As unique as the space; one button press changes the room.",
     },
     {
-      title: "Ketra, Lumaris, Palladiom shades",
+      title: "Reliable quality for decades",
       description:
-        "Full native support for Lutron's premium fixture and shading catalog — the pieces RadioRA3 can use but HomeWorks is actually designed around.",
+        "Lutron quality, innovation, and support that stand up over time. Centralized low-voltage wiring or expansive wireless coverage, both engineered to keep working long after the keys are handed over.",
     },
   ];
 
@@ -99,61 +99,65 @@ const LutronHomeWorks = () => {
       icon: Hammer,
       title: "Design with the architect and lighting designer",
       description:
-        "We sit with the architect, interior designer, and lighting designer early. Panel location, keypad placement, fixture schedule, and shade pockets get decided on paper, not on site after drywall.",
+        "We sit with the architect, interior designer, and lighting designer early. Panel location, keypad placement, fixture schedule, and shade pockets get decided on paper — not on site after drywall.",
     },
     {
       icon: Sliders,
-      title: "Fixture-to-driver matching",
+      title: "Fixture, driver, and shade matching",
       description:
-        "Every LED driver, fixture, and shade motor picked to work with HomeWorks — no surprises at commissioning. 0-10V, ELV, DALI, phase-cut, and Lutron-native all selected on purpose.",
+        "Every LED driver, fixture, and shade motor picked to work with HomeWorks — Ketra D2, Lumaris, Rania, Aviena, Palladiom, Triathlon. 0-10V, ELV, DALI, phase-cut, LED+, Lutron-native — all chosen on purpose.",
     },
     {
       icon: Sparkles,
-      title: "Scenes tuned to the house",
+      title: "Choreographed comfort",
       description:
-        "Welcome, Goodnight, Movie, Entertaining, Away — each programmed to how the family actually uses the rooms, and to the time of day. Scenes refined after the family lives in the house, not just at commissioning.",
+        "Welcome, Movie, Entertaining, Goodnight — at one button press the shades close, the lights dim, and the room arrives at the right atmosphere for the moment. Scenes refined after the family lives in the house.",
     },
     {
       icon: Network,
-      title: "Integration with the rest of the system",
+      title: "Integration with the rest of the home",
       description:
-        "Native integration into Control4 for whole-home automation, AVA for media rooms, Sonos for audio, plus climate, security, and voice where it makes sense.",
+        "Cloud-powered Lutron Connect tools tying HomeWorks into Control4 for whole-home automation, AVA for media rooms, Sonos for audio, plus climate, security, and voice where it makes sense.",
     },
   ];
 
   const experience = [
     {
-      title: "The house follows the sun",
+      title: "Natural-feeling light, all day",
       description:
-        "Ketra and Lumaris warm with the day. Shades rise with the sunrise, rest at mid-day, and drop again before dusk. The house never feels like fluorescent office light at 10pm.",
+        "Ketra full-spectrum and Lumaris tunable white shift with the day — 1800K to 4000K, dimming to 0.1%, smooth seamless transitions. The house never feels like fluorescent office light at 10pm.",
     },
     {
-      title: "One button, the whole wing",
+      title: "One button press, the whole wing",
       description:
-        "Welcome at the front door brings the entry, great room, kitchen, and main hallway up to the right level. Goodnight in the primary closes the house down without walking through every room.",
+        "Welcome at the front door brings entry, great room, kitchen, and hallway up. Goodnight from the primary closes the house — shades close, lights dim, atmosphere for the next moment.",
     },
     {
-      title: "Elegant hardware on the wall",
+      title: "Hand-crafted hardware on the wall",
       description:
-        "No plastic panels in the living room. Engraved keypads, matching wallplates, and a layout the owner can read without squinting.",
+        "No plastic panels in the living room. Palladiom and Alisse keypads, matching wallplates, finishes and engraving chosen room by room — bespoke, not catalog.",
     },
     {
-      title: "Reliable, quiet, and serviceable",
+      title: "Reliable quality, quiet operation",
       description:
-        "Wired backbone where it matters, local scenes that keep running when the internet hiccups, and a program we document so the next service call — from us or anyone else — does not start from scratch.",
+        "Centralized low-voltage backbone where it matters, expansive Clear Connect coverage where it does not. Local scenes keep running when the internet hiccups, and the program is documented for the next decade.",
     },
   ];
 
   const capabilities = [
     "HomeWorks processors & panels",
-    "QS wired backbone",
+    "QS centralized low-voltage wiring",
     "Clear Connect RF",
     "Palladiom keypads",
-    "seeTouch keypads",
     "Alisse keypads",
     "Sunnata dimmers & switches",
-    "Ketra full-spectrum light",
-    "Lumaris tunable light",
+    "Ketra D2 full-spectrum",
+    "Ketra Lightbar Slim",
+    "Lumaris downlights",
+    "Rania A20 lamp",
+    "Rania PAR lamps",
+    "Rania D2",
+    "Aviena",
     "Palladiom shades",
     "Triathlon shades",
     "Sivoia QS shades",
@@ -198,14 +202,14 @@ const LutronHomeWorks = () => {
     {
       title: "RadioRA3",
       description:
-        "Wireless, retrofit-friendly, up to 400 devices with paired processors. Perfect for existing homes, scalable smart lighting, and most finished houses. Grows one room at a time.",
+        "A professionally installed suite of wireless controls, intelligent lighting, and automated shading. Wirelessly retrofittable, powerfully scalable to 400 devices. Native integration with Lumaris and Triathlon — no third-party bridges.",
       link: "/platforms/lutron-radiora3",
       linkLabel: "RadioRA3 details",
     },
     {
       title: "HomeWorks",
       description:
-        "Wired or wireless, centralized panels, up to 10,000 zones, native Ketra/Lumaris/Palladiom, hand-crafted keypads. Designed for architectural homes and luxury whole-home lighting.",
+        "Lutron's flagship for the world's most uncompromising projects. Centralized low-voltage wiring or expansive wireless coverage, up to 10,000 zones, native Ketra / Lumaris / Rania / Palladiom, hand-crafted keypads.",
       link: "/platforms/lutron-homeworks",
       linkLabel: "HomeWorks details",
     },
@@ -214,7 +218,7 @@ const LutronHomeWorks = () => {
   const faqs = [
     {
       q: "How is HomeWorks different from RadioRA3?",
-      a: "RadioRA3 is Lutron's professional wireless platform — excellent for retrofits, scalable smart lighting, and most homes. HomeWorks is Lutron's flagship platform designed for architectural and luxury projects. HomeWorks supports wired QS backbones, very large zone counts (up to 10,000), centralized panels, and native Ketra/Lumaris/Palladiom shades. For very large estates and architect-led designs, HomeWorks is the right tool.",
+      a: "RadioRA3 is Lutron's professionally installed wireless suite of controls, intelligent lighting, and automated shading — wirelessly retrofittable, powerfully scalable to 400 devices, and the right answer for most finished homes. HomeWorks is Lutron's flagship, designed for the world's most uncompromising lighting and home automation projects: centralized low-voltage wiring, expansive wireless coverage, up to 10,000 zones, the full Lutron catalog, and hand-crafted keypads.",
     },
     {
       q: "Do I have to do the whole house at once?",
@@ -222,7 +226,7 @@ const LutronHomeWorks = () => {
     },
     {
       q: "Does HomeWorks need to be wired?",
-      a: "Not necessarily. HomeWorks supports both QS wired and Clear Connect wireless. Wired QS is the right choice for difficult architecture, very large zone counts, and centralized panel designs. Wireless is great for retrofits and outlying zones. Most of our HomeWorks projects are a mix.",
+      a: "Not necessarily. HomeWorks supports centralized low-voltage QS wiring and expansive Clear Connect wireless coverage. Wired QS is the right choice for difficult architecture, very large zone counts, and centralized panel designs. Wireless is right for retrofits and outlying zones. Most of our HomeWorks projects are a mix.",
     },
     {
       q: "Can HomeWorks integrate with Control4, AVA, and Sonos?",
@@ -230,7 +234,7 @@ const LutronHomeWorks = () => {
     },
     {
       q: "We have Ketra fixtures already — can HomeWorks drive them?",
-      a: "Yes. Ketra is natively supported by HomeWorks. Same for Lumaris tunable white and Palladiom shades. This is actually one of the main reasons to choose HomeWorks over other platforms.",
+      a: "Yes. Ketra D2 and Ketra Lightbar Slim are natively supported. Same for Lumaris downlights, Rania lamps, Aviena, and Palladiom shades. Native integration with the full Lutron catalog is one of the main reasons to choose HomeWorks.",
     },
     {
       q: "What does a HomeWorks system cost?",
@@ -252,7 +256,7 @@ const LutronHomeWorks = () => {
     <PageBackground image={bgLighting}>
       <SEO
         title="Lutron HomeWorks Design & Installation in Vail Valley"
-        description="Lutron HomeWorks design, installation, programming, and service for luxury Vail Valley homes — architectural lighting, Ketra, Lumaris, hand-crafted keypads, QS wired and Clear Connect wireless, motorized shades, and whole-home control."
+        description="Lutron HomeWorks design, installation, programming, and service for the Vail Valley — designed for the world's most uncompromising lighting and home automation projects. Native Ketra, Lumaris, Rania, and Palladiom; hand-crafted keypads; QS centralized wiring or Clear Connect wireless."
         keywords="Lutron HomeWorks Vail Valley, HomeWorks dealer Colorado, architectural lighting Eagle County, Ketra installer, Lumaris lighting, Palladiom shades, luxury smart home"
         schema={[serviceSchema, faqSchema]}
         breadcrumbs={[
@@ -276,10 +280,10 @@ const LutronHomeWorks = () => {
             Lutron HomeWorks
           </p>
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight mb-5 text-white hero-text-shadow">
-            The lighting system for architectural homes.
+            For the most uncompromising homes.
           </h1>
           <p className="text-white/60 text-base sm:text-lg leading-relaxed mb-8 max-w-2xl hero-subtext-shadow">
-            Lutron's flagship platform for luxury lighting and whole-home automation — designed, installed, and tuned around how the house is actually meant to look and feel.
+            HomeWorks is Lutron's flagship platform — designed for the world's most uncompromising lighting and home automation projects. Ultimate design freedom, the full Lutron catalog, and hand-crafted keypads, programmed and supported in the Vail Valley.
           </p>
           <div className="flex flex-col sm:flex-row gap-3">
             <a
@@ -327,10 +331,10 @@ const LutronHomeWorks = () => {
             What HomeWorks Offers
           </p>
           <h2 className="text-2xl sm:text-3xl font-bold text-white mb-5">
-            Built for uncompromising lighting and automation.
+            Designed for the world's most uncompromising projects.
           </h2>
           <p className="text-white/60 text-base leading-relaxed mb-10 max-w-3xl">
-            HomeWorks is designed for homes where the lighting is part of the architecture. Native support for the full Lutron catalog, hand-crafted keypads, wired and wireless backbones, and a platform Lutron builds around their most demanding projects.
+            HomeWorks is the platform Lutron builds around its most demanding projects — full design freedom, the entire native catalog of lighting, automated window treatments, and hand-crafted keypads, on a cloud-connected toolbox that adapts to retrofit or new construction, wireless or wired.
           </p>
           <div className="grid sm:grid-cols-2 gap-5">
             {whatItIs.map((item, i) => (
@@ -391,7 +395,7 @@ const LutronHomeWorks = () => {
             What HomeWorks covers natively.
           </h2>
           <p className="text-white/60 text-base leading-relaxed mb-8 max-w-2xl">
-            HomeWorks is designed around Lutron's full catalog — processors, panels, fixtures, shades, keypads, sensors, and cloud tools — with native integration into the rest of your smart-home stack.
+            HomeWorks is designed around Lutron's full catalog — processors, panels, fixtures, automated window treatments, hand-crafted keypads, sensors, and cloud-powered tools — and works with more smart home devices than any other whole-home lighting control brand.
           </p>
           <div className="flex flex-wrap gap-2">
             {capabilities.map((pill) => (
@@ -413,7 +417,7 @@ const LutronHomeWorks = () => {
             Everyday Scenes
           </p>
           <h2 className="text-2xl sm:text-3xl font-bold text-white mb-10">
-            What the family actually notices.
+            Choreographed comfort, atmosphere for every moment.
           </h2>
           <div className="grid sm:grid-cols-2 gap-5">
             {experience.map((item, i) => (
@@ -624,7 +628,7 @@ const LutronHomeWorks = () => {
               {
                 title: "Lutron RadioRA3",
                 description:
-                  "The wireless Lutron platform — retrofit-friendly and great for most finished homes.",
+                  "Lutron's professionally installed wireless suite — wirelessly retrofittable, powerfully scalable, native integration with Lumaris and Triathlon.",
                 path: "/platforms/lutron-radiora3",
               },
               {
@@ -637,7 +641,7 @@ const LutronHomeWorks = () => {
               {
                 title: "Motorized Shades",
                 description:
-                  "Palladiom, Triathlon, and Sivoia shades — native in HomeWorks and tied to scenes.",
+                  "Palladiom, Triathlon, and Sivoia QS shades — native in HomeWorks, choreographed with the lighting scenes.",
                 path: "/services/shades",
                 icon: Sun,
               },
@@ -673,7 +677,7 @@ const LutronHomeWorks = () => {
       <section className="px-4 sm:px-6 pb-10 pt-10">
         <div className="max-w-4xl mx-auto">
           <p className="text-white/35 text-xs leading-relaxed">
-            Lutron, HomeWorks, RadioRA3, Clear Connect, Sunnata, Ketra, Lumaris, Palladiom, Sivoia, Triathlon, seeTouch, Alisse, and related trade dress and logos are trademarks or registered trademarks of Lutron Electronics Co., Inc. in the U.S. and/or other countries. Symphony Smart Homes is an independent smart-home integration company.
+            Lutron, HomeWorks, RadioRA3, Clear Connect, Sunnata, Ketra, Lumaris, Rania, Aviena, Palladiom, Sivoia, Triathlon, Alisse, and related trade dress and logos are trademarks or registered trademarks of Lutron Electronics Co., Inc. in the U.S. and/or other countries. Symphony Smart Homes is an independent smart-home integration company.
           </p>
         </div>
       </section>
