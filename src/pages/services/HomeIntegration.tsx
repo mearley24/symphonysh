@@ -66,7 +66,7 @@ const HomeIntegration = () => {
             <p className="text-accent font-medium text-sm tracking-wide uppercase">Home Automation</p>
           </div>
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight mb-5 text-white hero-text-shadow">One keypad. One app. The whole home in agreement.</h1>
-          <p className="text-white/60 text-base sm:text-lg leading-relaxed mb-8 max-w-2xl hero-subtext-shadow">Control4 ties lighting, climate, audio, security, and shades into a single experience — usually sitting on top of a Lutron lighting layer. Named scenes for the way you live, X4 Routines that handle the repetitive parts.</p>
+          <p className="text-white/60 text-base sm:text-lg leading-relaxed mb-8 max-w-2xl hero-subtext-shadow">Control4 ties lighting, climate, audio, security, and shades into a single experience. Lutron HomeWorks or RadioRA3 sit underneath when the home calls for Lutron-grade lighting.</p>
           <div className="flex flex-col sm:flex-row gap-3">
             <Link to="/scheduling?service=home-integration" className="inline-flex items-center justify-center gap-2 bg-accent hover:bg-accent/90 text-white px-7 py-4 rounded-lg font-medium transition-colors text-base">Schedule a Walkthrough <ArrowRight className="w-4 h-4" /></Link>
             <a href="tel:+19705193013" className="inline-flex items-center justify-center gap-2 border border-white/20 hover:border-white/40 hover:bg-white/5 text-white px-7 py-4 rounded-lg font-medium transition-colors text-base"><Phone className="w-4 h-4" /> (970) 519-3013</a>
@@ -141,7 +141,7 @@ const HomeIntegration = () => {
           <div className="grid sm:grid-cols-3 gap-5">
             {[
               { title: "Control4", description: "Dedicated deep-dive on Control4 — new builds, fixes to inherited systems, and homeowner training.", path: "/platforms/control4" },
-              { title: "Lutron RadioRA3", description: "The lighting layer we most often pair with Control4 for larger Vail Valley homes.", path: "/platforms/lutron-radiora3" },
+              { title: "Lutron RadioRA3", description: "An optional Lutron lighting layer when the home calls for it.", path: "/platforms/lutron-radiora3" },
               { title: "AVA Smart Remote", description: "When a single remote for TV and audio is enough on its own.", path: "/platforms/ava" },
               { title: "Audio & Entertainment", description: "Multi-room audio and home theater controlled from your Control4 system.", path: "/services/audio-entertainment" },
               { title: "Smart Lighting", description: "Keypads and automated scenes that integrate seamlessly with Control4.", path: "/services/smart-lighting" },

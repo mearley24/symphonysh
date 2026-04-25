@@ -14,29 +14,27 @@ const Services = () => {
   const revealRef = useScrollReveal();
 
   const services = [
-    { icon: Home, title: "Whole-Home Integration", description: "Lighting, audio, climate, security, and shades behind one Control4 app, one set of keypads, and one quiet routine for the whole house.", link: "/services/home-integration" },
-    { icon: Volume2, title: "Audio & Home Theater", description: "Whole-home audio that follows you room to room and dedicated theaters with Dolby Atmos — tuned for the room, not just the spec sheet.", link: "/services/audio-entertainment" },
-    { icon: Shield, title: "Security & Cameras", description: "Cameras, smart locks, video doorbells, and alarm monitoring tied into the same scenes that turn the house off when you leave.", link: "/services/security-systems" },
-    { icon: Lightbulb, title: "Lighting & Keypads", description: "Lutron HomeWorks or RadioRA3 lighting with keypad scenes on the wall — Lumaris, Sunnata, Ketra, and Palladiom where they fit.", link: "/services/smart-lighting" },
-    { icon: Thermometer, title: "Climate", description: "Zoned HVAC, floor heating, and thermostats that quietly back off when the house is empty and warm up before you arrive.", link: "/services/climate-control" },
-    { icon: Wifi, title: "Networking", description: "Enterprise-grade Wi-Fi, structured cabling, and managed switching — the layer underneath that keeps every other system online.", link: "/services/networking" },
-    { icon: Sun, title: "Motorized Shades", description: "Triathlon Select, Palladiom, and Sivoia shades that move with the sun, the time, or a single keypad scene.", link: "/services/shades" },
-    { icon: Wrench, title: "Service & Maintenance", description: "Quiet ongoing care — firmware, remote diagnostics, second-home check-ins, and an on-site visit when something needs hands.", link: "/services/maintenance" },
-    { icon: Cable, title: "Pre-Wire & Structured Wiring", description: "Clean low-voltage rough-in for network, audio, shades, and automation — pulled before insulation, planned with your trades.", link: "/services/prewire" },
+    { icon: Home, title: "Whole-Home Integration", description: "Control4 lighting, scenes, audio, climate, security, and shades on one app and one keypad family.", link: "/services/home-integration" },
+    { icon: Volume2, title: "Audio & Home Theater", description: "Whole-home audio that follows you room to room and dedicated theaters with Dolby Atmos.", link: "/services/audio-entertainment" },
+    { icon: Shield, title: "Security & Cameras", description: "Cameras, smart locks, video doorbells, and alarm monitoring tied into your scenes.", link: "/services/security-systems" },
+    { icon: Lightbulb, title: "Lighting & Keypads", description: "Control4 lighting by default — Lutron RadioRA3 or HomeWorks when the home calls for it.", link: "/services/smart-lighting" },
+    { icon: Thermometer, title: "Climate", description: "Zoned HVAC, floor heating, and thermostats that back off when the house is empty.", link: "/services/climate-control" },
+    { icon: Wifi, title: "Networking", description: "Enterprise-grade Wi-Fi, structured cabling, and managed switching underneath everything.", link: "/services/networking" },
+    { icon: Sun, title: "Motorized Shades", description: "Shades that move with the sun, the time, or a single keypad scene.", link: "/services/shades" },
+    { icon: Wrench, title: "Service & Maintenance", description: "Firmware, remote diagnostics, second-home check-ins, and on-site visits when needed.", link: "/services/maintenance" },
+    { icon: Cable, title: "Pre-Wire & Structured Wiring", description: "Low-voltage rough-in pulled before insulation, planned with your trades.", link: "/services/prewire" },
   ];
 
-  // Platforms now live on their own tab. We keep a short cross-link on the Services page.
-
   const alsoAvailable = [
-    { icon: ScanLine, title: "Matterport 3D Scanning", description: "Immersive 3D virtual tours for real estate listings, construction documentation, and property records.", link: "/matterport" },
-    { icon: Compass, title: "Setup Finder", description: "Six quick questions about the house and how you live in it. We'll suggest a starting point — HomeWorks, RadioRA3, Control4, AVA, or just a stronger network first.", link: "/setup-finder" },
+    { icon: ScanLine, title: "Matterport 3D Scanning", description: "Immersive 3D tours for listings, construction docs, and records.", link: "/matterport" },
+    { icon: Compass, title: "Setup Finder", description: "Six questions about the house. We'll point to a starting point — Control4, HomeWorks, RadioRA3, AVA, or a stronger network first.", link: "/setup-finder" },
   ];
 
   const faqs = [
-    { q: "Do I need all of these at once?", a: "No. Plenty of homes start with the network and one platform — usually Lutron lighting or Control4 — and grow from there. The Setup Finder is built to help you figure out a sensible starting point without committing to a whole-home plan on day one." },
-    { q: "Do these all work together?", a: "Yes — that's the point. Lighting, audio, climate, shades, and security can sit behind one Control4 app and one set of keypads, with Lutron HomeWorks or RadioRA3 doing the lighting work underneath." },
-    { q: "Which brands show up most?", a: "Lutron HomeWorks and RadioRA3 for lighting and shades. Control4 for whole-home automation. AVA when the family wants a single physical remote for TV, theater, and music. Sonos, Sonance, and Araknis show up regularly underneath." },
-    { q: "What if I already have a system from another company?", a: "Inherited Control4, RadioRA3, HomeWorks, and AVA systems are some of our most common service calls. We read what's there, document it, and clean up the program until the house makes sense again." },
+    { q: "Do I need all of these at once?", a: "No. Plenty of homes start with the network and one platform — usually Control4 — and grow from there. The Setup Finder helps you find a starting point." },
+    { q: "Do these all work together?", a: "Yes. Control4 ties lighting, audio, climate, shades, and security behind one app. Lutron HomeWorks or RadioRA3 add Lutron-grade lighting when the home calls for it." },
+    { q: "Which brands show up most?", a: "Control4 for whole-home lighting and control. Lutron HomeWorks and RadioRA3 for Lutron-grade lighting and shades. AVA for single-remote media rooms. Sonos, Sonance, and Araknis underneath." },
+    { q: "What if I already have a system from another company?", a: "Inherited Control4, RadioRA3, HomeWorks, and AVA systems are common service calls. We read what's there, document it, and clean up the program." },
   ];
 
   const serviceSchema = {
@@ -70,7 +68,7 @@ const Services = () => {
             Every layer of a smart home, tuned to feel like one room.
           </h1>
           <p className="text-white/60 text-base sm:text-lg leading-relaxed mb-8 max-w-2xl hero-subtext-shadow">
-            Lighting and shades that move with the day. Audio that follows you between rooms. Cameras and locks that quietly arm when the house empties. All of it on the platforms that fit the home — Lutron, Control4, AVA — never the other way around.
+            Lighting, shades, audio, climate, security — on the platforms that fit the home. Control4 by default; Lutron and AVA where they fit. Standalone or mixed when it makes sense.
           </p>
           <div className="flex flex-col sm:flex-row gap-3">
             <Link to="/scheduling" className="inline-flex items-center justify-center gap-2 bg-accent hover:bg-accent/90 text-white px-7 py-4 rounded-lg font-medium transition-colors text-base">
@@ -92,7 +90,7 @@ const Services = () => {
             <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">Services</p>
             <h2 className="text-2xl sm:text-3xl font-bold text-white">Nine layers, one calm experience.</h2>
             <p className="text-white/55 text-base leading-relaxed mt-4 max-w-2xl mx-auto">
-              Each layer matters on its own — but the magic is when scenes, schedules, and away modes pull them together so nobody in the house is hunting for an app.
+              Each layer stands on its own. Scenes, schedules, and away modes pull them together when needed.
             </p>
           </div>
           <div data-reveal-children className="grid sm:grid-cols-2 gap-4">
@@ -121,7 +119,7 @@ const Services = () => {
             <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">Platforms</p>
             <h2 className="text-2xl sm:text-3xl font-bold text-white mb-3">The systems underneath all of it.</h2>
             <p className="text-white/55 text-base leading-relaxed max-w-2xl mx-auto">
-              Lutron HomeWorks, Lutron RadioRA3, Control4, and AVA each fit a different kind of home. The platform decision shapes how the house feels in five years — so it's the first one we walk through.
+              Independent platforms — Control4, Lutron HomeWorks, RadioRA3, AVA. Pick one that fits, or mix when it makes sense.
             </p>
           </div>
           <div data-reveal className="flex flex-col sm:flex-row gap-3 justify-center items-center">
@@ -176,10 +174,10 @@ const Services = () => {
           </div>
           <div data-reveal-children className="grid sm:grid-cols-2 gap-5">
             {[
-              { title: "One keypad, one app", description: "Lights, music, locks, cameras, shades, and thermostats from a single keypad on the wall, the AVA remote, or the Control4 app — never a five-app scavenger hunt." },
-              { title: "Scenes that know each other", description: "Goodbye dims the lights, drops the heat, locks the doors, and arms the cameras with one tap. Goodnight does the rest." },
-              { title: "Easier to live with — and maintain", description: "One team designed it, documented it, and stays reachable. No vendor finger-pointing when something needs a small tune." },
-              { title: "Grows with the house", description: "Start with the network and the rooms you use most. Add scenes, theaters, and exterior lighting later without ripping anything out." },
+              { title: "One keypad, one app", description: "Lights, music, locks, cameras, shades, and thermostats from a single keypad on the wall or the Control4 app — no five-app scavenger hunt." },
+              { title: "Scenes that know each other", description: "Goodbye dims the lights, drops the heat, locks the doors, and arms the cameras in one tap." },
+              { title: "Easier to live with — and maintain", description: "One team designed it, documented it, and stays reachable. No vendor finger-pointing." },
+              { title: "Grows with the house", description: "Start with the network and the rooms you use most. Add scenes and theaters later without ripping anything out." },
             ].map((item, i) => (
               <div key={i} className="flex gap-4 p-5 rounded-xl border border-white/8 bg-black/40 backdrop-blur-sm hover:border-white/10 transition-colors">
                 <CheckCircle2 className="w-5 h-5 text-accent shrink-0 mt-0.5" />
@@ -224,7 +222,7 @@ const Services = () => {
           <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">When You're Ready</p>
           <h2 className="text-2xl sm:text-3xl font-bold text-white mb-4">Walk us through your home.</h2>
           <p className="text-white/55 text-base mb-8 max-w-xl mx-auto">
-            New build, finished retrofit, or an existing system that needs attention — share what you're working with and how you live there. We'll help map it out without pressure.
+            New build, retrofit, or an existing system that needs attention — share what you're working with. We'll map it out without pressure.
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <Link to="/scheduling" className="inline-flex items-center justify-center gap-2 bg-accent hover:bg-accent/90 text-white px-8 py-4 rounded-lg font-medium transition-colors text-base">

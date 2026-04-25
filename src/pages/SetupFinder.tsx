@@ -130,16 +130,16 @@ function buildRecommendation(a: Answers): Recommendation {
     return {
       title: "Pre-wire plan (new build)",
       summary:
-        "While the walls are open, we plan for everything you might ever want — network drops, speaker pre-wire, shade wiring, TV backboxes, and a proper equipment rack. Installing cable now costs almost nothing; pulling it later costs everything.",
+        "While the walls are open, plan for everything you might ever want — network drops, speaker pre-wire, shade wiring, TV backboxes, and a proper rack. Pulling cable now costs almost nothing; pulling it later costs everything.",
       pieces: [
         { label: "Pre-Wire & Structured Wiring", path: "/services/prewire" },
         { label: "Home Networking", path: "/services/networking" },
-        ...(wantsLighting && (wholeHome || a.priority === "luxury-finish")
+        ...(wantsLighting && a.priority === "luxury-finish"
           ? [{ label: "Lutron HomeWorks", path: "/platforms/lutron-homeworks" }]
           : wantsLighting
-          ? [{ label: "Lutron RadioRA3", path: "/platforms/lutron-radiora3" }]
+          ? [{ label: "Control4 lighting", path: "/platforms/control4" }]
           : []),
-        ...(wantsTheater || wholeHome
+        ...(wholeHome || wantsTheater || wantsClimate || wantsSecurity
           ? [{ label: "Control4 automation", path: "/platforms/control4" }]
           : []),
         ...(wantsShades
@@ -148,30 +148,24 @@ function buildRecommendation(a: Answers): Recommendation {
       ],
       notes: [
         "We want to be on site before insulation.",
-        "Final system choices (Control4 vs AVA, RadioRA3 scope, shade brand) can be decided closer to trim.",
+        "Final platform choices can be decided closer to trim.",
       ],
     };
   }
 
-  // Lutron HomeWorks-first for luxury / architectural / very large scope
+  // Lutron HomeWorks — only when explicitly luxury-finish lighting on a large architectural project
   const homeWorksFit =
     hasHomeWorks ||
     (wholeHome &&
-      (newBuild || a.projectType === "remodel") &&
-      (a.priority === "luxury-finish" || a.priority === "builder-ready")) ||
-    (a.rooms === "multiple-properties" &&
-      a.priority === "luxury-finish") ||
-    (wantsLighting &&
-      wantsShades &&
-      wholeHome &&
-      (newBuild || a.projectType === "remodel") &&
-      open);
+      wantsLighting &&
+      a.priority === "luxury-finish" &&
+      (newBuild || a.projectType === "remodel"));
 
   if (homeWorksFit) {
     return {
-      title: "Lutron HomeWorks + Control4 + Shades",
+      title: "Lutron HomeWorks (lighting) + Control4",
       summary:
-        "Lutron's flagship line for architectural homes. HomeWorks handles lighting and shade hardware — hand-crafted keypads, Ketra and Lumaris fixtures, Palladiom shades, a single coordinated program — and Control4 ties the rest of the house (audio, climate, security) into one app.",
+        "Lutron's flagship lighting line — Ketra, Lumaris, Palladiom shading, hand-crafted keypads. Control4 ties the rest of the house (audio, climate, security, shades) behind one app.",
       pieces: [
         { label: "Lutron HomeWorks", path: "/platforms/lutron-homeworks" },
         { label: "Control4 automation", path: "/platforms/control4" },
@@ -190,29 +184,92 @@ function buildRecommendation(a: Answers): Recommendation {
           : []),
       ],
       notes: [
-        "Designed in coordination with the architect and lighting designer.",
-        "Phased delivery is normal — primary wing first, guest wing and exterior later.",
-        "Includes native Ketra, Lumaris, and Palladiom support out of the box.",
+        "Designed with the architect and lighting designer.",
+        "Phased delivery is normal — primary wing first.",
       ],
     };
   }
 
-  // Control4 + Lutron + shades for larger homes
+  // RadioRA3 — explicit Lutron-friendly retrofit signal
+  const radioRA3Fit =
+    hasLutron ||
+    (wantsLighting &&
+      a.walls === "finished" &&
+      a.priority === "retrofit-friendly");
+
+  if (radioRA3Fit && !wholeHome) {
+    return {
+      title: "Lutron RadioRA3 + a strong network",
+      summary:
+        "A lighting-first retrofit with Sunnata keypads and Lumaris dimming. RadioRA3 installs cleanly in finished walls and grows one room at a time.",
+      pieces: [
+        { label: "Lutron RadioRA3", path: "/platforms/lutron-radiora3" },
+        ...(wantsShades
+          ? [{ label: "Motorized shades", path: "/services/shades" }]
+          : []),
+        ...(wantsMusic || hasSonos
+          ? [{ label: "Sonos audio", path: "/services/audio-entertainment" }]
+          : []),
+        { label: "Home Networking", path: "/services/networking" },
+      ],
+      notes: [
+        "Good for finished homes where we cannot easily open walls.",
+        "Can expand into Control4 later if more automation is wanted.",
+      ],
+    };
+  }
+
+  // AVA — only when scope is room-first or media-first AND user signals simple/easy-service
+  const mediaForward =
+    !wholeHome &&
+    (wantsTvs || wantsTheater || wantsMusic) &&
+    !wantsSecurity &&
+    !wantsClimate &&
+    !wantsShades &&
+    (a.priority === "simple" || a.priority === "easy-service" || hasAva);
+
+  if (mediaForward) {
+    return {
+      title: "AVA + Sonos" + (hasControl4 ? " + Control4" : ""),
+      summary:
+        "A simple, room-first setup focused on TV and audio. AVA gives one physical remote the household can use; Sonos handles the music" +
+        (hasControl4 ? "; your existing Control4 stays in place for anything more advanced." : "."),
+      pieces: [
+        { label: "AVA remote", path: "/platforms/ava" },
+        { label: "Sonos / whole-home audio", path: "/services/audio-entertainment" },
+        ...(wantsTheater
+          ? [{ label: "Media room / theater", path: "/services/audio-entertainment" }]
+          : []),
+        { label: "Home Networking", path: "/services/networking" },
+        ...(hasControl4
+          ? [{ label: "Control4 (keep existing)", path: "/platforms/control4" }]
+          : []),
+      ],
+      notes: [
+        "No lighting scenes or shade control at this level.",
+        "Can be upgraded to Control4 later without replacing TV or audio gear.",
+      ],
+    };
+  }
+
+  // Control4 default — whole-home lighting and control
   const bigScope =
     wholeHome ||
-    (wantsLighting && wantsShades && (wantsTheater || wantsClimate)) ||
+    (wantsLighting && wantsShades) ||
+    wantsTheater ||
+    wantsClimate ||
+    wantsSecurity ||
     hasControl4 ||
     a.priority === "luxury-finish" ||
     a.priority === "builder-ready";
 
   if (bigScope) {
     return {
-      title: "Control4 + Lutron RadioRA3 + Shades",
+      title: "Control4 (lighting + control)",
       summary:
-        "A coordinated system where lighting, shades, audio, climate, and security all live behind one interface. Lutron RadioRA3 runs the lighting and shade hardware; Control4 ties everything together with scenes, keypads, and a single app.",
+        "Control4 as the default for whole-home lighting, scenes, audio, climate, security, and shades — one app, one keypad family across the house.",
       pieces: [
         { label: "Control4 automation", path: "/platforms/control4" },
-        { label: "Lutron RadioRA3", path: "/platforms/lutron-radiora3" },
         ...(wantsShades
           ? [{ label: "Motorized shades", path: "/services/shades" }]
           : []),
@@ -228,56 +285,19 @@ function buildRecommendation(a: Answers): Recommendation {
         existingService && hasControl4
           ? "We can often take over an existing Control4 system without starting from scratch."
           : "Designed to grow one room at a time.",
-        "Works for homes with a property manager or frequent house guests.",
+        "If the home calls for Lutron-grade lighting, we can layer HomeWorks or RadioRA3 in.",
       ],
     };
   }
 
-  // AVA + Sonos (or + Control4 light) for media-forward, simpler homes
-  const mediaForward =
-    (wantsTvs || wantsTheater || wantsMusic) &&
-    !wholeHome &&
-    !wantsSecurity &&
-    (a.priority === "simple" || a.priority === "easy-service" || hasAva || hasSonos);
-
-  if (mediaForward) {
+  // Lighting-first fallback when user wants lighting but didn't trigger anything else
+  if (wantsLighting) {
     return {
-      title: "AVA + Sonos" + (hasControl4 ? " + Control4" : ""),
+      title: "Control4 lighting + a strong network",
       summary:
-        "A simple, family-friendly setup focused on TV and audio. AVA gives you one physical remote that the whole household can actually use; Sonos handles the music in a way guests understand" +
-        (hasControl4 ? "; your existing Control4 stays in place for anything more advanced." : "."),
+        "Start with Control4 lighting and scenes on the rooms you use most. Add audio, shades, or full automation later without replacing what's there.",
       pieces: [
-        { label: "AVA remote", path: "/platforms/ava" },
-        { label: "Sonos / whole-home audio", path: "/services/audio-entertainment" },
-        ...(wantsTheater
-          ? [{ label: "Media room / theater", path: "/services/audio-entertainment" }]
-          : []),
-        { label: "Home Networking", path: "/services/networking" },
-        ...(hasControl4
-          ? [{ label: "Control4 (keep existing)", path: "/platforms/control4" }]
-          : []),
-      ],
-      notes: [
-        "No lighting scenes or shade control included at this level.",
-        "Can be upgraded to Control4 later without replacing the audio or TV gear.",
-      ],
-    };
-  }
-
-  // RadioRA3 + Sonos + strong network — classic lighting-first retrofit
-  const lightingFirst =
-    wantsLighting ||
-    hasLutron ||
-    a.priority === "retrofit-friendly" ||
-    (existingService && !bigScope);
-
-  if (lightingFirst) {
-    return {
-      title: "RadioRA3 + Sonos + a strong network",
-      summary:
-        "A lighting-first retrofit. RadioRA3 brings Sunnata keypads and Lumaris dimming so the house actually dims cleanly and has named scenes on the wall. Sonos handles the music. A proper network underneath keeps everything responsive.",
-      pieces: [
-        { label: "Lutron RadioRA3", path: "/platforms/lutron-radiora3" },
+        { label: "Control4 lighting", path: "/platforms/control4" },
         ...(wantsShades
           ? [{ label: "Motorized shades", path: "/services/shades" }]
           : []),
@@ -287,8 +307,7 @@ function buildRecommendation(a: Answers): Recommendation {
         { label: "Home Networking", path: "/services/networking" },
       ],
       notes: [
-        "Especially good for finished homes where we cannot easily open walls.",
-        "Can be expanded into Control4 later if more automation is wanted.",
+        "Lutron RadioRA3 is an option if you want the Lutron keypad and dimming feel specifically.",
       ],
     };
   }
@@ -378,7 +397,7 @@ const SetupFinder = () => {
             Walk through the options in three minutes.
           </h1>
           <p className="text-white/60 text-base sm:text-lg leading-relaxed mb-4 max-w-2xl hero-subtext-shadow">
-            Six quick questions about the house and how you live in it. We'll suggest a starting point — Lutron HomeWorks, RadioRA3, Control4, AVA, Sonos, or a pre-wire plan if the walls are still open.
+            Six questions about the house. We'll suggest a starting point — Control4, Lutron HomeWorks, RadioRA3, AVA, Sonos, or a pre-wire plan if the walls are still open.
           </p>
           <p className="text-white/40 text-sm italic">
             A starting point, not a final design — the real plan comes from walking the house.
