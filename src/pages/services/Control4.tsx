@@ -73,7 +73,7 @@ const Control4 = () => {
       icon: Home,
       title: "Scenes",
       description:
-        "Morning, Away, Movie, Goodnight — one gesture coordinates lights, music, shades, thermostat, and locks together.",
+        "Goodmorning, Goodbye/Away, Welcome, Movie/Relax, Goodnight — one gesture coordinates lights, music, shades, thermostat, and locks together.",
     },
   ];
 
@@ -376,10 +376,10 @@ const Control4 = () => {
           </h2>
           <div className="space-y-4">
             {[
-              { step: "01", title: "Morning", description: "Primary bedroom keypad lights come up gently, bathroom floor heat is already on, kitchen music starts at low volume, shades rise with the sun." },
-              { step: "02", title: "Leaving the house", description: "One tap on the kitchen keypad turns off lights, drops the thermostat setback, closes blinds in bright rooms, arms the alarm, and locks the doors." },
-              { step: "03", title: "Guests arrive", description: "Welcome scene at the front door brings up entry, great room, and kitchen, fires up background music, and sets the right climate for the room." },
-              { step: "04", title: "Movie Night", description: "One button on the theater remote dims the room, lowers the shades, drops the projector screen, powers the projector, and selects the right input." },
+              { step: "01", title: "Goodmorning", description: "Primary bedroom keypad lights come up gently, bathroom floor heat is already on, kitchen music starts at low volume, shades rise with the sun." },
+              { step: "02", title: "Goodbye/Away", description: "One tap on the kitchen keypad turns off lights, drops the thermostat setback, closes blinds in bright rooms, arms the alarm, and locks the doors." },
+              { step: "03", title: "Welcome", description: "Front-door scene brings up entry, great room, and kitchen, fires up background music, and sets the right climate for the room — the house is already on when guests walk in." },
+              { step: "04", title: "Movie/Relax", description: "One button on the theater remote dims the room, lowers the shades, drops the projector screen, powers the projector, and selects the right input." },
               { step: "05", title: "Goodnight", description: "Primary suite keypad shuts down the rest of the house — lights off, locks set, alarm armed, shades closed, primary bedroom lights fade to sleep." },
             ].map((item, i) => (
               <div

@@ -70,7 +70,7 @@ const LutronRadioRA3 = () => {
       icon: Sparkles,
       title: "Scenes for real life",
       description:
-        "Morning, Cook, Dinner, Movie, Goodnight — one button takes the whole room to the right level. No fiddling with ten dimmers or three apps.",
+        "Goodmorning, Goodbye/Away, Welcome, Movie/Relax, Goodnight — one button takes the whole room to the right level. No fiddling with ten dimmers or three apps.",
     },
     {
       icon: Smartphone,
@@ -152,33 +152,33 @@ const LutronRadioRA3 = () => {
   const everydayScenes = [
     {
       step: "01",
-      title: "Morning",
+      title: "Goodmorning",
       description:
         "Bathroom comes up gently, kitchen lights warm to a friendly level, exterior pathway lights fade as the sun rises over the valley. No tapping, no app.",
     },
     {
       step: "02",
-      title: "Cook",
+      title: "Goodbye/Away",
       description:
-        "One button on the kitchen keypad — under-cabinet on, island down a notch, dining at a soft glow, music optional. The room is set before the burner is lit.",
+        "One tap on the way out the door. House goes dark, exterior keeps a vacation pattern, and the Lutron app shows the state of every room from anywhere.",
     },
     {
       step: "03",
-      title: "Movie",
+      title: "Welcome",
+      description:
+        "Front-door keypad brings the entry, great room, and kitchen up to the right level — guests walk into a house that already feels lived in, not a dark foyer fumbling for switches.",
+    },
+    {
+      step: "04",
+      title: "Movie/Relax",
       description:
         "Great-room scene drops the cans, holds the wall sconces low, brings the shades down, and leaves a step-light on for the kitchen run.",
     },
     {
-      step: "04",
+      step: "05",
       title: "Goodnight",
       description:
         "Primary suite keypad shuts the house down — interior lights off, exterior on a low security level, shades closed, primary bedroom fades to sleep.",
-    },
-    {
-      step: "05",
-      title: "Away",
-      description:
-        "One tap on the way out the door. House goes dark, exterior keeps a vacation pattern, and the Lutron app shows the state of every room from anywhere.",
     },
   ];
 
