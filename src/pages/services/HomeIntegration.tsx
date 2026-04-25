@@ -140,9 +140,9 @@ const HomeIntegration = () => {
           <h2 className="text-2xl sm:text-3xl font-bold text-white mb-8">Related Services</h2>
           <div className="grid sm:grid-cols-3 gap-5">
             {[
-              { title: "Control4", description: "Dedicated deep-dive on Control4 — new builds, fixes to inherited systems, and homeowner training.", path: "/services/control4" },
-              { title: "Lutron RadioRA3", description: "The lighting layer we most often pair with Control4 for larger Vail Valley homes.", path: "/services/lutron-radiora3" },
-              { title: "AVA Smart Remote", description: "When a single remote for TV and audio is enough on its own.", path: "/services/ava" },
+              { title: "Control4", description: "Dedicated deep-dive on Control4 — new builds, fixes to inherited systems, and homeowner training.", path: "/platforms/control4" },
+              { title: "Lutron RadioRA3", description: "The lighting layer we most often pair with Control4 for larger Vail Valley homes.", path: "/platforms/lutron-radiora3" },
+              { title: "AVA Smart Remote", description: "When a single remote for TV and audio is enough on its own.", path: "/platforms/ava" },
               { title: "Audio & Entertainment", description: "Multi-room audio and home theater controlled from your Control4 system.", path: "/services/audio-entertainment" },
               { title: "Smart Lighting", description: "Keypads and automated scenes that integrate seamlessly with Control4.", path: "/services/smart-lighting" },
               { title: "Not sure what you need?", description: "Answer a few questions and get a starting recommendation.", path: "/setup-finder" },

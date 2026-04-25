@@ -138,9 +138,9 @@ const SmartLighting = () => {
           <h2 className="text-2xl sm:text-3xl font-bold text-white mb-8">Related Services</h2>
           <div className="grid sm:grid-cols-2 gap-5">
             {[
-              { title: "Lutron RadioRA3", description: "Our most-installed lighting platform — deeper dive into keypads, dimmers, and scene programming.", path: "/services/lutron-radiora3" },
+              { title: "Lutron RadioRA3", description: "Our most-installed lighting platform — deeper dive into keypads, dimmers, and scene programming.", path: "/platforms/lutron-radiora3" },
               { title: "Motorized Shades", description: "Lighting and shades that work together for perfect ambiance, privacy, and energy savings.", path: "/services/shades" },
-              { title: "Control4", description: "When lighting, audio, climate, and shades should all live behind one interface.", path: "/services/control4" },
+              { title: "Control4", description: "When lighting, audio, climate, and shades should all live behind one interface.", path: "/platforms/control4" },
               { title: "Not sure what you need?", description: "Answer a few questions and we will suggest a starting point for your home.", path: "/setup-finder" },
             ].map((s, i) => (
               <Link key={i} to={s.path} className="group flex items-start justify-between gap-4 p-5 rounded-xl border border-white/8 bg-black/40 backdrop-blur-sm hover:border-accent/30 transition-colors">
