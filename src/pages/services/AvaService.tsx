@@ -12,6 +12,10 @@ import {
   CheckCircle2,
   Sparkles,
   Users,
+  Wifi,
+  Hammer,
+  Wrench,
+  GraduationCap,
 } from "lucide-react";
 import { useState } from "react";
 import Header from "../../components/Header";
@@ -34,74 +38,153 @@ const AvaService = () => {
     "areaServed": "Vail Valley, Colorado",
   };
 
-  const whatAvaDoes = [
+  // What AVA offers — moved up to right after the hero. Covers
+  // Cinema Remote, Home Remote, AVA OS, Flows, and IP/IR control,
+  // per the page-flow spec.
+  const whatYouGet = [
     {
       icon: Tv,
-      title: "One remote, every screen",
+      title: "Cinema Remote",
       description:
-        "TV, receiver, Apple TV, cable box, soundbar — all behind one elegant remote. No more guessing which of five wands turns the TV on.",
+        "For TV rooms, media rooms, and theaters. Single-piece aluminum, runs AVA OS directly with a built-in processor — often no extra rack hardware needed.",
     },
     {
-      icon: Volume2,
-      title: "Whole-home audio, simply",
+      icon: Home,
+      title: "Home Remote",
       description:
-        "Start music in the kitchen, move it to the deck, drop the volume in the bedroom. AVA pairs cleanly with Sonos and Control4 audio.",
+        "For rooms without a TV — kitchens, primary bedrooms, outdoor living. Controls lighting scenes, audio zones, and shades through the same AVA OS.",
     },
     {
-      icon: Film,
-      title: "Media rooms & theaters",
+      icon: Sparkles,
+      title: "AVA OS",
       description:
-        "Movie Night lowers the shades, dims the lights, fires up the projector, and selects the right input. One button, every time.",
+        "The operating system that makes complex systems feel simple. Same consistent, family-friendly experience on every AVA remote in the house.",
     },
     {
       icon: Users,
-      title: "Guest-friendly",
+      title: "AVA Flows",
       description:
-        "Designed to be handed to a houseguest, a kid, or a property manager without a fifteen-minute tutorial.",
-    },
-  ];
-
-  const replacesClutter = [
-    {
-      title: "The coffee table graveyard",
-      description:
-        "Three or four dusty remotes, one of them always missing a battery. AVA consolidates them into one.",
+        "Visual automation without writing code. Link a button press to a sequence — shades down, lights dim, TV on, receiver to the right input.",
     },
     {
-      title: "The 'which input was it again'",
+      icon: Wifi,
+      title: "IP control for 10,000+ devices",
       description:
-        "Watching a movie should not require remembering HDMI 2 vs HDMI 4. AVA switches inputs as part of a scene, not a separate step.",
+        "AVA talks to most modern gear over IP — TVs, receivers, streamers, projectors, audio platforms. Faster, more reliable, and with two-way feedback.",
     },
     {
-      title: "The app-in-every-room problem",
+      icon: Volume2,
+      title: "IR control for 60,000+ devices",
       description:
-        "One app for Sonos, another for the TV, another for shades. AVA hands the everyday stuff to a physical remote so the app is optional.",
+        "Older TVs, receivers, and cable boxes still work. Almost anything in the rack or on the wall is controllable, even legacy gear.",
     },
     {
-      title: "The 'nobody else can use the system'",
+      icon: Film,
+      title: "Movie Night, one button",
       description:
-        "If the owner is the only person in the house who can turn the TV on, the system has failed. AVA fixes that.",
-    },
-  ];
-
-  const whenAva = [
-    {
-      title: "When AVA makes sense",
-      description:
-        "Primarily a media and audio house. One or two TVs, a media room or theater, whole-home audio. You want simple, physical control without committing to a full Control4 system.",
-      icon: Sparkles,
+        "Lowers the shades, dims the lights, fires up the projector or TV, selects the right input, sets receiver volume — every time, the same way.",
     },
     {
-      title: "When Control4 makes sense",
-      description:
-        "Lighting scenes, shades, climate, and security all need to live behind the same interface. Larger homes, more systems, more integration — Control4 handles more layers than AVA was built for.",
-      icon: Home,
-    },
-    {
-      title: "When Sonos alone is enough",
-      description:
-        "Audio-only, no theater, no coordinated TV control. Sonos on its own with the Sonos app is often the right answer and we will say so.",
       icon: Music,
+      title: "Whole-home audio integration",
+      description:
+        "Pairs cleanly with Sonos and Control4 audio. Start music in the kitchen, move it to the deck, drop the volume in the bedroom — without three apps.",
+    },
+  ];
+
+  const bestFit = [
+    {
+      title: "Media-forward homes",
+      description:
+        "One or two TVs, a media room or theater, whole-home audio. AVA gives you simple, physical control without committing to a full Control4 system.",
+    },
+    {
+      title: "Houses where guests need to use the system",
+      description:
+        "If the owner is the only person in the house who can turn the TV on, the system has failed. AVA is designed to be handed to anyone.",
+    },
+    {
+      title: "Replacing aging universal remotes",
+      description:
+        "Harmony, Logitech, and other legacy universal remotes with broken databases and flaky IR are one of the main reasons homeowners call us about AVA.",
+    },
+    {
+      title: "Smaller footprints alongside Lutron",
+      description:
+        "Lutron RadioRA3 handles the lighting and shades, AVA handles the TV and audio. Two clean systems instead of one large one.",
+    },
+  ];
+
+  const componentPills = [
+    "AVA Cinema Remote",
+    "AVA Home Remote",
+    "AVA OS",
+    "AVA Flows",
+    "Charging cradle",
+    "IP control",
+    "IR blasters",
+    "Sonos integration",
+    "Control4 integration",
+    "Lutron integration",
+    "Apple TV",
+    "Roku",
+    "Receivers",
+    "Projectors",
+    "Soundbars",
+    "TVs",
+  ];
+
+  const everydayScenarios = [
+    {
+      step: "01",
+      title: "Movie Night",
+      description:
+        "One button on the Cinema Remote — shades down, lights dim, projector on, receiver to the right input, Apple TV ready. The room is set before the popcorn is.",
+    },
+    {
+      step: "02",
+      title: "Game day",
+      description:
+        "Living room scene: TV on, cable to the right channel, surround sound up, kitchen audio synced for the half-time crowd. Hand the remote to whoever is closest.",
+    },
+    {
+      step: "03",
+      title: "Dinner",
+      description:
+        "Home Remote in the kitchen drops the dining lights, raises the great room a notch, starts a Sonos playlist on the deck and inside. No phones.",
+    },
+    {
+      step: "04",
+      title: "Goodnight",
+      description:
+        "Last button of the night turns off the TV stack, mutes the receiver properly, and tells the lighting system the family is done. Even the kids can run it.",
+    },
+  ];
+
+  const symphonyProcess = [
+    {
+      icon: Hammer,
+      title: "Walk the room with you",
+      description:
+        "We start in the actual room — TV wall, gear rack, seating. The remote layout is built around how you watch, not a generic template.",
+    },
+    {
+      icon: Wrench,
+      title: "Pair AVA to existing gear",
+      description:
+        "Existing TV, receiver, Apple TV, soundbar, Sonos, or projector — we pair AVA to what is already there. No rip and replace unless something is actually broken.",
+    },
+    {
+      icon: Sparkles,
+      title: "Build the scenes that matter",
+      description:
+        "Movie Night, Game Day, Goodnight, Music — each scene tuned to your gear, your room, and your habits. Refined after the family lives with it for a week or two.",
+    },
+    {
+      icon: GraduationCap,
+      title: "Hand it off properly",
+      description:
+        "Walk-through with the family. We show the spouse, the kids, and the houseguests how the remote works, and leave a one-page cheat sheet on the counter.",
     },
   ];
 
@@ -160,7 +243,7 @@ const AvaService = () => {
       />
       <Header />
 
-      {/* Hero */}
+      {/* 1. Hero */}
       <section className="pt-36 sm:pt-44 pb-16 sm:pb-20 px-4 sm:px-6">
         <div className="max-w-4xl mx-auto">
           <Link
@@ -200,17 +283,20 @@ const AvaService = () => {
 
       <div className="hero-divider w-full" />
 
-      {/* What AVA Does */}
+      {/* 2. What AVA Offers — moved up from middle of page */}
       <section className="py-16 sm:py-24 px-4 sm:px-6 bg-black/20 backdrop-blur-sm border-y border-white/5">
         <div className="max-w-5xl mx-auto">
           <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">
-            What AVA Does
+            What AVA Offers
           </p>
-          <h2 className="text-2xl sm:text-3xl font-bold text-white mb-10">
-            Simple media control, done properly.
+          <h2 className="text-2xl sm:text-3xl font-bold text-white mb-5">
+            Cinema Remote, Home Remote, AVA OS, and Flows — one clean design.
           </h2>
-          <div className="grid sm:grid-cols-2 gap-5">
-            {whatAvaDoes.map((item, i) => (
+          <p className="text-white/60 text-base leading-relaxed mb-10 max-w-3xl">
+            AVA runs on Swiss-designed, single-piece aluminum remotes. Cinema Remote handles TV rooms with a built-in processor. Home Remote covers rooms without a TV. AVA OS keeps the experience consistent across the house. AVA Flows builds the scenes.
+          </p>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+            {whatYouGet.map((item, i) => (
               <div
                 key={i}
                 className="bg-black/40 backdrop-blur-sm border border-white/8 rounded-xl p-6"
@@ -218,7 +304,7 @@ const AvaService = () => {
                 <div className="w-10 h-10 rounded-lg bg-accent/10 flex items-center justify-center mb-3">
                   <item.icon className="w-5 h-5 text-accent" />
                 </div>
-                <h3 className="text-white font-semibold text-lg mb-2">
+                <h3 className="text-white font-semibold text-base mb-2">
                   {item.title}
                 </h3>
                 <p className="text-white/50 text-sm leading-relaxed">
@@ -230,17 +316,17 @@ const AvaService = () => {
         </div>
       </section>
 
-      {/* Replaces the clutter */}
+      {/* 3. Best Fit */}
       <section className="py-16 sm:py-24 px-4 sm:px-6">
         <div className="max-w-4xl mx-auto">
           <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">
-            What AVA Replaces
+            Best Fit
           </p>
           <h2 className="text-2xl sm:text-3xl font-bold text-white mb-10">
-            The clutter goes away.
+            Where AVA is the right answer.
           </h2>
           <div className="grid sm:grid-cols-2 gap-5">
-            {replacesClutter.map((item, i) => (
+            {bestFit.map((item, i) => (
               <div
                 key={i}
                 className="flex gap-4 p-5 rounded-xl border border-white/8 bg-black/40 backdrop-blur-sm"
@@ -258,45 +344,72 @@ const AvaService = () => {
         </div>
       </section>
 
-      {/* AVA hardware & OS */}
+      {/* 4. Devices / Components */}
+      <section className="py-16 sm:py-24 px-4 sm:px-6 bg-black/20 backdrop-blur-sm border-y border-white/5">
+        <div className="max-w-4xl mx-auto">
+          <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">
+            Devices & Components
+          </p>
+          <h2 className="text-2xl sm:text-3xl font-bold text-white mb-5">
+            What ends up in the room.
+          </h2>
+          <p className="text-white/60 text-base leading-relaxed mb-8 max-w-2xl">
+            A short, clean rack and one or two remotes per room — that is usually all the gear you see.
+          </p>
+          <div className="flex flex-wrap gap-2">
+            {componentPills.map((pill) => (
+              <span
+                key={pill}
+                className="px-3 py-1.5 rounded-full border border-white/10 bg-black/40 backdrop-blur-sm text-white/70 text-xs sm:text-sm"
+              >
+                {pill}
+              </span>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* 5. Everyday Scenarios */}
+      <section className="py-16 sm:py-24 px-4 sm:px-6">
+        <div className="max-w-4xl mx-auto">
+          <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">
+            Everyday Scenarios
+          </p>
+          <h2 className="text-2xl sm:text-3xl font-bold text-white mb-10">
+            What the day looks like.
+          </h2>
+          <div className="space-y-4">
+            {everydayScenarios.map((item, i) => (
+              <div
+                key={i}
+                className="flex gap-5 p-5 rounded-xl border border-white/8 bg-black/40 backdrop-blur-sm"
+              >
+                <span className="text-accent font-semibold text-sm shrink-0 w-8">
+                  {item.step}
+                </span>
+                <div>
+                  <h3 className="text-white font-semibold mb-1">{item.title}</h3>
+                  <p className="text-white/50 text-sm leading-relaxed">
+                    {item.description}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* 6. How Symphony Sets It Up */}
       <section className="py-16 sm:py-24 px-4 sm:px-6 bg-black/20 backdrop-blur-sm border-y border-white/5">
         <div className="max-w-5xl mx-auto">
           <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">
-            AVA Hardware & OS
+            How Symphony Sets It Up
           </p>
-          <h2 className="text-2xl sm:text-3xl font-bold text-white mb-5">
-            Two remotes, one operating system, one clean design language.
+          <h2 className="text-2xl sm:text-3xl font-bold text-white mb-10">
+            Tuned to your gear, your room, your family.
           </h2>
-          <p className="text-white/60 text-base leading-relaxed mb-10 max-w-3xl">
-            AVA runs on Swiss-designed, single-piece aluminum remotes. The Cinema Remote has a built-in processor and runs AVA OS directly — no separate box required in many rooms. The Home Remote covers rooms without a TV.
-          </p>
-          <div className="grid md:grid-cols-2 gap-5">
-            {[
-              {
-                icon: Tv,
-                title: "Cinema Remote",
-                description:
-                  "For TV rooms, media rooms, and theaters. Runs AVA OS directly with a built-in processor. IP control for 10,000+ devices and IR for 60,000+ — almost any TV, receiver, streamer, or projector.",
-              },
-              {
-                icon: Home,
-                title: "Home Remote",
-                description:
-                  "For rooms without a TV — kitchens, primary bedrooms, outdoor living. Controls lighting scenes, audio zones, and shades through the same AVA OS interface.",
-              },
-              {
-                icon: Sparkles,
-                title: "AVA OS",
-                description:
-                  "The operating system that makes complex systems feel simple and connected. Consistent, clean, and family-friendly — the same experience on every AVA remote in the house.",
-              },
-              {
-                icon: Users,
-                title: "AVA Flows",
-                description:
-                  "Simple automation without writing code. Link a button press to a sequence of actions — shades down, lights dim, TV on, receiver to the right input — using AVA's visual flow builder.",
-              },
-            ].map((item, i) => (
+          <div className="grid sm:grid-cols-2 gap-5">
+            {symphonyProcess.map((item, i) => (
               <div
                 key={i}
                 className="bg-black/40 backdrop-blur-sm border border-white/8 rounded-xl p-6"
@@ -313,49 +426,60 @@ const AvaService = () => {
               </div>
             ))}
           </div>
-          <div className="mt-8 p-5 rounded-xl border border-white/8 bg-black/40 backdrop-blur-sm">
-            <p className="text-white/55 text-sm leading-relaxed">
-              <span className="text-white font-semibold">IP and IR, covered.</span>{" "}
-              AVA talks to most modern gear over IP — 10,000+ supported devices — and still reaches older TVs, receivers, and cable boxes over IR with support for 60,000+ devices. In practice, almost anything in the rack or on the wall is controllable.
-            </p>
-          </div>
         </div>
       </section>
 
-      {/* When AVA vs Control4 vs Sonos */}
+      {/* 7. Compare / Choose */}
       <section className="py-16 sm:py-24 px-4 sm:px-6">
-        <div className="max-w-5xl mx-auto">
+        <div className="max-w-4xl mx-auto">
           <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">
-            Right Fit
+            AVA vs Control4 vs Sonos alone
           </p>
           <h2 className="text-2xl sm:text-3xl font-bold text-white mb-5">
-            AVA vs Control4 vs Sonos alone.
+            Three honest options.
           </h2>
-          <p className="text-white/60 text-base leading-relaxed mb-10 max-w-3xl">
+          <p className="text-white/60 text-base leading-relaxed mb-8 max-w-3xl">
             We install all three. The right choice depends on how much of the house you actually want automated, and how often other people need to use it.
           </p>
-          <div className="grid md:grid-cols-3 gap-5">
-            {whenAva.map((item, i) => (
-              <div
-                key={i}
-                className="bg-black/40 backdrop-blur-sm border border-white/8 rounded-xl p-6"
-              >
-                <div className="w-10 h-10 rounded-lg bg-accent/10 flex items-center justify-center mb-3">
-                  <item.icon className="w-5 h-5 text-accent" />
-                </div>
-                <h3 className="text-white font-semibold text-lg mb-2">
-                  {item.title}
-                </h3>
-                <p className="text-white/50 text-sm leading-relaxed">
-                  {item.description}
-                </p>
-              </div>
-            ))}
+          <div className="grid sm:grid-cols-3 gap-5 mb-6">
+            <div className="bg-black/40 backdrop-blur-sm border border-accent/30 rounded-xl p-6">
+              <p className="text-accent text-xs font-semibold uppercase tracking-wide mb-2">You are here</p>
+              <h3 className="text-white font-semibold text-lg mb-2">AVA</h3>
+              <p className="text-white/55 text-sm leading-relaxed">
+                Premium remote and media control. Right when the house is mostly TV, theater, and audio without committing to a full automation system.
+              </p>
+            </div>
+            <Link
+              to="/platforms/control4"
+              className="group bg-black/40 backdrop-blur-sm border border-white/8 rounded-xl p-6 hover:border-accent/30 transition-colors"
+            >
+              <p className="text-white/40 text-xs font-semibold uppercase tracking-wide mb-2">Whole-home automation</p>
+              <h3 className="text-white font-semibold text-lg mb-2 group-hover:text-accent transition-colors">Control4</h3>
+              <p className="text-white/55 text-sm leading-relaxed mb-4">
+                When lighting, shades, climate, and security all need to live behind the same interface.
+              </p>
+              <span className="inline-flex items-center gap-1 text-accent text-sm font-medium group-hover:gap-2 transition-all">
+                Explore Control4 <ArrowRight className="w-3.5 h-3.5" />
+              </span>
+            </Link>
+            <div className="bg-black/40 backdrop-blur-sm border border-white/8 rounded-xl p-6">
+              <p className="text-white/40 text-xs font-semibold uppercase tracking-wide mb-2">Audio only</p>
+              <h3 className="text-white font-semibold text-lg mb-2">Sonos alone</h3>
+              <p className="text-white/55 text-sm leading-relaxed">
+                Audio-only, no theater, no coordinated TV control. Sonos on its own with the Sonos app is often the right answer and we will say so.
+              </p>
+            </div>
           </div>
+          <Link
+            to="/setup-finder"
+            className="inline-flex items-center gap-2 text-accent text-sm font-medium hover:gap-3 transition-all"
+          >
+            Not sure which one? Try the Setup Finder <ArrowRight className="w-4 h-4" />
+          </Link>
         </div>
       </section>
 
-      {/* FAQ */}
+      {/* 8. FAQ */}
       <section className="py-16 sm:py-24 px-4 sm:px-6 bg-black/20 backdrop-blur-sm border-y border-white/5">
         <div className="max-w-3xl mx-auto">
           <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">
@@ -397,7 +521,7 @@ const AvaService = () => {
         </div>
       </section>
 
-      {/* Final CTA */}
+      {/* 9. Final CTA */}
       <section className="py-16 sm:py-24 px-4 sm:px-6">
         <div className="max-w-3xl mx-auto text-center">
           <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">
@@ -483,7 +607,7 @@ const AvaService = () => {
       </section>
 
       {/* Trademark */}
-      <section className="px-4 sm:px-6 pb-10">
+      <section className="px-4 sm:px-6 pb-10 pt-10">
         <div className="max-w-4xl mx-auto">
           <p className="text-white/35 text-xs leading-relaxed">
             AVA and related trade dress and logos are trademarks of their respective owners. Sonos is a registered trademark of Sonos, Inc. Control4 is a trademark of Snap One, LLC. Symphony Smart Homes is an independent smart-home integration company.

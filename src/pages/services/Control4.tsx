@@ -228,15 +228,18 @@ const Control4 = () => {
 
       <div className="hero-divider w-full" />
 
-      {/* Pillars */}
+      {/* 3. What Control4 Brings Together — right after hero */}
       <section className="py-16 sm:py-24 px-4 sm:px-6 bg-black/20 backdrop-blur-sm border-y border-white/5">
         <div className="max-w-5xl mx-auto">
           <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">
-            What Control4 Controls
+            What Control4 Brings Together
           </p>
-          <h2 className="text-2xl sm:text-3xl font-bold text-white mb-10">
+          <h2 className="text-2xl sm:text-3xl font-bold text-white mb-5">
             One system. Every layer of the house.
           </h2>
+          <p className="text-white/60 text-base leading-relaxed mb-10 max-w-3xl">
+            Control4 unifies lighting, audio and video, climate, security, locks, network gear, and shades behind one consistent interface — on phones, touchscreens, wall keypads, and handheld remotes.
+          </p>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
             {pillars.map((item, i) => (
               <div
@@ -258,41 +261,11 @@ const Control4 = () => {
         </div>
       </section>
 
-      {/* Services / What we do */}
+      {/* 4. Best Fit */}
       <section className="py-16 sm:py-24 px-4 sm:px-6">
-        <div className="max-w-5xl mx-auto">
-          <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">
-            What We Do
-          </p>
-          <h2 className="text-2xl sm:text-3xl font-bold text-white mb-10">
-            From blank walls to a working system.
-          </h2>
-          <div className="grid sm:grid-cols-2 gap-5">
-            {services.map((item, i) => (
-              <div
-                key={i}
-                className="bg-black/40 backdrop-blur-sm border border-white/8 rounded-xl p-6"
-              >
-                <div className="w-10 h-10 rounded-lg bg-accent/10 flex items-center justify-center mb-3">
-                  <item.icon className="w-5 h-5 text-accent" />
-                </div>
-                <h3 className="text-white font-semibold text-lg mb-2">
-                  {item.title}
-                </h3>
-                <p className="text-white/50 text-sm leading-relaxed">
-                  {item.description}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Why Control4 */}
-      <section className="py-16 sm:py-24 px-4 sm:px-6 bg-black/20 backdrop-blur-sm border-y border-white/5">
         <div className="max-w-4xl mx-auto">
           <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">
-            Why Control4
+            Best Fit
           </p>
           <h2 className="text-2xl sm:text-3xl font-bold text-white mb-10">
             Why we recommend it for larger homes.
@@ -316,8 +289,8 @@ const Control4 = () => {
         </div>
       </section>
 
-      {/* Control surfaces */}
-      <section className="py-16 sm:py-24 px-4 sm:px-6">
+      {/* 5. Control surfaces — system pieces */}
+      <section className="py-16 sm:py-24 px-4 sm:px-6 bg-black/20 backdrop-blur-sm border-y border-white/5">
         <div className="max-w-4xl mx-auto">
           <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">
             Control Surfaces
@@ -328,7 +301,7 @@ const Control4 = () => {
           <p className="text-white/60 text-base leading-relaxed mb-8 max-w-3xl">
             Control4 lives on phones, dedicated touchscreens, wall keypads, and handheld remotes — so guests, kids, housekeepers, and the homeowner all have an interface that fits how they actually use the room.
           </p>
-          <div className="grid sm:grid-cols-2 gap-5">
+          <div className="grid sm:grid-cols-2 gap-5 mb-10">
             {[
               { title: "Phones & tablets", description: "The Control4 app on iOS and Android, with remote access from anywhere." },
               { title: "Dedicated touchscreens", description: "In-wall and tabletop touchscreens for kitchens, primary bedrooms, and entry halls." },
@@ -349,20 +322,11 @@ const Control4 = () => {
               </div>
             ))}
           </div>
-        </div>
-      </section>
-
-      {/* Common integrations */}
-      <section className="py-16 sm:py-24 px-4 sm:px-6 bg-black/20 backdrop-blur-sm border-y border-white/5">
-        <div className="max-w-4xl mx-auto">
-          <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">
-            Common Integrations
+          <p className="text-accent font-medium text-sm tracking-wide uppercase mb-3">
+            Plays Well With
           </p>
-          <h2 className="text-2xl sm:text-3xl font-bold text-white mb-5">
-            Plays well with the rest of the house.
-          </h2>
-          <p className="text-white/60 text-base leading-relaxed mb-8 max-w-3xl">
-            Control4 is compatible with 25,000+ third-party devices. Most of the brands already in the house are supported natively, so the existing gear keeps working instead of going in the bin.
+          <p className="text-white/55 text-sm leading-relaxed mb-5 max-w-3xl">
+            Compatible with 25,000+ third-party devices — most of the brands already in the house are supported natively.
           </p>
           <div className="flex flex-wrap gap-2">
             {[
@@ -401,11 +365,11 @@ const Control4 = () => {
         </div>
       </section>
 
-      {/* Customer scenarios */}
+      {/* 6. Everyday Scenarios */}
       <section className="py-16 sm:py-24 px-4 sm:px-6">
         <div className="max-w-4xl mx-auto">
           <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">
-            Customer Scenarios
+            Everyday Scenarios
           </p>
           <h2 className="text-2xl sm:text-3xl font-bold text-white mb-10">
             What the day looks like.
@@ -434,6 +398,105 @@ const Control4 = () => {
               </div>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* 7. How Symphony Sets It Up */}
+      <section className="py-16 sm:py-24 px-4 sm:px-6 bg-black/20 backdrop-blur-sm border-y border-white/5">
+        <div className="max-w-5xl mx-auto">
+          <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">
+            How Symphony Sets It Up
+          </p>
+          <h2 className="text-2xl sm:text-3xl font-bold text-white mb-10">
+            From blank walls to a working system.
+          </h2>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+            {services.map((item, i) => (
+              <div
+                key={i}
+                className="bg-black/40 backdrop-blur-sm border border-white/8 rounded-xl p-6"
+              >
+                <div className="w-10 h-10 rounded-lg bg-accent/10 flex items-center justify-center mb-3">
+                  <item.icon className="w-5 h-5 text-accent" />
+                </div>
+                <h3 className="text-white font-semibold text-lg mb-2">
+                  {item.title}
+                </h3>
+                <p className="text-white/50 text-sm leading-relaxed">
+                  {item.description}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* 8. Compare / Choose */}
+      <section className="py-16 sm:py-24 px-4 sm:px-6">
+        <div className="max-w-4xl mx-auto">
+          <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">
+            Compare Platforms
+          </p>
+          <h2 className="text-2xl sm:text-3xl font-bold text-white mb-5">
+            Control4, RadioRA3, HomeWorks, or AVA?
+          </h2>
+          <p className="text-white/60 text-base leading-relaxed mb-8 max-w-3xl">
+            Control4 is the whole-home automation layer. Lutron sits underneath for lighting and shades. AVA is the simpler choice when the house is mostly about media and TV. We install all of them and will tell you what fits.
+          </p>
+          <div className="grid sm:grid-cols-2 gap-5 mb-6">
+            <div className="bg-black/40 backdrop-blur-sm border border-accent/30 rounded-xl p-6">
+              <p className="text-accent text-xs font-semibold uppercase tracking-wide mb-2">You are here</p>
+              <h3 className="text-white font-semibold text-lg mb-2">Control4</h3>
+              <p className="text-white/55 text-sm leading-relaxed">
+                Whole-home automation tying lighting, audio, climate, security, and shades together. Best when more than two systems need to live behind one interface.
+              </p>
+            </div>
+            <Link
+              to="/platforms/lutron-radiora3"
+              className="group bg-black/40 backdrop-blur-sm border border-white/8 rounded-xl p-6 hover:border-accent/30 transition-colors"
+            >
+              <p className="text-white/40 text-xs font-semibold uppercase tracking-wide mb-2">Lighting platform</p>
+              <h3 className="text-white font-semibold text-lg mb-2 group-hover:text-accent transition-colors">RadioRA3</h3>
+              <p className="text-white/55 text-sm leading-relaxed mb-4">
+                Lutron's wireless lighting and shade platform. Often runs underneath Control4 in our installs.
+              </p>
+              <span className="inline-flex items-center gap-1 text-accent text-sm font-medium group-hover:gap-2 transition-all">
+                Explore RadioRA3 <ArrowRight className="w-3.5 h-3.5" />
+              </span>
+            </Link>
+            <Link
+              to="/platforms/lutron-homeworks"
+              className="group bg-black/40 backdrop-blur-sm border border-white/8 rounded-xl p-6 hover:border-accent/30 transition-colors"
+            >
+              <p className="text-white/40 text-xs font-semibold uppercase tracking-wide mb-2">Flagship lighting</p>
+              <h3 className="text-white font-semibold text-lg mb-2 group-hover:text-accent transition-colors">HomeWorks</h3>
+              <p className="text-white/55 text-sm leading-relaxed mb-4">
+                Lutron's flagship platform for architectural homes. Control4 often sits on top for whole-home automation.
+              </p>
+              <span className="inline-flex items-center gap-1 text-accent text-sm font-medium group-hover:gap-2 transition-all">
+                Explore HomeWorks <ArrowRight className="w-3.5 h-3.5" />
+              </span>
+            </Link>
+            <Link
+              to="/platforms/ava"
+              className="group bg-black/40 backdrop-blur-sm border border-white/8 rounded-xl p-6 hover:border-accent/30 transition-colors"
+            >
+              <p className="text-white/40 text-xs font-semibold uppercase tracking-wide mb-2">Media remote</p>
+              <h3 className="text-white font-semibold text-lg mb-2 group-hover:text-accent transition-colors">AVA</h3>
+              <p className="text-white/55 text-sm leading-relaxed mb-4">
+                Premium remote and media control. Right when the house is mostly TV and audio without full automation.
+              </p>
+              <span className="inline-flex items-center gap-1 text-accent text-sm font-medium group-hover:gap-2 transition-all">
+                Explore AVA <ArrowRight className="w-3.5 h-3.5" />
+              </span>
+            </Link>
+          </div>
+          <Link
+            to="/setup-finder"
+            className="inline-flex items-center gap-2 text-accent text-sm font-medium hover:gap-3 transition-all"
+          >
+            Not sure which one? Try the Setup Finder <ArrowRight className="w-4 h-4" />
+          </Link>
         </div>
       </section>
 
