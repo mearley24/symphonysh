@@ -74,7 +74,7 @@ const Footer = () => {
               </li>
               <li>
                 <Link to="/scheduling" className="text-white/40 hover:text-white/70 text-sm transition-colors">
-                  Schedule a Consultation
+                  Schedule a Walkthrough
                 </Link>
               </li>
             </ul>

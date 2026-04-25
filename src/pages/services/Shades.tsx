@@ -63,11 +63,11 @@ const Shades = () => {
             <div className="w-11 h-11 rounded-lg bg-accent/10 flex items-center justify-center"><Sun className="w-5 h-5 text-accent" /></div>
             <p className="text-accent font-medium text-sm tracking-wide uppercase">Motorized Shades</p>
           </div>
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight mb-5 text-white hero-text-shadow">Shades that move with your day.</h1>
-          <p className="text-white/60 text-base sm:text-lg leading-relaxed mb-8 max-w-2xl hero-subtext-shadow">Motorized window treatments that open with your morning routine, block afternoon glare, and close at sunset — all automatically. Controlled from the wall, your phone, or your voice.</p>
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight mb-5 text-white hero-text-shadow">Shades that follow the sun without anyone noticing.</h1>
+          <p className="text-white/60 text-base sm:text-lg leading-relaxed mb-8 max-w-2xl hero-subtext-shadow">Lutron Triathlon Select for clean retrofits, Palladiom for architectural homes, and Sivoia QS where the design calls for it. Open with the morning scene, drop for afternoon glare, close on a sunset schedule — paired with the same keypads that run the lights.</p>
           <div className="flex flex-col sm:flex-row gap-3">
-            <Link to="/scheduling?service=shades" className="inline-flex items-center justify-center gap-2 bg-accent hover:bg-accent/90 text-white px-7 py-4 rounded-lg font-medium transition-colors text-base">Schedule a Consultation <ArrowRight className="w-4 h-4" /></Link>
-            <a href="tel:+19705193013" className="inline-flex items-center justify-center gap-2 border border-white/20 hover:border-white/40 hover:bg-white/5 text-white px-7 py-4 rounded-lg font-medium transition-colors text-base"><Phone className="w-4 h-4" /> Call Now</a>
+            <Link to="/scheduling?service=shades" className="inline-flex items-center justify-center gap-2 bg-accent hover:bg-accent/90 text-white px-7 py-4 rounded-lg font-medium transition-colors text-base">Schedule a Walkthrough <ArrowRight className="w-4 h-4" /></Link>
+            <a href="tel:+19705193013" className="inline-flex items-center justify-center gap-2 border border-white/20 hover:border-white/40 hover:bg-white/5 text-white px-7 py-4 rounded-lg font-medium transition-colors text-base"><Phone className="w-4 h-4" /> (970) 519-3013</a>
           </div>
         </div>
       </section>
@@ -76,8 +76,8 @@ const Shades = () => {
 
       <section className="py-16 sm:py-24 px-4 sm:px-6 bg-black/20 backdrop-blur-sm border-y border-white/5">
         <div className="max-w-4xl mx-auto">
-          <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">What We Install</p>
-          <h2 className="text-2xl sm:text-3xl font-bold text-white mb-10">Shade solutions</h2>
+          <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">The Shading Layer</p>
+          <h2 className="text-2xl sm:text-3xl font-bold text-white mb-10">Triathlon Select, Palladiom, Sivoia — picked for the room.</h2>
           <div className="grid sm:grid-cols-2 gap-5">
             {capabilities.map((item, i) => (
               <div key={i} className="bg-black/40 backdrop-blur-sm border border-white/8 rounded-xl p-6">
@@ -155,12 +155,12 @@ const Shades = () => {
 
       <section className="py-16 sm:py-24 px-4 sm:px-6">
         <div className="max-w-3xl mx-auto text-center">
-          <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">Get Started</p>
-            <h2 className="text-2xl sm:text-3xl font-bold text-white mb-4">Ready to automate your windows?</h2>
-          <p className="text-white/50 text-base mb-8 max-w-xl mx-auto">Let us measure your windows and recommend the right shades for your home.</p>
+          <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">When You're Ready</p>
+            <h2 className="text-2xl sm:text-3xl font-bold text-white mb-4">Walk us through the windows.</h2>
+          <p className="text-white/55 text-base mb-8 max-w-xl mx-auto">We'll measure, talk through fabric and hardware, and tell you which Lutron shading line fits the room — Triathlon Select, Palladiom, or Sivoia.</p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
-            <Link to="/scheduling?service=shades" className="inline-flex items-center justify-center gap-2 bg-accent hover:bg-accent/90 text-white px-8 py-4 rounded-lg font-medium transition-colors text-base">Schedule a Consultation <ArrowRight className="w-4 h-4" /></Link>
-            <a href="tel:+19705193013" className="inline-flex items-center justify-center gap-2 border border-white/20 hover:border-white/40 hover:bg-white/5 text-white px-8 py-4 rounded-lg font-medium transition-colors text-base"><Phone className="w-4 h-4" /> Call Now</a>
+            <Link to="/scheduling?service=shades" className="inline-flex items-center justify-center gap-2 bg-accent hover:bg-accent/90 text-white px-8 py-4 rounded-lg font-medium transition-colors text-base">Schedule a Walkthrough <ArrowRight className="w-4 h-4" /></Link>
+            <a href="tel:+19705193013" className="inline-flex items-center justify-center gap-2 border border-white/20 hover:border-white/40 hover:bg-white/5 text-white px-8 py-4 rounded-lg font-medium transition-colors text-base"><Phone className="w-4 h-4" /> (970) 519-3013</a>
           </div>
         </div>
       </section>

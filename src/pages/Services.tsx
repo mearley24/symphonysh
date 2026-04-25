@@ -14,29 +14,29 @@ const Services = () => {
   const revealRef = useScrollReveal();
 
   const services = [
-    { icon: Home, title: "Home Automation & Control", description: "Unified smart home control through Control4 — lighting, climate, audio, security, and shades managed from one interface.", link: "/services/home-integration" },
-    { icon: Volume2, title: "Audio & Home Theater", description: "Multi-room audio distribution, dedicated home theaters with Dolby Atmos, and outdoor speaker systems.", link: "/services/audio-entertainment" },
-    { icon: Shield, title: "Security & Surveillance", description: "IP camera systems, smart locks, video doorbells, and integrated alarm monitoring for complete peace of mind.", link: "/services/security-systems" },
-    { icon: Lightbulb, title: "Smart Lighting", description: "Lutron and Control4 lighting control — keypads, dimmers, scenes, and automated schedules for every room.", link: "/services/smart-lighting" },
-    { icon: Thermometer, title: "Climate Control", description: "Smart thermostat integration with zoned HVAC control, floor heating, and automated comfort scheduling.", link: "/services/climate-control" },
-    { icon: Wifi, title: "Home Networking", description: "Enterprise-grade Wi-Fi, structured cabling, managed switches, and network racks for reliable connectivity.", link: "/services/networking" },
-    { icon: Sun, title: "Motorized Shades", description: "Automated window treatments that respond to sunlight, schedules, and scenes — integrated with your smart home.", link: "/services/shades" },
-    { icon: Wrench, title: "Maintenance & Support", description: "Ongoing system maintenance, firmware updates, remote diagnostics, and on-site service when you need it.", link: "/services/maintenance" },
-    { icon: Cable, title: "Pre-Wire & Structured Wiring", description: "Structured cabling for new construction and retrofits — Cat6, speaker wire, HDMI, and control wiring installed clean from the start.", link: "/services/prewire" },
+    { icon: Home, title: "Whole-Home Integration", description: "Lighting, audio, climate, security, and shades behind one Control4 app, one set of keypads, and one quiet routine for the whole house.", link: "/services/home-integration" },
+    { icon: Volume2, title: "Audio & Home Theater", description: "Whole-home audio that follows you room to room and dedicated theaters with Dolby Atmos — tuned for the room, not just the spec sheet.", link: "/services/audio-entertainment" },
+    { icon: Shield, title: "Security & Cameras", description: "Cameras, smart locks, video doorbells, and alarm monitoring tied into the same scenes that turn the house off when you leave.", link: "/services/security-systems" },
+    { icon: Lightbulb, title: "Lighting & Keypads", description: "Lutron HomeWorks or RadioRA3 lighting with keypad scenes on the wall — Lumaris, Sunnata, Ketra, and Palladiom where they fit.", link: "/services/smart-lighting" },
+    { icon: Thermometer, title: "Climate", description: "Zoned HVAC, floor heating, and thermostats that quietly back off when the house is empty and warm up before you arrive.", link: "/services/climate-control" },
+    { icon: Wifi, title: "Networking", description: "Enterprise-grade Wi-Fi, structured cabling, and managed switching — the layer underneath that keeps every other system online.", link: "/services/networking" },
+    { icon: Sun, title: "Motorized Shades", description: "Triathlon Select, Palladiom, and Sivoia shades that move with the sun, the time, or a single keypad scene.", link: "/services/shades" },
+    { icon: Wrench, title: "Service & Maintenance", description: "Quiet ongoing care — firmware, remote diagnostics, second-home check-ins, and an on-site visit when something needs hands.", link: "/services/maintenance" },
+    { icon: Cable, title: "Pre-Wire & Structured Wiring", description: "Clean low-voltage rough-in for network, audio, shades, and automation — pulled before insulation, planned with your trades.", link: "/services/prewire" },
   ];
 
   // Platforms now live on their own tab. We keep a short cross-link on the Services page.
 
   const alsoAvailable = [
     { icon: ScanLine, title: "Matterport 3D Scanning", description: "Immersive 3D virtual tours for real estate listings, construction documentation, and property records.", link: "/matterport" },
-    { icon: Compass, title: "Setup Finder", description: "Not sure whether you need RadioRA3, Control4, AVA, Sonos, or just a better network? Answer a few questions and we will suggest a starting point.", link: "/setup-finder" },
+    { icon: Compass, title: "Setup Finder", description: "Six quick questions about the house and how you live in it. We'll suggest a starting point — HomeWorks, RadioRA3, Control4, AVA, or just a stronger network first.", link: "/setup-finder" },
   ];
 
   const faqs = [
-    { q: "Do I need all of these services?", a: "No. Every project is different. Some clients start with networking and audio, others want a full-home system from day one. We'll help you prioritize based on your goals and budget." },
-    { q: "Can these systems work together?", a: "Yes — that's the point. We design integrated systems where lighting, audio, climate, shades, and security all communicate through a single platform like Control4." },
-    { q: "Do you work with specific brands?", a: "We're brand-agnostic and recommend what works best for your situation. We frequently install Control4, Lutron, Sonos, Sonance, Araknis, and others." },
-    { q: "What if I already have some smart devices?", a: "We can often incorporate existing equipment into a unified system. During the consultation, we'll assess what you have and recommend the best path forward." },
+    { q: "Do I need all of these at once?", a: "No. Plenty of homes start with the network and one platform — usually Lutron lighting or Control4 — and grow from there. The Setup Finder is built to help you figure out a sensible starting point without committing to a whole-home plan on day one." },
+    { q: "Do these all work together?", a: "Yes — that's the point. Lighting, audio, climate, shades, and security can sit behind one Control4 app and one set of keypads, with Lutron HomeWorks or RadioRA3 doing the lighting work underneath." },
+    { q: "Which brands show up most?", a: "Lutron HomeWorks and RadioRA3 for lighting and shades. Control4 for whole-home automation. AVA when the family wants a single physical remote for TV, theater, and music. Sonos, Sonance, and Araknis show up regularly underneath." },
+    { q: "What if I already have a system from another company?", a: "Inherited Control4, RadioRA3, HomeWorks, and AVA systems are some of our most common service calls. We read what's there, document it, and clean up the program until the house makes sense again." },
   ];
 
   const serviceSchema = {
@@ -51,9 +51,9 @@ const Services = () => {
     <PageBackground image={bgServices}>
       <div ref={revealRef}>
       <SEO
-        title="Smart Home Services | Vail Valley, CO"
-        description="Full-service smart home integration: automation, audio, lighting, security, networking, and more. Serving Vail Valley & Eagle County."
-        keywords="smart home services Vail Valley, home automation Eagle County, AV installation, Control4 dealer"
+        title="Services | Symphony Smart Homes — Vail Valley"
+        description="Lutron lighting, Control4 automation, AVA media, audio, climate, security, networking, and shades — every layer of a Vail Valley smart home, designed to feel like one calm system."
+        keywords="smart home services Vail Valley, home automation Eagle County, Lutron HomeWorks, Control4 dealer, AVA remote"
         schema={serviceSchema}
         breadcrumbs={[{ name: "Home", url: "/" }, { name: "Services", url: "/services" }]}
       />
@@ -65,19 +65,19 @@ const Services = () => {
           <Link to="/" className="inline-flex items-center gap-1.5 text-white/40 hover:text-white/70 text-sm mb-8 transition-colors">
             <ArrowLeft className="w-3.5 h-3.5" /> Back to Home
           </Link>
-          <p className="text-accent font-medium text-sm tracking-wide uppercase mb-3">Our Services</p>
+          <p className="text-accent font-medium text-sm tracking-wide uppercase mb-3">Services</p>
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight mb-5 text-white hero-text-shadow">
-            Everything your smart home needs — designed, installed, and supported.
+            Every layer of a smart home, tuned to feel like one room.
           </h1>
           <p className="text-white/60 text-base sm:text-lg leading-relaxed mb-8 max-w-2xl hero-subtext-shadow">
-            From structured wiring to full-home automation, we handle every layer of smart home technology. One team, one point of contact, start to finish.
+            Lighting and shades that move with the day. Audio that follows you between rooms. Cameras and locks that quietly arm when the house empties. All of it on the platforms that fit the home — Lutron, Control4, AVA — never the other way around.
           </p>
           <div className="flex flex-col sm:flex-row gap-3">
             <Link to="/scheduling" className="inline-flex items-center justify-center gap-2 bg-accent hover:bg-accent/90 text-white px-7 py-4 rounded-lg font-medium transition-colors text-base">
-              Schedule a Consultation <ArrowRight className="w-4 h-4" />
+              Schedule a Walkthrough <ArrowRight className="w-4 h-4" />
             </Link>
             <a href="tel:+19705193013" className="inline-flex items-center justify-center gap-2 border border-white/20 hover:border-white/40 hover:bg-white/5 text-white px-7 py-4 rounded-lg font-medium transition-colors text-base">
-              <Phone className="w-4 h-4" /> Call Now
+              <Phone className="w-4 h-4" /> (970) 519-3013
             </a>
           </div>
         </div>
@@ -89,8 +89,11 @@ const Services = () => {
       <section className="py-16 sm:py-24 px-4 sm:px-6 bg-black/20 backdrop-blur-sm border-y border-white/5">
         <div className="max-w-5xl mx-auto">
           <div data-reveal className="text-center mb-12">
-            <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">What We Do</p>
-            <h2 className="text-2xl sm:text-3xl font-bold text-white">Smart Home Services</h2>
+            <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">Services</p>
+            <h2 className="text-2xl sm:text-3xl font-bold text-white">Nine layers, one calm experience.</h2>
+            <p className="text-white/55 text-base leading-relaxed mt-4 max-w-2xl mx-auto">
+              Each layer matters on its own — but the magic is when scenes, schedules, and away modes pull them together so nobody in the house is hunting for an app.
+            </p>
           </div>
           <div data-reveal-children className="grid sm:grid-cols-2 gap-4">
             {services.map((service, i) => (
@@ -102,7 +105,7 @@ const Services = () => {
                   <h3 className="text-white font-semibold text-lg mb-2">{service.title}</h3>
                   <p className="text-white/50 text-sm leading-relaxed">{service.description}</p>
                   <span className="inline-flex items-center gap-1 text-accent text-sm font-medium mt-4 group-hover:gap-2 transition-all">
-                    Learn more <ArrowRight className="w-3.5 h-3.5" />
+                    See what's included <ArrowRight className="w-3.5 h-3.5" />
                   </span>
                 </div>
               </Link>
@@ -116,9 +119,9 @@ const Services = () => {
         <div className="max-w-4xl mx-auto">
           <div data-reveal className="text-center mb-8">
             <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">Platforms</p>
-            <h2 className="text-2xl sm:text-3xl font-bold text-white mb-3">The systems that power the services above</h2>
+            <h2 className="text-2xl sm:text-3xl font-bold text-white mb-3">The systems underneath all of it.</h2>
             <p className="text-white/55 text-base leading-relaxed max-w-2xl mx-auto">
-              Lighting, audio, shades, climate, and security all run on real platforms underneath — Lutron HomeWorks, Lutron RadioRA3, Control4, and AVA. Each one fits a different kind of home.
+              Lutron HomeWorks, Lutron RadioRA3, Control4, and AVA each fit a different kind of home. The platform decision shapes how the house feels in five years — so it's the first one we walk through.
             </p>
           </div>
           <div data-reveal className="flex flex-col sm:flex-row gap-3 justify-center items-center">
@@ -126,13 +129,13 @@ const Services = () => {
               to="/platforms"
               className="inline-flex items-center justify-center gap-2 bg-accent hover:bg-accent/90 text-white px-7 py-4 rounded-lg font-medium transition-colors text-base"
             >
-              Explore Platforms <ArrowRight className="w-4 h-4" />
+              Compare platforms <ArrowRight className="w-4 h-4" />
             </Link>
             <Link
               to="/setup-finder"
               className="inline-flex items-center justify-center gap-2 border border-white/20 hover:border-white/40 hover:bg-white/5 text-white px-7 py-4 rounded-lg font-medium transition-colors text-base"
             >
-              <Compass className="w-4 h-4" /> Open the Setup Finder
+              <Compass className="w-4 h-4" /> Find the right setup
             </Link>
           </div>
         </div>
@@ -155,7 +158,7 @@ const Services = () => {
                   <h3 className="text-white font-semibold text-lg mb-2">{item.title}</h3>
                   <p className="text-white/50 text-sm leading-relaxed">{item.description}</p>
                   <span className="inline-flex items-center gap-1 text-accent text-sm font-medium mt-4 group-hover:gap-2 transition-all">
-                    Learn more <ArrowRight className="w-3.5 h-3.5" />
+                    See what's included <ArrowRight className="w-3.5 h-3.5" />
                   </span>
                 </div>
               </Link>
@@ -168,15 +171,15 @@ const Services = () => {
       <section className="py-16 sm:py-24 px-4 sm:px-6">
         <div className="max-w-4xl mx-auto">
           <div data-reveal className="text-center mb-12">
-            <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">The Advantage</p>
-            <h2 className="text-2xl sm:text-3xl font-bold text-white">Why an integrated system matters</h2>
+            <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">Why It Adds Up</p>
+            <h2 className="text-2xl sm:text-3xl font-bold text-white">Each layer earns its keep — together they disappear.</h2>
           </div>
           <div data-reveal-children className="grid sm:grid-cols-2 gap-5">
             {[
-              { title: "One App, One Interface", description: "Control everything — lights, music, locks, cameras, shades, thermostats — from a single touchscreen, phone, or remote." },
-              { title: "Systems That Talk to Each Other", description: "When you leave the house, the lights turn off, the thermostat adjusts, the doors lock, and the cameras arm — automatically." },
-              { title: "Easier to Maintain", description: "When one team designs and installs your system, troubleshooting is straightforward. No finger-pointing between vendors." },
-              { title: "Built to Grow", description: "Start with what you need now. Add capabilities later without ripping anything out. We plan for expansion from day one." },
+              { title: "One keypad, one app", description: "Lights, music, locks, cameras, shades, and thermostats from a single keypad on the wall, the AVA remote, or the Control4 app — never a five-app scavenger hunt." },
+              { title: "Scenes that know each other", description: "Goodbye dims the lights, drops the heat, locks the doors, and arms the cameras with one tap. Goodnight does the rest." },
+              { title: "Easier to live with — and maintain", description: "One team designed it, documented it, and stays reachable. No vendor finger-pointing when something needs a small tune." },
+              { title: "Grows with the house", description: "Start with the network and the rooms you use most. Add scenes, theaters, and exterior lighting later without ripping anything out." },
             ].map((item, i) => (
               <div key={i} className="flex gap-4 p-5 rounded-xl border border-white/8 bg-black/40 backdrop-blur-sm hover:border-white/10 transition-colors">
                 <CheckCircle2 className="w-5 h-5 text-accent shrink-0 mt-0.5" />
@@ -195,7 +198,7 @@ const Services = () => {
         <div className="max-w-3xl mx-auto">
           <div data-reveal className="text-center mb-12">
             <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">FAQ</p>
-            <h2 className="text-2xl sm:text-3xl font-bold text-white">Common Questions</h2>
+            <h2 className="text-2xl sm:text-3xl font-bold text-white">Things people ask early on.</h2>
           </div>
           <div data-reveal-children className="space-y-2">
             {faqs.map((faq, i) => (
@@ -218,17 +221,17 @@ const Services = () => {
       {/* Final CTA */}
       <section data-reveal className="py-16 sm:py-24 px-4 sm:px-6">
         <div className="max-w-3xl mx-auto text-center">
-          <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">Get Started</p>
-          <h2 className="text-2xl sm:text-3xl font-bold text-white mb-4">Not sure where to start?</h2>
-          <p className="text-white/50 text-base mb-8 max-w-xl mx-auto">
-            Give us a call or schedule a walkthrough. We'll help you figure out what makes sense for your home — no pressure, no sales pitch.
+          <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">When You're Ready</p>
+          <h2 className="text-2xl sm:text-3xl font-bold text-white mb-4">Walk us through your home.</h2>
+          <p className="text-white/55 text-base mb-8 max-w-xl mx-auto">
+            New build, finished retrofit, or an existing system that needs attention — share what you're working with and how you live there. We'll help map it out without pressure.
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <Link to="/scheduling" className="inline-flex items-center justify-center gap-2 bg-accent hover:bg-accent/90 text-white px-8 py-4 rounded-lg font-medium transition-colors text-base">
-              Schedule a Consultation <ArrowRight className="w-4 h-4" />
+              Schedule a Walkthrough <ArrowRight className="w-4 h-4" />
             </Link>
             <a href="tel:+19705193013" className="inline-flex items-center justify-center gap-2 border border-white/20 hover:border-white/40 hover:bg-white/5 text-white px-8 py-4 rounded-lg font-medium transition-colors text-base">
-              <Phone className="w-4 h-4" /> Call Now
+              <Phone className="w-4 h-4" /> (970) 519-3013
             </a>
           </div>
         </div>

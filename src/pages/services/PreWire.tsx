@@ -77,13 +77,13 @@ const PreWire = () => (
           </div>
           <p className="text-accent font-medium text-sm tracking-wide uppercase">Pre-Wire & Structured Wiring</p>
         </div>
-        <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight mb-5 text-white hero-text-shadow">Pre-Wire & Structured Wiring</h1>
+        <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight mb-5 text-white hero-text-shadow">The wiring that quietly decides what's possible later.</h1>
         <p className="text-white/60 text-base sm:text-lg leading-relaxed max-w-2xl mb-8 hero-subtext-shadow">
-          Future-proof your new build or renovation with clean, organized low-voltage wiring for audio, video, networking, and automation — installed by a team that understands the full system.
+          Clean, labeled low-voltage rough-in for network, audio, shades, automation, and security — pulled before insulation, planned with your GC, electrician, and architect. Cable now costs almost nothing; pulling it later costs everything.
         </p>
         <div className="flex flex-col sm:flex-row gap-3">
           <Link to="/scheduling?service=Pre-Wire" className="inline-flex items-center justify-center gap-2 bg-accent hover:bg-accent/90 text-white font-medium px-7 py-4 rounded-lg transition-colors text-base">
-            Schedule a Consultation <ArrowRight className="w-4 h-4" />
+            Schedule a Walkthrough <ArrowRight className="w-4 h-4" />
           </Link>
           <a href="tel:+19705193013" className="inline-flex items-center justify-center gap-2 border border-white/20 hover:border-white/40 hover:bg-white/5 text-white font-medium px-7 py-4 rounded-lg transition-colors text-base">
             <Phone className="w-4 h-4" /> (970) 519-3013
@@ -97,8 +97,8 @@ const PreWire = () => (
     {/* Capabilities */}
     <section className="py-16 sm:py-24 border-y border-white/5 bg-black/20 backdrop-blur-sm px-4 sm:px-6">
       <div className="max-w-4xl mx-auto">
-        <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">What We Do</p>
-        <h2 className="text-2xl sm:text-3xl font-bold text-white mb-10">Wiring Done Right the First Time</h2>
+        <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">The Rough-In</p>
+        <h2 className="text-2xl sm:text-3xl font-bold text-white mb-10">Cable pulled clean, labeled, and tested before drywall.</h2>
         <div className="grid sm:grid-cols-2 gap-4">
           {capabilities.map((c, i) => (
             <div key={i} className="bg-black/40 backdrop-blur-sm border border-white/8 rounded-xl p-6">
@@ -172,10 +172,10 @@ const PreWire = () => (
     {/* CTA */}
     <section className="py-16 sm:py-24 px-4 sm:px-6">
       <div className="max-w-4xl mx-auto text-center">
-        <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">Get Started</p>
-        <h2 className="text-2xl sm:text-3xl font-bold text-white mb-4">Planning a Build?</h2>
-        <p className="text-white/50 text-base mb-8 max-w-lg mx-auto">
-          Let's review your plans and make sure every wire is accounted for before drywall goes up.
+        <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">When You're Ready</p>
+        <h2 className="text-2xl sm:text-3xl font-bold text-white mb-4">Send the plans before drywall.</h2>
+        <p className="text-white/55 text-base mb-8 max-w-lg mx-auto">
+          We'll mark up the drawings with the GC and electrician — speakers, keypads, shade headers, network drops — so the rough-in matches every routine the house should run later.
         </p>
         <div className="flex flex-col sm:flex-row gap-3 justify-center">
           <Link to="/scheduling?service=Pre-Wire" className="inline-flex items-center justify-center gap-2 bg-accent hover:bg-accent/90 text-white font-medium px-7 py-4 rounded-lg transition-colors text-base">
