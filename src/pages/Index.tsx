@@ -1,5 +1,8 @@
 import { Link } from "react-router-dom";
-import { Phone, ArrowRight, Cable, Home, Wrench, ScanLine, CheckCircle2, ChevronDown, MapPin } from "lucide-react";
+import {
+  Phone, ArrowRight, Cable, Home, Wrench, CheckCircle2, ChevronDown, MapPin,
+  Lightbulb, Music, Shield, Wifi, Sun, Thermometer,
+} from "lucide-react";
 import { useState } from "react";
 import { trackPhoneClick } from "../utils/tracking";
 import Header from "../components/Header";
@@ -18,42 +21,99 @@ const Index = () => {
   const services = [
     {
       icon: Home,
-      title: "Smart Home Integration",
-      description: "Full-home automation with Control4 — lighting, audio, climate, security, and shades all working together from one interface.",
-      link: "/services",
+      title: "Smart Home Automation",
+      description: "Whole-home control across lighting, AV, comfort, and security from one interface.",
+      link: "/services/home-integration",
+    },
+    {
+      icon: Lightbulb,
+      title: "Lighting Control",
+      description: "Architectural and retrofit lighting — Lutron HomeWorks, RadioRA3, and Control4 scenes.",
+      link: "/services/smart-lighting",
+    },
+    {
+      icon: Music,
+      title: "Audio & Home Theater",
+      description: "Multi-room audio and dedicated theaters with calibrated sound and clean sightlines.",
+      link: "/services/audio-entertainment",
+    },
+    {
+      icon: Shield,
+      title: "Security & Cameras",
+      description: "Cameras, access, and monitoring that integrate with the rest of the home.",
+      link: "/services/security-systems",
+    },
+    {
+      icon: Wifi,
+      title: "Networking & Wi-Fi",
+      description: "Reliable, fast coverage built for whole-home automation, streaming, and remote work.",
+      link: "/services/networking",
+    },
+    {
+      icon: Sun,
+      title: "Motorized Shades",
+      description: "Lutron shades that follow the sun, scenes, and time of day — quiet and reliable.",
+      link: "/services/shades",
+    },
+    {
+      icon: Thermometer,
+      title: "Climate Control",
+      description: "Thermostats and zones that match how you actually use the house through the seasons.",
+      link: "/services/climate-control",
     },
     {
       icon: Cable,
-      title: "Pre-Wire & New Construction",
-      description: "Future-proof your new build or renovation with clean, organized low-voltage wiring for audio, video, networking, and automation.",
+      title: "Pre-Wire & Structured Cabling",
+      description: "Future-proof low-voltage rough-in for new builds and major remodels.",
       link: "/services/prewire",
     },
     {
       icon: Wrench,
-      title: "Maintenance & Support",
-      description: "Keep your systems running smoothly. We diagnose issues, update firmware, and resolve problems — on-site or remotely.",
+      title: "Ongoing Service & Support",
+      description: "Same-day response, remote diagnostics, and on-site service when something needs attention.",
       link: "/services/maintenance",
-    },
-    {
-      icon: ScanLine,
-      title: "Matterport 3D Scanning",
-      description: "Immersive 3D virtual tours for real estate listings, construction documentation, and property records.",
-      link: "/matterport",
     },
   ];
 
+  const platforms = [
+    { name: "Lutron HomeWorks", desc: "Architectural luxury lighting in new builds and deep remodels.", href: "/platforms/lutron-homeworks" },
+    { name: "Lutron RadioRA3",  desc: "Wireless lighting and shades for existing homes and phased upgrades.", href: "/platforms/lutron-radiora3" },
+    { name: "Control4",         desc: "Whole-home control across lighting, AV, comfort, security, and more.", href: "/platforms/control4" },
+    { name: "AVA",              desc: "Elegant room-first control for media spaces and simple everyday use.", href: "/platforms/ava" },
+  ];
+
+  const scenes = [
+    { label: "Goodmorning",    copy: "The shades rise slowly. The lights come up warm. Your home wakes up before the first lift spins." },
+    { label: "Goodbye / Away", copy: "One tap on the way out — lights off, doors locked, cameras active, thermostats set back." },
+    { label: "Welcome",        copy: "You pull in after a long drive. The entry lights are on, the music is low, and the house feels ready." },
+    { label: "Movie / Relax",  copy: "The lights dim, the room quiets down, and the system gets out of the way." },
+    { label: "Goodnight",      copy: "One button at the nightstand. Lights fade, shades close, doors lock, and the house winds down." },
+  ];
+
   const steps = [
-    { number: "01", title: "Consultation", description: "We discuss your goals, walk the property, and understand how you actually live in your home." },
+    { number: "01", title: "Walkthrough", description: "We discuss your goals, walk the property, and understand how you actually live in your home." },
     { number: "02", title: "Design & Proposal", description: "You receive a clear scope of work with transparent pricing — no surprises." },
     { number: "03", title: "Installation", description: "Our team handles wiring, mounting, and programming with minimal disruption to your schedule." },
     { number: "04", title: "Training & Handoff", description: "We walk you through everything until you're comfortable, then provide ongoing support." },
   ];
 
   const differentiators = [
-    { title: "Local to Vail Valley", description: "We live and work here. We understand mountain construction, altitude challenges, and the expectations of homeowners in this market." },
-    { title: "One Accountable Team", description: "You work directly with the same team from start to finish — clear ownership, no finger-pointing, no runaround." },
-    { title: "Built for the Long Term", description: "We design systems that are easy to maintain and upgrade. No proprietary lock-in, no orphaned technology." },
-    { title: "Responsive Support", description: "When something needs attention, we answer the phone. Remote diagnostics and on-site service when you need it." },
+    {
+      title: "Mountain homes aren't suburban homes.",
+      description: "Altitude, snow load, second-home patterns, sun exposure, and seasonal occupancy all change how systems are specified, installed, and supported. We design for that reality.",
+    },
+    {
+      title: "One accountable local team.",
+      description: "Symphony is a local Eagle County integration team. You work with the same people from first walkthrough through final training and ongoing support.",
+    },
+    {
+      title: "Built for second-home schedules.",
+      description: "Remote diagnostics, owner and property-manager coordination, and seasonal check-ins. We answer the phone in season and out.",
+    },
+    {
+      title: "Documented systems, no lock-in.",
+      description: "Clear as-builts, labeled racks, and platform choices that can be updated and serviced over time — by us or by anyone qualified.",
+    },
   ];
 
   const faqs = [
@@ -64,6 +124,8 @@ const Index = () => {
     { q: "How long does an install take?", a: "Small jobs — a TV mount, a few speakers — can be a few hours. A whole-home job on a build is phased: pre-wire early, then trim-out and programming as the house comes together. Ballpark 3–6 months from rough-in to final handoff on a full system, depending on the build schedule." },
     { q: "Do you offer ongoing support?", a: "Yes. We have maintenance options and we're available for one-off service when something acts up. Quite a bit we can sort out remotely before we roll a truck." },
     { q: "Where do you work?", a: "Vail Valley and Eagle County — Vail, Beaver Creek, Avon, Edwards, Eagle, Minturn, and nearby. If you're close and not sure, ask." },
+    { q: "Do you service second homes?", a: "Yes. We support seasonal occupancy with remote diagnostics, scheduled in-season check-ins, and coordination with owners and property managers. When something needs urgent attention, we answer the phone — not a call center." },
+    { q: "Can you coordinate with our architect, GC, or interior designer?", a: "Yes. On most builds we're working alongside an architect, GC, electrician, and interior designer from rough-in through finish. We'll line up pre-wire, device placement, fixture selection, and change orders so low-voltage isn't an afterthought." },
   ];
 
   const serviceSchema = localBusinessHomePageSchema();
@@ -85,8 +147,8 @@ const Index = () => {
     <div className="min-h-screen bg-primary text-primary-foreground relative">
       <SEO
         title="Smart Home Integration in Vail Valley"
-        description="Professional smart home pre-wire, installation, and maintenance in Vail Valley & Eagle County. Trusted local integrators for new builds and existing homes."
-        keywords="smart home installation, pre-wire, home automation, Vail Valley, Eagle County, Control4, TV mounting, home theater"
+        description="Smart home automation in the Vail Valley — lighting, audio, security, climate, and shades, designed and installed by a local Eagle County team. Lutron, Control4, AVA."
+        keywords="smart home installation, pre-wire, home automation, Vail Valley, Eagle County, Control4, Lutron, AVA, home theater"
         schema={[serviceSchema, faqSchema]}
       />
 
@@ -124,7 +186,9 @@ const Index = () => {
                   We build smart homes that just work.
                 </h1>
                 <p className="animate-fade-in text-white/65 text-lg sm:text-xl leading-relaxed mb-10 max-w-xl mx-auto hero-subtext-shadow [animation-delay:200ms]">
-                  A local Eagle County smart-home team with trusted trade partners. Pre-wire through programming — designed, installed, and supported by the same accountable team from first walkthrough to final training.
+                  Lighting, audio, security, and climate — all working together, controlled
+                  from one app or a button on the wall. Designed, installed, and supported
+                  by the same local team, start to finish.
                 </p>
               </div>
             </div>
@@ -137,7 +201,7 @@ const Index = () => {
                 to="/scheduling"
                 className="group inline-flex items-center justify-center gap-2 bg-accent hover:bg-accent/90 text-white px-7 py-4 rounded-lg font-medium transition-all text-base shadow-lg shadow-accent/20 hover:shadow-accent/30"
               >
-                Schedule a Consultation
+                Schedule a Free Walkthrough
                 <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5" />
               </Link>
               <a
@@ -185,14 +249,38 @@ const Index = () => {
           </section>
         </div>
 
-        {/* Services */}
-        <section className="py-16 sm:py-24 px-4 sm:px-6" id="services">
-          <div className="max-w-5xl mx-auto">
-            <div data-reveal className="text-center mb-12">
-              <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">What We Do</p>
-              <h2 className="text-2xl sm:text-3xl font-bold text-white">Core Services</h2>
+        {/* Lifestyle Vignettes — The Symphony Home */}
+        <section data-reveal className="py-16 sm:py-24 px-4 sm:px-6">
+          <div className="max-w-6xl mx-auto">
+            <div className="text-center mb-12">
+              <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">The Symphony Home</p>
+              <h2 className="text-2xl sm:text-3xl font-bold text-white">A day, in scenes.</h2>
+              <p className="text-white/50 text-base mt-3 max-w-2xl mx-auto">
+                Five moments where the house quietly does the right thing.
+              </p>
             </div>
-            <div data-reveal-children className="grid sm:grid-cols-2 gap-4">
+            <div data-reveal-children className="grid sm:grid-cols-2 lg:grid-cols-5 gap-4">
+              {scenes.map((scene, i) => (
+                <div key={i} className="bg-black/40 backdrop-blur-sm border border-white/8 rounded-xl overflow-hidden flex flex-col">
+                  <div className="aspect-[4/3] bg-gradient-to-br from-accent/10 via-black/40 to-black/60" />
+                  <div className="p-5">
+                    <p className="text-accent text-xs font-semibold tracking-widest uppercase mb-2">{scene.label}</p>
+                    <p className="text-white/70 text-sm leading-relaxed">{scene.copy}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* What We Install */}
+        <section className="py-16 sm:py-24 px-4 sm:px-6 bg-black/20 backdrop-blur-sm border-y border-white/5" id="services">
+          <div className="max-w-6xl mx-auto">
+            <div data-reveal className="text-center mb-12">
+              <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">What We Install</p>
+              <h2 className="text-2xl sm:text-3xl font-bold text-white">Systems we design, install, and support.</h2>
+            </div>
+            <div data-reveal-children className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
               {services.map((service, i) => (
                 <Link key={i} to={service.link} className="group">
                   <div className="bg-black/40 backdrop-blur-sm border border-white/8 rounded-xl p-6 h-full hover:border-accent/30 hover:bg-gradient-to-br hover:from-accent/5 hover:to-transparent transition-all duration-200">
@@ -208,11 +296,64 @@ const Index = () => {
                 </Link>
               ))}
             </div>
+            <div className="text-center mt-10">
+              <Link to="/services" className="inline-flex items-center gap-1.5 text-accent hover:text-accent/80 text-sm font-medium">
+                See all services <ArrowRight className="w-3.5 h-3.5" />
+              </Link>
+            </div>
+          </div>
+        </section>
+
+        {/* The Platforms We Install */}
+        <section data-reveal className="py-16 sm:py-24 px-4 sm:px-6">
+          <div className="max-w-6xl mx-auto">
+            <div className="text-center mb-12">
+              <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">What's Running Underneath</p>
+              <h2 className="text-2xl sm:text-3xl font-bold text-white">The platforms we install.</h2>
+              <p className="text-white/50 text-base mt-3 max-w-2xl mx-auto">
+                We pick the right brain for the house — not the other way around.
+              </p>
+            </div>
+            <div data-reveal-children className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+              {platforms.map((p, i) => (
+                <Link key={i} to={p.href} className="group bg-black/40 backdrop-blur-sm border border-white/8 rounded-xl p-6 hover:border-accent/30 transition-all">
+                  <h3 className="text-white font-semibold text-lg mb-2">{p.name}</h3>
+                  <p className="text-white/55 text-sm leading-relaxed mb-4">{p.desc}</p>
+                  <span className="inline-flex items-center gap-1 text-accent text-sm font-medium group-hover:gap-2 transition-all">
+                    Learn more <ArrowRight className="w-3.5 h-3.5" />
+                  </span>
+                </Link>
+              ))}
+            </div>
+            <div className="text-center mt-10">
+              <Link to="/platforms" className="inline-flex items-center gap-1.5 text-accent hover:text-accent/80 text-sm font-medium">
+                Compare all platforms <ArrowRight className="w-3.5 h-3.5" />
+              </Link>
+            </div>
+          </div>
+        </section>
+
+        {/* Setup Finder teaser */}
+        <section data-reveal className="py-16 sm:py-24 px-4 sm:px-6 bg-black/20 backdrop-blur-sm border-y border-white/5">
+          <div className="max-w-4xl mx-auto text-center">
+            <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">Decision Support</p>
+            <h2 className="text-2xl sm:text-3xl font-bold text-white mb-4">Not sure where to start?</h2>
+            <p className="text-white/55 text-base leading-relaxed max-w-2xl mx-auto mb-8">
+              Answer a few questions about your home and what you want it to do. We'll point you toward
+              the right platform, service path, or first fix.
+            </p>
+            <Link
+              to="/setup-finder"
+              className="inline-flex items-center justify-center gap-2 bg-accent hover:bg-accent/90 text-white px-7 py-4 rounded-lg font-medium transition-all text-base shadow-lg shadow-accent/20"
+            >
+              Try the Setup Finder
+              <ArrowRight className="w-4 h-4" />
+            </Link>
           </div>
         </section>
 
         {/* How It Works */}
-        <section className="py-16 sm:py-24 px-4 sm:px-6 bg-black/20 backdrop-blur-sm border-y border-white/5">
+        <section className="py-16 sm:py-24 px-4 sm:px-6">
           <div className="max-w-5xl mx-auto">
             <div data-reveal className="text-center mb-12">
               <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">Our Process</p>
@@ -235,15 +376,15 @@ const Index = () => {
         {/* Client Testimonials */}
         <ClientTestimonials />
 
-        {/* Featured Projects */}
+        {/* Featured / Recent Work */}
         <Testimonials />
 
         {/* Why Symphony */}
         <section className="py-16 sm:py-24 px-4 sm:px-6">
           <div className="max-w-5xl mx-auto">
             <div data-reveal className="text-center mb-12">
-              <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">Why Us</p>
-              <h2 className="text-2xl sm:text-3xl font-bold text-white">Why Homeowners Choose Symphony</h2>
+              <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">Why a local integrator</p>
+              <h2 className="text-2xl sm:text-3xl font-bold text-white">Why Symphony</h2>
             </div>
             <div data-reveal-children className="grid sm:grid-cols-2 gap-5">
               {differentiators.map((item, i) => (
@@ -327,16 +468,17 @@ const Index = () => {
         <section data-reveal className="py-16 sm:py-24 px-4 sm:px-6">
           <div className="max-w-3xl mx-auto text-center">
             <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">Get Started</p>
-            <h2 className="text-2xl sm:text-3xl font-bold text-white mb-4">Ready to get started?</h2>
+            <h2 className="text-2xl sm:text-3xl font-bold text-white mb-4">Ready when you are.</h2>
             <p className="text-white/50 text-base mb-8 max-w-xl mx-auto">
-              Whether you're building new, renovating, or just need something fixed — reach out. No pressure, no sales pitch.
+              Whether you're breaking ground, mid-renovation, or just need something fixed —
+              reach out. No pressure, no pitch.
             </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
               <Link
                 to="/scheduling"
                 className="inline-flex items-center justify-center gap-2 bg-accent hover:bg-accent/90 text-white px-7 py-4 rounded-lg font-medium transition-colors text-base"
               >
-                Schedule a Consultation
+                Schedule a Free Walkthrough
                 <ArrowRight className="w-4 h-4" />
               </Link>
               <a
@@ -345,7 +487,7 @@ const Index = () => {
                 className="inline-flex items-center justify-center gap-2 border border-white/20 hover:border-white/40 hover:bg-white/5 text-white px-7 py-4 rounded-lg font-medium transition-colors text-base"
               >
                 <Phone className="w-4 h-4" />
-                Call Now
+                (970) 519-3013
               </a>
             </div>
           </div>

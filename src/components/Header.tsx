@@ -70,9 +70,29 @@ const Header = () => {
               />
             </Link>
 
-            {/* Scrolled: Schedule CTA + Menu button */}
+            {/* Unscrolled: Desktop nav row beneath centered logo */}
+            {!scrolled && (
+              <nav className="hidden lg:flex items-center gap-7 mt-3 pointer-events-auto text-sm">
+                <Link to="/services" className={`transition-colors ${isActive("/services") ? "text-white" : "text-white/60 hover:text-white"}`}>Services</Link>
+                <Link to="/platforms" className={`transition-colors ${isActive("/platforms") ? "text-white" : "text-white/60 hover:text-white"}`}>Platforms</Link>
+                <Link to="/setup-finder" className={`transition-colors ${isActive("/setup-finder") ? "text-white" : "text-white/60 hover:text-white"}`}>Setup Finder</Link>
+                <Link to="/projects" className={`transition-colors ${isActive("/projects") ? "text-white" : "text-white/60 hover:text-white"}`}>Our Work</Link>
+                <Link to="/about" className={`transition-colors ${isActive("/about") ? "text-white" : "text-white/60 hover:text-white"}`}>About</Link>
+                <Link to="/contact" className={`transition-colors ${isActive("/contact") ? "text-white" : "text-white/60 hover:text-white"}`}>Contact</Link>
+              </nav>
+            )}
+
+            {/* Scrolled: Desktop nav + Schedule CTA + Menu button */}
             {scrolled && (
-              <div className="flex items-center gap-3 pointer-events-auto">
+              <div className="flex items-center gap-5 pointer-events-auto">
+                <nav className="hidden lg:flex items-center gap-6 text-sm">
+                  <Link to="/services" className={`transition-colors ${isActive("/services") ? "text-white" : "text-white/60 hover:text-white"}`}>Services</Link>
+                  <Link to="/platforms" className={`transition-colors ${isActive("/platforms") ? "text-white" : "text-white/60 hover:text-white"}`}>Platforms</Link>
+                  <Link to="/setup-finder" className={`transition-colors ${isActive("/setup-finder") ? "text-white" : "text-white/60 hover:text-white"}`}>Setup Finder</Link>
+                  <Link to="/projects" className={`transition-colors ${isActive("/projects") ? "text-white" : "text-white/60 hover:text-white"}`}>Our Work</Link>
+                  <Link to="/about" className={`transition-colors ${isActive("/about") ? "text-white" : "text-white/60 hover:text-white"}`}>About</Link>
+                  <Link to="/contact" className={`transition-colors ${isActive("/contact") ? "text-white" : "text-white/60 hover:text-white"}`}>Contact</Link>
+                </nav>
                 <Link
                   to="/scheduling"
                   className="hidden sm:inline-flex items-center justify-center bg-accent hover:bg-accent/90 text-white text-sm font-medium px-4 py-2 rounded-lg transition-colors"
