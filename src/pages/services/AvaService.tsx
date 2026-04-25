@@ -21,6 +21,9 @@ import { useState } from "react";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import SEO from "../../components/SEO";
+import ProductFamilyTree, {
+  type ProductFamilyGroup,
+} from "../../components/ProductFamilyTree";
 import { schemaProviderLocalBusiness } from "../../constants/businessSchema";
 import PageBackground from "../../components/PageBackground";
 import bgAudio from "../../assets/bg-audio.jpg";
@@ -115,28 +118,76 @@ const AvaService = () => {
     },
   ];
 
-  const componentPills = [
-    "AVA Cinema Remote",
-    "AVA Home Remote",
-    "AVA OS",
-    "AVA Flows",
-    "Nano Brain",
-    "Dynamic Keypad",
-    "3D Glass",
-    "Single-piece aluminum",
-    "Kiosk Mode",
-    "AVA App",
-    "IP control",
-    "IR control",
-    "Sonos integration",
-    "Control4 integration",
-    "Lutron integration",
-    "Apple TV",
-    "Roku",
-    "Receivers",
-    "Projectors",
-    "Soundbars",
-    "TVs",
+  const productFamilies: ProductFamilyGroup[] = [
+    {
+      title: "Core platform",
+      description:
+        "AVA's brain — the operating system, the cloud-flow engine, and the built-in processor that lives inside Cinema Remote.",
+      items: [
+        { label: "AVA OS", href: "https://avahq.com/", external: true, hint: "AVA's home operating system" },
+        { label: "AVA Flows", hint: "AVA's automation logic — multi-step flows tied to events" },
+        { label: "Nano Brain", hint: "Compact built-in processor option" },
+        { label: "Built-in octa-core processor", hint: "Cinema Remote includes its own processor — less hardware in the closet" },
+      ],
+    },
+    {
+      title: "Remotes",
+      description:
+        "Single-piece aluminum, 3D Glass, and a mechanical click — built to last, charged on a magnetic dock.",
+      items: [
+        { label: "AVA Cinema Remote", href: "https://avahq.com/products/cinema-remote", external: true, hint: "Flagship remote for media rooms and theaters" },
+        { label: "AVA Home Remote", href: "https://avahq.com/products/home-remote", external: true, hint: "Whole-home remote for rooms beyond the screen" },
+      ],
+    },
+    {
+      title: "Control surfaces",
+      description:
+        "Keypads, app, and direct IP control — plus Kiosk Mode for shared touch surfaces.",
+      items: [
+        { label: "Dynamic Keypad", hint: "AVA's on-wall scene keypad" },
+        { label: "AVA App", href: "https://avahq.com/", external: true, hint: "iOS and Android control" },
+        { label: "Kiosk Mode", hint: "Locked-down touch surface for shared spaces" },
+        { label: "IP-direct control", hint: "Network control of receivers, displays, and streamers" },
+        { label: "IR control", hint: "Legacy IR control where IP isn't available" },
+      ],
+    },
+    {
+      title: "Hardware feel",
+      description:
+        "What the remote looks and feels like in the hand.",
+      items: [
+        { label: "Single-piece aluminum", hint: "Machined chassis, no seams" },
+        { label: "3D Glass", hint: "Curved cover glass over the display" },
+        { label: "Mechanical click", hint: "Tactile button feedback" },
+        { label: "Magnetic charging dock", hint: "Drop-in charging on the table or nightstand" },
+      ],
+    },
+    {
+      title: "Room types",
+      description:
+        "Where AVA shows up in the home — built around the screen first, then the rooms beyond it.",
+      items: [
+        { label: "TV & cinema spaces", hint: "Theaters, media rooms, primary TVs" },
+        { label: "Music, lighting, climate", hint: "Whole-home control beyond the screen" },
+        { label: "Multi-room", hint: "Flows that span rooms and zones" },
+      ],
+    },
+    {
+      title: "Plays well with",
+      description:
+        "How AVA cooperates with the rest of the gear in the rack and on the wall.",
+      items: [
+        { label: "Sonos", href: "/services/audio-entertainment", hint: "Whole-home audio control" },
+        { label: "Control4", href: "/platforms/control4", hint: "Sits alongside or under a Control4 program" },
+        { label: "Lutron", href: "/platforms/lutron-homeworks", hint: "Lighting and shades control" },
+        { label: "Apple TV", hint: "IP and IR control of Apple TV" },
+        { label: "Roku", hint: "IP and IR control of Roku" },
+        { label: "AV receivers", hint: "Denon, Marantz, Yamaha, and others" },
+        { label: "Projectors", hint: "Sony, JVC, Epson, and others" },
+        { label: "Soundbars", hint: "Sonos, Sennheiser, Samsung, and others" },
+        { label: "TVs", hint: "Sony, LG, Samsung, and others" },
+      ],
+    },
   ];
 
   const everydayScenarios = [
@@ -349,28 +400,19 @@ const AvaService = () => {
         </div>
       </section>
 
-      {/* 4. Devices / Components */}
-      <section className="py-16 sm:py-24 px-4 sm:px-6 bg-black/20 backdrop-blur-sm border-y border-white/5">
+      {/* 4. Product family tree */}
+      <section className="py-16 sm:py-24 px-4 sm:px-6 bg-black/20 backdrop-blur-sm border-y border-white/5" id="product-family-tree">
         <div className="max-w-4xl mx-auto">
           <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">
-            Devices & Components
+            Product Family Tree
           </p>
           <h2 className="text-2xl sm:text-3xl font-bold text-white mb-5">
             What ends up in the room.
           </h2>
           <p className="text-white/60 text-base leading-relaxed mb-8 max-w-2xl">
-            A short, clean rack and one or two AVA remotes per room — single-piece aluminum, magnetic charging dock, built to last. Built-in processor on Cinema Remote means less hardware in the closet.
+            Organized by family — core platform, remotes, control surfaces, hardware feel, room types, and integrations. Linked tags open AVA's official product page.
           </p>
-          <div className="flex flex-wrap gap-2">
-            {componentPills.map((pill) => (
-              <span
-                key={pill}
-                className="px-3 py-1.5 rounded-full border border-white/10 bg-black/40 backdrop-blur-sm text-white/70 text-xs sm:text-sm"
-              >
-                {pill}
-              </span>
-            ))}
-          </div>
+          <ProductFamilyTree groups={productFamilies} />
         </div>
       </section>
 
