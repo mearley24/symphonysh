@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Phone, Menu as MenuIcon, X, Globe, Camera } from "lucide-react";
-import { trackPhoneClick } from "../utils/tracking";
+import { Menu as MenuIcon, X } from "lucide-react";
 
 const navLinks = [
   { label: "Services", path: "/services" },
@@ -11,24 +10,6 @@ const navLinks = [
   { label: "Blog", path: "/blog" },
   { label: "About", path: "/about" },
   { label: "Contact", path: "/contact" },
-];
-
-const serviceLinks = [
-  { label: "Home Automation", path: "/services/home-integration" },
-  { label: "Audio & Entertainment", path: "/services/audio-entertainment" },
-  { label: "Smart Lighting", path: "/services/smart-lighting" },
-  { label: "Shades", path: "/services/shades" },
-  { label: "Networking", path: "/services/networking" },
-  { label: "Climate Control", path: "/services/climate-control" },
-  { label: "Security", path: "/services/security-systems" },
-  { label: "Maintenance", path: "/services/maintenance" },
-];
-
-const platformLinks = [
-  { label: "Lutron HomeWorks", path: "/platforms/lutron-homeworks" },
-  { label: "Lutron RadioRA3", path: "/platforms/lutron-radiora3" },
-  { label: "Control4", path: "/platforms/control4" },
-  { label: "AVA", path: "/platforms/ava" },
 ];
 
 const Header = () => {
@@ -165,123 +146,25 @@ const Header = () => {
             </button>
 
             <nav className="relative z-10 flex flex-col items-center justify-center min-h-screen px-6 py-20 overflow-y-auto">
-          {/* Main nav links */}
-          <div className="space-y-1 text-center mb-10">
-            {navLinks.map((link) => (
-              <Link
-                key={link.path}
-                to={link.path}
-                onClick={() => setMenuOpen(false)}
-                className="group relative block text-3xl sm:text-4xl font-bold py-1.5 transition-colors"
-              >
-                <span className={isActive(link.path) ? "text-white" : "text-white/50 group-hover:text-white transition-colors"}>
-                  {link.label}
-                </span>
-                <span
-                  className={`absolute left-1/2 -translate-x-1/2 -bottom-0.5 h-0.5 rounded-full bg-accent transition-all duration-200 ease-out ${
-                    isActive(link.path) ? "w-12" : "w-0 group-hover:w-8"
-                  }`}
-                />
-              </Link>
-            ))}
-          </div>
-
-          {/* Sub-link groups: Services + Platforms, clearly labeled */}
-          <div className="grid sm:grid-cols-2 gap-x-12 gap-y-6 max-w-2xl w-full mb-12">
-            {/* Services group */}
-            <div className="text-center sm:text-left">
-              <p className="text-accent text-[11px] tracking-widest uppercase mb-3">Services</p>
-              <div className="flex flex-col gap-1.5">
-                {serviceLinks.map((s) => (
+              <div className="space-y-3 text-center">
+                {navLinks.map((link) => (
                   <Link
-                    key={s.path}
-                    to={s.path}
+                    key={link.path}
+                    to={link.path}
                     onClick={() => setMenuOpen(false)}
-                    className={`text-sm transition-colors ${
-                      isActive(s.path)
-                        ? "text-accent"
-                        : "text-white/40 hover:text-white/70"
-                    }`}
+                    className="group relative block text-3xl sm:text-4xl font-bold py-2 transition-colors"
                   >
-                    {s.label}
+                    <span className={isActive(link.path) ? "text-white" : "text-white/50 group-hover:text-white transition-colors"}>
+                      {link.label}
+                    </span>
+                    <span
+                      className={`absolute left-1/2 -translate-x-1/2 -bottom-0.5 h-0.5 rounded-full bg-accent transition-all duration-200 ease-out ${
+                        isActive(link.path) ? "w-12" : "w-0 group-hover:w-8"
+                      }`}
+                    />
                   </Link>
                 ))}
               </div>
-            </div>
-
-            {/* Platforms group */}
-            <div className="text-center sm:text-left">
-              <p className="text-accent text-[11px] tracking-widest uppercase mb-3">Platforms</p>
-              <div className="flex flex-col gap-1.5">
-                {platformLinks.map((p) => (
-                  <Link
-                    key={p.path}
-                    to={p.path}
-                    onClick={() => setMenuOpen(false)}
-                    className={`text-sm transition-colors ${
-                      isActive(p.path)
-                        ? "text-accent"
-                        : "text-white/40 hover:text-white/70"
-                    }`}
-                  >
-                    {p.label}
-                  </Link>
-                ))}
-                <Link
-                  to="/setup-finder"
-                  onClick={() => setMenuOpen(false)}
-                  className={`text-sm transition-colors mt-2 ${
-                    isActive("/setup-finder")
-                      ? "text-accent"
-                      : "text-white/55 hover:text-white/80"
-                  }`}
-                >
-                  Not sure which one? → Setup Finder
-                </Link>
-              </div>
-            </div>
-          </div>
-
-          {/* CTA + phone */}
-          <div className="flex flex-col items-center gap-4">
-            <Link
-              to="/scheduling"
-              onClick={() => setMenuOpen(false)}
-              className="inline-flex items-center justify-center bg-accent hover:bg-accent/90 text-white text-base font-medium px-8 py-3.5 rounded-lg transition-colors"
-            >
-              Book Consultation
-            </Link>
-            <a
-              href="tel:+19705193013"
-              onClick={trackPhoneClick}
-              className="inline-flex items-center gap-2.5 text-white/50 hover:text-white/80 text-lg transition-colors"
-            >
-              <Phone className="w-5 h-5" />
-              (970) 519-3013
-            </a>
-          </div>
-
-          {/* Social links */}
-          <div className="flex items-center gap-6 mt-8 pt-6 border-t border-white/10">
-            <a
-              href="https://www.instagram.com/symphonysmarthomes"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 text-white/30 hover:text-white/60 text-sm transition-colors"
-            >
-              <Camera className="w-4 h-4" />
-              Instagram
-            </a>
-            <a
-              href="https://g.page/symphonysmarthomes"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 text-white/30 hover:text-white/60 text-sm transition-colors"
-            >
-              <Globe className="w-4 h-4" />
-              Google
-            </a>
-          </div>
             </nav>
           </div>
         </>
