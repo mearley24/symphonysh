@@ -124,6 +124,21 @@ const AvaService = () => {
     href: "https://www.ava.com/ava-os",
     external: true,
     hint: "AVA's operating system — the brain behind every remote and keypad",
+    preview: {
+      category: "Home operating system",
+      description:
+        "AVA OS is the operating system behind every AVA remote and keypad — Flows, Dynamic Keypad, and direct device control all run on the same platform.",
+      bestFit:
+        "Cinema rooms, theaters, and media-room-first homes that want the AV experience to feel custom-built, not generic.",
+      relatedTo: "Platform · AVA",
+      highlights: [
+        "Cinema-first interface tuned around the screen",
+        "Dynamic on-screen and on-wall controls",
+        "Runs alongside or under Control4 cleanly",
+      ],
+      officialUrl: "https://www.ava.com/ava-os",
+      ctaHref: "/scheduling?service=ava",
+    },
   };
 
   const productFamilies: ProductFamilyGroup[] = [
@@ -132,9 +147,59 @@ const AvaService = () => {
       description:
         "Single-piece aluminum, 3D Glass, mechanical click — and a built-in octa-core processor inside Cinema Remote, so there's less hardware in the closet.",
       items: [
-        { label: "Cinema Remote", href: "https://www.ava.com/cinema-remote", external: true, hint: "Flagship remote for media rooms and theaters, with built-in processor" },
-        { label: "Home Remote", href: "https://www.ava.com/home-remote", external: true, hint: "Whole-home remote for rooms beyond the screen" },
-        { label: "Nano Brain", hint: "Compact processor option for installs without a Cinema Remote" },
+        {
+          label: "Cinema Remote",
+          hint: "Flagship remote for media rooms and theaters, with built-in processor",
+          preview: {
+            category: "Cinema remote",
+            description:
+              "AVA's flagship remote — single-piece aluminum, 3D Glass, mechanical click — with a built-in octa-core processor, so a separate brain in the rack isn't required.",
+            bestFit: "Media rooms and theaters where the remote is the primary interface and has to feel right in the hand.",
+            relatedTo: "Hardware · AVA",
+            highlights: [
+              "Built-in octa-core processor",
+              "Single-piece aluminum, 3D Glass touch surface",
+              "Tuned for cinema-first interface",
+            ],
+            officialUrl: "https://www.ava.com/cinema-remote",
+            ctaHref: "/scheduling?service=ava",
+          },
+        },
+        {
+          label: "Home Remote",
+          hint: "Whole-home remote for rooms beyond the screen",
+          preview: {
+            category: "Whole-home remote",
+            description:
+              "The Home Remote takes AVA OS beyond the cinema — rooms with TVs, music, lighting, climate, and shades, on the same hand-held experience.",
+            bestFit: "Whole-home AVA installs that want the same remote in every TV room and great room.",
+            relatedTo: "Hardware · AVA",
+            highlights: [
+              "Same AVA OS as Cinema Remote",
+              "Whole-home control beyond the screen",
+              "Shared favorites and flows",
+            ],
+            officialUrl: "https://www.ava.com/home-remote",
+            ctaHref: "/scheduling?service=ava",
+          },
+        },
+        {
+          label: "Nano Brain",
+          hint: "Compact processor option for installs without a Cinema Remote",
+          preview: {
+            category: "Compact processor",
+            description:
+              "Nano Brain is the compact AVA processor — used when an install needs the AVA OS engine without a Cinema Remote in the room.",
+            bestFit: "Whole-home AVA programs that need a brain per zone but a Cinema Remote isn't the right interface there.",
+            relatedTo: "Hardware · AVA",
+            highlights: [
+              "Compact, rack- or shelf-mountable",
+              "Same AVA OS feature set",
+              "Pairs with Home Remote, Dynamic Keypad, AVA App",
+            ],
+            ctaHref: "/scheduling?service=ava",
+          },
+        },
       ],
     },
     {
@@ -144,8 +209,42 @@ const AvaService = () => {
       description:
         "The logic AVA OS runs underneath — flows, dynamic keypads, and direct device control.",
       items: [
-        { label: "AVA Flows", hint: "Multi-step automation logic tied to events" },
-        { label: "Dynamic Keypad", hint: "AVA's on-wall scene keypad" },
+        {
+          label: "AVA Flows",
+          hint: "Multi-step automation logic tied to events",
+          preview: {
+            category: "Automation logic",
+            description:
+              "Flows are the multi-step automations underneath AVA OS — Movie, Game day, Goodnight — tying displays, receivers, lighting, shades, and audio together around real moments.",
+            bestFit: "Cinema rooms and great rooms where 'one tap, the whole room sets up' is the goal.",
+            relatedTo: "Control engine · AVA OS",
+            highlights: [
+              "Triggers from remote, keypad, schedule, or event",
+              "Conditional logic across AV, lighting, shades",
+              "Tunable per-room without touching firmware",
+            ],
+            officialUrl:
+              "https://support.ava.com/hc/en-us/articles/17380276206877--Device-Control-and-AVA-OS",
+            ctaHref: "/scheduling?service=ava",
+          },
+        },
+        {
+          label: "Dynamic Keypad",
+          hint: "AVA's on-wall scene keypad",
+          preview: {
+            category: "On-wall keypad",
+            description:
+              "Dynamic Keypad is AVA's on-wall scene control — labels and behavior change with the room state, so the wall keeps up with what the family is actually doing.",
+            bestFit: "Theaters, media rooms, and great rooms where the wall keypad has to feel as adaptive as the remote.",
+            relatedTo: "Control engine · AVA OS",
+            highlights: [
+              "Dynamic labels per scene/state",
+              "Tied into AVA Flows",
+              "Pairs with Cinema Remote, Home Remote, App",
+            ],
+            ctaHref: "/scheduling?service=ava",
+          },
+        },
         { label: "IP control", hint: "Network control of receivers, displays, and streamers" },
         { label: "IR / CEC", hint: "Legacy IR and HDMI-CEC control where IP isn't available" },
       ],

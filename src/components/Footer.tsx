@@ -99,6 +99,14 @@ const Footer = () => {
                   </Link>
                 </li>
               ))}
+              <li className="pt-1">
+                <Link
+                  to="/service-areas"
+                  className="text-white/30 hover:text-white/60 text-xs transition-colors"
+                >
+                  All service areas →
+                </Link>
+              </li>
             </ul>
           </div>
         </div>
