@@ -13,24 +13,6 @@ const navLinks = [
   { label: "Contact", path: "/contact" },
 ];
 
-const serviceLinks = [
-  { label: "Home Automation", path: "/services/home-integration" },
-  { label: "Audio & Entertainment", path: "/services/audio-entertainment" },
-  { label: "Smart Lighting", path: "/services/smart-lighting" },
-  { label: "Shades", path: "/services/shades" },
-  { label: "Networking", path: "/services/networking" },
-  { label: "Climate Control", path: "/services/climate-control" },
-  { label: "Security", path: "/services/security-systems" },
-  { label: "Maintenance", path: "/services/maintenance" },
-];
-
-const platformLinks = [
-  { label: "Lutron HomeWorks", path: "/platforms/lutron-homeworks" },
-  { label: "Lutron RadioRA3", path: "/platforms/lutron-radiora3" },
-  { label: "Control4", path: "/platforms/control4" },
-  { label: "AVA", path: "/platforms/ava" },
-];
-
 const Header = () => {
   const location = useLocation();
   const currentPath = location.pathname;
@@ -166,13 +148,13 @@ const Header = () => {
 
             <nav className="relative z-10 flex flex-col items-center justify-center min-h-screen px-6 py-20 overflow-y-auto">
           {/* Main nav links */}
-          <div className="space-y-1 text-center mb-10">
+          <div className="space-y-2 text-center mb-12">
             {navLinks.map((link) => (
               <Link
                 key={link.path}
                 to={link.path}
                 onClick={() => setMenuOpen(false)}
-                className="group relative block text-3xl sm:text-4xl font-bold py-1.5 transition-colors"
+                className="group relative block text-3xl sm:text-4xl font-bold py-2 transition-colors"
               >
                 <span className={isActive(link.path) ? "text-white" : "text-white/50 group-hover:text-white transition-colors"}>
                   {link.label}
@@ -184,62 +166,6 @@ const Header = () => {
                 />
               </Link>
             ))}
-          </div>
-
-          {/* Sub-link groups: Services + Platforms, clearly labeled */}
-          <div className="grid sm:grid-cols-2 gap-x-12 gap-y-6 max-w-2xl w-full mb-12">
-            {/* Services group */}
-            <div className="text-center sm:text-left">
-              <p className="text-accent text-[11px] tracking-widest uppercase mb-3">Services</p>
-              <div className="flex flex-col gap-1.5">
-                {serviceLinks.map((s) => (
-                  <Link
-                    key={s.path}
-                    to={s.path}
-                    onClick={() => setMenuOpen(false)}
-                    className={`text-sm transition-colors ${
-                      isActive(s.path)
-                        ? "text-accent"
-                        : "text-white/40 hover:text-white/70"
-                    }`}
-                  >
-                    {s.label}
-                  </Link>
-                ))}
-              </div>
-            </div>
-
-            {/* Platforms group */}
-            <div className="text-center sm:text-left">
-              <p className="text-accent text-[11px] tracking-widest uppercase mb-3">Platforms</p>
-              <div className="flex flex-col gap-1.5">
-                {platformLinks.map((p) => (
-                  <Link
-                    key={p.path}
-                    to={p.path}
-                    onClick={() => setMenuOpen(false)}
-                    className={`text-sm transition-colors ${
-                      isActive(p.path)
-                        ? "text-accent"
-                        : "text-white/40 hover:text-white/70"
-                    }`}
-                  >
-                    {p.label}
-                  </Link>
-                ))}
-                <Link
-                  to="/setup-finder"
-                  onClick={() => setMenuOpen(false)}
-                  className={`text-sm transition-colors mt-2 ${
-                    isActive("/setup-finder")
-                      ? "text-accent"
-                      : "text-white/55 hover:text-white/80"
-                  }`}
-                >
-                  Not sure which one? → Setup Finder
-                </Link>
-              </div>
-            </div>
           </div>
 
           {/* CTA + phone */}
