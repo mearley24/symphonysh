@@ -43,6 +43,26 @@ const Header = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Close menu on route change
+  useEffect(() => {
+    setMenuOpen(false);
+  }, [currentPath]);
+
+  // Escape key closes menu; lock body scroll while open
+  useEffect(() => {
+    if (!menuOpen) return;
+    const handleKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setMenuOpen(false);
+    };
+    document.addEventListener("keydown", handleKey);
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.removeEventListener("keydown", handleKey);
+      document.body.style.overflow = previousOverflow;
+    };
+  }, [menuOpen]);
+
   const isActive = (path: string) =>
     currentPath === path || (path !== "/" && currentPath.startsWith(path));
 
@@ -80,9 +100,12 @@ const Header = () => {
                   Schedule
                 </Link>
                 <button
+                  type="button"
                   onClick={() => setMenuOpen(!menuOpen)}
                   className="inline-flex items-center gap-2 text-white/40 hover:text-white text-sm tracking-widest uppercase transition-colors px-[2px]"
-                  aria-label="Toggle menu"
+                  aria-label={menuOpen ? "Close menu" : "Open menu"}
+                  aria-expanded={menuOpen}
+                  aria-controls="primary-menu"
                 >
                   {menuOpen ? <X className="w-5 h-5" /> : <MenuIcon className="w-5 h-5" />}
                   <span>Menu</span>
@@ -97,9 +120,12 @@ const Header = () => {
       {!scrolled && (
         <div className="fixed top-4 right-4 z-50">
           <button
+            type="button"
             onClick={() => setMenuOpen(!menuOpen)}
             className="inline-flex items-center gap-2 bg-white/5 backdrop-blur-sm border border-white/10 rounded-full px-4 py-2 text-white/60 hover:text-white text-sm tracking-widest uppercase transition-colors"
-            aria-label="Toggle menu"
+            aria-label={menuOpen ? "Close menu" : "Open menu"}
+            aria-expanded={menuOpen}
+            aria-controls="primary-menu"
           >
             {menuOpen ? <X className="w-5 h-5" /> : <MenuIcon className="w-5 h-5" />}
             <span>Menu</span>
@@ -107,25 +133,38 @@ const Header = () => {
         </div>
       )}
 
-      {/* Full-screen overlay menu */}
-      {/* Backdrop */}
-      <div
-        className={`fixed inset-0 z-30 bg-black/60 transition-opacity duration-200 ease-out ${
-          menuOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
-        }`}
-        onClick={() => setMenuOpen(false)}
-      />
-      {/* Menu panel */}
-      <div
-        className={`fixed inset-0 z-40 transition-all duration-200 ease-out ${
-          menuOpen
-            ? "opacity-100 translate-y-0 pointer-events-auto"
-            : "opacity-0 -translate-y-4 pointer-events-none"
-        }`}
-      >
-        <div className="absolute inset-0 bg-primary/98 backdrop-blur-2xl" />
+      {/* Full-screen overlay menu — only mounted when open so closed-state links
+          stay out of the DOM/accessibility/focus tree entirely. */}
+      {menuOpen && (
+        <>
+          {/* Backdrop */}
+          <div
+            className="fixed inset-0 z-[60] bg-black/60 animate-in fade-in duration-200"
+            onClick={() => setMenuOpen(false)}
+            aria-hidden="true"
+          />
+          {/* Menu panel — z above header (z-50) so logo can't intercept link clicks */}
+          <div
+            id="primary-menu"
+            role="dialog"
+            aria-modal="true"
+            aria-label="Site navigation"
+            className="fixed inset-0 z-[70] animate-in fade-in duration-200"
+          >
+            <div className="absolute inset-0 bg-primary/98 backdrop-blur-2xl" />
 
-        <nav className="relative z-10 flex flex-col items-center justify-center min-h-screen px-6 py-20">
+            {/* Close button — sits above the panel so it can always close the menu */}
+            <button
+              type="button"
+              onClick={() => setMenuOpen(false)}
+              className="absolute top-4 right-4 z-20 inline-flex items-center gap-2 bg-white/5 hover:bg-white/10 backdrop-blur-sm border border-white/10 rounded-full px-4 py-2 text-white/80 hover:text-white text-sm tracking-widest uppercase transition-colors"
+              aria-label="Close menu"
+            >
+              <X className="w-5 h-5" />
+              <span>Close</span>
+            </button>
+
+            <nav className="relative z-10 flex flex-col items-center justify-center min-h-screen px-6 py-20 overflow-y-auto">
           {/* Main nav links */}
           <div className="space-y-1 text-center mb-10">
             {navLinks.map((link) => (
@@ -243,8 +282,10 @@ const Header = () => {
               Google
             </a>
           </div>
-        </nav>
-      </div>
+            </nav>
+          </div>
+        </>
+      )}
     </>
   );
 };
