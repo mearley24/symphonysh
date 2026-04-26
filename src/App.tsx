@@ -21,6 +21,8 @@ import BlogPost from "./pages/BlogPost";
 import CityPage from "./pages/CityPage";
 import LocalLandingPage from "./pages/LocalLandingPage";
 import ServiceAreasIndex from "./pages/ServiceAreasIndex";
+import Resources from "./pages/Resources";
+import ResourceGuide from "./pages/ResourceGuide";
 
 // Photo gallery pages
 import HomeTheater from "./pages/photos/HomeTheater";
@@ -155,6 +157,12 @@ function App() {
           {/* Service-area landing hub + service-specific local pages */}
           <Route path="/service-areas" element={<ServiceAreasIndex />} />
           <Route path="/service-areas/:slug" element={<LocalLandingPage />} />
+
+          {/* Resources / guides hub + guide pages */}
+          <Route path="/resources" element={<Resources />} />
+          <Route path="/resources/:slug" element={<ResourceGuide />} />
+          <Route path="/guides" element={<Navigate to="/resources" replace />} />
+          <Route path="/guides/:slug" element={<Navigate to="/resources" replace />} />
 
           {/* 404 route should be the last one */}
           <Route path="*" element={<NotFound />} />

@@ -36,4 +36,12 @@
   <url><loc>https://symphonysh.com/service-areas/control4-lighting-vail-valley</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://symphonysh.com/service-areas/lutron-radiora3-vail-valley</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://symphonysh.com/service-areas/smart-home-prewire-vail-valley</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <!-- Resources / guides hub + high-intent guide pages -->
+  <url><loc>https://symphonysh.com/resources</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://symphonysh.com/resources/control4-vs-lutron-lighting</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://symphonysh.com/resources/radiora3-vs-homeworks</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://symphonysh.com/resources/smart-home-prewire-checklist</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://symphonysh.com/resources/second-home-smart-home-setup</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://symphonysh.com/resources/smart-shades-options</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://symphonysh.com/resources/goodnight-scene-checklist</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
 </urlset>
