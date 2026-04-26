@@ -36,7 +36,7 @@ const Control4 = () => {
     "name": "Control4 Home Automation",
     "provider": schemaProviderLocalBusiness,
     "description":
-      "Control4 design, installation, programming, and service for Vail Valley homes. Lighting, audio, climate, security, and shades from one interface.",
+      "Control4 design, installation, programming, and service for Vail Valley homes. Native Control4 lighting, audio, climate, security, and shades from one interface.",
     "areaServed": "Vail Valley, Colorado",
   };
 
@@ -45,13 +45,19 @@ const Control4 = () => {
       icon: Lightbulb,
       title: "Lighting",
       description:
-        "Keypads, dimmers, and lighting scenes across the whole house — Control4 sits on top of Lutron RadioRA3 or HomeWorks for the actual lighting load.",
+        "Native Control4 lighting — Lux keypads, dimmers, switches, and outlets in wireless and wired, plus centralized lighting modules for whole-home loads on a panel.",
+    },
+    {
+      icon: Sparkles,
+      title: "Vibrant Linear Lighting",
+      description:
+        "Tunable-white CCT LEDs with 90+ CRI in aluminum extrusions. Daylight mode mirrors the sun's cycle through the day to support circadian health.",
     },
     {
       icon: Volume2,
       title: "Entertainment",
       description:
-        "Whole-home audio, media rooms, and theaters under one interface. Multi-room music, lightning-fast source switching, and entertainment sessions anyone can start.",
+        "Whole-home audio, media rooms, and theaters on one interface. Multi-room music, fast source switching, and entertainment sessions anyone can start.",
     },
     {
       icon: Thermometer,
@@ -75,7 +81,7 @@ const Control4 = () => {
       icon: Home,
       title: "Scenes & X4 Routines",
       description:
-        "Goodmorning, Goodbye/Away, Welcome, Movie/Relax, Goodnight — one tap, voice command, or scheduled X4 Routine coordinates lights, music, shades, climate, and locks.",
+        "Goodmorning, Goodbye/Away, Welcome, Movie/Relax, Goodnight — one tap, voice command, or scheduled X4 Routine coordinates lights, music, shades, climate, and locks. Mockupancy plays back recorded use while the house is empty.",
     },
   ];
 
@@ -116,6 +122,21 @@ const Control4 = () => {
 
   const productFamilies: ProductFamilyGroup[] = [
     {
+      title: "Control4 lighting",
+      href: "https://www.control4.com/solutions/smart-lighting",
+      external: true,
+      description:
+        "Native Control4 lighting — keypads, dimmers, switches, and outlets in wireless and wired, plus centralized modules for whole-home loads on a panel.",
+      items: [
+        { label: "Lux Keypads", href: "https://www.control4.com/solutions/products/wireless-keypads", external: true, hint: "Configurable keypads with custom backlit engraving — up to 34 button variations" },
+        { label: "Lux Universal Dimmer", href: "https://www.control4.com/solutions/products/wireless-keypads", external: true, hint: "Dims virtually any load type" },
+        { label: "Lux Switch", href: "https://www.control4.com/solutions/products/wireless-keypads", external: true, hint: "On/off for LED, incandescent, halogen, ELV/MLV, fluorescents, motors, fans" },
+        { label: "Lux Outlets", href: "https://www.control4.com/solutions/products/wireless-keypads", external: true, hint: "Smart outlets in the Lux faceplate family" },
+        { label: "Centralized lighting", href: "https://www.control4.com/solutions/products/wireless-keypads", external: true, hint: "Panel-mounted modules — 8 circuits per module, 120/240/277V" },
+        { label: "Vibrant Linear Lighting", href: "https://www.control4.com/solutions/products/vibrant-linear-lighting", external: true, hint: "90+ CRI tunable-white linear LEDs with daylight mode" },
+      ],
+    },
+    {
       title: "Control surfaces",
       href: "https://www.control4.com/solutions/products/",
       external: true,
@@ -129,14 +150,16 @@ const Control4 = () => {
       ],
     },
     {
-      title: "Experiences",
+      title: "Scenes & routines",
       description:
         "What the system actually does — the routines, scenes, and alerts the family lives with day to day.",
       items: [
         { label: "X4 Routines", hint: "Multi-step routines that chain lighting, AV, climate, and shades" },
         { label: "Scenes", hint: "Welcome, Movie, Goodnight — engraved on a keypad" },
-        { label: "Favorites", hint: "Personal home-screen layouts per user" },
         { label: "Schedules", hint: "Time, sunrise/sunset, and conditional schedules" },
+        { label: "Mockupancy", hint: "Records use and plays it back with randomization while you're away" },
+        { label: "Motion sensors", hint: "Hands-free illumination in halls, baths, closets" },
+        { label: "Favorites", hint: "Personal home-screen layouts per user" },
         { label: "Alerts", hint: "Push and in-app notifications for the events that matter" },
       ],
     },
@@ -145,23 +168,12 @@ const Control4 = () => {
       description:
         "Subsystems Control4 ties together under one interface — driver-supported and confirmed against the gear actually in the house.",
       items: [
-        { label: "Lighting", href: "/services/smart-lighting", hint: "Lutron HomeWorks, RadioRA3, and Control4 lighting" },
         { label: "Audio & entertainment", href: "/services/audio-entertainment", hint: "Sonos, Denon, distributed audio, TVs, and projectors" },
         { label: "Climate", href: "/services/climate-control", hint: "Thermostats, mini-splits, and zoned HVAC" },
         { label: "Security", href: "/services/security-systems", hint: "Cameras, doorbells, and intrusion" },
-        { label: "Shades", href: "/services/shades", hint: "Lutron, Hunter Douglas, and Lutron Triathlon motorized shades" },
+        { label: "Shades", href: "/services/shades", hint: "Motorized shades drawn into lighting scenes" },
         { label: "Locks & garage", hint: "Smart locks and gate/garage drivers where verified" },
         { label: "Networking", href: "/services/networking", hint: "Routers, switches, access points — the foundation under it all" },
-      ],
-    },
-    {
-      title: "Lighting layer",
-      description:
-        "What Control4 rides on top of — the lighting platforms it integrates with most often.",
-      items: [
-        { label: "Lutron HomeWorks", href: "/platforms/lutron-homeworks", hint: "Often the lighting layer underneath Control4" },
-        { label: "Lutron RadioRA3", href: "/platforms/lutron-radiora3", hint: "Residential wireless lighting" },
-        { label: "AVA", href: "/platforms/ava", hint: "Cinema and entertainment focus" },
       ],
     },
     {
@@ -169,12 +181,23 @@ const Control4 = () => {
       href: "https://www.control4.com/solutions/catalog",
       external: true,
       description:
-        "Voice and the wider ecosystem that Control4 cooperates with.",
+        "Voice and the wider ecosystem Control4 cooperates with.",
       items: [
         { label: "25,000+ compatible devices", href: "https://www.control4.com/solutions/catalog", external: true, hint: "Driver-supported third-party devices" },
         { label: "Alexa", hint: "Amazon Alexa voice control" },
         { label: "Google Assistant", hint: "Google Assistant voice control" },
         { label: "Apple HomeKit, CarPlay & Siri", hint: "Apple ecosystem integrations" },
+      ],
+    },
+    {
+      title: "Optional integrations",
+      description:
+        "Independent platforms Control4 can coexist with when a client already has them or specifically wants them — not required for a Control4 install.",
+      items: [
+        { label: "Lutron HomeWorks", href: "/platforms/lutron-homeworks", hint: "Optional pairing when a client wants Lutron-grade architectural lighting" },
+        { label: "Lutron RadioRA3", href: "/platforms/lutron-radiora3", hint: "Optional pairing for finished-home retrofits already on RadioRA3" },
+        { label: "AVA", href: "/platforms/ava", hint: "Optional single-remote layer for media rooms and theaters" },
+        { label: "Sonos", hint: "Streaming audio under the Control4 app" },
       ],
     },
   ];
@@ -204,8 +227,12 @@ const Control4 = () => {
 
   const faqs = [
     {
-      q: "What is the difference between Control4 and Lutron RadioRA3?",
-      a: "RadioRA3 is a lighting and shade control system. Control4 is a full-home automation system that ties lighting, audio, video, climate, security, and shades together behind one interface. Many of our homes run Control4 on top of RadioRA3 — the two are designed to work together.",
+      q: "Does Control4 have its own lighting, or do I need Lutron underneath?",
+      a: "Control4 has its own native lighting line — Lux keypads, dimmers, switches, outlets, and centralized lighting modules — plus Vibrant Linear Lighting for tunable-white LED. A Control4 install does not require Lutron. Lutron is an option when a client already has it or specifically wants Lutron's keypad and dimming feel.",
+    },
+    {
+      q: "Can Control4 and Lutron run together?",
+      a: "Yes, but it is optional, not the default. Control4 and Lutron are independent platforms. We mix them when a homeowner already has Lutron in the walls or wants Lutron-grade architectural lighting alongside the rest of the Control4 system.",
     },
     {
       q: "Can you service a Control4 system another company installed?",
@@ -246,8 +273,8 @@ const Control4 = () => {
     <PageBackground image={bgHomeIntegration}>
       <SEO
         title="Control4 Installation & Service in Vail Valley"
-        description="Control4 design, installation, programming, and personalization for Vail Valley homes. Lighting, entertainment, security, and comfort on one platform — Control4 App, touchscreens, on-wall keypads, and smart remote. Compatible with an ecosystem of over 25,000 third-party devices."
-        keywords="Control4 Vail Valley, Control4 dealer Eagle County, Control4 installer, Control4 programming, Control4 service"
+        description="Control4 for Vail Valley homes — native Control4 lighting (Lux keypads, dimmers, centralized modules, Vibrant Linear), entertainment, security, and comfort on one platform. Control4 App, touchscreens, keypads, and smart remote. Compatible with 25,000+ third-party devices."
+        keywords="Control4 Vail Valley, Control4 dealer Eagle County, Control4 lighting, Lux keypads, Vibrant Linear Lighting, Control4 installer"
         schema={[serviceSchema, faqSchema]}
         breadcrumbs={[
           { name: "Home", url: "/" },
@@ -273,7 +300,7 @@ const Control4 = () => {
             Whole-home lighting and control, one interface.
           </h1>
           <p className="text-white/60 text-base sm:text-lg leading-relaxed mb-8 max-w-2xl hero-subtext-shadow">
-            Our default for whole-home projects. Lighting, scenes, audio, climate, security, and shades behind one app, one keypad family, and a smart remote.
+            The default for whole-home projects. Native Control4 lighting, scenes, audio, climate, security, and shades behind one app, one keypad family, and a smart remote.
           </p>
           <div className="flex flex-col sm:flex-row gap-3">
             <a
@@ -307,7 +334,7 @@ const Control4 = () => {
             One platform for lighting, entertainment, security, and comfort.
           </h2>
           <p className="text-white/60 text-base leading-relaxed mb-10 max-w-3xl">
-            Control4 is a personalized smart-home platform. It pulls the devices in the house — lighting, audio, video, climate, locks, shades, cameras — into one program controlled from the Control4 App, dedicated touchscreens, on-wall keypads, or a smart remote.
+            A personalized platform with its own native lighting line — Lux keypads, dimmers, switches, outlets, centralized modules, and Vibrant Linear LED — alongside audio, video, climate, locks, shades, and cameras. Controlled from the Control4 App, dedicated touchscreens, on-wall keypads, or a smart remote.
           </p>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
             {pillars.map((item, i) => (
@@ -404,7 +431,7 @@ const Control4 = () => {
             Explore what Control4 can include.
           </h2>
           <p className="text-white/80 text-base sm:text-lg leading-relaxed mb-10 max-w-3xl">
-            The Control4 controller sits at the top — every branch below it runs on the same program. Linked items open Control4's official product pages or an internal service page where available.
+            Control4 at the root, native lighting first, then control surfaces, scenes, and connected categories. Lutron and AVA appear only as optional integrations. Linked items open Control4's official product pages or an internal service page where available.
           </p>
           <ProductFamilyTree root={productFamilyRoot} groups={productFamilies} />
         </div>
@@ -483,27 +510,27 @@ const Control4 = () => {
             Compare Platforms
           </p>
           <h2 className="text-2xl sm:text-3xl font-bold text-white mb-5">
-            Control4, RadioRA3, HomeWorks, or AVA?
+            Control4, Lutron, or AVA?
           </h2>
           <p className="text-white/60 text-base leading-relaxed mb-8 max-w-3xl">
-            Control4 is the whole-home automation layer. Lutron sits underneath it for lighting and shades. AVA is the simpler choice when the house is mostly about media and TV.
+            Control4 is the default for whole-home projects — a full automation platform with its own native lighting. Lutron and AVA are independent platforms. Each can stand on its own; mixing is optional when it actually fits the home.
           </p>
           <div className="grid sm:grid-cols-2 gap-5 mb-6">
             <div className="bg-black/40 backdrop-blur-sm border border-accent/30 rounded-xl p-6">
-              <p className="text-accent text-xs font-semibold uppercase tracking-wide mb-2">You are here</p>
+              <p className="text-accent text-xs font-semibold uppercase tracking-wide mb-2">You are here · Default</p>
               <h3 className="text-white font-semibold text-lg mb-2">Control4</h3>
               <p className="text-white/55 text-sm leading-relaxed">
-                One platform for lighting, entertainment, security, and comfort. Personalized by your integrator, controlled from the Control4 App, touchscreens, on-wall keypads, or smart remote.
+                One platform for lighting, entertainment, security, and comfort — with native Control4 lighting (Lux keypads, dimmers, centralized modules, Vibrant Linear). Controlled from the Control4 App, touchscreens, on-wall keypads, or smart remote.
               </p>
             </div>
             <Link
               to="/platforms/lutron-radiora3"
               className="group bg-black/40 backdrop-blur-sm border border-white/8 rounded-xl p-6 hover:border-accent/30 transition-colors"
             >
-              <p className="text-white/40 text-xs font-semibold uppercase tracking-wide mb-2">Lighting platform</p>
+              <p className="text-white/40 text-xs font-semibold uppercase tracking-wide mb-2">Alternative · Lutron lighting</p>
               <h3 className="text-white font-semibold text-lg mb-2 group-hover:text-accent transition-colors">RadioRA3</h3>
               <p className="text-white/55 text-sm leading-relaxed mb-4">
-                Lutron's wireless lighting and shade platform. Often runs underneath Control4 in our installs.
+                Lutron's wireless lighting and shade platform. Stands alone, or pairs with Control4 when a client already has it or wants the Lutron keypad feel.
               </p>
               <span className="inline-flex items-center gap-1 text-accent text-sm font-medium group-hover:gap-2 transition-all">
                 Explore RadioRA3 <ArrowRight className="w-3.5 h-3.5" />
@@ -513,10 +540,10 @@ const Control4 = () => {
               to="/platforms/lutron-homeworks"
               className="group bg-black/40 backdrop-blur-sm border border-white/8 rounded-xl p-6 hover:border-accent/30 transition-colors"
             >
-              <p className="text-white/40 text-xs font-semibold uppercase tracking-wide mb-2">Flagship lighting</p>
+              <p className="text-white/40 text-xs font-semibold uppercase tracking-wide mb-2">Alternative · Architectural</p>
               <h3 className="text-white font-semibold text-lg mb-2 group-hover:text-accent transition-colors">HomeWorks</h3>
               <p className="text-white/55 text-sm leading-relaxed mb-4">
-                Lutron's flagship platform for architectural homes. Control4 often sits on top for whole-home automation.
+                Lutron's flagship for architectural homes — Ketra, Lumaris, Palladiom, hand-crafted keypads. Optional pairing with Control4 when a client wants Lutron-grade lighting.
               </p>
               <span className="inline-flex items-center gap-1 text-accent text-sm font-medium group-hover:gap-2 transition-all">
                 Explore HomeWorks <ArrowRight className="w-3.5 h-3.5" />
@@ -526,10 +553,10 @@ const Control4 = () => {
               to="/platforms/ava"
               className="group bg-black/40 backdrop-blur-sm border border-white/8 rounded-xl p-6 hover:border-accent/30 transition-colors"
             >
-              <p className="text-white/40 text-xs font-semibold uppercase tracking-wide mb-2">Media remote</p>
+              <p className="text-white/40 text-xs font-semibold uppercase tracking-wide mb-2">Optional · Media remote</p>
               <h3 className="text-white font-semibold text-lg mb-2 group-hover:text-accent transition-colors">AVA</h3>
               <p className="text-white/55 text-sm leading-relaxed mb-4">
-                Premium remote and media control. Right when the house is mostly TV and audio without full automation.
+                A single physical remote for media rooms and theaters. Stands alone, or sits alongside Control4 when one room needs a dedicated remote.
               </p>
               <span className="inline-flex items-center gap-1 text-accent text-sm font-medium group-hover:gap-2 transition-all">
                 Explore AVA <ArrowRight className="w-3.5 h-3.5" />
@@ -628,21 +655,27 @@ const Control4 = () => {
           <div className="grid sm:grid-cols-2 gap-5">
             {[
               {
+                title: "Smart Lighting",
+                description:
+                  "How Control4 native lighting compares to Lutron — keypads, dimmers, scenes, and tunable-white LED.",
+                path: "/services/smart-lighting",
+              },
+              {
                 title: "Lutron HomeWorks",
                 description:
-                  "For architectural and luxury homes, Control4 often sits on top of HomeWorks.",
+                  "Lutron's architectural flagship — an alternative platform when a client specifically wants Lutron-grade lighting.",
                 path: "/platforms/lutron-homeworks",
               },
               {
                 title: "Lutron RadioRA3",
                 description:
-                  "The lighting layer we most often pair with Control4 in retrofits and scalable homes.",
+                  "Lutron's wireless line for finished-home retrofits — optional pairing with Control4 when it already exists in the house.",
                 path: "/platforms/lutron-radiora3",
               },
               {
                 title: "AVA Smart Remote",
                 description:
-                  "When a single remote for TV, audio, and basic control is enough on its own.",
+                  "A single remote for media rooms and theaters. Stands alone or sits alongside Control4 in one room.",
                 path: "/platforms/ava",
               },
               {
