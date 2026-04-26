@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Phone, Menu as MenuIcon, X, Globe, Camera } from "lucide-react";
-import { trackPhoneClick } from "../utils/tracking";
+import { Menu as MenuIcon, X } from "lucide-react";
 
 const navLinks = [
   { label: "Services", path: "/services" },
@@ -147,67 +146,25 @@ const Header = () => {
             </button>
 
             <nav className="relative z-10 flex flex-col items-center justify-center min-h-screen px-6 py-20 overflow-y-auto">
-          {/* Main nav links */}
-          <div className="space-y-2 text-center mb-12">
-            {navLinks.map((link) => (
-              <Link
-                key={link.path}
-                to={link.path}
-                onClick={() => setMenuOpen(false)}
-                className="group relative block text-3xl sm:text-4xl font-bold py-2 transition-colors"
-              >
-                <span className={isActive(link.path) ? "text-white" : "text-white/50 group-hover:text-white transition-colors"}>
-                  {link.label}
-                </span>
-                <span
-                  className={`absolute left-1/2 -translate-x-1/2 -bottom-0.5 h-0.5 rounded-full bg-accent transition-all duration-200 ease-out ${
-                    isActive(link.path) ? "w-12" : "w-0 group-hover:w-8"
-                  }`}
-                />
-              </Link>
-            ))}
-          </div>
-
-          {/* CTA + phone */}
-          <div className="flex flex-col items-center gap-4">
-            <Link
-              to="/scheduling"
-              onClick={() => setMenuOpen(false)}
-              className="inline-flex items-center justify-center bg-accent hover:bg-accent/90 text-white text-base font-medium px-8 py-3.5 rounded-lg transition-colors"
-            >
-              Book Consultation
-            </Link>
-            <a
-              href="tel:+19705193013"
-              onClick={trackPhoneClick}
-              className="inline-flex items-center gap-2.5 text-white/50 hover:text-white/80 text-lg transition-colors"
-            >
-              <Phone className="w-5 h-5" />
-              (970) 519-3013
-            </a>
-          </div>
-
-          {/* Social links */}
-          <div className="flex items-center gap-6 mt-8 pt-6 border-t border-white/10">
-            <a
-              href="https://www.instagram.com/symphonysmarthomes"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 text-white/30 hover:text-white/60 text-sm transition-colors"
-            >
-              <Camera className="w-4 h-4" />
-              Instagram
-            </a>
-            <a
-              href="https://g.page/symphonysmarthomes"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 text-white/30 hover:text-white/60 text-sm transition-colors"
-            >
-              <Globe className="w-4 h-4" />
-              Google
-            </a>
-          </div>
+              <div className="space-y-3 text-center">
+                {navLinks.map((link) => (
+                  <Link
+                    key={link.path}
+                    to={link.path}
+                    onClick={() => setMenuOpen(false)}
+                    className="group relative block text-3xl sm:text-4xl font-bold py-2 transition-colors"
+                  >
+                    <span className={isActive(link.path) ? "text-white" : "text-white/50 group-hover:text-white transition-colors"}>
+                      {link.label}
+                    </span>
+                    <span
+                      className={`absolute left-1/2 -translate-x-1/2 -bottom-0.5 h-0.5 rounded-full bg-accent transition-all duration-200 ease-out ${
+                        isActive(link.path) ? "w-12" : "w-0 group-hover:w-8"
+                      }`}
+                    />
+                  </Link>
+                ))}
+              </div>
             </nav>
           </div>
         </>
