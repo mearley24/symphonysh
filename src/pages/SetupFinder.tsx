@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { useState, useMemo } from "react";
+import { useState, useMemo, useRef, useEffect } from "react";
 import {
   ArrowRight,
   Phone,
@@ -330,8 +330,22 @@ function buildRecommendation(a: Answers): Recommendation {
 const SetupFinder = () => {
   const [answers, setAnswers] = useState<Answers>(INITIAL);
   const [submitted, setSubmitted] = useState(false);
+  const resultRef = useRef<HTMLElement | null>(null);
 
   const rec = useMemo(() => buildRecommendation(answers), [answers]);
+
+  useEffect(() => {
+    if (!submitted) return;
+    const el = resultRef.current;
+    if (!el) return;
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    el.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "start" });
+    // Move focus so screen readers announce the result region.
+    const focusTimer = window.setTimeout(() => {
+      el.focus({ preventScroll: true });
+    }, reduceMotion ? 0 : 350);
+    return () => window.clearTimeout(focusTimer);
+  }, [submitted]);
 
   const toggleControl = (c: ControlItem) =>
     setAnswers((a) => ({
@@ -616,7 +630,13 @@ const SetupFinder = () => {
 
       {/* Result */}
       {submitted && ready && (
-        <section className="py-16 sm:py-24 px-4 sm:px-6">
+        <section
+          ref={resultRef}
+          tabIndex={-1}
+          aria-live="polite"
+          aria-labelledby="setup-finder-result-title"
+          className="py-16 sm:py-24 px-4 sm:px-6 scroll-mt-24 focus:outline-none"
+        >
           <div className="max-w-3xl mx-auto">
             <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">
               Starting Recommendation
@@ -627,7 +647,10 @@ const SetupFinder = () => {
                   <Sparkles className="w-5 h-5 text-accent" />
                 </div>
                 <div>
-                  <h2 className="text-2xl sm:text-3xl font-bold text-white mb-2">
+                  <h2
+                    id="setup-finder-result-title"
+                    className="text-2xl sm:text-3xl font-bold text-white mb-2"
+                  >
                     {rec.title}
                   </h2>
                   <p className="text-white/70 text-base leading-relaxed">

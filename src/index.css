@@ -152,6 +152,32 @@
   min-height: 100vh;
 }
 
+/* Reserve space at the bottom of every page on mobile so the sticky
+   Schedule/Call bar (MobileClickToCall) cannot obscure the last line of
+   content while scrolling. Hidden on md+ where the sticky bar isn't shown. */
+@media (max-width: 767px) {
+  body {
+    padding-bottom: calc(76px + env(safe-area-inset-bottom));
+  }
+}
+
+/* Keep deep-linked anchors clear of the sticky header. */
+section[id],
+[id] > h1,
+[id] > h2,
+[id] > h3,
+h1[id],
+h2[id],
+h3[id] {
+  scroll-margin-top: 6rem;
+}
+
+/* Section-level scroll alignment: any <section> can be a deep-link target,
+   so always pad the top to keep headings clear of the sticky header. */
+section {
+  scroll-margin-top: 6rem;
+}
+
 /* Calendar mobile styling */
 .rdp {
   --rdp-accent-color: rgba(202, 159, 92, 1) !important;
