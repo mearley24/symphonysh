@@ -360,13 +360,15 @@ const SetupFinder = () => {
     setSubmitted(false);
   };
 
-  const ready =
-    answers.projectType &&
-    answers.controls.length > 0 &&
-    answers.rooms &&
-    answers.walls &&
-    answers.existing.length > 0 &&
-    answers.priority;
+  const answeredCount =
+    (answers.projectType ? 1 : 0) +
+    (answers.controls.length > 0 ? 1 : 0) +
+    (answers.rooms ? 1 : 0) +
+    (answers.walls ? 1 : 0) +
+    (answers.existing.length > 0 ? 1 : 0) +
+    (answers.priority ? 1 : 0);
+
+  const ready = answeredCount === 6;
 
   return (
     <PageBackground image={bgHomeIntegration}>
@@ -385,10 +387,10 @@ const SetupFinder = () => {
       <section className="pt-36 sm:pt-44 pb-12 sm:pb-16 px-4 sm:px-6">
         <div className="max-w-4xl mx-auto">
           <Link
-            to="/services"
+            to="/"
             className="inline-flex items-center gap-1.5 text-white/40 hover:text-white/70 text-sm mb-8 transition-colors"
           >
-            <ArrowLeft className="w-3.5 h-3.5" /> All Services
+            <ArrowLeft className="w-3.5 h-3.5" /> Home
           </Link>
           <p className="text-accent font-medium text-sm tracking-wide uppercase mb-3">
             Setup Finder
@@ -410,8 +412,32 @@ const SetupFinder = () => {
       {/* Form */}
       <section className="py-12 sm:py-16 px-4 sm:px-6 bg-black/20 backdrop-blur-sm border-y border-white/5">
         <div className="max-w-3xl mx-auto space-y-10">
+          {/* Progress indicator */}
+          <div>
+            <div className="flex items-center justify-between mb-2">
+              <p className="text-white/60 text-xs font-semibold tracking-wide uppercase">
+                Progress
+              </p>
+              <p className="text-white/50 text-xs">
+                {answeredCount} of 6 answered
+              </p>
+            </div>
+            <div
+              className="h-1.5 w-full rounded-full bg-white/10 overflow-hidden"
+              role="progressbar"
+              aria-valuemin={0}
+              aria-valuemax={6}
+              aria-valuenow={answeredCount}
+            >
+              <div
+                className="h-full bg-accent transition-all duration-300"
+                style={{ width: `${(answeredCount / 6) * 100}%` }}
+              />
+            </div>
+          </div>
+
           {/* Q1 */}
-          <Question label="1. What kind of project is this?">
+          <Question label="1. What kind of project is this?" step={1} total={6}>
             <OptionRow>
               <Choice
                 selected={answers.projectType === "new-build"}
@@ -441,7 +467,12 @@ const SetupFinder = () => {
           </Question>
 
           {/* Q2 */}
-          <Question label="2. What do you want to control?">
+          <Question
+            label="2. What do you want to control?"
+            step={2}
+            total={6}
+            instructions="Choose any that apply."
+          >
             <OptionRow wrap>
               {(
                 [
@@ -463,11 +494,10 @@ const SetupFinder = () => {
                 />
               ))}
             </OptionRow>
-            <p className="text-white/40 text-xs mt-2">Choose any that apply.</p>
           </Question>
 
           {/* Q3 */}
-          <Question label="3. How much of the house?">
+          <Question label="3. How much of the house?" step={3} total={6}>
             <OptionRow>
               {(
                 [
@@ -488,7 +518,7 @@ const SetupFinder = () => {
           </Question>
 
           {/* Q4 */}
-          <Question label="4. Are the walls open or finished?">
+          <Question label="4. Are the walls open or finished?" step={4} total={6}>
             <OptionRow>
               {(
                 [
@@ -508,7 +538,12 @@ const SetupFinder = () => {
           </Question>
 
           {/* Q5 */}
-          <Question label="5. What is already in the house?">
+          <Question
+            label="5. What is already in the house?"
+            step={5}
+            total={6}
+            instructions="Choose any that apply."
+          >
             <OptionRow wrap>
               {(
                 [
@@ -529,11 +564,10 @@ const SetupFinder = () => {
                 />
               ))}
             </OptionRow>
-            <p className="text-white/40 text-xs mt-2">Choose any that apply.</p>
           </Question>
 
           {/* Q6 */}
-          <Question label="6. What matters most?">
+          <Question label="6. What matters most?" step={6} total={6}>
             <OptionRow wrap>
               {(
                 [
@@ -653,19 +687,28 @@ const SetupFinder = () => {
               </p>
             </div>
 
-            <div className="flex flex-col sm:flex-row gap-3 justify-center items-center mt-10">
+            <div className="flex flex-col sm:flex-row gap-3 justify-center items-stretch mt-10">
+              <Link
+                to="/scheduling"
+                className="inline-flex items-center justify-center gap-2 bg-accent hover:bg-accent/90 text-white px-8 py-4 rounded-lg font-medium transition-colors text-base w-full sm:w-auto"
+              >
+                Schedule a Walkthrough <ArrowRight className="w-4 h-4" />
+              </Link>
+              {rec.pieces.find((p) => p.path) && (
+                <Link
+                  to={rec.pieces.find((p) => p.path)!.path!}
+                  className="inline-flex items-center justify-center gap-2 border border-accent/50 hover:border-accent hover:bg-accent/10 text-white px-8 py-4 rounded-lg font-medium transition-colors text-base w-full sm:w-auto"
+                >
+                  Read more about {rec.pieces.find((p) => p.path)!.label}
+                  <ArrowRight className="w-4 h-4" />
+                </Link>
+              )}
               <a
                 href="tel:+19705193013"
-                className="inline-flex items-center justify-center gap-2 bg-accent hover:bg-accent/90 text-white px-8 py-4 rounded-lg font-medium transition-colors text-base w-full sm:w-auto"
+                className="inline-flex items-center justify-center gap-2 border border-white/20 hover:border-white/40 hover:bg-white/5 text-white px-8 py-4 rounded-lg font-medium transition-colors text-base w-full sm:w-auto"
               >
                 <Phone className="w-4 h-4" /> Call (970) 519-3013
               </a>
-              <Link
-                to="/scheduling"
-                className="inline-flex items-center justify-center gap-2 border border-white/20 hover:border-white/40 hover:bg-white/5 text-white px-8 py-4 rounded-lg font-medium transition-colors text-base w-full sm:w-auto"
-              >
-                Send photos & details <ArrowRight className="w-4 h-4" />
-              </Link>
             </div>
           </div>
         </section>
@@ -696,14 +739,29 @@ const SetupFinder = () => {
 const Question = ({
   label,
   children,
+  step,
+  total,
+  instructions,
 }: {
   label: string;
   children: React.ReactNode;
+  step?: number;
+  total?: number;
+  instructions?: string;
 }) => (
   <div>
-    <h3 className="text-white font-semibold text-base sm:text-lg mb-4">
+    {step && total && (
+      <p className="text-accent/80 text-xs font-semibold tracking-wide uppercase mb-2">
+        Question {step} of {total}
+      </p>
+    )}
+    <h3 className="text-white font-semibold text-base sm:text-lg mb-2">
       {label}
     </h3>
+    {instructions && (
+      <p className="text-white/60 text-sm mb-4">{instructions}</p>
+    )}
+    {!instructions && <div className="mb-2" />}
     {children}
   </div>
 );

@@ -95,9 +95,24 @@ const Contact = () => {
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight mb-5 text-white hero-text-shadow">
             Let's talk about your project.
           </h1>
-          <p className="text-white/60 text-base sm:text-lg leading-relaxed max-w-2xl hero-subtext-shadow">
-            Give us a call, send a message, or schedule a walkthrough. No pressure — we're happy to answer questions and help you figure out what makes sense.
+          <p className="text-white/60 text-base sm:text-lg leading-relaxed max-w-2xl hero-subtext-shadow mb-8">
+            Give us a call, send a question, or schedule a walkthrough. No pressure — we're happy to answer questions and help you figure out what makes sense.
           </p>
+          <div className="flex flex-col sm:flex-row gap-3">
+            <Link
+              to="/scheduling"
+              className="inline-flex items-center justify-center gap-2 bg-accent hover:bg-accent/90 text-white px-7 py-4 rounded-lg font-medium transition-colors text-base"
+            >
+              Schedule a Walkthrough <ArrowRight className="w-4 h-4" />
+            </Link>
+            <a
+              href="tel:+19705193013"
+              onClick={trackPhoneClick}
+              className="inline-flex items-center justify-center gap-2 border border-white/20 hover:border-white/40 hover:bg-white/5 text-white px-7 py-4 rounded-lg font-medium transition-colors text-base"
+            >
+              <Phone className="w-4 h-4" /> (970) 519-3013
+            </a>
+          </div>
         </div>
       </section>
 
@@ -149,7 +164,15 @@ const Contact = () => {
 
             <div className="md:col-span-3">
               <div className="bg-black/40 backdrop-blur-sm border border-white/8 rounded-xl p-6">
-                <h3 className="text-white font-semibold mb-5">Send a Message</h3>
+                <h3 className="text-white font-semibold mb-1">Send a Question</h3>
+                <p className="text-white/50 text-sm mb-5">
+                  Got a question about platforms, pricing, or your project? Drop it here.
+                  Want to lock in a time to walk the property?{" "}
+                  <Link to="/scheduling" className="text-accent hover:text-accent/80 transition-colors">
+                    Schedule a Walkthrough
+                  </Link>
+                  .
+                </p>
                 <form onSubmit={handleSubmit} className="space-y-4">
                   <div>
                     <label className="text-white/60 text-sm mb-1.5 block">Name</label>
@@ -180,7 +203,7 @@ const Contact = () => {
                     className="w-full py-3 bg-accent hover:bg-accent/90 text-white rounded-lg font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
                   >
                     <Send className="w-4 h-4" />
-                    {isSubmitting ? "Sending..." : "Send Message"}
+                    {isSubmitting ? "Sending..." : "Send Question"}
                   </button>
                   <p className="text-white/30 text-xs text-center mt-3">We typically respond within a few hours during business hours.</p>
                 </form>

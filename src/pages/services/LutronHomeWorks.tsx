@@ -42,7 +42,7 @@ const LutronHomeWorks = () => {
 
   const stats = [
     { label: "Designed For", value: "Lutron's flagship lighting & home-automation projects" },
-    { label: "Backbone", value: "QS centralized low-voltage wiring, Clear Connect RF, or a mix" },
+    { label: "Wiring Architecture", value: "QS centralized low-voltage wiring, Clear Connect RF, or a mix" },
     { label: "Native Catalog", value: "Ketra, Lumaris, Rania, Aviena, Palladiom" },
     { label: "Network", value: "Can expand to large architectural projects on a single Lutron program" },
   ];

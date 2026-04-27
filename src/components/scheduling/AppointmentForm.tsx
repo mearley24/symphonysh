@@ -116,7 +116,7 @@ export function AppointmentForm({
 
       <div>
         <label htmlFor="address" className={labelClass}>
-          Property Address *
+          Property address or general area *
         </label>
         <input
           type="text"
@@ -124,7 +124,7 @@ export function AppointmentForm({
           value={address}
           onChange={(e) => setAddress(e.target.value)}
           className={inputClass}
-          placeholder="Street address or general area"
+          placeholder="Street address, neighborhood, or town"
         />
       </div>
 

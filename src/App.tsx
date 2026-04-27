@@ -89,6 +89,8 @@ function App() {
           <Route path="/blog/:slug" element={<BlogPost />} />
 
           <Route path="/pre-wiring" element={<Navigate to="/services/prewire" replace />} />
+          <Route path="/smart-lighting" element={<Navigate to="/services/smart-lighting" replace />} />
+          <Route path="/minturn" element={<CityPage />} />
           <Route path="/installation" element={<Navigate to="/install" replace />} />
           <Route path="/maintenance" element={<Navigate to="/troubleshooting" replace />} />
           <Route path="/3d-tours" element={<Navigate to="/matterport" replace />} />

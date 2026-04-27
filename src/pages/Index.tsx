@@ -92,7 +92,7 @@ const Index = () => {
           className="w-full h-full object-cover"
           loading="eager"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-primary/60 via-primary/75 to-primary/90" />
+        <div className="absolute inset-0 bg-gradient-to-b from-primary/70 via-primary/80 to-primary/90" />
       </div>
 
       <div className="relative z-10" ref={revealRef}>
@@ -117,7 +117,7 @@ const Index = () => {
                 <h1 className="animate-fade-in text-5xl sm:text-6xl lg:text-7xl font-extrabold leading-[0.95] mb-6 text-white hero-text-shadow [animation-delay:100ms]">
                   We make smart homes that just work.
                 </h1>
-                <p className="animate-fade-in text-white/65 text-lg sm:text-xl leading-relaxed mb-10 max-w-xl mx-auto hero-subtext-shadow [animation-delay:200ms]">
+                <p className="animate-fade-in text-white/80 text-lg sm:text-xl leading-relaxed mb-10 max-w-xl mx-auto hero-subtext-shadow [animation-delay:200ms]">
                   Control4 lighting and scenes for the whole home — Lutron when the home calls for it, AVA when you want one simple remote. Tuned to how you actually live.
                 </p>
               </div>
@@ -157,22 +157,22 @@ const Index = () => {
           {/* Trust Strip — pinned to bottom of window */}
           <section data-reveal className="border-y border-white/10 py-6 sm:py-8 px-4 sm:px-6 bg-black/30 backdrop-blur-sm">
             <div className="max-w-5xl mx-auto">
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 text-center">
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-5 sm:gap-6 text-center">
                 <div>
-                  <p className="text-white font-semibold text-lg">10+ Years</p>
-                  <p className="text-white/50 text-sm">In the valley</p>
+                  <p className="text-white font-semibold text-base sm:text-lg">10+ Years</p>
+                  <p className="text-white/65 text-sm leading-snug">In the valley</p>
                 </div>
                 <div>
-                  <p className="text-white font-semibold text-lg">Licensed</p>
-                  <p className="text-white/50 text-sm">& fully insured</p>
+                  <p className="text-white font-semibold text-base sm:text-lg">Licensed</p>
+                  <p className="text-white/65 text-sm leading-snug">& fully insured</p>
                 </div>
                 <div>
-                  <p className="text-white font-semibold text-lg">Lutron · Control4 · AVA</p>
-                  <p className="text-white/50 text-sm">Real platforms, no lock-in</p>
+                  <p className="text-white font-semibold text-base sm:text-lg">Control4 · Lutron · AVA</p>
+                  <p className="text-white/65 text-sm leading-snug">Real platforms, no lock-in</p>
                 </div>
                 <div>
-                  <p className="text-white font-semibold text-lg">Same-Day Response</p>
-                  <p className="text-white/50 text-sm">A real person picks up</p>
+                  <p className="text-white font-semibold text-base sm:text-lg">Same-Day Response</p>
+                  <p className="text-white/65 text-sm leading-snug">A real person picks up</p>
                 </div>
               </div>
             </div>
