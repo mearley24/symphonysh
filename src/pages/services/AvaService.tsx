@@ -621,12 +621,15 @@ const AvaService = () => {
         </div>
       </section>
 
-      {/* Real theater & media room proof */}
+      {/* Real theater & media room proof — AVA is media/room-first, so we
+          frame this around the rooms where a simple remote matters, not as
+          "AVA in real homes". The photos are the same theater/media-room
+          set used elsewhere — AVA fits those rooms. */}
       <ProjectProof
         setKey="homeTheater"
         eyebrow="Where AVA fits"
-        headline="Theaters and media rooms — one remote, no app hunt."
-        subhead="AVA is built for the rooms below: dedicated theater, finished media room, family TV space. One remote that handles TV, source switching, and the lights coming down."
+        headline="Media rooms where one remote matters"
+        subhead="AVA earns its keep in the rooms below: dedicated theater, finished media room, family TV space. One remote handles TV, source switching, and the lights coming down — no app hunt."
         footerLink={{ to: "/projects/eagle-vail-theater", label: "See the Eagle-Vail theater" }}
       />
 
