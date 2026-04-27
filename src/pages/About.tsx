@@ -17,7 +17,7 @@ const About = () => {
     <PageBackground image={bgAbout}>
       <div ref={revealRef}>
       <SEO
-        title="About Symphony Smart Homes | Vail Valley"
+        title="About Us — Vail Valley"
         description="A local Eagle County team behind Lutron, Control4, and AVA homes across the Vail Valley. Same faces from first walkthrough through year five."
         keywords="about symphony smart homes, Vail Valley smart home, Eagle County, local integrator"
         schema={serviceSchema}

@@ -422,7 +422,7 @@ const AvaService = () => {
               to="/scheduling?service=ava"
               className="inline-flex items-center justify-center gap-2 border border-white/20 hover:border-white/40 hover:bg-white/5 text-white px-7 py-4 rounded-lg font-medium transition-colors text-base"
             >
-              <Phone className="w-4 h-4" /> Schedule a Demo
+              <Phone className="w-4 h-4" /> Schedule a Walkthrough
             </Link>
           </div>
           <p className="text-white/40 text-sm mt-6">
@@ -685,7 +685,7 @@ const AvaService = () => {
               to="/scheduling?service=ava"
               className="inline-flex items-center justify-center gap-2 border border-white/20 hover:border-white/40 hover:bg-white/5 text-white px-8 py-4 rounded-lg font-medium transition-colors text-base w-full sm:w-auto"
             >
-              <Phone className="w-4 h-4" /> Schedule a Demo
+              <Phone className="w-4 h-4" /> Schedule a Walkthrough
             </Link>
           </div>
         </div>

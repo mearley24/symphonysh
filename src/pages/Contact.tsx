@@ -63,7 +63,7 @@ const Contact = () => {
     <PageBackground image={bgContact}>
       <div ref={revealRef}>
       <SEO
-        title="Contact Us | Symphony Smart Homes"
+        title="Contact Us"
         description="Get in touch with Symphony Smart Homes. Call, email, or send us a message. Serving Vail Valley and Eagle County, Colorado."
         keywords="contact, smart home, Vail Valley, Eagle County, phone, email"
         breadcrumbs={[{ name: "Home", url: "/" }, { name: "Contact", url: "/contact" }]}

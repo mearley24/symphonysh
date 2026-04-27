@@ -184,8 +184,11 @@ const SmartLighting = () => {
           <p className="text-white/55 text-base mb-8 max-w-xl mx-auto">Control4 lighting is our default. RadioRA3 retrofits cleanly into finished homes; HomeWorks fits luxury new builds with Ketra and Palladiom. We'll help you tell which fits.</p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <Link to="/scheduling?service=smart-lighting" className="inline-flex items-center justify-center gap-2 bg-accent hover:bg-accent/90 text-white px-8 py-4 rounded-lg font-medium transition-colors text-base">Schedule a Walkthrough <ArrowRight className="w-4 h-4" /></Link>
-            <a href="tel:+19705193013" className="inline-flex items-center justify-center gap-2 border border-white/20 hover:border-white/40 hover:bg-white/5 text-white px-8 py-4 rounded-lg font-medium transition-colors text-base"><Phone className="w-4 h-4" /> (970) 519-3013</a>
+            <Link to="/platforms" className="inline-flex items-center justify-center gap-2 border border-white/20 hover:border-white/40 hover:bg-white/5 text-white px-8 py-4 rounded-lg font-medium transition-colors text-base">Compare Platforms</Link>
           </div>
+          <p className="mt-6 text-white/40 text-sm">
+            Not sure which? <Link to="/setup-finder" className="text-white/70 hover:text-accent transition-colors">Try the Setup Finder</Link> · <Link to="/resources/control4-vs-lutron-lighting" className="text-white/70 hover:text-accent transition-colors">Read Control4 vs Lutron</Link>
+          </p>
         </div>
       </section>
 

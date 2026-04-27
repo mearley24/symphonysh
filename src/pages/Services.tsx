@@ -49,7 +49,7 @@ const Services = () => {
     <PageBackground image={bgServices}>
       <div ref={revealRef}>
       <SEO
-        title="Services | Symphony Smart Homes — Vail Valley"
+        title="Services — Vail Valley"
         description="Lutron lighting, Control4 automation, AVA media, audio, climate, security, networking, and shades — every layer of a Vail Valley smart home, designed to feel like one calm system."
         keywords="smart home services Vail Valley, home automation Eagle County, Lutron HomeWorks, Control4 dealer, AVA remote"
         schema={serviceSchema}
@@ -127,13 +127,13 @@ const Services = () => {
               to="/platforms"
               className="inline-flex items-center justify-center gap-2 bg-accent hover:bg-accent/90 text-white px-7 py-4 rounded-lg font-medium transition-colors text-base"
             >
-              Compare platforms <ArrowRight className="w-4 h-4" />
+              Compare Platforms <ArrowRight className="w-4 h-4" />
             </Link>
             <Link
               to="/setup-finder"
               className="inline-flex items-center justify-center gap-2 border border-white/20 hover:border-white/40 hover:bg-white/5 text-white px-7 py-4 rounded-lg font-medium transition-colors text-base"
             >
-              <Compass className="w-4 h-4" /> Find the right setup
+              <Compass className="w-4 h-4" /> Find the Right Setup
             </Link>
           </div>
         </div>

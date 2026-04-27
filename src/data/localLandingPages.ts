@@ -129,10 +129,10 @@ export const localLandingPages: LocalLandingPage[] = [
     bestFit: [
       "Whole-home projects that want one app, one keypad family, and consistent dimming everywhere.",
       "Mountain homes where guests, kids, and housekeepers need a one-button answer.",
-      "Houses already running Lutron HomeWorks or RadioRA3 underneath that want Control4 logic on top.",
+      "Houses already running Lutron HomeWorks or RadioRA3 that want Control4 to tie lighting in with media, climate, and security.",
     ],
     localContext:
-      "Vail Valley homes mix premium fixtures, big great rooms, and primary suites that all want different lighting at different times of day. Control4 sits on top of the lighting layer — usually Lutron HomeWorks or RadioRA3 — and hands the family one program: Welcome, Movie, Goodnight, engraved on a keypad and matched on the phone.",
+      "Vail Valley homes mix premium fixtures, big great rooms, and primary suites that all want different lighting at different times of day. Control4 runs lighting natively for most homes; in houses that already use Lutron HomeWorks or RadioRA3, Control4 ties that lighting in with media, climate, and security so the family gets one program: Welcome, Movie, Goodnight, engraved on a keypad and matched on the phone.",
     localScenarios: [
       "Sunrise and sunset scenes scheduled on the astronomic clock — no phones at 6am.",
       "Engraved keypads at the entry, kitchen, primary suite, and theater room.",

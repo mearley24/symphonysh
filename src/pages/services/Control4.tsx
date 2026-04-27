@@ -504,7 +504,7 @@ const Control4 = () => {
               to="/scheduling?service=control4"
               className="inline-flex items-center justify-center gap-2 border border-white/20 hover:border-white/40 hover:bg-white/5 text-white px-7 py-4 rounded-lg font-medium transition-colors text-base"
             >
-              <Phone className="w-4 h-4" /> Schedule a Walk-Through
+              <Phone className="w-4 h-4" /> Schedule a Walkthrough
             </Link>
           </div>
           <p className="text-white/40 text-sm mt-6">
@@ -754,12 +754,20 @@ const Control4 = () => {
               </span>
             </Link>
           </div>
-          <Link
-            to="/setup-finder"
-            className="inline-flex items-center gap-2 text-accent text-sm font-medium hover:gap-3 transition-all"
-          >
-            Not sure which one? Try the Setup Finder <ArrowRight className="w-4 h-4" />
-          </Link>
+          <div className="flex flex-col sm:flex-row gap-x-6 gap-y-2">
+            <Link
+              to="/setup-finder"
+              className="inline-flex items-center gap-2 text-accent text-sm font-medium hover:gap-3 transition-all"
+            >
+              Not sure which one? Try the Setup Finder <ArrowRight className="w-4 h-4" />
+            </Link>
+            <Link
+              to="/resources/control4-vs-lutron-lighting"
+              className="inline-flex items-center gap-2 text-white/60 hover:text-accent text-sm font-medium transition-colors"
+            >
+              Read: Control4 vs Lutron lighting <ArrowRight className="w-4 h-4" />
+            </Link>
+          </div>
         </div>
       </section>
 
@@ -828,7 +836,7 @@ const Control4 = () => {
               to="/scheduling?service=control4"
               className="inline-flex items-center justify-center gap-2 border border-white/20 hover:border-white/40 hover:bg-white/5 text-white px-8 py-4 rounded-lg font-medium transition-colors text-base w-full sm:w-auto"
             >
-              <Phone className="w-4 h-4" /> Schedule a Walk-Through
+              <Phone className="w-4 h-4" /> Schedule a Walkthrough
             </Link>
           </div>
         </div>
