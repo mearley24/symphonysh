@@ -118,6 +118,21 @@ const Control4 = () => {
     href: "https://www.control4.com/the-smart-home-experience",
     external: true,
     hint: "Control4's whole-home automation platform",
+    preview: {
+      category: "Whole-home controller",
+      description:
+        "The Control4 controller is the brain of the system — it runs the local program that ties native Control4 lighting, audio, video, climate, security, and shades into one experience.",
+      bestFit:
+        "Whole-home projects that want one app and one keypad family across every room, including media rooms and theaters.",
+      relatedTo: "Platform · Control4",
+      highlights: [
+        "Runs scenes and routines locally — keeps working when the internet hiccups",
+        "Supports an ecosystem of 25,000+ third-party devices",
+        "One platform across phone, touchscreen, keypad, and smart remote",
+      ],
+      officialUrl: "https://www.control4.com/the-smart-home-experience",
+      ctaHref: "/scheduling?service=control4",
+    },
   };
 
   const productFamilies: ProductFamilyGroup[] = [
@@ -143,10 +158,78 @@ const Control4 = () => {
       description:
         "Same personalized system, picked up wherever the family is — phone, touchscreen, wall, or remote.",
       items: [
-        { label: "Control4 App", href: "https://www.control4.com/solutions/products/apps/", external: true, hint: "iOS and Android app, the same on every device" },
-        { label: "Touchscreens", href: "https://www.control4.com/solutions/products/touchscreens", external: true, hint: "In-wall and tabletop touchscreens" },
-        { label: "Keypads", href: "https://www.control4.com/solutions/products/keypads/", external: true, hint: "Engraved scene keypads for guests, kids, and anyone without a phone" },
-        { label: "Controllers & remotes", href: "https://www.control4.com/solutions/products/controllers", external: true, hint: "Handheld smart remote and controllers for media rooms and theaters" },
+        {
+          label: "Control4 App",
+          hint: "iOS and Android app, the same on every device",
+          preview: {
+            category: "Mobile control",
+            description:
+              "The Control4 App is the same experience on every phone in the house — favorites and home-screen layouts are personal to each user, but the underlying program is shared.",
+            bestFit: "Owners and family members who want phone access without a separate dashboard for every subsystem.",
+            relatedTo: "Control surface · Control4",
+            highlights: [
+              "Personal home-screen layouts per user",
+              "Local control on the home network, remote access through Control4 4Sight",
+              "Push alerts for the events that matter",
+            ],
+            officialUrl: "https://www.control4.com/solutions/products/apps/",
+            ctaHref: "/scheduling?service=control4",
+          },
+        },
+        {
+          label: "Touchscreens",
+          hint: "In-wall and tabletop touchscreens",
+          preview: {
+            category: "On-wall touchscreen",
+            description:
+              "Dedicated touchscreens for kitchens, primary suites, and entries — full system control without picking up a phone, and shared between everyone in the house.",
+            bestFit: "Households who want a 'pick it up and use it' panel near the kitchen, entry, or primary bedroom.",
+            relatedTo: "Control surface · Control4",
+            highlights: [
+              "In-wall and tabletop options",
+              "Custom layouts, scenes, and intercom",
+              "Full system view: lighting, audio, climate, cameras, shades",
+            ],
+            officialUrl: "https://www.control4.com/solutions/products/touchscreens",
+            ctaHref: "/scheduling?service=control4",
+          },
+        },
+        {
+          label: "Keypads",
+          hint: "Engraved scene keypads for guests, kids, and anyone without a phone",
+          preview: {
+            category: "Scene keypad",
+            description:
+              "Engraved on-wall keypads for the scenes the family actually uses — Welcome, Movie, Goodnight — so anyone can run the house without learning an app.",
+            bestFit: "Guests, kids, housekeepers, and property managers — the people who need a one-button answer.",
+            relatedTo: "Control surface · Control4",
+            highlights: [
+              "Engraved per-room scene labels",
+              "Multiple finishes and gang configurations",
+              "Pairs with Control4 Lux dimming and centralized lighting",
+            ],
+            officialUrl: "https://www.control4.com/solutions/products/keypads/",
+            ctaHref: "/scheduling?service=control4",
+          },
+        },
+        {
+          label: "Controllers & remotes",
+          hint: "Handheld smart remote and controllers for media rooms and theaters",
+          preview: {
+            category: "Smart remote / controller",
+            description:
+              "Handheld Control4 smart remote for media rooms and theaters — plus the controllers in the rack that run the local program for each zone.",
+            bestFit: "Media rooms, theaters, and great rooms where the TV is the focus and a phone-only setup feels wrong.",
+            relatedTo: "Control surface · Control4",
+            highlights: [
+              "Backlit handheld remote with system-wide control",
+              "Controllers run scenes locally per zone",
+              "Pairs with Sonos, Apple TV, receivers, and projectors",
+            ],
+            officialUrl: "https://www.control4.com/solutions/products/controllers",
+            ctaHref: "/scheduling?service=control4",
+          },
+        },
       ],
     },
     {
@@ -154,7 +237,25 @@ const Control4 = () => {
       description:
         "What the system actually does — the routines, scenes, and alerts the family lives with day to day.",
       items: [
-        { label: "X4 Routines", hint: "Multi-step routines that chain lighting, AV, climate, and shades" },
+        {
+          label: "X4 Routines",
+          hint: "Multi-step routines that chain lighting, AV, climate, and shades",
+          preview: {
+            category: "Automation engine",
+            description:
+              "X4 is Control4's routine engine — multi-step automations that chain lighting, AV, climate, security, and shades around real moments in the day.",
+            bestFit:
+              "Houses that want behavior, not just buttons — Goodmorning, Welcome, Movie, Goodnight tied to time, sun, occupancy, or events.",
+            relatedTo: "Experience · Control4 OS 4",
+            highlights: [
+              "Triggers from time, sunrise/sunset, sensors, doors, voice, and keypads",
+              "Conditional logic across multiple subsystems",
+              "Personal favorites, alerts, and schedules per user",
+            ],
+            officialUrl: "https://www.control4.com/solutions/products/",
+            ctaHref: "/scheduling?service=control4",
+          },
+        },
         { label: "Scenes", hint: "Welcome, Movie, Goodnight — engraved on a keypad" },
         { label: "Schedules", hint: "Time, sunrise/sunset, and conditional schedules" },
         { label: "Mockupancy", hint: "Records use and plays it back with randomization while you're away" },
@@ -168,12 +269,102 @@ const Control4 = () => {
       description:
         "Subsystems Control4 ties together under one interface — driver-supported and confirmed against the gear actually in the house.",
       items: [
-        { label: "Audio & entertainment", href: "/services/audio-entertainment", hint: "Sonos, Denon, distributed audio, TVs, and projectors" },
-        { label: "Climate", href: "/services/climate-control", hint: "Thermostats, mini-splits, and zoned HVAC" },
-        { label: "Security", href: "/services/security-systems", hint: "Cameras, doorbells, and intrusion" },
-        { label: "Shades", href: "/services/shades", hint: "Motorized shades drawn into lighting scenes" },
+        {
+          label: "Audio & entertainment",
+          href: "/services/audio-entertainment",
+          hint: "Sonos, Denon, distributed audio, TVs, and projectors",
+          preview: {
+            category: "Connected category",
+            description:
+              "Sonos, Denon, distributed audio, TVs, and projectors all behave like one system — same favorites, same scenes, same remote.",
+            bestFit: "Great rooms, kitchens, decks, and theaters that need to act as one when the family entertains.",
+            relatedTo: "Connected category · Control4",
+            highlights: [
+              "Multi-zone audio with synchronized rooms",
+              "Theaters and media rooms automated end-to-end",
+              "Apple TV, Roku, cable, and streaming sources unified",
+            ],
+            ctaHref: "/services/audio-entertainment",
+            ctaLabel: "See entertainment service",
+          },
+        },
+        {
+          label: "Climate",
+          href: "/services/climate-control",
+          hint: "Thermostats, mini-splits, and zoned HVAC",
+          preview: {
+            category: "Connected category",
+            description:
+              "Thermostats, mini-splits, and zoned HVAC all show up in the Control4 app and respond to scenes, schedules, and away modes.",
+            bestFit: "Mountain homes with zoned heat and second-home owners who want temperature ready when they arrive.",
+            relatedTo: "Connected category · Control4",
+            highlights: [
+              "Zoned setbacks tied to occupancy",
+              "Pre-arrive warming for second homes",
+              "Per-room comfort without per-room thermostats",
+            ],
+            ctaHref: "/services/climate-control",
+            ctaLabel: "See climate service",
+          },
+        },
+        {
+          label: "Security",
+          href: "/services/security-systems",
+          hint: "Cameras, doorbells, and intrusion",
+          preview: {
+            category: "Connected category",
+            description:
+              "Cameras, video doorbells, smart locks, and intrusion panels — visible in the Control4 app and tied into routines like Goodbye and Goodnight.",
+            bestFit: "Vacation rentals and second homes where remote eyes on the property matter every day.",
+            relatedTo: "Connected category · Control4",
+            highlights: [
+              "Camera feeds in the app and on touchscreens",
+              "Lock/unlock and intrusion arming from one place",
+              "Push alerts for the events that matter",
+            ],
+            ctaHref: "/services/security-systems",
+            ctaLabel: "See security service",
+          },
+        },
+        {
+          label: "Shades",
+          href: "/services/shades",
+          hint: "Motorized shades drawn into lighting scenes",
+          preview: {
+            category: "Connected category",
+            description:
+              "Motorized shades managed alongside lighting so afternoon sun, privacy, and view all behave themselves — drawn into the same scenes as Control4 lighting.",
+            bestFit: "Mountain-facing great rooms and primary suites with strong afternoon sun.",
+            relatedTo: "Connected category · Control4",
+            highlights: [
+              "Sun tracking and astronomic timeclock",
+              "Per-zone privacy and blackout layers",
+              "Pairs with lighting in a single scene",
+            ],
+            ctaHref: "/services/shades",
+            ctaLabel: "See shade service",
+          },
+        },
         { label: "Locks & garage", hint: "Smart locks and gate/garage drivers where verified" },
-        { label: "Networking", href: "/services/networking", hint: "Routers, switches, access points — the foundation under it all" },
+        {
+          label: "Networking",
+          href: "/services/networking",
+          hint: "Routers, switches, access points — the foundation under it all",
+          preview: {
+            category: "Foundation",
+            description:
+              "Enterprise-grade Wi-Fi, switches, and structured cabling — the foundation Control4 rides on. The system is only as reliable as the network underneath.",
+            bestFit: "Houses with 30+ smart devices, work-from-home, and 4K streaming all happening at once.",
+            relatedTo: "Foundation · Networking",
+            highlights: [
+              "Wi-Fi 6/6E coverage with no dead zones",
+              "VLANs separating IoT, guest, and primary",
+              "Wired backbone where it matters",
+            ],
+            ctaHref: "/services/networking",
+            ctaLabel: "See networking service",
+          },
+        },
       ],
     },
     {

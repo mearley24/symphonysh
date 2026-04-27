@@ -153,6 +153,22 @@ const LutronHomeWorks = () => {
     href: "https://www.lutron.com/en-US/Products/Pages/WholeHomeSystems/HomeWorks/Overview.aspx",
     external: true,
     hint: "Centralized HomeWorks processors and dimming/switching panels — one Lutron program over either or both backbones",
+    preview: {
+      category: "Flagship lighting backbone",
+      description:
+        "HomeWorks is Lutron's flagship line — centralized processors, panel dimming, the full native fixture catalog (Ketra, Rania, Lumaris, Aviena), and a QS-wired or Clear Connect backbone that scales to large architectural projects.",
+      bestFit:
+        "New construction and deep remodels with a lighting designer, premium fixtures, and a goal of one program for the whole house.",
+      relatedTo: "Lighting layer · Lutron",
+      highlights: [
+        "QS-wired backbone + Clear Connect RF",
+        "Native Ketra, Rania, Lumaris, Aviena fixtures",
+        "Palladiom and Alisse architectural keypads",
+      ],
+      officialUrl:
+        "https://www.lutron.com/en-US/Products/Pages/WholeHomeSystems/HomeWorks/Overview.aspx",
+      ctaHref: "/scheduling?service=homeworks",
+    },
   };
 
   const productFamilies: ProductFamilyGroup[] = [
@@ -161,9 +177,64 @@ const LutronHomeWorks = () => {
       description:
         "Hand-crafted keypads and Sunnata controls for the rooms where the family lives — engraved per scene, finished per room.",
       items: [
-        { label: "Palladiom keypads", href: "https://www.lutron.com/en-US/Products/Pages/WholeHomeSystems/HomeWorks/Overview.aspx", external: true, hint: "Designer metal keypads in a wide range of finishes" },
-        { label: "Alisse keypads", href: "https://www.lutron.com/en-US/Products/Pages/Components/AlisseKeypad/Overview.aspx", external: true, hint: "Glass keypads with edge-lit engraving" },
-        { label: "Sunnata dimmers & switches", href: "https://www.lutron.com/en-US/Products/Pages/SingleRoomControls/SunnataDimmersAndSwitches/Overview.aspx", external: true, hint: "PRO LED+ dimming and switching for difficult LED loads" },
+        {
+          label: "Palladiom keypads",
+          hint: "Designer metal keypads in a wide range of finishes",
+          preview: {
+            category: "Architectural keypad",
+            description:
+              "Palladiom is Lutron's flagship metal keypad — hand-finished, engraved per scene, and chosen as part of the room's hardware finish, not picked from a catalog.",
+            bestFit:
+              "Living rooms, primary suites, and entries where the keypad is part of the design, not just a switch.",
+            relatedTo: "Wall control · HomeWorks",
+            highlights: [
+              "Premium metal finishes",
+              "Custom engraving per scene",
+              "Coordinated wallplate options",
+            ],
+            officialUrl:
+              "https://www.lutron.com/en-US/Products/Pages/WholeHomeSystems/HomeWorks/Overview.aspx",
+            ctaHref: "/scheduling?service=homeworks",
+          },
+        },
+        {
+          label: "Alisse keypads",
+          hint: "Glass keypads with edge-lit engraving",
+          preview: {
+            category: "Architectural keypad",
+            description:
+              "Alisse is Lutron's glass keypad line — flush, edge-lit, with engraving that glows just enough at night without dominating the wall.",
+            bestFit: "Modern, minimal interiors where the glass face is part of the room's language.",
+            relatedTo: "Wall control · HomeWorks",
+            highlights: [
+              "Frameless glass face",
+              "Edge-lit engraving",
+              "Quiet, modern aesthetic",
+            ],
+            officialUrl:
+              "https://www.lutron.com/en-US/Products/Pages/Components/AlisseKeypad/Overview.aspx",
+            ctaHref: "/scheduling?service=homeworks",
+          },
+        },
+        {
+          label: "Sunnata dimmers & switches",
+          hint: "PRO LED+ dimming and switching for difficult LED loads",
+          preview: {
+            category: "Dimmer / switch",
+            description:
+              "Sunnata dimmers and switches handle the rooms that don't need a keypad — touch interface, PRO LED+ dimming for tricky LED loads, and full HomeWorks integration.",
+            bestFit: "Closets, hallways, and utility spaces where a switch is enough but the program still has to be Lutron-clean.",
+            relatedTo: "Wall control · HomeWorks",
+            highlights: [
+              "PRO LED+ dimming",
+              "Touch dim and switch options",
+              "Companion dimming and 4-speed fan control",
+            ],
+            officialUrl:
+              "https://www.lutron.com/en-US/Products/Pages/SingleRoomControls/SunnataDimmersAndSwitches/Overview.aspx",
+            ctaHref: "/scheduling?service=homeworks",
+          },
+        },
       ],
     },
     {
@@ -171,10 +242,79 @@ const LutronHomeWorks = () => {
       description:
         "Lutron's native fixture catalog — full-spectrum and tunable white, downlights to lamps, all driven by HomeWorks without third-party bridges. Ketra, Rania, Lumaris, and Aviena live on the same program.",
       items: [
-        { label: "Ketra", href: "https://www.lutron.com/us/en/lighting/ketra", external: true, hint: "Full-spectrum, color-tunable downlights and lightbars" },
-        { label: "Rania", href: "https://www.lutron.com/us/en/lighting/rania", external: true, hint: "Architectural Rania downlights and lamps for HomeWorks" },
-        { label: "Lumaris", href: "https://www.lutron.com/us/en/lighting/downlights/lumaris-downlight?sku=cd6-wh-tw", external: true, hint: "Tunable white downlights and tape, 1,800K–4,000K, 90+ CRI" },
-        { label: "Aviena", hint: "Linear architectural fixtures for HomeWorks" },
+        {
+          label: "Ketra",
+          hint: "Full-spectrum, color-tunable downlights and lightbars",
+          preview: {
+            category: "Full-spectrum architectural light",
+            description:
+              "Ketra is Lutron's full-spectrum, color-tunable lighting — downlights and lightbars that match daylight or warm to candlelight, all driven natively by HomeWorks.",
+            bestFit:
+              "Premium living spaces where the light has to feel right at every hour, not just turn on and off.",
+            relatedTo: "Intelligent lighting · HomeWorks",
+            highlights: [
+              "Full-spectrum color and tunable white",
+              "Daylight-matching dimming curves",
+              "Native HomeWorks integration",
+            ],
+            officialUrl: "https://www.lutron.com/us/en/lighting/ketra",
+            ctaHref: "/scheduling?service=homeworks",
+          },
+        },
+        {
+          label: "Rania",
+          hint: "Architectural Rania downlights and lamps for HomeWorks",
+          preview: {
+            category: "Architectural fixture",
+            description:
+              "Rania is Lutron's architectural downlight and lamp family for HomeWorks — clean apertures, multiple beam angles, and dimming tuned with the rest of the program.",
+            bestFit: "Whole-home lighting plans that need consistent, well-engineered downlighting from foyer to back hall.",
+            relatedTo: "Intelligent lighting · HomeWorks",
+            highlights: [
+              "Architectural downlights and lamps",
+              "Multiple aperture and beam options",
+              "Native HomeWorks dimming",
+            ],
+            officialUrl: "https://www.lutron.com/us/en/lighting/rania",
+            ctaHref: "/scheduling?service=homeworks",
+          },
+        },
+        {
+          label: "Lumaris",
+          hint: "Tunable white downlights and tape, 1,800K–4,000K, 90+ CRI",
+          preview: {
+            category: "Tunable-white downlight & tape",
+            description:
+              "Lumaris is Lutron's tunable-white downlight and linear tape — 1,800K–4,000K, 90+ CRI, dim to 0.1%. Native to HomeWorks and RadioRA3.",
+            bestFit: "Whole-home tunable-white lighting where warm dim and consistent color across rooms matters.",
+            relatedTo: "Intelligent lighting · HomeWorks + RadioRA3",
+            highlights: [
+              "1,800K–4,000K tunable white, 90+ CRI",
+              "Dim to 0.1%",
+              "Downlights, tape, and extrusions",
+            ],
+            officialUrl:
+              "https://www.lutron.com/us/en/lighting/downlights/lumaris-downlight?sku=cd6-wh-tw",
+            ctaHref: "/scheduling?service=homeworks",
+          },
+        },
+        {
+          label: "Aviena",
+          hint: "Linear architectural fixtures for HomeWorks",
+          preview: {
+            category: "Linear architectural fixture",
+            description:
+              "Aviena is Lutron's linear architectural fixture for HomeWorks — used in coves, headers, and continuous lines where lighting is part of the architecture.",
+            bestFit: "Cove lighting, soffits, and architectural lines that need to disappear into the design.",
+            relatedTo: "Intelligent lighting · HomeWorks",
+            highlights: [
+              "Linear architectural runs",
+              "HomeWorks-native dimming",
+              "Coordinated with Ketra, Rania, Lumaris program",
+            ],
+            ctaHref: "/scheduling?service=homeworks",
+          },
+        },
       ],
     },
     {
@@ -184,8 +324,45 @@ const LutronHomeWorks = () => {
       description:
         "Drawn natively into the same scenes as the lighting — pockets and brackets coordinated with the architecture.",
       items: [
-        { label: "Palladiom shades", href: "https://luxury.lutron.com/us/en/shades/palladiom-exposed-roller-shades", external: true, hint: "Premium architectural exposed-roller shades" },
-        { label: "Triathlon", href: "https://www.lutron.com/en-US/Products/Pages/ShadingSystems/Triathlon/Overview.aspx", external: true, hint: "Battery-powered or wired Triathlon shades" },
+        {
+          label: "Palladiom shades",
+          hint: "Premium architectural exposed-roller shades",
+          preview: {
+            category: "Architectural shade",
+            description:
+              "Palladiom shades are Lutron's premium architectural exposed-roller line — designed to live in the room, not hide behind a pocket. Hardware finishes coordinated with Palladiom keypads.",
+            bestFit:
+              "Living rooms and primary suites where the shade hardware is part of the architecture and finish story.",
+            relatedTo: "Window treatments · HomeWorks",
+            highlights: [
+              "Architectural exposed-roller hardware",
+              "Coordinated with Palladiom keypad finishes",
+              "Native HomeWorks integration",
+            ],
+            officialUrl:
+              "https://luxury.lutron.com/us/en/shades/palladiom-exposed-roller-shades",
+            ctaHref: "/scheduling?service=homeworks",
+          },
+        },
+        {
+          label: "Triathlon",
+          hint: "Battery-powered or wired Triathlon shades",
+          preview: {
+            category: "Motorized shade",
+            description:
+              "Triathlon is Lutron's battery or hardwired motorized shade line — quiet motion, custom sizing, and the same Lutron program behavior as the lighting.",
+            bestFit: "Whole-home shade plans that need consistent quality across many openings.",
+            relatedTo: "Window treatments · HomeWorks",
+            highlights: [
+              "Battery or hardwired",
+              "Custom widths and heights",
+              "Quiet motion and dependable repeatability",
+            ],
+            officialUrl:
+              "https://www.lutron.com/en-US/Products/Pages/ShadingSystems/Triathlon/Overview.aspx",
+            ctaHref: "/scheduling?service=homeworks",
+          },
+        },
         { label: "Sivoia QS", hint: "Wired Sivoia QS shading system" },
       ],
     },

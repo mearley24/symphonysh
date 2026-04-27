@@ -19,6 +19,8 @@ import Platforms from "./pages/Platforms";
 import Blog from "./pages/Blog";
 import BlogPost from "./pages/BlogPost";
 import CityPage from "./pages/CityPage";
+import LocalLandingPage from "./pages/LocalLandingPage";
+import ServiceAreasIndex from "./pages/ServiceAreasIndex";
 
 // Photo gallery pages
 import HomeTheater from "./pages/photos/HomeTheater";
@@ -149,6 +151,10 @@ function App() {
           <Route path="/edwards" element={<CityPage />} />
           <Route path="/avon" element={<CityPage />} />
           <Route path="/eagle" element={<CityPage />} />
+
+          {/* Service-area landing hub + service-specific local pages */}
+          <Route path="/service-areas" element={<ServiceAreasIndex />} />
+          <Route path="/service-areas/:slug" element={<LocalLandingPage />} />
 
           {/* 404 route should be the last one */}
           <Route path="*" element={<NotFound />} />

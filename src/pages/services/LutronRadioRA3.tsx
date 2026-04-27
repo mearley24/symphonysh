@@ -130,6 +130,22 @@ const LutronRadioRA3 = () => {
     href: "https://www.lutron.com/en-US/products/pages/wholehomesystems/radiora3/overview.aspx",
     external: true,
     hint: "Up to 100 Type X devices per processor, 200 per system",
+    preview: {
+      category: "Wireless lighting processor",
+      description:
+        "RadioRA3 is Lutron's residential wireless lighting and shade platform — built around the Clear Connect Type X mesh that talks to every Sunnata, Pico, Triathlon, and Lumaris device in the house.",
+      bestFit:
+        "Residential whole-home lighting where you want Lutron quality without the wired infrastructure of HomeWorks.",
+      relatedTo: "Lighting layer · Lutron",
+      highlights: [
+        "Up to 100 Type X devices per processor, 200 per system",
+        "Cloud-connected, PC-programmable",
+        "Sits cleanly under Control4 when the rest of the house wants automation",
+      ],
+      officialUrl:
+        "https://www.lutron.com/en-US/products/pages/wholehomesystems/radiora3/overview.aspx",
+      ctaHref: "/scheduling?service=radiora3",
+    },
   };
 
   const productFamilies: ProductFamilyGroup[] = [
@@ -138,9 +154,64 @@ const LutronRadioRA3 = () => {
       description:
         "Sunnata RF dimmers, switches, fan control, and engraved keypads — plus Pico remotes for tabletop or wall use.",
       items: [
-        { label: "Sunnata Keypads", href: "https://www.lutron.com/en-US/Products/Pages/SingleRoomControls/SunnataKeypads/Overview.aspx", external: true, hint: "Engraved scene keypads in 20+ colors and finishes" },
-        { label: "Sunnata Dimmers & Switches", href: "https://www.lutron.com/en-US/Products/Pages/SingleRoomControls/SunnataDimmersAndSwitches/Overview.aspx", external: true, hint: "Touch Dimmer with PRO LED+, Touch Switch, companion devices, and 4-speed fan control" },
-        { label: "Pico Remotes", href: "https://www.lutron.com/en-US/Products/Pages/Components/PicoWirelessControl/Overview.aspx", external: true, hint: "Tabletop or wall-mount paddle remotes" },
+        {
+          label: "Sunnata Keypads",
+          hint: "Engraved scene keypads in 20+ colors and finishes",
+          preview: {
+            category: "Engraved scene keypad",
+            description:
+              "Sunnata RF keypads are the on-wall scene control for RadioRA3 — engraved with the scenes the family uses (Welcome, Movie, Goodnight) and finished to match the room.",
+            bestFit:
+              "Entries, kitchens, primary suites, and theaters where guests need a one-button answer instead of an app.",
+            relatedTo: "Wall control · RadioRA3",
+            highlights: [
+              "20+ colors and finishes, custom engraving",
+              "1, 2, 3, 4, 5, 7, and 10-button options",
+              "LED feedback that follows the scene",
+            ],
+            officialUrl:
+              "https://www.lutron.com/en-US/Products/Pages/SingleRoomControls/SunnataKeypads/Overview.aspx",
+            ctaHref: "/scheduling?service=radiora3",
+          },
+        },
+        {
+          label: "Sunnata Dimmers & Switches",
+          hint: "Touch Dimmer with PRO LED+, Touch Switch, companion devices, and 4-speed fan control",
+          preview: {
+            category: "Dimmer / switch",
+            description:
+              "Sunnata RF dimmers and switches replace a builder-grade switch in the same box — touch interface, smooth LED dimming, and full RadioRA3 integration.",
+            bestFit: "Retrofits and new construction where the goal is Lutron-quality dimming on every load.",
+            relatedTo: "Wall control · RadioRA3",
+            highlights: [
+              "Touch Dimmer with PRO LED+ technology",
+              "Touch Switch and companion devices",
+              "4-speed fan control",
+            ],
+            officialUrl:
+              "https://www.lutron.com/en-US/Products/Pages/SingleRoomControls/SunnataDimmersAndSwitches/Overview.aspx",
+            ctaHref: "/scheduling?service=radiora3",
+          },
+        },
+        {
+          label: "Pico Remotes",
+          hint: "Tabletop or wall-mount paddle remotes",
+          preview: {
+            category: "Pico remote",
+            description:
+              "Pico is Lutron's tiny multi-function remote — used as a tabletop pedestal, in a wall plate without a junction box, or paddle-style for shades and scenes.",
+            bestFit: "Bedside scenes, shade control, the room that 'needs one more button' without re-wiring.",
+            relatedTo: "Wall control · RadioRA3",
+            highlights: [
+              "Tabletop pedestal or wall-mount in any spot",
+              "Pico Paddle for shade open/close",
+              "10-year battery, no wiring",
+            ],
+            officialUrl:
+              "https://www.lutron.com/en-US/Products/Pages/Components/PicoWirelessControl/Overview.aspx",
+            ctaHref: "/scheduling?service=radiora3",
+          },
+        },
       ],
     },
     {
@@ -150,8 +221,45 @@ const LutronRadioRA3 = () => {
       description:
         "Lumaris downlights and tape — natively integrated, no third-party bridge between the can and the keypad.",
       items: [
-        { label: "Lumaris Downlights", href: "https://www.lutron.com/us/en/lighting/downlights/lumaris-downlight?sku=cd6-wh-tw", external: true, hint: "3\" & 4\" downlights, tunable white 1,800K–4,000K, dim to 0.1%" },
-        { label: "Lumaris Tape Light", href: "https://www.lutron.com/us/en/lighting/linear-tape-lights/tapelight?sku=lu-t30-tw-in", external: true, hint: "Linear tunable-white and RGB+TW tape for coves and toe-kicks" },
+        {
+          label: "Lumaris Downlights",
+          hint: "3\" & 4\" downlights, tunable white 1,800K–4,000K, dim to 0.1%",
+          preview: {
+            category: "Architectural fixture",
+            description:
+              "Lumaris is Lutron's tunable-white downlight — natively integrated with RadioRA3 and HomeWorks. No third-party bridge between the can and the keypad.",
+            bestFit:
+              "Whole-home lighting plans that want warm dim, true 0.1% dimming, and a single platform from keypad to fixture.",
+            relatedTo: "Lighting · RadioRA3 + HomeWorks",
+            highlights: [
+              "3\" and 4\" apertures",
+              "Tunable white 1,800K–4,000K",
+              "Smooth flicker-free dim to 0.1%",
+            ],
+            officialUrl:
+              "https://www.lutron.com/us/en/lighting/downlights/lumaris-downlight?sku=cd6-wh-tw",
+            ctaHref: "/scheduling?service=radiora3",
+          },
+        },
+        {
+          label: "Lumaris Tape Light",
+          hint: "Linear tunable-white and RGB+TW tape for coves and toe-kicks",
+          preview: {
+            category: "Architectural tape",
+            description:
+              "Tunable-white and RGB+TW LED tape designed to drive cleanly off Lutron tape drivers — used in coves, toe-kicks, headboards, and stair lighting.",
+            bestFit: "Architectural lighting moments where the tape is part of the design, not just an accent.",
+            relatedTo: "Lighting · RadioRA3 + HomeWorks",
+            highlights: [
+              "Linear tunable-white and RGB+TW",
+              "Aluminum extrusions for clean install",
+              "Tuned with the same dimming curves as the rest of the house",
+            ],
+            officialUrl:
+              "https://www.lutron.com/us/en/lighting/linear-tape-lights/tapelight?sku=lu-t30-tw-in",
+            ctaHref: "/scheduling?service=radiora3",
+          },
+        },
         { label: "LED Tape Extrusions", hint: "Aluminum extrusions for Lumaris and other LED tape" },
         { label: "Outdoor Plug-in Switch", hint: "Outdoor-rated plug-in switch for landscape and holiday loads" },
       ],
@@ -163,8 +271,45 @@ const LutronRadioRA3 = () => {
       description:
         "Wire-free Triathlon Select for fast retrofits, full-line Triathlon, and wired Sivoia QS for centralized projects.",
       items: [
-        { label: "Triathlon Select", href: "https://www.lutron.com/en-US/Products/Pages/ShadingSystems/Triathlon/Overview.aspx", external: true, hint: "Wire-free, fixed sizes, ~2 yr battery life on D-cells" },
-        { label: "Triathlon", href: "https://www.lutron.com/en-US/Products/Pages/ShadingSystems/Triathlon/Overview.aspx", external: true, hint: "Full-line battery or hardwired Triathlon" },
+        {
+          label: "Triathlon Select",
+          hint: "Wire-free, fixed sizes, ~2 yr battery life on D-cells",
+          preview: {
+            category: "Wire-free motorized shade",
+            description:
+              "Triathlon Select is the wire-free, fixed-size Lutron shade — battery powered, drops in fast, and integrates natively with RadioRA3.",
+            bestFit:
+              "Retrofits and rooms where running power to the headrail isn't practical, but Lutron-grade quality still matters.",
+            relatedTo: "Shades · RadioRA3 + HomeWorks",
+            highlights: [
+              "Wire-free, ~2 yr battery life on D-cells",
+              "Fixed sizes for fast lead time",
+              "Native integration with RadioRA3",
+            ],
+            officialUrl:
+              "https://www.lutron.com/en-US/Products/Pages/ShadingSystems/Triathlon/Overview.aspx",
+            ctaHref: "/scheduling?service=radiora3",
+          },
+        },
+        {
+          label: "Triathlon",
+          hint: "Full-line battery or hardwired Triathlon",
+          preview: {
+            category: "Battery or hardwired shade",
+            description:
+              "The full Triathlon line — custom sizing, battery or hardwired, the same Lutron shade quality across every opening in the house.",
+            bestFit: "Whole-home shade plans where openings need custom sizing and consistent quiet motion.",
+            relatedTo: "Shades · RadioRA3 + HomeWorks",
+            highlights: [
+              "Custom widths and heights",
+              "Battery or hardwired",
+              "Quiet motion, dependable repeatability",
+            ],
+            officialUrl:
+              "https://www.lutron.com/en-US/Products/Pages/ShadingSystems/Triathlon/Overview.aspx",
+            ctaHref: "/scheduling?service=radiora3",
+          },
+        },
         { label: "Sivoia QS", hint: "Wired QS shading system, compatible with RadioRA3 via integration" },
       ],
     },
