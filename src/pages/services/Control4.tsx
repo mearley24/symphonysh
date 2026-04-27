@@ -25,6 +25,7 @@ import ProductFamilyTree, {
 } from "../../components/ProductFamilyTree";
 import { schemaProviderLocalBusiness } from "../../constants/businessSchema";
 import PageBackground from "../../components/PageBackground";
+import ProjectProof from "../../components/ProjectProof";
 import bgHomeIntegration from "../../assets/bg-home-integration.jpg";
 
 const Control4 = () => {
@@ -770,6 +771,15 @@ const Control4 = () => {
           </div>
         </div>
       </section>
+
+      {/* Real Control4 work in the field */}
+      <ProjectProof
+        setKey="wholeHome"
+        eyebrow="Control4 in real homes"
+        headline="Whole-home Control4 — same standard, every room."
+        subhead="Same mounting standard, hidden cabling, one rack feeding the house. Scenes a guest can read, lights that follow the day, audio in every room."
+        footerLink={{ to: "/projects/full-home-install", label: "See the full-home install" }}
+      />
 
       {/* FAQ */}
       <section className="py-16 sm:py-24 px-4 sm:px-6 bg-black/20 backdrop-blur-sm border-y border-white/5">

@@ -26,6 +26,7 @@ import ProductFamilyTree, {
 } from "../../components/ProductFamilyTree";
 import { schemaProviderLocalBusiness } from "../../constants/businessSchema";
 import PageBackground from "../../components/PageBackground";
+import ProjectProof from "../../components/ProjectProof";
 import bgAudio from "../../assets/bg-audio.jpg";
 
 const AvaService = () => {
@@ -619,6 +620,15 @@ const AvaService = () => {
           </Link>
         </div>
       </section>
+
+      {/* Real theater & media room proof */}
+      <ProjectProof
+        setKey="homeTheater"
+        eyebrow="Where AVA fits"
+        headline="Theaters and media rooms — one remote, no app hunt."
+        subhead="AVA is built for the rooms below: dedicated theater, finished media room, family TV space. One remote that handles TV, source switching, and the lights coming down."
+        footerLink={{ to: "/projects/eagle-vail-theater", label: "See the Eagle-Vail theater" }}
+      />
 
       {/* 8. FAQ */}
       <section className="py-16 sm:py-24 px-4 sm:px-6 bg-black/20 backdrop-blur-sm border-y border-white/5">

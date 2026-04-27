@@ -25,6 +25,7 @@ import ProductFamilyTree, {
 } from "../../components/ProductFamilyTree";
 import { schemaProviderLocalBusiness } from "../../constants/businessSchema";
 import PageBackground from "../../components/PageBackground";
+import ProjectProof from "../../components/ProjectProof";
 import bgLighting from "../../assets/bg-lighting.jpg";
 
 const LutronHomeWorks = () => {
@@ -760,6 +761,15 @@ const LutronHomeWorks = () => {
           </div>
         </div>
       </section>
+
+      {/* Real-room proof */}
+      <ProjectProof
+        setKey="lightingControl"
+        eyebrow="Lighting in real rooms"
+        headline="Architectural lighting, in homes you can walk through."
+        subhead="HomeWorks fits luxury new builds — Ketra, Lumaris, hand-crafted Palladiom keypads. The rooms below show the integrated control story we deliver across platforms."
+        footerLink={{ to: "/projects", label: "Browse every project" }}
+      />
 
       {/* FAQ */}
       <section className="py-16 sm:py-24 px-4 sm:px-6 bg-black/20 backdrop-blur-sm border-y border-white/5">

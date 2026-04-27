@@ -29,6 +29,7 @@ import ProductFamilyTree, {
 } from "../../components/ProductFamilyTree";
 import { schemaProviderLocalBusiness } from "../../constants/businessSchema";
 import PageBackground from "../../components/PageBackground";
+import ProjectProof from "../../components/ProjectProof";
 import bgLighting from "../../assets/bg-lighting.jpg";
 
 const LutronRadioRA3 = () => {
@@ -774,6 +775,16 @@ const LutronRadioRA3 = () => {
           </div>
         </div>
       </section>
+
+      {/* Real-room proof */}
+      <ProjectProof
+        setKey="lightingControl"
+        eyebrow="Lutron in finished rooms"
+        headline="The kind of rooms RadioRA3 quietly runs."
+        subhead="Theater, great room, media room, bedrooms — same scenes across the home, no app in hand. RadioRA3 retrofits cleanly into the same finished spaces."
+        footerLink={{ to: "/projects", label: "Browse every project" }}
+        variant="light"
+      />
 
       {/* 9. FAQ */}
       <section className="py-16 sm:py-24 px-4 sm:px-6">
