@@ -52,7 +52,7 @@ const SmartLighting = () => {
 
   return (
     <PageBackground image={bgLighting}>
-      <SEO title="Smart Lighting & Control | Vail Valley | Symphony Smart Homes" description="Control4 lighting and keypads by default for Vail Valley homes — Lutron RadioRA3 or HomeWorks when the home calls for it. Scenes, dimmers, and automated schedules." keywords="smart lighting Vail Valley, Control4 lighting Eagle County, Lutron RadioRA3, HomeWorks, lighting control, keypads" schema={[serviceSchema, faqSchema]} breadcrumbs={[{ name: "Home", url: "/" }, { name: "Services", url: "/services" }, { name: "Smart Lighting", url: "/services/smart-lighting" }]} />
+      <SEO title="Smart Lighting & Control | Vail Valley" description="Control4 lighting and keypads by default for Vail Valley homes — Lutron RadioRA3 or HomeWorks when the home calls for it. Scenes, dimmers, and automated schedules." keywords="smart lighting Vail Valley, Control4 lighting Eagle County, Lutron RadioRA3, HomeWorks, lighting control, keypads" schema={[serviceSchema, faqSchema]} breadcrumbs={[{ name: "Home", url: "/" }, { name: "Services", url: "/services" }, { name: "Smart Lighting", url: "/services/smart-lighting" }]} />
       <Header />
 
       <section className="pt-36 sm:pt-44 pb-16 sm:pb-20 px-4 sm:px-6">
