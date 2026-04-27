@@ -66,6 +66,19 @@ export const cityPages: CityPage[] = [
     driveTime: "10-minute drive from our base"
   },
   {
+    slug: "minturn",
+    city: "Minturn",
+    metaTitle: "Smart Home Installation in Minturn, CO",
+    metaDescription: "Smart home installation, pre-wire, and service in Minturn, Colorado. Control4, Lutron, networking, and AV for historic and new construction homes near Vail.",
+    headline: "Smart Home Integration in Minturn",
+    subheadline: "Local integrator serving Minturn, Maloit Park, and the Highway 24 corridor",
+    intro: "Minturn's mix of older homes and newer custom builds means we see a lot of retrofit lighting, networking upgrades, and pre-wire on tear-down/rebuild projects. The town is small, but it sits right between Vail and the rest of the valley — we're here regularly.",
+    localDetails: "Minturn properties skew toward older bones with character — log construction, thicker walls, and tight lots along the Eagle River. Wireless mesh systems struggle here, and lighting retrofits often need wireless platforms like Lutron RadioRA3 because opening up walls isn't always practical. New custom builds near Maloit Park and along the river benefit from full pre-wire while the framing is open.",
+    commonProjects: ["Wireless lighting retrofits in older homes", "Networking upgrades for thick-walled construction", "New construction pre-wire", "Music and TV systems for cozy living rooms", "Smart locks and cameras for second homes"],
+    neighborhoods: ["Downtown Minturn", "Maloit Park", "Highway 24 corridor"],
+    driveTime: "10-minute drive from our base"
+  },
+  {
     slug: "eagle",
     city: "Eagle",
     metaTitle: "Smart Home Installation in Eagle, CO",

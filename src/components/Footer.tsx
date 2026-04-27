@@ -95,7 +95,7 @@ const Footer = () => {
                 { name: "Edwards", path: "/edwards" },
                 { name: "Avon", path: "/avon" },
                 { name: "Eagle", path: "/eagle" },
-                { name: "Minturn", path: "/contact" },
+                { name: "Minturn", path: "/minturn" },
               ].map((area) => (
                 <li key={area.name}>
                   <Link to={area.path} className="flex items-center gap-1.5 text-white/40 hover:text-white/70 text-sm transition-colors">
@@ -132,7 +132,7 @@ const Footer = () => {
               <Camera className="w-3.5 h-3.5" /> Instagram
             </a>
             <a
-              href="https://g.page/symphonysmarthomes"
+              href="https://www.google.com/search?q=Symphony+Smart+Homes+Vail+Valley"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-1.5 text-white/25 hover:text-white/50 text-xs transition-colors"

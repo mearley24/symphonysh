@@ -30,6 +30,7 @@
   <url><loc>https://symphonysh.com/edwards</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://symphonysh.com/avon</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://symphonysh.com/eagle</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://symphonysh.com/minturn</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <!-- Service-area hub + service-specific local landing pages -->
   <url><loc>https://symphonysh.com/service-areas</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://symphonysh.com/service-areas/vail-smart-home-installation</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>

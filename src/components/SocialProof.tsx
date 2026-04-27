@@ -8,7 +8,7 @@ const stats = [
   },
   {
     icon: Layers,
-    value: "Lutron · Control4 · AVA",
+    value: "Control4 · Lutron · AVA",
     label: "Real platforms, no lock-in",
   },
   {
