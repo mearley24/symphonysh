@@ -103,7 +103,7 @@ const ResourceGuide = () => {
               to="/setup-finder"
               className="inline-flex items-center justify-center gap-2 border border-white/20 hover:border-white/40 hover:bg-white/5 text-white px-7 py-4 rounded-lg font-medium transition-colors text-base"
             >
-              Try Setup Finder
+              Find the Right Setup
             </Link>
           </div>
         </div>

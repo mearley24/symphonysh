@@ -371,7 +371,7 @@ const SetupFinder = () => {
   return (
     <PageBackground image={bgHomeIntegration}>
       <SEO
-        title="Find the Right Setup | Symphony Smart Homes"
+        title="Find the Right Setup"
         description="HomeWorks, RadioRA3, Control4, AVA, or just a better network? Six quick questions about your Vail Valley home and we suggest a starting point — no pressure to commit."
         keywords="smart home recommendation, HomeWorks vs RadioRA3, Control4 vs Lutron, AVA vs Control4, Vail Valley smart home"
         breadcrumbs={[

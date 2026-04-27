@@ -7,6 +7,7 @@ const navLinks = [
   { label: "Platforms", path: "/platforms" },
   { label: "Setup Finder", path: "/setup-finder" },
   { label: "Our Work", path: "/projects" },
+  { label: "Resources", path: "/resources" },
   { label: "Blog", path: "/blog" },
   { label: "About", path: "/about" },
   { label: "Contact", path: "/contact" },

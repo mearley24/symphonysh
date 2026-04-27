@@ -107,6 +107,35 @@ const ServiceAreasIndex = () => {
         </div>
       </section>
 
+      {/* CTA */}
+      <section className="py-16 sm:py-24 px-4 sm:px-6 bg-black/20 backdrop-blur-sm border-y border-white/5">
+        <div className="max-w-3xl mx-auto text-center">
+          <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">
+            Ready when you are
+          </p>
+          <h2 className="text-2xl sm:text-3xl font-bold text-white mb-4">
+            Tell us about the home.
+          </h2>
+          <p className="text-white/55 text-base mb-8 max-w-xl mx-auto">
+            We'll meet you on-site, walk the property, and lay out what fits — no pressure to commit.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-3 justify-center">
+            <Link
+              to="/scheduling"
+              className="inline-flex items-center justify-center gap-2 bg-accent hover:bg-accent/90 text-white px-8 py-4 rounded-lg font-medium transition-colors text-base"
+            >
+              Schedule a Walkthrough <ArrowRight className="w-4 h-4" />
+            </Link>
+            <Link
+              to="/setup-finder"
+              className="inline-flex items-center justify-center gap-2 border border-white/20 hover:border-white/40 hover:bg-white/5 text-white px-8 py-4 rounded-lg font-medium transition-colors text-base"
+            >
+              Find the Right Setup
+            </Link>
+          </div>
+        </div>
+      </section>
+
       <Footer />
     </PageBackground>
   );

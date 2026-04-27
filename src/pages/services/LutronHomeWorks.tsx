@@ -382,7 +382,7 @@ const LutronHomeWorks = () => {
       description:
         "How HomeWorks cooperates with the rest of the home — whole-home automation, media rooms, audio, and voice.",
       items: [
-        { label: "Control4", href: "/platforms/control4", hint: "Whole-home automation that often sits on top of HomeWorks lighting" },
+        { label: "Control4", href: "/platforms/control4", hint: "Whole-home automation that ties HomeWorks lighting in with media, climate, and security" },
         { label: "AVA", href: "/platforms/ava", hint: "Cinema and entertainment control for media rooms" },
         { label: "Sonos", href: "/services/audio-entertainment", hint: "Whole-home audio alongside HomeWorks scenes" },
         { label: "Voice assistants", hint: "Alexa, Google, and Siri tied into Lutron Connect" },
@@ -515,7 +515,7 @@ const LutronHomeWorks = () => {
               to="/scheduling?service=homeworks"
               className="inline-flex items-center justify-center gap-2 border border-white/20 hover:border-white/40 hover:bg-white/5 text-white px-7 py-4 rounded-lg font-medium transition-colors text-base"
             >
-              <Phone className="w-4 h-4" /> Schedule a Design Meeting
+              <Phone className="w-4 h-4" /> Schedule a Walkthrough
             </Link>
           </div>
           <p className="text-white/40 text-sm mt-6">
@@ -744,12 +744,20 @@ const LutronHomeWorks = () => {
               );
             })}
           </div>
-          <Link
-            to="/setup-finder"
-            className="inline-flex items-center gap-2 text-accent text-sm font-medium hover:gap-3 transition-all"
-          >
-            Not sure which one? Try the Setup Finder <ArrowRight className="w-4 h-4" />
-          </Link>
+          <div className="flex flex-col sm:flex-row gap-x-6 gap-y-2">
+            <Link
+              to="/setup-finder"
+              className="inline-flex items-center gap-2 text-accent text-sm font-medium hover:gap-3 transition-all"
+            >
+              Not sure which one? Try the Setup Finder <ArrowRight className="w-4 h-4" />
+            </Link>
+            <Link
+              to="/resources/radiora3-vs-homeworks"
+              className="inline-flex items-center gap-2 text-white/60 hover:text-accent text-sm font-medium transition-colors"
+            >
+              Read: RadioRA3 vs HomeWorks <ArrowRight className="w-4 h-4" />
+            </Link>
+          </div>
         </div>
       </section>
 
@@ -818,7 +826,7 @@ const LutronHomeWorks = () => {
               to="/scheduling?service=homeworks"
               className="inline-flex items-center justify-center gap-2 border border-white/20 hover:border-white/40 hover:bg-white/5 text-white px-8 py-4 rounded-lg font-medium transition-colors text-base w-full sm:w-auto"
             >
-              <Phone className="w-4 h-4" /> Schedule a Design Meeting
+              <Phone className="w-4 h-4" /> Schedule a Walkthrough
             </Link>
           </div>
         </div>
@@ -844,7 +852,7 @@ const LutronHomeWorks = () => {
               {
                 title: "Control4 Automation",
                 description:
-                  "The whole-home automation layer that often sits on top of HomeWorks lighting.",
+                  "The whole-home automation layer that ties HomeWorks lighting together with media, climate, and security.",
                 path: "/platforms/control4",
                 icon: Home,
               },
