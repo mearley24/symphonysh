@@ -137,7 +137,7 @@ const Index = () => {
               <a
                 href="tel:+19705193013"
                 onClick={trackPhoneClick}
-                className="inline-flex items-center justify-center gap-2 border border-white/20 hover:border-white/40 hover:bg-white/5 text-white px-7 py-4 rounded-lg font-medium transition-all text-base backdrop-blur-sm"
+                className="inline-flex items-center justify-center gap-2 border border-white/40 hover:border-white/60 bg-white/10 hover:bg-white/15 text-white px-7 py-4 rounded-lg font-medium transition-all text-base backdrop-blur-md shadow-md shadow-black/30"
               >
                 <Phone className="w-4 h-4" />
                 (970) 519-3013
@@ -157,7 +157,7 @@ const Index = () => {
           {/* Trust Strip — pinned to bottom of window */}
           <section data-reveal className="border-y border-white/10 py-6 sm:py-8 px-4 sm:px-6 bg-black/30 backdrop-blur-sm">
             <div className="max-w-5xl mx-auto">
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-5 sm:gap-6 text-center">
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-x-3 gap-y-5 sm:gap-6 text-center">
                 <div>
                   <p className="text-white font-semibold text-base sm:text-lg">10+ Years</p>
                   <p className="text-white/65 text-sm leading-snug">In the valley</p>
@@ -167,7 +167,9 @@ const Index = () => {
                   <p className="text-white/65 text-sm leading-snug">& fully insured</p>
                 </div>
                 <div>
-                  <p className="text-white font-semibold text-base sm:text-lg">Control4 · Lutron · AVA</p>
+                  <p className="text-white font-semibold text-sm sm:text-lg whitespace-nowrap">
+                    Control4<span className="mx-1 text-white/40">·</span>Lutron<span className="mx-1 text-white/40">·</span>AVA
+                  </p>
                   <p className="text-white/65 text-sm leading-snug">Real platforms, no lock-in</p>
                 </div>
                 <div>

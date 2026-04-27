@@ -55,15 +55,20 @@ const SmartLighting = () => {
       <SEO title="Smart Lighting & Control | Vail Valley" description="Control4 lighting and keypads by default for Vail Valley homes — Lutron RadioRA3 or HomeWorks when the home calls for it. Scenes, dimmers, and automated schedules." keywords="smart lighting Vail Valley, Control4 lighting Eagle County, Lutron RadioRA3, HomeWorks, lighting control, keypads" schema={[serviceSchema, faqSchema]} breadcrumbs={[{ name: "Home", url: "/" }, { name: "Services", url: "/services" }, { name: "Smart Lighting", url: "/services/smart-lighting" }]} />
       <Header />
 
-      <section className="pt-36 sm:pt-44 pb-16 sm:pb-20 px-4 sm:px-6">
-        <div className="max-w-4xl mx-auto">
-          <Link to="/services" className="inline-flex items-center gap-1.5 text-white/40 hover:text-white/70 text-sm mb-8 transition-colors"><ArrowLeft className="w-3.5 h-3.5" /> All Services</Link>
+      <section className="relative pt-36 sm:pt-44 pb-16 sm:pb-20 px-4 sm:px-6">
+        {/* Hero scrim — keeps white text readable over brighter areas of the photo */}
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-0 bg-gradient-to-b from-black/60 via-black/30 to-transparent"
+        />
+        <div className="relative max-w-4xl mx-auto">
+          <Link to="/services" className="inline-flex items-center gap-1.5 text-white/60 hover:text-white text-sm mb-8 transition-colors"><ArrowLeft className="w-3.5 h-3.5" /> All Services</Link>
           <div className="flex items-center gap-3 mb-4">
             <div className="w-11 h-11 rounded-lg bg-accent/10 flex items-center justify-center"><Lightbulb className="w-5 h-5 text-accent" /></div>
             <p className="text-accent font-medium text-sm tracking-wide uppercase">Smart Lighting</p>
           </div>
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight mb-5 text-white hero-text-shadow">Lighting that quietly sets the room.</h1>
-          <p className="text-white/60 text-base sm:text-lg leading-relaxed mb-8 max-w-2xl hero-subtext-shadow">Control4 lighting and scenes by default — Lutron RadioRA3 or HomeWorks when the home calls for it. Named scenes, warm mornings, soft amber overnight, no phone in hand.</p>
+          <p className="text-white/80 text-base sm:text-lg leading-relaxed mb-8 max-w-2xl hero-subtext-shadow">Control4 lighting and scenes by default — Lutron RadioRA3 or HomeWorks when the home calls for it. Named scenes, warm mornings, soft amber overnight, no phone in hand.</p>
           <div className="flex flex-col sm:flex-row gap-3">
             <Link to="/scheduling?service=smart-lighting" className="inline-flex items-center justify-center gap-2 bg-accent hover:bg-accent/90 text-white px-7 py-4 rounded-lg font-medium transition-colors text-base">Schedule a Walkthrough <ArrowRight className="w-4 h-4" /></Link>
             <a href="tel:+19705193013" className="inline-flex items-center justify-center gap-2 border border-white/20 hover:border-white/40 hover:bg-white/5 text-white px-7 py-4 rounded-lg font-medium transition-colors text-base"><Phone className="w-4 h-4" /> (970) 519-3013</a>
