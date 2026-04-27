@@ -78,9 +78,9 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-primary text-primary-foreground relative">
       <SEO
-        title="Smart Homes for the Vail Valley | Lutron, Control4, AVA"
-        description="Lutron HomeWorks, RadioRA3, Control4, and AVA smart homes in Vail Valley & Eagle County. Lighting, shades, audio, climate, and security on one calm, reliable system."
-        keywords="Lutron HomeWorks Vail Valley, Lutron RadioRA3, Control4 dealer, AVA smart remote, smart home Eagle County, mountain home automation"
+        title="Smart Homes for the Vail Valley | Control4, Lutron, AVA"
+        description="Control4 whole-home automation by default, Lutron RadioRA3 or HomeWorks when the home calls for it, and AVA for the media room and simple remote. Vail Valley & Eagle County."
+        keywords="Control4 dealer Vail Valley, Lutron RadioRA3, Lutron HomeWorks, AVA smart remote, smart home Eagle County, mountain home automation"
         schema={[serviceSchema, faqSchema]}
       />
 
