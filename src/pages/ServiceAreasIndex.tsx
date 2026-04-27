@@ -4,6 +4,7 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import SEO from "../components/SEO";
 import PageBackground from "../components/PageBackground";
+import ProjectProof from "../components/ProjectProof";
 import bgAbout from "../assets/bg-about.jpg";
 import { localLandingPages } from "../data/localLandingPages";
 import { cityPages } from "../data/cityPages";
@@ -106,6 +107,15 @@ const ServiceAreasIndex = () => {
           </div>
         </div>
       </section>
+
+      {/* Real installs across the valley */}
+      <ProjectProof
+        setKey="mixedPortfolio"
+        eyebrow="Real work · real homes"
+        headline="What our valley installs actually look like."
+        subhead="Theater, mounted TVs, and the structured wiring behind them — every photo a project we delivered in Eagle County."
+        footerLink={{ to: "/projects", label: "Browse every project" }}
+      />
 
       {/* CTA */}
       <section className="py-16 sm:py-24 px-4 sm:px-6 bg-black/20 backdrop-blur-sm border-y border-white/5">

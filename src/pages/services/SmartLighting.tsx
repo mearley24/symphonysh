@@ -7,6 +7,7 @@ import SEO from "../../components/SEO";
 import { schemaProviderLocalBusiness } from "../../constants/businessSchema";
 
 import PageBackground from "../../components/PageBackground";
+import ProjectProof from "../../components/ProjectProof";
 import bgLighting from "../../assets/bg-lighting.jpg";
 
 const SmartLighting = () => {
@@ -140,6 +141,14 @@ const SmartLighting = () => {
           </div>
         </div>
       </section>
+
+      <ProjectProof
+        setKey="lightingControl"
+        eyebrow="Lighting in real rooms"
+        headline="Scenes you'd actually use, in homes we delivered."
+        subhead="Control4 lighting and Lutron keypads run the rooms below. Same one-button feel — theater, great room, media room, bedrooms."
+        footerLink={{ to: "/projects", label: "Browse every project" }}
+      />
 
       <section className="py-16 sm:py-24 px-4 sm:px-6 bg-black/20 backdrop-blur-sm border-y border-white/5">
         <div className="max-w-3xl mx-auto">

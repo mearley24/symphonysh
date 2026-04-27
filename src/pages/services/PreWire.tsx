@@ -6,6 +6,7 @@ import SEO from "@/components/SEO";
 import { schemaProviderLocalBusiness } from "@/constants/businessSchema";
 
 import PageBackground from "@/components/PageBackground";
+import ProjectProof from "@/components/ProjectProof";
 import bgPrewire from "../../assets/bg-prewire.jpg";
 
 const capabilities = [
@@ -125,6 +126,15 @@ const PreWire = () => (
         </div>
       </div>
     </section>
+
+    {/* Real pre-wire & rack work */}
+    <ProjectProof
+      setKey="prewire"
+      eyebrow="Pre-wire in the field"
+      headline="What rough-in actually looks like."
+      subhead="Cable pulled clean, labeled, and tested before drywall. Backboxes set with the GC. The work that decides what's possible later."
+      footerLink={{ to: "/projects/structured-wiring-showcase", label: "See the structured wiring set" }}
+    />
 
     {/* FAQ */}
     <section className="py-16 sm:py-24 bg-black/20 backdrop-blur-sm border-y border-white/5 px-4 sm:px-6">

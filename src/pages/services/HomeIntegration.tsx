@@ -7,6 +7,7 @@ import SEO from "../../components/SEO";
 import { schemaProviderLocalBusiness } from "../../constants/businessSchema";
 
 import PageBackground from "../../components/PageBackground";
+import ProjectProof from "../../components/ProjectProof";
 import ServiceDemoSection from "../../components/ServiceDemoSection";
 import { HomeAutomationDemo } from "../../components/service-demos/HomeAutomationDemo";
 import bgHomeIntegration from "../../assets/bg-home-integration.jpg";
@@ -115,6 +116,14 @@ const HomeIntegration = () => {
           </div>
         </div>
       </section>
+
+      <ProjectProof
+        setKey="wholeHome"
+        eyebrow="Whole-home automation"
+        headline="One standard, every room — from real Vail Valley jobs."
+        subhead="Same mounting standard, same hidden cabling, one rack feeding the house. The work behind a Control4 system that just stays running."
+        footerLink={{ to: "/projects", label: "Browse every project" }}
+      />
 
       <section className="py-16 sm:py-24 px-4 sm:px-6 bg-black/20 backdrop-blur-sm border-y border-white/5">
         <div className="max-w-3xl mx-auto">
