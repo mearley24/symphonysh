@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ArrowRight, Phone, ArrowLeft, Lightbulb, Clock, Eye, Palette, CheckCircle2, ChevronDown } from "lucide-react";
+import { ArrowRight, Phone, ArrowLeft, Lightbulb, Clock, Eye, Palette, CheckCircle2, ChevronDown, Layers, Sliders, SquareStack, Sun, Blinds } from "lucide-react";
 import { useState } from "react";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
@@ -7,8 +7,6 @@ import SEO from "../../components/SEO";
 import { schemaProviderLocalBusiness } from "../../constants/businessSchema";
 
 import PageBackground from "../../components/PageBackground";
-import ServiceDemoSection from "../../components/ServiceDemoSection";
-import { HomeAutomationDemo } from "../../components/service-demos/HomeAutomationDemo";
 import bgLighting from "../../assets/bg-lighting.jpg";
 
 const SmartLighting = () => {
@@ -91,9 +89,32 @@ const SmartLighting = () => {
         </div>
       </section>
 
-      <ServiceDemoSection title="Lighting Control Demo" subtitle="Interactive Demo">
-        <HomeAutomationDemo />
-      </ServiceDemoSection>
+      <section className="py-16 sm:py-24 px-4 sm:px-6 bg-black/10 backdrop-blur-sm border-y border-white/5">
+        <div className="max-w-5xl mx-auto">
+          <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">The Lighting Path</p>
+          <h2 className="text-2xl sm:text-3xl font-bold text-white mb-4">What a real lighting system has to answer.</h2>
+          <p className="text-white/55 text-base leading-relaxed mb-12 max-w-2xl">Five questions worth getting right before the first switch goes in. Control4 is our default for the whole-home story; Lutron RadioRA3 or HomeWorks step in when the home calls for them.</p>
+
+          <ol className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {[
+              { step: "01", icon: Layers, title: "Control layer", body: "Where the brain lives. Control4 by default — keypads, scenes, and one app that ties lighting to shades, audio, and climate. Lutron RadioRA3 or HomeWorks for Lutron-grade dimming and architectural finishes." },
+              { step: "02", icon: Sliders, title: "Dimming & load type", body: "Dimmers matched to the bulb — LED, low-voltage, halogen, or hybrid. The right driver and trim mean smooth fades, no flicker, and bulbs that actually last." },
+              { step: "03", icon: SquareStack, title: "Keypads & scenes", body: "Goodmorning, Welcome, Movie, Goodnight, Away — labeled in plain English on a keypad anyone can read at a glance. One button still turns the room on or off without an app." },
+              { step: "04", icon: Sun, title: "Accent & tunable lighting", body: "Tunable-white LED for warm-dim mornings and cool-bright tasks. Astronomic schedules follow sunrise and sunset on their own — soft amber overnight, no phone in hand." },
+              { step: "05", icon: Blinds, title: "Shades & daylight", body: "Lighting and shades on the same system. Morning sun lifts the shades; afternoon glare drops them; evening scenes warm the room. Daylight does most of the work, the lights fill in." },
+            ].map((s, i) => (
+              <li key={i} className="bg-black/40 backdrop-blur-sm border border-white/8 rounded-xl p-6">
+                <div className="flex items-center justify-between mb-4">
+                  <span className="text-accent/70 font-mono text-xs tracking-widest">{s.step}</span>
+                  <div className="w-10 h-10 rounded-lg bg-accent/10 flex items-center justify-center"><s.icon className="w-5 h-5 text-accent" aria-hidden="true" /></div>
+                </div>
+                <h3 className="text-white font-semibold text-lg mb-2">{s.title}</h3>
+                <p className="text-white/60 text-sm leading-relaxed">{s.body}</p>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </section>
 
       <section className="py-16 sm:py-24 px-4 sm:px-6">
         <div className="max-w-4xl mx-auto">
