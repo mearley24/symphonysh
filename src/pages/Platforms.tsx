@@ -149,9 +149,9 @@ const Platforms = () => {
     <PageBackground image={bgHomeIntegration}>
       <div ref={revealRef}>
         <SEO
-          title="Smart Home Platforms | Lutron HomeWorks, RadioRA3, Control4, AVA"
-          description="Lutron HomeWorks, Lutron RadioRA3, Control4, and AVA — the four product lines behind almost every Vail Valley smart home, with the trade-offs that actually matter."
-          keywords="smart home platforms Vail Valley, Lutron HomeWorks, Lutron RadioRA3, Control4 dealer, AVA smart remote, Eagle County home automation"
+          title="Smart Home Platforms | Control4, Lutron RadioRA3 & HomeWorks, AVA"
+          description="Control4 by default for whole-home automation, Lutron RadioRA3 or HomeWorks when the home calls for it, and AVA for the media room — the platforms behind Vail Valley smart homes."
+          keywords="smart home platforms Vail Valley, Control4 dealer, Lutron RadioRA3, Lutron HomeWorks, AVA smart remote, Eagle County home automation"
           schema={[platformsSchema, faqSchema]}
           breadcrumbs={[
             { name: "Home", url: "/" },
@@ -274,6 +274,9 @@ const Platforms = () => {
                 </div>
               ))}
             </div>
+            <p className="text-white/55 text-sm mt-8">
+              Want the deeper write-ups? <Link to="/resources" className="text-accent hover:text-accent/80 underline underline-offset-4 transition-colors">Read the Guides</Link> — Control4 vs Lutron, RadioRA3 vs HomeWorks, and more.
+            </p>
           </div>
         </section>
 
