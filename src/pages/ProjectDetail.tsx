@@ -6,7 +6,9 @@ import Footer from "../components/Footer";
 import SEO from "../components/SEO";
 import PageBackground from "../components/PageBackground";
 import bgProjects from "../assets/bg-projects.jpg";
-import { projects, projectCategories } from "../data/projects";
+import { projects, projectCategories, locationSlug, projectLocationFilters } from "../data/projects";
+
+const SITE_URL = "https://symphonysh.com";
 
 const ProjectDetail = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -47,13 +49,43 @@ const ProjectDetail = () => {
     return found?.label ?? c;
   });
 
+  const locSlug = locationSlug(project.location);
+  const locationFilter = projectLocationFilters.find((l) => l.slug === locSlug);
+
+  // Unique meta description: scope + location + first three system tags so
+  // each project page has its own snippet rather than repeating the scope.
+  const systemSnippet = (project.systemsInstalled ?? []).slice(0, 3).join(", ");
+  const metaDescription = systemSnippet
+    ? `${project.scope} ${project.location}. Systems: ${systemSnippet}.`
+    : `${project.scope} ${project.location}.`;
+
+  // Image gallery schema — ImageGallery + ImageObject per photo. Caption
+  // ties each image back to the project name so search engines can index
+  // them with context.
+  const imageGallerySchema: Record<string, unknown> = {
+    "@context": "https://schema.org",
+    "@type": "ImageGallery",
+    "name": `${project.name} — Photos`,
+    "description": metaDescription,
+    "url": `${SITE_URL}/projects/${project.slug}`,
+    "image": project.photos.map((src, i) => ({
+      "@type": "ImageObject",
+      "contentUrl": `${SITE_URL}${src}`,
+      "name": `${project.name} — photo ${i + 1}`,
+      "caption": `${project.name}, ${project.location}`,
+    })),
+  };
+
   return (
     <PageBackground image={bgProjects}>
       <SEO
-        title={project.name}
-        description={project.scope}
-        keywords={`${project.name}, smart home installation, ${project.location}, ${categoryLabels.join(", ")}`}
+        title={`${project.name} — ${project.location}`}
+        description={metaDescription}
+        keywords={`${project.name}, ${categoryLabels.join(", ")}, ${project.location}, smart home installation Vail Valley`}
         breadcrumbs={[{ name: "Home", url: "/" }, { name: "Our Work", url: "/projects" }, { name: project.name, url: `/projects/${project.slug}` }]}
+        ogImage={project.heroPhoto}
+        ogType="article"
+        schema={imageGallerySchema}
       />
       <Header />
 
@@ -94,7 +126,7 @@ const ProjectDetail = () => {
           <div className="aspect-[16/9] relative">
             <img
               src={project.heroPhoto}
-              alt={project.name}
+              alt={`${project.name} — ${categoryLabels.join(", ")} in ${project.location}`}
               className="w-full h-full object-cover"
               loading="eager"
             />
@@ -122,7 +154,7 @@ const ProjectDetail = () => {
                       imgRefs.current[i] = el;
                     }}
                     src={photo}
-                    alt={`${project.name} — photo ${i + 1}`}
+                    alt={`${project.name} in ${project.location} — ${categoryLabels.join(", ")} install, photo ${i + 1}`}
                     className={`w-full h-full object-cover transition-all duration-300 ease-out group-hover:scale-[1.02] group-hover:brightness-110 ${
                       visibleImages.has(i) ? "opacity-100" : "opacity-0"
                     }`}
@@ -188,6 +220,95 @@ const ProjectDetail = () => {
           </div>
         </div>
       </section>
+
+      {/* Related services — cross-links to service/platform pages this project demonstrates */}
+      {project.relatedServices && project.relatedServices.length > 0 && (
+        <section className="py-12 px-4 sm:px-6 border-t border-white/5">
+          <div className="max-w-4xl mx-auto">
+            <p className="text-accent font-medium text-xs uppercase tracking-widest mb-2">
+              Services this project demonstrates
+            </p>
+            <h2 className="text-white text-xl sm:text-2xl font-bold mb-6">
+              Want this in your home?
+            </h2>
+            <div className="grid sm:grid-cols-2 gap-3">
+              {project.relatedServices.map((svc) => (
+                <Link
+                  key={svc.to}
+                  to={svc.to}
+                  className="group flex items-start justify-between gap-3 bg-black/40 backdrop-blur-sm border border-white/8 rounded-lg p-4 hover:border-accent/30 transition-colors"
+                >
+                  <div>
+                    <p className="text-white font-medium text-sm group-hover:text-accent transition-colors">
+                      {svc.label}
+                    </p>
+                    <p className="text-white/55 text-xs mt-0.5 leading-relaxed">{svc.reason}</p>
+                  </div>
+                  <ArrowRight className="w-4 h-4 text-white/30 group-hover:text-accent group-hover:translate-x-0.5 transition-all flex-shrink-0 mt-0.5" />
+                </Link>
+              ))}
+            </div>
+
+            {locationFilter?.cityPath && (
+              <p className="text-white/45 text-sm mt-6">
+                More smart home work in this area:{" "}
+                <Link to={locationFilter.cityPath} className="text-accent hover:underline">
+                  Symphony in {locationFilter.label}
+                </Link>
+                .
+              </p>
+            )}
+          </div>
+        </section>
+      )}
+
+      {/* More projects — same category, excluding current */}
+      {(() => {
+        const related = projects
+          .filter(
+            (p) =>
+              p.slug !== project.slug &&
+              p.categories.some((c) => project.categories.includes(c)),
+          )
+          .slice(0, 3);
+        if (related.length === 0) return null;
+        return (
+          <section className="py-12 px-4 sm:px-6 border-t border-white/5">
+            <div className="max-w-4xl mx-auto">
+              <p className="text-accent font-medium text-xs uppercase tracking-widest mb-2">
+                More like this
+              </p>
+              <h2 className="text-white text-xl sm:text-2xl font-bold mb-6">
+                Other {categoryLabels[0].toLowerCase()} projects
+              </h2>
+              <div className="grid sm:grid-cols-3 gap-4">
+                {related.map((p) => (
+                  <Link
+                    key={p.slug}
+                    to={`/projects/${p.slug}`}
+                    className="group block bg-black/40 backdrop-blur-sm border border-white/8 rounded-lg overflow-hidden hover:border-accent/30 transition-colors"
+                  >
+                    <div className="aspect-[16/10] relative overflow-hidden">
+                      <img
+                        src={p.heroPhoto}
+                        alt={`${p.name} in ${p.location}`}
+                        className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                        loading="lazy"
+                      />
+                    </div>
+                    <div className="p-3">
+                      <p className="text-white font-medium text-sm leading-snug">{p.name}</p>
+                      <p className="text-white/45 text-xs mt-0.5 flex items-center gap-1">
+                        <MapPin className="w-3 h-3" /> {p.location}
+                      </p>
+                    </div>
+                  </Link>
+                ))}
+              </div>
+            </div>
+          </section>
+        );
+      })()}
 
       {/* CTA */}
       <section className="py-14 px-4 sm:px-6 bg-black/20 backdrop-blur-sm border-t border-white/5">
