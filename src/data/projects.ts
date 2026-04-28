@@ -21,6 +21,13 @@ export interface Project {
   photos: string[];
   heroPhoto: string;
   systemsInstalled?: string[];
+  /**
+   * Service / platform pages this project demonstrates. Used by
+   * ProjectDetail to render an internal cross-link block. Only include
+   * services the project actually proves — do not pad. Each entry is a
+   * route path that already exists in the app (no invented routes).
+   */
+  relatedServices?: { to: string; label: string; reason: string }[];
   /** Real client quote or null. Never invent. */
   testimonial?: {
     quote: string;
@@ -35,7 +42,7 @@ export const projects: Project[] = [
     slug: "eagle-vail-theater",
     name: "Eagle-Vail Home Theater",
     location: "Eagle-Vail, CO",
-    categories: ["theater", "whole-home"],
+    categories: ["theater", "media-room", "whole-home", "control4", "lighting"],
     scope:
       "Dedicated home theater build — acoustic treatment, projection, surround sound, Control4.",
     description:
@@ -56,6 +63,12 @@ export const projects: Project[] = [
       "Acoustic Treatment",
       "Control4 Automation",
       "Lighting Scenes",
+    ],
+    relatedServices: [
+      { to: "/services/ava", label: "AVA — Media Room First", reason: "Single-room theater & media experience" },
+      { to: "/services/home-integration", label: "Home Integration", reason: "Whole-home AV under one system" },
+      { to: "/services/control4", label: "Control4", reason: "One-button cinema scenes & automation" },
+      { to: "/services/smart-lighting", label: "Smart Lighting", reason: "Scene-based dim on Play" },
     ],
     testimonial: null,
   },
@@ -88,13 +101,18 @@ export const projects: Project[] = [
       "Drywall Blocking",
       "Low-Voltage Plates",
     ],
+    relatedServices: [
+      { to: "/services/home-integration", label: "Home Integration", reason: "Whole-home AV from one rack" },
+      { to: "/services/prewire", label: "Pre-Wire", reason: "Concealed wiring & blocking standard" },
+      { to: "/services/networking", label: "Networking & Rack", reason: "Centralized rack feeding the home" },
+    ],
     testimonial: null,
   },
   {
     slug: "backbox-fireplace",
     name: "Backbox Fireplace Mount",
     location: "Eagle County, CO",
-    categories: ["tv-mounting"],
+    categories: ["tv-mounting", "prewire"],
     scope:
       "Pre-construction backbox install for a flush fireplace TV mount — zero visible cable, zero gap.",
     description:
@@ -109,6 +127,10 @@ export const projects: Project[] = [
       "/lovable-uploads/mounted-tvs/backbox-fp/IMG_0029.JPG",
     ],
     systemsInstalled: ["Backbox Pre-Install", "Flush TV Mount", "In-Wall Wiring"],
+    relatedServices: [
+      { to: "/services/prewire", label: "Pre-Wire", reason: "Backbox set before drywall" },
+      { to: "/services/home-integration", label: "Home Integration", reason: "Flush TV mount integrated with the room" },
+    ],
     testimonial: null,
   },
 
@@ -117,7 +139,7 @@ export const projects: Project[] = [
     slug: "structured-wiring-showcase",
     name: "Structured Wiring — Behind the Scenes",
     location: "Vail Valley, CO",
-    categories: ["wiring", "networking"],
+    categories: ["wiring", "networking", "rack", "prewire"],
     scope:
       "Rack builds, labeled cable runs, and structured cabling across multiple Vail Valley jobs.",
     description:
@@ -147,6 +169,11 @@ export const projects: Project[] = [
       "Cable Labeling",
       "Patch Panel Termination",
     ],
+    relatedServices: [
+      { to: "/services/prewire", label: "Pre-Wire", reason: "Structured cabling before drywall" },
+      { to: "/services/networking", label: "Networking & Rack", reason: "Rack builds, patch panels, labeled runs" },
+      { to: "/services/home-integration", label: "Home Integration", reason: "Foundation for whole-home control" },
+    ],
     testimonial: null,
   },
   {
@@ -169,6 +196,10 @@ export const projects: Project[] = [
       "One-Connect Box",
       "Concealed Wiring",
     ],
+    relatedServices: [
+      { to: "/services/audio-entertainment", label: "TV & Entertainment", reason: "Frame TV mount with concealed One-Connect" },
+      { to: "/services/prewire", label: "Pre-Wire", reason: "Concealed cable run for a clean install" },
+    ],
     testimonial: null,
   },
   {
@@ -190,6 +221,10 @@ export const projects: Project[] = [
       "/lovable-uploads/mounted-tvs/bc-condo-fp/IMG_0679.JPG",
     ],
     systemsInstalled: ["TV Mounting", "Concealed Wiring", "Cable Management"],
+    relatedServices: [
+      { to: "/services/audio-entertainment", label: "TV & Entertainment", reason: "Fireplace TV mount, clean finish" },
+      { to: "/service-areas", label: "Beaver Creek Service Area", reason: "Local condo work in Beaver Creek" },
+    ],
     testimonial: null,
   },
   {
@@ -210,6 +245,9 @@ export const projects: Project[] = [
       "/lovable-uploads/mounted-tvs/mantel-mount/IMG_1519.JPG",
     ],
     systemsInstalled: ["MantelMount MM540", "Heat Shield", "Concealed Wiring"],
+    relatedServices: [
+      { to: "/services/audio-entertainment", label: "TV & Entertainment", reason: "Pull-down mount for above-fireplace TVs" },
+    ],
     testimonial: null,
   },
   {
@@ -230,6 +268,10 @@ export const projects: Project[] = [
       "/lovable-uploads/mounted-tvs/HP/IMG_0993.JPG",
     ],
     systemsInstalled: ["Multi-Room TV", "Centralized Wiring", "Cable Management"],
+    relatedServices: [
+      { to: "/services/home-integration", label: "Home Integration", reason: "Multi-room TVs from a centralized rack" },
+      { to: "/services/networking", label: "Networking & Rack", reason: "Wiring closet feeding every room" },
+    ],
     testimonial: null,
   },
 
@@ -249,6 +291,9 @@ export const projects: Project[] = [
       "/lovable-uploads/mounted-tvs/frame-sonos/IMG_0030.JPG",
     ],
     systemsInstalled: ["Samsung Frame TV", "Sonos Soundbar", "eARC Audio", "Concealed Wiring"],
+    relatedServices: [
+      { to: "/services/audio-entertainment", label: "TV & Entertainment", reason: "Frame TV + Sonos as a clean wall pair" },
+    ],
     testimonial: null,
   },
   {
@@ -266,6 +311,9 @@ export const projects: Project[] = [
       "/lovable-uploads/mounted-tvs/wood-media/IMG_0511.JPG",
     ],
     systemsInstalled: ["TV Mounting", "Wood Accent Wall", "Built-In Cable Management"],
+    relatedServices: [
+      { to: "/services/audio-entertainment", label: "TV & Entertainment", reason: "TV integrated into a custom media wall" },
+    ],
     testimonial: null,
   },
   {
@@ -284,13 +332,17 @@ export const projects: Project[] = [
       "/lovable-uploads/mounted-tvs/singletree-fp/IMG_1185.JPG",
     ],
     systemsInstalled: ["TV Mounting", "Stone Conduit Run", "Concealed Wiring"],
+    relatedServices: [
+      { to: "/services/audio-entertainment", label: "TV & Entertainment", reason: "Stone-front fireplace mount with concealed run" },
+      { to: "/services/prewire", label: "Pre-Wire", reason: "In-wall conduit before stone went up" },
+    ],
     testimonial: null,
   },
   {
     slug: "west-vail-residence",
     name: "West Vail Residence",
     location: "West Vail, CO",
-    categories: ["tv-mounting"],
+    categories: ["tv-mounting", "prewire", "wiring"],
     scope: "Multiple TV installations with structured wiring and backbox pre-install.",
     description:
       "Multiple TV installations across a West Vail home with clean cable management and structured wiring behind every wall. Backbox pre-install for future-proof mounting.",
@@ -300,26 +352,35 @@ export const projects: Project[] = [
       "/lovable-uploads/mounted-tvs/west-vail-bb/IMG_1718.JPG",
     ],
     systemsInstalled: ["TV Mounting", "Backbox Install", "Structured Wiring"],
+    relatedServices: [
+      { to: "/services/prewire", label: "Pre-Wire", reason: "Backbox + structured wiring before drywall" },
+      { to: "/services/audio-entertainment", label: "TV & Entertainment", reason: "Multiple displays across the home" },
+    ],
     testimonial: null,
   },
   {
     slug: "cordillera-media-room",
     name: "Cordillera Media Room",
     location: "Cordillera, CO",
-    categories: ["theater"],
+    categories: ["theater", "media-room", "control4"],
     scope: "Media room with architectural speakers and automation.",
     description:
       "A media room built for everyday use in a mountain residence. Clean sight lines, in-ceiling architectural speakers, and Control4 automation that disappears into the room. One keypad press switches between movie mode, music mode, and game mode.",
     heroPhoto: "/lovable-uploads/home-theater/IMG_0958.JPG",
     photos: ["/lovable-uploads/home-theater/IMG_0958.JPG"],
     systemsInstalled: ["Architectural Speakers", "Control4 Automation", "Scene Control"],
+    relatedServices: [
+      { to: "/services/ava", label: "AVA — Media Room First", reason: "Single media room with everyday usability" },
+      { to: "/services/control4", label: "Control4", reason: "Scene-based mode switching (movie, music, game)" },
+      { to: "/services/audio-entertainment", label: "Architectural Audio", reason: "In-ceiling speakers blended into the room" },
+    ],
     testimonial: null,
   },
   {
     slug: "featured-theater-install",
     name: "Theater-Style Install",
     location: "Vail Valley, CO",
-    categories: ["theater"],
+    categories: ["theater", "media-room"],
     scope: "Clean theater-style installation with in-wall speakers.",
     description:
       "A theater-grade AV installation with in-wall speakers and a projector setup designed for a dedicated viewing room. Equipment hidden from sight, control via a single remote.",
@@ -329,6 +390,10 @@ export const projects: Project[] = [
       "/lovable-uploads/home-theater/IMG_0512.JPG",
     ],
     systemsInstalled: ["In-Wall Speakers", "Projection", "Hidden Equipment"],
+    relatedServices: [
+      { to: "/services/ava", label: "AVA — Media Room First", reason: "Dedicated viewing room, hidden equipment" },
+      { to: "/services/audio-entertainment", label: "Architectural Audio", reason: "In-wall speakers tuned to the room" },
+    ],
     testimonial: null,
   },
   {
@@ -366,17 +431,68 @@ export const projects: Project[] = [
       "/lovable-uploads/mounted-tvs/Misc/IMG_1714.JPG",
     ],
     systemsInstalled: ["TV Mounting", "Concealed Wiring", "Various Installations"],
+    relatedServices: [
+      { to: "/services/audio-entertainment", label: "TV & Entertainment", reason: "Range of TV mounting work across the valley" },
+      { to: "/services/home-integration", label: "Home Integration", reason: "Whole-home AV when projects scale up" },
+    ],
     testimonial: null,
   },
 ];
 
+/**
+ * Project filter pills shown on /projects. Order matters — the highest-intent
+ * categories for Vail Valley homeowners come first. Adding a new slug here
+ * requires at least one project in `projects` to carry that slug, otherwise
+ * the filter will look broken (empty state). Verify before adding.
+ */
 export const projectCategories = [
   { slug: "all", label: "All Projects" },
+  { slug: "control4", label: "Control4" },
+  { slug: "lighting", label: "Smart Lighting" },
   { slug: "theater", label: "Home Theater" },
+  { slug: "media-room", label: "Media Rooms" },
   { slug: "tv-mounting", label: "TV Mounting" },
   { slug: "frame-tv", label: "Frame TV" },
   { slug: "mantel-mount", label: "MantelMount" },
+  { slug: "prewire", label: "Pre-Wire" },
   { slug: "wiring", label: "Structured Wiring" },
-  { slug: "whole-home", label: "Whole-Home" },
+  { slug: "rack", label: "Rack & Networking" },
   { slug: "networking", label: "Networking" },
+  { slug: "whole-home", label: "Whole-Home" },
 ];
+
+/**
+ * Location filter values shown alongside the category pills. Only includes
+ * locations with at least one project today; rebuilt when project locations
+ * change. Locations that map to a city page also expose a deep-link.
+ */
+export const projectLocationFilters: { slug: string; label: string; cityPath?: string }[] = [
+  { slug: "all", label: "All Locations" },
+  { slug: "vail", label: "Vail", cityPath: "/vail" },
+  { slug: "beaver-creek", label: "Beaver Creek", cityPath: "/beaver-creek" },
+  { slug: "edwards", label: "Edwards", cityPath: "/edwards" },
+  { slug: "avon", label: "Avon", cityPath: "/avon" },
+  { slug: "eagle", label: "Eagle / Eagle-Vail", cityPath: "/eagle" },
+  { slug: "cordillera", label: "Cordillera" },
+  { slug: "singletree", label: "Singletree" },
+  { slug: "vail-valley", label: "Vail Valley" },
+];
+
+/**
+ * Reduce a project's `location` string to one of the slugs in
+ * projectLocationFilters. Pure-string heuristic — match the start of the
+ * location text against known city/town names. Fallback returns "vail-valley"
+ * for the generic Vail Valley / Eagle County entries so they still show up
+ * under the broad regional filter.
+ */
+export function locationSlug(location: string): string {
+  const l = location.toLowerCase();
+  if (l.startsWith("vail,") || l.startsWith("west vail") || l.startsWith("east vail")) return "vail";
+  if (l.startsWith("beaver creek")) return "beaver-creek";
+  if (l.startsWith("edwards")) return "edwards";
+  if (l.startsWith("avon")) return "avon";
+  if (l.startsWith("eagle-vail") || l.startsWith("eagle,") || l.startsWith("eagle county")) return "eagle";
+  if (l.startsWith("cordillera")) return "cordillera";
+  if (l.startsWith("singletree")) return "singletree";
+  return "vail-valley";
+}

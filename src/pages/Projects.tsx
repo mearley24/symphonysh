@@ -6,20 +6,29 @@ import Footer from "../components/Footer";
 import SEO from "../components/SEO";
 import PageBackground from "../components/PageBackground";
 import bgProjects from "../assets/bg-projects.jpg";
-import { projects, projectCategories } from "../data/projects";
+import {
+  projects,
+  projectCategories,
+  projectLocationFilters,
+  locationSlug,
+} from "../data/projects";
 import { useScrollReveal } from "../hooks/useScrollReveal";
+
+const applyFilters = (categorySlug: string, locSlug: string) => {
+  return projects.filter((p) => {
+    const matchesCategory = categorySlug === "all" || p.categories.includes(categorySlug);
+    const matchesLocation = locSlug === "all" || locationSlug(p.location) === locSlug;
+    return matchesCategory && matchesLocation;
+  });
+};
 
 const Projects = () => {
   const [activeFilter, setActiveFilter] = useState("all");
+  const [activeLocation, setActiveLocation] = useState("all");
   const [displayedProjects, setDisplayedProjects] = useState(projects);
   const [animatingOut, setAnimatingOut] = useState(false);
   const cardRefs = useRef<(HTMLAnchorElement | null)[]>([]);
   const revealRef = useScrollReveal();
-
-  const filtered =
-    activeFilter === "all"
-      ? projects
-      : projects.filter((p) => p.categories.includes(activeFilter));
 
   const handleFilterChange = useCallback(
     (slug: string) => {
@@ -28,16 +37,28 @@ const Projects = () => {
 
       setTimeout(() => {
         setActiveFilter(slug);
-        const next =
-          slug === "all"
-            ? projects
-            : projects.filter((p) => p.categories.includes(slug));
-        setDisplayedProjects(next);
+        setDisplayedProjects(applyFilters(slug, activeLocation));
         setAnimatingOut(false);
       }, 200);
     },
-    [activeFilter],
+    [activeFilter, activeLocation],
   );
+
+  const handleLocationChange = useCallback(
+    (slug: string) => {
+      if (slug === activeLocation) return;
+      setAnimatingOut(true);
+
+      setTimeout(() => {
+        setActiveLocation(slug);
+        setDisplayedProjects(applyFilters(activeFilter, slug));
+        setAnimatingOut(false);
+      }, 200);
+    },
+    [activeFilter, activeLocation],
+  );
+
+  const activeLocationFilter = projectLocationFilters.find((l) => l.slug === activeLocation);
 
   const [visibleCards, setVisibleCards] = useState<Set<number>>(new Set());
   useEffect(() => {
@@ -68,10 +89,23 @@ const Projects = () => {
     <PageBackground image={bgProjects}>
       <div ref={revealRef}>
       <SEO
-        title="Our Work | Smart Home Projects in Vail Valley"
-        description="Browse our portfolio of smart home installations: home theaters, TV mounting, and structured wiring across Vail Valley and Eagle County."
-        keywords="smart home portfolio, home theater, TV mounting, wiring, Vail Valley"
+        title="Our Work — Smart Home Projects in Vail Valley"
+        description="Real Symphony Smart Homes projects across Vail, Beaver Creek, Edwards, Avon, and Eagle County. Filter by Control4, smart lighting, home theater, media rooms, TV mounting, pre-wire, structured wiring, rack & networking."
+        keywords="smart home portfolio, Control4 projects, home theater Vail, media room, TV mounting, pre-wire, structured wiring, rack, networking, Vail Valley"
         breadcrumbs={[{ name: "Home", url: "/" }, { name: "Our Work", url: "/projects" }]}
+        schema={{
+          "@context": "https://schema.org",
+          "@type": "ItemList",
+          "name": "Symphony Smart Homes — Project Portfolio",
+          "itemListOrder": "https://schema.org/ItemListOrderAscending",
+          "numberOfItems": projects.length,
+          "itemListElement": projects.map((p, i) => ({
+            "@type": "ListItem",
+            "position": i + 1,
+            "url": `https://symphonysh.com/projects/${p.slug}`,
+            "name": p.name,
+          })),
+        }}
       />
       <Header />
 
@@ -101,21 +135,53 @@ const Projects = () => {
       {/* Filter + Project Cards */}
       <section className="py-8 sm:py-12 px-4 sm:px-6 bg-black/20 backdrop-blur-sm border-y border-white/5">
         <div className="max-w-5xl mx-auto">
-          {/* Filter pills */}
-          <div data-reveal className="flex flex-wrap gap-2 mb-8">
-            {projectCategories.map((cat) => (
-              <button
-                key={cat.slug}
-                onClick={() => handleFilterChange(cat.slug)}
-                className={`px-4 py-2 min-h-[44px] rounded-lg text-sm font-medium transition-all duration-300 ${
-                  activeFilter === cat.slug
-                    ? "bg-accent text-white shadow-md shadow-accent/20"
-                    : "bg-white/5 text-white/60 hover:bg-white/10 hover:text-white border border-white/8"
-                }`}
-              >
-                {cat.label}
-              </button>
-            ))}
+          {/* Category filter pills */}
+          <div data-reveal className="mb-3">
+            <p className="text-white/40 text-xs uppercase tracking-widest mb-2">Browse by system</p>
+            <div className="flex flex-wrap gap-2">
+              {projectCategories.map((cat) => (
+                <button
+                  key={cat.slug}
+                  onClick={() => handleFilterChange(cat.slug)}
+                  className={`px-4 py-2 min-h-[44px] rounded-lg text-sm font-medium transition-all duration-300 ${
+                    activeFilter === cat.slug
+                      ? "bg-accent text-white shadow-md shadow-accent/20"
+                      : "bg-white/5 text-white/60 hover:bg-white/10 hover:text-white border border-white/8"
+                  }`}
+                >
+                  {cat.label}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Location filter pills */}
+          <div data-reveal className="mb-6">
+            <p className="text-white/40 text-xs uppercase tracking-widest mb-2">Browse by area</p>
+            <div className="flex flex-wrap gap-2">
+              {projectLocationFilters.map((loc) => (
+                <button
+                  key={loc.slug}
+                  onClick={() => handleLocationChange(loc.slug)}
+                  className={`px-3 py-1.5 min-h-[36px] rounded-md text-xs font-medium transition-all duration-300 ${
+                    activeLocation === loc.slug
+                      ? "bg-white/15 text-white border border-white/20"
+                      : "bg-white/5 text-white/55 hover:bg-white/10 hover:text-white border border-white/8"
+                  }`}
+                >
+                  {loc.label}
+                </button>
+              ))}
+            </div>
+            {activeLocationFilter?.cityPath && activeLocation !== "all" && (
+              <p className="text-white/45 text-xs mt-3">
+                Looking for everything we do in {activeLocationFilter.label}?{" "}
+                <Link to={activeLocationFilter.cityPath} className="text-accent hover:underline">
+                  See the {activeLocationFilter.label} service area page
+                </Link>
+                .
+              </p>
+            )}
           </div>
 
           {/* Project cards */}
