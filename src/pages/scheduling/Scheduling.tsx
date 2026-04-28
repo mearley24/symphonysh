@@ -8,6 +8,7 @@ import { ErrorDisplay } from "./components/ErrorDisplay";
 import { LoadingIndicator } from "./components/LoadingIndicator";
 import { ErrorHandler } from "./components/ErrorHandler";
 import { useFormState } from "./hooks/useFormState";
+import SEO from "../../components/SEO";
 
 const Scheduling = () => {
   const formState = useFormState();
@@ -60,6 +61,16 @@ const Scheduling = () => {
 
   return (
     <ErrorHandler onError={handleError}>
+      <SEO
+        title="Schedule a Walkthrough"
+        description="Book a free on-site walkthrough with Symphony Smart Homes. Vail Valley & Eagle County — Control4, Lutron, AVA, pre-wire, and full-home integration."
+        keywords="schedule smart home walkthrough, Vail Valley, Eagle County, Control4 consultation, Lutron, AVA, pre-wire"
+        canonicalUrl="https://symphonysh.com/scheduling"
+        breadcrumbs={[
+          { name: "Home", url: "/" },
+          { name: "Schedule", url: "/scheduling" },
+        ]}
+      />
       <PageLayout>
         <SchedulingForm
           {...formState}

@@ -385,6 +385,7 @@ const AvaService = () => {
         title="AVA Cinema Remote, Home Remote & AVA OS in Vail Valley"
         description="The AVA line — Cinema Remote and Home Remote, both running AVA OS, with AVA Flows for automation without coding. Cinema Remote includes a built-in octa-core processor and Dynamic Keypad — IP control directly from the remote, no external processor required."
         keywords="AVA remote Vail Valley, AVA Cinema Remote, AVA Home Remote, AVA OS, AVA Flows, smart remote installer"
+        canonicalUrl="https://symphonysh.com/platforms/ava"
         schema={[serviceSchema, faqSchema]}
         breadcrumbs={[
           { name: "Home", url: "/" },

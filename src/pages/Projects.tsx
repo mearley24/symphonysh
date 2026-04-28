@@ -262,7 +262,7 @@ const Projects = () => {
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <Link
-              to="/walkthrough"
+              to="/scheduling"
               className="inline-flex items-center justify-center gap-2 bg-accent hover:bg-accent/90 text-white px-8 py-4 rounded-lg font-medium transition-colors text-base"
             >
               Schedule a Walkthrough <ArrowRight className="w-4 h-4" />

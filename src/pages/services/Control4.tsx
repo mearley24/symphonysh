@@ -467,6 +467,7 @@ const Control4 = () => {
         title="Control4 Installation & Service in Vail Valley"
         description="Control4 for Vail Valley homes — native Control4 lighting (Lux keypads, dimmers, centralized modules, Vibrant Linear), entertainment, security, and comfort on one platform. Control4 App, touchscreens, keypads, and smart remote. Compatible with 25,000+ third-party devices."
         keywords="Control4 Vail Valley, Control4 dealer Eagle County, Control4 lighting, Lux keypads, Vibrant Linear Lighting, Control4 installer"
+        canonicalUrl="https://symphonysh.com/platforms/control4"
         schema={[serviceSchema, faqSchema]}
         breadcrumbs={[
           { name: "Home", url: "/" },

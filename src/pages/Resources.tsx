@@ -80,7 +80,7 @@ const Resources = () => {
             Try the Setup Finder.
           </h2>
           <p className="text-white/55 text-base mb-8 max-w-xl mx-auto">
-            Three quick questions. We'll point you at the platform direction that fits the home you actually have.
+            Six questions about the house. We'll point you at the platform direction that fits the home you actually have.
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <Link
