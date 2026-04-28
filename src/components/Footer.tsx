@@ -5,7 +5,7 @@ import { trackPhoneClick } from "../utils/tracking";
 
 const Footer = () => {
   return (
-    <footer className="border-t border-white/10 py-10 px-4 sm:px-6 bg-black/40 backdrop-blur-sm">
+    <footer className="border-t border-white/10 pt-10 pb-28 md:pb-10 px-4 sm:px-6 bg-black/40 backdrop-blur-sm">
       <div className="max-w-5xl mx-auto">
         <div className="grid sm:grid-cols-3 gap-8 mb-8">
           {/* Col 1: Logo + tagline + phone */}

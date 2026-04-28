@@ -478,6 +478,7 @@ const LutronHomeWorks = () => {
         title="Lutron HomeWorks Design & Installation in Vail Valley"
         description="Lutron HomeWorks in the Vail Valley — Lutron's flagship lighting and home-automation line. Ketra, Lumaris, Rania, Aviena, and Palladiom natively integrated with hand-crafted keypads and a QS-wired or Clear Connect RF backbone."
         keywords="Lutron HomeWorks Vail Valley, HomeWorks dealer Colorado, architectural lighting Eagle County, Ketra installer, Lumaris lighting, Palladiom shades, luxury smart home"
+        canonicalUrl="https://symphonysh.com/platforms/lutron-homeworks"
         schema={[serviceSchema, faqSchema]}
         breadcrumbs={[
           { name: "Home", url: "/" },

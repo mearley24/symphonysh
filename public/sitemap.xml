@@ -22,8 +22,26 @@
   <url><loc>https://symphonysh.com/about</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://symphonysh.com/contact</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://symphonysh.com/scheduling</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://symphonysh.com/walkthrough</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://symphonysh.com/matterport</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://symphonysh.com/blog</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://symphonysh.com/blog/smart-home-pre-wire-guide-vail-valley</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <!-- Project detail pages -->
+  <url><loc>https://symphonysh.com/projects/eagle-vail-theater</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://symphonysh.com/projects/full-home-install</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://symphonysh.com/projects/backbox-fireplace</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://symphonysh.com/projects/structured-wiring-showcase</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://symphonysh.com/projects/fireplace-frame-tv</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://symphonysh.com/projects/beaver-creek-condo</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://symphonysh.com/projects/mantel-mount-install</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://symphonysh.com/projects/hp-multi-room</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://symphonysh.com/projects/frame-sonos-combo</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://symphonysh.com/projects/wood-media-wall</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://symphonysh.com/projects/singletree-fireplace</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://symphonysh.com/projects/west-vail-residence</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://symphonysh.com/projects/cordillera-media-room</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://symphonysh.com/projects/featured-theater-install</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://symphonysh.com/projects/misc-installations</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <!-- City pages -->
   <url><loc>https://symphonysh.com/vail</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://symphonysh.com/beaver-creek</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>

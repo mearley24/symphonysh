@@ -81,6 +81,7 @@ const Index = () => {
         title="Smart Homes for the Vail Valley | Control4, Lutron, AVA"
         description="Control4 whole-home automation by default, Lutron RadioRA3 or HomeWorks when the home calls for it, and AVA for the media room and simple remote. Vail Valley & Eagle County."
         keywords="Control4 dealer Vail Valley, Lutron RadioRA3, Lutron HomeWorks, AVA smart remote, smart home Eagle County, mountain home automation"
+        canonicalUrl="https://symphonysh.com/"
         schema={[serviceSchema, faqSchema]}
       />
 

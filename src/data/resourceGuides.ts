@@ -211,7 +211,7 @@ export const resourceGuides: ResourceGuide[] = [
       {
         label: "Setup Finder",
         href: "/setup-finder",
-        description: "Three quick questions to narrow the platform direction.",
+        description: "Six quick questions to narrow the platform direction.",
       },
     ],
     faqs: [

@@ -493,6 +493,7 @@ const LutronRadioRA3 = () => {
         title="Lutron RadioRA3 — Clear Connect Type X, Lumaris & Triathlon Select"
         description="Lutron RadioRA3 in the Vail Valley — Clear Connect Type X (CCX) wireless mesh independent of Wi-Fi, Lumaris LED downlights and tape light, Triathlon Select smart shades, and Sunnata RF keypads. Native integration, no third-party bridges."
         keywords="RadioRA3 Vail Valley, Clear Connect Type X, CCX, Lumaris LED, Triathlon Select shades, Sunnata RF keypads, Lutron wireless lighting Eagle County"
+        canonicalUrl="https://symphonysh.com/platforms/lutron-radiora3"
         schema={[serviceSchema, faqSchema]}
         breadcrumbs={[
           { name: "Home", url: "/" },
