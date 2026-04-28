@@ -124,7 +124,7 @@ const Projects = () => {
             Real projects. Real homes. Vail Valley.
           </h1>
           <p className="text-white/60 text-base sm:text-lg leading-relaxed max-w-2xl hero-subtext-shadow">
-            Browse photos from recent installations across Eagle County — home theaters, TV mounts,
+            Selected highlights from 100+ projects across Eagle County — home theaters, TV mounts,
             and structured wiring for new construction and renovations.
           </p>
         </div>

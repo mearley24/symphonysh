@@ -50,7 +50,7 @@ const ServiceAreasIndex = () => {
             By service
           </p>
           <h2 className="text-2xl sm:text-3xl font-bold text-white mb-10">
-            High-intent local pages
+            What we do in your area
           </h2>
           <div className="grid sm:grid-cols-2 gap-4">
             {localLandingPages.map((p) => (

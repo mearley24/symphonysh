@@ -330,9 +330,22 @@ function buildRecommendation(a: Answers): Recommendation {
 const SetupFinder = () => {
   const [answers, setAnswers] = useState<Answers>(INITIAL);
   const [submitted, setSubmitted] = useState(false);
+  const [showIncomplete, setShowIncomplete] = useState(false);
   const resultRef = useRef<HTMLElement | null>(null);
+  const questionRefs = useRef<Record<number, HTMLDivElement | null>>({});
 
   const rec = useMemo(() => buildRecommendation(answers), [answers]);
+
+  const incompleteSteps = useMemo(() => {
+    const missing: number[] = [];
+    if (!answers.projectType) missing.push(1);
+    if (answers.controls.length === 0) missing.push(2);
+    if (!answers.rooms) missing.push(3);
+    if (!answers.walls) missing.push(4);
+    if (answers.existing.length === 0) missing.push(5);
+    if (!answers.priority) missing.push(6);
+    return missing;
+  }, [answers]);
 
   useEffect(() => {
     if (!submitted) return;
@@ -346,6 +359,13 @@ const SetupFinder = () => {
     }, reduceMotion ? 0 : 350);
     return () => window.clearTimeout(focusTimer);
   }, [submitted]);
+
+  // Once user provides remaining answers after a failed submit, clear the warning.
+  useEffect(() => {
+    if (showIncomplete && incompleteSteps.length === 0) {
+      setShowIncomplete(false);
+    }
+  }, [showIncomplete, incompleteSteps]);
 
   const toggleControl = (c: ControlItem) =>
     setAnswers((a) => ({
@@ -372,17 +392,25 @@ const SetupFinder = () => {
   const reset = () => {
     setAnswers(INITIAL);
     setSubmitted(false);
+    setShowIncomplete(false);
   };
 
-  const answeredCount =
-    (answers.projectType ? 1 : 0) +
-    (answers.controls.length > 0 ? 1 : 0) +
-    (answers.rooms ? 1 : 0) +
-    (answers.walls ? 1 : 0) +
-    (answers.existing.length > 0 ? 1 : 0) +
-    (answers.priority ? 1 : 0);
+  const answeredCount = 6 - incompleteSteps.length;
+  const ready = incompleteSteps.length === 0;
 
-  const ready = answeredCount === 6;
+  const handleSubmit = () => {
+    if (!ready) {
+      setShowIncomplete(true);
+      const firstMissing = incompleteSteps[0];
+      const el = questionRefs.current[firstMissing];
+      if (el) {
+        const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        el.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "start" });
+      }
+      return;
+    }
+    setSubmitted(true);
+  };
 
   return (
     <PageBackground image={bgHomeIntegration}>
@@ -451,7 +479,18 @@ const SetupFinder = () => {
           </div>
 
           {/* Q1 */}
-          <Question label="1. What kind of project is this?" step={1} total={6}>
+          <div
+            ref={(el) => {
+              questionRefs.current[1] = el;
+            }}
+            className="scroll-mt-24"
+          >
+          <Question
+            label="1. What kind of project is this?"
+            step={1}
+            total={6}
+            incomplete={showIncomplete && incompleteSteps.includes(1)}
+          >
             <OptionRow>
               <Choice
                 selected={answers.projectType === "new-build"}
@@ -479,13 +518,21 @@ const SetupFinder = () => {
               />
             </OptionRow>
           </Question>
+          </div>
 
           {/* Q2 */}
+          <div
+            ref={(el) => {
+              questionRefs.current[2] = el;
+            }}
+            className="scroll-mt-24"
+          >
           <Question
             label="2. What do you want to control?"
             step={2}
             total={6}
             instructions="Choose any that apply."
+            incomplete={showIncomplete && incompleteSteps.includes(2)}
           >
             <OptionRow wrap>
               {(
@@ -509,9 +556,21 @@ const SetupFinder = () => {
               ))}
             </OptionRow>
           </Question>
+          </div>
 
           {/* Q3 */}
-          <Question label="3. How much of the house?" step={3} total={6}>
+          <div
+            ref={(el) => {
+              questionRefs.current[3] = el;
+            }}
+            className="scroll-mt-24"
+          >
+          <Question
+            label="3. How much of the house?"
+            step={3}
+            total={6}
+            incomplete={showIncomplete && incompleteSteps.includes(3)}
+          >
             <OptionRow>
               {(
                 [
@@ -530,9 +589,21 @@ const SetupFinder = () => {
               ))}
             </OptionRow>
           </Question>
+          </div>
 
           {/* Q4 */}
-          <Question label="4. Are the walls open or finished?" step={4} total={6}>
+          <div
+            ref={(el) => {
+              questionRefs.current[4] = el;
+            }}
+            className="scroll-mt-24"
+          >
+          <Question
+            label="4. Are the walls open or finished?"
+            step={4}
+            total={6}
+            incomplete={showIncomplete && incompleteSteps.includes(4)}
+          >
             <OptionRow>
               {(
                 [
@@ -550,13 +621,21 @@ const SetupFinder = () => {
               ))}
             </OptionRow>
           </Question>
+          </div>
 
           {/* Q5 */}
+          <div
+            ref={(el) => {
+              questionRefs.current[5] = el;
+            }}
+            className="scroll-mt-24"
+          >
           <Question
             label="5. What is already in the house?"
             step={5}
             total={6}
             instructions="Choose any that apply."
+            incomplete={showIncomplete && incompleteSteps.includes(5)}
           >
             <OptionRow wrap>
               {(
@@ -579,9 +658,21 @@ const SetupFinder = () => {
               ))}
             </OptionRow>
           </Question>
+          </div>
 
           {/* Q6 */}
-          <Question label="6. What matters most?" step={6} total={6}>
+          <div
+            ref={(el) => {
+              questionRefs.current[6] = el;
+            }}
+            className="scroll-mt-24"
+          >
+          <Question
+            label="6. What matters most?"
+            step={6}
+            total={6}
+            incomplete={showIncomplete && incompleteSteps.includes(6)}
+          >
             <OptionRow wrap>
               {(
                 [
@@ -604,12 +695,13 @@ const SetupFinder = () => {
               ))}
             </OptionRow>
           </Question>
+          </div>
 
           <div className="flex flex-col sm:flex-row gap-3 pt-2">
             <button
-              onClick={() => setSubmitted(true)}
-              disabled={!ready}
-              className="inline-flex items-center justify-center gap-2 bg-accent hover:bg-accent/90 disabled:opacity-40 disabled:cursor-not-allowed text-white px-7 py-4 rounded-lg font-medium transition-colors text-base"
+              onClick={handleSubmit}
+              aria-disabled={!ready}
+              className="inline-flex items-center justify-center gap-2 bg-accent hover:bg-accent/90 text-white px-7 py-4 rounded-lg font-medium transition-colors text-base"
             >
               Show my starting recommendation <ArrowRight className="w-4 h-4" />
             </button>
@@ -620,9 +712,18 @@ const SetupFinder = () => {
               <RotateCcw className="w-4 h-4" /> Start over
             </button>
           </div>
-          {!ready && (
+          {showIncomplete && !ready && (
+            <p
+              role="alert"
+              className="text-accent text-sm"
+            >
+              Still need an answer for {incompleteSteps.length === 1 ? "question" : "questions"}{" "}
+              {incompleteSteps.join(", ")}. Scrolled to the first one.
+            </p>
+          )}
+          {!showIncomplete && !ready && (
             <p className="text-white/40 text-xs">
-              Answer all six questions to see a recommendation.
+              Answer all six questions to see a recommendation ({answeredCount} of 6 done).
             </p>
           )}
         </div>
@@ -765,17 +866,30 @@ const Question = ({
   step,
   total,
   instructions,
+  incomplete,
 }: {
   label: string;
   children: React.ReactNode;
   step?: number;
   total?: number;
   instructions?: string;
+  incomplete?: boolean;
 }) => (
-  <div>
+  <div
+    className={
+      incomplete
+        ? "rounded-lg border border-accent/40 bg-accent/5 p-4 -mx-4"
+        : undefined
+    }
+  >
     {step && total && (
       <p className="text-accent/80 text-xs font-semibold tracking-wide uppercase mb-2">
         Question {step} of {total}
+        {incomplete && (
+          <span className="ml-2 text-accent normal-case font-medium">
+            — needs an answer
+          </span>
+        )}
       </p>
     )}
     <h3 className="text-white font-semibold text-base sm:text-lg mb-2">
