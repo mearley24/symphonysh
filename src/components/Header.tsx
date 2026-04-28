@@ -166,6 +166,15 @@ const Header = () => {
                   </Link>
                 ))}
               </div>
+              <div className="mt-10">
+                <Link
+                  to="/scheduling"
+                  onClick={() => setMenuOpen(false)}
+                  className="inline-flex items-center justify-center bg-accent hover:bg-accent/90 text-white text-base sm:text-lg font-semibold px-8 py-4 rounded-lg transition-colors"
+                >
+                  Schedule a Walkthrough
+                </Link>
+              </div>
             </nav>
           </div>
         </>

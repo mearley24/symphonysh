@@ -29,7 +29,7 @@ export function PageLayout({ children }: PageLayoutProps) {
             Book a Consultation
           </p>
           <h1 className="text-3xl sm:text-4xl font-bold leading-tight mb-3 text-white hero-text-shadow">
-            Schedule a Visit
+            Schedule a Walkthrough
           </h1>
           <p className="text-white/60 text-base leading-relaxed max-w-2xl hero-subtext-shadow">
             Pick a date and time that works for you — we'll confirm within a few hours.

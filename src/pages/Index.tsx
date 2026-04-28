@@ -26,7 +26,7 @@ const Index = () => {
     { icon: Wrench, title: "Control4", desc: "Our default for whole-home lighting, scenes, audio, climate, and shades — one app, one set of keypads.", link: "/platforms/control4", cta: "Open the Control4 page" },
     { icon: Layers, title: "Lutron HomeWorks", desc: "Architectural lighting option — Ketra, Lumaris, Palladiom, hand-crafted keypads. For luxury new builds.", link: "/platforms/lutron-homeworks", cta: "Explore HomeWorks" },
     { icon: Home, title: "Lutron RadioRA3", desc: "Wireless lighting and shades for clean retrofits — Sunnata keypads, Lumaris, Triathlon Select.", link: "/platforms/lutron-radiora3", cta: "See RadioRA3" },
-    { icon: Cable, title: "AVA", desc: "One simple remote for TV, theater, and music. Great in media rooms or for a remote-first household.", link: "/platforms/ava", cta: "Meet the AVA remote" },
+    { icon: Cable, title: "AVA", desc: "AVA for media rooms that just work — one simple remote for TV, theater, and music the whole household can actually use.", link: "/platforms/ava", cta: "Meet the AVA remote" },
   ];
 
   const services = [

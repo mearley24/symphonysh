@@ -176,7 +176,7 @@ const Platforms = () => {
               Four independent platforms. Pick what fits.
             </h1>
             <p className="text-white/60 text-base sm:text-lg leading-relaxed mb-8 max-w-2xl hero-subtext-shadow">
-              Control4 is our default for whole-home lighting and control. Lutron HomeWorks and RadioRA3 are independent options when the home calls for Lutron-grade lighting. AVA is great on its own as a single remote — standalone or mixed when it makes sense.
+              Control4 is our default for whole-home lighting and control. Lutron HomeWorks and RadioRA3 step in when the design calls for Lutron-grade lighting — Ketra, Lumaris, or Palladiom shading on architectural finishes. AVA is great on its own as a single remote — standalone or mixed when it makes sense.
             </p>
             <div className="flex flex-col sm:flex-row gap-3">
               <Link
