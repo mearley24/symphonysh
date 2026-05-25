@@ -116,7 +116,7 @@ const Index = () => {
                   <span className="w-8 h-px bg-accent" />
                 </p>
                 <h1 className="animate-fade-in text-5xl sm:text-6xl lg:text-7xl font-extrabold leading-[0.95] mb-6 text-white hero-text-shadow [animation-delay:100ms]">
-                  We make smart homes that just work.
+                  We build smart homes that just work.
                 </h1>
                 <p className="animate-fade-in text-white/80 text-lg sm:text-xl leading-relaxed mb-10 max-w-xl mx-auto hero-subtext-shadow [animation-delay:200ms]">
                   Control4 lighting and scenes for the whole home — Lutron when the home calls for it, AVA when you want one simple remote. Tuned to how you actually live.
