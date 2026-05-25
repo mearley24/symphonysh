@@ -119,7 +119,7 @@ const Index = () => {
                   We build smart homes that just work.
                 </h1>
                 <p className="animate-fade-in text-white/80 text-lg sm:text-xl leading-relaxed mb-10 max-w-xl mx-auto hero-subtext-shadow [animation-delay:200ms]">
-                  Control4 lighting and scenes for the whole home — Lutron when the home calls for it, AVA when you want one simple remote. Tuned to how you actually live.
+                  Control4 is what we recommend most — but we'll work in any system, new or old, when that's what the home calls for. Done right the first time, tuned to how you actually live.
                 </p>
               </div>
             </div>

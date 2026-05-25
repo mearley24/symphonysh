@@ -67,7 +67,7 @@ const HomeIntegration = () => {
             <p className="text-accent font-medium text-sm tracking-wide uppercase">Home Automation</p>
           </div>
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight mb-5 text-white hero-text-shadow">One keypad. One app. The whole home in agreement.</h1>
-          <p className="text-white/60 text-base sm:text-lg leading-relaxed mb-8 max-w-2xl hero-subtext-shadow">Control4 ties lighting, climate, audio, security, and shades into a single experience. Lutron HomeWorks or RadioRA3 sit underneath when the home calls for Lutron-grade lighting.</p>
+          <p className="text-white/60 text-base sm:text-lg leading-relaxed mb-8 max-w-2xl hero-subtext-shadow">Control4 is our lead recommendation — it ties lighting, climate, audio, security, and shades into a single experience. Lutron HomeWorks or RadioRA3 sit underneath when the home calls for Lutron-grade lighting, and we'll work in any major control platform, new or old, when the job calls for it.</p>
           <div className="flex flex-col sm:flex-row gap-3">
             <Link to="/scheduling?service=home-integration" className="inline-flex items-center justify-center gap-2 bg-accent hover:bg-accent/90 text-white px-7 py-4 rounded-lg font-medium transition-colors text-base">Schedule a Walkthrough <ArrowRight className="w-4 h-4" /></Link>
             <a href="tel:+19705193013" className="inline-flex items-center justify-center gap-2 border border-white/20 hover:border-white/40 hover:bg-white/5 text-white px-7 py-4 rounded-lg font-medium transition-colors text-base"><Phone className="w-4 h-4" /> (970) 519-3013</a>

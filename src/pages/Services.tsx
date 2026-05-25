@@ -50,7 +50,7 @@ const Services = () => {
       <div ref={revealRef}>
       <SEO
         title="Services — Vail Valley"
-        description="Lutron lighting, Control4 automation, AVA media, audio, climate, security, networking, and shades — every layer of a Vail Valley smart home, designed to feel like one calm system."
+        description="Smart home integration in any major control platform — Control4 by default, plus Lutron, AVA, and others when the home calls for it. Lighting, audio, climate, security, networking, and shades, designed to feel like one calm system."
         keywords="smart home services Vail Valley, home automation Eagle County, Lutron HomeWorks, Control4 dealer, AVA remote"
         schema={serviceSchema}
         breadcrumbs={[{ name: "Home", url: "/" }, { name: "Services", url: "/services" }]}
@@ -68,7 +68,7 @@ const Services = () => {
             Every layer of a smart home, tuned to feel like one room.
           </h1>
           <p className="text-white/60 text-base sm:text-lg leading-relaxed mb-8 max-w-2xl hero-subtext-shadow">
-            Lighting, shades, audio, climate, security — on the platforms that fit the home. Control4 by default; Lutron and AVA where they fit. Standalone or mixed when it makes sense.
+            Lighting, shades, audio, climate, security — on the platforms that fit the home. Control4 is our default recommendation, but we'll work in Lutron, AVA, or any major system new or old. Standalone or mixed when it makes sense.
           </p>
           <div className="flex flex-col sm:flex-row gap-3">
             <Link to="/scheduling" className="inline-flex items-center justify-center gap-2 bg-accent hover:bg-accent/90 text-white px-7 py-4 rounded-lg font-medium transition-colors text-base">
