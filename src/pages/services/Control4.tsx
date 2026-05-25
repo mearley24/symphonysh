@@ -779,7 +779,7 @@ const Control4 = () => {
         eyebrow="Control4 in real homes"
         headline="Whole-home Control4 — same standard, every room."
         subhead="Same mounting standard, hidden cabling, one rack feeding the house. Scenes a guest can read, lights that follow the day, audio in every room."
-        footerLink={{ to: "/projects/full-home-install", label: "See the full-home install" }}
+        footerLink={{ to: "/projects/eagle-vail-theater", label: "See a real Vail Valley install" }}
       />
 
       {/* FAQ */}

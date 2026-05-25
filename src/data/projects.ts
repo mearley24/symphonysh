@@ -73,42 +73,6 @@ export const projects: Project[] = [
     testimonial: null,
   },
   {
-    slug: "full-home-install",
-    name: "Full-Home AV Install",
-    location: "Vail Valley, CO",
-    categories: ["whole-home", "tv-mounting"],
-    scope:
-      "Eleven displays, centralized rack, consistent mounting standard throughout the home.",
-    description:
-      "A comprehensive residential AV installation with TVs in every major room. From the great room to the guest bedrooms, each display was mounted to the same standard — concealed wiring, proper blocking behind drywall, and clean low-voltage plates. One rack feeds the entire house.",
-    heroPhoto: "/lovable-uploads/mounted-tvs/Home/IMG_0665.JPG",
-    photos: [
-      "/lovable-uploads/mounted-tvs/Home/71355776563__D3C0B111-3E4E-4B32-A4BB-7B60F151C39A.JPG",
-      "/lovable-uploads/mounted-tvs/Home/IMG_0659.JPG",
-      "/lovable-uploads/mounted-tvs/Home/IMG_0660.JPG",
-      "/lovable-uploads/mounted-tvs/Home/IMG_0661.JPG",
-      "/lovable-uploads/mounted-tvs/Home/IMG_0662.JPG",
-      "/lovable-uploads/mounted-tvs/Home/IMG_0663.JPG",
-      "/lovable-uploads/mounted-tvs/Home/IMG_0664.JPG",
-      "/lovable-uploads/mounted-tvs/Home/IMG_0665.JPG",
-      "/lovable-uploads/mounted-tvs/Home/IMG_0666.JPG",
-      "/lovable-uploads/mounted-tvs/Home/IMG_0668.JPG",
-      "/lovable-uploads/mounted-tvs/Home/IMG_0669.JPG",
-    ],
-    systemsInstalled: [
-      "Multi-Room TV (11 displays)",
-      "Concealed Wiring",
-      "Drywall Blocking",
-      "Low-Voltage Plates",
-    ],
-    relatedServices: [
-      { to: "/services/home-integration", label: "Home Integration", reason: "Whole-home AV from one rack" },
-      { to: "/services/prewire", label: "Pre-Wire", reason: "Concealed wiring & blocking standard" },
-      { to: "/services/networking", label: "Networking & Rack", reason: "Centralized rack feeding the home" },
-    ],
-    testimonial: null,
-  },
-  {
     slug: "backbox-fireplace",
     name: "Backbox Fireplace Mount",
     location: "Eagle County, CO",
@@ -135,47 +99,6 @@ export const projects: Project[] = [
   },
 
   // ---- Strong secondary proof --------------------------------------------
-  {
-    slug: "structured-wiring-showcase",
-    name: "Structured Wiring — Behind the Scenes",
-    location: "Vail Valley, CO",
-    categories: ["wiring", "networking", "rack", "prewire"],
-    scope:
-      "Rack builds, labeled cable runs, and structured cabling across multiple Vail Valley jobs.",
-    description:
-      "A showcase of structured wiring and rack builds across multiple projects. Clean cable runs, labeled terminations, proper rack organization, and cable management that makes future service visits simple. This is the work that happens behind the walls — and the reason your system stays serviceable for years.",
-    heroPhoto: "/lovable-uploads/wiring/IMG_1138.JPG",
-    photos: [
-      "/lovable-uploads/wiring/IMG_1138.JPG",
-      "/lovable-uploads/wiring/IMG_1320.JPG",
-      "/lovable-uploads/wiring/IMG_1324.JPG",
-      "/lovable-uploads/wiring/IMG_1323.JPG",
-      "/lovable-uploads/wiring/IMG_1322.JPG",
-      "/lovable-uploads/wiring/IMG_0136.JPG",
-      "/lovable-uploads/wiring/IMG_0137.JPG",
-      "/lovable-uploads/wiring/IMG_0578.JPG",
-      "/lovable-uploads/wiring/IMG_1499.JPG",
-      "/lovable-uploads/wiring/IMG_1311.JPG",
-      "/lovable-uploads/wiring/IMG_1313.JPG",
-      "/lovable-uploads/wiring/71934397485__8C49F301-AD94-46A1-86EB-A779999B757F.JPG",
-      "/lovable-uploads/wiring/IMG_0611.JPG",
-      "/lovable-uploads/wiring/IMG_1552.JPG",
-      "/lovable-uploads/wiring/IMG_1733.JPG",
-      "/lovable-uploads/wiring/IMG_1161.JPG",
-    ],
-    systemsInstalled: [
-      "Cat6 Structured Cabling",
-      "Rack Builds",
-      "Cable Labeling",
-      "Patch Panel Termination",
-    ],
-    relatedServices: [
-      { to: "/services/prewire", label: "Pre-Wire", reason: "Structured cabling before drywall" },
-      { to: "/services/networking", label: "Networking & Rack", reason: "Rack builds, patch panels, labeled runs" },
-      { to: "/services/home-integration", label: "Home Integration", reason: "Foundation for whole-home control" },
-    ],
-    testimonial: null,
-  },
   {
     slug: "fireplace-frame-tv",
     name: "Samsung Frame Over Fireplace",

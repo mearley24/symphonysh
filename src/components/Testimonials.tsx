@@ -3,12 +3,25 @@ import { ArrowRight, MapPin } from "lucide-react";
 import { projects } from "../data/projects";
 
 /**
- * "Featured Work" section — replaces placeholder testimonials.
- * Shows real project cards linking to /projects/:slug.
- * When real testimonials are collected, add a separate section above or below.
+ * "Recent Work" section on the homepage.
+ *
+ * Renders three hand-picked projects by slug rather than projects.slice(0,3).
+ * Picking by slug means the homepage is decoupled from arbitrary array order
+ * — add/remove projects elsewhere without changing which three appear here.
+ *
+ * To swap a card: change one of the slugs in FEATURED_SLUGS below.
  */
+const FEATURED_SLUGS = [
+  "frame-sonos-combo",
+  "wood-media-wall",
+  "singletree-fireplace",
+];
+
 const Testimonials = () => {
-  const featured = projects.slice(0, 3);
+  const bySlug = new Map(projects.map((p) => [p.slug, p]));
+  const featured = FEATURED_SLUGS
+    .map((slug) => bySlug.get(slug))
+    .filter((p): p is NonNullable<typeof p> => Boolean(p));
 
   return (
     <section className="py-16 sm:py-24 px-4 sm:px-6 bg-black/15 backdrop-blur-sm border-y border-white/5">

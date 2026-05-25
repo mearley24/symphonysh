@@ -133,7 +133,7 @@ const PreWire = () => (
       eyebrow="Pre-wire in the field"
       headline="What rough-in actually looks like."
       subhead="Cable pulled clean, labeled, and tested before drywall. Backboxes set with the GC. The work that decides what's possible later."
-      footerLink={{ to: "/projects/structured-wiring-showcase", label: "See the structured wiring set" }}
+      footerLink={{ to: "/projects/backbox-fireplace", label: "See a pre-wire install" }}
     />
 
     {/* FAQ */}

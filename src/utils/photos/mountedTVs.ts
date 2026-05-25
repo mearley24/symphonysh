@@ -57,24 +57,6 @@ export const mountedTVsCategories: GalleryCategory[] = [
     ]
   },
   { 
-    title: "Home Installations", 
-    path: "/photos/mounted-tvs/home", 
-    image: "/lovable-uploads/mounted-tvs/Home/IMG_0665.JPG", // Changed from IMG_0659.JPG to the 7th image (IMG_0665.JPG)
-    photos: [
-      "/lovable-uploads/mounted-tvs/Home/71355776563__D3C0B111-3E4E-4B32-A4BB-7B60F151C39A.JPG",
-      "/lovable-uploads/mounted-tvs/Home/IMG_0659.JPG",
-      "/lovable-uploads/mounted-tvs/Home/IMG_0660.JPG",
-      "/lovable-uploads/mounted-tvs/Home/IMG_0661.JPG",
-      "/lovable-uploads/mounted-tvs/Home/IMG_0662.JPG",
-      "/lovable-uploads/mounted-tvs/Home/IMG_0663.JPG",
-      "/lovable-uploads/mounted-tvs/Home/IMG_0664.JPG",
-      "/lovable-uploads/mounted-tvs/Home/IMG_0665.JPG",
-      "/lovable-uploads/mounted-tvs/Home/IMG_0666.JPG",
-      "/lovable-uploads/mounted-tvs/Home/IMG_0668.JPG",
-      "/lovable-uploads/mounted-tvs/Home/IMG_0669.JPG"
-    ]
-  },
-  { 
     title: "Mantel Mount", 
     path: "/photos/mounted-tvs/mantel-mount", 
     image: "/lovable-uploads/mounted-tvs/mantel-mount/IMG_1090.JPG",

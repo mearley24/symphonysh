@@ -39,7 +39,6 @@ import BackboxFP from "./pages/photos/mounted-tvs/BackboxFP";
 import FPFrame from "./pages/photos/mounted-tvs/FPFrame";
 import FrameSonos from "./pages/photos/mounted-tvs/FrameSonos";
 import HP from "./pages/photos/mounted-tvs/HP";
-import Home from "./pages/photos/mounted-tvs/Home";
 import MantelMount from "./pages/photos/mounted-tvs/MantelMount";
 import Misc from "./pages/photos/mounted-tvs/Misc";
 import SingletreeFP from "./pages/photos/mounted-tvs/SingletreeFP";
@@ -109,7 +108,6 @@ function App() {
           <Route path="/photos/mounted-tvs/fp-frame" element={<FPFrame />} />
           <Route path="/photos/mounted-tvs/frame-sonos" element={<FrameSonos />} />
           <Route path="/photos/mounted-tvs/hp" element={<HP />} />
-          <Route path="/photos/mounted-tvs/home" element={<Home />} />
           <Route path="/photos/mounted-tvs/mantel-mount" element={<MantelMount />} />
           <Route path="/photos/mounted-tvs/misc" element={<Misc />} />
           <Route path="/photos/mounted-tvs/singletree-fp" element={<SingletreeFP />} />
