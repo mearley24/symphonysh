@@ -1,11 +1,12 @@
 import { Link } from "react-router-dom";
-import { Phone, ArrowRight, Cable, Home, Wrench, ScanLine, CheckCircle2, ChevronDown, MapPin, Sunrise, DoorClosed, Film, Moon, Compass, Layers } from "lucide-react";
+import { Phone, ArrowRight, Cable, Home, Wrench, ScanLine, ChevronDown, MapPin, Sunrise, DoorClosed, Film, Moon, Layers } from "lucide-react";
 import { useState } from "react";
 import { trackPhoneClick } from "../utils/tracking";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import Testimonials from "../components/Testimonials";
 import ClientTestimonials from "../components/ClientTestimonials";
+import StickyMobileCTA from "../components/StickyMobileCTA";
 import SEO from "../components/SEO";
 import heroImage from "../assets/hero-smart-home.jpg";
 import { localBusinessHomePageSchema } from "../constants/businessSchema";
@@ -34,20 +35,6 @@ const Index = () => {
     { icon: Cable, title: "Pre-Wire & New Construction", description: "Low-voltage rough-in planned with your GC, electrician, and architect.", link: "/services/prewire" },
     { icon: Wrench, title: "Service & Maintenance", description: "Remote diagnostics, firmware, on-site fixes, and second-home check-ins.", link: "/services/maintenance" },
     { icon: ScanLine, title: "Matterport 3D Scanning", description: "Immersive 3D tours for listings, construction docs, and records.", link: "/matterport" },
-  ];
-
-  const steps = [
-    { number: "01", title: "Walkthrough", description: "We walk the property and listen to how you actually live." },
-    { number: "02", title: "Design & Proposal", description: "Clear scope, transparent line items, real numbers." },
-    { number: "03", title: "Build", description: "Wiring, mounting, and programming on schedule with the rest of the trades." },
-    { number: "04", title: "Handoff & Support", description: "Scenes tuned until they feel like home — then we stay reachable." },
-  ];
-
-  const differentiators = [
-    { title: "Mountain homes, not suburbs", description: "Built for Eagle County weather and how these homes are actually lived in." },
-    { title: "One accountable team", description: "Same faces from walkthrough through year five." },
-    { title: "Quiet reliability", description: "Real platforms — Control4, Lutron, AVA. No proprietary lock-in." },
-    { title: "We answer the phone", description: "Remote fixes when possible, on-site when needed." },
   ];
 
   const faqs = [
@@ -232,34 +219,21 @@ const Index = () => {
                 </Link>
               ))}
             </div>
-            <div data-reveal className="mt-10 text-center">
+            <div data-reveal className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-x-8 gap-y-3 text-center">
               <Link
                 to="/platforms"
                 className="inline-flex items-center gap-1.5 text-white/60 hover:text-white text-sm transition-colors"
               >
                 Compare all four platforms <ArrowRight className="w-3.5 h-3.5" />
               </Link>
+              <span className="hidden sm:inline text-white/20">·</span>
+              <Link
+                to="/setup-finder"
+                className="inline-flex items-center gap-1.5 text-white/60 hover:text-white text-sm transition-colors"
+              >
+                Not sure? Try the 3-minute Setup Finder <ArrowRight className="w-3.5 h-3.5" />
+              </Link>
             </div>
-          </div>
-        </section>
-
-        {/* Setup Finder teaser */}
-        <section className="py-16 sm:py-24 px-4 sm:px-6">
-          <div className="max-w-3xl mx-auto text-center">
-            <div className="w-11 h-11 rounded-lg bg-accent/10 flex items-center justify-center mx-auto mb-4">
-              <Compass className="w-5 h-5 text-accent" />
-            </div>
-            <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">Not sure where to start?</p>
-            <h2 className="text-2xl sm:text-3xl font-bold text-white mb-4">Walk through the options in three minutes.</h2>
-            <p className="text-white/55 text-base mb-8 max-w-2xl mx-auto">
-              Six questions about the house. We'll point to a starting point — Control4, HomeWorks, RadioRA3, AVA, or a stronger network first — no pressure to commit.
-            </p>
-            <Link
-              to="/setup-finder"
-              className="inline-flex items-center justify-center gap-2 bg-accent hover:bg-accent/90 text-white px-8 py-4 rounded-lg font-medium transition-colors text-base"
-            >
-              Find the Right Setup <ArrowRight className="w-4 h-4" />
-            </Link>
           </div>
         </section>
 
@@ -290,6 +264,10 @@ const Index = () => {
               ))}
             </div>
             <div data-reveal className="mt-10 text-center">
+              <p className="text-white/55 text-sm sm:text-base mb-4">
+                <span className="text-white/80 font-medium">How it goes:</span>
+                {" "}walkthrough &rarr; plan &rarr; build &rarr; handoff &rarr; year-five support.
+              </p>
               <Link
                 to="/services"
                 className="inline-flex items-center gap-1.5 text-white/60 hover:text-white text-sm transition-colors"
@@ -300,88 +278,11 @@ const Index = () => {
           </div>
         </section>
 
-        {/* How It Works */}
-        <section className="py-16 sm:py-24 px-4 sm:px-6">
-          <div className="max-w-5xl mx-auto">
-            <div data-reveal className="text-center mb-12">
-              <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">How It Works</p>
-              <h2 className="text-2xl sm:text-3xl font-bold text-white">Walkthrough → Plan → Build → Handoff.</h2>
-            </div>
-            <div data-reveal-children className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-              {steps.map((step, i) => (
-                <div key={i} className="relative">
-                  <span className="text-accent/20 text-5xl font-bold absolute -top-2 -left-1">{step.number}</span>
-                  <div className="pt-10">
-                    <h3 className="text-white font-semibold text-base mb-2">{step.title}</h3>
-                    <p className="text-white/50 text-sm leading-relaxed">{step.description}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
         {/* Client Testimonials */}
         <ClientTestimonials />
 
         {/* Featured Projects */}
         <Testimonials />
-
-        {/* Why Symphony */}
-        <section className="py-16 sm:py-24 px-4 sm:px-6 bg-black/20 backdrop-blur-sm border-y border-white/5">
-          <div className="max-w-5xl mx-auto">
-            <div data-reveal className="text-center mb-12">
-              <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">Why Symphony</p>
-              <h2 className="text-2xl sm:text-3xl font-bold text-white">Built for mountain homes that should just be ready.</h2>
-            </div>
-            <div data-reveal-children className="grid sm:grid-cols-2 gap-5">
-              {differentiators.map((item, i) => (
-                <div key={i} className="flex gap-4 p-5 rounded-xl border border-white/8 hover:border-white/10 transition-colors bg-black/40 backdrop-blur-sm">
-                  <CheckCircle2 className="w-5 h-5 text-accent shrink-0 mt-0.5" />
-                  <div>
-                    <h3 className="text-white font-semibold mb-1">{item.title}</h3>
-                    <p className="text-white/50 text-sm leading-relaxed">{item.description}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Meet the Team */}
-        <section className="py-16 sm:py-24 px-4 sm:px-6">
-          <div className="max-w-5xl mx-auto">
-            <div data-reveal className="grid sm:grid-cols-2 gap-10 items-center">
-              {/* Left: text */}
-              <div>
-                <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">The Team</p>
-                <h2 className="text-2xl sm:text-3xl font-bold text-white mb-4">Same faces from first walkthrough through year five.</h2>
-                <p className="text-white/50 text-base leading-relaxed mb-6">
-                  A local Eagle County team led by founder Matt Earley. The people who plan the system are the ones who tune it months later.
-                </p>
-                <Link
-                  to="/about"
-                  className="inline-flex items-center gap-1.5 text-accent hover:text-accent/80 text-sm font-medium transition-colors"
-                >
-                  Meet the team <ArrowRight className="w-3.5 h-3.5" />
-                </Link>
-              </div>
-              {/* Right: stats */}
-              <div className="grid grid-cols-3 gap-4">
-                {[
-                  { value: "100+", label: "Projects Completed" },
-                  { value: "10+", label: "Years in the Valley" },
-                  { value: "Same Day", label: "Response Time" },
-                ].map((stat, i) => (
-                  <div key={i} className="bg-black/40 border border-white/8 rounded-xl p-4 text-center">
-                    <p className="text-white font-bold text-2xl mb-1">{stat.value}</p>
-                    <p className="text-white/40 text-xs leading-snug">{stat.label}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </section>
 
         {/* FAQ */}
         <section className="py-16 sm:py-24 px-4 sm:px-6 bg-black/20 backdrop-blur-sm border-y border-white/5">
@@ -412,36 +313,9 @@ const Index = () => {
           </div>
         </section>
 
-        {/* Final CTA */}
-        <section data-reveal className="py-16 sm:py-24 px-4 sm:px-6">
-          <div className="max-w-3xl mx-auto text-center">
-            <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">When You're Ready</p>
-            <h2 className="text-2xl sm:text-3xl font-bold text-white mb-4">Tell us about the home.</h2>
-            <p className="text-white/55 text-base mb-8 max-w-xl mx-auto">
-              New build, retrofit, or an inherited system — share the property and how you live there. We'll point to the platform that fits.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-3 justify-center">
-              <Link
-                to="/scheduling"
-                className="inline-flex items-center justify-center gap-2 bg-accent hover:bg-accent/90 text-white px-7 py-4 rounded-lg font-medium transition-colors text-base"
-              >
-                Schedule a Walkthrough
-                <ArrowRight className="w-4 h-4" />
-              </Link>
-              <a
-                href="tel:+19705193013"
-                onClick={trackPhoneClick}
-                className="inline-flex items-center justify-center gap-2 border border-white/20 hover:border-white/40 hover:bg-white/5 text-white px-7 py-4 rounded-lg font-medium transition-colors text-base"
-              >
-                <Phone className="w-4 h-4" />
-                (970) 519-3013
-              </a>
-            </div>
-          </div>
-        </section>
-
         <Footer />
       </div>
+      <StickyMobileCTA />
     </div>
   );
 };

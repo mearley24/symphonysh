@@ -5,11 +5,9 @@ import { Menu as MenuIcon, X } from "lucide-react";
 const navLinks = [
   { label: "Services", path: "/services" },
   { label: "Platforms", path: "/platforms" },
-  { label: "Setup Finder", path: "/setup-finder" },
   { label: "Our Work", path: "/projects" },
-  { label: "Resources", path: "/resources" },
-  { label: "Blog", path: "/blog" },
   { label: "About", path: "/about" },
+  { label: "Resources", path: "/resources" },
   { label: "Contact", path: "/contact" },
 ];
 
