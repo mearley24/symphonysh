@@ -41,8 +41,8 @@ const SCENES: Scene[] = [
     cans: 4, pendants: 0, undercab: 0, cove: 14, sconces: 0, temp: "warm", sky: "night", tv: true, shades: 100 },
   { id: "goodnight", label: "Goodnight",  note: "Everything off but an 8% path light to bed. The house powers down.",
     cans: 0, pendants: 0, undercab: 0, cove: 0, sconces: 8, temp: "warm", sky: "night", tv: false, shades: 100 },
-  { id: "away",     label: "Away",        note: "One tap on the way out — every load off, the house is empty.",
-    cans: 0, pendants: 0, undercab: 0, cove: 0, sconces: 0, temp: "cool", sky: "day", tv: false, shades: 0 },
+  { id: "away",     label: "Away",        note: "Not really empty — a sconce stays on so the house looks lived-in, with exterior security lighting. Doors locked, cameras armed.",
+    cans: 0, pendants: 0, undercab: 0, cove: 0, sconces: 30, temp: "warm", sky: "night", tv: false, shades: 0 },
 ];
 
 // warm→cool light color by temperature

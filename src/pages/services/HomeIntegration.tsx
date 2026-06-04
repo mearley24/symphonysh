@@ -9,7 +9,7 @@ import { schemaProviderLocalBusiness } from "../../constants/businessSchema";
 import PageBackground from "../../components/PageBackground";
 import ProjectProof from "../../components/ProjectProof";
 import ServiceDemoSection from "../../components/ServiceDemoSection";
-import { HomeAutomationDemo } from "../../components/service-demos/HomeAutomationDemo";
+import WholeHomeDemo from "../../components/service-demos/WholeHomeDemo";
 import bgHomeIntegration from "../../assets/bg-home-integration.jpg";
 
 const HomeIntegration = () => {
@@ -94,7 +94,7 @@ const HomeIntegration = () => {
       </section>
 
       <ServiceDemoSection title="See Automation in Action" subtitle="Interactive Demo">
-        <HomeAutomationDemo />
+        <WholeHomeDemo />
       </ServiceDemoSection>
 
       <section className="py-16 sm:py-24 px-4 sm:px-6">
