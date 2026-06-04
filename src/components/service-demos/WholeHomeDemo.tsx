@@ -1,14 +1,16 @@
 import { useState } from "react";
-import { Lightbulb, Volume2, Thermometer, ShieldCheck, Video } from "lucide-react";
+import { Lightbulb, Volume2, Thermometer, ShieldCheck, Video, Wifi } from "lucide-react";
 
 /**
- * WholeHomeDemo — the Control4 "everything in one place" demo, done realistically.
+ * WholeHomeDemo — a premium whole-home control surface on a real main-floor program.
  *
- * A coherent main-floor plan where every system a real install ties together is
- * represented and responds to scenes: lighting glows at its true per-circuit
- * level + color temperature, audio zones play, climate sets back, security arms,
- * cameras record. One scene button orchestrates all of it — which is the whole
- * point of integration. Pure SVG + CSS; no dependencies, no photos.
+ * The plan mirrors how we actually lay out a high-end mountain-modern home: an
+ * irregular footprint with a garage wing, an open kitchen / great-room heart, a
+ * primary suite with walk-in closets, and a view deck wrapping the south + east
+ * where the exterior cameras and outdoor speakers live. One scene orchestrates
+ * lighting circuits, audio zones, two-zone climate, security sensors, and cameras.
+ *
+ * Pure SVG + CSS. No dependencies, no photos.
  */
 
 type Temp = "cool" | "neutral" | "warm";
@@ -16,217 +18,271 @@ type Sky = "day" | "dusk" | "night";
 type Sec = "Disarmed" | "Armed · Stay" | "Armed · Away";
 
 interface Scene {
-  id: string;
-  label: string;
-  note: string;
-  lights: Record<string, number>; // circuit id → 0-100
-  temp: Temp;
-  sky: Sky;
-  tv: boolean;
-  shades: number;                 // great-room shades, 0 open → 100 closed
-  audioZones: string[];           // rooms with audio playing
-  climate: number;                // setpoint °F
-  climateLabel: string;
-  security: Sec;
-  cameras: boolean;               // surveillance recording
+  id: string; label: string; note: string;
+  lights: Record<string, number>;
+  temp: Temp; sky: Sky; tv: boolean; shades: number;
+  audioZones: string[];
+  climateMain: number; climatePrimary: number; climateLabel: string;
+  security: Sec; cameras: boolean;
 }
 
-// Lighting circuits, grouped by room (each is a real load on a dimmer).
-const CIRCUITS = [
-  { id: "gr_cans", room: "Great Room", name: "Recessed cans" },
-  { id: "gr_sconce", room: "Great Room", name: "Sconces" },
-  { id: "k_cans", room: "Kitchen", name: "Recessed cans" },
-  { id: "k_pendants", room: "Kitchen", name: "Island pendants" },
-  { id: "k_under", room: "Kitchen", name: "Undercabinet" },
-  { id: "dining", room: "Dining", name: "Chandelier" },
-  { id: "primary", room: "Primary", name: "Bedside + cans" },
-  { id: "hall", room: "Hall / Entry", name: "Path lights" },
-];
-
 const SCENES: Scene[] = [
-  {
-    id: "welcome", label: "Welcome Home",
-    note: "Doors unlock, a warm welcome through the main floor, climate to comfort, music ready.",
-    lights: { gr_cans: 70, gr_sconce: 50, k_cans: 80, k_pendants: 70, k_under: 100, dining: 55, primary: 0, hall: 45 },
-    temp: "neutral", sky: "day", tv: false, shades: 0, audioZones: ["Kitchen"], climate: 71, climateLabel: "Comfort",
-    security: "Disarmed", cameras: true,
-  },
-  {
-    id: "cooking", label: "Cooking",
-    note: "Full task light over the island, music in the kitchen, everything crisp.",
-    lights: { gr_cans: 40, gr_sconce: 30, k_cans: 100, k_pendants: 90, k_under: 100, dining: 30, primary: 0, hall: 30 },
-    temp: "neutral", sky: "day", tv: false, shades: 0, audioZones: ["Kitchen", "Great Room"], climate: 70, climateLabel: "Comfort",
-    security: "Disarmed", cameras: true,
-  },
-  {
-    id: "dinner", label: "Dinner",
-    note: "Low and warm — chandelier leads, the room settles, soft music over dinner.",
-    lights: { gr_cans: 20, gr_sconce: 25, k_cans: 25, k_pendants: 30, k_under: 35, dining: 55, primary: 0, hall: 25 },
-    temp: "warm", sky: "dusk", tv: false, shades: 0, audioZones: ["Dining"], climate: 70, climateLabel: "Comfort",
-    security: "Disarmed", cameras: true,
-  },
-  {
-    id: "movie", label: "Movie",
-    note: "Great-room shades down, screen on, surround up, a whisper of cove light. Rest of the floor dark.",
-    lights: { gr_cans: 5, gr_sconce: 0, k_cans: 0, k_pendants: 0, k_under: 0, dining: 0, primary: 0, hall: 12 },
-    temp: "warm", sky: "night", tv: true, shades: 100, audioZones: ["Great Room"], climate: 71, climateLabel: "Comfort",
-    security: "Disarmed", cameras: true,
-  },
-  {
-    id: "goodnight", label: "Goodnight",
-    note: "Main floor off but a path to bed, climate to night setback, doors locked and the house armed.",
-    lights: { gr_cans: 0, gr_sconce: 0, k_cans: 0, k_pendants: 0, k_under: 0, dining: 0, primary: 15, hall: 10 },
-    temp: "warm", sky: "night", tv: false, shades: 100, audioZones: [], climate: 66, climateLabel: "Night setback",
-    security: "Armed · Stay", cameras: true,
-  },
-  {
-    id: "away", label: "Away",
-    note: "A sconce stays on so the house looks lived-in, climate sets way back, every zone armed and recording.",
-    lights: { gr_cans: 0, gr_sconce: 30, k_cans: 0, k_pendants: 0, k_under: 0, dining: 0, primary: 0, hall: 20 },
-    temp: "warm", sky: "night", tv: false, shades: 0, audioZones: [], climate: 62, climateLabel: "Away setback",
-    security: "Armed · Away", cameras: true,
-  },
+  { id: "welcome", label: "Welcome Home",
+    note: "Front door unlocks, a warm welcome through the entry and great room, climate to comfort, music in the kitchen.",
+    lights: { gr_cans: 65, gr_cove: 40, gr_sconce: 45, k_cans: 75, k_pendants: 70, k_under: 100, dining: 55, foyer: 85, primary: 0, hall: 45, deck: 0 },
+    temp: "neutral", sky: "day", tv: false, shades: 0, audioZones: ["Kitchen"], climateMain: 71, climatePrimary: 70, climateLabel: "Comfort", security: "Disarmed", cameras: true },
+  { id: "cooking", label: "Cooking",
+    note: "Full task light over the island, undercabinet on, music through the kitchen and great room.",
+    lights: { gr_cans: 45, gr_cove: 25, gr_sconce: 30, k_cans: 100, k_pendants: 95, k_under: 100, dining: 30, foyer: 50, primary: 0, hall: 30, deck: 0 },
+    temp: "neutral", sky: "day", tv: false, shades: 0, audioZones: ["Kitchen", "Great Room"], climateMain: 70, climatePrimary: 70, climateLabel: "Comfort", security: "Disarmed", cameras: true },
+  { id: "dinner", label: "Dinner",
+    note: "Chandelier leads, the great room settles to a warm wash, the deck glows, soft music over dinner.",
+    lights: { gr_cans: 18, gr_cove: 30, gr_sconce: 25, k_cans: 22, k_pendants: 28, k_under: 35, dining: 60, foyer: 30, primary: 0, hall: 22, deck: 40 },
+    temp: "warm", sky: "dusk", tv: false, shades: 0, audioZones: ["Dining", "Deck"], climateMain: 70, climatePrimary: 69, climateLabel: "Comfort", security: "Disarmed", cameras: true },
+  { id: "movie", label: "Movie",
+    note: "Great-room shades down, screen on, cove light at a whisper, surround up. Rest of the floor goes dark.",
+    lights: { gr_cans: 4, gr_cove: 12, gr_sconce: 0, k_cans: 0, k_pendants: 0, k_under: 0, dining: 0, foyer: 8, primary: 0, hall: 12, deck: 0 },
+    temp: "warm", sky: "night", tv: true, shades: 100, audioZones: ["Great Room"], climateMain: 71, climatePrimary: 68, climateLabel: "Comfort", security: "Disarmed", cameras: true },
+  { id: "goodnight", label: "Goodnight",
+    note: "Main floor off but a path to bed, climate to night setback, every door locked and the house armed to stay.",
+    lights: { gr_cans: 0, gr_cove: 0, gr_sconce: 0, k_cans: 0, k_pendants: 0, k_under: 0, dining: 0, foyer: 0, primary: 14, hall: 10, deck: 0 },
+    temp: "warm", sky: "night", tv: false, shades: 100, audioZones: [], climateMain: 66, climatePrimary: 65, climateLabel: "Night setback", security: "Armed · Stay", cameras: true },
+  { id: "away", label: "Away",
+    note: "A sconce and the deck lights stay on so the house looks lived-in, climate sets way back, every zone armed and all cameras recording.",
+    lights: { gr_cans: 0, gr_cove: 0, gr_sconce: 28, k_cans: 0, k_pendants: 0, k_under: 0, dining: 0, foyer: 20, primary: 0, hall: 18, deck: 25 },
+    temp: "warm", sky: "night", tv: false, shades: 0, audioZones: [], climateMain: 62, climatePrimary: 62, climateLabel: "Away setback", security: "Armed · Away", cameras: true },
 ];
 
 const TEMP_COLOR: Record<Temp, string> = { warm: "#ffb86b", neutral: "#ffe6c2", cool: "#dcebff" };
 
-// Lighting fixtures placed sensibly inside each room. Each maps to a circuit.
-const FIXTURES: { x: number; y: number; r: number; circuit: string }[] = [
-  // Great Room — 2×2 recessed grid
-  { x: 110, y: 120, r: 30, circuit: "gr_cans" }, { x: 250, y: 120, r: 30, circuit: "gr_cans" },
-  { x: 110, y: 210, r: 30, circuit: "gr_cans" }, { x: 250, y: 210, r: 30, circuit: "gr_cans" },
-  // Great Room sconces (left wall)
-  { x: 52, y: 130, r: 18, circuit: "gr_sconce" }, { x: 52, y: 200, r: 18, circuit: "gr_sconce" },
-  // Kitchen cans
-  { x: 380, y: 80, r: 24, circuit: "k_cans" }, { x: 440, y: 80, r: 24, circuit: "k_cans" },
-  // Kitchen pendants over island
-  { x: 405, y: 140, r: 18, circuit: "k_pendants" }, { x: 450, y: 140, r: 18, circuit: "k_pendants" }, { x: 495, y: 140, r: 18, circuit: "k_pendants" },
+// Rooms — varied sizes form the irregular footprint (not a uniform grid).
+const ROOMS: { x: number; y: number; w: number; h: number; label: string }[] = [
+  { x: 70, y: 40, w: 150, h: 120, label: "GARAGE" },
+  { x: 220, y: 70, w: 90, h: 70, label: "MUD" },
+  { x: 310, y: 70, w: 130, h: 110, label: "OFFICE" },
+  { x: 440, y: 70, w: 70, h: 55, label: "POWDER" },
+  { x: 440, y: 125, w: 70, h: 55, label: "PANTRY" },
+  { x: 510, y: 70, w: 130, h: 110, label: "BATH" },
+  { x: 70, y: 180, w: 150, h: 120, label: "DINING" },
+  { x: 220, y: 140, w: 220, h: 160, label: "KITCHEN" },
+  { x: 440, y: 180, w: 100, h: 100, label: "HALL" },
+  { x: 540, y: 180, w: 100, h: 100, label: "W. CLOSET" },
+  { x: 70, y: 300, w: 380, h: 140, label: "GREAT ROOM" },
+  { x: 450, y: 280, w: 190, h: 160, label: "PRIMARY SUITE" },
+];
+
+// Lighting fixtures mapped to dimmer circuits, placed in real rooms.
+const FIX: { x: number; y: number; r: number; c: string }[] = [
+  // Great room — 3×2 recessed grid
+  { x: 150, y: 340, r: 24, c: "gr_cans" }, { x: 260, y: 340, r: 24, c: "gr_cans" }, { x: 370, y: 340, r: 24, c: "gr_cans" },
+  { x: 150, y: 405, r: 24, c: "gr_cans" }, { x: 260, y: 405, r: 24, c: "gr_cans" }, { x: 370, y: 405, r: 24, c: "gr_cans" },
+  // Great room sconces (flanking media wall, west)
+  { x: 86, y: 345, r: 13, c: "gr_sconce" }, { x: 86, y: 410, r: 13, c: "gr_sconce" },
+  // Kitchen recessed
+  { x: 270, y: 178, r: 19, c: "k_cans" }, { x: 395, y: 178, r: 19, c: "k_cans" },
+  // Island pendants
+  { x: 292, y: 226, r: 13, c: "k_pendants" }, { x: 332, y: 226, r: 13, c: "k_pendants" }, { x: 372, y: 226, r: 13, c: "k_pendants" },
   // Dining chandelier
-  { x: 450, y: 240, r: 26, circuit: "dining" },
-  // Primary suite
-  { x: 95, y: 330, r: 22, circuit: "primary" }, { x: 185, y: 330, r: 22, circuit: "primary" },
-  { x: 70, y: 300, r: 14, circuit: "primary" }, { x: 210, y: 300, r: 14, circuit: "primary" },
-  // Hall / entry path
-  { x: 290, y: 320, r: 16, circuit: "hall" }, { x: 290, y: 390, r: 16, circuit: "hall" },
-  // Office (right) — share kitchen cans visual group via hall for simplicity
-  { x: 410, y: 340, r: 22, circuit: "hall" }, { x: 500, y: 340, r: 22, circuit: "hall" },
+  { x: 145, y: 235, r: 22, c: "dining" },
+  // Office / foyer
+  { x: 375, y: 120, r: 18, c: "foyer" },
+  // Primary suite (recessed + bed sconces)
+  { x: 510, y: 365, r: 18, c: "primary" }, { x: 590, y: 365, r: 18, c: "primary" },
+  { x: 478, y: 312, r: 11, c: "primary" }, { x: 622, y: 312, r: 11, c: "primary" },
+  // Hall / mud / pantry / closet path
+  { x: 265, y: 105, r: 14, c: "hall" }, { x: 475, y: 152, r: 14, c: "hall" }, { x: 590, y: 230, r: 14, c: "hall" },
+  // Exterior deck soffit lights
+  { x: 200, y: 462, r: 16, c: "deck" }, { x: 450, y: 462, r: 16, c: "deck" }, { x: 678, y: 320, r: 16, c: "deck" },
+];
+
+// In-ceiling speakers by audio zone (interior + outdoor deck).
+const SPEAKERS = [
+  { x: 200, y: 360, z: "Great Room" }, { x: 380, y: 360, z: "Great Room" },
+  { x: 330, y: 210, z: "Kitchen" }, { x: 145, y: 240, z: "Dining" },
+  { x: 545, y: 360, z: "Primary" }, { x: 230, y: 462, z: "Deck" }, { x: 470, y: 462, z: "Deck" },
+];
+
+// Exterior cameras with field-of-view cones (degrees the cone points; SVG y-down).
+const CAMERAS = [
+  { x: 265, y: 24, fov: 90, label: "Front Entry" },   // above front door, looks down (south)
+  { x: 40, y: 50, fov: 35, label: "Driveway" },        // NW corner, looks SE at garage
+  { x: 300, y: 478, fov: 270, label: "Deck" },         // south deck, looks up (north)
+  { x: 690, y: 300, fov: 180, label: "View Deck" },    // east deck, looks west
 ];
 
 const WholeHomeDemo = () => {
   const [active, setActive] = useState("welcome");
+  const [hoverCam, setHoverCam] = useState<string | null>(null);
   const s = SCENES.find((x) => x.id === active) || SCENES[0];
   const lc = TEMP_COLOR[s.temp];
   const skyFill = s.sky === "day" ? "#9ec7e8" : s.sky === "dusk" ? "#7a4a5a" : "#0d1326";
   const g = (lvl: number) => Math.pow(lvl / 100, 0.7);
-  const lvl = (c: string) => s.lights[c] ?? 0;
-  const overallDim = 1 - g(Math.max(...Object.values(s.lights)));
+  const lv = (c: string) => s.lights[c] ?? 0;
+  const interiorMax = Math.max(...Object.entries(s.lights).filter(([k]) => k !== "deck").map(([, v]) => v));
+  const dim = 1 - g(interiorMax);
 
   const systems = [
-    { icon: Lightbulb, label: "Lighting", value: `${Object.values(s.lights).filter((v) => v > 0).length} circuits on` },
-    { icon: Volume2, label: "Audio", value: s.audioZones.length ? s.audioZones.join(", ") : "Quiet" },
-    { icon: Thermometer, label: "Climate", value: `${s.climate}° · ${s.climateLabel}` },
+    { icon: Lightbulb, label: "Lighting", value: `${Object.values(s.lights).filter((v) => v > 0).length} of ${Object.keys(s.lights).length} circuits on` },
+    { icon: Volume2, label: "Audio", value: s.audioZones.length ? s.audioZones.join(" · ") : "All zones quiet" },
+    { icon: Thermometer, label: "Climate", value: `Main ${s.climateMain}° · Primary ${s.climatePrimary}°` },
     { icon: ShieldCheck, label: "Security", value: s.security },
-    { icon: Video, label: "Surveillance", value: s.cameras ? "All cameras recording" : "Idle" },
+    { icon: Video, label: "Surveillance", value: s.cameras ? "4 cameras · recording" : "Idle" },
+    { icon: Wifi, label: "Network", value: "Online · 1.2 Gbps" },
   ];
 
+  const cone = (cx: number, cy: number, deg: number) => {
+    const sp = 28, len = 88, a = (deg * Math.PI) / 180;
+    const a1 = a - (sp * Math.PI) / 180, a2 = a + (sp * Math.PI) / 180;
+    return `M ${cx} ${cy} L ${cx + len * Math.cos(a1)} ${cy + len * Math.sin(a1)} L ${cx + len * Math.cos(a2)} ${cy + len * Math.sin(a2)} Z`;
+  };
+
   return (
-    <div className="rounded-2xl border border-white/10 bg-black/40 backdrop-blur-sm overflow-hidden">
-      <div className="grid lg:grid-cols-[1fr_300px]">
-        {/* ───────── Floor plan ───────── */}
+    <div className="rounded-2xl border border-white/10 bg-gradient-to-b from-[#0e1119] to-[#0a0c12] overflow-hidden shadow-2xl">
+      {/* header bar — premium control-surface chrome */}
+      <div className="flex items-center justify-between px-5 py-3 border-b border-white/10 bg-white/[0.02]">
+        <div className="flex items-center gap-2.5">
+          <span className="w-2 h-2 rounded-full bg-emerald-400 shadow-[0_0_8px] shadow-emerald-400/60" />
+          <span className="text-white/90 text-sm font-semibold tracking-wide">Aspen Ridge Residence</span>
+          <span className="text-white/30 text-xs hidden sm:inline">· Main Floor</span>
+        </div>
+        <span className="text-white/40 text-xs tabular-nums">{s.sky === "day" ? "2:14 PM" : s.sky === "dusk" ? "6:48 PM" : "10:32 PM"} · 28°F</span>
+      </div>
+
+      <div className="grid lg:grid-cols-[1fr_290px]">
+        {/* ───────── Architectural floor plan ───────── */}
         <div className="relative p-3">
-          <svg viewBox="0 0 560 440" className="w-full h-auto block rounded-lg" style={{ background: "#0b0d14" }}>
+          <svg viewBox="0 0 760 520" className="w-full h-auto block rounded-lg" style={{ background: "radial-gradient(120% 120% at 50% 0%, #0f1320, #090b11)" }}>
             <defs>
               <radialGradient id="wh-glow"><stop offset="0%" stopColor={lc} stopOpacity="0.85" /><stop offset="100%" stopColor={lc} stopOpacity="0" /></radialGradient>
+              <linearGradient id="cam-cone" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stopColor="#5b8cff" stopOpacity="0.3" /><stop offset="100%" stopColor="#5b8cff" stopOpacity="0" /></linearGradient>
             </defs>
 
-            {/* room footprints (tiled, sharing walls = coherent) */}
-            {[
-              { x: 40, y: 50, w: 300, h: 230, label: "Great Room" },
-              { x: 340, y: 50, w: 200, h: 150, label: "Kitchen" },
-              { x: 340, y: 200, w: 200, h: 80, label: "Dining" },
-              { x: 40, y: 280, w: 220, h: 130, label: "Primary Suite" },
-              { x: 260, y: 280, w: 80, h: 130, label: "Hall" },
-              { x: 340, y: 280, w: 200, h: 130, label: "Office" },
-            ].map((rm) => (
-              <g key={rm.label}>
-                <rect x={rm.x} y={rm.y} width={rm.w} height={rm.h} fill="#12151f" stroke="#2a2f42" strokeWidth="1.5" />
-                <text x={rm.x + 8} y={rm.y + 16} className="fill-white/35" style={{ fontSize: 10, letterSpacing: 0.5 }}>{rm.label.toUpperCase()}</text>
-              </g>
+            {/* wrapping view deck (exterior, south + east) */}
+            <path d="M 78 440 L 640 440 L 640 200 L 706 200 L 706 500 L 78 500 Z" fill="#0c0f17" stroke="#262c3d" strokeWidth="1.5" />
+            {[...Array(7)].map((_, i) => <line key={i} x1={120 + i * 80} y1="445" x2={120 + i * 80} y2="495" stroke="#1a1f2c" strokeWidth="1" />)}
+
+            {/* exterior camera coverage cones (behind house) */}
+            {CAMERAS.map((c, i) => (
+              <path key={i} d={cone(c.x, c.y, c.fov)} fill="url(#cam-cone)"
+                opacity={s.cameras ? (hoverCam === null || hoverCam === c.label ? 1 : 0.2) : 0.1}
+                style={{ transition: "opacity 0.5s" }} />
             ))}
 
-            {/* kitchen island */}
-            <rect x="390" y="125" width="120" height="34" rx="3" fill="#171b27" stroke="#2a2f42" />
-            {/* great-room TV + shades (south wall) */}
-            <rect x="150" y="52" width="84" height="10" fill={s.tv ? "#1b3a6b" : "#0a0d14"} style={{ transition: "fill 0.8s" }} />
-            {/* window on great room west wall with sky + shade */}
-            <rect x="40" y="95" width="8" height="90" fill={skyFill} style={{ transition: "fill 1.2s" }} />
-            <rect x="40" y="95" width="8" height={0.9 * s.shades} fill="#191c28" style={{ transition: "height 1.2s" }} />
+            {/* ── rooms (varied sizes = architectural footprint) ── */}
+            {ROOMS.map((r) => (
+              <rect key={r.label} x={r.x} y={r.y} width={r.w} height={r.h} rx="2" fill="#10131d" stroke="#39405a" strokeWidth="2" />
+            ))}
+            {/* outer shell accent */}
+            <rect x="70" y="40" width="570" height="400" fill="none" stroke="#454d6b" strokeWidth="2.5" rx="3" pointerEvents="none" />
 
-            {/* lighting fixtures — glow at real per-circuit level */}
-            {FIXTURES.map((f, i) => {
-              const v = lvl(f.circuit);
+            {/* room labels */}
+            {ROOMS.map((r) => (
+              <text key={r.label + "t"} x={r.x + 6} y={r.y + 15} className="fill-white/30" style={{ fontSize: 8.5, letterSpacing: 0.8 }}>{r.label}</text>
+            ))}
+
+            {/* ── furniture silhouettes ── */}
+            <g fill="#1a1f2e" stroke="#2a3145" strokeWidth="1">
+              {/* garage — two car bays */}
+              <rect x="90" y="70" width="50" height="80" rx="4" /><rect x="150" y="70" width="50" height="80" rx="4" />
+              {/* office desk */}
+              <rect x="320" y="140" width="80" height="22" rx="3" />
+              {/* dining table + chairs */}
+              <rect x="105" y="210" width="80" height="48" rx="6" />
+              {[0, 1, 2, 3].map((i) => <rect key={i} x={108 + (i % 2) * 70} y={212 + Math.floor(i / 2) * 30} width="9" height="18" rx="3" />)}
+              {/* kitchen island + perimeter counter + stools */}
+              <rect x="262" y="210" width="140" height="32" rx="3" />
+              <rect x="222" y="140" width="216" height="18" />
+              {[0, 1, 2].map((i) => <circle key={i} cx={292 + i * 40} cy={254} r="5" />)}
+              {/* great room: media wall + TV, sectional, coffee table */}
+              <rect x="70" y="330" width="11" height="100" rx="2" />
+              <rect x="74" y="355" width="7" height="60" fill={s.tv ? "#1b3a6b" : "#0a0d14"} stroke="none" style={{ transition: "fill 0.8s" }} />
+              <rect x="150" y="390" width="180" height="34" rx="8" />
+              <rect x="150" y="355" width="44" height="40" rx="8" />
+              <rect x="185" y="350" width="100" height="28" rx="5" />
+              {/* primary bed + nightstands */}
+              <rect x="500" y="312" width="120" height="86" rx="4" />
+              <rect x="478" y="312" width="18" height="22" rx="2" /><rect x="624" y="312" width="14" height="22" rx="2" />
+            </g>
+
+            {/* great-room window + shade on west exterior wall */}
+            <rect x="70" y="305" width="6" height="20" fill={skyFill} style={{ transition: "fill 1.2s" }} />
+            {/* great-room south windows to the deck */}
+            <rect x="120" y="437" width="260" height="6" fill={skyFill} style={{ transition: "fill 1.2s" }} />
+            <rect x="120" y="437" width={2.6 * s.shades} height="6" fill="#191c28" style={{ transition: "width 1.2s" }} />
+            {/* cove light band (great room ceiling) */}
+            <rect x="78" y="305" width="364" height="7" rx="3.5" fill={lc} opacity={0.5 * g(lv("gr_cove"))} style={{ transition: "opacity 1s, fill 1s" }} />
+
+            {/* lighting fixtures glow at real circuit levels */}
+            {FIX.map((f, i) => {
+              const v = lv(f.c);
               return (
                 <g key={i}>
                   <circle cx={f.x} cy={f.y} r={f.r} fill="url(#wh-glow)" opacity={g(v)} style={{ transition: "opacity 1s" }} />
-                  <circle cx={f.x} cy={f.y} r={3.5} fill={lc} opacity={0.3 + 0.7 * g(v)} style={{ transition: "opacity 1s, fill 1s" }} />
+                  <circle cx={f.x} cy={f.y} r={2.6} fill={lc} opacity={0.28 + 0.72 * g(v)} style={{ transition: "opacity 1s, fill 1s" }} />
                 </g>
               );
             })}
+            {/* undercabinet strip */}
+            <rect x="226" y="158" width="208" height="5" fill={lc} opacity={0.7 * g(lv("k_under"))} style={{ transition: "opacity 1s, fill 1s" }} />
 
-            {/* undercabinet strip glow */}
-            <rect x="392" y="159" width="116" height="6" fill={lc} opacity={0.7 * g(lvl("k_under"))} style={{ transition: "opacity 1s, fill 1s" }} />
-
-            {/* ── device markers (the other systems) ── */}
-            {/* speakers (audio) — pulse when their zone plays */}
-            {[
-              { x: 315, y: 70, room: "Great Room" }, { x: 525, y: 65, room: "Kitchen" },
-              { x: 525, y: 240, room: "Dining" }, { x: 60, y: 395, room: "Primary" },
-            ].map((sp, i) => {
-              const on = s.audioZones.includes(sp.room);
+            {/* ── devices ── */}
+            {/* in-ceiling speakers */}
+            {SPEAKERS.map((sp, i) => {
+              const on = s.audioZones.includes(sp.z);
               return (
-                <g key={i} opacity={on ? 1 : 0.3} style={{ transition: "opacity 0.6s" }}>
-                  <circle cx={sp.x} cy={sp.y} r="7" fill="none" stroke="#5b8cff" strokeWidth="1.5" />
-                  <circle cx={sp.x} cy={sp.y} r="2.5" fill="#5b8cff" className={on ? "animate-pulse" : ""} />
+                <g key={i} opacity={on ? 1 : 0.26} style={{ transition: "opacity 0.6s" }}>
+                  <circle cx={sp.x} cy={sp.y} r="6" fill="none" stroke="#5b8cff" strokeWidth="1.2" />
+                  <circle cx={sp.x} cy={sp.y} r="2" fill="#5b8cff" className={on ? "animate-pulse" : ""} />
                 </g>
               );
             })}
-            {/* thermostat (climate) */}
-            <g>
-              <rect x="300" y="150" width="34" height="18" rx="4" fill="#0f1420" stroke="#2a3550" />
-              <text x="317" y="163" textAnchor="middle" className="fill-emerald-300" style={{ fontSize: 10 }}>{s.climate}°</text>
-            </g>
-            {/* cameras (surveillance) at entries/corners */}
-            {[{ x: 300, y: 295 }, { x: 50, y: 60 }, { x: 530, y: 60 }].map((c, i) => (
-              <g key={i} opacity={s.cameras ? 1 : 0.25} style={{ transition: "opacity 0.6s" }}>
-                <circle cx={c.x} cy={c.y} r="5.5" fill="#0f1420" stroke="#9aa6c7" strokeWidth="1" />
-                <circle cx={c.x} cy={c.y} r="2" fill={s.cameras ? "#f87171" : "#3a3f4e"} className={s.cameras ? "animate-pulse" : ""} />
+            {/* wall keypads at room entries */}
+            {[[312, 175], [240, 158], [444, 300], [452, 320]].map(([x, y], i) => (
+              <rect key={i} x={(x as number) - 4} y={(y as number) - 6} width="8" height="12" rx="1.5" fill="#1a2030" stroke="#3a4663" strokeWidth="0.8" />
+            ))}
+            {/* thermostats — main + primary zones */}
+            {[{ x: 446, y: 240, t: s.climateMain }, { x: 452, y: 360, t: s.climatePrimary }].map((th, i) => (
+              <g key={i}>
+                <rect x={th.x - 15} y={th.y - 9} width="30" height="18" rx="4" fill="#0c1320" stroke="#234" strokeWidth="1" />
+                <text x={th.x} y={th.y + 4} textAnchor="middle" className="fill-emerald-300" style={{ fontSize: 9 }}>{th.t}°</text>
               </g>
             ))}
-            {/* entry door lock (security) */}
-            <g>
-              <rect x="282" y="404" width="16" height="6" rx="1" fill={s.security === "Disarmed" ? "#34d399" : "#f59e0b"} style={{ transition: "fill 0.6s" }} />
-            </g>
+            {/* door/window contact sensors on the perimeter */}
+            {[[265, 70], [70, 360], [380, 440], [640, 300], [510, 70]].map(([x, y], i) => (
+              <circle key={i} cx={x as number} cy={y as number} r="3" fill={s.security === "Disarmed" ? "#34d399" : "#f59e0b"} style={{ transition: "fill 0.6s" }} />
+            ))}
 
-            {/* night darkening wash */}
-            <rect x="0" y="0" width="560" height="440" fill="#05060a" opacity={0.5 * overallDim} style={{ transition: "opacity 1s" }} pointerEvents="none" />
+            {/* exterior cameras (outside the walls) */}
+            {CAMERAS.map((c, i) => (
+              <g key={i} onMouseEnter={() => setHoverCam(c.label)} onMouseLeave={() => setHoverCam(null)} className="cursor-pointer">
+                <circle cx={c.x} cy={c.y} r="7" fill="#0c1320" stroke="#9aa6c7" strokeWidth="1.2" />
+                <circle cx={c.x} cy={c.y} r="2.4" fill={s.cameras ? "#f87171" : "#3a3f4e"} className={s.cameras ? "animate-pulse" : ""} />
+                {hoverCam === c.label && (
+                  <text x={c.x} y={c.y - 12} textAnchor="middle" className="fill-white" style={{ fontSize: 9 }}>{c.label}</text>
+                )}
+              </g>
+            ))}
+
+            {/* night darkening wash over interior only */}
+            <rect x="70" y="40" width="570" height="400" fill="#05060a" opacity={0.5 * dim} style={{ transition: "opacity 1s" }} pointerEvents="none" />
           </svg>
 
-          <div className="absolute bottom-4 left-5 right-5">
-            <p className="text-accent text-xs font-semibold tracking-widest uppercase">{s.label}</p>
-            <p className="text-white/80 text-sm mt-0.5">{s.note}</p>
+          <div className="absolute bottom-5 left-6 right-6">
+            <p className="text-accent text-[0.7rem] font-semibold tracking-widest uppercase">{s.label}</p>
+            <p className="text-white/80 text-sm mt-0.5 leading-snug">{s.note}</p>
           </div>
         </div>
 
         {/* ───────── Control surface ───────── */}
-        <div className="border-t lg:border-t-0 lg:border-l border-white/10 p-5 flex flex-col gap-5">
+        <div className="border-t lg:border-t-0 lg:border-l border-white/10 p-5 flex flex-col gap-5 bg-white/[0.015]">
           <div>
             <p className="text-white/40 text-[0.7rem] tracking-widest uppercase mb-3">Scenes</p>
-            <div className="rounded-xl bg-gradient-to-b from-[#1a1d28] to-[#0e1018] border border-white/10 p-2.5 space-y-1.5">
+            <div className="rounded-xl bg-gradient-to-b from-[#1a1d28] to-[#0e1018] border border-white/10 p-2.5 space-y-1.5 shadow-inner">
               {SCENES.map((sc) => {
                 const on = sc.id === active;
                 return (
                   <button key={sc.id} onClick={() => setActive(sc.id)}
-                    className={`w-full flex items-center gap-3 px-3.5 py-2.5 rounded-lg text-left transition-all duration-200 ${on ? "bg-white/[0.07]" : "hover:bg-white/[0.04]"}`}>
+                    className={`w-full flex items-center gap-3 px-3.5 py-2.5 rounded-lg text-left transition-all duration-200 ${on ? "bg-white/[0.08]" : "hover:bg-white/[0.04]"}`}>
                     <span className="w-1.5 h-1.5 rounded-full shrink-0 transition-all duration-300"
                       style={{ background: on ? "#ca9f5c" : "#3a3f4e", boxShadow: on ? "0 0 8px 1px #ca9f5c" : "none" }} />
                     <span className={`text-sm font-medium tracking-wide ${on ? "text-white" : "text-white/55"}`}>{sc.label}</span>
@@ -243,15 +299,15 @@ const WholeHomeDemo = () => {
                 <div key={sys.label} className="flex items-center gap-3">
                   <sys.icon className="w-4 h-4 text-accent/80 shrink-0" />
                   <div className="flex-1 min-w-0 flex justify-between items-baseline gap-2">
-                    <span className="text-white/70 text-xs">{sys.label}</span>
+                    <span className="text-white/65 text-xs">{sys.label}</span>
                     <span className="text-white/45 text-xs text-right truncate">{sys.value}</span>
                   </div>
                 </div>
               ))}
             </div>
             <p className="text-white/30 text-[0.7rem] leading-relaxed mt-4">
-              One scene, every system — that's what integration means. Lighting, audio, climate, security, and
-              cameras moving together on one button.
+              One scene moves every system at once — lighting, audio, climate, security, and cameras. That orchestration
+              is what a high-end install delivers; the individual products are just the parts.
             </p>
           </div>
         </div>
