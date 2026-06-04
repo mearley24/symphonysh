@@ -1,14 +1,15 @@
 import { useState } from "react";
 import { Lightbulb, Volume2, Thermometer, ShieldCheck, Video, Wifi } from "lucide-react";
+import { VIEWBOX, ROOMS, DEVICES } from "@/data/wholeHomeLayout";
 
 /**
- * WholeHomeDemo — a premium whole-home control surface on a real main-floor program.
+ * WholeHomeDemo — a premium whole-home control surface rendered from a REAL install.
  *
- * The plan mirrors how we actually lay out a high-end mountain-modern home: an
- * irregular footprint with a garage wing, an open kitchen / great-room heart, a
- * primary suite with walk-in closets, and a view deck wrapping the south + east
- * where the exterior cameras and outdoor speakers live. One scene orchestrates
- * lighting circuits, audio zones, two-zone climate, security sensors, and cameras.
+ * The floor plan (room polygons) and every device (keypads, speakers, shades, TVs,
+ * contact/glassbreak/motion sensors, life-safety, control panels, touch panels) come
+ * straight from the project markup in src/data/wholeHomeLayout.ts — actual coordinates,
+ * not an approximation. One scene orchestrates lighting, audio, climate, security, and
+ * cameras across the plan.
  *
  * Pure SVG + CSS. No dependencies, no photos.
  */
@@ -19,105 +20,49 @@ type Sec = "Disarmed" | "Armed · Stay" | "Armed · Away";
 
 interface Scene {
   id: string; label: string; note: string;
-  lights: Record<string, number>;
+  lights: Record<string, number>; // room name -> level 0..100
   temp: Temp; sky: Sky; tv: boolean; shades: number;
-  audioZones: string[];
-  climateMain: number; climatePrimary: number; climateLabel: string;
-  security: Sec; cameras: boolean;
+  audioZones: string[]; // room names
+  climateMain: number; climatePrimary: number; security: Sec; cameras: boolean;
 }
 
 const SCENES: Scene[] = [
   { id: "welcome", label: "Welcome Home",
-    note: "Front door unlocks, a warm welcome through the entry and great room, climate to comfort, music in the kitchen.",
-    lights: { gr_cans: 65, gr_cove: 40, gr_sconce: 45, k_cans: 75, k_pendants: 70, k_under: 100, dining: 55, foyer: 85, primary: 0, hall: 45, deck: 0 },
-    temp: "neutral", sky: "day", tv: false, shades: 0, audioZones: ["Kitchen"], climateMain: 71, climatePrimary: 70, climateLabel: "Comfort", security: "Disarmed", cameras: true },
+    note: "Front door unlocks, a warm welcome through the entry, kitchen and living room, climate to comfort, music in the kitchen.",
+    lights: { "Front Entry": 90, "Mudroom": 50, "Office": 35, "Office 2": 25, "Stairwell": 30, "Kitchen": 75, "Hearth": 60, "Dining": 50, "Living Room": 65 },
+    temp: "neutral", sky: "day", tv: false, shades: 0, audioZones: ["Kitchen"], climateMain: 71, climatePrimary: 70, security: "Disarmed", cameras: true },
   { id: "cooking", label: "Cooking",
-    note: "Full task light over the island, undercabinet on, music through the kitchen and great room.",
-    lights: { gr_cans: 45, gr_cove: 25, gr_sconce: 30, k_cans: 100, k_pendants: 95, k_under: 100, dining: 30, foyer: 50, primary: 0, hall: 30, deck: 0 },
-    temp: "neutral", sky: "day", tv: false, shades: 0, audioZones: ["Kitchen", "Great Room"], climateMain: 70, climatePrimary: 70, climateLabel: "Comfort", security: "Disarmed", cameras: true },
+    note: "Full task light over the island, the hearth and living room come up, music through the kitchen and living room.",
+    lights: { "Kitchen": 100, "Hearth": 65, "Dining": 40, "Living Room": 45, "Front Entry": 50, "Mudroom": 30, "Stairwell": 20 },
+    temp: "neutral", sky: "day", tv: false, shades: 0, audioZones: ["Kitchen", "Living Room"], climateMain: 70, climatePrimary: 70, security: "Disarmed", cameras: true },
   { id: "dinner", label: "Dinner",
-    note: "Chandelier leads, the great room settles to a warm wash, the deck glows, soft music over dinner.",
-    lights: { gr_cans: 18, gr_cove: 30, gr_sconce: 25, k_cans: 22, k_pendants: 28, k_under: 35, dining: 60, foyer: 30, primary: 0, hall: 22, deck: 40 },
-    temp: "warm", sky: "dusk", tv: false, shades: 0, audioZones: ["Dining", "Deck"], climateMain: 70, climatePrimary: 69, climateLabel: "Comfort", security: "Disarmed", cameras: true },
+    note: "Dining leads, the living room settles to a warm wash, the deck glows, soft music inside and out.",
+    lights: { "Dining": 75, "Kitchen": 25, "Hearth": 35, "Living Room": 30, "Front Entry": 30, "Deck": 45, "Stairwell": 15 },
+    temp: "warm", sky: "dusk", tv: false, shades: 0, audioZones: ["Dining", "Deck"], climateMain: 70, climatePrimary: 69, security: "Disarmed", cameras: true },
   { id: "movie", label: "Movie",
-    note: "Great-room shades down, screen on, cove light at a whisper, surround up. Rest of the floor goes dark.",
-    lights: { gr_cans: 4, gr_cove: 12, gr_sconce: 0, k_cans: 0, k_pendants: 0, k_under: 0, dining: 0, foyer: 8, primary: 0, hall: 12, deck: 0 },
-    temp: "warm", sky: "night", tv: true, shades: 100, audioZones: ["Great Room"], climateMain: 71, climatePrimary: 68, climateLabel: "Comfort", security: "Disarmed", cameras: true },
+    note: "Living-room shades down, screen on, just enough path light, surround up. The rest of the floor goes dark.",
+    lights: { "Living Room": 8, "Hearth": 6, "Stairwell": 8, "Front Entry": 6 },
+    temp: "warm", sky: "night", tv: true, shades: 100, audioZones: ["Living Room"], climateMain: 71, climatePrimary: 68, security: "Disarmed", cameras: true },
   { id: "goodnight", label: "Goodnight",
-    note: "Main floor off but a path to bed, climate to night setback, every door locked and the house armed to stay.",
-    lights: { gr_cans: 0, gr_cove: 0, gr_sconce: 0, k_cans: 0, k_pendants: 0, k_under: 0, dining: 0, foyer: 0, primary: 14, hall: 10, deck: 0 },
-    temp: "warm", sky: "night", tv: false, shades: 100, audioZones: [], climateMain: 66, climatePrimary: 65, climateLabel: "Night setback", security: "Armed · Stay", cameras: true },
+    note: "Main floor off but a soft path to bed, climate to night setback, every door locked and the house armed to stay.",
+    lights: { "Primary Bed": 14, "Stairwell": 12 },
+    temp: "warm", sky: "night", tv: false, shades: 100, audioZones: [], climateMain: 66, climatePrimary: 65, security: "Armed · Stay", cameras: true },
   { id: "away", label: "Away",
-    note: "A sconce and the deck lights stay on so the house looks lived-in, climate sets way back, every zone armed and all cameras recording.",
-    lights: { gr_cans: 0, gr_cove: 0, gr_sconce: 28, k_cans: 0, k_pendants: 0, k_under: 0, dining: 0, foyer: 20, primary: 0, hall: 18, deck: 25 },
-    temp: "warm", sky: "night", tv: false, shades: 0, audioZones: [], climateMain: 62, climatePrimary: 62, climateLabel: "Away setback", security: "Armed · Away", cameras: true },
+    note: "A light at the entry and the deck stay on so the house looks lived-in, climate sets way back, every zone armed and all cameras recording.",
+    lights: { "Front Entry": 20, "Mudroom": 12, "Deck": 25 },
+    temp: "warm", sky: "night", tv: false, shades: 0, audioZones: [], climateMain: 62, climatePrimary: 62, security: "Armed · Away", cameras: true },
 ];
 
 const TEMP_COLOR: Record<Temp, string> = { warm: "#ffb86b", neutral: "#ffe6c2", cool: "#dcebff" };
+const [VBW, VBH] = VIEWBOX;
 
-// Rooms — varied sizes form the irregular footprint (not a uniform grid).
-const ROOMS: { x: number; y: number; w: number; h: number; label: string }[] = [
-  { x: 70, y: 40, w: 150, h: 120, label: "GARAGE" },
-  { x: 220, y: 70, w: 90, h: 70, label: "MUD" },
-  { x: 310, y: 70, w: 130, h: 110, label: "OFFICE" },
-  { x: 440, y: 70, w: 70, h: 55, label: "POWDER" },
-  { x: 440, y: 125, w: 70, h: 55, label: "PANTRY" },
-  { x: 510, y: 70, w: 130, h: 110, label: "BATH" },
-  { x: 70, y: 180, w: 150, h: 120, label: "DINING" },
-  { x: 220, y: 140, w: 220, h: 160, label: "KITCHEN" },
-  { x: 440, y: 180, w: 100, h: 100, label: "HALL" },
-  { x: 540, y: 180, w: 100, h: 100, label: "W. CLOSET" },
-  { x: 70, y: 300, w: 380, h: 140, label: "GREAT ROOM" },
-  { x: 450, y: 280, w: 190, h: 160, label: "PRIMARY SUITE" },
-];
-
-// Lighting fixtures mapped to dimmer circuits, placed in real rooms.
-const FIX: { x: number; y: number; r: number; c: string }[] = [
-  // Great room — 3×2 recessed grid
-  { x: 150, y: 340, r: 24, c: "gr_cans" }, { x: 260, y: 340, r: 24, c: "gr_cans" }, { x: 370, y: 340, r: 24, c: "gr_cans" },
-  { x: 150, y: 405, r: 24, c: "gr_cans" }, { x: 260, y: 405, r: 24, c: "gr_cans" }, { x: 370, y: 405, r: 24, c: "gr_cans" },
-  // Great room sconces (flanking media wall, west)
-  { x: 86, y: 345, r: 13, c: "gr_sconce" }, { x: 86, y: 410, r: 13, c: "gr_sconce" },
-  // Kitchen recessed
-  { x: 270, y: 178, r: 19, c: "k_cans" }, { x: 395, y: 178, r: 19, c: "k_cans" },
-  // Island pendants
-  { x: 292, y: 226, r: 13, c: "k_pendants" }, { x: 332, y: 226, r: 13, c: "k_pendants" }, { x: 372, y: 226, r: 13, c: "k_pendants" },
-  // Dining chandelier
-  { x: 145, y: 235, r: 22, c: "dining" },
-  // Office / foyer
-  { x: 375, y: 120, r: 18, c: "foyer" },
-  // Primary suite (recessed + bed sconces)
-  { x: 510, y: 365, r: 18, c: "primary" }, { x: 590, y: 365, r: 18, c: "primary" },
-  { x: 478, y: 312, r: 11, c: "primary" }, { x: 622, y: 312, r: 11, c: "primary" },
-  // Hall / mud / pantry / closet path
-  { x: 265, y: 105, r: 14, c: "hall" }, { x: 475, y: 152, r: 14, c: "hall" }, { x: 590, y: 230, r: 14, c: "hall" },
-  // Exterior deck soffit lights
-  { x: 200, y: 462, r: 16, c: "deck" }, { x: 450, y: 462, r: 16, c: "deck" }, { x: 678, y: 320, r: 16, c: "deck" },
-];
-
-// In-ceiling speakers by audio zone (interior + outdoor deck).
-const SPEAKERS = [
-  { x: 200, y: 360, z: "Great Room" }, { x: 380, y: 360, z: "Great Room" },
-  { x: 330, y: 210, z: "Kitchen" }, { x: 145, y: 240, z: "Dining" },
-  { x: 545, y: 360, z: "Primary" }, { x: 230, y: 462, z: "Deck" }, { x: 470, y: 462, z: "Deck" },
-];
-
-// Wall keypads mounted by room entries — each engraved with its scene buttons,
-// just like a real install (the featured faceplate at right shows the engravings).
-const KEYPADS: { x: number; y: number; name: string; engraving: string[] }[] = [
-  { x: 318, y: 166, name: "Entry", engraving: ["Welcome", "Away", "All Off"] },
-  { x: 236, y: 152, name: "Kitchen", engraving: ["Cooking", "Bright", "Dim", "Off"] },
-  { x: 256, y: 312, name: "Great Room", engraving: ["Bright", "Dinner", "Movie", "Off"] },
-  { x: 466, y: 298, name: "Primary", engraving: ["Goodnight", "Reading", "Off"] },
-];
-
-// Exterior cameras mounted at the property corners, each sweeping the yard
-// (wide field of view fanning diagonally inward). fov = degrees the cone points; SVG y-down.
+// Designed exterior cameras at the property corners (the main-level markup has no
+// cameras — those live on the site plan — so we place a realistic yard-coverage set).
 const CAMERAS = [
-  { x: 26, y: 22, fov: 45, label: "NW · Driveway" },   // NW corner, sweeps SE across the front
-  { x: 734, y: 22, fov: 135, label: "NE · Front Entry" }, // NE corner, sweeps SW
-  { x: 734, y: 498, fov: 225, label: "SE · View Deck" }, // SE corner, sweeps NW
-  { x: 26, y: 498, fov: 315, label: "SW · South Yard" }, // SW corner, sweeps NE
+  { x: 22, y: 20, fov: 45, label: "NW · Driveway" },
+  { x: VBW - 22, y: 20, fov: 135, label: "NE · Front Entry" },
+  { x: VBW - 22, y: VBH - 20, fov: 225, label: "SE · View Deck" },
+  { x: 22, y: VBH - 20, fov: 315, label: "SW · South Yard" },
 ];
 
 const WholeHomeDemo = () => {
@@ -125,14 +70,16 @@ const WholeHomeDemo = () => {
   const [hoverCam, setHoverCam] = useState<string | null>(null);
   const s = SCENES.find((x) => x.id === active) || SCENES[0];
   const lc = TEMP_COLOR[s.temp];
-  const skyFill = s.sky === "day" ? "#9ec7e8" : s.sky === "dusk" ? "#7a4a5a" : "#0d1326";
   const g = (lvl: number) => Math.pow(lvl / 100, 0.7);
-  const lv = (c: string) => s.lights[c] ?? 0;
-  const interiorMax = Math.max(...Object.entries(s.lights).filter(([k]) => k !== "deck").map(([, v]) => v));
+  const lvl = (room: string) => s.lights[room] ?? 0;
+  const litRooms = ROOMS.filter((r) => lvl(r.name) > 0).length;
+  const interiorMax = Math.max(0, ...ROOMS.filter((r) => r.name !== "Deck").map((r) => lvl(r.name)));
   const dim = 1 - g(interiorMax);
+  const armed = s.security !== "Disarmed";
+  const secColor = armed ? "#f59e0b" : "#34d399";
 
   const systems = [
-    { icon: Lightbulb, label: "Lighting", value: `${Object.values(s.lights).filter((v) => v > 0).length} of ${Object.keys(s.lights).length} circuits on` },
+    { icon: Lightbulb, label: "Lighting", value: `${litRooms} of ${ROOMS.length} rooms lit` },
     { icon: Volume2, label: "Audio", value: s.audioZones.length ? s.audioZones.join(" · ") : "All zones quiet" },
     { icon: Thermometer, label: "Climate", value: `Main ${s.climateMain}° · Primary ${s.climatePrimary}°` },
     { icon: ShieldCheck, label: "Security", value: s.security },
@@ -140,15 +87,73 @@ const WholeHomeDemo = () => {
     { icon: Wifi, label: "Network", value: "Online · 1.2 Gbps" },
   ];
 
+  const poly = (pts: [number, number][]) => pts.map((p) => p.join(",")).join(" ");
   const cone = (cx: number, cy: number, deg: number) => {
-    const sp = 44, len = 210, a = (deg * Math.PI) / 180;
+    const sp = 44, len = 300, a = (deg * Math.PI) / 180;
     const a1 = a - (sp * Math.PI) / 180, a2 = a + (sp * Math.PI) / 180;
     return `M ${cx} ${cy} L ${cx + len * Math.cos(a1)} ${cy + len * Math.sin(a1)} L ${cx + len * Math.cos(a2)} ${cy + len * Math.sin(a2)} Z`;
   };
 
+  // device glyph
+  const renderDevice = (d: typeof DEVICES[number], i: number) => {
+    const { cat, x, y, room } = d;
+    switch (cat) {
+      case "keypad": {
+        const on = room ? lvl(room) > 0 : false;
+        return (
+          <g key={i}>
+            <rect x={x - 5} y={y - 7.5} width="10" height="15" rx="2" fill="#262a34" stroke="#8b93a8" strokeWidth="0.9" />
+            <circle cx={x} cy={y - 4} r="1.2" fill={on ? "#ca9f5c" : "#3a4053"} style={{ transition: "fill 0.5s" }} />
+            <line x1={x - 3} y1={y} x2={x + 3} y2={y} stroke="#525a70" strokeWidth="1" strokeLinecap="round" />
+            <line x1={x - 3} y1={y + 3} x2={x + 3} y2={y + 3} stroke="#525a70" strokeWidth="1" strokeLinecap="round" />
+          </g>
+        );
+      }
+      case "speaker": {
+        const on = room ? s.audioZones.includes(room) : false;
+        return (
+          <g key={i} opacity={on ? 1 : 0.5} style={{ transition: "opacity 0.6s" }}>
+            <circle cx={x} cy={y} r="6" fill="#0d1422" stroke="#6f9bff" strokeWidth="1.2" />
+            <circle cx={x} cy={y} r="3.2" fill="none" stroke="#6f9bff" strokeWidth="0.8" />
+            <circle cx={x} cy={y} r="1.5" fill="#6f9bff" className={on ? "animate-pulse" : ""} />
+          </g>
+        );
+      }
+      case "tv": {
+        const on = s.tv && room === "Living Room";
+        return <rect key={i} x={x - 8} y={y - 5} width="16" height="10" rx="1.5" fill={on ? "#1b3a6b" : "#10141d"} stroke="#3a4663" strokeWidth="1" style={{ transition: "fill 0.7s" }} />;
+      }
+      case "shade": {
+        const down = s.shades > 50;
+        return (
+          <g key={i}>
+            <rect x={x - 7} y={y - 2} width="14" height="2.4" rx="1" fill="#4a5266" />
+            <rect x={x - 7} y={y - 1} width="14" height={down ? 7 : 1.5} fill="#2a3140" opacity="0.85" style={{ transition: "height 0.8s" }} />
+          </g>
+        );
+      }
+      case "glassbreak":
+        return <rect key={i} x={x - 2.6} y={y - 2.6} width="5.2" height="5.2" transform={`rotate(45 ${x} ${y})`} fill={secColor} style={{ transition: "fill 0.5s" }} />;
+      case "motion":
+        return <path key={i} d={`M ${x} ${y - 3} L ${x + 3} ${y + 2.5} L ${x - 3} ${y + 2.5} Z`} fill={secColor} style={{ transition: "fill 0.5s" }} />;
+      case "contact":
+        return <circle key={i} cx={x} cy={y} r="2.6" fill={secColor} style={{ transition: "fill 0.5s" }} />;
+      case "safety":
+        return <g key={i}><circle cx={x} cy={y} r="3" fill="none" stroke="#ef4444" strokeWidth="1" /><circle cx={x} cy={y} r="1" fill="#ef4444" /></g>;
+      case "water":
+        return <circle key={i} cx={x} cy={y} r="2.4" fill="#38bdf8" />;
+      case "panel":
+        return <rect key={i} x={x - 4} y={y - 4} width="8" height="8" rx="1.5" fill="#1a2030" stroke="#5b6a8a" strokeWidth="1" />;
+      case "touchpanel":
+        return <rect key={i} x={x - 6} y={y - 4} width="12" height="8" rx="1.5" fill="#13283f" stroke="#3f6ea0" strokeWidth="1" />;
+      default:
+        return null;
+    }
+  };
+
   return (
     <div className="rounded-2xl border border-white/10 bg-gradient-to-b from-[#0e1119] to-[#0a0c12] overflow-hidden shadow-2xl">
-      {/* header bar — premium control-surface chrome */}
+      {/* header bar */}
       <div className="flex items-center justify-between px-5 py-3 border-b border-white/10 bg-white/[0.02]">
         <div className="flex items-center gap-2.5">
           <span className="w-2 h-2 rounded-full bg-emerald-400 shadow-[0_0_8px] shadow-emerald-400/60" />
@@ -158,142 +163,64 @@ const WholeHomeDemo = () => {
         <span className="text-white/40 text-xs tabular-nums">{s.sky === "day" ? "2:14 PM" : s.sky === "dusk" ? "6:48 PM" : "10:32 PM"} · 28°F</span>
       </div>
 
-      <div className="grid lg:grid-cols-[1fr_290px]">
-        {/* ───────── Architectural floor plan ───────── */}
-        <div className="relative p-3">
-          <svg viewBox="0 0 760 520" className="w-full h-auto block rounded-lg" style={{ background: "radial-gradient(120% 120% at 50% 0%, #0f1320, #090b11)" }}>
+      <div className="grid lg:grid-cols-[1fr_300px]">
+        {/* ───────── Real floor plan ───────── */}
+        <div className="p-3">
+          <svg viewBox={`0 0 ${VBW} ${VBH}`} className="w-full h-auto block rounded-lg"
+            style={{ background: "radial-gradient(120% 100% at 50% 0%, #0f1320, #090b11)" }}>
             <defs>
-              <radialGradient id="wh-glow"><stop offset="0%" stopColor={lc} stopOpacity="0.85" /><stop offset="100%" stopColor={lc} stopOpacity="0" /></radialGradient>
-              <linearGradient id="cam-cone" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stopColor="#5b8cff" stopOpacity="0.3" /><stop offset="100%" stopColor="#5b8cff" stopOpacity="0" /></linearGradient>
+              <linearGradient id="cam-cone" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stopColor="#5b8cff" stopOpacity="0.28" /><stop offset="100%" stopColor="#5b8cff" stopOpacity="0" /></linearGradient>
             </defs>
 
-            {/* wrapping view deck (exterior, south + east) */}
-            <path d="M 78 440 L 640 440 L 640 200 L 706 200 L 706 500 L 78 500 Z" fill="#0c0f17" stroke="#262c3d" strokeWidth="1.5" />
-            {[...Array(7)].map((_, i) => <line key={i} x1={120 + i * 80} y1="445" x2={120 + i * 80} y2="495" stroke="#1a1f2c" strokeWidth="1" />)}
-
-            {/* exterior camera coverage cones (behind house) */}
+            {/* exterior camera coverage cones */}
             {CAMERAS.map((c, i) => (
               <path key={i} d={cone(c.x, c.y, c.fov)} fill="url(#cam-cone)"
-                opacity={s.cameras ? (hoverCam === null || hoverCam === c.label ? 1 : 0.2) : 0.1}
+                opacity={s.cameras ? (hoverCam === null || hoverCam === c.label ? 1 : 0.18) : 0.08}
                 style={{ transition: "opacity 0.5s" }} />
             ))}
 
-            {/* ── rooms (varied sizes = architectural footprint) ── */}
+            {/* rooms — base fill + light glow */}
             {ROOMS.map((r) => (
-              <rect key={r.label} x={r.x} y={r.y} width={r.w} height={r.h} rx="2" fill="#10131d" stroke="#39405a" strokeWidth="2" />
+              <polygon key={r.name} points={poly(r.pts)} fill={r.name === "Deck" ? "#0c0f17" : "#10131d"} stroke="#3b425c" strokeWidth="1.6" />
             ))}
+            {ROOMS.map((r) => {
+              const v = lvl(r.name);
+              if (v <= 0) return null;
+              return <polygon key={r.name + "l"} points={poly(r.pts)} fill={lc} opacity={0.5 * g(v)} style={{ transition: "opacity 1s, fill 1s" }} />;
+            })}
             {/* outer shell accent */}
-            <rect x="70" y="40" width="570" height="400" fill="none" stroke="#454d6b" strokeWidth="2.5" rx="3" pointerEvents="none" />
+            {ROOMS.map((r) => (
+              <polygon key={r.name + "o"} points={poly(r.pts)} fill="none" stroke="#000" strokeOpacity="0.35" strokeWidth="0.5" pointerEvents="none" />
+            ))}
+
+            {/* night wash over interior (deck stays lit) */}
+            <rect x="0" y="0" width={VBW} height={VBH} fill="#05060a" opacity={0.5 * dim} style={{ transition: "opacity 1s" }} pointerEvents="none" />
 
             {/* room labels */}
             {ROOMS.map((r) => (
-              <text key={r.label + "t"} x={r.x + 6} y={r.y + 15} className="fill-white/30" style={{ fontSize: 8.5, letterSpacing: 0.8 }}>{r.label}</text>
+              <text key={r.name + "t"} x={r.lx} y={r.ly} textAnchor="middle" className="fill-white/35"
+                style={{ fontSize: 8.5, letterSpacing: 0.6 }}>{r.name.toUpperCase()}</text>
             ))}
 
-            {/* ── furniture silhouettes ── */}
-            <g fill="#1a1f2e" stroke="#2a3145" strokeWidth="1">
-              {/* garage — two car bays */}
-              <rect x="90" y="70" width="50" height="80" rx="4" /><rect x="150" y="70" width="50" height="80" rx="4" />
-              {/* office desk */}
-              <rect x="320" y="140" width="80" height="22" rx="3" />
-              {/* dining table + chairs */}
-              <rect x="105" y="210" width="80" height="48" rx="6" />
-              {[0, 1, 2, 3].map((i) => <rect key={i} x={108 + (i % 2) * 70} y={212 + Math.floor(i / 2) * 30} width="9" height="18" rx="3" />)}
-              {/* kitchen island + perimeter counter + stools */}
-              <rect x="262" y="210" width="140" height="32" rx="3" />
-              <rect x="222" y="140" width="216" height="18" />
-              {[0, 1, 2].map((i) => <circle key={i} cx={292 + i * 40} cy={254} r="5" />)}
-              {/* great room: media wall + TV, sectional, coffee table */}
-              <rect x="70" y="330" width="11" height="100" rx="2" />
-              <rect x="74" y="355" width="7" height="60" fill={s.tv ? "#1b3a6b" : "#0a0d14"} stroke="none" style={{ transition: "fill 0.8s" }} />
-              <rect x="150" y="390" width="180" height="34" rx="8" />
-              <rect x="150" y="355" width="44" height="40" rx="8" />
-              <rect x="185" y="350" width="100" height="28" rx="5" />
-              {/* primary bed + nightstands */}
-              <rect x="500" y="312" width="120" height="86" rx="4" />
-              <rect x="478" y="312" width="18" height="22" rx="2" /><rect x="624" y="312" width="14" height="22" rx="2" />
-            </g>
+            {/* every placed device, by category */}
+            {DEVICES.map(renderDevice)}
 
-            {/* great-room window + shade on west exterior wall */}
-            <rect x="70" y="305" width="6" height="20" fill={skyFill} style={{ transition: "fill 1.2s" }} />
-            {/* great-room south windows to the deck */}
-            <rect x="120" y="437" width="260" height="6" fill={skyFill} style={{ transition: "fill 1.2s" }} />
-            <rect x="120" y="437" width={2.6 * s.shades} height="6" fill="#191c28" style={{ transition: "width 1.2s" }} />
-            {/* cove light band (great room ceiling) */}
-            <rect x="78" y="305" width="364" height="7" rx="3.5" fill={lc} opacity={0.5 * g(lv("gr_cove"))} style={{ transition: "opacity 1s, fill 1s" }} />
-
-            {/* lighting fixtures glow at real circuit levels */}
-            {FIX.map((f, i) => {
-              const v = lv(f.c);
-              return (
-                <g key={i}>
-                  <circle cx={f.x} cy={f.y} r={f.r} fill="url(#wh-glow)" opacity={g(v)} style={{ transition: "opacity 1s" }} />
-                  <circle cx={f.x} cy={f.y} r={2.6} fill={lc} opacity={0.28 + 0.72 * g(v)} style={{ transition: "opacity 1s, fill 1s" }} />
-                </g>
-              );
-            })}
-            {/* undercabinet strip */}
-            <rect x="226" y="158" width="208" height="5" fill={lc} opacity={0.7 * g(lv("k_under"))} style={{ transition: "opacity 1s, fill 1s" }} />
-
-            {/* ── devices ── */}
-            {/* in-ceiling speakers */}
-            {SPEAKERS.map((sp, i) => {
-              const on = s.audioZones.includes(sp.z);
-              return (
-                <g key={i} opacity={on ? 1 : 0.5} style={{ transition: "opacity 0.6s" }}>
-                  <circle cx={sp.x} cy={sp.y} r="6.5" fill="#0d1422" stroke="#6f9bff" strokeWidth="1.3" />
-                  <circle cx={sp.x} cy={sp.y} r="3.6" fill="none" stroke="#6f9bff" strokeWidth="0.9" />
-                  <circle cx={sp.x} cy={sp.y} r="1.7" fill="#6f9bff" className={on ? "animate-pulse" : ""} />
-                </g>
-              );
-            })}
-            {/* wall keypads — engraved button panels at room entries */}
-            {KEYPADS.map((k, i) => (
-              <g key={i}>
-                <rect x={k.x - 6.5} y={k.y - 10} width="13" height="20" rx="2.5" fill="#262a34" stroke="#8b93a8" strokeWidth="1.1" />
-                <circle cx={k.x} cy={k.y - 6} r="1.5" fill="#ca9f5c" />
-                <line x1={k.x - 4} y1={k.y - 0.5} x2={k.x + 4} y2={k.y - 0.5} stroke="#525a70" strokeWidth="1.2" strokeLinecap="round" />
-                <line x1={k.x - 4} y1={k.y + 3.5} x2={k.x + 4} y2={k.y + 3.5} stroke="#525a70" strokeWidth="1.2" strokeLinecap="round" />
-                <line x1={k.x - 4} y1={k.y + 7} x2={k.x + 4} y2={k.y + 7} stroke="#525a70" strokeWidth="1.2" strokeLinecap="round" />
-              </g>
-            ))}
-            {/* thermostats — main + primary zones */}
-            {[{ x: 446, y: 240, t: s.climateMain }, { x: 452, y: 360, t: s.climatePrimary }].map((th, i) => (
-              <g key={i}>
-                <rect x={th.x - 15} y={th.y - 9} width="30" height="18" rx="4" fill="#0c1320" stroke="#234" strokeWidth="1" />
-                <text x={th.x} y={th.y + 4} textAnchor="middle" className="fill-emerald-300" style={{ fontSize: 9 }}>{th.t}°</text>
-              </g>
-            ))}
-            {/* door/window contact sensors on the perimeter */}
-            {[[265, 70], [70, 360], [380, 440], [640, 300], [510, 70]].map(([x, y], i) => {
-              const col = s.security === "Disarmed" ? "#34d399" : "#f59e0b";
-              return (
-                <g key={i}>
-                  <circle cx={x as number} cy={y as number} r="6" fill="none" stroke={col} strokeWidth="0.8" opacity="0.4" style={{ transition: "stroke 0.6s" }} />
-                  <circle cx={x as number} cy={y as number} r="3.4" fill={col} style={{ transition: "fill 0.6s" }} />
-                </g>
-              );
-            })}
-
-            {/* exterior cameras (outside the walls) */}
+            {/* exterior cameras at corners */}
             {CAMERAS.map((c, i) => (
               <g key={i} onMouseEnter={() => setHoverCam(c.label)} onMouseLeave={() => setHoverCam(null)} className="cursor-pointer">
                 <circle cx={c.x} cy={c.y} r="7" fill="#0c1320" stroke="#9aa6c7" strokeWidth="1.2" />
                 <circle cx={c.x} cy={c.y} r="2.4" fill={s.cameras ? "#f87171" : "#3a3f4e"} className={s.cameras ? "animate-pulse" : ""} />
                 {hoverCam === c.label && (
-                  <text x={c.x < 380 ? c.x + 11 : c.x - 11} y={c.y < 260 ? c.y + 16 : c.y - 11}
-                    textAnchor={c.x < 380 ? "start" : "end"} className="fill-white" style={{ fontSize: 9 }}>{c.label}</text>
+                  <text x={c.x < VBW / 2 ? c.x + 11 : c.x - 11} y={c.y < VBH / 2 ? c.y + 16 : c.y - 11}
+                    textAnchor={c.x < VBW / 2 ? "start" : "end"} className="fill-white" style={{ fontSize: 10 }}>{c.label}</text>
                 )}
               </g>
             ))}
-
-            {/* night darkening wash over interior only */}
-            <rect x="70" y="40" width="570" height="400" fill="#05060a" opacity={0.5 * dim} style={{ transition: "opacity 1s" }} pointerEvents="none" />
           </svg>
 
           <div className="mt-3 px-1">
             <div className="flex flex-wrap gap-x-4 gap-y-1.5 mb-3">
-              {([["Camera", "#9aa6c7"], ["Keypad", "#ca9f5c"], ["Speaker", "#6f9bff"], ["Thermostat", "#34d399"], ["Door sensor", "#34d399"]] as const).map(([n, c]) => (
+              {([["Camera", "#9aa6c7"], ["Keypad", "#ca9f5c"], ["Speaker", "#6f9bff"], ["TV", "#3a6bb0"], ["Shade", "#7c879c"], ["Sensor", "#34d399"], ["Touch panel", "#3f6ea0"]] as const).map(([n, c]) => (
                 <span key={n} className="flex items-center gap-1.5 text-white/45 text-[0.68rem]">
                   <span className="w-2 h-2 rounded-full" style={{ background: c }} /> {n}
                 </span>
@@ -311,7 +238,6 @@ const WholeHomeDemo = () => {
               <p className="text-white/40 text-[0.7rem] tracking-widest uppercase">Entry Keypad</p>
               <p className="text-white/25 text-[0.6rem] tracking-widest uppercase">Engraved · 6-button</p>
             </div>
-            {/* engraved keypad faceplate */}
             <div className="rounded-xl p-3 bg-gradient-to-b from-[#2b2d34] to-[#15161b] border border-black/60 shadow-[0_12px_34px_rgba(0,0,0,0.55),inset_0_1px_0_rgba(255,255,255,0.07)]">
               <div className="space-y-2">
                 {SCENES.map((sc) => {
@@ -335,7 +261,7 @@ const WholeHomeDemo = () => {
               </div>
             </div>
             <p className="text-white/35 text-[0.7rem] mt-2.5 leading-relaxed">
-              Every button is a one-press scene — the same engraved keypads sit by each door on the plan (Kitchen, Great Room, Primary).
+              Every button is a one-press scene — the same engraved keypads sit by each door on the plan.
             </p>
           </div>
 
@@ -353,8 +279,8 @@ const WholeHomeDemo = () => {
               ))}
             </div>
             <p className="text-white/30 text-[0.7rem] leading-relaxed mt-4">
-              One scene moves every system at once — lighting, audio, climate, security, and cameras. That orchestration
-              is what a high-end install delivers; the individual products are just the parts.
+              Plan and device placement are taken from a real Symphony install — {DEVICES.length} devices across {ROOMS.length} rooms.
+              One scene moves all of it at once.
             </p>
           </div>
         </div>
