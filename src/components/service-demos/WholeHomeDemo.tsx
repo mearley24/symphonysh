@@ -1,18 +1,16 @@
 import { useState } from "react";
 import { Lightbulb, Volume2, Thermometer, ShieldCheck, Video, Wifi } from "lucide-react";
-import { VIEWBOX, ROOMS, DEVICES } from "@/data/wholeHomeLayout";
+import { VIEWBOX, ROOMS, DEVICES, FIXTURES } from "@/data/wholeHomeLayout";
 
 /**
  * WholeHomeDemo — whole-home control on the REAL blueprint, exactly aligned.
  *
- * Base image = the actual main-level architectural drawing (source PDF, title
- * block cropped off). Room polygons and all 94 devices come from the project
- * markup, mapped onto the drawing by the exact transform (markup × 0.6667, the
- * markup space being the layer-PDF point space) — so the walls, the light pools,
- * and every keypad/speaker/sensor/shade land on their true positions. One
- * engraved keypad orchestrates lighting, audio, climate, security and cameras.
- *
- * <img> + SVG + CSS. No dependencies.
+ * Base image = the actual main-level drawing (source PDF, title block cropped).
+ * Room polygons + all 94 devices come from the project markup, mapped onto the
+ * drawing by the exact transform (markup × 0.6667). Lighting emanates from a
+ * designed downlight grid (FIXTURES) inset in each real room, so every scene
+ * lights real fixtures, not a blob. One engraved keypad runs lighting, audio,
+ * climate, security and cameras together.
  */
 
 type Temp = "cool" | "neutral" | "warm";
@@ -56,7 +54,7 @@ const SCENES: Scene[] = [
     temp: "warm", sky: "night", tv: false, shades: 0, audioZones: [], climateMain: 62, climatePrimary: 62, security: "Armed · Away", cameras: true },
 ];
 
-const TEMP_COLOR: Record<Temp, string> = { warm: "#ffb070", neutral: "#ffe2b8", cool: "#cfe2ff" };
+const TEMP_COLOR: Record<Temp, string> = { warm: "#ffb060", neutral: "#ffe0b0", cool: "#cfe2ff" };
 
 const CAMERAS = [
   { x: 30, y: 28, fov: 45, label: "NW · Driveway" },
@@ -88,7 +86,6 @@ const WholeHomeDemo = () => {
     { icon: Wifi, label: "Network", value: "Online · 1.2 Gbps" },
   ];
 
-  const polyStr = (pts: [number, number][]) => pts.map((p) => p.join(",")).join(" ");
   const cone = (cx: number, cy: number, deg: number) => {
     const sp = 42, len = 620, a = (deg * Math.PI) / 180;
     const a1 = a - (sp * Math.PI) / 180, a2 = a + (sp * Math.PI) / 180;
@@ -163,121 +160,134 @@ const WholeHomeDemo = () => {
         <span className="text-white/40 text-xs tabular-nums">{s.sky === "day" ? "2:14 PM" : s.sky === "dusk" ? "6:48 PM" : "10:32 PM"} · 28°F</span>
       </div>
 
-      <div className="grid lg:grid-cols-[1fr_300px]">
-        {/* ───────── Real blueprint + overlays ───────── */}
-        <div className="p-3">
-          <div className="relative rounded-lg overflow-hidden" style={{ background: "#07090e" }}>
-            <img src={IMG} alt="Main-floor plan" className="w-full h-auto block select-none" draggable={false} />
-            <svg viewBox={`0 0 ${VBW} ${VBH}`} className="absolute inset-0 w-full h-full" preserveAspectRatio="none">
-              <defs>
-                <filter id="wh-soft" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="22" /></filter>
-                <linearGradient id="wh-cone" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stopColor="#5b8cff" stopOpacity="0.22" /><stop offset="100%" stopColor="#5b8cff" stopOpacity="0" /></linearGradient>
-              </defs>
+      {/* ───────── Full-width blueprint ───────── */}
+      <div className="p-3">
+        <div className="relative rounded-lg overflow-hidden" style={{ background: "#07090e" }}>
+          <img src={IMG} alt="Main-floor plan" className="w-full h-auto block select-none" draggable={false} />
+          <svg viewBox={`0 0 ${VBW} ${VBH}`} className="absolute inset-0 w-full h-full" preserveAspectRatio="none">
+            <defs>
+              <radialGradient id="wh-fix">
+                <stop offset="0%" stopColor={lc} stopOpacity="0.95" />
+                <stop offset="55%" stopColor={lc} stopOpacity="0.25" />
+                <stop offset="100%" stopColor={lc} stopOpacity="0" />
+              </radialGradient>
+              <linearGradient id="wh-cone" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stopColor="#5b8cff" stopOpacity="0.22" /><stop offset="100%" stopColor="#5b8cff" stopOpacity="0" /></linearGradient>
+            </defs>
 
-              {/* night wash */}
-              <rect x="0" y="0" width={VBW} height={VBH} fill="#04050a" opacity={0.62 * dim} style={{ transition: "opacity 1s" }} />
+            {/* night wash */}
+            <rect x="0" y="0" width={VBW} height={VBH} fill="#04050a" opacity={0.6 * dim} style={{ transition: "opacity 1s" }} />
 
-              {/* per-room light pools — the real room shapes */}
-              <g filter="url(#wh-soft)" style={{ mixBlendMode: "screen" } as React.CSSProperties}>
-                {ROOMS.map((r) => {
-                  const v = lvl(r.name);
-                  if (v <= 0) return null;
-                  return <polygon key={r.name} points={polyStr(r.pts)} fill={lc} opacity={0.7 * g(v)} style={{ transition: "opacity 1s, fill 1s" }} />;
-                })}
+            {/* light from real fixture locations */}
+            <g style={{ mixBlendMode: "screen" } as React.CSSProperties}>
+              {FIXTURES.map((f, i) => {
+                const v = lvl(f.room);
+                if (v <= 0) return null;
+                const r = 26 + 34 * g(v);
+                return <circle key={i} cx={f.x} cy={f.y} r={r} fill="url(#wh-fix)" opacity={0.6 * g(v)} style={{ transition: "opacity 1s, r 1s" }} />;
+              })}
+            </g>
+            {/* fixture cores (faint dots so the layout reads even when off) */}
+            {FIXTURES.map((f, i) => {
+              const v = lvl(f.room);
+              return <circle key={"fc" + i} cx={f.x} cy={f.y} r="1.6" fill={v > 0 ? "#ffffff" : "#3a4258"} opacity={v > 0 ? 0.4 + 0.6 * g(v) : 0.22}
+                style={{ transition: "opacity 1s" }} />;
+            })}
+
+            {/* camera cones */}
+            {CAMERAS.map((c, i) => (
+              <path key={i} d={cone(c.x, c.y, c.fov)} fill="url(#wh-cone)"
+                opacity={s.cameras ? (hoverCam === null || hoverCam === c.label ? 1 : 0.18) : 0.07} style={{ transition: "opacity 0.5s" }} />
+            ))}
+
+            {/* all real devices */}
+            {showDevices && DEVICES.map(renderDevice)}
+
+            {/* corner cameras */}
+            {CAMERAS.map((c, i) => (
+              <g key={"c" + i} onMouseEnter={() => setHoverCam(c.label)} onMouseLeave={() => setHoverCam(null)} className="cursor-pointer">
+                <circle cx={c.x} cy={c.y} r="13" fill="#0c1320" stroke="#9aa6c7" strokeWidth="2.5" />
+                <circle cx={c.x} cy={c.y} r="5" fill={s.cameras ? "#f87171" : "#3a3f4e"} className={s.cameras ? "animate-pulse" : ""} />
+                {hoverCam === c.label && (
+                  <text x={c.x < VBW / 2 ? c.x + 20 : c.x - 20} y={c.y < VBH / 2 ? c.y + 30 : c.y - 20}
+                    textAnchor={c.x < VBW / 2 ? "start" : "end"} className="fill-white" style={{ fontSize: 26, fontWeight: 600 }}>{c.label}</text>
+                )}
               </g>
+            ))}
+          </svg>
 
-              {/* camera cones */}
-              {CAMERAS.map((c, i) => (
-                <path key={i} d={cone(c.x, c.y, c.fov)} fill="url(#wh-cone)"
-                  opacity={s.cameras ? (hoverCam === null || hoverCam === c.label ? 1 : 0.18) : 0.07} style={{ transition: "opacity 0.5s" }} />
-              ))}
-
-              {/* all real devices */}
-              {showDevices && DEVICES.map(renderDevice)}
-
-              {/* corner cameras */}
-              {CAMERAS.map((c, i) => (
-                <g key={"c" + i} onMouseEnter={() => setHoverCam(c.label)} onMouseLeave={() => setHoverCam(null)} className="cursor-pointer">
-                  <circle cx={c.x} cy={c.y} r="13" fill="#0c1320" stroke="#9aa6c7" strokeWidth="2.5" />
-                  <circle cx={c.x} cy={c.y} r="5" fill={s.cameras ? "#f87171" : "#3a3f4e"} className={s.cameras ? "animate-pulse" : ""} />
-                  {hoverCam === c.label && (
-                    <text x={c.x < VBW / 2 ? c.x + 20 : c.x - 20} y={c.y < VBH / 2 ? c.y + 30 : c.y - 20}
-                      textAnchor={c.x < VBW / 2 ? "start" : "end"} className="fill-white" style={{ fontSize: 26, fontWeight: 600 }}>{c.label}</text>
-                  )}
-                </g>
-              ))}
-            </svg>
-          </div>
-
-          <div className="mt-3 flex items-center justify-between gap-3 flex-wrap">
-            <div className="flex flex-wrap gap-x-3.5 gap-y-1.5">
-              {([["Keypad", "#ca9f5c"], ["Speaker", "#6f9bff"], ["TV", "#3a6bb0"], ["Shade", "#7c879c"], ["Sensor", "#34d399"], ["Touch panel", "#3f6ea0"]] as const).map(([n, c]) => (
-                <span key={n} className="flex items-center gap-1.5 text-white/45 text-[0.68rem]">
-                  <span className="w-2 h-2 rounded-full" style={{ background: c }} /> {n}
-                </span>
-              ))}
-            </div>
-            <button onClick={() => setShowDevices((v) => !v)}
-              className="text-[0.68rem] text-white/50 hover:text-white/80 border border-white/15 rounded-md px-2.5 py-1 transition-colors">
-              {showDevices ? "Hide devices" : "Show devices"}
-            </button>
-          </div>
-
-          <div className="mt-3 px-1">
+          {/* scene caption over the plan */}
+          <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/85 to-transparent pointer-events-none">
             <p className="text-accent text-[0.7rem] font-semibold tracking-widest uppercase">{s.label}</p>
-            <p className="text-white/80 text-sm mt-0.5 leading-snug">{s.note}</p>
-            <p className="text-white/30 text-[0.68rem] mt-2">Actual main-level plan · {DEVICES.length} devices placed from the project drawings.</p>
+            <p className="text-white/85 text-sm mt-0.5 leading-snug max-w-2xl">{s.note}</p>
           </div>
         </div>
 
-        {/* ───────── Control surface ───────── */}
-        <div className="border-t lg:border-t-0 lg:border-l border-white/10 p-5 flex flex-col gap-5 bg-white/[0.015]">
-          <div>
-            <div className="flex items-baseline justify-between mb-3">
-              <p className="text-white/40 text-[0.7rem] tracking-widest uppercase">Entry Keypad</p>
-              <p className="text-white/25 text-[0.6rem] tracking-widest uppercase">Engraved · 6-button</p>
-            </div>
-            <div className="rounded-xl p-3 bg-gradient-to-b from-[#2b2d34] to-[#15161b] border border-black/60 shadow-[0_12px_34px_rgba(0,0,0,0.55),inset_0_1px_0_rgba(255,255,255,0.07)]">
-              <div className="space-y-2">
-                {SCENES.map((sc) => {
-                  const on = sc.id === active;
-                  return (
-                    <button key={sc.id} onClick={() => setActive(sc.id)}
-                      className={`w-full flex items-center gap-3 px-3.5 py-2.5 rounded-md text-left border transition-all duration-150 ${
-                        on
-                          ? "bg-gradient-to-b from-[#34373f] to-[#212329] border-black/50 shadow-[inset_0_1px_0_rgba(255,255,255,0.09)]"
-                          : "bg-gradient-to-b from-[#212329] to-[#16181d] border-black/40 hover:from-[#272a32] shadow-[inset_0_1px_0_rgba(255,255,255,0.035)]"
-                      }`}>
-                      <span className="w-2 h-2 rounded-full shrink-0 transition-all duration-300"
-                        style={{ background: on ? "#ca9f5c" : "#2a2e38", boxShadow: on ? "0 0 9px 1px #ca9f5c" : "inset 0 0 2px rgba(0,0,0,0.8)" }} />
-                      <span className="flex-1 text-[0.8rem] font-semibold uppercase tracking-[0.14em]"
-                        style={{ color: on ? "#f0e2c8" : "#878d9c", textShadow: "0 1px 0 rgba(0,0,0,0.7), 0 -0.5px 0 rgba(255,255,255,0.05)" }}>
-                        {sc.label}
-                      </span>
-                    </button>
-                  );
-                })}
-              </div>
-            </div>
-            <p className="text-white/35 text-[0.7rem] mt-2.5 leading-relaxed">
-              Every button is a one-press scene — lighting, shades, audio, climate and security move together.
-            </p>
+        <div className="mt-3 flex items-center justify-between gap-3 flex-wrap">
+          <div className="flex flex-wrap gap-x-3.5 gap-y-1.5">
+            {([["Downlight", "#ffd9a0"], ["Keypad", "#ca9f5c"], ["Speaker", "#6f9bff"], ["TV", "#3a6bb0"], ["Shade", "#7c879c"], ["Sensor", "#34d399"]] as const).map(([n, c]) => (
+              <span key={n} className="flex items-center gap-1.5 text-white/45 text-[0.68rem]">
+                <span className="w-2 h-2 rounded-full" style={{ background: c }} /> {n}
+              </span>
+            ))}
           </div>
+          <button onClick={() => setShowDevices((v) => !v)}
+            className="text-[0.68rem] text-white/50 hover:text-white/80 border border-white/15 rounded-md px-2.5 py-1 transition-colors">
+            {showDevices ? "Hide devices" : "Show devices"}
+          </button>
+        </div>
+      </div>
 
-          <div>
-            <p className="text-white/40 text-[0.7rem] tracking-widest uppercase mb-2.5">Systems</p>
-            <div className="space-y-2.5">
-              {systems.map((sys) => (
-                <div key={sys.label} className="flex items-center gap-3">
-                  <sys.icon className="w-4 h-4 text-accent/80 shrink-0" />
-                  <div className="flex-1 min-w-0 flex justify-between items-baseline gap-2">
-                    <span className="text-white/65 text-xs">{sys.label}</span>
-                    <span className="text-white/45 text-xs text-right truncate">{sys.value}</span>
-                  </div>
-                </div>
-              ))}
+      {/* ───────── Controls below ───────── */}
+      <div className="grid md:grid-cols-[300px_1fr] gap-6 px-5 pb-5 pt-2 border-t border-white/10 bg-white/[0.015]">
+        <div>
+          <div className="flex items-baseline justify-between mb-3">
+            <p className="text-white/40 text-[0.7rem] tracking-widest uppercase">Entry Keypad</p>
+            <p className="text-white/25 text-[0.6rem] tracking-widest uppercase">Engraved · 6-button</p>
+          </div>
+          <div className="rounded-xl p-3 bg-gradient-to-b from-[#2b2d34] to-[#15161b] border border-black/60 shadow-[0_12px_34px_rgba(0,0,0,0.55),inset_0_1px_0_rgba(255,255,255,0.07)]">
+            <div className="grid grid-cols-2 gap-2">
+              {SCENES.map((sc) => {
+                const on = sc.id === active;
+                return (
+                  <button key={sc.id} onClick={() => setActive(sc.id)}
+                    className={`flex items-center gap-2.5 px-3 py-2.5 rounded-md text-left border transition-all duration-150 ${
+                      on
+                        ? "bg-gradient-to-b from-[#34373f] to-[#212329] border-black/50 shadow-[inset_0_1px_0_rgba(255,255,255,0.09)]"
+                        : "bg-gradient-to-b from-[#212329] to-[#16181d] border-black/40 hover:from-[#272a32] shadow-[inset_0_1px_0_rgba(255,255,255,0.035)]"
+                    }`}>
+                    <span className="w-2 h-2 rounded-full shrink-0 transition-all duration-300"
+                      style={{ background: on ? "#ca9f5c" : "#2a2e38", boxShadow: on ? "0 0 9px 1px #ca9f5c" : "inset 0 0 2px rgba(0,0,0,0.8)" }} />
+                    <span className="flex-1 text-[0.72rem] font-semibold uppercase tracking-[0.1em] leading-tight"
+                      style={{ color: on ? "#f0e2c8" : "#878d9c", textShadow: "0 1px 0 rgba(0,0,0,0.7)" }}>
+                      {sc.label}
+                    </span>
+                  </button>
+                );
+              })}
             </div>
           </div>
+          <p className="text-white/35 text-[0.7rem] mt-2.5 leading-relaxed">
+            Every button is a one-press scene — lighting, shades, audio, climate and security move together.
+          </p>
+        </div>
+
+        <div>
+          <p className="text-white/40 text-[0.7rem] tracking-widest uppercase mb-2.5">Systems</p>
+          <div className="grid sm:grid-cols-2 gap-x-6 gap-y-2.5">
+            {systems.map((sys) => (
+              <div key={sys.label} className="flex items-center gap-3">
+                <sys.icon className="w-4 h-4 text-accent/80 shrink-0" />
+                <div className="flex-1 min-w-0 flex justify-between items-baseline gap-2">
+                  <span className="text-white/65 text-xs">{sys.label}</span>
+                  <span className="text-white/45 text-xs text-right truncate">{sys.value}</span>
+                </div>
+              </div>
+            ))}
+          </div>
+          <p className="text-white/30 text-[0.68rem] leading-relaxed mt-4">
+            Actual main-level plan · {DEVICES.length} devices placed from the project drawings · {FIXTURES.length} lighting fixtures.
+            One scene moves all of it at once.
+          </p>
         </div>
       </div>
     </div>
