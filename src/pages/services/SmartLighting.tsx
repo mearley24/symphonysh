@@ -9,6 +9,7 @@ import { schemaProviderLocalBusiness } from "../../constants/businessSchema";
 import PageBackground from "../../components/PageBackground";
 import ProjectProof from "../../components/ProjectProof";
 import bgLighting from "../../assets/bg-lighting.jpg";
+import SceneLightingDemo from "../../components/smart-lighting/SceneLightingDemo";
 
 const SmartLighting = () => {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
@@ -78,6 +79,21 @@ const SmartLighting = () => {
       </section>
 
       <div className="hero-divider w-full" />
+
+      {/* Interactive scene demo */}
+      <section className="py-16 sm:py-24 px-4 sm:px-6">
+        <div className="max-w-5xl mx-auto">
+          <div className="text-center mb-10">
+            <p className="text-accent font-medium text-sm tracking-wide uppercase mb-2">See It Work</p>
+            <h2 className="text-2xl sm:text-3xl font-bold text-white">Tap a scene. Watch the room respond.</h2>
+            <p className="text-white/55 text-base leading-relaxed mt-4 max-w-2xl mx-auto">
+              This is how a real system behaves — one button sets every light to its own level and color
+              temperature, fades the room, and moves the shades. Not one global dimmer.
+            </p>
+          </div>
+          <SceneLightingDemo />
+        </div>
+      </section>
 
       <section className="py-16 sm:py-24 px-4 sm:px-6 bg-black/20 backdrop-blur-sm border-y border-white/5">
         <div className="max-w-4xl mx-auto">
