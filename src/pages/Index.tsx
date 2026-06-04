@@ -169,6 +169,27 @@ const Index = () => {
           </section>
         </div>
 
+        {/* Cinematic moment — full-bleed real home theater */}
+        <section className="relative h-[80vh] min-h-[520px] overflow-hidden">
+          <img
+            src="/lovable-uploads/home-theater/IMG_0979.JPG"
+            alt="Custom home theater installed in an Eagle-Vail residence"
+            className="absolute inset-0 w-full h-full object-cover cinematic-img"
+            loading="lazy"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black via-black/45 to-black/20" />
+          <div className="relative h-full flex items-end">
+            <div data-reveal className="max-w-5xl mx-auto w-full px-4 sm:px-6 pb-12 sm:pb-20">
+              <p className="text-accent font-semibold text-sm tracking-widest uppercase mb-3 inline-flex items-center gap-2">
+                <span className="w-8 h-px bg-accent" /> Eagle-Vail · Home Theater
+              </p>
+              <h2 className="text-white text-3xl sm:text-5xl lg:text-6xl font-extrabold leading-[0.95] max-w-2xl hero-text-shadow">
+                One button. Lights down, shades closed, the show begins.
+              </h2>
+            </div>
+          </div>
+        </section>
+
         {/* Scenes — the Symphony home */}
         <section className="py-16 sm:py-24 px-4 sm:px-6" id="scenes">
           <div className="max-w-5xl mx-auto">
