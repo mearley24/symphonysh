@@ -102,12 +102,22 @@ const SPEAKERS = [
   { x: 545, y: 360, z: "Primary" }, { x: 230, y: 462, z: "Deck" }, { x: 470, y: 462, z: "Deck" },
 ];
 
-// Exterior cameras with field-of-view cones (degrees the cone points; SVG y-down).
+// Wall keypads mounted by room entries — each engraved with its scene buttons,
+// just like a real install (the featured faceplate at right shows the engravings).
+const KEYPADS: { x: number; y: number; name: string; engraving: string[] }[] = [
+  { x: 318, y: 166, name: "Entry", engraving: ["Welcome", "Away", "All Off"] },
+  { x: 236, y: 152, name: "Kitchen", engraving: ["Cooking", "Bright", "Dim", "Off"] },
+  { x: 256, y: 312, name: "Great Room", engraving: ["Bright", "Dinner", "Movie", "Off"] },
+  { x: 466, y: 298, name: "Primary", engraving: ["Goodnight", "Reading", "Off"] },
+];
+
+// Exterior cameras mounted at the property corners, each sweeping the yard
+// (wide field of view fanning diagonally inward). fov = degrees the cone points; SVG y-down.
 const CAMERAS = [
-  { x: 265, y: 24, fov: 90, label: "Front Entry" },   // above front door, looks down (south)
-  { x: 40, y: 50, fov: 35, label: "Driveway" },        // NW corner, looks SE at garage
-  { x: 300, y: 478, fov: 270, label: "Deck" },         // south deck, looks up (north)
-  { x: 690, y: 300, fov: 180, label: "View Deck" },    // east deck, looks west
+  { x: 26, y: 22, fov: 45, label: "NW · Driveway" },   // NW corner, sweeps SE across the front
+  { x: 734, y: 22, fov: 135, label: "NE · Front Entry" }, // NE corner, sweeps SW
+  { x: 734, y: 498, fov: 225, label: "SE · View Deck" }, // SE corner, sweeps NW
+  { x: 26, y: 498, fov: 315, label: "SW · South Yard" }, // SW corner, sweeps NE
 ];
 
 const WholeHomeDemo = () => {
@@ -131,7 +141,7 @@ const WholeHomeDemo = () => {
   ];
 
   const cone = (cx: number, cy: number, deg: number) => {
-    const sp = 28, len = 88, a = (deg * Math.PI) / 180;
+    const sp = 44, len = 210, a = (deg * Math.PI) / 180;
     const a1 = a - (sp * Math.PI) / 180, a2 = a + (sp * Math.PI) / 180;
     return `M ${cx} ${cy} L ${cx + len * Math.cos(a1)} ${cy + len * Math.sin(a1)} L ${cx + len * Math.cos(a2)} ${cy + len * Math.sin(a2)} Z`;
   };
@@ -142,8 +152,8 @@ const WholeHomeDemo = () => {
       <div className="flex items-center justify-between px-5 py-3 border-b border-white/10 bg-white/[0.02]">
         <div className="flex items-center gap-2.5">
           <span className="w-2 h-2 rounded-full bg-emerald-400 shadow-[0_0_8px] shadow-emerald-400/60" />
-          <span className="text-white/90 text-sm font-semibold tracking-wide">Aspen Ridge Residence</span>
-          <span className="text-white/30 text-xs hidden sm:inline">· Main Floor</span>
+          <span className="text-white/90 text-sm font-semibold tracking-wide">Main Floor</span>
+          <span className="text-white/30 text-xs hidden sm:inline">· Whole-Home Control</span>
         </div>
         <span className="text-white/40 text-xs tabular-nums">{s.sky === "day" ? "2:14 PM" : s.sky === "dusk" ? "6:48 PM" : "10:32 PM"} · 28°F</span>
       </div>
@@ -230,15 +240,22 @@ const WholeHomeDemo = () => {
             {SPEAKERS.map((sp, i) => {
               const on = s.audioZones.includes(sp.z);
               return (
-                <g key={i} opacity={on ? 1 : 0.26} style={{ transition: "opacity 0.6s" }}>
-                  <circle cx={sp.x} cy={sp.y} r="6" fill="none" stroke="#5b8cff" strokeWidth="1.2" />
-                  <circle cx={sp.x} cy={sp.y} r="2" fill="#5b8cff" className={on ? "animate-pulse" : ""} />
+                <g key={i} opacity={on ? 1 : 0.5} style={{ transition: "opacity 0.6s" }}>
+                  <circle cx={sp.x} cy={sp.y} r="6.5" fill="#0d1422" stroke="#6f9bff" strokeWidth="1.3" />
+                  <circle cx={sp.x} cy={sp.y} r="3.6" fill="none" stroke="#6f9bff" strokeWidth="0.9" />
+                  <circle cx={sp.x} cy={sp.y} r="1.7" fill="#6f9bff" className={on ? "animate-pulse" : ""} />
                 </g>
               );
             })}
-            {/* wall keypads at room entries */}
-            {[[312, 175], [240, 158], [444, 300], [452, 320]].map(([x, y], i) => (
-              <rect key={i} x={(x as number) - 4} y={(y as number) - 6} width="8" height="12" rx="1.5" fill="#1a2030" stroke="#3a4663" strokeWidth="0.8" />
+            {/* wall keypads — engraved button panels at room entries */}
+            {KEYPADS.map((k, i) => (
+              <g key={i}>
+                <rect x={k.x - 6.5} y={k.y - 10} width="13" height="20" rx="2.5" fill="#262a34" stroke="#8b93a8" strokeWidth="1.1" />
+                <circle cx={k.x} cy={k.y - 6} r="1.5" fill="#ca9f5c" />
+                <line x1={k.x - 4} y1={k.y - 0.5} x2={k.x + 4} y2={k.y - 0.5} stroke="#525a70" strokeWidth="1.2" strokeLinecap="round" />
+                <line x1={k.x - 4} y1={k.y + 3.5} x2={k.x + 4} y2={k.y + 3.5} stroke="#525a70" strokeWidth="1.2" strokeLinecap="round" />
+                <line x1={k.x - 4} y1={k.y + 7} x2={k.x + 4} y2={k.y + 7} stroke="#525a70" strokeWidth="1.2" strokeLinecap="round" />
+              </g>
             ))}
             {/* thermostats — main + primary zones */}
             {[{ x: 446, y: 240, t: s.climateMain }, { x: 452, y: 360, t: s.climatePrimary }].map((th, i) => (
@@ -248,9 +265,15 @@ const WholeHomeDemo = () => {
               </g>
             ))}
             {/* door/window contact sensors on the perimeter */}
-            {[[265, 70], [70, 360], [380, 440], [640, 300], [510, 70]].map(([x, y], i) => (
-              <circle key={i} cx={x as number} cy={y as number} r="3" fill={s.security === "Disarmed" ? "#34d399" : "#f59e0b"} style={{ transition: "fill 0.6s" }} />
-            ))}
+            {[[265, 70], [70, 360], [380, 440], [640, 300], [510, 70]].map(([x, y], i) => {
+              const col = s.security === "Disarmed" ? "#34d399" : "#f59e0b";
+              return (
+                <g key={i}>
+                  <circle cx={x as number} cy={y as number} r="6" fill="none" stroke={col} strokeWidth="0.8" opacity="0.4" style={{ transition: "stroke 0.6s" }} />
+                  <circle cx={x as number} cy={y as number} r="3.4" fill={col} style={{ transition: "fill 0.6s" }} />
+                </g>
+              );
+            })}
 
             {/* exterior cameras (outside the walls) */}
             {CAMERAS.map((c, i) => (
@@ -258,7 +281,8 @@ const WholeHomeDemo = () => {
                 <circle cx={c.x} cy={c.y} r="7" fill="#0c1320" stroke="#9aa6c7" strokeWidth="1.2" />
                 <circle cx={c.x} cy={c.y} r="2.4" fill={s.cameras ? "#f87171" : "#3a3f4e"} className={s.cameras ? "animate-pulse" : ""} />
                 {hoverCam === c.label && (
-                  <text x={c.x} y={c.y - 12} textAnchor="middle" className="fill-white" style={{ fontSize: 9 }}>{c.label}</text>
+                  <text x={c.x < 380 ? c.x + 11 : c.x - 11} y={c.y < 260 ? c.y + 16 : c.y - 11}
+                    textAnchor={c.x < 380 ? "start" : "end"} className="fill-white" style={{ fontSize: 9 }}>{c.label}</text>
                 )}
               </g>
             ))}
@@ -267,7 +291,14 @@ const WholeHomeDemo = () => {
             <rect x="70" y="40" width="570" height="400" fill="#05060a" opacity={0.5 * dim} style={{ transition: "opacity 1s" }} pointerEvents="none" />
           </svg>
 
-          <div className="absolute bottom-5 left-6 right-6">
+          <div className="mt-3 px-1">
+            <div className="flex flex-wrap gap-x-4 gap-y-1.5 mb-3">
+              {([["Camera", "#9aa6c7"], ["Keypad", "#ca9f5c"], ["Speaker", "#6f9bff"], ["Thermostat", "#34d399"], ["Door sensor", "#34d399"]] as const).map(([n, c]) => (
+                <span key={n} className="flex items-center gap-1.5 text-white/45 text-[0.68rem]">
+                  <span className="w-2 h-2 rounded-full" style={{ background: c }} /> {n}
+                </span>
+              ))}
+            </div>
             <p className="text-accent text-[0.7rem] font-semibold tracking-widest uppercase">{s.label}</p>
             <p className="text-white/80 text-sm mt-0.5 leading-snug">{s.note}</p>
           </div>
@@ -276,20 +307,36 @@ const WholeHomeDemo = () => {
         {/* ───────── Control surface ───────── */}
         <div className="border-t lg:border-t-0 lg:border-l border-white/10 p-5 flex flex-col gap-5 bg-white/[0.015]">
           <div>
-            <p className="text-white/40 text-[0.7rem] tracking-widest uppercase mb-3">Scenes</p>
-            <div className="rounded-xl bg-gradient-to-b from-[#1a1d28] to-[#0e1018] border border-white/10 p-2.5 space-y-1.5 shadow-inner">
-              {SCENES.map((sc) => {
-                const on = sc.id === active;
-                return (
-                  <button key={sc.id} onClick={() => setActive(sc.id)}
-                    className={`w-full flex items-center gap-3 px-3.5 py-2.5 rounded-lg text-left transition-all duration-200 ${on ? "bg-white/[0.08]" : "hover:bg-white/[0.04]"}`}>
-                    <span className="w-1.5 h-1.5 rounded-full shrink-0 transition-all duration-300"
-                      style={{ background: on ? "#ca9f5c" : "#3a3f4e", boxShadow: on ? "0 0 8px 1px #ca9f5c" : "none" }} />
-                    <span className={`text-sm font-medium tracking-wide ${on ? "text-white" : "text-white/55"}`}>{sc.label}</span>
-                  </button>
-                );
-              })}
+            <div className="flex items-baseline justify-between mb-3">
+              <p className="text-white/40 text-[0.7rem] tracking-widest uppercase">Entry Keypad</p>
+              <p className="text-white/25 text-[0.6rem] tracking-widest uppercase">Engraved · 6-button</p>
             </div>
+            {/* engraved keypad faceplate */}
+            <div className="rounded-xl p-3 bg-gradient-to-b from-[#2b2d34] to-[#15161b] border border-black/60 shadow-[0_12px_34px_rgba(0,0,0,0.55),inset_0_1px_0_rgba(255,255,255,0.07)]">
+              <div className="space-y-2">
+                {SCENES.map((sc) => {
+                  const on = sc.id === active;
+                  return (
+                    <button key={sc.id} onClick={() => setActive(sc.id)}
+                      className={`w-full flex items-center gap-3 px-3.5 py-2.5 rounded-md text-left border transition-all duration-150 ${
+                        on
+                          ? "bg-gradient-to-b from-[#34373f] to-[#212329] border-black/50 shadow-[inset_0_1px_0_rgba(255,255,255,0.09)]"
+                          : "bg-gradient-to-b from-[#212329] to-[#16181d] border-black/40 hover:from-[#272a32] shadow-[inset_0_1px_0_rgba(255,255,255,0.035)]"
+                      }`}>
+                      <span className="w-2 h-2 rounded-full shrink-0 transition-all duration-300"
+                        style={{ background: on ? "#ca9f5c" : "#2a2e38", boxShadow: on ? "0 0 9px 1px #ca9f5c" : "inset 0 0 2px rgba(0,0,0,0.8)" }} />
+                      <span className="flex-1 text-[0.8rem] font-semibold uppercase tracking-[0.14em]"
+                        style={{ color: on ? "#f0e2c8" : "#878d9c", textShadow: "0 1px 0 rgba(0,0,0,0.7), 0 -0.5px 0 rgba(255,255,255,0.05)" }}>
+                        {sc.label}
+                      </span>
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+            <p className="text-white/35 text-[0.7rem] mt-2.5 leading-relaxed">
+              Every button is a one-press scene — the same engraved keypads sit by each door on the plan (Kitchen, Great Room, Primary).
+            </p>
           </div>
 
           <div>
