@@ -1,16 +1,15 @@
 import { useState } from "react";
-import { Lightbulb, Volume2, Thermometer, ShieldCheck, Video, Wifi } from "lucide-react";
+import { Lightbulb, Volume2, Thermometer, ShieldCheck, Video, Wifi, Blinds } from "lucide-react";
 import { VIEWBOX, ROOMS, DEVICES, FIXTURES } from "@/data/wholeHomeLayout";
 
 /**
  * WholeHomeDemo — whole-home control on the REAL blueprint, exactly aligned.
  *
- * Base image = the actual main-level drawing (source PDF, title block cropped).
- * Room polygons + all 94 devices come from the project markup, mapped onto the
- * drawing by the exact transform (markup × 0.6667). Lighting emanates from a
- * designed downlight grid (FIXTURES) inset in each real room, so every scene
- * lights real fixtures, not a blob. One engraved keypad runs lighting, audio,
- * climate, security and cameras together.
+ * Base = the actual main-level drawing (source PDF, recessed to a calm backdrop).
+ * Rooms + all 94 devices come from the project markup (markup × 0.6667 maps them
+ * onto the drawing exactly). To stay readable, ONE system layer shows at a time;
+ * lighting emanates from a designed downlight grid. The engraved keypad runs the
+ * whole-home scenes.
  */
 
 type Temp = "cool" | "neutral" | "warm";
@@ -29,7 +28,7 @@ interface Scene {
 
 const SCENES: Scene[] = [
   { id: "welcome", label: "Welcome Home",
-    note: "Front door unlocks, a warm welcome through the entry, kitchen and living room, climate to comfort, music in the kitchen.",
+    note: "A warm welcome through the entry, kitchen and living room. Climate to comfort, music in the kitchen.",
     lights: { "Front Entry": 90, "Mudroom": 55, "Office": 35, "Office 2": 25, "Stairwell": 35, "Kitchen": 80, "Dining": 55, "Living Room": 70, "Hearth": 45 },
     temp: "neutral", sky: "day", tv: false, shades: 0, audioZones: ["Kitchen"], climateMain: 71, climatePrimary: 70, security: "Disarmed", cameras: true },
   { id: "cooking", label: "Cooking",
@@ -49,24 +48,32 @@ const SCENES: Scene[] = [
     lights: { "Primary Bed": 16, "Stairwell": 12 },
     temp: "warm", sky: "night", tv: false, shades: 100, audioZones: [], climateMain: 66, climatePrimary: 65, security: "Armed · Stay", cameras: true },
   { id: "away", label: "Away",
-    note: "A light at the entry and the deck stay on so the house looks lived-in, climate sets way back, every zone armed and all cameras recording.",
+    note: "A light at the entry and deck stay on so the house looks lived-in. Climate way back, every zone armed, cameras recording.",
     lights: { "Front Entry": 22, "Mudroom": 12, "Deck": 28 },
     temp: "warm", sky: "night", tv: false, shades: 0, audioZones: [], climateMain: 62, climatePrimary: 62, security: "Armed · Away", cameras: true },
 ];
 
 const TEMP_COLOR: Record<Temp, string> = { warm: "#ffb060", neutral: "#ffe0b0", cool: "#cfe2ff" };
 
+const LAYERS = [
+  { id: "lighting", label: "Lighting", icon: Lightbulb, cats: ["keypad"] },
+  { id: "audio", label: "Audio", icon: Volume2, cats: ["speaker"] },
+  { id: "security", label: "Security", icon: ShieldCheck, cats: ["contact", "glassbreak", "motion", "safety", "water", "panel", "touchpanel"] },
+  { id: "shades", label: "Shades", icon: Blinds, cats: ["shade"] },
+  { id: "video", label: "Video", icon: Video, cats: ["tv"] },
+] as const;
+
 const CAMERAS = [
-  { x: 30, y: 28, fov: 45, label: "NW · Driveway" },
-  { x: VBW - 30, y: 28, fov: 135, label: "NE · Front Entry" },
-  { x: VBW - 30, y: VBH - 28, fov: 225, label: "SE · View Deck" },
-  { x: 30, y: VBH - 28, fov: 315, label: "SW · South Yard" },
+  { x: 26, y: 24, fov: 45, label: "NW · Driveway" },
+  { x: VBW - 26, y: 24, fov: 135, label: "NE · Front Entry" },
+  { x: VBW - 26, y: VBH - 24, fov: 225, label: "SE · View Deck" },
+  { x: 26, y: VBH - 24, fov: 315, label: "SW · South Yard" },
 ];
 
 const WholeHomeDemo = () => {
   const [active, setActive] = useState("welcome");
+  const [layer, setLayer] = useState<string>("lighting");
   const [hoverCam, setHoverCam] = useState<string | null>(null);
-  const [showDevices, setShowDevices] = useState(true);
   const s = SCENES.find((x) => x.id === active) || SCENES[0];
   const lc = TEMP_COLOR[s.temp];
   const g = (v: number) => Math.pow(v / 100, 0.7);
@@ -76,6 +83,9 @@ const WholeHomeDemo = () => {
   const dim = 1 - g(interiorMax);
   const armed = s.security !== "Disarmed";
   const secColor = armed ? "#f59e0b" : "#34d399";
+  const lyr = LAYERS.find((l) => l.id === layer) || LAYERS[0];
+  const shownDevices = DEVICES.filter((d) => (lyr.cats as readonly string[]).includes(d.cat));
+  const showCameras = layer === "security";
 
   const systems = [
     { icon: Lightbulb, label: "Lighting", value: `${litRooms} of ${ROOMS.length} rooms lit` },
@@ -87,7 +97,7 @@ const WholeHomeDemo = () => {
   ];
 
   const cone = (cx: number, cy: number, deg: number) => {
-    const sp = 42, len = 620, a = (deg * Math.PI) / 180;
+    const sp = 42, len = 560, a = (deg * Math.PI) / 180;
     const a1 = a - (sp * Math.PI) / 180, a2 = a + (sp * Math.PI) / 180;
     return `M ${cx} ${cy} L ${cx + len * Math.cos(a1)} ${cy + len * Math.sin(a1)} L ${cx + len * Math.cos(a2)} ${cy + len * Math.sin(a2)} Z`;
   };
@@ -109,40 +119,40 @@ const WholeHomeDemo = () => {
       case "speaker": {
         const on = room ? s.audioZones.includes(room) : false;
         return (
-          <g key={i} opacity={on ? 1 : 0.55} style={{ transition: "opacity 0.6s" }}>
-            <circle cx={x} cy={y} r="8.5" fill="#0d1422" stroke="#6f9bff" strokeWidth="1.4" />
-            <circle cx={x} cy={y} r="4.6" fill="none" stroke="#6f9bff" strokeWidth="1" />
-            <circle cx={x} cy={y} r="2.1" fill="#6f9bff" className={on ? "animate-pulse" : ""} />
+          <g key={i}>
+            <circle cx={x} cy={y} r="9" fill="#0d1422" stroke="#6f9bff" strokeWidth="1.5" />
+            <circle cx={x} cy={y} r="4.8" fill="none" stroke="#6f9bff" strokeWidth="1.1" />
+            <circle cx={x} cy={y} r="2.2" fill="#6f9bff" className={on ? "animate-pulse" : ""} opacity={on ? 1 : 0.6} />
           </g>
         );
       }
       case "tv": {
         const on = s.tv && room === "Living Room";
-        return <rect key={i} x={x - 11} y={y - 7} width="22" height="14" rx="1.6" fill={on ? "#1b3a6b" : "#10141d"} stroke="#3a4663" strokeWidth="1.2" style={{ transition: "fill 0.7s" }} />;
+        return <rect key={i} x={x - 13} y={y - 8} width="26" height="16" rx="1.8" fill={on ? "#1b3a6b" : "#10141d"} stroke="#5b7fb0" strokeWidth="1.4" style={{ transition: "fill 0.7s" }} />;
       }
       case "shade": {
         const down = s.shades > 50;
         return (
           <g key={i}>
-            <rect x={x - 10} y={y - 3} width="20" height="3" rx="1.2" fill="#56627a" />
-            <rect x={x - 10} y={y} width="20" height={down ? 9 : 2} fill="#2a3140" opacity="0.85" style={{ transition: "height 0.8s" }} />
+            <rect x={x - 11} y={y - 3.5} width="22" height="3.5" rx="1.4" fill="#8b95ad" />
+            <rect x={x - 11} y={y} width="22" height={down ? 11 : 2.5} fill="#3a4258" opacity="0.9" style={{ transition: "height 0.8s" }} />
           </g>
         );
       }
       case "glassbreak":
-        return <rect key={i} x={x - 3.6} y={y - 3.6} width="7.2" height="7.2" transform={`rotate(45 ${x} ${y})`} fill={secColor} stroke="#0a0d14" strokeWidth="0.6" style={{ transition: "fill 0.5s" }} />;
+        return <rect key={i} x={x - 4} y={y - 4} width="8" height="8" transform={`rotate(45 ${x} ${y})`} fill={secColor} stroke="#0a0d14" strokeWidth="0.7" style={{ transition: "fill 0.5s" }} />;
       case "motion":
-        return <path key={i} d={`M ${x} ${y - 4.5} L ${x + 4.2} ${y + 3.5} L ${x - 4.2} ${y + 3.5} Z`} fill={secColor} stroke="#0a0d14" strokeWidth="0.6" style={{ transition: "fill 0.5s" }} />;
+        return <path key={i} d={`M ${x} ${y - 5} L ${x + 4.6} ${y + 3.8} L ${x - 4.6} ${y + 3.8} Z`} fill={secColor} stroke="#0a0d14" strokeWidth="0.7" style={{ transition: "fill 0.5s" }} />;
       case "contact":
-        return <circle key={i} cx={x} cy={y} r="3.6" fill={secColor} stroke="#0a0d14" strokeWidth="0.6" style={{ transition: "fill 0.5s" }} />;
+        return <circle key={i} cx={x} cy={y} r="4" fill={secColor} stroke="#0a0d14" strokeWidth="0.7" style={{ transition: "fill 0.5s" }} />;
       case "safety":
-        return <g key={i}><circle cx={x} cy={y} r="4.2" fill="#13070a" stroke="#ef4444" strokeWidth="1.3" /><circle cx={x} cy={y} r="1.4" fill="#ef4444" /></g>;
+        return <g key={i}><circle cx={x} cy={y} r="4.6" fill="#13070a" stroke="#ef4444" strokeWidth="1.4" /><circle cx={x} cy={y} r="1.5" fill="#ef4444" /></g>;
       case "water":
-        return <circle key={i} cx={x} cy={y} r="3.4" fill="#38bdf8" stroke="#0a0d14" strokeWidth="0.6" />;
+        return <circle key={i} cx={x} cy={y} r="3.8" fill="#38bdf8" stroke="#0a0d14" strokeWidth="0.7" />;
       case "panel":
-        return <rect key={i} x={x - 5.5} y={y - 5.5} width="11" height="11" rx="1.6" fill="#1a2030" stroke="#6a7a9a" strokeWidth="1.2" />;
+        return <rect key={i} x={x - 6} y={y - 6} width="12" height="12" rx="1.8" fill="#1a2030" stroke="#6a7a9a" strokeWidth="1.3" />;
       case "touchpanel":
-        return <rect key={i} x={x - 8} y={y - 5.5} width="16" height="11" rx="1.6" fill="#13283f" stroke="#3f6ea0" strokeWidth="1.2" />;
+        return <rect key={i} x={x - 9} y={y - 6} width="18" height="12" rx="1.8" fill="#13283f" stroke="#3f6ea0" strokeWidth="1.3" />;
       default:
         return null;
     }
@@ -160,50 +170,67 @@ const WholeHomeDemo = () => {
         <span className="text-white/40 text-xs tabular-nums">{s.sky === "day" ? "2:14 PM" : s.sky === "dusk" ? "6:48 PM" : "10:32 PM"} · 28°F</span>
       </div>
 
+      {/* layer selector */}
+      <div className="flex items-center gap-1.5 px-4 py-2.5 border-b border-white/10 overflow-x-auto">
+        <span className="text-white/35 text-[0.62rem] tracking-widest uppercase mr-1 shrink-0">View</span>
+        {LAYERS.map((l) => {
+          const on = l.id === layer;
+          const count = DEVICES.filter((d) => (l.cats as readonly string[]).includes(d.cat)).length;
+          return (
+            <button key={l.id} onClick={() => setLayer(l.id)}
+              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium whitespace-nowrap transition-all ${
+                on ? "bg-accent/15 text-accent border border-accent/40" : "text-white/55 hover:text-white/80 border border-transparent"
+              }`}>
+              <l.icon className="w-3.5 h-3.5" /> {l.label}
+              <span className={on ? "text-accent/70" : "text-white/30"}>{count}</span>
+            </button>
+          );
+        })}
+      </div>
+
       {/* ───────── Full-width blueprint ───────── */}
       <div className="p-3">
-        <div className="relative rounded-lg overflow-hidden" style={{ background: "#07090e" }}>
+        <div className="relative rounded-lg overflow-hidden" style={{ background: "#05070b" }}>
           <img src={IMG} alt="Main-floor plan" className="w-full h-auto block select-none" draggable={false} />
           <svg viewBox={`0 0 ${VBW} ${VBH}`} className="absolute inset-0 w-full h-full" preserveAspectRatio="none">
             <defs>
               <radialGradient id="wh-fix">
-                <stop offset="0%" stopColor={lc} stopOpacity="0.95" />
-                <stop offset="55%" stopColor={lc} stopOpacity="0.25" />
+                <stop offset="0%" stopColor={lc} stopOpacity="0.9" />
+                <stop offset="45%" stopColor={lc} stopOpacity="0.28" />
                 <stop offset="100%" stopColor={lc} stopOpacity="0" />
               </radialGradient>
               <linearGradient id="wh-cone" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stopColor="#5b8cff" stopOpacity="0.22" /><stop offset="100%" stopColor="#5b8cff" stopOpacity="0" /></linearGradient>
             </defs>
 
             {/* night wash */}
-            <rect x="0" y="0" width={VBW} height={VBH} fill="#04050a" opacity={0.6 * dim} style={{ transition: "opacity 1s" }} />
+            <rect x="0" y="0" width={VBW} height={VBH} fill="#04050a" opacity={0.55 * dim} style={{ transition: "opacity 1s" }} />
 
-            {/* light from real fixture locations */}
+            {/* light from fixtures (tight pools) */}
             <g style={{ mixBlendMode: "screen" } as React.CSSProperties}>
               {FIXTURES.map((f, i) => {
                 const v = lvl(f.room);
                 if (v <= 0) return null;
-                const r = 26 + 34 * g(v);
-                return <circle key={i} cx={f.x} cy={f.y} r={r} fill="url(#wh-fix)" opacity={0.6 * g(v)} style={{ transition: "opacity 1s, r 1s" }} />;
+                const r = 18 + 26 * g(v);
+                return <circle key={i} cx={f.x} cy={f.y} r={r} fill="url(#wh-fix)" opacity={0.62 * g(v)} style={{ transition: "opacity 0.9s" }} />;
               })}
             </g>
-            {/* fixture cores (faint dots so the layout reads even when off) */}
+            {/* fixture cores */}
             {FIXTURES.map((f, i) => {
               const v = lvl(f.room);
-              return <circle key={"fc" + i} cx={f.x} cy={f.y} r="1.6" fill={v > 0 ? "#ffffff" : "#3a4258"} opacity={v > 0 ? 0.4 + 0.6 * g(v) : 0.22}
-                style={{ transition: "opacity 1s" }} />;
+              return <circle key={"fc" + i} cx={f.x} cy={f.y} r="1.5" fill={v > 0 ? "#fff7e8" : "#39425a"} opacity={v > 0 ? 0.5 + 0.5 * g(v) : 0.3} style={{ transition: "opacity 0.9s" }} />;
             })}
 
-            {/* camera cones */}
-            {CAMERAS.map((c, i) => (
+            {/* camera cones (security view) */}
+            {showCameras && CAMERAS.map((c, i) => (
               <path key={i} d={cone(c.x, c.y, c.fov)} fill="url(#wh-cone)"
-                opacity={s.cameras ? (hoverCam === null || hoverCam === c.label ? 1 : 0.18) : 0.07} style={{ transition: "opacity 0.5s" }} />
+                opacity={hoverCam === null || hoverCam === c.label ? 1 : 0.2} style={{ transition: "opacity 0.4s" }} />
             ))}
 
-            {/* all real devices */}
-            {showDevices && DEVICES.map(renderDevice)}
+            {/* active layer's devices only */}
+            {shownDevices.map(renderDevice)}
 
-            {/* corner cameras */}
-            {CAMERAS.map((c, i) => (
+            {/* corner cameras (security view) */}
+            {showCameras && CAMERAS.map((c, i) => (
               <g key={"c" + i} onMouseEnter={() => setHoverCam(c.label)} onMouseLeave={() => setHoverCam(null)} className="cursor-pointer">
                 <circle cx={c.x} cy={c.y} r="13" fill="#0c1320" stroke="#9aa6c7" strokeWidth="2.5" />
                 <circle cx={c.x} cy={c.y} r="5" fill={s.cameras ? "#f87171" : "#3a3f4e"} className={s.cameras ? "animate-pulse" : ""} />
@@ -215,26 +242,16 @@ const WholeHomeDemo = () => {
             ))}
           </svg>
 
-          {/* scene caption over the plan */}
+          {/* scene caption */}
           <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/85 to-transparent pointer-events-none">
             <p className="text-accent text-[0.7rem] font-semibold tracking-widest uppercase">{s.label}</p>
             <p className="text-white/85 text-sm mt-0.5 leading-snug max-w-2xl">{s.note}</p>
           </div>
         </div>
 
-        <div className="mt-3 flex items-center justify-between gap-3 flex-wrap">
-          <div className="flex flex-wrap gap-x-3.5 gap-y-1.5">
-            {([["Downlight", "#ffd9a0"], ["Keypad", "#ca9f5c"], ["Speaker", "#6f9bff"], ["TV", "#3a6bb0"], ["Shade", "#7c879c"], ["Sensor", "#34d399"]] as const).map(([n, c]) => (
-              <span key={n} className="flex items-center gap-1.5 text-white/45 text-[0.68rem]">
-                <span className="w-2 h-2 rounded-full" style={{ background: c }} /> {n}
-              </span>
-            ))}
-          </div>
-          <button onClick={() => setShowDevices((v) => !v)}
-            className="text-[0.68rem] text-white/50 hover:text-white/80 border border-white/15 rounded-md px-2.5 py-1 transition-colors">
-            {showDevices ? "Hide devices" : "Show devices"}
-          </button>
-        </div>
+        <p className="text-white/35 text-[0.68rem] mt-2.5 px-1">
+          Showing the <span className="text-white/60">{lyr.label.toLowerCase()}</span> layer — {shownDevices.length} {lyr.label.toLowerCase()} devices placed from the project drawings. Switch layers above.
+        </p>
       </div>
 
       {/* ───────── Controls below ───────── */}
@@ -285,8 +302,7 @@ const WholeHomeDemo = () => {
             ))}
           </div>
           <p className="text-white/30 text-[0.68rem] leading-relaxed mt-4">
-            Actual main-level plan · {DEVICES.length} devices placed from the project drawings · {FIXTURES.length} lighting fixtures.
-            One scene moves all of it at once.
+            Actual main-level plan · {DEVICES.length} devices total across {ROOMS.length} rooms, placed from the project drawings.
           </p>
         </div>
       </div>
