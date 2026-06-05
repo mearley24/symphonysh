@@ -93,7 +93,7 @@ const HomeIntegration = () => {
         </div>
       </section>
 
-      <ServiceDemoSection title="See Automation in Action" subtitle="Interactive Demo">
+      <ServiceDemoSection title="See Automation in Action" subtitle="Interactive Demo" wide>
         <WholeHomeDemo />
       </ServiceDemoSection>
 

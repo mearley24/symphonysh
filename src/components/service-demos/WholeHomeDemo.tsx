@@ -200,8 +200,8 @@ const WholeHomeDemo = () => {
             return (
               <div key={i} className="absolute group" style={{ left: `${(d.x / VBW) * 100}%`, top: `${(d.y / VBH) * 100}%`, transform: "translate(-50%,-50%)" }}>
                 <div className="flex items-center justify-center rounded-full border backdrop-blur-[1px] transition-all duration-300"
-                  style={{ width: 21, height: 21, background: "rgba(7,10,17,0.82)", borderColor: color, boxShadow: on ? `0 0 9px 1px ${color}aa` : "0 1px 3px rgba(0,0,0,0.6)" }}>
-                  <Icon style={{ width: 11, height: 11, color }} className={on && d.cat === "speaker" ? "animate-pulse" : ""} />
+                  style={{ width: 18, height: 18, background: "rgba(7,10,17,0.8)", borderColor: color, boxShadow: on ? `0 0 8px 1px ${color}aa` : "0 1px 3px rgba(0,0,0,0.6)" }}>
+                  <Icon style={{ width: 9.5, height: 9.5, color }} className={on && d.cat === "speaker" ? "animate-pulse" : ""} />
                 </div>
                 <div className="pointer-events-none absolute left-1/2 -translate-x-1/2 -top-7 whitespace-nowrap rounded-md bg-black/90 border border-white/10 px-2 py-0.5 text-[10px] text-white/90 opacity-0 group-hover:opacity-100 transition-opacity z-20">
                   {meta.label}{d.room ? <span className="text-white/45"> · {d.room}</span> : null}
