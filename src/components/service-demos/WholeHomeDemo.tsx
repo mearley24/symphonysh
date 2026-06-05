@@ -1,15 +1,18 @@
 import { useState } from "react";
-import { Lightbulb, Volume2, Thermometer, ShieldCheck, Video, Wifi, Blinds } from "lucide-react";
+import {
+  Lightbulb, Volume2, Thermometer, ShieldCheck, Video, Wifi, Blinds, Tv,
+  Grip, DoorClosed, Radio, Radar, Flame, Droplet, Cpu, Tablet,
+} from "lucide-react";
 import { VIEWBOX, ROOMS, DEVICES, FIXTURES } from "@/data/wholeHomeLayout";
 
 /**
- * WholeHomeDemo — whole-home control on the REAL blueprint, exactly aligned.
+ * WholeHomeDemo — whole-home control on the REAL blueprint.
  *
- * Base = the actual main-level drawing (source PDF, recessed to a calm backdrop).
- * Rooms + all 94 devices come from the project markup (markup × 0.6667 maps them
- * onto the drawing exactly). To stay readable, ONE system layer shows at a time;
- * lighting emanates from a designed downlight grid. The engraved keypad runs the
- * whole-home scenes.
+ * Base = the actual main-level drawing (recessed to a calm backdrop). Rooms and
+ * every device come from the project markup via agents/symphony_demo (exact
+ * placement; wall devices snapped flush to walls). Devices render as labelled
+ * icon pins, one system layer at a time. Lighting emanates from a designed
+ * downlight grid. The engraved keypad runs the whole-home scenes.
  */
 
 type Temp = "cool" | "neutral" | "warm";
@@ -55,6 +58,21 @@ const SCENES: Scene[] = [
 
 const TEMP_COLOR: Record<Temp, string> = { warm: "#ffb060", neutral: "#ffe0b0", cool: "#cfe2ff" };
 
+// category → icon + label + base colour
+const CAT_META: Record<string, { icon: typeof Tv; label: string; color: string }> = {
+  keypad: { icon: Grip, label: "Keypad", color: "#ca9f5c" },
+  speaker: { icon: Volume2, label: "Speaker", color: "#6f9bff" },
+  contact: { icon: DoorClosed, label: "Door / Window", color: "#34d399" },
+  glassbreak: { icon: Radio, label: "Glass Break", color: "#34d399" },
+  motion: { icon: Radar, label: "Motion", color: "#34d399" },
+  safety: { icon: Flame, label: "Smoke / CO", color: "#ef4444" },
+  water: { icon: Droplet, label: "Water", color: "#38bdf8" },
+  panel: { icon: Cpu, label: "Controller", color: "#9aa6c7" },
+  touchpanel: { icon: Tablet, label: "Touch Panel", color: "#5b8fc0" },
+  tv: { icon: Tv, label: "TV", color: "#5b8fc0" },
+  shade: { icon: Blinds, label: "Shade", color: "#9aa3b8" },
+};
+
 const LAYERS = [
   { id: "lighting", label: "Lighting", icon: Lightbulb, cats: ["keypad"] },
   { id: "audio", label: "Audio", icon: Volume2, cats: ["speaker"] },
@@ -73,7 +91,6 @@ const CAMERAS = [
 const WholeHomeDemo = () => {
   const [active, setActive] = useState("welcome");
   const [layer, setLayer] = useState<string>("lighting");
-  const [hoverCam, setHoverCam] = useState<string | null>(null);
   const s = SCENES.find((x) => x.id === active) || SCENES[0];
   const lc = TEMP_COLOR[s.temp];
   const g = (v: number) => Math.pow(v / 100, 0.7);
@@ -82,7 +99,6 @@ const WholeHomeDemo = () => {
   const interiorMax = Math.max(0, ...ROOMS.filter((r) => r.name !== "Deck").map((r) => lvl(r.name)));
   const dim = 1 - g(interiorMax);
   const armed = s.security !== "Disarmed";
-  const secColor = armed ? "#f59e0b" : "#34d399";
   const lyr = LAYERS.find((l) => l.id === layer) || LAYERS[0];
   const shownDevices = DEVICES.filter((d) => (lyr.cats as readonly string[]).includes(d.cat));
   const showCameras = layer === "security";
@@ -102,60 +118,16 @@ const WholeHomeDemo = () => {
     return `M ${cx} ${cy} L ${cx + len * Math.cos(a1)} ${cy + len * Math.sin(a1)} L ${cx + len * Math.cos(a2)} ${cy + len * Math.sin(a2)} Z`;
   };
 
-  const renderDevice = (d: typeof DEVICES[number], i: number) => {
-    const { cat, x, y, room } = d;
-    switch (cat) {
-      case "keypad": {
-        const on = room ? lvl(room) > 0 : false;
-        return (
-          <g key={i}>
-            <rect x={x - 7} y={y - 10} width="14" height="20" rx="2.5" fill="#262a34" stroke="#9aa3b8" strokeWidth="1.1" />
-            <circle cx={x} cy={y - 5.5} r="1.7" fill={on ? "#ca9f5c" : "#3a4053"} style={{ transition: "fill 0.5s" }} />
-            <line x1={x - 4} y1={y + 0.5} x2={x + 4} y2={y + 0.5} stroke="#56627a" strokeWidth="1.2" strokeLinecap="round" />
-            <line x1={x - 4} y1={y + 4.5} x2={x + 4} y2={y + 4.5} stroke="#56627a" strokeWidth="1.2" strokeLinecap="round" />
-          </g>
-        );
-      }
-      case "speaker": {
-        const on = room ? s.audioZones.includes(room) : false;
-        return (
-          <g key={i}>
-            <circle cx={x} cy={y} r="9" fill="#0d1422" stroke="#6f9bff" strokeWidth="1.5" />
-            <circle cx={x} cy={y} r="4.8" fill="none" stroke="#6f9bff" strokeWidth="1.1" />
-            <circle cx={x} cy={y} r="2.2" fill="#6f9bff" className={on ? "animate-pulse" : ""} opacity={on ? 1 : 0.6} />
-          </g>
-        );
-      }
-      case "tv": {
-        const on = s.tv && room === "Living Room";
-        return <rect key={i} x={x - 13} y={y - 8} width="26" height="16" rx="1.8" fill={on ? "#1b3a6b" : "#10141d"} stroke="#5b7fb0" strokeWidth="1.4" style={{ transition: "fill 0.7s" }} />;
-      }
-      case "shade": {
-        const down = s.shades > 50;
-        return (
-          <g key={i}>
-            <rect x={x - 11} y={y - 3.5} width="22" height="3.5" rx="1.4" fill="#8b95ad" />
-            <rect x={x - 11} y={y} width="22" height={down ? 11 : 2.5} fill="#3a4258" opacity="0.9" style={{ transition: "height 0.8s" }} />
-          </g>
-        );
-      }
-      case "glassbreak":
-        return <rect key={i} x={x - 4} y={y - 4} width="8" height="8" transform={`rotate(45 ${x} ${y})`} fill={secColor} stroke="#0a0d14" strokeWidth="0.7" style={{ transition: "fill 0.5s" }} />;
-      case "motion":
-        return <path key={i} d={`M ${x} ${y - 5} L ${x + 4.6} ${y + 3.8} L ${x - 4.6} ${y + 3.8} Z`} fill={secColor} stroke="#0a0d14" strokeWidth="0.7" style={{ transition: "fill 0.5s" }} />;
-      case "contact":
-        return <circle key={i} cx={x} cy={y} r="4" fill={secColor} stroke="#0a0d14" strokeWidth="0.7" style={{ transition: "fill 0.5s" }} />;
-      case "safety":
-        return <g key={i}><circle cx={x} cy={y} r="4.6" fill="#13070a" stroke="#ef4444" strokeWidth="1.4" /><circle cx={x} cy={y} r="1.5" fill="#ef4444" /></g>;
-      case "water":
-        return <circle key={i} cx={x} cy={y} r="3.8" fill="#38bdf8" stroke="#0a0d14" strokeWidth="0.7" />;
-      case "panel":
-        return <rect key={i} x={x - 6} y={y - 6} width="12" height="12" rx="1.8" fill="#1a2030" stroke="#6a7a9a" strokeWidth="1.3" />;
-      case "touchpanel":
-        return <rect key={i} x={x - 9} y={y - 6} width="18" height="12" rx="1.8" fill="#13283f" stroke="#3f6ea0" strokeWidth="1.3" />;
-      default:
-        return null;
-    }
+  // pin colour + active state per device for the current scene
+  const pinState = (d: typeof DEVICES[number]) => {
+    const meta = CAT_META[d.cat];
+    let color = meta.color, on = false;
+    if (d.cat === "keypad") { on = d.room ? lvl(d.room) > 0 : false; color = on ? "#ca9f5c" : "#6b6457"; }
+    else if (d.cat === "speaker") { on = d.room ? s.audioZones.includes(d.room) : false; color = on ? "#6f9bff" : "#41506f"; }
+    else if (d.cat === "tv") { on = s.tv && d.room === "Living Room"; color = on ? "#5b9bf0" : "#3c536f"; }
+    else if (d.cat === "shade") { on = s.shades > 50; color = "#9aa3b8"; }
+    else if (["contact", "glassbreak", "motion"].includes(d.cat)) { on = armed; color = armed ? "#f59e0b" : "#34d399"; }
+    return { meta, color, on };
   };
 
   return (
@@ -192,55 +164,63 @@ const WholeHomeDemo = () => {
       <div className="p-3">
         <div className="relative rounded-lg overflow-hidden" style={{ background: "#05070b" }}>
           <img src={IMG} alt="Main-floor plan" className="w-full h-auto block select-none" draggable={false} />
-          <svg viewBox={`0 0 ${VBW} ${VBH}`} className="absolute inset-0 w-full h-full" preserveAspectRatio="none">
+
+          {/* lighting + camera cones (SVG, non-interactive) */}
+          <svg viewBox={`0 0 ${VBW} ${VBH}`} className="absolute inset-0 w-full h-full pointer-events-none" preserveAspectRatio="none">
             <defs>
               <radialGradient id="wh-fix">
                 <stop offset="0%" stopColor={lc} stopOpacity="0.9" />
                 <stop offset="45%" stopColor={lc} stopOpacity="0.28" />
                 <stop offset="100%" stopColor={lc} stopOpacity="0" />
               </radialGradient>
-              <linearGradient id="wh-cone" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stopColor="#5b8cff" stopOpacity="0.22" /><stop offset="100%" stopColor="#5b8cff" stopOpacity="0" /></linearGradient>
+              <linearGradient id="wh-cone" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stopColor="#5b8cff" stopOpacity="0.2" /><stop offset="100%" stopColor="#5b8cff" stopOpacity="0" /></linearGradient>
             </defs>
-
-            {/* night wash */}
             <rect x="0" y="0" width={VBW} height={VBH} fill="#04050a" opacity={0.55 * dim} style={{ transition: "opacity 1s" }} />
-
-            {/* light from fixtures (tight pools) */}
             <g style={{ mixBlendMode: "screen" } as React.CSSProperties}>
               {FIXTURES.map((f, i) => {
                 const v = lvl(f.room);
                 if (v <= 0) return null;
                 const r = 18 + 26 * g(v);
-                return <circle key={i} cx={f.x} cy={f.y} r={r} fill="url(#wh-fix)" opacity={0.62 * g(v)} style={{ transition: "opacity 0.9s" }} />;
+                return <circle key={i} cx={f.x} cy={f.y} r={r} fill="url(#wh-fix)" opacity={0.6 * g(v)} style={{ transition: "opacity 0.9s" }} />;
               })}
             </g>
-            {/* fixture cores */}
             {FIXTURES.map((f, i) => {
               const v = lvl(f.room);
-              return <circle key={"fc" + i} cx={f.x} cy={f.y} r="1.5" fill={v > 0 ? "#fff7e8" : "#39425a"} opacity={v > 0 ? 0.5 + 0.5 * g(v) : 0.3} style={{ transition: "opacity 0.9s" }} />;
+              return <circle key={"fc" + i} cx={f.x} cy={f.y} r="1.5" fill={v > 0 ? "#fff7e8" : "#39425a"} opacity={v > 0 ? 0.5 + 0.5 * g(v) : 0.28} style={{ transition: "opacity 0.9s" }} />;
             })}
-
-            {/* camera cones (security view) */}
             {showCameras && CAMERAS.map((c, i) => (
-              <path key={i} d={cone(c.x, c.y, c.fov)} fill="url(#wh-cone)"
-                opacity={hoverCam === null || hoverCam === c.label ? 1 : 0.2} style={{ transition: "opacity 0.4s" }} />
-            ))}
-
-            {/* active layer's devices only */}
-            {shownDevices.map(renderDevice)}
-
-            {/* corner cameras (security view) */}
-            {showCameras && CAMERAS.map((c, i) => (
-              <g key={"c" + i} onMouseEnter={() => setHoverCam(c.label)} onMouseLeave={() => setHoverCam(null)} className="cursor-pointer">
-                <circle cx={c.x} cy={c.y} r="13" fill="#0c1320" stroke="#9aa6c7" strokeWidth="2.5" />
-                <circle cx={c.x} cy={c.y} r="5" fill={s.cameras ? "#f87171" : "#3a3f4e"} className={s.cameras ? "animate-pulse" : ""} />
-                {hoverCam === c.label && (
-                  <text x={c.x < VBW / 2 ? c.x + 20 : c.x - 20} y={c.y < VBH / 2 ? c.y + 30 : c.y - 20}
-                    textAnchor={c.x < VBW / 2 ? "start" : "end"} className="fill-white" style={{ fontSize: 26, fontWeight: 600 }}>{c.label}</text>
-                )}
-              </g>
+              <path key={i} d={cone(c.x, c.y, c.fov)} fill="url(#wh-cone)" />
             ))}
           </svg>
+
+          {/* device pins (HTML, labelled, hoverable) */}
+          {shownDevices.map((d, i) => {
+            const { meta, color, on } = pinState(d);
+            const Icon = meta.icon;
+            return (
+              <div key={i} className="absolute group" style={{ left: `${(d.x / VBW) * 100}%`, top: `${(d.y / VBH) * 100}%`, transform: "translate(-50%,-50%)" }}>
+                <div className="flex items-center justify-center rounded-full border backdrop-blur-[1px] transition-all duration-300"
+                  style={{ width: 21, height: 21, background: "rgba(7,10,17,0.82)", borderColor: color, boxShadow: on ? `0 0 9px 1px ${color}aa` : "0 1px 3px rgba(0,0,0,0.6)" }}>
+                  <Icon style={{ width: 11, height: 11, color }} className={on && d.cat === "speaker" ? "animate-pulse" : ""} />
+                </div>
+                <div className="pointer-events-none absolute left-1/2 -translate-x-1/2 -top-7 whitespace-nowrap rounded-md bg-black/90 border border-white/10 px-2 py-0.5 text-[10px] text-white/90 opacity-0 group-hover:opacity-100 transition-opacity z-20">
+                  {meta.label}{d.room ? <span className="text-white/45"> · {d.room}</span> : null}
+                </div>
+              </div>
+            );
+          })}
+
+          {/* corner cameras (security view) as pins */}
+          {showCameras && CAMERAS.map((c, i) => (
+            <div key={"cam" + i} className="absolute group" style={{ left: `${(c.x / VBW) * 100}%`, top: `${(c.y / VBH) * 100}%`, transform: "translate(-50%,-50%)" }}>
+              <div className="flex items-center justify-center rounded-full border" style={{ width: 24, height: 24, background: "rgba(7,10,17,0.9)", borderColor: "#9aa6c7" }}>
+                <Video style={{ width: 12, height: 12, color: s.cameras ? "#f87171" : "#6b7280" }} className={s.cameras ? "animate-pulse" : ""} />
+              </div>
+              <div className="pointer-events-none absolute left-1/2 -translate-x-1/2 -top-7 whitespace-nowrap rounded-md bg-black/90 border border-white/10 px-2 py-0.5 text-[10px] text-white/90 opacity-0 group-hover:opacity-100 transition-opacity z-20">
+                Camera · {c.label}
+              </div>
+            </div>
+          ))}
 
           {/* scene caption */}
           <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/85 to-transparent pointer-events-none">
@@ -250,7 +230,7 @@ const WholeHomeDemo = () => {
         </div>
 
         <p className="text-white/35 text-[0.68rem] mt-2.5 px-1">
-          Showing the <span className="text-white/60">{lyr.label.toLowerCase()}</span> layer — {shownDevices.length} {lyr.label.toLowerCase()} devices placed from the project drawings. Switch layers above.
+          Showing the <span className="text-white/60">{lyr.label.toLowerCase()}</span> layer — {shownDevices.length} devices, placed from the project drawings. Hover any device to identify it; switch layers above.
         </p>
       </div>
 
@@ -302,7 +282,7 @@ const WholeHomeDemo = () => {
             ))}
           </div>
           <p className="text-white/30 text-[0.68rem] leading-relaxed mt-4">
-            Actual main-level plan · {DEVICES.length} devices total across {ROOMS.length} rooms, placed from the project drawings.
+            Actual main-level plan · {DEVICES.length} devices across {ROOMS.length} rooms, placed from the project drawings.
           </p>
         </div>
       </div>
